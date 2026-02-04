@@ -19,7 +19,7 @@ package dokkatest.visibleForTesting
 import androidx.annotation.VisibleForTesting
 
 class ClassWithVisibleForTestingFunction {
-    @VisibleForTesting
-    fun testingFunction() = Unit
+    @VisibleForTesting fun testingFunction() = Unit
+
     fun visibleFunction() = Unit
 }

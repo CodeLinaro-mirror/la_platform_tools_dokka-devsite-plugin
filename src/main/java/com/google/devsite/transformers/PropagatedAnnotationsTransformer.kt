@@ -41,9 +41,8 @@ import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
 
 /** Propagates annotations from elements to their members. */
-class PropagatedAnnotationsTransformer(
-    private val propagatingAnnotations: List<String>,
-) : DocumentableTransformer {
+class PropagatedAnnotationsTransformer(private val propagatingAnnotations: List<String>) :
+    DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule {
         if (propagatingAnnotations.isEmpty()) return original
 
@@ -134,9 +133,7 @@ class PropagatedAnnotationsTransformer(
         // Annotations are not propagated to function parameters.
         if (parentAnnotations.isEmpty()) return original
         val (newExtra, _) = original.propagateAnnotations(parentAnnotations)
-        return original.copy(
-            extra = newExtra,
-        )
+        return original.copy(extra = newExtra)
     }
 
     private fun transform(original: DProperty, parentAnnotations: Set<Annotation>): DProperty {
@@ -153,9 +150,7 @@ class PropagatedAnnotationsTransformer(
         // Annotations are not propagated to members of enum entries because they aren't in docs.
         if (parentAnnotations.isEmpty()) return original
         val (newExtra, _) = original.propagateAnnotations(parentAnnotations)
-        return original.copy(
-            extra = newExtra,
-        )
+        return original.copy(extra = newExtra)
     }
 
     /**
@@ -169,9 +164,8 @@ class PropagatedAnnotationsTransformer(
      */
     private fun <T> T.propagateAnnotations(
         parentAnnotations: Set<Annotation>
-    ): Pair<PropertyContainer<T>, Set<Annotation>> where
-    T : Documentable,
-    T : WithExtraProperties<T> {
+    ): Pair<PropertyContainer<T>, Set<Annotation>>
+        where T : Documentable, T : WithExtraProperties<T> {
         val elementAnnotations = getPropagatingAnnotations()
         val annotationsToAdd = parentAnnotations - elementAnnotations
         val annotationsToPropagate = parentAnnotations + elementAnnotations

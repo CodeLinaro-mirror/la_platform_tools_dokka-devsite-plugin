@@ -20,9 +20,8 @@ import com.google.devsite.components.symbols.PropertySignature
 import kotlinx.html.FlowContent
 
 /** Default implementation of a property signature. */
-internal data class DefaultPropertySignature(
-    override val data: PropertySignature.Params,
-) : PropertySignature {
+internal data class DefaultPropertySignature(override val data: PropertySignature.Params) :
+    PropertySignature {
     override fun render(into: FlowContent) =
         into.run {
             if (data.receiver != null) {

@@ -19,17 +19,20 @@ package dokkatest.hiddenParents
 /** @hide */
 open class HiddenCompanionGrandparent {
     fun grandparentFunction(): Unit {}
+
     val grandparentProperty = 1
 }
 
 open class VisibleCompanionParent : HiddenCompanionGrandparent() {
     fun parentFunction(): Unit {}
+
     val parentProperty = 2
 }
 
 class ClassWithCompanion {
     companion object Companion : VisibleCompanionParent() {
         fun companionFunction(): Unit {}
+
         val companionProperty = 3
     }
 }

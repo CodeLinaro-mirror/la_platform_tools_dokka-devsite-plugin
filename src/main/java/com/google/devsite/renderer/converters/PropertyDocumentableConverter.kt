@@ -67,7 +67,7 @@ internal class PropertyDocumentableConverter(
                                     propagatedAnnotations = typeAnnotations,
                                 ),
                             modifiers = property.modifiers(jvmSourceSet).modifiersFor(hints),
-                        ),
+                        )
                     ),
                 description =
                     DefaultSymbolSummary(
@@ -84,9 +84,9 @@ internal class PropertyDocumentableConverter(
                                     // Propagates to return type instead
                                     nullability = Nullability.DONT_CARE,
                                 ),
-                        ),
+                        )
                     ),
-            ),
+            )
         )
     }
 
@@ -117,7 +117,7 @@ internal class PropertyDocumentableConverter(
                                 property
                                     .modifiers(property.getExpectOrCommonSourceSet())
                                     .modifiersFor(hints),
-                        ),
+                        )
                     ),
                 description =
                     DefaultSymbolSummary(
@@ -134,10 +134,10 @@ internal class PropertyDocumentableConverter(
                                     // Propagates to return type instead
                                     nullability = Nullability.DONT_CARE,
                                 ),
-                        ),
+                        )
                     ),
                 platforms = DefaultPlatformComponent(property.sourceSets),
-            ),
+            )
         )
     }
 
@@ -183,7 +183,7 @@ internal class PropertyDocumentableConverter(
                         nullability = Nullability.DONT_CARE, // Propagates to return type instead
                     ),
                 metadataComponent = metadataConverter.getMetadataForProperty(property),
-            ),
+            )
         )
     }
 
@@ -234,7 +234,7 @@ internal class PropertyDocumentableConverter(
                     ),
                 platforms = DefaultPlatformComponent(property.sourceSets),
                 metadataComponent = metadataConverter.getMetadataForProperty(property),
-            ),
+            )
         )
     }
 
@@ -271,7 +271,7 @@ internal class PropertyDocumentableConverter(
                         Language.KOTLIN -> receiver
                     },
                 constantValue = constantValue,
-            ),
+            )
         )
     }
 

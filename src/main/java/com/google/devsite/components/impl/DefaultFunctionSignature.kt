@@ -26,9 +26,8 @@ import kotlinx.html.span
 import kotlinx.html.unsafe
 
 /** Default implementation of a function signature. */
-internal data class DefaultFunctionSignature(
-    override val data: FunctionSignature.Params,
-) : FunctionSignature {
+internal data class DefaultFunctionSignature(override val data: FunctionSignature.Params) :
+    FunctionSignature {
     override fun render(into: FlowContent) =
         into.run {
             data.typeParameters.render(this, brackets = "<>", shouldBreak = ShouldBreak.NO)

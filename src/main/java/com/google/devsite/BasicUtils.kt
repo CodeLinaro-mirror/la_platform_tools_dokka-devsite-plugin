@@ -56,7 +56,7 @@ internal fun <T> Collection<T>.joinMaybePrefix(
             prefix = prefix,
             postfix = postfix,
             separator = separator,
-            transform = transform
+            transform = transform,
         )
     }
 

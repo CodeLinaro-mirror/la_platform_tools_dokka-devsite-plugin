@@ -35,7 +35,7 @@ class DefaultRawTest {
                 """
 <div>Hello world!</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

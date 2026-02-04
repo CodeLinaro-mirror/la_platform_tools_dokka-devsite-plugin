@@ -45,9 +45,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class FunctionDocumentableConverterTest(
-    displayLanguage: Language,
-) : ConverterTestBase(displayLanguage) {
+internal class FunctionDocumentableConverterTest(displayLanguage: Language) :
+    ConverterTestBase(displayLanguage) {
 
     override var defaultHints =
         ModifierHints(
@@ -586,9 +585,7 @@ internal class FunctionDocumentableConverterTest(
                     assertThat(aType.nullable).isEqualTo(whichFun in "nulla, platform")
                     val annotations = aType.annotations
                     assertThat(
-                        annotations.singleOrNull()?.name?.let {
-                            it in NULLABILITY_ANNOTATION_NAMES
-                        },
+                        annotations.singleOrNull()?.name?.let { it in NULLABILITY_ANNOTATION_NAMES }
                     )
                     kotlinOnly {
                         // We've decided to hide all nullability annotations as-kotlin even if they
@@ -878,10 +875,6 @@ internal class FunctionDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() =
-            listOf(
-                arrayOf(Language.JAVA),
-                arrayOf(Language.KOTLIN),
-            )
+        fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
     }
 }

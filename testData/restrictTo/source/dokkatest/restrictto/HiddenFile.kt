@@ -15,6 +15,7 @@
  */
 
 @file:RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+
 package dokkatest.restrictto
 
 import androidx.annotation.RestrictTo

@@ -36,7 +36,7 @@ class DefaultClassHierarchyTest {
                 """
 <body></body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -62,7 +62,7 @@ class DefaultClassHierarchyTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -92,7 +92,7 @@ class DefaultClassHierarchyTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -100,14 +100,7 @@ class DefaultClassHierarchyTest {
     fun `Class hierarchy with many parents renders correctly`() {
         val component =
             DefaultClassHierarchy(
-                Params(
-                    listOf(
-                        NoopLink("a"),
-                        NoopLink("b"),
-                        NoopLink("c"),
-                        NoopLink("d"),
-                    ),
-                ),
+                Params(listOf(NoopLink("a"), NoopLink("b"), NoopLink("c"), NoopLink("d")))
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -143,7 +136,7 @@ class DefaultClassHierarchyTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

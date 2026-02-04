@@ -42,19 +42,13 @@ class KmpTest : IntegrationTestBase() {
 
     @Test
     fun `Validate prod AndroidX collections prebuilts`() {
-        validatePrebuilts(
-            testName = "collections",
-            artifactNames = listOf("collection"),
-        )
+        validatePrebuilts(testName = "collections", artifactNames = listOf("collection"))
     }
 
     @Test
     fun `Validate prod AndroidX annotations prebuilts`() {
         squashAndroid = true
-        validatePrebuilts(
-            testName = "annotation-kmp",
-            artifactNames = listOf("annotation"),
-        )
+        validatePrebuilts(testName = "annotation-kmp", artifactNames = listOf("annotation"))
     }
 
     @Test
@@ -117,10 +111,7 @@ fun TestDokkaConfigurationBuilder.multiPlatformSourceSets(
         classpath = classpathFromFile("testData/classpath.txt")
         externalDocumentationLinks = externalLinks
         documentedVisibilities =
-            setOf(
-                DokkaConfiguration.Visibility.PUBLIC,
-                DokkaConfiguration.Visibility.PROTECTED,
-            )
+            setOf(DokkaConfiguration.Visibility.PUBLIC, DokkaConfiguration.Visibility.PROTECTED)
         this.analysisPlatform = analysisPlatform
         this.dependentSourceSets = ssDependencies
     }
@@ -163,7 +154,7 @@ fun TestDokkaConfigurationBuilder.multiPlatformSourceSets(
         sourceFolders.remove("android")
     } else {
         throw RuntimeException(
-            "Due to upstream squashing, not squashing android into jvm isn't currently supported.",
+            "Due to upstream squashing, not squashing android into jvm isn't currently supported."
         )
     }
 

@@ -40,7 +40,7 @@ class DefaultParameterComponentTest {
                     name = "number",
                     type = NoopTypeProjectionComponent("Int"),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -51,7 +51,7 @@ class DefaultParameterComponentTest {
                 """
 <div>number:&nbsp;Int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -63,7 +63,7 @@ class DefaultParameterComponentTest {
                     name = "number",
                     type = NoopTypeProjectionComponent("int"),
                     displayLanguage = Language.JAVA,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -74,7 +74,7 @@ class DefaultParameterComponentTest {
                 """
 <div>int&nbsp;number</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -86,7 +86,7 @@ class DefaultParameterComponentTest {
                     name = "",
                     type = NoopTypeProjectionComponent("Int"),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -97,7 +97,7 @@ class DefaultParameterComponentTest {
                 """
 <div>Int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -110,7 +110,7 @@ class DefaultParameterComponentTest {
                     type = NoopTypeProjectionComponent("Int"),
                     displayLanguage = Language.KOTLIN,
                     modifiers = Modifiers("vararg"),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -121,7 +121,7 @@ class DefaultParameterComponentTest {
                 """
 <div>vararg&nbsp;number:&nbsp;Int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -134,7 +134,7 @@ class DefaultParameterComponentTest {
                     type = NoopTypeProjectionComponent("Int"),
                     displayLanguage = Language.JAVA,
                     modifiers = Modifiers("vararg"),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -145,7 +145,7 @@ class DefaultParameterComponentTest {
                 """
 <div>Int...&nbsp;number</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -157,7 +157,7 @@ class DefaultParameterComponentTest {
                     name = "",
                     type = NoopTypeProjectionComponent("int"),
                     displayLanguage = Language.JAVA,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -168,7 +168,7 @@ class DefaultParameterComponentTest {
                 """
 <div>int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -185,7 +185,7 @@ class DefaultParameterComponentTest {
                             NoopAnnotationComponent("@Really"),
                             NoopAnnotationComponent("@Special"),
                         ),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -196,7 +196,7 @@ class DefaultParameterComponentTest {
                 """
 <div>@Really @Special number:&nbsp;Int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -213,7 +213,7 @@ class DefaultParameterComponentTest {
                             NoopAnnotationComponent("@Really"),
                             NoopAnnotationComponent("@Special"),
                         ),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -224,7 +224,7 @@ class DefaultParameterComponentTest {
                 """
 <div>@Really @Special int&nbsp;number</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -236,7 +236,7 @@ class DefaultParameterComponentTest {
                     name = "block",
                     type = NoopLambdaTypeProjectionComponent(type = "Unit"),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -247,7 +247,7 @@ class DefaultParameterComponentTest {
                 """
 <div>block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> Unit</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -259,7 +259,7 @@ class DefaultParameterComponentTest {
                     name = "number",
                     type = NoopLambdaTypeProjectionComponent(receiver = "Int", type = "Int"),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -270,7 +270,7 @@ class DefaultParameterComponentTest {
                 """
 <div>number:&nbsp;Int.() <span style="white-space: nowrap;">-&gt;</span> Int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -292,10 +292,10 @@ class DefaultParameterComponentTest {
                                         NoopParameterComponent("Int"),
                                         NoopParameterComponent("String"),
                                     ),
-                            ),
+                            )
                         ),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -306,7 +306,7 @@ class DefaultParameterComponentTest {
                 """
 <div>number:&nbsp;(Int, String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -325,10 +325,10 @@ class DefaultParameterComponentTest {
                                 displayLanguage = Language.KOTLIN,
                                 lambdaParams = listOf(NoopParameterComponent("String")),
                                 receiver = NoopTypeProjectionComponent("Boolean"),
-                            ),
+                            )
                         ),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -339,7 +339,7 @@ class DefaultParameterComponentTest {
                 """
 <div>number:&nbsp;Boolean.(String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -358,10 +358,10 @@ class DefaultParameterComponentTest {
                                 displayLanguage = Language.KOTLIN,
                                 lambdaModifiers = listOf("suspend"),
                                 lambdaParams = listOf(NoopParameterComponent("String")),
-                            ),
+                            )
                         ),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -372,7 +372,7 @@ class DefaultParameterComponentTest {
                 """
 <div>number:&nbsp;suspend&nbsp;(String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -385,7 +385,7 @@ class DefaultParameterComponentTest {
                     type = NoopTypeProjectionComponent("Int"),
                     displayLanguage = Language.KOTLIN,
                     defaultValue = "5",
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -396,7 +396,7 @@ class DefaultParameterComponentTest {
                 """
 <div>number:&nbsp;Int = 5</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

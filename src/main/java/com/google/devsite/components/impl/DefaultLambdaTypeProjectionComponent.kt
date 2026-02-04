@@ -26,7 +26,7 @@ import kotlinx.html.FlowContent
 
 /** Default implementation of a function parameter type. */
 internal data class DefaultLambdaTypeProjectionComponent(
-    override val data: LambdaTypeProjectionComponent.Params,
+    override val data: LambdaTypeProjectionComponent.Params
 ) : LambdaTypeProjectionComponent {
     override fun render(into: FlowContent) =
         into.run {

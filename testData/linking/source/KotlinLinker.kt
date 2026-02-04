@@ -17,9 +17,8 @@
 package dokkatest.linking
 
 /**
- * Reference link [KotlinEnum] should resolve <p>
- * stuff stuff [KotlinEnum.ON_CREATE] should resolve <p>
- * stujj stujj [JavaEnum.ON_DECEIT] should resolve
+ * Reference link [KotlinEnum] should resolve <p> stuff stuff [KotlinEnum.ON_CREATE] should resolve
+ *
+ * <p> stujj stujj [JavaEnum.ON_DECEIT] should resolve
  */
 public fun foofoofoo() {}
-

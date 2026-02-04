@@ -24,9 +24,8 @@ import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 
 /** Default implementation of a function parameter. */
-internal data class DefaultParameterComponent(
-    override val data: ParameterComponent.Params,
-) : ParameterComponent {
+internal data class DefaultParameterComponent(override val data: ParameterComponent.Params) :
+    ParameterComponent {
 
     override fun render(into: FlowContent) =
         into.run {

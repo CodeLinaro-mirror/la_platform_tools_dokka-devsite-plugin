@@ -27,12 +27,7 @@ class DefaultReferenceObjectTest {
     @Test
     fun `Basic reference object renders correctly`() {
         val component =
-            DefaultReferenceObject(
-                ReferenceObject.Params(
-                    language = Language.JAVA,
-                    name = "Foo",
-                ),
-            )
+            DefaultReferenceObject(ReferenceObject.Params(language = Language.JAVA, name = "Foo"))
 
         val output = createHTML().body { component.render(this) }.trim()
 
@@ -46,8 +41,8 @@ class DefaultReferenceObjectTest {
                     <meta itemprop="language" content="JAVA">
                   </div>
                 </body>
-            """
-                    .trimIndent(),
+                """
+                    .trimIndent()
             )
     }
 
@@ -55,11 +50,7 @@ class DefaultReferenceObjectTest {
     fun `Reference object with path renders correctly`() {
         val component =
             DefaultReferenceObject(
-                ReferenceObject.Params(
-                    language = Language.KOTLIN,
-                    name = "Foo",
-                    path = "test.pkg",
-                ),
+                ReferenceObject.Params(language = Language.KOTLIN, name = "Foo", path = "test.pkg")
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -75,8 +66,8 @@ class DefaultReferenceObjectTest {
                     <meta itemprop="language" content="KOTLIN">
                   </div>
                 </body>
-            """
-                    .trimIndent(),
+                """
+                    .trimIndent()
             )
     }
 
@@ -88,7 +79,7 @@ class DefaultReferenceObjectTest {
                     language = Language.KOTLIN,
                     name = "Foo",
                     properties = listOf("foo"),
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -104,8 +95,8 @@ class DefaultReferenceObjectTest {
                     <meta itemprop="language" content="KOTLIN">
                   </div>
                 </body>
-            """
-                    .trimIndent(),
+                """
+                    .trimIndent()
             )
     }
 
@@ -117,7 +108,7 @@ class DefaultReferenceObjectTest {
                     language = Language.KOTLIN,
                     name = "Foo",
                     properties = listOf("foo", "bar", "Foo.Companion", "FOO"),
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -136,8 +127,8 @@ class DefaultReferenceObjectTest {
                     <meta itemprop="language" content="KOTLIN">
                   </div>
                 </body>
-            """
-                    .trimIndent(),
+                """
+                    .trimIndent()
             )
     }
 
@@ -150,7 +141,7 @@ class DefaultReferenceObjectTest {
                     name = "Foo",
                     path = "test.pkg",
                     properties = listOf("foo", "bar", "Foo.Companion", "FOO"),
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -170,8 +161,8 @@ class DefaultReferenceObjectTest {
                     <meta itemprop="language" content="JAVA">
                   </div>
                 </body>
-            """
-                    .trimIndent(),
+                """
+                    .trimIndent()
             )
     }
 }

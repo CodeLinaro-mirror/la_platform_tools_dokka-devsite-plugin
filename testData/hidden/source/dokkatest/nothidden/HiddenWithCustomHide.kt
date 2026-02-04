@@ -16,12 +16,10 @@
 
 package dokkatest.nothidden
 
-@CustomHideAnnotation
-class HiddenWithCustomHide
+@CustomHideAnnotation class HiddenWithCustomHide
 
 /** @suppress */
 fun suppressedFunction() {}
 
 // The getter annotation should also apply to the property to match metalava
-@get:CustomHideAnnotation
-val foo = 3
+@get:CustomHideAnnotation val foo = 3

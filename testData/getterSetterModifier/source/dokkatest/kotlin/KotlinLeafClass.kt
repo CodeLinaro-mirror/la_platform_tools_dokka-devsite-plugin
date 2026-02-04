@@ -24,13 +24,8 @@ class KotlinExtendingJava : JavaSuperClass() {
         javaSuperBackingField += 1
     }
 
-    /**
-     * My kotlin leaf class public property
-     */
+    /** My kotlin leaf class public property */
     var kotlinLeafProperty: Int = 0
-    /**
-     * My kotlin leaf class public field
-     */
-    @JvmField
-    var kotlinLeafField: Int = 1
+    /** My kotlin leaf class public field */
+    @JvmField var kotlinLeafField: Int = 1
 }

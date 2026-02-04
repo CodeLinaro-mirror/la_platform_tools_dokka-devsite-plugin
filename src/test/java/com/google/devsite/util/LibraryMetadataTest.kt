@@ -41,27 +41,17 @@ class LibraryMetadataTest {
                 groupId = "androidx.a",
                 artifactId = "foo",
                 releaseNotesUrl = "https://d.android.com/release/a",
-                jarContents =
-                    listOf(
-                        "androidx/a/a.kt",
-                        "androidx/a/b.java",
-                    ),
+                jarContents = listOf("androidx/a/a.kt", "androidx/a/b.java"),
             )
         val jsonMetadata2 =
             JsonLibraryMetadata(
                 groupId = "androidx.b",
                 artifactId = "bar",
                 releaseNotesUrl = "https://d.android.com/release/b",
-                jarContents =
-                    listOf(
-                        "androidx/b/a.kt",
-                        "androidx/b/b.java",
-                    ),
+                jarContents = listOf("androidx/b/a.kt", "androidx/b/b.java"),
             )
         val mapping =
-            LibraryMetadata.convertJsonMetadataToFileMap(
-                listOf(jsonMetadata1, jsonMetadata2),
-            )
+            LibraryMetadata.convertJsonMetadataToFileMap(listOf(jsonMetadata1, jsonMetadata2))
 
         val fileMetadataA = mapping["androidx/a/a.kt"]!!
         assertThat(fileMetadataA.groupId).isEqualTo("androidx.a")

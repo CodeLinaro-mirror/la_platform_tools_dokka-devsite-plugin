@@ -22,9 +22,11 @@ actual open class FooSparseArray<E> {
     internal actual var garbage: Boolean
         get() = TODO("Not yet implemented")
         set(value) {}
+
     internal actual var keys: LongArray
         get() = TODO("Not yet implemented")
         set(value) {}
+
     internal actual var values: Array<Any?>
         get() = TODO("Not yet implemented")
         set(value) {}
@@ -48,20 +50,17 @@ actual open class FooSparseArray<E> {
 
     @Deprecated(
         message = "Alias for `remove(key)`.",
-        replaceWith = ReplaceWith(expression = "remove(key)",)
+        replaceWith = ReplaceWith(expression = "remove(key)"),
     )
-    actual open fun delete(key: Long) {
-    }
+    actual open fun delete(key: Long) {}
 
-    actual open fun remove(key: Long) {
-    }
+    actual open fun remove(key: Long) {}
 
     actual open fun remove(key: Long, value: E): Boolean {
         TODO("Not yet implemented")
     }
 
-    actual open fun removeAt(index: Int) {
-    }
+    actual open fun removeAt(index: Int) {}
 
     actual open fun replace(key: Long, value: E): E? {
         TODO("Not yet implemented")
@@ -71,11 +70,9 @@ actual open class FooSparseArray<E> {
         TODO("Not yet implemented")
     }
 
-    actual open fun put(key: Long, value: E) {
-    }
+    actual open fun put(key: Long, value: E) {}
 
-    actual open fun putAll(other: FooSparseArray<out E>) {
-    }
+    actual open fun putAll(other: FooSparseArray<out E>) {}
 
     actual open fun putIfAbsent(key: Long, value: E): E? {
         TODO("Not yet implemented")
@@ -93,8 +90,7 @@ actual open class FooSparseArray<E> {
         TODO("Not yet implemented")
     }
 
-    actual open fun setValueAt(index: Int, value: E) {
-    }
+    actual open fun setValueAt(index: Int, value: E) {}
 
     actual open fun indexOfKey(key: Long): Int {
         TODO("Not yet implemented")
@@ -112,9 +108,7 @@ actual open class FooSparseArray<E> {
         TODO("Not yet implemented")
     }
 
-    actual open fun clear() {
-    }
+    actual open fun clear() {}
 
-    actual open fun append(key: Long, value: E) {
-    }
+    actual open fun append(key: Long, value: E) {}
 }

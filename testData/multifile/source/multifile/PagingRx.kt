@@ -20,8 +20,6 @@
 
 package multifile
 
-/**
- * The values of the map.
- */
+/** The values of the map. */
 val <Key : Any, Value : Any> Map<Key, Value>.observable: List<Value>
     get() = values.toList()

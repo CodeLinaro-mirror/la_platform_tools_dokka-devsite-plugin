@@ -29,20 +29,19 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class PackageDocumentableConverterTest(
-    displayLanguage: Language,
-) : ConverterTestBase(displayLanguage) {
+internal class PackageDocumentableConverterTest(displayLanguage: Language) :
+    ConverterTestBase(displayLanguage) {
     @Test
     fun `Package summary creates components with correct page title`() {
         val page =
             listOf(
                     """
-                |/src/main/kotlin/androidx/example/A.kt
-                |package hello.i.am.a.packagez
-                |
-                |class A
-            """
-                        .trimMargin(),
+                    |/src/main/kotlin/androidx/example/A.kt
+                    |package hello.i.am.a.packagez
+                    |
+                    |class A
+                    """
+                        .trimMargin()
                 )
                 .render()
                 .packagePage()
@@ -55,12 +54,12 @@ internal class PackageDocumentableConverterTest(
         val page =
             listOf(
                     """
-                |/src/main/kotlin/androidx/example/A.kt
-                |package hello.i.am.a.packagez
-                |
-                |class A
-            """
-                        .trimMargin(),
+                    |/src/main/kotlin/androidx/example/A.kt
+                    |package hello.i.am.a.packagez
+                    |
+                    |class A
+                    """
+                        .trimMargin()
                 )
                 .render()
                 .packagePage()
@@ -446,10 +445,6 @@ internal class PackageDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() =
-            listOf(
-                arrayOf(Language.JAVA),
-                arrayOf(Language.KOTLIN),
-            )
+        fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
     }
 }

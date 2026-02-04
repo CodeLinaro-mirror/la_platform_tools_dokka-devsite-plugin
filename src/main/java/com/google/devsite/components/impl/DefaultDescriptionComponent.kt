@@ -135,9 +135,8 @@ import org.jetbrains.dokka.model.doc.Ul
 import org.jetbrains.dokka.model.doc.Var
 
 /** Default implementation of the hand-written documentation for a symbol. */
-internal data class DefaultDescriptionComponent(
-    override val data: DescriptionComponent.Params,
-) : DescriptionComponent {
+internal data class DefaultDescriptionComponent(override val data: DescriptionComponent.Params) :
+    DescriptionComponent {
     override fun render(into: FlowContent) =
         into.run {
             if (data.deprecation == null) {
@@ -219,7 +218,7 @@ internal data class DefaultDescriptionComponent(
             ?.logger
             ?.warn(
                 "You have a strange period in these docs that may or may not end a sentence: " +
-                    tags.text(),
+                    tags.text()
             )
         return true // This should never happen--it would require period-space-something-weird
     }
@@ -361,10 +360,10 @@ internal data class DefaultDescriptionComponent(
                 is Main,
                 is Menu,
                 is Nav,
-                is Index, ->
+                is Index ->
                     throw NotImplementedError(
                         "Inline HTML pages are not supported: " +
-                            "${tag.javaClass.simpleName}. Context: ${tags.text()}.",
+                            "${tag.javaClass.simpleName}. Context: ${tags.text()}."
                     )
                 is Small,
                 is Big,
@@ -382,10 +381,10 @@ internal data class DefaultDescriptionComponent(
                 is U,
                 is Script,
                 is NoScript,
-                is Section, ->
+                is Section ->
                     throw NotImplementedError(
                         "Unknown use case for " +
-                            "${tag.javaClass.simpleName}.  Context: ${tags.text()}.",
+                            "${tag.javaClass.simpleName}.  Context: ${tags.text()}."
                     )
                 is THead,
                 is TBody,
@@ -398,13 +397,13 @@ internal data class DefaultDescriptionComponent(
                     error(
                         "Not in list context: ${tag.javaClass.simpleName}. The <li> tag " +
                             "must be contained in a parent element (such as <ol>, <ul>, or <menu>). " +
-                            "Context: ${tags.text()}.",
+                            "Context: ${tags.text()}."
                     )
                 is Dd,
                 is Dt ->
                     error(
                         "Not in list context: ${tag.javaClass.simpleName}. The <dt> or <dd> tag " +
-                            "<must be contained in a <dl> element. Context: ${tags.text()}.",
+                            "<must be contained in a <dl> element. Context: ${tags.text()}."
                     )
                 is Caption -> TODO("Support this tag")
             }
@@ -443,7 +442,7 @@ internal data class DefaultDescriptionComponent(
                 else ->
                     error(
                         "Invalid tag inside of Table: ${tag.javaClass.simpleName}. " +
-                            "Context: ${tags.text()}.",
+                            "Context: ${tags.text()}."
                     )
             }
         }
@@ -456,7 +455,7 @@ internal data class DefaultDescriptionComponent(
                 else ->
                     error(
                         "Invalid tag inside of TableHeader: ${tag.javaClass.simpleName}. " +
-                            "Context: ${tags.text()}.",
+                            "Context: ${tags.text()}."
                     )
             }
         }
@@ -469,7 +468,7 @@ internal data class DefaultDescriptionComponent(
                 else ->
                     error(
                         "Invalid tag inside of TableBody: ${tag.javaClass.simpleName}. " +
-                            "Context: ${tags.text()}.",
+                            "Context: ${tags.text()}."
                     )
             }
         }
@@ -482,7 +481,7 @@ internal data class DefaultDescriptionComponent(
                 else ->
                     error(
                         "Invalid tag inside of TableFooter: ${tag.javaClass.simpleName}. " +
-                            "Context: ${tags.text()}.",
+                            "Context: ${tags.text()}."
                     )
             }
         }
@@ -506,7 +505,7 @@ internal data class DefaultDescriptionComponent(
                 else ->
                     error(
                         "Invalid tag inside of TableRow: ${tag.javaClass.simpleName}. " +
-                            "Context: ${tags.text()}.",
+                            "Context: ${tags.text()}."
                     )
             }
         }
@@ -521,7 +520,7 @@ internal data class DefaultDescriptionComponent(
                 else ->
                     error(
                         "Invalid tag inside of OrderedList: ${tag.javaClass.simpleName}. " +
-                            "Context: ${tags.text()}.",
+                            "Context: ${tags.text()}."
                     )
             }
         }
@@ -536,7 +535,7 @@ internal data class DefaultDescriptionComponent(
                 else ->
                     error(
                         "Invalid tag inside of UnorderedList: ${tag.javaClass.simpleName}. " +
-                            "Context: ${tags.text()}.",
+                            "Context: ${tags.text()}."
                     )
             }
         }

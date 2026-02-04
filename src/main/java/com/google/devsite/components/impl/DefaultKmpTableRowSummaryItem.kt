@@ -26,9 +26,7 @@ import kotlinx.html.td
 internal data class DefaultKmpTableRowSummaryItem<
     T : ContextFreeComponent?,
     V : ContextFreeComponent,
->(
-    override val data: KmpTableRowSummaryItem.Params<T, V>,
-) : KmpTableRowSummaryItem<T, V> {
+>(override val data: KmpTableRowSummaryItem.Params<T, V>) : KmpTableRowSummaryItem<T, V> {
     override fun render(into: TR) =
         into.run {
             data.title?.let { title -> td { code { title.render(this) } } }

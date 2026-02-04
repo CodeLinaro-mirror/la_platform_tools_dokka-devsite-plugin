@@ -45,12 +45,8 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#TabRow(kotlin.Int,kotlin.String,kotlin.String,kotlin.String,kotlin.Function1,kotlin.Function0,kotlin.Function0)">TabRow</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;selectedTabIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;Modifier&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;MaterialTheme.colors.primarySurface&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentColor:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;contentColorFor(backgroundColor)&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;indicator:&nbsp;(tabPositions:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a> = { tabPositions -&gt;
-        listOf(
-            listOf(tabPositions[selectedTabIndex])
-        )
-    },<br>&nbsp;&nbsp;&nbsp;&nbsp;divider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a> = {
-        listOf&lt;Unit&gt;()
-    },<br>&nbsp;&nbsp;&nbsp;&nbsp;tabs:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        listOf(listOf(tabPositions[selectedTabIndex]))
+    },<br>&nbsp;&nbsp;&nbsp;&nbsp;divider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a> = { listOf&lt;Unit&gt;() },<br>&nbsp;&nbsp;&nbsp;&nbsp;tabs:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>A TabRow contains a row of Tabs, and displays an indicator underneath the currently selected tab. A TabRow places its tabs evenly spaced along the entire row, with each tab taking up an equal amount of space. See ScrollableTabRow for a tab row that does not enforce equal size, and allows scrolling to tabs that do not fit on screen.</p>
       <p>A simple example with text tabs looks like:</p>
       <pre class="prettyprint lang-kotlin">
@@ -351,18 +347,14 @@ Column {
             </tr>
             <tr>
               <td><code>indicator:&nbsp;(tabPositions:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a> = { tabPositions -&gt;
-        listOf(
-            listOf(tabPositions[selectedTabIndex])
-        )
+        listOf(listOf(tabPositions[selectedTabIndex]))
     }</code></td>
               <td>
                 <p>the indicator that represents which tab is currently selected. By default this will be a TabRowDefaults.Indicator, using a TabRowDefaults.tabIndicatorOffset modifier to animate its position. Note that this indicator will be forced to fill up the entire TabRow, so you should use TabRowDefaults.tabIndicatorOffset or similar to animate the actual drawn indicator inside this space, and provide an offset from the start.</p>
               </td>
             </tr>
             <tr>
-              <td><code>divider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a> = {
-        listOf&lt;Unit&gt;()
-    }</code></td>
+              <td><code>divider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a> = { listOf&lt;Unit&gt;() }</code></td>
               <td>
                 <p>the divider displayed at the bottom of the TabRow. This provides a layer of separation between the TabRow and the content displayed underneath.</p>
               </td>

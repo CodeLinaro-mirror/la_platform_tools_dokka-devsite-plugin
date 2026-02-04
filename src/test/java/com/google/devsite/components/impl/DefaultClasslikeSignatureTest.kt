@@ -51,11 +51,11 @@ class DefaultClasslikeSignatureTest {
                                         listOf(NoopTypeProjectionComponent("GenericSupertype")),
                                     pathProvider = NoopFilePathProvider(),
                                     displayLanguage = Language.KOTLIN,
-                                ),
-                            ),
+                                )
+                            )
                         ),
                     annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation")),
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -66,7 +66,7 @@ class DefaultClasslikeSignatureTest {
                 """
 <body>@GenericAnnotation<br>public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -90,11 +90,11 @@ class DefaultClasslikeSignatureTest {
                                         listOf(NoopTypeProjectionComponent("GenericSupertype")),
                                     pathProvider = NoopFilePathProvider(),
                                     displayLanguage = Language.KOTLIN,
-                                ),
-                            ),
+                                )
+                            )
                         ),
                     annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation")),
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -105,7 +105,7 @@ class DefaultClasslikeSignatureTest {
                 """
 <body>@GenericAnnotation<br>open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -122,7 +122,7 @@ class DefaultClasslikeSignatureTest {
                     implements = listOf(NoopLink("SomeInterface")),
                     typeParameters = listOf(),
                     annotationComponents = emptyList(),
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -133,7 +133,7 @@ class DefaultClasslikeSignatureTest {
                 """
 <body>interface Foo extends SomeInterface</body>
         """
-                    .trim(),
+                    .trim()
             )
     }
 }

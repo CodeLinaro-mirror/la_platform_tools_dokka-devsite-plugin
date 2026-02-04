@@ -28,9 +28,7 @@ import kotlinx.html.title
 import kotlinx.html.unsafe
 
 /** Default implementation of a client-side redirect. */
-internal data class DefaultRedirectPage(
-    override val data: RedirectPage.Params,
-) : RedirectPage {
+internal data class DefaultRedirectPage(override val data: RedirectPage.Params) : RedirectPage {
     override fun render(into: HTML) =
         into.run {
             head {

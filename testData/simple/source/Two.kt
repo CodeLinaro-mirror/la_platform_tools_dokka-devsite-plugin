@@ -18,6 +18,7 @@ package dokkatest.simple
 
 /**
  * Sample interface 2
+ *
  * ## Two is One Big Deal
  */
 interface Two {
@@ -25,6 +26,7 @@ interface Two {
 
     fun z()
 }
+
 /*
  * Interface Four is for extending
  */
@@ -32,12 +34,8 @@ interface Four {
     val fore: String
 }
 
-/**
- * from jetbrains Kotlin documentation examples
- * [copyWhenGreater], [Fraggy.createType]
- */
+/** from jetbrains Kotlin documentation examples [copyWhenGreater], [Fraggy.createType] */
 fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
-    where T : CharSequence,
-          T : Comparable<T> {
+    where T : CharSequence, T : Comparable<T> {
     return list.filter { it > threshold }.map { it.toString() }
 }

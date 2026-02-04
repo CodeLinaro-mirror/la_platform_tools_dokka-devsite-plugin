@@ -52,5 +52,5 @@ val defaultPluginsConfiguration =
                                 listOf("androidx.example.NonNull", "androidx.example.Nullable"),
                     )
                     .toCompactJsonString(),
-        ),
+        )
     )

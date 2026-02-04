@@ -39,7 +39,7 @@ class DefaultAnnotationComponentTest {
                 """
 <div>@Foo</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -52,10 +52,10 @@ class DefaultAnnotationComponentTest {
                     parameters =
                         listOf(
                             DefaultNamedValueAnnotationParameter(
-                                NamedValueAnnotationParameter.Params("a", "value"),
-                            ),
+                                NamedValueAnnotationParameter.Params("a", "value")
+                            )
                         ),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -66,7 +66,7 @@ class DefaultAnnotationComponentTest {
                 """
 <div>@Foo(a&nbsp;=&nbsp;value)</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -79,13 +79,13 @@ class DefaultAnnotationComponentTest {
                     parameters =
                         listOf(
                             DefaultNamedValueAnnotationParameter(
-                                NamedValueAnnotationParameter.Params("a", "value"),
+                                NamedValueAnnotationParameter.Params("a", "value")
                             ),
                             DefaultNamedValueAnnotationParameter(
-                                NamedValueAnnotationParameter.Params("another", "value"),
+                                NamedValueAnnotationParameter.Params("another", "value")
                             ),
                         ),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -96,7 +96,7 @@ class DefaultAnnotationComponentTest {
                 """
 <div>@Foo(a&nbsp;=&nbsp;value,&nbsp;another&nbsp;=&nbsp;value)</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -111,11 +111,11 @@ class DefaultAnnotationComponentTest {
                             DefaultLinkedValueAnnotationParameter(
                                 LinkedValueAnnotationParameter.Params(
                                     "a",
-                                    DefaultLink(Link.Params("Value", "example.com"))
-                                ),
-                            ),
+                                    DefaultLink(Link.Params("Value", "example.com")),
+                                )
+                            )
                         ),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -126,7 +126,7 @@ class DefaultAnnotationComponentTest {
                 """
                 <div>@Foo(a&nbsp;=&nbsp;<a href="example.com">Value</a>)</div>
                 """
-                    .trimIndent(),
+                    .trimIndent()
             )
     }
 }

@@ -22,11 +22,7 @@ internal interface Link : ContextFreeComponent, Sizeable {
 
     override fun length() = data.name.length
 
-    open class Params(
-        val name: String,
-        val url: String,
-        val externalLink: Boolean = false,
-    ) {
+    open class Params(val name: String, val url: String, val externalLink: Boolean = false) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (other !is Params) return false

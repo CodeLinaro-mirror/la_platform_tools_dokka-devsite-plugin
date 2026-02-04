@@ -28,9 +28,7 @@ import kotlinx.html.h2
 import kotlinx.html.visit
 
 /** Default implementation of class-like pages. */
-internal data class DefaultClasslike(
-    override val data: Classlike.Params,
-) : Classlike {
+internal data class DefaultClasslike(override val data: Classlike.Params) : Classlike {
     override fun render(into: FlowContent) =
         into.run {
             data.description.render(this)

@@ -23,7 +23,5 @@ import kotlinx.html.HTML
 internal interface RedirectPage : HtmlComponent<HTML> {
     val data: Params
 
-    data class Params(
-        val url: String,
-    )
+    data class Params(val url: String)
 }

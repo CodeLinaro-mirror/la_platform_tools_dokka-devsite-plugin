@@ -16,7 +16,6 @@
 
 package dokkatest.sampleAnnotation
 
-
 /**
  * top-level extension property docs
  *
@@ -26,7 +25,8 @@ package dokkatest.sampleAnnotation
  *
  * @sample dokkatest.sampleAnnotation.samples.AnotherSampleInTheSameFile
  */
-val List<String>.topLevelExtensionProperty get() = Pair(10f, 20f)
+val List<String>.topLevelExtensionProperty
+    get() = Pair(10f, 20f)
 
 /**
  * top-level non-extension property docs
@@ -34,12 +34,14 @@ val List<String>.topLevelExtensionProperty get() = Pair(10f, 20f)
  * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
  *
  * and this is a Java sample from Kotlin source using Kotlin syntax (does not work):
+ *
  * @BROKENsample dokkatest.sampleAnnotation.samples.FragmentArgumentsSupport.onCreate
  *
  * and this is a Java sample from Kotlin source using Java syntax:
  *
- * {@sample frameworks/support/samples/Support4Demos/src/main/java/com/example/android/supportv4/app/FragmentArgumentsSupport.java
- *      fragment}
+ * {@sample
+ * frameworks/support/samples/Support4Demos/src/main/java/com/example/android/supportv4/app/FragmentArgumentsSupport.java
+ * fragment}
  */
 val topLevelProperty: String? = null
 
@@ -48,8 +50,9 @@ val topLevelProperty: String? = null
  *
  * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
  *
- * and this is an XML sample from Kotlin source:
- * {@sample frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_arguments_support.xml from_attributes}
+ * and this is an XML sample from Kotlin source: {@sample
+ * frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_arguments_support.xml
+ * from_attributes}
  */
 fun List<String>.topLevelExtensionFunction() = Pair(10f, 20f)
 
@@ -71,7 +74,8 @@ class TopLevelClass {
      *
      * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
      */
-    val List<String>.inClassExtensionProperty get() = Pair(10f, 20f)
+    val List<String>.inClassExtensionProperty
+        get() = Pair(10f, 20f)
 
     /**
      * class non-extension property docs
@@ -100,6 +104,7 @@ class TopLevelClass {
      * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
      */
     class InnerClass
+
     /**
      * inner interface docs
      *

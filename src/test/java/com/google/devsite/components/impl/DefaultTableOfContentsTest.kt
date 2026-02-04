@@ -30,7 +30,7 @@ class DefaultTableOfContentsTest {
                     classesUrl = "classes.html",
                     packagesUrl = "packages.html",
                     packages = listOf(NoopTocPackage, NoopTocPackage),
-                ),
+                )
             )
 
         val output = buildString { component.render(this) }.trim()
@@ -49,7 +49,7 @@ noop
 
 noop
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

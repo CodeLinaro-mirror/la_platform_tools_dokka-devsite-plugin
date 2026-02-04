@@ -50,7 +50,7 @@ relatedSymbols
 descriptionDocs
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -67,9 +67,9 @@ descriptionDocs
                                 primarySignature = NoopClasslikeSignature(),
                                 relatedSymbols = NoopRelatedSymbols(),
                                 descriptionDocs = emptyList(),
-                            ),
-                        ),
-                ),
+                            )
+                        )
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -86,7 +86,7 @@ descriptionDocs
   <div>Related symbols</div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -98,7 +98,7 @@ descriptionDocs
                     publicFunctionsSummary = NoopSummaryList(),
                     publicFunctionsDetails =
                         Classlike.TitledList("Symbols", listOf(NoopSymbolDetailF)),
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -121,7 +121,7 @@ descriptionDocs
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

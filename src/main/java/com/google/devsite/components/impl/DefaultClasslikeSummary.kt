@@ -21,9 +21,8 @@ import kotlinx.html.FlowContent
 import kotlinx.html.code
 import kotlinx.html.div
 
-internal data class DefaultClasslikeSummary(
-    override val data: ClasslikeSummary.Params,
-) : ClasslikeSummary {
+internal data class DefaultClasslikeSummary(override val data: ClasslikeSummary.Params) :
+    ClasslikeSummary {
     override fun render(into: FlowContent) =
         into.run {
             div { code { data.signature.render(this) } }

@@ -24,7 +24,7 @@ class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
             packages =
                 original.packages.map { p ->
                     p.copy(classlikes = p.classlikes.map(::transformClasslike))
-                },
+                }
         )
 
     private fun transformClasslike(classlike: DClasslike): DClasslike =
@@ -52,9 +52,7 @@ class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
             is DAnnotation -> classlike
         }
 
-    private fun transformFunction(
-        function: DFunction,
-    ): DFunction {
+    private fun transformFunction(function: DFunction): DFunction {
         val allExceptions = function.extra[CheckedExceptions]?.exceptions
         return if (allExceptions.isNullOrEmpty()) {
             function

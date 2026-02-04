@@ -28,7 +28,7 @@ import kotlinx.html.id
 
 /** Default implementation of a VersionMetadataComponent. */
 internal data class DefaultVersionMetadataComponent(
-    override val data: VersionMetadataComponent.Params,
+    override val data: VersionMetadataComponent.Params
 ) : VersionMetadataComponent {
 
     override fun render(into: FlowContent): Unit =
@@ -73,12 +73,12 @@ internal data class DefaultVersionMetadataComponent(
                 VersionMetadataComponent.Params(
                     addedIn = addedIn?.let { createVersionLinkFromBase(it, baseUrl) },
                     deprecatedIn = deprecatedIn?.let { createVersionLinkFromBase(it, baseUrl) },
-                ),
+                )
             )
 
         /** Generate mapping of each class to its API metadata */
         fun convertJsonVersionMetadataToVersionMap(
-            versionMetadataList: List<JsonVersionMetadata>,
+            versionMetadataList: List<JsonVersionMetadata>
         ): Map<String, ClassVersionMetadata> {
             val versionMetadataMap = hashMapOf<String, ClassVersionMetadata>()
             versionMetadataList.forEach { versionMetadata ->
@@ -96,11 +96,6 @@ internal data class DefaultVersionMetadataComponent(
         }
 
         private fun createVersionLinkFromBase(version: String, baseUrl: String?) =
-            DefaultLink(
-                Link.Params(
-                    name = version,
-                    url = baseUrl?.plus("#$version").orEmpty(),
-                ),
-            )
+            DefaultLink(Link.Params(name = version, url = baseUrl?.plus("#$version").orEmpty()))
     }
 }

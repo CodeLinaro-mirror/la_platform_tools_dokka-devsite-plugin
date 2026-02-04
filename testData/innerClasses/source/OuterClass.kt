@@ -52,8 +52,9 @@ abstract class OuterClass {
         B,
 
         /** Third */
-        C
+        C,
     }
+
     companion object {
         class InsideCompanionObject {}
     }

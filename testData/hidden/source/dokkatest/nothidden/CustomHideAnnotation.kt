@@ -16,5 +16,4 @@
 
 package dokkatest.nothidden
 
-@CustomHideAnnotation
-annotation class CustomHideAnnotation
+@CustomHideAnnotation annotation class CustomHideAnnotation

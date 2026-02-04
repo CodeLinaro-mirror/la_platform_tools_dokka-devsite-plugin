@@ -25,10 +25,7 @@ internal interface SummaryList<T : SummaryItem> : ContextFreeComponent, List<T> 
     /** @return true if there is summary content to render, false otherwise */
     fun hasContent(): Boolean
 
-    data class Params<T>(
-        val header: TableTitle? = null,
-        var items: List<T>,
-    )
+    data class Params<T>(val header: TableTitle? = null, var items: List<T>)
 
     fun title(): String? = data.header?.data?.title
 

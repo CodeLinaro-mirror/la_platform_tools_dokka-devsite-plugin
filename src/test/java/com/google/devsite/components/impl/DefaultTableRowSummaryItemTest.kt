@@ -39,7 +39,7 @@ class DefaultTableRowSummaryItemTest {
   <td></td>
 </tr>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -47,10 +47,7 @@ class DefaultTableRowSummaryItemTest {
     fun `Simple item renders correctly`() {
         val component =
             DefaultTableRowSummaryItem(
-                Params(
-                    PlainTextOutput("Title"),
-                    PlainTextOutput("Description"),
-                ),
+                Params(PlainTextOutput("Title"), PlainTextOutput("Description"))
             )
 
         val b = createHTML().tr { component.render(this) }.trim()
@@ -64,7 +61,7 @@ class DefaultTableRowSummaryItemTest {
   <td>Description</td>
 </tr>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

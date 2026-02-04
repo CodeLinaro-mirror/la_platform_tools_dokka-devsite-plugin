@@ -60,13 +60,13 @@ internal class MultiLanguageRenderer(
         val module = (root as ModulePageNode).documentables.single() as DModule
         val locationProvider =
             DefaultExternalDokkaLocationProvider(
-                dokkaLocationProvider = DokkaLocationProvider(root, context),
+                dokkaLocationProvider = DokkaLocationProvider(root, context)
             )
 
         runBlocking(Dispatchers.Default) {
             val libraryMetadataArray =
                 JsonLibraryMetadata.getMetadataFromFile(
-                    devsiteConfiguration.libraryMetadataFilename.orEmpty(),
+                    devsiteConfiguration.libraryMetadataFilename.orEmpty()
                 )
             val fileMetadataMap = LibraryMetadata.convertJsonMetadataToFileMap(libraryMetadataArray)
 
@@ -77,9 +77,7 @@ internal class MultiLanguageRenderer(
             val versionMetadataMap = hashMapOf<String, ClassVersionMetadata>()
             devsiteConfiguration.versionMetadataFilenames?.forEach { versionMetadataFilename ->
                 val versionMetadataArray =
-                    JsonVersionMetadata.getMetadataFromFile(
-                        versionMetadataFilename,
-                    )
+                    JsonVersionMetadata.getMetadataFromFile(versionMetadataFilename)
                 versionMetadataMap +=
                     DefaultVersionMetadataComponent.convertJsonVersionMetadataToVersionMap(
                         versionMetadataArray

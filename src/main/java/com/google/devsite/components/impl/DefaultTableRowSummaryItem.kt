@@ -23,11 +23,8 @@ import kotlinx.html.code
 import kotlinx.html.td
 
 /** Default implementation of the two-pane layout item for symbol tables. */
-internal data class DefaultTableRowSummaryItem<
-    T : ContextFreeComponent?,
-    V : ContextFreeComponent,
->(
-    override val data: TableRowSummaryItem.Params<T, V>,
+internal data class DefaultTableRowSummaryItem<T : ContextFreeComponent?, V : ContextFreeComponent>(
+    override val data: TableRowSummaryItem.Params<T, V>
 ) : TableRowSummaryItem<T, V> {
     override fun render(into: TR) =
         into.run {

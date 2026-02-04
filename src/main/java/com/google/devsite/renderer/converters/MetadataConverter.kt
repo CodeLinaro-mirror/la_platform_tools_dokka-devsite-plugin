@@ -55,28 +55,21 @@ import org.jetbrains.dokka.model.isExtension
  * Creates metadata components (a section containing information such as artifact ID and source
  * links) for documentables.
  */
-internal class MetadataConverter(
-    private val docsHolder: DocumentablesHolder,
-) {
+internal class MetadataConverter(private val docsHolder: DocumentablesHolder) {
     /** Creates a metadata component for the classlike. */
     fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent {
         val libraryMetadata = classlike.findMatchingLibraryMetadata()
         val sourceUrl =
-            classlike.createLinkToSource(
-                docsHolder.baseClassSourceLink,
-                classlike.dri.fullName,
-            )
+            classlike.createLinkToSource(docsHolder.baseClassSourceLink, classlike.dri.fullName)
         val versionMetadata =
-            classlike.findMatchingVersionMetadata(
-                libraryMetadata?.releaseNotesUrl,
-            )
+            classlike.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
                 libraryMetadata = libraryMetadata,
                 sourceLinkUrl = sourceUrl,
                 versionMetadata = versionMetadata,
-            ),
+            )
         )
     }
 
@@ -112,7 +105,7 @@ internal class MetadataConverter(
                 libraryMetadata = if (includeAdditionalMetadata) libraryMetadata else null,
                 sourceLinkUrl = sourceLink,
                 versionMetadata = versionMetadata,
-            ),
+            )
         )
     }
 
@@ -136,7 +129,7 @@ internal class MetadataConverter(
                 libraryMetadata = if (includeAdditionalMetadata) libraryMetadata else null,
                 sourceLinkUrl = sourceLink,
                 versionMetadata = versionMetadata,
-            ),
+            )
         )
     }
 
@@ -144,9 +137,8 @@ internal class MetadataConverter(
      * Iterate through the library metadata Map to find a [LibraryMetadata] that matches the current
      * class being processed. Otherwise, return null.
      */
-    private fun <T> T.findMatchingLibraryMetadata(): LibraryMetadata? where
-    T : Documentable,
-    T : WithSources {
+    private fun <T> T.findMatchingLibraryMetadata(): LibraryMetadata?
+        where T : Documentable, T : WithSources {
         val paths = getSourceFilePaths() ?: return null
         val path =
             if (paths.size > 1) {
@@ -165,7 +157,7 @@ internal class MetadataConverter(
      * current class being processed and append a release URL. Otherwise, return null.
      */
     private fun DClasslike.findMatchingVersionMetadata(
-        releaseNotesUrl: String?,
+        releaseNotesUrl: String?
     ): VersionMetadataComponent? {
         val classVersionMetadata = docsHolder.versionMetadataMap[dri.fullName]
 
@@ -183,15 +175,11 @@ internal class MetadataConverter(
      * current function being processed and append a release URL. Otherwise, return null.
      */
     private fun DFunction.findMatchingVersionMetadata(
-        releaseNotesUrl: String?,
+        releaseNotesUrl: String?
     ): VersionMetadataComponent? {
         val classVersionMetadata = docsHolder.versionMetadataMap[containingClassName()]
         val methodVersionMetadata =
-            classVersionMetadata
-                ?.methodVersions
-                ?.get(
-                    apiSinceMethodSignature(this),
-                )
+            classVersionMetadata?.methodVersions?.get(apiSinceMethodSignature(this))
 
         return methodVersionMetadata?.let {
             DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
@@ -209,7 +197,7 @@ internal class MetadataConverter(
      * for metadata of the getter if metadata can't be found for the property itself.
      */
     private fun DProperty.findMatchingVersionMetadata(
-        releaseNotesUrl: String?,
+        releaseNotesUrl: String?
     ): VersionMetadataComponent? {
         val classVersionMetadata = docsHolder.versionMetadataMap[containingClassName()]
         val propertyVersionMetadata = classVersionMetadata?.fieldVersions?.get(name)
@@ -270,10 +258,8 @@ internal class MetadataConverter(
      *
      * Returns null if [baseLink] is null or the documentable has no source entries.
      */
-    private fun <T> T.createLinkToSource(
-        baseLink: String?,
-        name: String,
-    ): String? where T : Documentable, T : WithSources {
+    private fun <T> T.createLinkToSource(baseLink: String?, name: String): String?
+        where T : Documentable, T : WithSources {
         baseLink ?: return null
         val paths = getSourceFilePaths() ?: return null
         // Reduce the list of paths to a single path by taking the common prefix of all of them.
@@ -317,9 +303,7 @@ internal class MetadataConverter(
                     .map { param ->
                         val basicTypeName =
                             param.type
-                                .rewriteKotlinPrimitivesForJava(
-                                    useQualifiedTypes = true,
-                                )
+                                .rewriteKotlinPrimitivesForJava(useQualifiedTypes = true)
                                 .metalavaName()
 
                         // Kotlin varargs are separate from the type representation

@@ -190,9 +190,9 @@ class PropagatedAnnotationsTransformerTest :
                                     annotationsNotToDisplayKotlin = null,
                                     hidingAnnotations = emptyList(),
                                     propagatingAnnotations =
-                                        listOf("com.sample.A", "com.sample.B", "com.sample.C")
+                                        listOf("com.sample.A", "com.sample.B", "com.sample.C"),
                                 )
-                                .toCompactJsonString()
+                                .toCompactJsonString(),
                     )
                 )
             )
@@ -221,7 +221,7 @@ class PropagatedAnnotationsTransformerTest :
                 fun checkAnnotations(d: Documentable, expected: List<String>) {
                     assertContentEquals(
                         expected.sorted(),
-                        d.allAnnotations().map { it.dri.classNames!! }.sorted()
+                        d.allAnnotations().map { it.dri.classNames!! }.sorted(),
                     )
                 }
                 val fooClass = mod.packages.single().classlikes.single { it.name == "Foo" }

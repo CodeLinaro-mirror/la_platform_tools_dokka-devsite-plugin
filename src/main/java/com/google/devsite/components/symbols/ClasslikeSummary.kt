@@ -23,8 +23,5 @@ import com.google.devsite.components.DescriptionComponent
 internal interface ClasslikeSummary : ContextFreeComponent {
     val data: Params
 
-    data class Params(
-        val signature: ClasslikeSignature,
-        val description: DescriptionComponent,
-    )
+    data class Params(val signature: ClasslikeSignature, val description: DescriptionComponent)
 }

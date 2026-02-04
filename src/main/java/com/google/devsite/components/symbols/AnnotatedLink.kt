@@ -22,8 +22,6 @@ import com.google.devsite.components.Link
 internal interface AnnotatedLink : Link {
     override val data: Params
 
-    data class Params(
-        val annotations: List<AnnotationComponent>,
-        val link: Link,
-    ) : Link.Params(name = link.data.name, url = link.data.url)
+    data class Params(val annotations: List<AnnotationComponent>, val link: Link) :
+        Link.Params(name = link.data.name, url = link.data.url)
 }

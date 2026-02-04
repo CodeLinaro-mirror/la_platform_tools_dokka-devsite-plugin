@@ -61,10 +61,7 @@ abstract class IntegrationTestBase :
             externalDocumentationLinks = externalLinks
             samples = samplesLocations
             documentedVisibilities =
-                setOf(
-                    DokkaConfiguration.Visibility.PUBLIC,
-                    DokkaConfiguration.Visibility.PROTECTED,
-                )
+                setOf(DokkaConfiguration.Visibility.PUBLIC, DokkaConfiguration.Visibility.PROTECTED)
         }
     }
 
@@ -165,7 +162,7 @@ abstract class IntegrationTestBase :
                                     validNullabilityAnnotations = validNullabilityAnnotations,
                                 )
                                 .toCompactJsonString(),
-                    ),
+                    )
                 )
         }
     }
@@ -223,10 +220,7 @@ abstract class IntegrationTestBase :
 
         val writerPlugin = TestOutputWriterPlugin()
 
-        testFromData(
-            configuration,
-            pluginOverrides = listOf(writerPlugin),
-        ) {
+        testFromData(configuration, pluginOverrides = listOf(writerPlugin)) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
                 dump(writerPlugin.writer.contents, File("build/docs/$testName").absolutePath)
             }
@@ -298,10 +292,7 @@ abstract class IntegrationTestBase :
 
         val writerPlugin = TestOutputWriterPlugin()
 
-        testFromData(
-            configuration,
-            pluginOverrides = listOf(writerPlugin),
-        ) {
+        testFromData(configuration, pluginOverrides = listOf(writerPlugin)) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
                 dump(writerPlugin.writer.contents, File("build/docs/$testName").absolutePath)
             }
@@ -315,11 +306,7 @@ abstract class IntegrationTestBase :
      * `build/explodedSources/$artifactName-$version-sources/` Samples are kept locally (read from
      * `testData/$testName/samples/`), as they are not published
      */
-    fun executePrebuilts(
-        testName: String,
-        artifactNames: List<String>,
-        samples: Boolean = false,
-    ) {
+    fun executePrebuilts(testName: String, artifactNames: List<String>, samples: Boolean = false) {
         val samplesBaseDir = "testData/$testName/samples"
 
         val configuration =
@@ -335,10 +322,7 @@ abstract class IntegrationTestBase :
 
         val writerPlugin = TestOutputWriterPlugin()
 
-        testFromData(
-            configuration,
-            pluginOverrides = listOf(writerPlugin),
-        ) {
+        testFromData(configuration, pluginOverrides = listOf(writerPlugin)) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
                 dump(writerPlugin.writer.contents, File("build/docs/$testName").absolutePath)
             }
@@ -440,10 +424,7 @@ abstract class IntegrationTestBase :
 
         val writerPlugin = TestOutputWriterPlugin()
 
-        testFromData(
-            configuration,
-            pluginOverrides = listOf(writerPlugin),
-        ) {
+        testFromData(configuration, pluginOverrides = listOf(writerPlugin)) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
                 verifyOutput(writerPlugin.writer.contents, outputBaseDir)
                 verifyOutput(logFiles(sourceDir), loggingDir)
@@ -508,10 +489,7 @@ abstract class IntegrationTestBase :
 
         val writerPlugin = TestOutputWriterPlugin()
 
-        testFromData(
-            configuration,
-            pluginOverrides = listOf(writerPlugin),
-        ) {
+        testFromData(configuration, pluginOverrides = listOf(writerPlugin)) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
                 verifyOutput(writerPlugin.writer.contents, outputBaseDir)
                 verifyOutput(logFiles(explodedSourcesDir), loggingDir)

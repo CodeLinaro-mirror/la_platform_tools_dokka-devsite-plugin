@@ -23,8 +23,5 @@ import com.google.devsite.components.ContextFreeComponent
 internal interface PackageIndex : ContextFreeComponent {
     val data: Params
 
-    data class Params(
-        val classesUrl: String,
-        val packages: LinkDescriptionSummaryList,
-    )
+    data class Params(val classesUrl: String, val packages: LinkDescriptionSummaryList)
 }

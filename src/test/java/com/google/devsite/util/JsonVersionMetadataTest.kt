@@ -43,15 +43,15 @@ class JsonVersionMetadataTest {
     fun `getMetadataFromFile with unparseable json file throws IOException`() {
         val json =
             """
-[
-  {
-    "a": "b"
-  },
-  {
-    "c": "d"
-  }
-]
-        """
+            [
+              {
+                "a": "b"
+              },
+              {
+                "c": "d"
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("Unparseable.json")
@@ -63,42 +63,42 @@ class JsonVersionMetadataTest {
     fun `getMetadataFromFile with valid json file`() {
         val json =
             """
-[
-  {
-    "class": "androidx.fragment.foo",
-    "addedIn": "1.0.0",
-    "deprecatedIn": "1.1.0",
-    "methods": [
-      {
-        "method": "isFoo()",
-        "addedIn": "1.0.0",
-        "deprecatedIn": "1.1.0"
-      },
-      {
-        "method": "isBar()",
-        "addedIn": "1.0.1"
-      }
-    ],
-    "fields": [
-      {
-        "field": "FIELD_FOO",
-        "addedIn": "1.0.0",
-        "deprecatedIn": "1.1.0"
-      },
-      {
-        "field": "FIELD_BAR",
-        "addedIn": "1.0.1"
-      }
-    ]
-  },
-  {
-    "class": "androidx.fragment.bar",
-    "addedIn": "1.2.3",
-    "methods": [],
-    "fields": []
-  }
-]
-        """
+            [
+              {
+                "class": "androidx.fragment.foo",
+                "addedIn": "1.0.0",
+                "deprecatedIn": "1.1.0",
+                "methods": [
+                  {
+                    "method": "isFoo()",
+                    "addedIn": "1.0.0",
+                    "deprecatedIn": "1.1.0"
+                  },
+                  {
+                    "method": "isBar()",
+                    "addedIn": "1.0.1"
+                  }
+                ],
+                "fields": [
+                  {
+                    "field": "FIELD_FOO",
+                    "addedIn": "1.0.0",
+                    "deprecatedIn": "1.1.0"
+                  },
+                  {
+                    "field": "FIELD_BAR",
+                    "addedIn": "1.0.1"
+                  }
+                ]
+              },
+              {
+                "class": "androidx.fragment.bar",
+                "addedIn": "1.2.3",
+                "methods": [],
+                "fields": []
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
@@ -139,14 +139,14 @@ class JsonVersionMetadataTest {
     fun `getMetadataFromFile with valid json file with extra field`() {
         val json =
             """
-[
-  {
-    "class": "androidx.fragment.foo",
-    "addedIn": "1.0.0",
-    "extraField": "extraFoo"
-  }
-]
-        """
+            [
+              {
+                "class": "androidx.fragment.foo",
+                "addedIn": "1.0.0",
+                "extraField": "extraFoo"
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
@@ -160,29 +160,29 @@ class JsonVersionMetadataTest {
     fun `getMetadataFromFile with missing JSON fields returns default values`() {
         val json =
             """
-[
-  {
-    "class": "androidx.fragment.foo",
-    "addedIn": "1.0.0"
-  },
-  {
-    "class": "androidx.fragment.bar",
-    "addedIn": "1.0.0",
-    "methods": [
-      {
-        "method": "isFoo()",
-        "addedIn": "1.0.0"
-      }
-    ],
-    "fields": [
-      {
-        "field": "FIELD_FOO",
-        "addedIn": "1.0.0"
-      }
-    ]
-  }
-]
-        """
+            [
+              {
+                "class": "androidx.fragment.foo",
+                "addedIn": "1.0.0"
+              },
+              {
+                "class": "androidx.fragment.bar",
+                "addedIn": "1.0.0",
+                "methods": [
+                  {
+                    "method": "isFoo()",
+                    "addedIn": "1.0.0"
+                  }
+                ],
+                "fields": [
+                  {
+                    "field": "FIELD_FOO",
+                    "addedIn": "1.0.0"
+                  }
+                ]
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")

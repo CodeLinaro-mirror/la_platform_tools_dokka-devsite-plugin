@@ -33,7 +33,7 @@ import kotlinx.html.pre
 
 /** Default implementation of a fully documented function. */
 internal data class DefaultKmpSymbolDetail<T : SymbolSignature>(
-    override val data: KmpSymbolDetail.Params<T>,
+    override val data: KmpSymbolDetail.Params<T>
 ) : KmpSymbolDetail<T> {
     override fun render(into: FlowContent) =
         into.div(classes = "api-item") {

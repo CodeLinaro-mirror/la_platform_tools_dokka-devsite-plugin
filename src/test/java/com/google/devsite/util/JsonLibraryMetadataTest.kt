@@ -43,15 +43,15 @@ class JsonLibraryMetadataTest {
     fun `getMetadataFromFile with unparseable json file throws IOException`() {
         val json =
             """
-[
-  {
-    "a": "b"
-  },
-  {
-    "c": "d"
-  }
-]
-        """
+            [
+              {
+                "a": "b"
+              },
+              {
+                "c": "d"
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("Unparseable.json")
@@ -63,27 +63,27 @@ class JsonLibraryMetadataTest {
     fun `getMetadataFromFile with valid json file`() {
         val json =
             """
-[
-  {
-    "groupId": "androidx.a",
-    "artifactId": "a-runtime",
-    "releaseNotesUrl": "https://d.android.com/a",
-    "jarContents": [
-      "META-INF/",
-      "META-INF/MANIFEST.MF",
-      "androidx/",
-      "androidx/library/",
-      "androidx/library/Foo.java",
-      "androidx/library/Bar.kt"]
-  },
-  {
-    "groupId": "androidx.b",
-    "artifactId": "b-runtime",
-    "releaseNotesUrl": "https://d.android.com/b",
-    "jarContents": ["a/b/c.kt"]
-  }
-]
-        """
+            [
+              {
+                "groupId": "androidx.a",
+                "artifactId": "a-runtime",
+                "releaseNotesUrl": "https://d.android.com/a",
+                "jarContents": [
+                  "META-INF/",
+                  "META-INF/MANIFEST.MF",
+                  "androidx/",
+                  "androidx/library/",
+                  "androidx/library/Foo.java",
+                  "androidx/library/Bar.kt"]
+              },
+              {
+                "groupId": "androidx.b",
+                "artifactId": "b-runtime",
+                "releaseNotesUrl": "https://d.android.com/b",
+                "jarContents": ["a/b/c.kt"]
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
@@ -103,25 +103,25 @@ class JsonLibraryMetadataTest {
     fun `getMetadataFromFile with valid json file with extra field`() {
         val json =
             """
-[
-  {
-    "groupId": "androidx.a",
-    "artifactId": "a-runtime",
-    "releaseNotesUrl": "https://d.android.com/a",
-    "sourceDir": "a/a-runtime",
-    "jarContents": ["a/b/c.kt"],
-    "extrafield": "foo"
-  },
-  {
-    "groupId": "androidx.b",
-    "artifactId": "b-runtime",
-    "releaseNotesUrl": "https://d.android.com/b",
-    "sourceDir": "b/b-runtime",
-    "jarContents": ["a/b/c.kt"],
-    "extrafield": "bar"
-  }
-]
-        """
+            [
+              {
+                "groupId": "androidx.a",
+                "artifactId": "a-runtime",
+                "releaseNotesUrl": "https://d.android.com/a",
+                "sourceDir": "a/a-runtime",
+                "jarContents": ["a/b/c.kt"],
+                "extrafield": "foo"
+              },
+              {
+                "groupId": "androidx.b",
+                "artifactId": "b-runtime",
+                "releaseNotesUrl": "https://d.android.com/b",
+                "sourceDir": "b/b-runtime",
+                "jarContents": ["a/b/c.kt"],
+                "extrafield": "bar"
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
@@ -135,21 +135,21 @@ class JsonLibraryMetadataTest {
     fun `getMetadataFromFile with json file with blank groupId`() {
         val json =
             """
-[
-  {
-    "groupId": "androidx.a",
-    "artifactId": "a-runtime",
-    "releaseNotesUrl": "https://d.android.com/a",
-    "jarContents": ["a/unused.kt"]
-  },
-  {
-    "groupId": "",
-    "artifactId": "b-runtime",
-    "releaseNotesUrl": "https://d.android.com/b",
-    "jarContents": ["b/unused.kt"]
-  }
-]
-        """
+            [
+              {
+                "groupId": "androidx.a",
+                "artifactId": "a-runtime",
+                "releaseNotesUrl": "https://d.android.com/a",
+                "jarContents": ["a/unused.kt"]
+              },
+              {
+                "groupId": "",
+                "artifactId": "b-runtime",
+                "releaseNotesUrl": "https://d.android.com/b",
+                "jarContents": ["b/unused.kt"]
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
@@ -164,21 +164,21 @@ class JsonLibraryMetadataTest {
     fun `getMetadataFromFile with json file with blank artifactId`() {
         val json =
             """
-[
-  {
-    "groupId": "androidx.a",
-    "artifactId": "a-runtime",
-    "releaseNotesUrl": "https://d.android.com/a",
-    "jarContents": ["a/unused.kt"]
-  },
-  {
-    "groupId": "androidx.b",
-    "artifactId": "",
-    "releaseNotesUrl": "https://d.android.com/b",
-    "jarContents": ["b/unused.kt"]
-  }
-]
-        """
+            [
+              {
+                "groupId": "androidx.a",
+                "artifactId": "a-runtime",
+                "releaseNotesUrl": "https://d.android.com/a",
+                "jarContents": ["a/unused.kt"]
+              },
+              {
+                "groupId": "androidx.b",
+                "artifactId": "",
+                "releaseNotesUrl": "https://d.android.com/b",
+                "jarContents": ["b/unused.kt"]
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
@@ -193,21 +193,21 @@ class JsonLibraryMetadataTest {
     fun `getMetadataFromFile with json file with blank groupId and artifactId`() {
         val json =
             """
-[
-  {
-    "groupId": "androidx.a",
-    "artifactId": "a-runtime",
-    "releaseNotesUrl": "https://d.android.com/a",
-    "jarContents": ["a/unused.kt"]
-  },
-  {
-    "groupId": "",
-    "artifactId": "",
-    "releaseNotesUrl": "https://d.android.com/b",
-    "jarContents": ["b/unused.kt"]
-  }
-]
-        """
+            [
+              {
+                "groupId": "androidx.a",
+                "artifactId": "a-runtime",
+                "releaseNotesUrl": "https://d.android.com/a",
+                "jarContents": ["a/unused.kt"]
+              },
+              {
+                "groupId": "",
+                "artifactId": "",
+                "releaseNotesUrl": "https://d.android.com/b",
+                "jarContents": ["b/unused.kt"]
+              }
+            ]
+            """
                 .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")

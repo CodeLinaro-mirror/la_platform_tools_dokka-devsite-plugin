@@ -146,7 +146,7 @@ internal class KmpClasslikeConverter(
                         .mapValues { (_, v) -> DefaultPlatformComponent(v) }
                         .toList()
                         .sortedBy { it.second.toString() },
-            ),
+            )
         )
     }
 }

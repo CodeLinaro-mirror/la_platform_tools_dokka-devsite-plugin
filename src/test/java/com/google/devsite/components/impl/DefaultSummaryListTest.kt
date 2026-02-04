@@ -37,7 +37,7 @@ class DefaultSummaryListTest {
                 """
 <div></div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -45,7 +45,7 @@ class DefaultSummaryListTest {
     fun `Simple summary renders correctly`() {
         val component =
             DefaultSummaryList(
-                Params(items = listOf(NoopTableRowTypeSummaryItem, NoopTableRowTypeSummaryItem)),
+                Params(items = listOf(NoopTableRowTypeSummaryItem, NoopTableRowTypeSummaryItem))
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -69,7 +69,7 @@ class DefaultSummaryListTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -101,7 +101,7 @@ class DefaultSummaryListTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

@@ -37,7 +37,7 @@ class DefaultTableTitleTest {
   <th colspan="100%">Title</th>
 </tr>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -55,7 +55,7 @@ class DefaultTableTitleTest {
   <th colspan="100%"><h3>Title</h3></th>
 </tr>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

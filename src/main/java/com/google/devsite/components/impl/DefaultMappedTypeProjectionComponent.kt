@@ -7,7 +7,7 @@ import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
 internal data class DefaultMappedTypeProjectionComponent(
-    override val data: MappedTypeProjectionComponent.Params,
+    override val data: MappedTypeProjectionComponent.Params
 ) : MappedTypeProjectionComponent {
     override fun render(into: FlowContent) =
         into.run {

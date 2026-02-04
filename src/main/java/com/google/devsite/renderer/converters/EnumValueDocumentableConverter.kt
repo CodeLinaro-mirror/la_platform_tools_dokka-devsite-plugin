@@ -46,7 +46,7 @@ internal class EnumValueDocumentableConverter(
             TableRowSummaryItem.Params(
                 title = pathProvider.linkForReference(enumValue.dri, enumValue.name),
                 description = javadocConverter.summaryDescription(enumValue),
-            ),
+            )
         )
     }
 
@@ -55,7 +55,7 @@ internal class EnumValueDocumentableConverter(
     fun detail(
         dEnum: DEnum,
         enumValue: DEnumEntry,
-        hints: ModifierHints
+        hints: ModifierHints,
     ): SymbolDetail<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
             dEnum.annotations(dEnum.getExpectOrCommonSourceSet()).partition {
@@ -96,7 +96,7 @@ internal class EnumValueDocumentableConverter(
                         annotations = nonTypeAnnotations,
                         nullability = Nullability.DONT_CARE, // See above
                     ),
-            ),
+            )
         )
     }
 
@@ -107,14 +107,12 @@ internal class EnumValueDocumentableConverter(
                 // TODO(b/168136770): figure out path for default anchors
                 name = pathProvider.linkForReference(dri),
                 receiver = null,
-            ),
+            )
         )
     }
 
     /** Returns anchors for this enum value. */
     private fun DEnumEntry.generateAnchors(): LinkedHashSet<String> {
-        return linkedSetOf(
-            name,
-        )
+        return linkedSetOf(name)
     }
 }

@@ -19,25 +19,20 @@ package dokkatest.kotlin
 import kotlin.jvm.JvmField
 
 public open class KotlinSuperClass {
-    /**
-     * My kotlin super class public property
-     */
+    /** My kotlin super class public property */
     var kotlinSuperProperty: Int = 0
-    /**
-     * My kotlin super class public field
-     */
-    @JvmField
-    var kotlinSuperField: Int = 0
+    /** My kotlin super class public field */
+    @JvmField var kotlinSuperField: Int = 0
     /** prop1 property */
     var prop1: Int = 1
     /** prop2 property */
     val prop2: Int = 2
     /** prop3 property */
-    @get:JvmName("myNewProp3")
-    var prop3: Int = 3
+    @get:JvmName("myNewProp3") var prop3: Int = 3
     /** prop4 property */
-    @JvmField
-    var prop4: Int = 4
+    @JvmField var prop4: Int = 4
+
     fun myFun(): Int = 2
+
     private fun myPrivateFun(): Int = 4
 }

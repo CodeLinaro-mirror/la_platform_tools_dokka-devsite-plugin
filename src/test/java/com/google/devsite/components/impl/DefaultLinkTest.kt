@@ -35,7 +35,7 @@ class DefaultLinkTest {
                 """
 <div><a href="link">Name</a></div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -51,7 +51,7 @@ class DefaultLinkTest {
                 """
 <div>Name</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

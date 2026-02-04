@@ -27,9 +27,8 @@ import kotlinx.html.FlowContent
 import kotlinx.html.h2
 
 /** Default implementation of the package summary page. */
-internal data class DefaultPackageSummary(
-    override val data: PackageSummary.Params,
-) : PackageSummary {
+internal data class DefaultPackageSummary(override val data: PackageSummary.Params) :
+    PackageSummary {
     override fun render(into: FlowContent) =
         into.run {
             data.header?.render(into)

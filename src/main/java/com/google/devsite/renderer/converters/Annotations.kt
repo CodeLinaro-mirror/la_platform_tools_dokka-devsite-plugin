@@ -126,9 +126,8 @@ internal fun List<Annotation>.deprecationAnnotation() =
  *
  * @return the list of file-level annotations on this WithSource's source file
  */
-internal fun <T> T.fileLevelAnnotations(sourceSet: DokkaConfiguration.DokkaSourceSet?) where
-T : WithSources,
-T : Documentable =
+internal fun <T> T.fileLevelAnnotations(sourceSet: DokkaConfiguration.DokkaSourceSet?)
+    where T : WithSources, T : Documentable =
     (this as WithExtraProperties<*>).extra.allOfType<Annotations>().flatMap { annotations ->
         annotations.fileLevelAnnotations[sourceSet] ?: emptyList()
     }

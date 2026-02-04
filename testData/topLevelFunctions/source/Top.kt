@@ -18,7 +18,7 @@
     "unused",
     "UNUSED_PARAMETER",
     "RedundantSuspendModifier",
-    "REDUNDANT_INLINE_SUSPEND_FUNCTION_TYPE"
+    "REDUNDANT_INLINE_SUSPEND_FUNCTION_TYPE",
 )
 
 package dokkatest.toplevel
@@ -29,7 +29,8 @@ const val bool = true
 val hello = Foo()
 
 /** The Wheels on the Bus go round and round... */
-val String.world: Int get() = 42
+val String.world: Int
+    get() = 42
 
 fun a() = Unit
 
@@ -45,14 +46,14 @@ fun sadBoi(): Nothing = error("Ouch")
  *
  * ![Sarcastic laugh](https://thumbs.gfycat.com/BothFabulousHarvestmen-size_restricted.gif)
  *
- * @throws IllegalStateException because the world is broken
  * @param a choose your own adventure!
  * @param c any number of ints
+ * @param block Lots, and LOTS of lambdas. Oh, and suspending ones too.
+ * @param stuff lambdas
  * @return a list of... something?
  * @receiver what is even going on here
- * @param block Lots, and LOTS of lambdas. Oh, and suspending ones too.
+ * @throws IllegalStateException because the world is broken
  * @see b it's a lot simpler
- * @param stuff lambdas
  * @author Nobody cares :(
  */
 @Wassup("hello", ["world"])
@@ -60,10 +61,11 @@ suspend inline fun <@Wassup T, R : @Wassup Number> (T.(@Wassup Int) -> List<@Was
     a: T,
     vararg c: Int,
     crossinline stuff: @Wassup(a = "bar") () -> (() -> String?)? = { { "Nests." } },
-    @Wassup block: suspend Set<Boolean>.(
-        cache: Map<String?, List<T>>,
-        mapper: ((Double?) -> Double)
-    ) -> @Wassup(f = ["foo"]) Collection<R?>
+    @Wassup
+    block:
+        suspend Set<Boolean>.(
+            cache: Map<String?, List<T>>, mapper: ((Double?) -> Double),
+        ) -> @Wassup(f = ["foo"]) Collection<R?>,
 ): () -> List<Float>? = { emptyList() }
 
 class Foo
@@ -73,7 +75,7 @@ class Foo
     AnnotationTarget.FUNCTION,
     AnnotationTarget.TYPE,
     AnnotationTarget.TYPE_PARAMETER,
-    AnnotationTarget.VALUE_PARAMETER
+    AnnotationTarget.VALUE_PARAMETER,
 )
 annotation class Wassup(val a: String = "", val f: Array<String> = [])
 

@@ -19,18 +19,15 @@ package dokkatest.restrictto
 import androidx.annotation.RestrictTo
 
 class VisibleWithHiddenMembers {
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun hiddenMemberFunction(): Int = 1
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP) fun hiddenMemberFunction(): Int = 1
 
     fun visibleMemberFunction(): Int = 2
 
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    val hiddenMemberProperty = 3
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP) val hiddenMemberProperty = 3
 
     val visibleMemberProperty = 4
 
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    class HiddenInnerClass
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP) class HiddenInnerClass
 
     class VisibleInnerClass
 }

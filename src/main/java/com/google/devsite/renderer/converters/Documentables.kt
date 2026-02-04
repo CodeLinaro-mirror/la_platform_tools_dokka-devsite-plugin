@@ -80,7 +80,7 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** For use when generating error messages. Is slow. */
 internal fun <T> T.getErrorLocation(
-    sourceSet: DokkaConfiguration.DokkaSourceSet = getExpectOrCommonSourceSet(),
+    sourceSet: DokkaConfiguration.DokkaSourceSet = getExpectOrCommonSourceSet()
 ): String where T : WithSources, T : Documentable {
     val sourceFilePath: String = this.sources[sourceSet]!!.path
     if (".tmp" in sourceFilePath) return "Error occurred in an unreadable temporary file!"
@@ -288,11 +288,7 @@ internal fun <T> PropertyContainer<T>.addModifier(
     val newModifiers =
         if (existingAdditionalModifiers.isEmpty()) {
             // There are no existing modifiers, create them with the new modifier on each source set
-            listOf(
-                AdditionalModifiers(
-                    sourceSets.associateWith { setOf(newModifier) },
-                )
-            )
+            listOf(AdditionalModifiers(sourceSets.associateWith { setOf(newModifier) }))
         } else {
             // There are existing modifiers, update them to add the new modifier on each source set
             existingAdditionalModifiers.map { modifiers ->
@@ -300,7 +296,7 @@ internal fun <T> PropertyContainer<T>.addModifier(
                     sourceSets.associateWith { sourceSet ->
                         val previous = modifiers.content[sourceSet] ?: emptySet()
                         previous + newModifier
-                    },
+                    }
                 )
             }
         }
@@ -394,9 +390,8 @@ fun <T> T.addJvmStatic(): T where T : Documentable, T : WithExtraProperties<T> {
 }
 
 /** Adds annotations to a Documentable. Often used for injecting e.g. @JvmStatic. */
-fun <T> T.addAnnotations(newAnnotations: Collection<Annotations.Annotation>): T where
-T : Documentable,
-T : WithExtraProperties<T> {
+fun <T> T.addAnnotations(newAnnotations: Collection<Annotations.Annotation>): T
+    where T : Documentable, T : WithExtraProperties<T> {
     return withNewExtras(extra.addAnnotations(newAnnotations, sourceSets))
 }
 
@@ -517,10 +512,7 @@ fun DProperty.objectPropertyHoistedInJava() = isJvmFieldAnnotated() || isLateini
  */
 fun DFunction.convertReceiverForJava() =
     receiver?.let { receiver ->
-        copy(
-            parameters = listOf(receiver.copy(name = "receiver")) + parameters,
-            receiver = null,
-        )
+        copy(parameters = listOf(receiver.copy(name = "receiver")) + parameters, receiver = null)
     } ?: this
 
 /**
@@ -582,12 +574,7 @@ private fun DFunction.fixSyntheticAccessor(forProperty: DProperty, getter: Boole
  * assumed the function name starts with "<get-", otherwise it is assumes it starts with "<set-".
  */
 private fun DRI.withFixedName(getter: Boolean) =
-    copy(
-        callable =
-            callable!!.copy(
-                name = fixCallableName(callable?.name ?: "", getter),
-            ),
-    )
+    copy(callable = callable!!.copy(name = fixCallableName(callable?.name ?: "", getter)))
 
 private fun fixCallableName(badName: String, getter: Boolean) =
     if (getter) {
@@ -650,7 +637,7 @@ private fun SourceSetDependent<DocumentationNode>.correctTagsInAccessorDocs(
                     is Property -> Description(it.root)
                     else -> it
                 }
-            },
+            }
         )
     }
 }

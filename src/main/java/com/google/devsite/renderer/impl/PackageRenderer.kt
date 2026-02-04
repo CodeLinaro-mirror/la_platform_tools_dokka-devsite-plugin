@@ -70,11 +70,7 @@ internal class PackageRenderer(
             return
         }
 
-        outputWriter.write(
-            pathProvider.forType(dPackage.name, DIR_INDEX_NAME),
-            index,
-            "",
-        )
+        outputWriter.write(pathProvider.forType(dPackage.name, DIR_INDEX_NAME), index, "")
     }
 
     suspend fun writePackageSummary(dPackage: DPackage) {
@@ -113,10 +109,7 @@ internal class PackageRenderer(
         )
     }
 
-    suspend fun writeClasslike(
-        dPackage: DPackage,
-        dClasslike: DClasslike,
-    ) {
+    suspend fun writeClasslike(dPackage: DPackage, dClasslike: DClasslike) {
         // Compose is "not kmp" but has expect/actuals; we need to deterministically use the expect
         // Because source jars are not KMP, we can't check `"common" in it.path`, so ban .***.kt
         if (

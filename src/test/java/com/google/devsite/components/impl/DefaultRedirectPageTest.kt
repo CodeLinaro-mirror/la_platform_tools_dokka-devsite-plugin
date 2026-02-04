@@ -46,7 +46,7 @@ class DefaultRedirectPageTest {
 <a href="foo.html">Click here if you are not redirected.</a></body>
 </html>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

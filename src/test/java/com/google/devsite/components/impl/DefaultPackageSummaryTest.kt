@@ -42,9 +42,7 @@ class DefaultPackageSummaryTest {
     @Test
     fun `Package summary with description renders correctly`() {
         val component =
-            createPackageSummary(
-                description = listOf(NoopDescriptionComponent("Hello World!")),
-            )
+            createPackageSummary(description = listOf(NoopDescriptionComponent("Hello World!")))
 
         val output = createHTML().div { component.render(this) }.trim()
 
@@ -56,7 +54,7 @@ class DefaultPackageSummaryTest {
   <p>Hello World!</p>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -75,7 +73,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -94,7 +92,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -113,7 +111,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -201,7 +199,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -220,17 +218,14 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
     @Test
     fun `Package summary with only type aliases renders correctly`() {
         val component =
-            createPackageSummary(
-                displayLanguage = Language.KOTLIN,
-                typeAliases = NoopSummaryList(),
-            )
+            createPackageSummary(displayLanguage = Language.KOTLIN, typeAliases = NoopSummaryList())
 
         val output = createHTML().div { component.render(this) }.trim()
 
@@ -243,7 +238,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -288,7 +283,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -314,7 +309,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -340,7 +335,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -366,7 +361,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -392,7 +387,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -418,7 +413,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -468,7 +463,7 @@ class DefaultPackageSummaryTest {
   <div>noop</div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -515,6 +510,6 @@ class DefaultPackageSummaryTest {
                 topLevelFunctions = topLevelFunctions,
                 extensionProperties = extensionProperties,
                 extensionFunctions = extensionFunctions,
-            ),
+            )
         )
 }

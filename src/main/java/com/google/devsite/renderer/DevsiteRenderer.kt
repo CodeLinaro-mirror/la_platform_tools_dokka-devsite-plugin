@@ -46,9 +46,7 @@ internal class DevsiteRenderer(
         launch { rootFileRenderer.writeToc(devsiteConfiguration.packagePrefixToRemoveInToc) }
     }
 
-    private suspend fun writePackage(
-        dPackage: DPackage,
-    ) = coroutineScope {
+    private suspend fun writePackage(dPackage: DPackage) = coroutineScope {
         launch { packageRenderer.writeIndex(dPackage) }
         launch { packageRenderer.writePackageSummary(dPackage) }
 

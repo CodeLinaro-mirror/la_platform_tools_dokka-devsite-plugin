@@ -33,9 +33,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class RootDocumentableConverterTest(
-    displayLanguage: Language,
-) : ConverterTestBase(displayLanguage) {
+internal class RootDocumentableConverterTest(displayLanguage: Language) :
+    ConverterTestBase(displayLanguage) {
     @Test
     fun `Class index creates components with correct page title`() {
         val page =
@@ -188,18 +187,18 @@ internal class RootDocumentableConverterTest(
         val page =
             listOf(
                     """
-                |/src/main/kotlin/androidx/example/A.kt
-                |package a
-                |
-                |class AB
-            """
+                    |/src/main/kotlin/androidx/example/A.kt
+                    |package a
+                    |
+                    |class AB
+                    """
                         .trimMargin(),
                     """
-                |/src/main/kotlin/androidx/example/B.kt
-                |package b
-                |
-                |class AA
-            """
+                    |/src/main/kotlin/androidx/example/B.kt
+                    |package b
+                    |
+                    |class AA
+                    """
                         .trimMargin(),
                 )
                 .render()
@@ -306,12 +305,12 @@ internal class RootDocumentableConverterTest(
         val page =
             listOf(
                     """
-                |/src/main/kotlin/androidx/example/Test.kt
-                |package androidx.example
-                |
-                |class Foo
-            """
-                        .trimMargin(),
+                    |/src/main/kotlin/androidx/example/Test.kt
+                    |package androidx.example
+                    |
+                    |class Foo
+                    """
+                        .trimMargin()
                 )
                 .render()
                 .indexPageForPackages()
@@ -328,25 +327,25 @@ internal class RootDocumentableConverterTest(
         val page =
             listOf(
                     """
-                |/src/main/kotlin/androidx/example/A.kt
-                |package a
-                |
-                |class A
-            """
+                    |/src/main/kotlin/androidx/example/A.kt
+                    |package a
+                    |
+                    |class A
+                    """
                         .trimMargin(),
                     """
-                |/src/main/kotlin/androidx/example/B.kt
-                |package b
-                |
-                |class B
-            """
+                    |/src/main/kotlin/androidx/example/B.kt
+                    |package b
+                    |
+                    |class B
+                    """
                         .trimMargin(),
                     """
-                |/src/main/kotlin/androidx/example/C.kt
-                |package c
-                |
-                |class C
-            """
+                    |/src/main/kotlin/androidx/example/C.kt
+                    |package c
+                    |
+                    |class C
+                    """
                         .trimMargin(),
                 )
                 .render()
@@ -367,18 +366,18 @@ internal class RootDocumentableConverterTest(
         val page =
             listOf(
                     """
-                |/src/main/kotlin/androidx/example/B.kt
-                |package b
-                |
-                |class B
-            """
+                    |/src/main/kotlin/androidx/example/B.kt
+                    |package b
+                    |
+                    |class B
+                    """
                         .trimMargin(),
                     """
-                |/src/main/kotlin/androidx/example/a/A.kt
-                |package a
-                |
-                |class A
-            """
+                    |/src/main/kotlin/androidx/example/a/A.kt
+                    |package a
+                    |
+                    |class A
+                    """
                         .trimMargin(),
                 )
                 .render()
@@ -503,18 +502,18 @@ internal class RootDocumentableConverterTest(
         val toc =
             listOf(
                     """
-                |/src/main/kotlin/androidx/example/B.kt
-                |package androidx.example.b
-                |
-                |class B
-            """
+                    |/src/main/kotlin/androidx/example/B.kt
+                    |package androidx.example.b
+                    |
+                    |class B
+                    """
                         .trimMargin(),
                     """
-                |/src/main/kotlin/androidx/example/a/A.kt
-                |package androidx.example.a
-                |
-                |class A
-            """
+                    |/src/main/kotlin/androidx/example/a/A.kt
+                    |package androidx.example.a
+                    |
+                    |class A
+                    """
                         .trimMargin(),
                 )
                 .render()
@@ -561,10 +560,6 @@ internal class RootDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() =
-            listOf(
-                arrayOf(Language.JAVA),
-                arrayOf(Language.KOTLIN),
-            )
+        fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
     }
 }

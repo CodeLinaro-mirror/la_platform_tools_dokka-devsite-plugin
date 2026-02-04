@@ -20,26 +20,31 @@ import com.google.common.truth.Ordered
 import kotlin.collections.MutableMap
 
 /** For verifying that methods can be inherited from externally-defined interfaces. */
-interface KotlinInterface: Comparable<KotlinInterface>, Ordered {
+interface KotlinInterface : Comparable<KotlinInterface>, Ordered {
     fun aDefaultMethod() = 5
+
     fun aNonImplementedMethod(): Int
 }
 
 /** For verifying that methods can be inherited from internally-defined interfaces. */
-abstract class KotlinAbstractClass: KotlinInterface {
+abstract class KotlinAbstractClass : KotlinInterface {
     fun aNonAbstractMethod() = 5
+
     abstract fun anAbstractMethod(): Int
 }
 
-open class KotlinSuperClass: KotlinAbstractClass() {
+open class KotlinSuperClass : KotlinAbstractClass() {
     /**
      * kotlinSuperClassFunction docs
+     *
      * @param foo KotlinSuperClassFooDocs
      */
     fun kotlinSuperclassFunction(foo: String) = "KotlinSuperClass"
+
     fun importTest(): JavaSuperClass? = null
 
     override fun aNonImplementedMethod() = -5
+
     override fun compareTo(other: KotlinInterface): Int {
         TODO("Not yet implemented")
     }
@@ -54,6 +59,7 @@ open class KotlinSuperClass: KotlinAbstractClass() {
 open class KotlinSubClass : JavaSuperClass() {
     /**
      * kotlinSubClassFunction docs
+     *
      * @param bar KotlinSubClassBarDocs
      */
     fun kotlinSubclassFunction(bar: String) = "KotlinSubClass"
@@ -62,16 +68,18 @@ open class KotlinSubClass : JavaSuperClass() {
 class KotlinLeafClass : JavaSubClass() {
     /**
      * kotlinSuperLeafFunction docs
+     *
      * @param baz KotlinLeafClassBazDocs
      */
     fun kotlinLeafClassFunction(baz: String) = "KotlinLeafClass"
 }
 
 /** For testing if externally-defined interface default method remove(key, value) is inherited. */
-class KotlinMap(override val size: Int,
-                override val entries: MutableSet<MutableMap.MutableEntry<String, String>>,
-                override val keys: MutableSet<String>,
-                override val values: MutableCollection<String>
+class KotlinMap(
+    override val size: Int,
+    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>,
+    override val keys: MutableSet<String>,
+    override val values: MutableCollection<String>,
 ) : MutableMap<String, String> {
     override fun containsKey(key: String): Boolean {
         TODO("Not yet implemented")
@@ -104,5 +112,4 @@ class KotlinMap(override val size: Int,
     override fun remove(key: String): String? {
         TODO("Not yet implemented")
     }
-
 }

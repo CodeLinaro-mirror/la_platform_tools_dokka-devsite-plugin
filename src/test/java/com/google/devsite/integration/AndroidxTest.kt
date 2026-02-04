@@ -45,15 +45,12 @@ class AndroidxTest : IntegrationTestBase() {
         val docsPublic = "${getAndroidxPath()}/../../out/androidx/docs-public"
         executionTest(
             testName = "androidxDocsPublicJvm",
-            paths =
-                listOf(
-                    "$docsPublic/build/unzippedJvmSources/",
-                ),
+            paths = listOf("$docsPublic/build/unzippedJvmSources/"),
             sampleLocations =
                 listOf(
                     "$docsPublic/build/unzippedJvmSampleSources/",
                     "$docsPublic/build/unzippedDeprecatedSampleSources/",
-                    "$base/samples/"
+                    "$base/samples/",
                 ),
         )
     }

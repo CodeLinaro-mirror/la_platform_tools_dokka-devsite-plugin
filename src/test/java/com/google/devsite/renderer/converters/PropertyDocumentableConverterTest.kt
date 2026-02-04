@@ -38,9 +38,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class PropertyDocumentableConverterTest(
-    displayLanguage: Language,
-) : ConverterTestBase(displayLanguage) {
+internal class PropertyDocumentableConverterTest(displayLanguage: Language) :
+    ConverterTestBase(displayLanguage) {
 
     override var defaultHints =
         ModifierHints(
@@ -112,9 +111,7 @@ internal class PropertyDocumentableConverterTest(
                     assertThat(aType.nullable).isEqualTo(whichProp in "nulla, platform")
                     val annotations = aType.annotations
                     assertThat(
-                        annotations.singleOrNull()?.name?.let {
-                            it in NULLABILITY_ANNOTATION_NAMES
-                        },
+                        annotations.singleOrNull()?.name?.let { it in NULLABILITY_ANNOTATION_NAMES }
                     )
                     kotlinOnly {
                         // We've decided to hide all nullability annotations as-kotlin even if they
@@ -382,14 +379,12 @@ internal class PropertyDocumentableConverterTest(
         val link = htmlParts.first { it.startsWith("href") }.split(">")[0]
         javaOnly {
             assertThat(link)
-                .isEqualTo(
-                    "href=\"https://developer.android.com/reference/java/lang/Object.html\"",
-                )
+                .isEqualTo("href=\"https://developer.android.com/reference/java/lang/Object.html\"")
         }
         kotlinOnly {
             assertThat(link)
                 .isEqualTo(
-                    "href=\"https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html\"",
+                    "href=\"https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html\""
                 )
         }
     }
@@ -473,10 +468,6 @@ internal class PropertyDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() =
-            listOf(
-                arrayOf(Language.JAVA),
-                arrayOf(Language.KOTLIN),
-            )
+        fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
     }
 }

@@ -46,9 +46,7 @@ inline fun FlowContent.devsiteFilter(crossinline block: HTMLTag.() -> Unit = {})
         )
         .visit(block)
 
-fun FlowContent.devsitePlatformSelector(
-    platforms: List<Platform>,
-) =
+fun FlowContent.devsitePlatformSelector(platforms: List<Platform>) =
     HTMLTag(
             tagName = "devsite-select ",
             consumer = consumer,

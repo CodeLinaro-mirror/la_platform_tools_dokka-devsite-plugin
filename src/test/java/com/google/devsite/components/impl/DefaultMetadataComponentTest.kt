@@ -55,7 +55,7 @@ internal class DefaultMetadataComponentTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -87,7 +87,7 @@ internal class DefaultMetadataComponentTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -113,7 +113,7 @@ internal class DefaultMetadataComponentTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -146,7 +146,7 @@ internal class DefaultMetadataComponentTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -181,7 +181,7 @@ internal class DefaultMetadataComponentTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -216,7 +216,7 @@ internal class DefaultMetadataComponentTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -250,7 +250,7 @@ internal class DefaultMetadataComponentTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -292,7 +292,7 @@ internal class DefaultMetadataComponentTest {
   </div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -314,7 +314,7 @@ internal class DefaultMetadataComponentTest {
                 """
 <body></body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

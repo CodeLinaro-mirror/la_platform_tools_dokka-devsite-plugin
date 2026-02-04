@@ -73,7 +73,7 @@ internal class FunctionDocumentableConverter(
                                     sourceSet = jvmSourceSet,
                                 ),
                             modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints),
-                        ),
+                        )
                     ),
                 description =
                     DefaultSymbolSummary(
@@ -90,9 +90,9 @@ internal class FunctionDocumentableConverter(
                                     // Propagates to return type instead
                                     nullability = Nullability.DONT_CARE,
                                 ),
-                        ),
+                        )
                     ),
-            ),
+            )
         )
     }
 
@@ -126,7 +126,7 @@ internal class FunctionDocumentableConverter(
                                 function
                                     .modifiers(function.getExpectOrCommonSourceSet())
                                     .modifiersFor(hints),
-                        ),
+                        )
                     ),
                 description =
                     DefaultSymbolSummary(
@@ -143,10 +143,10 @@ internal class FunctionDocumentableConverter(
                                     // Propagates to return type instead
                                     nullability = Nullability.DONT_CARE,
                                 ),
-                        ),
+                        )
                     ),
                 platforms = DefaultPlatformComponent(function.sourceSets),
-            ),
+            )
         )
     }
 
@@ -168,9 +168,9 @@ internal class FunctionDocumentableConverter(
                                 // Propagates to return type instead
                                 nullability = Nullability.DONT_CARE,
                             ),
-                    ),
+                    )
                 ),
-            ),
+            )
         )
     }
 
@@ -193,10 +193,10 @@ internal class FunctionDocumentableConverter(
                                 // Propagates to return type instead
                                 nullability = Nullability.DONT_CARE,
                             ),
-                    ),
+                    )
                 ),
                 platforms = DefaultPlatformComponent(function.sourceSets),
-            ),
+            )
         )
 
     /** @return the function detail component */
@@ -243,7 +243,7 @@ internal class FunctionDocumentableConverter(
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
         if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
             throw RuntimeException(
-                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!",
+                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!"
             )
         }
 
@@ -271,7 +271,7 @@ internal class FunctionDocumentableConverter(
                         nullability = Nullability.DONT_CARE,
                     ),
                 metadataComponent = metadataConverter.getMetadataForFunction(function),
-            ),
+            )
         )
     }
 
@@ -305,7 +305,7 @@ internal class FunctionDocumentableConverter(
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
         if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
             throw RuntimeException(
-                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!",
+                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!"
             )
         }
 
@@ -336,7 +336,7 @@ internal class FunctionDocumentableConverter(
                     ),
                 platforms = DefaultPlatformComponent(function.sourceSets),
                 metadataComponent = metadataConverter.getMetadataForFunction(function),
-            ),
+            )
         )
     }
 
@@ -384,7 +384,7 @@ internal class FunctionDocumentableConverter(
                     },
                 // TODO(handle sourceSet-varying deprecations b/262711247)
                 isDeprecated = annotations(getExpectOrCommonSourceSet()).isDeprecated(),
-            ),
+            )
         )
     }
 
@@ -423,10 +423,10 @@ internal class FunctionDocumentableConverter(
                             nullability = Nullability.DONT_CARE,
                             displayLanguage =
                                 displayLanguage, // Fake synthetic classes can't be null
-                        ),
+                        )
                     ),
                 displayLanguage = displayLanguage,
-            ),
+            )
         )
     }
 }

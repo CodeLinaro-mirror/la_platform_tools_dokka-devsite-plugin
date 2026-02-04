@@ -333,7 +333,7 @@ val zipTask = project.tasks.register<Zip>("zipTestResults") {
 
 val ktfmtConfiguration: Configuration by configurations.creating
 dependencies {
-    ktfmtConfiguration("com.facebook:ktfmt:0.49")
+    ktfmtConfiguration("com.facebook:ktfmt:0.59")
 }
 
 class KtFilesProvider : CommandLineArgumentProvider {

@@ -137,7 +137,7 @@ class PreMergePrivateAnnotationRecorder : PreMergeDocumentableTransformer {
  * [DokkaConfiguration.Visibility]s.
  */
 private fun Visibility.isDocumented(
-    documentedVisibilities: Set<DokkaConfiguration.Visibility>,
+    documentedVisibilities: Set<DokkaConfiguration.Visibility>
 ): Boolean =
     // Java package visibility has an empty string name as a [Visibility] but not as a
     // [DokkaConfiguration.Visibility]. All other visibilities match between the definitions.

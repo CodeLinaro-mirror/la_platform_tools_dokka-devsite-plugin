@@ -193,10 +193,7 @@ internal fun setUpAnalysis(
     }
 */
 /** Resolves a javadoc `{@sample path/to/file.javaOrXml}`. Takes Text, returns <pre><code>. */
-internal fun convertTextToJavadocSample(
-    block: Text,
-    samples: Set<File>,
-): Pre {
+internal fun convertTextToJavadocSample(block: Text, samples: Set<File>): Pre {
     val sampleLine =
         block.body
             .trim()
@@ -208,7 +205,7 @@ internal fun convertTextToJavadocSample(
     if (sampleLine[0] != "@sample") {
         throw RuntimeException(
             "invalid first line of " +
-                "purported sample block: \"${sampleLine[0]}\"; expected to be \"@sample\"",
+                "purported sample block: \"${sampleLine[0]}\"; expected to be \"@sample\""
         )
     }
     val filePath = sampleLine[1]
@@ -226,7 +223,7 @@ internal fun convertTextToJavadocSample(
                 if (sampleFiles.isEmpty()) throw RuntimeException("Samples set is empty!")
                 throw RuntimeException(
                     "Unable to find the sample file $filePath in the samples directory " +
-                        sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) },
+                        sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) }
                 )
             } else {
                 Pre(emptyList())

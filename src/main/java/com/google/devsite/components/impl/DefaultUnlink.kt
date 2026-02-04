@@ -20,9 +20,7 @@ import com.google.devsite.components.Link
 import kotlinx.html.FlowContent
 
 /** Default implementation of a link. */
-internal data class DefaultUnlink(
-    override val data: Link.Params,
-) : Link {
+internal data class DefaultUnlink(override val data: Link.Params) : Link {
     init {
         assert(data.url == "")
     }

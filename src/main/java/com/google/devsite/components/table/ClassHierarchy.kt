@@ -23,7 +23,5 @@ import com.google.devsite.components.Link
 internal interface ClassHierarchy : ContextFreeComponent {
     val data: Params
 
-    data class Params(
-        val parents: List<Link>,
-    )
+    data class Params(val parents: List<Link>)
 }

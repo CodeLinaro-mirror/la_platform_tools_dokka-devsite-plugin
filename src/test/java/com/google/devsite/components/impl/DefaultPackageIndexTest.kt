@@ -39,7 +39,7 @@ class DefaultPackageIndexTest {
   <div>noop</div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

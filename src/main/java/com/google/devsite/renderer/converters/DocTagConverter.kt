@@ -227,7 +227,7 @@ internal class DocTagConverter(
                         is Suppress ->
                             throw RuntimeException(
                                 "Reaching the documentation generation step on a suppressed member should" +
-                                    "be impossible! If you see this, file a bug on dackka. $documentable",
+                                    "be impossible! If you see this, file a bug on dackka. $documentable"
                             )
                         // These aren't tags we believe it is necessary to support
                         is Version,
@@ -385,17 +385,17 @@ internal class DocTagConverter(
                             isFromJava = isFromJava,
                             parent = documentable,
                         )
-                },
+                }
             )
             allOptions.putAll(
                 recursivelyGetLambdaParamNames(documentable.parameters.map { it.type }).map {
                     (it.presentableName ?: "") to
                         paramConverter.componentForLambdaParameter(it, isFromJava, sourceSet)
-                },
+                }
             )
         }
         allOptions.putAll(
-            dGenerics.map { it.name to paramConverter.componentForTypeParameter(it, isFromJava) },
+            dGenerics.map { it.name to paramConverter.componentForTypeParameter(it, isFromJava) }
         )
         if (documentable is Callable && documentable.receiver != null) {
             allOptions[documentable.receiver!!.name ?: "receiver"] =
@@ -412,15 +412,12 @@ internal class DocTagConverter(
                     throw RuntimeException(
                         "Unable to find what is referred to by \"@param " +
                             "${tag.name()}\" in ${documentable.className} " +
-                            "${documentable.name}, with contents: ${tag.text()}",
+                            "${documentable.name}, with contents: ${tag.text()}"
                     )
                 }
                 val title = allOptions[tag.name()]!!
                 DefaultTableRowSummaryItem(
-                    TableRowSummaryItem.Params(
-                        title = title,
-                        description = description(tag),
-                    ),
+                    TableRowSummaryItem.Params(title = title, description = description(tag))
                 )
             }
 
@@ -428,13 +425,13 @@ internal class DocTagConverter(
             SummaryList.Params(
                 header = DefaultTableTitle(TableTitle.Params("Parameters")),
                 items = params,
-            ),
+            )
         )
     }
 
     /** For example, "a" and "b" in `fun foo((a: (b: String) -> int)) -> Unit)` */
     private fun recursivelyGetLambdaParamNames(
-        argumentTypes: List<Projection>,
+        argumentTypes: List<Projection>
     ): List<TypeConstructor> {
         val result = mutableListOf<TypeConstructor>()
         for (argumentType in argumentTypes) {
@@ -458,7 +455,7 @@ internal class DocTagConverter(
                 is TypeAliased -> { // No clear way to decide which
                     result +=
                         recursivelyGetLambdaParamNames(
-                            setOf(argumentType.inner, argumentType.typeAlias).toList(),
+                            setOf(argumentType.inner, argumentType.typeAlias).toList()
                         )
                 }
                 is PrimitiveJavaType,
@@ -478,15 +475,12 @@ internal class DocTagConverter(
 
     private fun returnType(
         tags: List<Return>,
-        returnType: TypeProjectionComponent
+        returnType: TypeProjectionComponent,
     ): SummaryList<TableRowSummaryItem<TypeProjectionComponent, DescriptionComponent>> {
         val params =
             tags.map { tag ->
                 DefaultTableRowSummaryItem(
-                    TableRowSummaryItem.Params(
-                        title = returnType,
-                        description = description(tag),
-                    ),
+                    TableRowSummaryItem.Params(title = returnType, description = description(tag))
                 )
             }
 
@@ -494,7 +488,7 @@ internal class DocTagConverter(
             SummaryList.Params(
                 header = DefaultTableTitle(TableTitle.Params("Returns")),
                 items = params,
-            ),
+            )
         )
     }
 
@@ -505,7 +499,7 @@ internal class DocTagConverter(
                     TableRowSummaryItem.Params(
                         title = throwsToParameterComponent(tag, parent),
                         description = description(tag),
-                    ),
+                    )
                 )
             }
 
@@ -513,7 +507,7 @@ internal class DocTagConverter(
             SummaryList.Params(
                 header = DefaultTableTitle(TableTitle.Params("Throws")),
                 items = params,
-            ),
+            )
         )
     }
 
@@ -528,13 +522,13 @@ internal class DocTagConverter(
         if (throws.name in listOf("a", "an")) {
             throw RuntimeException(
                 "Do not use '${throws.name}' before the exception type in an @throws statement. " +
-                    "This is against jdoc spec. Your exception is not being linked and looks bad",
+                    "This is against jdoc spec. Your exception is not being linked and looks bad"
             )
         } else if ("{@link" in name) {
             throw RuntimeException(
                 "Do not {@link the exception type in an @throws statement. @throws state" +
                     "ments are automatically linked. Manually java-linking them is against jdoc s" +
-                    "pec, and breaks linking behavior causing them to actually *not* be linked.",
+                    "pec, and breaks linking behavior causing them to actually *not* be linked."
             )
         } else if (throws.exceptionAddress == null) {
             docsHolder.printWarningFor(
@@ -564,10 +558,10 @@ internal class DocTagConverter(
                             type = link,
                             nullability = Nullability.DONT_CARE,
                             displayLanguage = displayLanguage,
-                        ),
+                        )
                     ),
                 displayLanguage = displayLanguage,
-            ),
+            )
         )
     }
 
@@ -578,7 +572,7 @@ internal class DocTagConverter(
                     TableRowSummaryItem.Params(
                         title = tag.toLink(parent),
                         description = description(tag),
-                    ),
+                    )
                 )
             }
 
@@ -586,7 +580,7 @@ internal class DocTagConverter(
             SummaryList.Params(
                 header = DefaultTableTitle(TableTitle.Params("See also")),
                 items = params,
-            ),
+            )
         )
     }
 
@@ -677,7 +671,7 @@ internal class DocTagConverter(
         val sample =
             docsHolder.sampleAnalysisEnvironment.value.resolveSample(
                 docsHolder.commonSourceSet,
-                name
+                name,
             ) ?: throw RuntimeException("Unable to resolve sample $name")
         val imports = processImports(sample)
 
@@ -730,7 +724,7 @@ internal class DocTagConverter(
                     val additionalText =
                         nameAndAdditionalText.substringAfter(
                             delimiter = " ",
-                            missingDelimiterValue = ""
+                            missingDelimiterValue = "",
                         )
                     if (additionalText.isNotEmpty()) {
                         components.add(Text(additionalText))
@@ -739,11 +733,7 @@ internal class DocTagConverter(
             }
             is P -> {
                 for (child in root.children) {
-                    recursivelyConsiderPsAndTextsForSamples(
-                        child,
-                        components,
-                        samples,
-                    )
+                    recursivelyConsiderPsAndTextsForSamples(child, components, samples)
                 }
             }
             // Having non-text components on the same line as a samples is not supported
@@ -769,13 +759,7 @@ internal class DocTagConverter(
         deprecation: String? = null,
     ): DescriptionComponent {
         return DefaultDescriptionComponent(
-            DescriptionComponent.Params(
-                pathProvider,
-                components,
-                summary,
-                deprecation,
-                docsHolder,
-            ),
+            DescriptionComponent.Params(pathProvider, components, summary, deprecation, docsHolder)
         )
     }
 
@@ -974,14 +958,11 @@ internal class DocTagConverter(
      * Converts a generic List<Documentable> to a SummaryList. Does nothing clever; only converts
      * Documentables to links (by default with annotations)
      */
-    private fun docsToSummary(
-        documentables: List<Documentable>,
-        showAnnotations: Boolean,
-    ) =
+    private fun docsToSummary(documentables: List<Documentable>, showAnnotations: Boolean) =
         DefaultSummaryList(
             SummaryList.Params(
-                items = documentables.map { summaryForDocumentable(it, showAnnotations) },
-            ),
+                items = documentables.map { summaryForDocumentable(it, showAnnotations) }
+            )
         )
 
     /**
@@ -1007,7 +988,7 @@ internal class DocTagConverter(
                                 nullability = Nullability.DONT_CARE, // Not useful for these cases
                             ),
                         link = link,
-                    ),
+                    )
                 )
             } else {
                 link
@@ -1015,12 +996,8 @@ internal class DocTagConverter(
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = maybeAnnotatedLink,
-                description =
-                    summaryDescription(
-                        documentable,
-                        documentable.deprecationAnnotation(),
-                    ),
-            ),
+                description = summaryDescription(documentable, documentable.deprecationAnnotation()),
+            )
         )
     }
 
@@ -1028,13 +1005,9 @@ internal class DocTagConverter(
      * Converts a generic List<Documentable> to a SummaryList. Does nothing clever; only converts
      * Documentables to links (by default with annotations)
      */
-    internal fun docsToSummaryKmp(
-        documentables: List<Documentable>,
-    ) =
+    internal fun docsToSummaryKmp(documentables: List<Documentable>) =
         DefaultSummaryList(
-            SummaryList.Params(
-                items = documentables.map { summaryForDocumentableKmp(it) },
-            ),
+            SummaryList.Params(items = documentables.map { summaryForDocumentableKmp(it) })
         )
 
     /**
@@ -1042,14 +1015,14 @@ internal class DocTagConverter(
      * is used for mini-signatures, e.g. nested types list, subclasses list, package summary
      */
     private fun summaryForDocumentableKmp(
-        documentable: Documentable,
+        documentable: Documentable
     ): TableRowSummaryItem<Link, DescriptionComponent> {
         return DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
                 title = pathProvider.linkForReference(documentable.dri),
                 description = summaryDescription(documentable),
                 platforms = DefaultPlatformComponent(documentable.sourceSets),
-            ),
+            )
         )
     }
 }

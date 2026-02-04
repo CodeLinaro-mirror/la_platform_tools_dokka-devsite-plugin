@@ -158,10 +158,7 @@ internal abstract class ClasslikeDocumentableConverter(
             )
         }
         val constantsSummary = async {
-            propertiesToSummary(
-                constantsTitle(),
-                declaredProperties.constants(),
-            )
+            propertiesToSummary(constantsTitle(), declaredProperties.constants())
         }
         val publicPropertiesSummary = async {
             propertiesToSummary(
@@ -176,10 +173,7 @@ internal abstract class ClasslikeDocumentableConverter(
             )
         }
         val publicConstructorsSummary = async {
-            constructorsToSummary(
-                publicConstructorsTitle(),
-                allConstructors.filter(::isPublic),
-            )
+            constructorsToSummary(publicConstructorsTitle(), allConstructors.filter(::isPublic))
         }
         val protectedConstructorsSummary = async {
             constructorsToSummary(
@@ -275,7 +269,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 // together in a logical way
                 .sortedWith(
                     compareBy<DFunction> { nameForSyntheticClass(it) }
-                        .then(functionSignatureComparator),
+                        .then(functionSignatureComparator)
                 )
                 // Convert DRIs to this class so link from summary to detail will stay on class page
                 .map { it.withDRIOfClass(classlike) }
@@ -294,7 +288,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 // together in a logical way
                 .sortedWith(
                     compareBy<DProperty> { nameForSyntheticClass(it) }
-                        .then(simpleDocumentableComparator),
+                        .then(simpleDocumentableComparator)
                 )
                 // Convert DRIs to this class so link from summary to detail will stay on class page
                 .map { it.withDRIOfClass(classlike) }
@@ -345,16 +339,10 @@ internal abstract class ClasslikeDocumentableConverter(
                             nestedTypesSummary = nestedTypesSummary.await(),
                             enumValuesSummary = enumValuesSummary.await(),
                             enumValuesDetails =
-                                TitledList(
-                                    enumValuesTitle(),
-                                    enumDetails?.await() ?: emptyList(),
-                                ),
+                                TitledList(enumValuesTitle(), enumDetails?.await() ?: emptyList()),
                             constantsSummary = constantsSummary.await(),
                             constantsDetails =
-                                TitledList(
-                                    constantsTitle(),
-                                    constantsDetails.await(),
-                                ),
+                                TitledList(constantsTitle(), constantsDetails.await()),
                             publicCompanionFunctionsSummary =
                                 publicCompanionFunctionsSummary.await(),
                             publicCompanionFunctionsDetails =
@@ -433,9 +421,8 @@ internal abstract class ClasslikeDocumentableConverter(
                                 ),
                             inheritedFunctions = inheritedFunctions ?: emptyInheritedSymbolsList(),
                             inheritedConstants = inheritedConstants ?: emptyInheritedSymbolsList(),
-                            inheritedProperties =
-                                inheritedProperties ?: emptyInheritedSymbolsList(),
-                        ),
+                            inheritedProperties = inheritedProperties ?: emptyInheritedSymbolsList(),
+                        )
                     ),
                 metadataComponent = metadataComponent.await(),
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
@@ -457,9 +444,9 @@ internal abstract class ClasslikeDocumentableConverter(
                                     }
                                     .mapNotNull { it.dri.callable?.anchor() ?: it.name },
                             language = displayLanguage,
-                        ),
+                        )
                     ),
-            ),
+            )
         )
     }
 
@@ -481,13 +468,13 @@ internal abstract class ClasslikeDocumentableConverter(
                 hierarchy = hierarchy.await(),
                 relatedSymbols = relatedSymbols.await(),
                 descriptionDocs = javadocConverter.metadata(classlike),
-            ),
+            )
         )
     }
 
     private fun nestedTypesToSummary(
         nestedClasslikes: List<DClasslike>,
-        classGraph: ClassGraph
+        classGraph: ClassGraph,
     ): ClasslikeSummaryList {
         val components =
             nestedClasslikes.map { nestedClasslike ->
@@ -501,10 +488,10 @@ internal abstract class ClasslikeDocumentableConverter(
                                         signature = computeSignature(nestedClasslike, classGraph),
                                         description =
                                             javadocConverter.summaryDescription(nestedClasslike),
-                                    ),
+                                    )
                                 )
                                     as ClasslikeSummary,
-                        ),
+                        )
                     )
                 }
             }
@@ -512,20 +499,15 @@ internal abstract class ClasslikeDocumentableConverter(
         return DefaultSummaryList(
             SummaryList.Params(
                 header =
-                    DefaultTableTitle(
-                        TableTitle.Params(
-                            title = nestedTypesTitle(),
-                            big = true,
-                        ),
-                    ),
+                    DefaultTableTitle(TableTitle.Params(title = nestedTypesTitle(), big = true)),
                 items = components,
-            ),
+            )
         )
     }
 
     private fun functionsToSummary(
         name: String? = null,
-        functions: List<DFunction>
+        functions: List<DFunction>,
     ): FunctionSummaryList {
         val components =
             functions.mapNotNull {
@@ -545,22 +527,15 @@ internal abstract class ClasslikeDocumentableConverter(
         return DefaultSummaryList(
             SummaryList.Params(
                 header =
-                    name?.let {
-                        DefaultTableTitle(
-                            TableTitle.Params(
-                                title = name,
-                                big = true,
-                            ),
-                        )
-                    },
+                    name?.let { DefaultTableTitle(TableTitle.Params(title = name, big = true)) },
                 items = components,
-            ),
+            )
         )
     }
 
     private fun constructorsToSummary(
         name: String,
-        constructors: List<DFunction>
+        constructors: List<DFunction>,
     ): ConstructorSummaryList {
         val components =
             constructors.mapNotNull {
@@ -569,20 +544,14 @@ internal abstract class ClasslikeDocumentableConverter(
 
         return DefaultSummaryList(
             SummaryList.Params(
-                header =
-                    DefaultTableTitle(
-                        TableTitle.Params(
-                            title = name,
-                            big = true,
-                        ),
-                    ),
+                header = DefaultTableTitle(TableTitle.Params(title = name, big = true)),
                 items = components,
-            ),
+            )
         )
     }
 
     private fun functionsToDetail(
-        functions: List<DFunction>,
+        functions: List<DFunction>
     ): List<SymbolDetail<FunctionSignature>> {
         return functions.mapNotNull {
             val modifierHints =
@@ -618,26 +587,20 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private fun enumValuesToSummary(
         title: String,
-        enumVals: List<DEnumEntry>
+        enumVals: List<DEnumEntry>,
     ): LinkDescriptionSummaryList {
         val components = enumVals.map { errorContextInjector(it) { enumConverter.summary(it) } }
         return DefaultSummaryList(
             SummaryList.Params(
-                header =
-                    DefaultTableTitle(
-                        TableTitle.Params(
-                            title = title,
-                            big = true,
-                        ),
-                    ),
+                header = DefaultTableTitle(TableTitle.Params(title = title, big = true)),
                 items = components,
-            ),
+            )
         )
     }
 
     private fun propertiesToSummary(
         name: String? = null,
-        properties: List<DProperty>
+        properties: List<DProperty>,
     ): PropertySummaryList {
         val components =
             properties.mapNotNull {
@@ -653,26 +616,13 @@ internal abstract class ClasslikeDocumentableConverter(
                 errorContextInjector(it) { propertyToSummaryConverter(it, modifierHints) }
             }
 
-        val title =
-            name?.let {
-                DefaultTableTitle(
-                    TableTitle.Params(
-                        title = it,
-                        big = true,
-                    ),
-                )
-            }
+        val title = name?.let { DefaultTableTitle(TableTitle.Params(title = it, big = true)) }
 
-        return DefaultSummaryList(
-            SummaryList.Params(
-                header = title,
-                items = components,
-            ),
-        )
+        return DefaultSummaryList(SummaryList.Params(header = title, items = components))
     }
 
     private fun propertiesToDetail(
-        properties: List<DProperty>,
+        properties: List<DProperty>
     ): List<SymbolDetail<PropertySignature>> {
         return properties.mapNotNull {
             val modifierHints =
@@ -690,7 +640,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private fun enumValuesToDetail(
         dEnum: DEnum,
-        enumValues: List<DEnumEntry>
+        enumValues: List<DEnumEntry>,
     ): List<SymbolDetail<PropertySignature>> {
         val modifierHints =
             ModifierHints(
@@ -779,10 +729,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private val objectInstanceProperty: DProperty by lazy {
         DProperty(
-            dri =
-                classlike.dri.copy(
-                    callable = Callable(name = "INSTANCE", params = emptyList()),
-                ),
+            dri = classlike.dri.copy(callable = Callable(name = "INSTANCE", params = emptyList())),
             name = "INSTANCE",
             documentation = emptyMap(),
             expectPresentInSet = classlike.expectPresentInSet,
@@ -799,9 +746,7 @@ internal abstract class ClasslikeDocumentableConverter(
             extra =
                 PropertyContainer.withAll(
                     classlike.sourceSets.map {
-                        mapOf(
-                                it to setOf(ExtraModifiers.JavaOnlyModifiers.Static),
-                            )
+                        mapOf(it to setOf(ExtraModifiers.JavaOnlyModifiers.Static))
                             .toAdditionalModifiers()
                     } +
                         classlike.sourceSets.map {
@@ -816,11 +761,11 @@ internal abstract class ClasslikeDocumentableConverter(
                                                         classNames = "JvmField",
                                                     ),
                                                 params = emptyMap(),
-                                            ),
-                                        ),
-                                ),
+                                            )
+                                        )
+                                )
                             )
-                        },
+                        }
                 ),
         )
     }
@@ -859,9 +804,7 @@ internal abstract class ClasslikeDocumentableConverter(
         val sourceSetDependentInput = computeSourceSetDependentSignatureInputs(classlike, sourceSet)
         val sourceSetIndepInput = computeSourceSetIndependentSignatureInputs(classlike)
 
-        return SIGNATURE_INSTANCES.getOrPut(
-            sourceSetDependentInput to sourceSetIndepInput,
-        ) {
+        return SIGNATURE_INSTANCES.getOrPut(sourceSetDependentInput to sourceSetIndepInput) {
             // TODO(KMP ClassGraph b/253454963. Move these into sourceSetDependentInput.)
             val (extends, implements) =
                 when (sourceSetIndepInput.type) {
@@ -883,7 +826,7 @@ internal abstract class ClasslikeDocumentableConverter(
                     name =
                         pathProvider.linkForReference(
                             sourceSetIndepInput.dri,
-                            sourceSetIndepInput.name
+                            sourceSetIndepInput.name,
                         ),
                     type =
                         if (sourceSetDependentInput.typeAliasEquals != null) {
@@ -904,11 +847,10 @@ internal abstract class ClasslikeDocumentableConverter(
                     annotationComponents =
                         annotationConverter.annotationComponents(
                             annotations = sourceSetDependentInput.annotations,
-                            nullability =
-                                Nullability.DONT_CARE, // Classlike definitions aren't null
+                            nullability = Nullability.DONT_CARE, // Classlike definitions aren't null
                         ),
                     typeAliasEquals = sourceSetDependentInput.typeAliasEquals,
-                ),
+                )
             )
         }
     }
@@ -937,16 +879,14 @@ internal abstract class ClasslikeDocumentableConverter(
                     injectStatic = classlike is DObject && displayLanguage == Language.JAVA,
                     isFromJava = classlike.isFromJava(),
                     isSummary = false,
-                ),
+                )
             ),
             classlike.annotations(sourceSet),
             typeAliasEquals?.let { paramConverter.componentForProjection(it, false, sourceSet) },
         )
     }
 
-    private fun computeSourceSetIndependentSignatureInputs(
-        classlike: DClasslike,
-    ) =
+    private fun computeSourceSetIndependentSignatureInputs(classlike: DClasslike) =
         SourceSetIndependentSignatureInputs(
             dri = classlike.dri,
             name = classlike.name(),
@@ -986,7 +926,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     /** Creates a list of InheritedSymbols from a list of DFunctions */
     private fun computeInheritedSymbols(
-        symbolList: List<Documentable>,
+        symbolList: List<Documentable>
     ): Triple<
         InheritedSymbolsList<FunctionSignature>?,
         InheritedSymbolsList<PropertySignature>?,
@@ -1041,7 +981,7 @@ internal abstract class ClasslikeDocumentableConverter(
     ): InheritedSymbolsList<U> where T : Documentable, T : WithExtraProperties<T> {
         fun createInheritedSymbolsList(
             parentDri: DRI,
-            symbolList: List<T>
+            symbolList: List<T>,
         ): Pair<Link, SummaryList<TypeSummaryItem<U>>> {
             val link = pathProvider.linkForReference(parentDri, parentDri.fullName)
             val summary = summaryGen(symbolList)
@@ -1059,12 +999,9 @@ internal abstract class ClasslikeDocumentableConverter(
 
         return DefaultInheritedSymbols(
             InheritedSymbolsList.Params(
-                header =
-                    DefaultTableTitle(
-                        TableTitle.Params(title, big = true),
-                    ),
+                header = DefaultTableTitle(TableTitle.Params(title, big = true)),
                 inheritedSymbolSummaries = category,
-            ),
+            )
         )
     }
 
@@ -1093,7 +1030,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 directSummary = javadocConverter.docsToSummaryDefault(directSubclasses),
                 indirectSubclasses = linksForClasslikes(indirectSubclasses),
                 indirectSummary = javadocConverter.docsToSummaryDefault(indirectSubclasses),
-            ),
+            )
         )
     }
 
@@ -1158,10 +1095,7 @@ internal abstract class ClasslikeDocumentableConverter(
             this
         } else {
             val dri =
-                this.dri.copy(
-                    packageName = forClass.packageName(),
-                    classNames = forClass.name(),
-                )
+                this.dri.copy(packageName = forClass.packageName(), classNames = forClass.name())
             when (this) {
                 is DFunction -> this.copy(dri) as T
                 is DProperty -> this.copy(dri) as T

@@ -26,7 +26,7 @@ import kotlinx.html.FlowContent
 
 /** Default implementation of a function or class type parameter. */
 internal data class DefaultTypeParameterComponent(
-    override val data: TypeParameterComponent.Params,
+    override val data: TypeParameterComponent.Params
 ) : TypeParameterComponent {
     init {
         validate()

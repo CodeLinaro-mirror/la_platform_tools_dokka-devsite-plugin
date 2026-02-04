@@ -37,9 +37,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class DocumentablesHolderTest(
-    displayLanguage: Language,
-) : ConverterTestBase(displayLanguage) {
+internal class DocumentablesHolderTest(displayLanguage: Language) :
+    ConverterTestBase(displayLanguage) {
     private val packageA = fakeDPackage(dri = DRI(packageName = "com.example.a"))
     private val packageB = fakeDPackage(dri = DRI(packageName = "com.example.b"))
     private val packageC = fakeDPackage(dri = DRI(packageName = "com.example.c"))
@@ -85,11 +84,7 @@ internal class DocumentablesHolderTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() =
-            listOf(
-                arrayOf(Language.JAVA),
-                arrayOf(Language.KOTLIN),
-            )
+        fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
     }
 }
 

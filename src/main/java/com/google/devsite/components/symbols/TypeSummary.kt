@@ -24,8 +24,5 @@ import com.google.devsite.renderer.converters.Modifiers
 internal interface TypeSummary : ContextFreeComponent {
     val data: Params
 
-    data class Params(
-        val type: TypeProjectionComponent,
-        val modifiers: Modifiers = EmptyModifiers,
-    )
+    data class Params(val type: TypeProjectionComponent, val modifiers: Modifiers = EmptyModifiers)
 }

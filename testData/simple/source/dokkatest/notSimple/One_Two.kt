@@ -48,4 +48,5 @@ open class Five {
 }
 
 fun One.oneExtensionFun() = 5
+
 fun dokkatest.simple.One.oneExtensionFun() = -5

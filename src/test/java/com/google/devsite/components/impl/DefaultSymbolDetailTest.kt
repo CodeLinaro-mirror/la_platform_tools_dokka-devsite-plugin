@@ -46,7 +46,7 @@ class DefaultSymbolDetailTest {
                     anchors = linkedSetOf(),
                     metadata = emptyList(),
                     displayLanguage = Language.JAVA,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -66,7 +66,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -82,7 +82,7 @@ class DefaultSymbolDetailTest {
                     anchors = linkedSetOf(),
                     metadata = emptyList(),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -102,7 +102,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -118,7 +118,7 @@ class DefaultSymbolDetailTest {
                     anchors = linkedSetOf(),
                     metadata = emptyList(),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -138,7 +138,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -154,7 +154,7 @@ class DefaultSymbolDetailTest {
                     anchors = linkedSetOf(),
                     metadata = emptyList(),
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -174,7 +174,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -190,7 +190,7 @@ class DefaultSymbolDetailTest {
                     anchors = linkedSetOf(),
                     metadata = emptyList(),
                     displayLanguage = Language.JAVA,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -210,7 +210,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -227,11 +227,8 @@ class DefaultSymbolDetailTest {
                     metadata = emptyList(),
                     displayLanguage = Language.JAVA,
                     annotationComponents =
-                        listOf(
-                            NoopAnnotationComponent("@Foo"),
-                            NoopAnnotationComponent("@Bar"),
-                        ),
-                ),
+                        listOf(NoopAnnotationComponent("@Foo"), NoopAnnotationComponent("@Bar")),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -251,7 +248,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -268,7 +265,7 @@ class DefaultSymbolDetailTest {
                     metadata = emptyList(),
                     displayLanguage = Language.JAVA,
                     modifiers = Modifiers("protected", "abstract"),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -288,7 +285,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -305,7 +302,7 @@ class DefaultSymbolDetailTest {
                     metadata = emptyList(),
                     displayLanguage = Language.KOTLIN,
                     modifiers = Modifiers("protected", "abstract"),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -325,7 +322,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -341,7 +338,7 @@ class DefaultSymbolDetailTest {
                     anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
                     metadata = emptyList(),
                     displayLanguage = Language.JAVA,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -361,7 +358,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -377,7 +374,7 @@ class DefaultSymbolDetailTest {
                     anchors = linkedSetOf(),
                     metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent),
                     displayLanguage = Language.JAVA,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -399,7 +396,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -416,7 +413,7 @@ class DefaultSymbolDetailTest {
                     metadata = emptyList(),
                     displayLanguage = Language.JAVA,
                     extFunctionClass = "MyClassKt",
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -436,7 +433,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -458,9 +455,9 @@ class DefaultSymbolDetailTest {
                                 addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
                                 deprecatedIn =
                                     DefaultLink(Link.Params(name = "API Level 12", url = "")),
-                            ),
+                            )
                         ),
-                ),
+                )
             )
         val component =
             DefaultSymbolDetail(
@@ -473,7 +470,7 @@ class DefaultSymbolDetailTest {
                     metadata = emptyList(),
                     displayLanguage = Language.JAVA,
                     metadataComponent = metadataComponent,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -501,7 +498,7 @@ class DefaultSymbolDetailTest {
   </div>
 </div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

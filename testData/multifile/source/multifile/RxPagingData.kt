@@ -20,10 +20,6 @@
 
 package multifile
 
-/**
- * Returns a [List] containing only elements matching the given [predicate].
- */
+/** Returns a [List] containing only elements matching the given [predicate]. */
 @JvmName("filter")
-fun <T : Any> List<T>.filterCustom(
-    predicate: (T) -> Boolean
-): List<T> = filter { predicate(it) }
+fun <T : Any> List<T>.filterCustom(predicate: (T) -> Boolean): List<T> = filter { predicate(it) }

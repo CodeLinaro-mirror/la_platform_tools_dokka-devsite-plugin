@@ -32,9 +32,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class MetadataConverterTest(
-    private val displayLanguage: Language,
-) : ConverterTestBase(displayLanguage) {
+internal class MetadataConverterTest(private val displayLanguage: Language) :
+    ConverterTestBase(displayLanguage) {
     @Test
     fun `Source links are generated correctly`() {
         val metadataComponent =
@@ -43,7 +42,7 @@ internal class MetadataConverterTest(
         """
                 .render()
                 .metadataForClasslike(
-                    baseClassSourceLink = "https://cs.android.com/search?q=file:%s+class:%s",
+                    baseClassSourceLink = "https://cs.android.com/search?q=file:%s+class:%s"
                 )
 
         val link = metadataComponent.data.sourceLink
@@ -63,7 +62,7 @@ internal class MetadataConverterTest(
             """
                 .render()
                 .metadataForClasslike(
-                    baseClassSourceLink = "https://cs.android.com/search?q=file:%s",
+                    baseClassSourceLink = "https://cs.android.com/search?q=file:%s"
                 )
 
         val link = metadataComponent.data.sourceLink
@@ -88,7 +87,7 @@ internal class MetadataConverterTest(
         """
                 .render()
                 .metadataForClasslike(
-                    versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
+                    versionMetadataMap = mapOf("androidx.example.Foo" to metadata)
                 )
 
         val versionMetadata = metadataComponent.data.versionMetadata
@@ -112,7 +111,7 @@ internal class MetadataConverterTest(
         """
                 .render()
                 .metadataForClasslike(
-                    versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
+                    versionMetadataMap = mapOf("androidx.example.Foo" to metadata)
                 )
 
         val versionMetadata = metadataComponent.data.versionMetadata
@@ -137,7 +136,7 @@ internal class MetadataConverterTest(
                                     ClassVersionMetadata.FieldVersionMetadata(
                                         fieldName = "Companion",
                                         addedIn = "1.2.3",
-                                    ),
+                                    )
                             ),
                     ),
                 "androidx.example.Foo.Companion" to
@@ -211,7 +210,7 @@ internal class MetadataConverterTest(
                                         addedIn = "1.2.3",
                                     ),
                             ),
-                    ),
+                    )
             )
         val module =
             """
@@ -254,7 +253,7 @@ internal class MetadataConverterTest(
                                 methodName = "bar()",
                                 addedIn = "1.2.3",
                                 deprecatedIn = "2.3.4",
-                            ),
+                            )
                     ),
             )
         val metadataComponent =
@@ -470,7 +469,7 @@ internal class MetadataConverterTest(
 
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
             .isEqualTo(
-                "bar01(kotlin.jvm.functions.Function1<? super java.lang.String,java.lang.String>)",
+                "bar01(kotlin.jvm.functions.Function1<? super java.lang.String,java.lang.String>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
             .isEqualTo("bar02(kotlin.jvm.functions.Function1<java.lang.Object,java.lang.String>)")
@@ -479,11 +478,11 @@ internal class MetadataConverterTest(
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
             .isEqualTo(
                 "bar04(kotlin.jvm.functions.Function2<? super java.lang.String," +
-                    "? super java.lang.Integer,java.lang.String>)",
+                    "? super java.lang.Integer,java.lang.String>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
             .isEqualTo(
-                "bar05(kotlin.jvm.functions.Function1<? super java.lang.String,kotlin.Unit>)",
+                "bar05(kotlin.jvm.functions.Function1<? super java.lang.String,kotlin.Unit>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[5]))
             .isEqualTo("bar06(kotlin.jvm.functions.Function0<java.lang.String>)")
@@ -492,7 +491,7 @@ internal class MetadataConverterTest(
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[7]))
             .isEqualTo(
                 "bar08(kotlin.jvm.functions.Function1<" +
-                    "? super java.util.List<java.lang.String>,kotlin.Unit>)",
+                    "? super java.util.List<java.lang.String>,kotlin.Unit>)"
             )
     }
 
@@ -524,16 +523,16 @@ internal class MetadataConverterTest(
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[2]))
             .isEqualTo(
                 "bar03(kotlin.jvm.functions.Function0<? extends " +
-                    "java.util.List<java.lang.Integer>>)",
+                    "java.util.List<java.lang.Integer>>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
             .isEqualTo(
-                "bar04(kotlin.jvm.functions.Function0<? extends java.util.List<java.lang.String>>)",
+                "bar04(kotlin.jvm.functions.Function0<? extends java.util.List<java.lang.String>>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
             .isEqualTo(
                 "bar05(kotlin.jvm.functions.Function0<? extends " +
-                    "java.util.Map<java.lang.String,java.lang.Integer>>)",
+                    "java.util.Map<java.lang.String,java.lang.Integer>>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[5]))
             .isEqualTo("bar06(kotlin.jvm.functions.Function0<java.lang.Integer>)")
@@ -546,7 +545,7 @@ internal class MetadataConverterTest(
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[9]))
             .isEqualTo(
                 "bar10(kotlin.jvm.functions.Function0<? extends " +
-                    "kotlin.jvm.functions.Function1<? super java.lang.String,java.lang.String>>)",
+                    "kotlin.jvm.functions.Function1<? super java.lang.String,java.lang.String>>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[10]))
             .isEqualTo("bar11<E>(kotlin.jvm.functions.Function0<? extends E>)")
@@ -572,39 +571,39 @@ internal class MetadataConverterTest(
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
             .isEqualTo(
                 "bar01(kotlin.jvm.functions.Function2<? super java.lang.String," +
-                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)",
+                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
             .isEqualTo(
                 "bar02(kotlin.jvm.functions.Function2<? super java.lang.Object," +
-                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)",
+                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[2]))
             .isEqualTo(
                 "bar03(kotlin.jvm.functions.Function2<? super java.lang.String," +
-                    "? super kotlin.coroutines.Continuation<? super java.lang.Object>,?>)",
+                    "? super kotlin.coroutines.Continuation<? super java.lang.Object>,?>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
             .isEqualTo(
                 "bar04(kotlin.jvm.functions.Function1<" +
-                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)",
+                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
             .isEqualTo(
                 "bar05(kotlin.jvm.functions.Function3<? super java.lang.String," +
                     "? super java.lang.Integer," +
-                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)",
+                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)"
             )
 
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[5]))
             .isEqualTo(
                 "bar06(kotlin.jvm.functions.Function2<? super java.lang.String," +
-                    "? super kotlin.coroutines.Continuation<? super kotlin.Unit>,?>)",
+                    "? super kotlin.coroutines.Continuation<? super kotlin.Unit>,?>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[6]))
             .isEqualTo(
                 "bar07(kotlin.jvm.functions.Function1<" +
-                    "? super kotlin.coroutines.Continuation<? super kotlin.Unit>,?>)",
+                    "? super kotlin.coroutines.Continuation<? super kotlin.Unit>,?>)"
             )
     }
 
@@ -626,18 +625,18 @@ internal class MetadataConverterTest(
             .isEqualTo("bar01(kotlin.coroutines.Continuation<? super kotlin.Unit>)")
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
             .isEqualTo(
-                "bar02(java.lang.String,kotlin.coroutines.Continuation<? super kotlin.Unit>)",
+                "bar02(java.lang.String,kotlin.coroutines.Continuation<? super kotlin.Unit>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[2]))
             .isEqualTo(
                 "bar03(kotlin.jvm.functions.Function1<? super java.lang.String," +
-                    "java.lang.String>,kotlin.coroutines.Continuation<? super kotlin.Unit>)",
+                    "java.lang.String>,kotlin.coroutines.Continuation<? super kotlin.Unit>)"
             )
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
             .isEqualTo(
                 "bar04(kotlin.jvm.functions.Function2<? super java.lang.String," +
                     "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>," +
-                    "kotlin.coroutines.Continuation<? super kotlin.Unit>)",
+                    "kotlin.coroutines.Continuation<? super kotlin.Unit>)"
             )
     }
 
@@ -656,7 +655,7 @@ internal class MetadataConverterTest(
                                     ClassVersionMetadata.MethodVersionMetadata(
                                         methodName = "topLevelFun()",
                                         addedIn = "1.2.3",
-                                    ),
+                                    )
                             ),
                         fieldVersions =
                             mapOf(
@@ -664,9 +663,9 @@ internal class MetadataConverterTest(
                                     ClassVersionMetadata.FieldVersionMetadata(
                                         fieldName = "topLevelConst",
                                         addedIn = "1.2.3",
-                                    ),
+                                    )
                             ),
-                    ),
+                    )
             )
         val module =
             """
@@ -683,10 +682,7 @@ internal class MetadataConverterTest(
         // In Java, the property and function will exist within a synthetic class
         if (displayLanguage == Language.JAVA) {
             metadataComponents +=
-                module.metadataForClasslike(
-                    name = "TestKt",
-                    versionMetadataMap = metadataMap,
-                )
+                module.metadataForClasslike(name = "TestKt", versionMetadataMap = metadataMap)
         }
 
         for (metadataComponent in metadataComponents) {
@@ -714,9 +710,9 @@ internal class MetadataConverterTest(
                                         methodName = "getFoo()",
                                         addedIn = "1.2.3",
                                         deprecatedIn = "2.3.4",
-                                    ),
+                                    )
                             ),
-                    ),
+                    )
             )
         val module =
             """
@@ -747,7 +743,7 @@ internal class MetadataConverterTest(
                                 fieldName = "foo",
                                 addedIn = "1.2.3",
                                 deprecatedIn = "2.3.4",
-                            ),
+                            )
                     ),
             )
         val metadataComponent =
@@ -757,9 +753,7 @@ internal class MetadataConverterTest(
             |}
         """
                 .render()
-                .metadataForProperty(
-                    versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
-                )
+                .metadataForProperty(versionMetadataMap = mapOf("androidx.example.Foo" to metadata))
 
         val versionMetadata = metadataComponent.data.versionMetadata
         assertThat(versionMetadata).isNotNull()
@@ -796,7 +790,7 @@ internal class MetadataConverterTest(
                                         addedIn = "1.2.3",
                                     ),
                             ),
-                    ),
+                    )
             )
         val module =
             """
@@ -833,7 +827,7 @@ internal class MetadataConverterTest(
                         groupId = "androidx.example",
                         artifactId = "example",
                         releaseNotesUrl = "https://d.android.com/release/example",
-                    ),
+                    )
             )
         val versionMetadataMap =
             mapOf(
@@ -849,7 +843,7 @@ internal class MetadataConverterTest(
                                         methodName = "bar()",
                                         addedIn = "1.2.3",
                                         deprecatedIn = "2.3.4",
-                                    ),
+                                    )
                             ),
                         fieldVersions =
                             mapOf(
@@ -858,9 +852,9 @@ internal class MetadataConverterTest(
                                         fieldName = "foo",
                                         addedIn = "1.2.3",
                                         deprecatedIn = "2.3.4",
-                                    ),
+                                    )
                             ),
-                    ),
+                    )
             )
 
         val module =
@@ -911,7 +905,7 @@ internal class MetadataConverterTest(
                         groupId = "androidx.example",
                         artifactId = "example",
                         releaseNotesUrl = "https://d.android.com/release/example",
-                    ),
+                    )
             )
 
         val module =
@@ -939,9 +933,7 @@ internal class MetadataConverterTest(
             assertThat(libraryMetadata!!.groupId).isEqualTo("androidx.example")
             assertThat(libraryMetadata.artifactId).isEqualTo("example")
             assertThat(libraryMetadata.releaseNotesUrl)
-                .isEqualTo(
-                    "https://d.android.com/release/example",
-                )
+                .isEqualTo("https://d.android.com/release/example")
         }
     }
 
@@ -954,7 +946,7 @@ internal class MetadataConverterTest(
                         groupId = "androidx.example",
                         artifactId = "example",
                         releaseNotesUrl = "https://d.android.com/release/example",
-                    ),
+                    )
             )
 
         val module =
@@ -975,9 +967,7 @@ internal class MetadataConverterTest(
             assertThat(libraryMetadata!!.groupId).isEqualTo("androidx.example")
             assertThat(libraryMetadata.artifactId).isEqualTo("example")
             assertThat(libraryMetadata.releaseNotesUrl)
-                .isEqualTo(
-                    "https://d.android.com/release/example",
-                )
+                .isEqualTo("https://d.android.com/release/example")
         }
     }
 
@@ -1003,7 +993,7 @@ internal class MetadataConverterTest(
         assertThat(sourceLinkComponent).isNotNull()
         assertThat(sourceLinkComponent!!.data.url)
             .isEqualTo(
-                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:bar",
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:bar"
             )
     }
 
@@ -1029,7 +1019,7 @@ internal class MetadataConverterTest(
         assertThat(sourceLinkComponent).isNotNull()
         assertThat(sourceLinkComponent!!.data.url)
             .isEqualTo(
-                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo"
             )
     }
 
@@ -1053,7 +1043,7 @@ internal class MetadataConverterTest(
             assertThat(sourceLinkComponent).isNotNull()
             assertThat(sourceLinkComponent!!.data.url)
                 .isEqualTo(
-                    "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
+                    "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo"
                 )
         }
     }
@@ -1077,7 +1067,7 @@ internal class MetadataConverterTest(
         assertThat(sourceLinkComponent).isNotNull()
         assertThat(sourceLinkComponent!!.data.url)
             .isEqualTo(
-                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo",
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo"
             )
     }
 
@@ -1101,7 +1091,7 @@ internal class MetadataConverterTest(
         assertThat(sourceLinkComponent).isNotNull()
         assertThat(sourceLinkComponent!!.data.url)
             .isEqualTo(
-                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo"
             )
     }
 
@@ -1123,7 +1113,7 @@ internal class MetadataConverterTest(
         assertThat(sourceLinkComponent).isNotNull()
         assertThat(sourceLinkComponent!!.data.url)
             .isEqualTo(
-                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo",
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo"
             )
     }
 
@@ -1196,10 +1186,6 @@ internal class MetadataConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() =
-            listOf(
-                arrayOf(Language.JAVA),
-                arrayOf(Language.KOTLIN),
-            )
+        fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
     }
 }

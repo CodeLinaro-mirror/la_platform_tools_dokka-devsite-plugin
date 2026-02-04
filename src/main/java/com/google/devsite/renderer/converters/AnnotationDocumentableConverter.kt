@@ -66,7 +66,7 @@ internal class AnnotationDocumentableConverter(
         if (annotations.any { it.isBadNullability }) {
             throw RuntimeException(
                 "Used a nullability annotation ${annotations.filter { it.isBadNullability }} not " +
-                    "in the list of validNullabilityAnnotations passed to dackka.",
+                    "in the list of validNullabilityAnnotations passed to dackka."
             )
         }
 
@@ -115,13 +115,11 @@ internal class AnnotationDocumentableConverter(
         return DefaultAnnotationComponent(AnnotationComponent.Params(type, params))
     }
 
-    private fun AnnotationParameterValue.toComponent(
-        name: String? = null,
-    ): AnnotationParameter =
+    private fun AnnotationParameterValue.toComponent(name: String? = null): AnnotationParameter =
         when (this) {
             is StringValue ->
                 DefaultNamedValueAnnotationParameter(
-                    NamedValueAnnotationParameter.Params(name, "\"${asString()}\""),
+                    NamedValueAnnotationParameter.Params(name, "\"${asString()}\"")
                 )
             is LiteralValue ->
                 DefaultNamedValueAnnotationParameter(
@@ -142,17 +140,17 @@ internal class AnnotationDocumentableConverter(
                                     extra =
                                         DRIExtraContainer()
                                             .also { it[EnumEntryDRIExtra] = EnumEntryDRIExtra }
-                                            .encode()
+                                            .encode(),
                                 )
                             }
-                        )
+                        ),
                     )
                 )
             is ClassValue ->
                 DefaultLinkedValueAnnotationParameter(
                     LinkedValueAnnotationParameter.Params(
                         name,
-                        pathProvider.linkForReference(classDRI)
+                        pathProvider.linkForReference(classDRI),
                     )
                 )
             is ArrayValue ->
@@ -160,14 +158,14 @@ internal class AnnotationDocumentableConverter(
                     ArrayValueAnnotationParameter.Params(
                         name,
                         innerAnnotationParameters = value.map { it.toComponent() },
-                    ),
+                    )
                 )
             is AnnotationValue ->
                 DefaultAnnotationValueAnnotationParameter(
                     AnnotationValueAnnotationParameter.Params(
                         name,
                         annotationComponentValue = annotation.toDackkaAnnotation(),
-                    ),
+                    )
                 )
         }
 

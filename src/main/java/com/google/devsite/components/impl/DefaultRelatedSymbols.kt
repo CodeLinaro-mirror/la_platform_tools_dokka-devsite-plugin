@@ -26,9 +26,8 @@ import kotlinx.html.span
 import kotlinx.html.unsafe
 
 /** Default implementation of related symbols. */
-internal data class DefaultRelatedSymbols(
-    override val data: RelatedSymbols.Params,
-) : RelatedSymbols {
+internal data class DefaultRelatedSymbols(override val data: RelatedSymbols.Params) :
+    RelatedSymbols {
     override fun render(into: FlowContent) =
         into.run {
             renderRelatedSymbolsFor(data.directSubclasses, data.directSummary, "direct")

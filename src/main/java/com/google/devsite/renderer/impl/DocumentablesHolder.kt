@@ -196,7 +196,7 @@ internal class DocumentablesHolder(
                     (objectsNamedCompanion - companionsMap.await().keys).forEach {
                         throw RuntimeException(
                             "Object with illegal name: named 'Companion' but is not a companion " +
-                                "object: $it.",
+                                "object: $it."
                         )
                     }
                 }
@@ -299,7 +299,7 @@ internal class DocumentablesHolder(
         return theseNestedClasslikes.filterNot {
             shouldNotBeDisplayed(
                 it,
-                interestingObjectsInThisLanguage[classlike.containingPackageDri()]!!.await()
+                interestingObjectsInThisLanguage[classlike.containingPackageDri()]!!.await(),
             )
         }
     }
@@ -349,10 +349,7 @@ internal class DocumentablesHolder(
             }
             if (displayLanguage == Language.JAVA) {
                 dPackage.properties.gettersAndSetters().forEach { accessor ->
-                    accessor.addToMapping(
-                        accessor.receiver?.type,
-                        extensionFunctionsMapping,
-                    )
+                    accessor.addToMapping(accessor.receiver?.type, extensionFunctionsMapping)
                 }
             }
         }
@@ -396,7 +393,7 @@ internal class DocumentablesHolder(
             Void, // builtins
             is TypeAliased,
             is FunctionalTypeConstructor,
-            is TypeParameter, -> {}
+            is TypeParameter -> {}
             Dynamic -> TODO() // I don't think this case is possible?
             is UnresolvedBound -> {
                 val unresolvedName = rType.name.removePrefix("ERROR CLASS: Symbol not found for ")
@@ -439,7 +436,7 @@ internal class DocumentablesHolder(
             .filterNot {
                 shouldNotBeDisplayed(
                     it,
-                    interestingObjectsInThisLanguage[it.containingPackageDri()]!!.await()
+                    interestingObjectsInThisLanguage[it.containingPackageDri()]!!.await(),
                 )
             }
             .sortedWith(simpleDocumentableComparator)
@@ -496,9 +493,8 @@ internal class DocumentablesHolder(
      *
      * This method uses @file:JvmName if it exists or the filename with "Kt" appended
      */
-    private fun <T> List<T>.mapToSyntheticNames(): Map<String, List<T>> where
-    T : Documentable,
-    T : WithSources =
+    private fun <T> List<T>.mapToSyntheticNames(): Map<String, List<T>>
+        where T : Documentable, T : WithSources =
         map { it.sources to it }
             .groupBy({ (_, function) -> nameForSyntheticClass(function) }) { it.second }
 
@@ -589,7 +585,7 @@ internal class DocumentablesHolder(
      */
     private fun shouldNotBeDisplayed(
         classlike: DClasslike,
-        interestingObjectsInThisLanguageList: Set<DObject>
+        interestingObjectsInThisLanguageList: Set<DObject>,
     ) = classlike is DObject && !interestingObjectsInThisLanguageList.contains(classlike)
 
     internal fun printWarningFor(
@@ -610,8 +606,6 @@ internal class DocumentablesHolder(
         containingInfo += " in ${documentableWithError.className} ${documentableWithError.name}"
         val location =
             containingDocumentable?.getErrorLocation() ?: documentableWithError.getErrorLocation()
-        logger.warn(
-            "$location $baseMessage$containingInfo$additionalContext",
-        )
+        logger.warn("$location $baseMessage$containingInfo$additionalContext")
     }
 }

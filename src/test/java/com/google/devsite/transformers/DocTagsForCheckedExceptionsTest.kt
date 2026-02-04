@@ -17,10 +17,7 @@ import org.junit.Test
 class DocTagsForCheckedExceptionsTest :
     BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
     private val driCorrespondence: Correspondence<ThrowsTag, String> =
-        Correspondence.transforming(
-            { it?.exceptionAddress?.toString() },
-            "has DRI equal to",
-        )
+        Correspondence.transforming({ it?.exceptionAddress?.toString() }, "has DRI equal to")
 
     private val configuration = dokkaConfiguration {
         sourceSets {

@@ -46,7 +46,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>Hello world!</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -58,9 +58,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             |class Foo
         """
                 .render()
-                .description(
-                    deprecation = "This class is deprecated.",
-                )
+                .description(deprecation = "This class is deprecated.")
 
         val output = createHTML().body { component.render(this) }.trim()
 
@@ -74,7 +72,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   </aside>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -102,7 +100,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>1 2 3.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -130,7 +128,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>This is foo.bar, blah blah.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -154,7 +152,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>Foo.Bar has great drinks.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -218,7 +216,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>This Animatable function creates a float value holder that automatically animates its value when the value is changed via animateTo.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -249,7 +247,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>Animation will be forced to end when its value reaches upper/lower bound (if they have been defined, e.g. via Animatable.updateBounds)</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -276,7 +274,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>the amount of time (in milliseconds) the animation will take to finish.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -290,10 +288,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             |class Foo
         """
                 .render()
-                .description(
-                    summary = true,
-                    deprecation = "This class is deprecated.",
-                )
+                .description(summary = true, deprecation = "This class is deprecated.")
 
         val output = createHTML().body { component.render(this) }.trim()
         // TODO(b/171570474) Work around for EOL space introduced by Dokka and is required to make
@@ -306,7 +301,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
                     "  <p><strong>This class is deprecated.</strong>\n" +
                     "    <p>Hello world!</p>\n" +
                     "  </p>\n" +
-                    "   </body>".trim(),
+                    "   </body>".trim()
             )
     }
 
@@ -354,7 +349,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>There was an old lady who swallowed a horse - She's dead, of course.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -382,7 +377,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>A <br>B <br>C.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -414,7 +409,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>The <code>Boolean</code> type has two possible values: <code>true</code> or <code>false</code>.</p>
 </body>
             """
-                        .trim(),
+                        .trim()
                 )
         }
     }
@@ -437,7 +432,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
                 """
 <body><p><em>Italics</em>, <b>Bold</b>, <em><b>Both</b></em>, <del>Bad</del>.</p></body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -477,7 +472,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   </ul>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -517,7 +512,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   </ol>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -563,7 +558,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   </ol>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -614,7 +609,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
      </dd>
 </dl></body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -662,7 +657,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   </dl>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -736,7 +731,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   </ul>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -787,7 +782,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   </table>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -827,7 +822,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 }</pre>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -851,7 +846,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>Click <a href="http://meme">here</a>.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -877,7 +872,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p><code><a href="/reference/androidx/example/Bar.html">Bar</a></code> is pretty cool.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -903,7 +898,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p><code><a href="/reference/androidx/example/package-summary.html#bar()">bar</a></code> is pretty cool.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -931,7 +926,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p><code><a href="/reference/androidx/example/BarIsVeryVeryVeryVeryLongNamed.html">Special snowflake snowflake snowflake snowflake snowflake</a></code> is pretty cool.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -955,7 +950,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p><img alt="Alt text" src="/path/to/img.jpg"></p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -984,7 +979,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   </blockquote>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -1010,7 +1005,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
  world!</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -1057,7 +1052,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         DOPreserveWhitespace: String            \\ blah
     }
 </pre>
-</body>""",
+</body>"""
             )
     }
 
@@ -1103,7 +1098,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
       </tr>
     </tbody>
   </table>
-</body>""",
+</body>"""
             )
     }
 
@@ -1156,7 +1151,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 </pre>
 </body>
         """
-                    .trim(),
+                    .trim()
             )
         // language=html
         assertThat(outputK)
@@ -1171,7 +1166,7 @@ public void onCreate() {
                  .detectDiskReads()
 </pre></body>
         """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -1195,7 +1190,7 @@ public void onCreate() {
   <p>Click <a href="/guide">here</a>.</p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -1219,7 +1214,7 @@ public void onCreate() {
   <p><h2 id="sample-formats">Fields relevant to sample formats</h2></p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -1249,8 +1244,8 @@ public void onCreate() {
                 <body>
                   <p> Destination pixels covered by the source are cleared to 0.</p>
                 </body>
-            """
-                    .trimIndent(),
+                """
+                    .trimIndent()
             )
 
         val detail =
@@ -1265,8 +1260,8 @@ public void onCreate() {
                   <p>\(\alpha_{out} = 0\)</p>
                   <p>\(C_{out} = 0\)</p>
                 </body>
-            """
-                    .trimIndent(),
+                """
+                    .trimIndent()
             )
     }
 
@@ -1277,12 +1272,7 @@ public void onCreate() {
         val tag = explicitClasslike("Foo").tag()
         val converterHolder = ConverterHolder(this@DefaultDescriptionComponentTest, this)
         return DefaultDescriptionComponent(
-            Params(
-                converterHolder.provider,
-                tag.children,
-                summary,
-                deprecation,
-            ),
+            Params(converterHolder.provider, tag.children, summary, deprecation)
         )
     }
 

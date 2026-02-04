@@ -61,8 +61,8 @@ internal class RootDocumentableConverter(
             alphabetizedClasses.mapValues { (_, nodes) ->
                 DefaultSummaryList(
                     SummaryList.Params(
-                        items = nodes.map { javadocConverter.summaryForDocumentable(it) },
-                    ),
+                        items = nodes.map { javadocConverter.summaryForDocumentable(it) }
+                    )
                 )
             }
 
@@ -73,15 +73,10 @@ internal class RootDocumentableConverter(
                 bookPath = pathProvider.book,
                 title = "Class Index",
                 content =
-                    DefaultClassIndex(
-                        ClassIndex.Params(
-                            pathProvider.packages,
-                            componentClasses,
-                        ),
-                    ),
+                    DefaultClassIndex(ClassIndex.Params(pathProvider.packages, componentClasses)),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
-            ),
+            )
         )
     }
 
@@ -99,8 +94,8 @@ internal class RootDocumentableConverter(
                             } // this synthetic package has broken self-links
                             .map {
                                 javadocConverter.summaryForDocumentable(it, showAnnotations = false)
-                            },
-                ),
+                            }
+                )
             )
 
         return DefaultDevsitePage(
@@ -111,14 +106,11 @@ internal class RootDocumentableConverter(
                 title = "Package Index",
                 content =
                     DefaultPackageIndex(
-                        PackageIndex.Params(
-                            pathProvider.classes,
-                            componentPackages,
-                        ),
+                        PackageIndex.Params(pathProvider.classes, componentPackages)
                     ),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
-            ),
+            )
         )
     }
 
@@ -137,7 +129,7 @@ internal class RootDocumentableConverter(
                 classesUrl = pathProvider.classes,
                 packagesUrl = pathProvider.packages,
                 packages = packageComponents,
-            ),
+            )
         )
     }
 
@@ -182,7 +174,7 @@ internal class RootDocumentableConverter(
                 exceptions = exceptions,
                 annotations = annotations,
                 objects = if (displayLanguage == Language.KOTLIN) objects else emptyList(),
-            ), // Typealiases do not appear in the toc because they do not get their own pages
+            ) // Typealiases do not appear in the toc because they do not get their own pages
         )
     }
 

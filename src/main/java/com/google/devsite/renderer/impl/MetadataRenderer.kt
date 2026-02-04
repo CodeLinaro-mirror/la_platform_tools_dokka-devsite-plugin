@@ -37,12 +37,7 @@ internal class MetadataRenderer(
     javadocConverter: DocTagConverter,
 ) {
     private val converter =
-        RootDocumentableConverter(
-            displayLanguage,
-            pathProvider,
-            docsHolder,
-            javadocConverter,
-        )
+        RootDocumentableConverter(displayLanguage, pathProvider, docsHolder, javadocConverter)
 
     /** Writes the list of packages in machine-readable format. */
     suspend fun writePackageList() {

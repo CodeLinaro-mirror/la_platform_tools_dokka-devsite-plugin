@@ -48,7 +48,7 @@ enum class Nullability {
     JAVA_ANNOTATED_NULLABLE,
     JAVA_NEVER_NULL, // This refers to types that cannot be nullable, e.g. int
     JAVA_NOT_ANNOTATED, // This means "platform type," which mostly means nullable
-    DONT_CARE, // Sometimes we don't print nullability, usually if it should be obvious from context
+    DONT_CARE // Sometimes we don't print nullability, usually if it should be obvious from context
     ;
 
     fun renderAsJavaAnnotation() =
@@ -70,7 +70,7 @@ enum class Nullability {
             JAVA_ANNOTATED_NULLABLE -> "?"
             KOTLIN_DEFAULT,
             JAVA_ANNOTATED_NOT_NULL,
-            JAVA_NEVER_NULL, -> ""
+            JAVA_NEVER_NULL -> ""
             JAVA_NOT_ANNOTATED -> "!"
             DONT_CARE -> ""
         }
@@ -80,10 +80,10 @@ enum class Nullability {
             KOTLIN_NULLABLE,
             JAVA_ANNOTATED_NULLABLE,
             JAVA_NOT_ANNOTATED,
-            DONT_CARE, -> true
+            DONT_CARE -> true
             KOTLIN_DEFAULT,
             JAVA_ANNOTATED_NOT_NULL,
-            JAVA_NEVER_NULL, -> false
+            JAVA_NEVER_NULL -> false
         }
 
     val nullable
@@ -147,7 +147,7 @@ internal fun Projection.getNullability(
         is TypeConstructor,
         is JavaObject,
         is UnresolvedBound,
-        is PrimitiveJavaType, -> {
+        is PrimitiveJavaType -> {
             // Java arrays are nullable; non-array primitives aren't
             if (this is PrimitiveJavaType) if ("[" !in name) Nullability.JAVA_NEVER_NULL
             // This is the only case where annotations can override the normal nullability

@@ -26,10 +26,7 @@ class DefaultTocPackageTest {
     fun `Toc package with empty types renders correctly`() {
         val component =
             DefaultTocPackage(
-                Params(
-                    name = "androidx.example",
-                    packageUrl = "androidx/example/package-summary",
-                ),
+                Params(name = "androidx.example", packageUrl = "androidx/example/package-summary")
             )
 
         val output = buildString { component.render(this) }.trim()
@@ -40,7 +37,7 @@ class DefaultTocPackageTest {
 - title: "androidx.example"
   path: "androidx/example/package-summary"
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -56,7 +53,7 @@ class DefaultTocPackageTest {
                     enums = listOf(Type("Enum", "link")),
                     exceptions = listOf(Type("Exception", "link")),
                     annotations = listOf(Type("Annotation", "link")),
-                ),
+                )
             )
 
         val output = buildString { component.render(this) }.trim()
@@ -98,7 +95,7 @@ class DefaultTocPackageTest {
     - title: "Annotation"
       path: "link"
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -109,12 +106,8 @@ class DefaultTocPackageTest {
                 Params(
                     name = "androidx.example",
                     packageUrl = "androidx/example/package-summary",
-                    interfaces =
-                        listOf(
-                            Type("InterfaceA", "link/a"),
-                            Type("InterfaceB", "link/b"),
-                        ),
-                ),
+                    interfaces = listOf(Type("InterfaceA", "link/a"), Type("InterfaceB", "link/b")),
+                )
             )
 
         val output = buildString { component.render(this) }.trim()
@@ -134,7 +127,7 @@ class DefaultTocPackageTest {
     - title: "InterfaceB"
       path: "link/b"
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

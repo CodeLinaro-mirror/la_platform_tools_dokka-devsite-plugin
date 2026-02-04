@@ -35,7 +35,7 @@ class DefaultTypeProjectionComponentTest {
                     type = NoopLink("Int"),
                     nullability = Nullability.KOTLIN_DEFAULT,
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -46,7 +46,7 @@ class DefaultTypeProjectionComponentTest {
                 """
 <div>Int</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -58,7 +58,7 @@ class DefaultTypeProjectionComponentTest {
                     type = NoopLink("Int"),
                     nullability = Nullability.KOTLIN_NULLABLE,
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -69,7 +69,7 @@ class DefaultTypeProjectionComponentTest {
                 """
 <div>Int?</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -81,7 +81,7 @@ class DefaultTypeProjectionComponentTest {
                     type = NoopLink("Int"),
                     nullability = Nullability.JAVA_NOT_ANNOTATED,
                     displayLanguage = Language.KOTLIN,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -92,7 +92,7 @@ class DefaultTypeProjectionComponentTest {
                 """
 <div>Int!</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -105,7 +105,7 @@ class DefaultTypeProjectionComponentTest {
                     nullability = Nullability.KOTLIN_DEFAULT,
                     displayLanguage = Language.KOTLIN,
                     generics = listOf(NoopTypeProjectionComponent("String")),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -116,7 +116,7 @@ class DefaultTypeProjectionComponentTest {
                 """
 <div>List&lt;String&gt;</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -129,7 +129,7 @@ class DefaultTypeProjectionComponentTest {
                     nullability = Nullability.KOTLIN_NULLABLE,
                     displayLanguage = Language.KOTLIN,
                     generics = listOf(NoopTypeProjectionComponent("String")),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -140,7 +140,7 @@ class DefaultTypeProjectionComponentTest {
                 """
 <div>List&lt;String&gt;?</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -157,7 +157,7 @@ class DefaultTypeProjectionComponentTest {
                             NoopTypeProjectionComponent("String"),
                             NoopTypeProjectionComponent("Int"),
                         ),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -168,7 +168,7 @@ class DefaultTypeProjectionComponentTest {
                 """
 <div>Map&lt;String,&nbsp;Int&gt;</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

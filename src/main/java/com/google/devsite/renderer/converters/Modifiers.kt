@@ -28,9 +28,7 @@ import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** @return the complete list of modifiers for this type */
-internal fun Documentable.modifiers(
-    sourceSet: DokkaConfiguration.DokkaSourceSet,
-): List<String> {
+internal fun Documentable.modifiers(sourceSet: DokkaConfiguration.DokkaSourceSet): List<String> {
     val result = mutableListOf<String?>()
     if (this is WithAbstraction) {
         result += listOf(modifier[sourceSet]?.name)
@@ -46,7 +44,7 @@ internal fun Documentable.modifiers(
 
 /** Returns a list of modifiers stored in the AdditionalModifiers extra field i.e. VarArg */
 internal fun <T : WithExtraProperties<*>> T.getExtraModifiers(
-    sourceSet: DokkaConfiguration.DokkaSourceSet,
+    sourceSet: DokkaConfiguration.DokkaSourceSet
 ) =
     extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
         modifiers.content[sourceSet]?.map { it.name }?.filter { it.isNotEmpty() } ?: emptyList()
@@ -54,7 +52,7 @@ internal fun <T : WithExtraProperties<*>> T.getExtraModifiers(
 
 /** @return true if the modifiers represent a constant symbol, false otherwise */
 internal fun DProperty.isConstant(
-    modifiers: List<String> = modifiers(getExpectOrCommonSourceSet()),
+    modifiers: List<String> = modifiers(getExpectOrCommonSourceSet())
 ): Boolean {
     return "const" in modifiers ||
         // A Java `static final` property is generally a constant, but due to b/241259955 could be
@@ -69,9 +67,7 @@ internal data class Modifiers(var baselist: List<String>) : ArrayList<String>(ba
 internal val EmptyModifiers = Modifiers()
 
 /** Returns a filtered and re-written list of modifiers. */
-internal fun List<String>.modifiersFor(
-    hints: ModifierHints,
-): Modifiers {
+internal fun List<String>.modifiersFor(hints: ModifierHints): Modifiers {
     val modifiers = toMutableSet()
 
     when (hints.displayLanguage) {

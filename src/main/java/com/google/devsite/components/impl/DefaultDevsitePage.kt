@@ -29,7 +29,7 @@ import kotlinx.html.unsafe
 
 /** Default implementation of the root component for devsite. */
 internal data class DefaultDevsitePage<T : ContextFreeComponent>(
-    override val data: DevsitePage.Params<T>,
+    override val data: DevsitePage.Params<T>
 ) : DevsitePage<T> {
 
     override fun render(into: HTML) =

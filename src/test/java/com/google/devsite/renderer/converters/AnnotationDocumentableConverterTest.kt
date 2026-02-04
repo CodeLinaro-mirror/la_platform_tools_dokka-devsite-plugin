@@ -36,9 +36,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class AnnotationDocumentableConverterTest(
-    displayLanguage: Language,
-) : ConverterTestBase(displayLanguage) {
+internal class AnnotationDocumentableConverterTest(displayLanguage: Language) :
+    ConverterTestBase(displayLanguage) {
 
     @Test
     fun `@Suppress annotations are ignored`() {
@@ -558,7 +557,7 @@ internal class AnnotationDocumentableConverterTest(
                     imports =
                         listOf(
                             "java.lang.annotation.Retention",
-                            "static java.lang.annotation.RetentionPolicy.CLASS"
+                            "static java.lang.annotation.RetentionPolicy.CLASS",
                         )
                 )
         val anno = module.annotationComponents(module.classlike("Foo")!!).single()
@@ -614,10 +613,6 @@ internal class AnnotationDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() =
-            listOf(
-                arrayOf(Language.JAVA),
-                arrayOf(Language.KOTLIN),
-            )
+        fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
     }
 }

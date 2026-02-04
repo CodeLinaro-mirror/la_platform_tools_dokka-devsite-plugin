@@ -127,12 +127,12 @@ data class DevsiteConfiguration(
         if (javaDocsPath == null && kotlinDocsPath == null) {
             throw IllegalStateException(
                 "Invalid Dackka configuration: at least one of `javaDocsPath` and " +
-                    "`kotlinDocsPath` must be specified as non-null",
+                    "`kotlinDocsPath` must be specified as non-null"
             )
         } else if (javaDocsPath == kotlinDocsPath) {
             throw IllegalStateException(
                 "Invalid Dackka configuration: `javaDocsPath` and `kotlinDocsPath` cannot have " +
-                    "the same value.",
+                    "the same value."
             )
         }
     }

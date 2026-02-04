@@ -22,7 +22,7 @@ import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DisplaySourceSet
 
 class DefaultExternalDokkaLocationProvider(
-    private val dokkaLocationProvider: DokkaLocationProvider,
+    private val dokkaLocationProvider: DokkaLocationProvider
 ) : ExternalDokkaLocationProvider {
     private val memoizer = ConcurrentHashMap<DRI, String>()
 

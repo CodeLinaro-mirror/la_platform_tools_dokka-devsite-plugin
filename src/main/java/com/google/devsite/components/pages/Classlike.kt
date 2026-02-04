@@ -100,11 +100,7 @@ internal interface Classlike : ContextFreeComponent {
 
     private val earlySummaries: List<SummaryList<*>>
         get() =
-            listOfNotNull(
-                data.nestedTypesSummary,
-                data.enumValuesSummary,
-                data.constantsSummary,
-            )
+            listOfNotNull(data.nestedTypesSummary, data.enumValuesSummary, data.constantsSummary)
 
     private val kotlinOnlySummaries: List<SummaryList<*>>
         get() =
@@ -125,11 +121,7 @@ internal interface Classlike : ContextFreeComponent {
             )
 
     private val propertiesSummaries: List<PropertySummaryList>
-        get() =
-            listOfNotNull(
-                data.publicPropertiesSummary,
-                data.protectedPropertiesSummary,
-            )
+        get() = listOfNotNull(data.publicPropertiesSummary, data.protectedPropertiesSummary)
 
     private val extensionFunctionsSummary: List<FunctionSummaryList>
         get() = listOf(data.extensionFunctionsSummary)
@@ -200,11 +192,7 @@ internal interface Classlike : ContextFreeComponent {
             )
 
     private val propertiesDetails
-        get() =
-            listOfNotNull(
-                data.publicPropertiesDetails,
-                data.protectedPropertiesDetails,
-            )
+        get() = listOfNotNull(data.publicPropertiesDetails, data.protectedPropertiesDetails)
 
     private val extensionFunctionsDetails
         get() = listOf(data.extensionFunctionsDetails)

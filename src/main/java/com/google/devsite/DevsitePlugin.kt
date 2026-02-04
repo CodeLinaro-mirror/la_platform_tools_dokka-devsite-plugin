@@ -72,9 +72,7 @@ class DevsitePlugin : DokkaPlugin() {
     val propagateAnnotations by extending {
         CoreExtensions.documentableTransformer providing
             {
-                PropagatedAnnotationsTransformer(
-                    getDevsiteConfiguration(it).propagatingAnnotations,
-                )
+                PropagatedAnnotationsTransformer(getDevsiteConfiguration(it).propagatingAnnotations)
             }
     }
 

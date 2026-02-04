@@ -17,5 +17,6 @@
 package dokkatest.linking
 
 enum class KotlinEnum {
-    ON_CREATE, ON_CATASTROPHE
+    ON_CREATE,
+    ON_CATASTROPHE,
 }

@@ -27,6 +27,8 @@ interface HiddenParentInterface : VisibleGrandparentInterface {
 
 class VisibleImplementingClass : HiddenParentInterface {
     override fun grandparentInterfaceFunction(): Unit {}
+
     override fun parentInterfaceFunction(): Unit {}
+
     fun childFunction(): Unit {}
 }

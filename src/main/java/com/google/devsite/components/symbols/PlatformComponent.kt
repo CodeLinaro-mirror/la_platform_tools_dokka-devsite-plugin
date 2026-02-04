@@ -30,9 +30,7 @@ import org.jetbrains.dokka.Platform as DokkaPlatform
 internal interface PlatformComponent : ContextFreeComponent {
     val data: Params
 
-    data class Params(
-        val platforms: Set<Platform>,
-    )
+    data class Params(val platforms: Set<Platform>)
 
     fun renderForDetail(into: FlowContent)
 }
@@ -47,8 +45,7 @@ enum class Platform {
     JVM,
     NATIVE,
     WASM,
-    JS,
-    ;
+    JS;
 
     /* Not used yet; strategy undecided
     ANDROID,

@@ -32,7 +32,7 @@ data class LibraryMetadata(
 
         // Generate mapping of each file to its respective artifact ID and other metadata
         fun convertJsonMetadataToFileMap(
-            metadataList: List<JsonLibraryMetadata>,
+            metadataList: List<JsonLibraryMetadata>
         ): Map<String, LibraryMetadata> {
             val fileMetadataMap = hashMapOf<String, LibraryMetadata>()
             metadataList.forEach { jsonLibraryMetadata ->

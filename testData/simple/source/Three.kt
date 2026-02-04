@@ -19,6 +19,5 @@ package dokkatest.simple
 enum class Three(val letter: String) {
     A("A"),
     B("B"),
-    @Deprecated("use B")
-    C("C")
+    @Deprecated("use B") C("C"),
 }

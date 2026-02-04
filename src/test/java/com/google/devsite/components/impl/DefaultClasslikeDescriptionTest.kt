@@ -37,7 +37,7 @@ class DefaultClasslikeDescriptionTest {
                     header = DefaultDevsitePlatformSelector(listOf(Platform.COMMON)),
                     hierarchy =
                         DefaultClassHierarchy(
-                            ClassHierarchy.Params(parents = listOf(NoopLink("some class"))),
+                            ClassHierarchy.Params(parents = listOf(NoopLink("some class")))
                         ),
                     primarySignature = NoopClasslikeSignature(),
                     relatedSymbols =
@@ -47,11 +47,10 @@ class DefaultClasslikeDescriptionTest {
                                 emptySummaryList(),
                                 emptyList(),
                                 emptySummaryList(),
-                            ),
+                            )
                         ),
-                    descriptionDocs =
-                        listOf(DefaultRaw(Raw.Params("description description docs"))),
-                ),
+                    descriptionDocs = listOf(DefaultRaw(Raw.Params("description description docs"))),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -77,7 +76,7 @@ class DefaultClasslikeDescriptionTest {
   <hr>
 description description docs</body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

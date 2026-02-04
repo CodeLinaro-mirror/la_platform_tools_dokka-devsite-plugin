@@ -80,9 +80,8 @@ import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
 import org.junit.Before
 
-internal abstract class ConverterTestBase(
-    private val displayLanguage: Language = Language.JAVA,
-) : BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
+internal abstract class ConverterTestBase(private val displayLanguage: Language = Language.JAVA) :
+    BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
     @Before
     fun setUp() {
         isRunningInDackkasTests = true
@@ -90,10 +89,7 @@ internal abstract class ConverterTestBase(
 
     protected fun List<String>.render(): DModule = testWithRootPageNode(this)
 
-    protected fun String.render(
-        java: Boolean = false,
-        fileUseAnnotation: String = "",
-    ): DModule =
+    protected fun String.render(java: Boolean = false, fileUseAnnotation: String = ""): DModule =
         if (java) {
             testJavaWithRootPageNode(trimMargin())
         } else {
@@ -483,7 +479,7 @@ internal abstract class ConverterTestBase(
     }
 
     protected fun DModule.functionSummaries(
-        hints: ModifierHints = defaultHints,
+        hints: ModifierHints = defaultHints
     ): Map<String, TypeSummaryItem<FunctionSignature>> {
         return functions()!!.associate {
             it.name to functionConverter().summary(it, hints.copy(isSummary = true))!!
@@ -498,22 +494,18 @@ internal abstract class ConverterTestBase(
     }
 
     protected fun DModule.functionSignature(
-        doc: DModule.() -> DFunction = ::smartDoc,
+        doc: DModule.() -> DFunction = ::smartDoc
     ): FunctionSignature {
         return with(functionConverter()) {
             this@functionSignature.doc().signature(isSummary = false)
         }
     }
 
-    protected fun DModule.functionSummary(
-        funName: String,
-        hints: ModifierHints = defaultHints,
-    ) = functionSummary({ this.function(funName)!! }, hints)
+    protected fun DModule.functionSummary(funName: String, hints: ModifierHints = defaultHints) =
+        functionSummary({ this.function(funName)!! }, hints)
 
-    protected fun DModule.functionDetail(
-        funName: String,
-        hints: ModifierHints = defaultHints,
-    ) = functionDetail({ this.function(funName)!! }, hints)
+    protected fun DModule.functionDetail(funName: String, hints: ModifierHints = defaultHints) =
+        functionDetail({ this.function(funName)!! }, hints)
 
     protected fun DModule.annotationComponents(
         annotations: List<Annotations.Annotation>,

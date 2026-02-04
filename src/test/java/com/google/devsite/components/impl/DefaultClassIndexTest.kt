@@ -39,7 +39,7 @@ class DefaultClassIndexTest {
   <p><em>This project has no classes.</em></p>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -60,7 +60,7 @@ class DefaultClassIndexTest {
   <div>noop</div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -73,9 +73,9 @@ class DefaultClassIndexTest {
                     mapOf(
                         'A' to NoopSummaryList(),
                         'B' to NoopSummaryList(),
-                        'Z' to NoopSummaryList()
+                        'Z' to NoopSummaryList(),
                     ),
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -95,7 +95,7 @@ class DefaultClassIndexTest {
   <div>noop</div>
 </body>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }

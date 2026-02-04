@@ -20,8 +20,5 @@ package com.google.devsite.components.table
 internal interface TableTitle : RowComponent {
     val data: Params
 
-    data class Params(
-        val title: String,
-        val big: Boolean = false,
-    )
+    data class Params(val title: String, val big: Boolean = false)
 }

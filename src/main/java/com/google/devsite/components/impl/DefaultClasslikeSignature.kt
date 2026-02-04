@@ -23,9 +23,8 @@ import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 
-internal data class DefaultClasslikeSignature(
-    override val data: ClasslikeSignature.Params,
-) : ClasslikeSignature {
+internal data class DefaultClasslikeSignature(override val data: ClasslikeSignature.Params) :
+    ClasslikeSignature {
 
     override fun render(into: FlowContent) =
         into.run {

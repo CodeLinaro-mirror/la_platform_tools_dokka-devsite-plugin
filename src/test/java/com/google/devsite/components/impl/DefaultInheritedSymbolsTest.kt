@@ -38,20 +38,17 @@ class DefaultInheritedSymbolsTest {
                     DefaultSummaryList(
                         SummaryList.Params(
                             items =
-                                listOf(NoopTableRowTypeSummaryItemF, NoopTableRowTypeSummaryItemF),
-                        ),
-                    ),
+                                listOf(NoopTableRowTypeSummaryItemF, NoopTableRowTypeSummaryItemF)
+                        )
+                    )
             )
 
         val component =
             DefaultInheritedSymbols(
                 InheritedSymbolsList.Params(
-                    header =
-                        DefaultTableTitle(
-                            TableTitle.Params("Inherited Methods", big = true),
-                        ),
+                    header = DefaultTableTitle(TableTitle.Params("Inherited Methods", big = true)),
                     inheritedSymbolSummaries = inheritedSymbols,
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -89,8 +86,8 @@ class DefaultInheritedSymbolsTest {
                     </table>
                   </div>
                 </body>
-            """
-                    .trimIndent(),
+                """
+                    .trimIndent()
             )
     }
 
@@ -99,12 +96,9 @@ class DefaultInheritedSymbolsTest {
         val component =
             DefaultInheritedSymbols(
                 InheritedSymbolsList.Params(
-                    header =
-                        DefaultTableTitle(
-                            TableTitle.Params("Inherited Methods", big = true),
-                        ),
+                    header = DefaultTableTitle(TableTitle.Params("Inherited Methods", big = true)),
                     inheritedSymbolSummaries = HashMap(),
-                ),
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()
@@ -114,8 +108,8 @@ class DefaultInheritedSymbolsTest {
             .isEqualTo(
                 """
                 <body></body>
-            """
-                    .trimIndent(),
+                """
+                    .trimIndent()
             )
     }
 }

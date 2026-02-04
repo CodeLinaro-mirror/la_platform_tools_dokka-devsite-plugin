@@ -31,12 +31,7 @@ import org.junit.Test
 class DefaultFunctionSignatureTest {
     @Test
     fun `Signature with no params renders correctly`() {
-        val component =
-            DefaultFunctionSignature(
-                Params(
-                    name = NoopLink("foo"),
-                ),
-            )
+        val component = DefaultFunctionSignature(Params(name = NoopLink("foo")))
 
         val output = createHTML().div { component.render(this) }.trim()
 
@@ -46,7 +41,7 @@ class DefaultFunctionSignatureTest {
                 """
 <div>foo()</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -61,7 +56,7 @@ class DefaultFunctionSignatureTest {
                             NoopParameterComponent("String foo"),
                             NoopParameterComponent("int bar"),
                         ),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -72,7 +67,7 @@ class DefaultFunctionSignatureTest {
                 """
 <div>foo(String foo,&nbsp;int bar)</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -88,7 +83,7 @@ class DefaultFunctionSignatureTest {
                             NoopParameterComponent("int bar"),
                         ),
                     isDeprecated = true,
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -99,7 +94,7 @@ class DefaultFunctionSignatureTest {
                 """
 <div><span><del>foo</del></span>(String foo,&nbsp;int bar)</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -107,10 +102,7 @@ class DefaultFunctionSignatureTest {
     fun `Signature with receiver renders correctly`() {
         val component =
             DefaultFunctionSignature(
-                Params(
-                    name = NoopLink("foo"),
-                    receiver = NoopParameterComponent("String"),
-                ),
+                Params(name = NoopLink("foo"), receiver = NoopParameterComponent("String"))
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -121,7 +113,7 @@ class DefaultFunctionSignatureTest {
                 """
 <div>String.foo()</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -136,7 +128,7 @@ class DefaultFunctionSignatureTest {
                             NoopParameterComponent("String foo", forceBreak = true),
                             NoopParameterComponent("int bar", forceBreak = true),
                         ),
-                ),
+                )
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -147,7 +139,7 @@ class DefaultFunctionSignatureTest {
                 """
 <div>foo(<br>&nbsp;&nbsp;&nbsp;&nbsp;String foo,<br>&nbsp;&nbsp;&nbsp;&nbsp;int bar<br>)</div>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -175,10 +167,10 @@ class DefaultFunctionSignatureTest {
                                             ),
                                         pathProvider = NoopFilePathProvider(),
                                         displayLanguage = displayLanguage,
-                                    ),
-                                ),
+                                    )
+                                )
                             ),
-                    ),
+                    )
                 )
 
             val output = createHTML().div { component.render(this) }.trim()
@@ -190,7 +182,7 @@ class DefaultFunctionSignatureTest {
                         """
 <div>&lt;T&nbsp;:&nbsp;CharSequence&nbsp;&amp;&nbsp;Comparable&lt;T&gt;&gt; copyWhenGreater(<br>&nbsp;&nbsp;&nbsp;&nbsp;list: List&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T threshold<br>)</div>
             """
-                            .trim(),
+                            .trim()
                     )
             } else {
                 // language=html
@@ -199,7 +191,7 @@ class DefaultFunctionSignatureTest {
                         """
 <div>&lt;T&nbsp;extends&nbsp;CharSequence&nbsp;&amp;&nbsp;Comparable&lt;T&gt;&gt; copyWhenGreater(<br>&nbsp;&nbsp;&nbsp;&nbsp;list: List&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T threshold<br>)</div>
             """
-                            .trim(),
+                            .trim()
                     )
             }
         }

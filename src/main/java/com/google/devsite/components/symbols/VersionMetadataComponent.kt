@@ -22,8 +22,5 @@ import com.google.devsite.components.Link
 internal interface VersionMetadataComponent : ContextFreeComponent {
     val data: Params
 
-    data class Params(
-        val addedIn: Link?,
-        val deprecatedIn: Link?,
-    )
+    data class Params(val addedIn: Link?, val deprecatedIn: Link?)
 }

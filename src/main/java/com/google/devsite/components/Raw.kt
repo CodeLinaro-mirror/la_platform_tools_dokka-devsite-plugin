@@ -20,7 +20,5 @@ package com.google.devsite.components
 internal interface Raw : ContextFreeComponent {
     val data: Params
 
-    data class Params(
-        val text: String,
-    )
+    data class Params(val text: String)
 }

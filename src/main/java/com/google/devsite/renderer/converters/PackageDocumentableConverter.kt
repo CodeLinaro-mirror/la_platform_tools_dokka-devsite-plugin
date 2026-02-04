@@ -156,7 +156,7 @@ internal abstract class PackageDocumentableConverter(
                             topLevelFunctions = topLevelFunctions.await(),
                             extensionProperties = extensionProperties.await(),
                             extensionFunctions = extensionFunctions.await(),
-                        ),
+                        )
                     ),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
@@ -195,9 +195,9 @@ internal abstract class PackageDocumentableConverter(
                                         )
                                     }
                                     .mapNotNull { it.dri.callable?.anchor() ?: it.name },
-                        ),
+                        )
                     ),
-            ),
+            )
         )
     }
 
@@ -215,15 +215,11 @@ internal abstract class PackageDocumentableConverter(
                 functionToSummaryConverter(it, modifierHints)
             }
 
-        return DefaultSummaryList(
-            SummaryList.Params(
-                items = components,
-            ),
-        )
+        return DefaultSummaryList(SummaryList.Params(items = components))
     }
 
     private fun functionsToDetail(
-        functions: List<DFunction>,
+        functions: List<DFunction>
     ): List<SymbolDetail<FunctionSignature>> {
         return functions.mapNotNull {
             val modifierHints =
@@ -252,15 +248,11 @@ internal abstract class PackageDocumentableConverter(
                 propertyToSummaryConverter(it, modifierHints)
             }
 
-        return DefaultSummaryList(
-            SummaryList.Params(
-                items = components,
-            ),
-        )
+        return DefaultSummaryList(SummaryList.Params(items = components))
     }
 
     private fun propertiesToDetail(
-        properties: List<DProperty>,
+        properties: List<DProperty>
     ): List<SymbolDetail<PropertySignature>> {
         return properties.mapNotNull {
             val modifierHints =

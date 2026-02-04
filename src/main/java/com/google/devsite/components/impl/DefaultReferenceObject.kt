@@ -23,9 +23,8 @@ import kotlinx.html.itemProp
 import kotlinx.html.meta
 
 /** See https://developers.google.com/devsite/reference/microdata/referenceobject */
-internal data class DefaultReferenceObject(
-    override val data: ReferenceObject.Params,
-) : ReferenceObject {
+internal data class DefaultReferenceObject(override val data: ReferenceObject.Params) :
+    ReferenceObject {
     override fun render(into: FlowContent) =
         into.run {
             div {

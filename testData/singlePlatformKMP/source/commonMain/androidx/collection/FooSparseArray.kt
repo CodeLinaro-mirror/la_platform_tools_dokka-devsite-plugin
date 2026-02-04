@@ -17,9 +17,6 @@
 package androidx.collection
 
 import kotlin.DeprecationLevel.HIDDEN
-import kotlin.jvm.JvmField
-import kotlin.jvm.JvmOverloads
-import kotlin.jvm.JvmSynthetic
 
 private val DELETED = Any()
 
@@ -47,9 +44,9 @@ private val DELETED = Any()
  * order, or the values corresponding to the keys in ascending order in the case of [valueAt].
  *
  * @constructor Creates a new [FooSparseArray] containing no mappings that will not require any
- * additional memory allocation to store the specified number of mappings. If you supply an initial
- * capacity of 0, the sparse array will be initialized with a light-weight representation not
- * requiring any additional array allocations.
+ *   additional memory allocation to store the specified number of mappings. If you supply an
+ *   initial capacity of 0, the sparse array will be initialized with a light-weight representation
+ *   not requiring any additional array allocations.
  */
 public interface FooSparseArray<E> {
     var garbage: Boolean
@@ -72,15 +69,11 @@ public interface FooSparseArray<E> {
     @Suppress("KotlinOperator") // Avoid confusion with matrix access syntax.
     public open fun get(key: Long, defaultValue: E): E
 
-    /**
-     * Removes the mapping from the specified [key], if there was any.
-     */
+    /** Removes the mapping from the specified [key], if there was any. */
     @Deprecated("Alias for `remove(key)`.", ReplaceWith("remove(key)"))
     public open fun delete(key: Long): Unit
 
-    /**
-     * Removes the mapping from the specified [key], if there was any.
-     */
+    /** Removes the mapping from the specified [key], if there was any. */
     public open fun remove(key: Long): Unit
 
     /**
@@ -92,9 +85,7 @@ public interface FooSparseArray<E> {
      */
     public open fun remove(key: Long, value: E): Boolean
 
-    /**
-     * Removes the mapping at the specified [index].
-     */
+    /** Removes the mapping at the specified [index]. */
     public open fun removeAt(index: Int): Unit
 
     /**
@@ -135,13 +126,11 @@ public interface FooSparseArray<E> {
      * @param key The key under which to store the value.
      * @param value The value to store for the given key.
      * @return Returns the value that was stored for the given key, or `null` if there was no such
-     * key.
+     *   key.
      */
     public open fun putIfAbsent(key: Long, value: E): E?
 
-    /**
-     * Returns the number of key-value mappings that this [FooSparseArray] currently stores.
-     */
+    /** Returns the number of key-value mappings that this [FooSparseArray] currently stores. */
     public open fun size(): Int
 
     /**
@@ -184,9 +173,8 @@ public interface FooSparseArray<E> {
     public open fun setValueAt(index: Int, value: E): Unit
 
     /**
-     * Returns the index for which [keyAt] would return the
-     * specified key, or a negative number if the specified
-     * key is not mapped.
+     * Returns the index for which [keyAt] would return the specified key, or a negative number if
+     * the specified key is not mapped.
      */
     public open fun indexOfKey(key: Long): Int
 
@@ -205,9 +193,7 @@ public interface FooSparseArray<E> {
     /** Returns `true` if the specified [value] is mapped from any key. */
     public open fun containsValue(value: E): Boolean
 
-    /**
-     * Removes all key-value mappings from this [FooSparseArray].
-     */
+    /** Removes all key-value mappings from this [FooSparseArray]. */
     public open fun clear(): Unit
 
     /**
@@ -238,16 +224,11 @@ internal inline fun <E> FooSparseArray<E>.commonGet(key: Long, defaultValue: E):
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <T : E?, E> FooSparseArray<E>.commonGetInternal(
-    key: Long,
-    defaultValue: T
-): T {
-    return  defaultValue
+internal inline fun <T : E?, E> FooSparseArray<E>.commonGetInternal(key: Long, defaultValue: T): T {
+    return defaultValue
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> FooSparseArray<E>.commonRemove(key: Long) {
-}
+@Suppress("NOTHING_TO_INLINE") internal inline fun <E> FooSparseArray<E>.commonRemove(key: Long) {}
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun <E> FooSparseArray<E>.commonRemove(key: Long, value: E): Boolean {
@@ -255,8 +236,7 @@ internal inline fun <E> FooSparseArray<E>.commonRemove(key: Long, value: E): Boo
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> FooSparseArray<E>.commonRemoveAt(index: Int) {
-}
+internal inline fun <E> FooSparseArray<E>.commonRemoveAt(index: Int) {}
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun <E> FooSparseArray<E>.commonReplace(key: Long, value: E): E? {
@@ -267,25 +247,20 @@ internal inline fun <E> FooSparseArray<E>.commonReplace(key: Long, value: E): E?
 internal inline fun <E> FooSparseArray<E>.commonReplace(
     key: Long,
     oldValue: E,
-    newValue: E
+    newValue: E,
 ): Boolean {
     return false
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> FooSparseArray<E>.commonGc() {
-}
+@Suppress("NOTHING_TO_INLINE") internal inline fun <E> FooSparseArray<E>.commonGc() {}
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> FooSparseArray<E>.commonPut(key: Long, value: E) {
-}
+internal inline fun <E> FooSparseArray<E>.commonPut(key: Long, value: E) {}
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun <E> FooSparseArray<E>.commonPutAll(other: FooSparseArray<out E>) {
     val size = other.size()
-    repeat(size) { i ->
-        put(other.keyAt(i), other.valueAt(i))
-    }
+    repeat(size) { i -> put(other.keyAt(i), other.valueAt(i)) }
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -310,9 +285,7 @@ internal inline fun <E> FooSparseArray<E>.commonIsEmpty(): Boolean = size() == 0
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun <E> FooSparseArray<E>.commonKeyAt(index: Int): Long {
-    require(index in 0 until size) {
-        "Expected index to be within 0..size()-1, but was $index"
-    }
+    require(index in 0 until size) { "Expected index to be within 0..size()-1, but was $index" }
 
     if (garbage) {
         commonGc()
@@ -322,9 +295,7 @@ internal inline fun <E> FooSparseArray<E>.commonKeyAt(index: Int): Long {
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun <E> FooSparseArray<E>.commonValueAt(index: Int): E {
-    require(index in 0 until size) {
-        "Expected index to be within 0..size()-1, but was $index"
-    }
+    require(index in 0 until size) { "Expected index to be within 0..size()-1, but was $index" }
 
     if (garbage) {
         commonGc()
@@ -336,9 +307,7 @@ internal inline fun <E> FooSparseArray<E>.commonValueAt(index: Int): E {
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun <E> FooSparseArray<E>.commonSetValueAt(index: Int, value: E) {
-    require(index in 0 until size) {
-        "Expected index to be within 0..size()-1, but was $index"
-    }
+    require(index in 0 until size) { "Expected index to be within 0..size()-1, but was $index" }
 
     if (garbage) {
         commonGc()
@@ -378,8 +347,7 @@ internal inline fun <E> FooSparseArray<E>.commonClear() {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> FooSparseArray<E>.commonAppend(key: Long, value: E) {
-}
+internal inline fun <E> FooSparseArray<E>.commonAppend(key: Long, value: E) {}
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun <E> FooSparseArray<E>.commonToString(): String {
@@ -408,7 +376,8 @@ internal inline fun <E> FooSparseArray<E>.commonToString(): String {
 
 /** Returns the number of key/value pairs in the collection. */
 @Suppress("NOTHING_TO_INLINE")
-public inline val <T> FooSparseArray<T>.size: Int get() = size()
+public inline val <T> FooSparseArray<T>.size: Int
+    get() = size()
 
 /** Returns true if the collection contains [key]. */
 @Suppress("NOTHING_TO_INLINE")
@@ -442,10 +411,7 @@ public inline fun <T> FooSparseArray<T>.isNotEmpty(): Boolean = !isEmpty()
 
 /** Removes the entry for [key] only if it is mapped to [value]. */
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER") // Binary API compatibility.
-@Deprecated(
-    message = "Replaced with member function. Remove extension import!",
-    level = HIDDEN
-)
+@Deprecated(message = "Replaced with member function. Remove extension import!", level = HIDDEN)
 public fun <T> FooSparseArray<T>.remove(key: Long, value: T): Boolean = remove(key, value)
 
 /** Performs the given [action] for each key/value entry. */
@@ -457,15 +423,21 @@ public inline fun <T> FooSparseArray<T>.forEach(action: (key: Long, value: T) ->
 }
 
 /** Return an iterator over the collection's keys. */
-public fun <T> FooSparseArray<T>.keyIterator(): LongIterator = object : LongIterator() {
-    var index = 0
-    override fun hasNext() = index < size()
-    override fun nextLong() = keyAt(index++)
-}
+public fun <T> FooSparseArray<T>.keyIterator(): LongIterator =
+    object : LongIterator() {
+        var index = 0
+
+        override fun hasNext() = index < size()
+
+        override fun nextLong() = keyAt(index++)
+    }
 
 /** Return an iterator over the collection's values. */
-public fun <T> FooSparseArray<T>.valueIterator(): Iterator<T> = object : Iterator<T> {
-    var index = 0
-    override fun hasNext() = index < size()
-    override fun next() = valueAt(index++)
-}
+public fun <T> FooSparseArray<T>.valueIterator(): Iterator<T> =
+    object : Iterator<T> {
+        var index = 0
+
+        override fun hasNext() = index < size()
+
+        override fun next() = valueAt(index++)
+    }

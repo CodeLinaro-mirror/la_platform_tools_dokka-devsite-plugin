@@ -40,7 +40,7 @@ class DefaultDevsitePageTest {
                     content = NoopContextFreeComponent,
                     metadataComponent = null,
                     includedHeadTagPath = "_shared/_reference-head-tags.html",
-                ),
+                )
             )
 
         val output = createHTML().html { component.render(this) }.trim()
@@ -69,7 +69,7 @@ class DefaultDevsitePageTest {
   </body>
 </html>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -85,7 +85,7 @@ class DefaultDevsitePageTest {
                     content = NoopContextFreeComponent,
                     metadataComponent = null,
                     includedHeadTagPath = "_shared/_reference-head-tags.html",
-                ),
+                )
             )
 
         val output = createHTML().html { component.render(this) }.trim()
@@ -114,7 +114,7 @@ class DefaultDevsitePageTest {
   </body>
 </html>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -138,7 +138,7 @@ class DefaultDevsitePageTest {
                     libraryMetadata = libraryMetadata,
                     sourceLinkUrl = "https://cs.android.com",
                     versionMetadata = versionMetadata,
-                ),
+                )
             )
         val pageComponent =
             DefaultDevsitePage(
@@ -150,7 +150,7 @@ class DefaultDevsitePageTest {
                     content = NoopContextFreeComponent,
                     metadataComponent = metadataComponent,
                     includedHeadTagPath = "_shared/_reference-head-tags.html",
-                ),
+                )
             )
 
         val output = createHTML().html { pageComponent.render(this) }.trim()
@@ -187,25 +187,21 @@ class DefaultDevsitePageTest {
   </body>
 </html>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
     @Test
     fun `Page with metadata without URL renders correctly`() {
         val libraryMetadata =
-            LibraryMetadata(
-                groupId = "android.x",
-                artifactId = "artifact",
-                releaseNotesUrl = "",
-            )
+            LibraryMetadata(groupId = "android.x", artifactId = "artifact", releaseNotesUrl = "")
         val metadataComponent =
             DefaultMetadataComponent(
                 MetadataComponent.Params(
                     libraryMetadata = libraryMetadata,
                     sourceLinkUrl = null,
                     versionMetadata = null,
-                ),
+                )
             )
         val pageComponent =
             DefaultDevsitePage(
@@ -217,7 +213,7 @@ class DefaultDevsitePageTest {
                     content = NoopContextFreeComponent,
                     metadataComponent = metadataComponent,
                     includedHeadTagPath = "_shared/_reference-head-tags.html",
-                ),
+                )
             )
 
         val output = createHTML().html { pageComponent.render(this) }.trim()
@@ -249,7 +245,7 @@ class DefaultDevsitePageTest {
   </body>
 </html>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -265,7 +261,7 @@ class DefaultDevsitePageTest {
                     content = NoopContextFreeComponent,
                     metadataComponent = null,
                     includedHeadTagPath = null,
-                ),
+                )
             )
 
         val output = createHTML().html { component.render(this) }.trim()
@@ -293,7 +289,7 @@ class DefaultDevsitePageTest {
   </body>
 </html>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
@@ -309,7 +305,7 @@ class DefaultDevsitePageTest {
                     content = NoopContextFreeComponent,
                     metadataComponent = null,
                     includedHeadTagPath = "en/docs/reference/android/_reference-head-tags.html",
-                ),
+                )
             )
 
         val output = createHTML().html { component.render(this) }.trim()
@@ -338,19 +334,14 @@ class DefaultDevsitePageTest {
   </body>
 </html>
             """
-                    .trim(),
+                    .trim()
             )
     }
 
     @Test
     fun `Page with reference object renders correctly`() {
         val referenceObject =
-            DefaultReferenceObject(
-                ReferenceObject.Params(
-                    name = "Foo",
-                    language = Language.JAVA,
-                ),
-            )
+            DefaultReferenceObject(ReferenceObject.Params(name = "Foo", language = Language.JAVA))
 
         val component =
             DefaultDevsitePage(
@@ -363,7 +354,7 @@ class DefaultDevsitePageTest {
                     metadataComponent = null,
                     includedHeadTagPath = null,
                     referenceObject = referenceObject,
-                ),
+                )
             )
 
         val output = createHTML().html { component.render(this) }.trim()
@@ -395,7 +386,7 @@ class DefaultDevsitePageTest {
   </body>
 </html>
             """
-                    .trim(),
+                    .trim()
             )
     }
 }
