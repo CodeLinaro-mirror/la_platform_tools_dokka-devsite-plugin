@@ -18,24 +18,24 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Locale
 
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktCheck", "publish", "zipTestResults")
 
 group = "com.google.devsite"
+
 version = "1.7.0" // This is appended to archiveBaseName in the ShadowJar task.
 
 val useK2 = false
+
 plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.shadow)
+    alias(libs.plugins.ktfmt)
     id("application")
     id("maven-publish")
 }
 
-application {
-    mainClass.set("org.jetbrains.dokka.MainKt")
-}
+application { mainClass.set("org.jetbrains.dokka.MainKt") }
 
 dependencies {
     implementation(libs.dokka.base)
@@ -63,68 +63,74 @@ dependencies {
     implementation(libs.dokka.cli) // Used in CLI integration test
 }
 
-val shadowJar = tasks.withType<ShadowJar> {
-    archiveBaseName.set("dackka")
-    isZip64 = true
-    destinationDirectory.set(getDistributionDirectory())
-}
+val shadowJar =
+    tasks.withType<ShadowJar> {
+        archiveBaseName.set("dackka")
+        isZip64 = true
+        destinationDirectory.set(getDistributionDirectory())
+    }
 
 // Do not publish shadow jar to maven
 val javaComponent = components["java"] as AdhocComponentWithVariants
-javaComponent.withVariantsFromConfiguration(configurations["shadowRuntimeElements"]) {
-    skip()
-}
+
+javaComponent.withVariantsFromConfiguration(configurations["shadowRuntimeElements"]) { skip() }
 
 val kmpIntegrationSourceDirs = listOf("simple-kmp", "datastore-kmp")
 // compose requires compose compiler plugin, fragment is fragmentary (missing internal dependencies)
 val unCompilableIntegrationTestSourceDirs = listOf("collections-ktx", "compose", "fragment")
-val (kmpSourceDirs, javaSourceDirs) = File("testData").listFiles()!!
-    .mapNotNull { testDir -> testDir.listFiles()?.singleOrNull { "source" in it.name } }
-    .filterNot { unCompilableIntegrationTestSourceDirs.any { badName -> badName in it.path  } }
-    .partition { kmpIntegrationSourceDirs.any { badName -> badName in it.path  } }
-val javaTestDataSS: SourceSet by sourceSets.creating {
-    javaSourceDirs.forEach { java.srcDir(it) }
-}
-val kmpTestDataSSs: List<SourceSet> = kmpSourceDirs.flatMap {
-    it.listFiles()!!.map { sourceSetDir ->
-        val ss = sourceSets.maybeCreate(sourceSetDir.name)
-        //ss.java.srcDir(sourceSetDir) // TODO(make KMP testData compile)
-        ss
+
+val (kmpSourceDirs, javaSourceDirs) =
+    File("testData")
+        .listFiles()!!
+        .mapNotNull { testDir -> testDir.listFiles()?.singleOrNull { "source" in it.name } }
+        .filterNot { unCompilableIntegrationTestSourceDirs.any { badName -> badName in it.path } }
+        .partition { kmpIntegrationSourceDirs.any { badName -> badName in it.path } }
+
+val javaTestDataSS: SourceSet by sourceSets.creating { javaSourceDirs.forEach { java.srcDir(it) } }
+val kmpTestDataSSs: List<SourceSet> =
+    kmpSourceDirs.flatMap {
+        it.listFiles()!!.map { sourceSetDir ->
+            val ss = sourceSets.maybeCreate(sourceSetDir.name)
+            // ss.java.srcDir(sourceSetDir) // TODO(make KMP testData compile)
+            ss
+        }
     }
-}
 
 val testDataImpl = project.configurations.getByName(javaTestDataSS.implementationConfigurationName)
 val testDataAars by project.configurations.creating
 val testDataParent by project.configurations.creating
+
 testDataParent.isCanBeResolved = true
+
 fun Configuration.setResolveSources(isKmp: Boolean = false) {
     isTransitive = false
     isCanBeConsumed = false
     attributes {
         attribute(
             Usage.USAGE_ATTRIBUTE,
-            project.objects.named(if (isKmp) "androidx-multiplatform-docs" else Usage.JAVA_RUNTIME)
+            project.objects.named(if (isKmp) "androidx-multiplatform-docs" else Usage.JAVA_RUNTIME),
         )
-        attribute(
-            Category.CATEGORY_ATTRIBUTE,
-            project.objects.named(Category.DOCUMENTATION)
-        )
-        attribute(
-            DocsType.DOCS_TYPE_ATTRIBUTE,
-            project.objects.named(DocsType.SOURCES)
-        )
+        attribute(Category.CATEGORY_ATTRIBUTE, project.objects.named(Category.DOCUMENTATION))
+        attribute(DocsType.DOCS_TYPE_ATTRIBUTE, project.objects.named(DocsType.SOURCES))
         attribute(
             LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE,
-            project.objects.named(LibraryElements.JAR)
+            project.objects.named(LibraryElements.JAR),
         )
     }
 }
+
 testDataParent.setResolveSources()
+
 val testDataSources by project.configurations.creating
+
 testDataSources.extendsFrom(testDataParent)
+
 testDataSources.setResolveSources()
+
 val testDataSourcesKmp by project.configurations.creating
+
 testDataSourcesKmp.extendsFrom(testDataParent)
+
 testDataSourcesKmp.setResolveSources(isKmp = true)
 
 // We want non-alpha versions here so we know the prebuilts won't get deleted
@@ -136,6 +142,7 @@ val benchmarkVersion = "1.2.0"
 val appsearchVersion = "1.1.0"
 val cameraVersion = "1.4.1"
 val carVersion = "1.4.0"
+
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.2")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
@@ -185,7 +192,7 @@ dependencies {
     testDataSources("androidx.activity:activity-ktx:1.6.0")
     testDataSourcesKmp("androidx.annotation:annotation:1.6.0")
     testDataSources("androidx.annotation:annotation-experimental:1.3.0")
-    //testDataSources("androidx.annotation:annotation-experimental-lint:1.0.0-rc01") // need dep
+    // testDataSources("androidx.annotation:annotation-experimental-lint:1.0.0-rc01") // need dep
     testDataSources("androidx.appcompat:appcompat:1.6.0")
     testDataSources("androidx.appcompat:appcompat-resources:1.6.0")
     testDataSources("androidx.appsearch:appsearch:$appsearchVersion")
@@ -244,7 +251,9 @@ dependencies {
     testDataSourcesKmp("androidx.compose.foundation:foundation:$composeVersion")
     testDataSourcesKmp("androidx.compose.foundation:foundation-layout:$composeVersion")
     testDataSourcesKmp("androidx.compose.material3:material3:$composeMaterial3Version")
-    testDataSourcesKmp("androidx.compose.material3:material3-window-size-class:$composeMaterial3Version")
+    testDataSourcesKmp(
+        "androidx.compose.material3:material3-window-size-class:$composeMaterial3Version"
+    )
     testDataSourcesKmp("androidx.compose.runtime:runtime:$composeVersion")
     testDataSourcesKmp("androidx.compose.ui:ui:$composeVersion")
     testDataSourcesKmp("androidx.compose.ui:ui-geometry:$composeVersion")
@@ -261,47 +270,49 @@ dependencies {
     testDataSourcesKmp("androidx.datastore:datastore-core:1.1.0")
 }
 
-val explodeAars by tasks.registering(Sync::class) {
-    into("${layout.buildDirectory.get()}/exploded")
-    from(testDataAars) {
-        include("*.jar")
+val explodeAars by
+    tasks.registering(Sync::class) {
+        into("${layout.buildDirectory.get()}/exploded")
+        from(testDataAars) { include("*.jar") }
+
+        testDataAars.files
+            .filter { it.extension == "aar" }
+            .forEach { arch ->
+                from(zipTree(arch)) {
+                    include("classes.jar")
+                    rename { arch.nameWithoutExtension + ".jar" }
+                }
+            }
     }
 
-    testDataAars.files.filter { it.extension == "aar" }.forEach { arch ->
-        from(zipTree(arch)) {
-            include("classes.jar")
-            rename { arch.nameWithoutExtension + ".jar" }
-        }
+val explodeSources by
+    tasks.registering {
+        (testDataSources.files + testDataSourcesKmp.files)
+            .filter { it.nameWithoutExtension.endsWith("sources") }
+            .forEach { arch ->
+                sync {
+                    val splitName = arch.nameWithoutExtension.split("-")
+                    val versionInd =
+                        splitName.indexOfFirst { '.' in it } // index of first block in version num
+                    val baseName = splitName.subList(0, versionInd).joinToString(separator = "-")
+                    logger.debug("Unzipping prebuilt for $baseName")
+                    from(zipTree(arch))
+                    into("${layout.buildDirectory.get()}/explodedSources/$baseName")
+                }
+            }
     }
-}
 
-val explodeSources by tasks.registering {
-    (testDataSources.files + testDataSourcesKmp.files).filter {
-        it.nameWithoutExtension.endsWith("sources")
-    }.forEach { arch ->
-        sync {
-            val splitName = arch.nameWithoutExtension.split("-")
-            val versionInd =
-                splitName.indexOfFirst { '.' in it } // index of first block in version num
-            val baseName = splitName.subList(0, versionInd).joinToString(separator = "-")
-            logger.debug("Unzipping prebuilt for $baseName")
-            from(zipTree(arch))
-            into("${layout.buildDirectory.get()}/explodedSources/$baseName")
-        }
+val classpathForTests by
+    tasks.registering(ClasspathForTestsTask::class) {
+        dependsOn(explodeAars)
+        dependsOn(explodeSources)
+        classpath = javaTestDataSS.compileClasspath
+        kmpTestDataSSs.forEach { classpath += it.compileClasspath }
+        location.set(file("testData/classpath.txt"))
     }
-}
 
-val classpathForTests by tasks.registering(ClasspathForTestsTask::class) {
-    dependsOn(explodeAars)
-    dependsOn(explodeSources)
-    classpath = javaTestDataSS.compileClasspath
-    kmpTestDataSSs.forEach { classpath += it.compileClasspath }
-    location.set(file("testData/classpath.txt"))
-}
+tasks.withType<JavaCompile>().configureEach { options.release.set(11) }
 
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(11)
-}
 tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_11)
@@ -310,63 +321,27 @@ tasks.withType<KotlinCompile>().configureEach {
     dependsOn(explodeAars)
 }
 
-val testTask = tasks.named<Test>("test") {
-    dependsOn(classpathForTests)
-    dependsOn(tasks.withType<KotlinCompile>())
+val testTask =
+    tasks.named<Test>("test") {
+        dependsOn(classpathForTests)
+        dependsOn(tasks.withType<KotlinCompile>())
 
-    maxHeapSize = "16g"
-    maxParallelForks = Runtime.getRuntime().availableProcessors()
-    testLogging.events = hashSetOf(
-        TestLogEvent.FAILED,
-        TestLogEvent.STANDARD_OUT,
-        TestLogEvent.STANDARD_ERROR
-    )
-    if (isBuildingOnServer()) ignoreFailures = true
-}
-
-val zipTask = project.tasks.register<Zip>("zipTestResults") {
-    dependsOn(testTask)
-    destinationDirectory.set(File(getDistributionDirectory(), "host-test-reports"))
-    archiveFileName.set("dackka-tests.zip")
-    from(project.file(testTask.flatMap { it.reports.junitXml.outputLocation}))
-}
-
-val ktfmtConfiguration: Configuration by configurations.creating
-dependencies {
-    ktfmtConfiguration("com.facebook:ktfmt:0.59")
-}
-
-class KtFilesProvider : CommandLineArgumentProvider {
-
-    override fun asArguments(): Iterable<String> {
-        val process = ProcessBuilder("sh", "-c", "find src -type f -name '*.kt'")
-            .redirectOutput(ProcessBuilder.Redirect.PIPE)
-            .start()
-
-        val ktFiles = process.inputStream.bufferedReader().use { it.readText() }.trim()
-        return ktFiles.split("\n")
+        maxHeapSize = "16g"
+        maxParallelForks = Runtime.getRuntime().availableProcessors()
+        testLogging.events =
+            hashSetOf(TestLogEvent.FAILED, TestLogEvent.STANDARD_OUT, TestLogEvent.STANDARD_ERROR)
+        if (isBuildingOnServer()) ignoreFailures = true
     }
-}
 
-val ktCheck by tasks.registering(JavaExec::class) {
-    description = "Check Kotlin code style."
-    group = "Verification"
-    classpath = ktfmtConfiguration
-    mainClass.set("com.facebook.ktfmt.cli.Main")
+val zipTask =
+    project.tasks.register<Zip>("zipTestResults") {
+        dependsOn(testTask)
+        destinationDirectory.set(File(getDistributionDirectory(), "host-test-reports"))
+        archiveFileName.set("dackka-tests.zip")
+        from(project.file(testTask.flatMap { it.reports.junitXml.outputLocation }))
+    }
 
-    argumentProviders.add(KtFilesProvider())
-    args = listOf("--kotlinlang-style", "--dry-run", "--set-exit-if-changed")
-}
-
-val ktFormat by tasks.registering(JavaExec::class) {
-    description = "Fix Kotlin code style deviations."
-    group = "Formatting"
-    classpath = ktfmtConfiguration
-    mainClass.set("com.facebook.ktfmt.cli.Main")
-
-    argumentProviders.add(KtFilesProvider())
-    args = listOf("--kotlinlang-style")
-}
+ktfmt { kotlinLangStyle() }
 
 publishing {
     publications {
@@ -379,23 +354,21 @@ publishing {
                         url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
                     }
                 }
-                developers {
-                    developer {
-                        name.set("The Android Open Source Project")
-                    }
-                }
+                developers { developer { name.set("The Android Open Source Project") } }
                 scm {
-                    connection.set("scm:git:https://android.googlesource.com/platform/tools/dokka-devsite-plugin/")
-                    url.set("https://android.googlesource.com/platform/tools/dokka-devsite-plugin//")
+                    connection.set(
+                        "scm:git:https://android.googlesource.com/platform/tools/dokka-devsite-plugin/"
+                    )
+                    url.set(
+                        "https://android.googlesource.com/platform/tools/dokka-devsite-plugin//"
+                    )
                 }
             }
         }
     }
 
     repositories {
-        maven {
-            url = uri("file://${getDistributionDirectory().canonicalPath}/repo/repository")
-        }
+        maven { url = uri("file://${getDistributionDirectory().canonicalPath}/repo/repository") }
     }
 }
 
@@ -415,12 +388,12 @@ fun isBuildingOnServer(): Boolean {
     return System.getenv("OUT_DIR") != null && System.getenv("DIST_DIR") != null
 }
 
-abstract class ClasspathForTestsTask: DefaultTask() {
+abstract class ClasspathForTestsTask : DefaultTask() {
     @get:Classpath abstract var classpath: FileCollection
     @get:OutputFile abstract val location: RegularFileProperty
 
     @TaskAction
-    fun run(){
+    fun run() {
         location.get().asFile.writeText(classpath.joinToString(separator = "\n"))
     }
 }

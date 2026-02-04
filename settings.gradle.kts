@@ -18,16 +18,10 @@ rootProject.name = "dokka-devsite-plugin"
 
 include(":integration-tests:cli")
 
-pluginManagement {
-    repositories {
-        maven("../../prebuilts/androidx/external")
-    }
-}
+pluginManagement { repositories { maven("../../prebuilts/androidx/external") } }
 
 buildscript {
-    repositories {
-        maven("../../prebuilts/androidx/external")
-    }
+    repositories { maven("../../prebuilts/androidx/external") }
     dependencies {
         classpath("com.gradle:develocity-gradle-plugin:4.3")
         classpath("com.gradle:common-custom-user-data-gradle-plugin:2.4.0")
@@ -42,9 +36,11 @@ dependencyResolutionManagement {
 }
 
 apply(plugin = "com.gradle.develocity")
+
 apply(plugin = "com.gradle.common-custom-user-data-gradle-plugin")
 
 val BUILD_NUMBER = System.getenv("BUILD_NUMBER")
+
 develocity {
     server = "https://ge.androidx.dev"
 
@@ -56,11 +52,12 @@ develocity {
         }
         if (BUILD_NUMBER != null) {
             value("BUILD_NUMBER", BUILD_NUMBER)
-            link("ci.android.com build", "https://ci.android.com/builds/branches/aosp-androidx-main/grid?head=$BUILD_NUMBER&tail=$BUILD_NUMBER")
+            link(
+                "ci.android.com build",
+                "https://ci.android.com/builds/branches/aosp-androidx-main/grid?head=$BUILD_NUMBER&tail=$BUILD_NUMBER",
+            )
         }
 
-        publishing.onlyIf {
-            it.isAuthenticated
-        }
+        publishing.onlyIf { it.isAuthenticated }
     }
 }
