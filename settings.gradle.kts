@@ -56,6 +56,10 @@ include(":testData:sampleAnnotation")
 
 include(":testData:simple")
 
+include(":testData:simple-kmp")
+
+include(":testData:singlePlatformKMP")
+
 include(":testData:topLevelFunctions")
 
 include(":testData:visibleForTesting")

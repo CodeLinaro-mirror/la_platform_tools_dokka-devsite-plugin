@@ -69,7 +69,8 @@ class DackkaTestPlugin : Plugin<Project> {
                 when (plugin) {
                     is JavaLibraryPlugin ->
                         singleSourceSet(project, dackkaTestExtension.hasSourceSamples)
-                    is KotlinMultiplatformPluginWrapper -> multiplatformSourceSets(project)
+                    is KotlinMultiplatformPluginWrapper ->
+                        multiplatformSourceSets(project, dackkaTestExtension.hasSourceSamples)
                     else -> return@configureEach
                 }
             WriteSourceSetsTask.setupTask(project, sourceSets, dackkaTestExtension.hasSourceSamples)
@@ -120,7 +121,10 @@ class DackkaTestPlugin : Plugin<Project> {
      * Returns a list containing the source sets of a KMP project, using
      * [KotlinMultiplatformExtension] to find the source files and classpath.
      */
-    fun multiplatformSourceSets(project: Project): Provider<List<WriteSourceSetsTask.SourceSet>> {
+    fun multiplatformSourceSets(
+        project: Project,
+        hasSamples: Property<Boolean>,
+    ): Provider<List<WriteSourceSetsTask.SourceSet>> {
         // Unzip the source jar for a prebuilts test, which contains all source sets.
         val artifactConfiguration = getArtifactConfiguration(project)
         val unzippedSourcesTask =
@@ -149,6 +153,22 @@ class DackkaTestPlugin : Plugin<Project> {
                         sourceSet in compilation.allKotlinSourceSets
                     }
 
+                // For source tests, find the sources and classpath for the source set. The
+                // classpath is aggregated from all compilations which the source set is part of.
+                val projectSourceRoots =
+                    SourceRootConfiguration.configureSources(
+                        project,
+                        sourceSet.kotlin.sourceDirectories,
+                        hasSamples,
+                        sourceSet.name,
+                    )
+                val projectClasspath =
+                    associatedCompilations.fold<KotlinCompilation<*>, FileCollection>(
+                        project.files()
+                    ) { fc, compilation ->
+                        fc + compilation.compileDependencyFiles
+                    }
+
                 // Compute source roots and classpath for a prebuilts test.
                 val prebuiltsSourceRoots =
                     SourceRootConfiguration.sourceRootsForKmpPrebuilts(
@@ -172,10 +192,11 @@ class DackkaTestPlugin : Plugin<Project> {
                         .toSet()
                 val analysisPlatform = allPlatforms.singleOrNull()?.name ?: "common"
 
+                // Combine the file collections for source and prebuilt test types in the source set
                 WriteSourceSetsTask.SourceSet(
                     name = sourceSet.name,
-                    sourceRoots = prebuiltsSourceRoots,
-                    classpath = prebuiltsClasspath,
+                    sourceRoots = prebuiltsSourceRoots + projectSourceRoots.get(),
+                    classpath = prebuiltsClasspath + projectClasspath,
                     dependentSourceSets = sourceSet.dependsOnTransitive().map { it.name },
                     analysisPlatform = analysisPlatform,
                 )

@@ -30,14 +30,12 @@ import testApi.testRunner.TestDokkaConfigurationBuilder
 class KmpTest : IntegrationTestBase() {
     @Test
     fun `Simple KMP classes test`() {
-        squashAndroid = true
-        validateDirectory("simple-kmp")
+        validate("simple-kmp")
     }
 
     @Test
     fun `Single-platform KMP package test`() {
-        squashAndroid = true
-        validateDirectory("singlePlatformKMP")
+        validate("singlePlatformKMP", projectPath = "commonMain")
     }
 
     @Test

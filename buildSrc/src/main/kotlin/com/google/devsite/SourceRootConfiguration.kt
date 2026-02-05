@@ -37,20 +37,29 @@ object SourceRootConfiguration {
      * For a test [project] which uses source files (as opposed to prebuilts) listed in [sources],
      * returns the source roots which should be used. This is based on whether [hasSourceSamples] is
      * true: if it is, the samples tags in the sources need to be rewritten.
+     *
+     * If [sourceSet] is non-null, if it used as a suffix on the task name and destination
+     * directories to avoid clashing with other source sets.
      */
     fun configureSources(
         project: Project,
         sources: FileCollection,
         hasSourceSamples: Property<Boolean>,
+        sourceSet: String? = null,
     ): Provider<FileCollection> {
+        val taskName = "rewriteSamplesTags" + (sourceSet?.let { "-$it" } ?: "")
+        val destinationDirPath = "rewrittenSources" + (sourceSet?.let { "/$it" } ?: "")
         // Sets up a task to rewrite samples tags (see [rewriteSamplesTags]). This will only be run
         // if the project has samples.
+        // If this function is called from within a provider, the task may have already been
+        // registered, so check if one exists first.
         val rewriteTask =
-            project.tasks.register("rewriteSamplesTags", Sync::class.java) { task ->
-                task.from(sources)
-                task.into(project.layout.buildDirectory.dir("rewrittenSources"))
-                task.rewriteSamplesTags()
-            }
+            project.tasks.findByName(taskName)
+                ?: project.tasks.register(taskName, Sync::class.java) { task ->
+                    task.from(sources)
+                    task.into(project.layout.buildDirectory.dir(destinationDirPath))
+                    task.rewriteSamplesTags()
+                }
         // If there are samples, use the rewritten sources, otherwise, use the original.
         return hasSourceSamples.map { hasSourceSamples ->
             if (hasSourceSamples) {
