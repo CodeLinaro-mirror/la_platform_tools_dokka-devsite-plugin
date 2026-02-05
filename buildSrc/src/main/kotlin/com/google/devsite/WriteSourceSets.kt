@@ -25,12 +25,15 @@ import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Nested
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import org.jetbrains.dokka.DokkaConfiguration
@@ -49,6 +52,10 @@ abstract class WriteSourceSetsTask : DefaultTask() {
      * expected package lists.
      */
     @get:InputDirectory abstract val packageListDir: DirectoryProperty
+
+    /** A directory containing samples, if there are any. */
+    @get:[InputDirectory Optional]
+    abstract val sourceSamples: DirectoryProperty
 
     /** The file to write source sets as JSON. */
     @get:OutputFile abstract val sourceSetOutputFile: RegularFileProperty
@@ -91,8 +98,20 @@ abstract class WriteSourceSetsTask : DefaultTask() {
                                 .map { DokkaSourceSetID(scopeId = "root", sourceSetName = it) }
                                 .toSet()
 
-                        // TODO: include samples
-                        samples = emptyList()
+                        // Include samples for either the main source set of a regular JVM project
+                        // or the commonMain source set of a KMP project (these are the two cases
+                        // where a source set has no dependent source sets, because all other KMP
+                        // source sets depend on commonMain).
+                        samples =
+                            if (sourceSet.dependentSourceSets.isEmpty()) {
+                                listOfNotNull(
+                                    sourceSamples.asFile.orNull
+                                        ?.takeIf { it.exists() }
+                                        ?.absolutePath
+                                )
+                            } else {
+                                emptyList()
+                            }
 
                         externalDocumentationLinks = externalLinks
                         documentedVisibilities =
@@ -144,11 +163,25 @@ abstract class WriteSourceSetsTask : DefaultTask() {
 
     companion object {
         /** Configures a "writeSourceSets" task for the project based on [sourceSets]. */
-        fun setupTask(project: Project, sourceSets: List<SourceSet>) {
+        fun setupTask(
+            project: Project,
+            sourceSets: Provider<List<SourceSet>>,
+            hasSourceSamples: Property<Boolean>,
+        ) {
             project.tasks.register("writeSourceSets", WriteSourceSetsTask::class.java) { task ->
                 task.packageListDir.set(project.layout.projectDirectory.dir("../package-lists"))
                 task.sourceSetOutputFile.set(project.layout.buildDirectory.file("sourceSets.json"))
                 task.sourceSets.set(sourceSets)
+                // Provide the samples directory only when it is expected to exist.
+                task.sourceSamples.set(
+                    hasSourceSamples.map { hasSourceSamples ->
+                        if (hasSourceSamples) {
+                            project.layout.projectDirectory.dir("samples")
+                        } else {
+                            null
+                        }
+                    }
+                )
             }
         }
     }

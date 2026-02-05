@@ -42,6 +42,8 @@ include(":testData:multifile")
 
 include(":testData:restrictTo")
 
+include(":testData:sampleAnnotation")
+
 include(":testData:simple")
 
 include(":testData:topLevelFunctions")

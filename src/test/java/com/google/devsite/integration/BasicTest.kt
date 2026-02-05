@@ -98,7 +98,7 @@ class BasicTest : IntegrationTestBase() {
 
     @Test
     fun `Validate @sample`() {
-        validateDirectory("sampleAnnotation", sampleLocations = listOf("samples"))
+        validate("sampleAnnotation")
     }
 
     @Test

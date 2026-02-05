@@ -20,6 +20,8 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaLibraryPlugin
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.provider.Property
+import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.getByType
 
 /**
@@ -30,14 +32,18 @@ import org.gradle.kotlin.dsl.getByType
  */
 class DackkaTestPlugin : Plugin<Project> {
     override fun apply(project: Project) {
+        val dackkaTestExtension =
+            project.extensions.create("dackkaTest", DackkaTestExtension::class.java)
+
         project.plugins.configureEach { plugin ->
             // Use the JavaLibraryPlugin to get source and classpath info for the project.
             val sourceSets =
                 when (plugin) {
-                    is JavaLibraryPlugin -> singleSourceSet(project)
+                    is JavaLibraryPlugin ->
+                        singleSourceSet(project, dackkaTestExtension.hasSourceSamples)
                     else -> return@configureEach
                 }
-            WriteSourceSetsTask.setupTask(project, sourceSets)
+            WriteSourceSetsTask.setupTask(project, sourceSets, dackkaTestExtension.hasSourceSamples)
         }
     }
 
@@ -45,20 +51,31 @@ class DackkaTestPlugin : Plugin<Project> {
      * Returns a list containing the single source set of a regular (non-KMP) project, using
      * [JavaPluginExtension] to find the source files and classpath.
      */
-    fun singleSourceSet(project: Project): List<WriteSourceSetsTask.SourceSet> {
+    fun singleSourceSet(
+        project: Project,
+        hasSamples: Property<Boolean>,
+    ): Provider<List<WriteSourceSetsTask.SourceSet>> {
         val extension = project.extensions.getByType<JavaPluginExtension>()
         val projectSourceSet =
             extension.sourceSets.getByName(org.gradle.api.tasks.SourceSet.MAIN_SOURCE_SET_NAME)
+        val projectSourceRoots =
+            SourceRootConfiguration.configureSources(
+                project,
+                projectSourceSet.java.sourceDirectories,
+                hasSamples,
+            )
         val projectClasspath = projectSourceSet.compileClasspath
 
-        return listOf(
-            WriteSourceSetsTask.SourceSet(
-                name = "main",
-                sourceRoots = projectSourceSet.java.sourceDirectories,
-                classpath = projectClasspath,
-                dependentSourceSets = emptyList(),
-                analysisPlatform = "jvm",
+        return projectSourceRoots.map { projectSourceRoots ->
+            listOf(
+                WriteSourceSetsTask.SourceSet(
+                    name = "main",
+                    sourceRoots = projectSourceRoots,
+                    classpath = projectClasspath,
+                    dependentSourceSets = emptyList(),
+                    analysisPlatform = "jvm",
+                )
             )
-        )
+        }
     }
 }
