@@ -16,14 +16,18 @@
 
 package com.google.devsite.testing
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import com.google.common.truth.Truth.assertWithMessage
 import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.defaultValidNullabilityAnnotations
 import com.google.devsite.renderer.converters.isRunningInDackkasTests
 import java.io.File
 import java.net.URL
+import kotlin.collections.singleOrNull
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaConfigurationImpl
+import org.jetbrains.dokka.DokkaSourceSetImpl
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.ExternalDocumentationLinkImpl
 import org.jetbrains.dokka.PluginConfigurationImpl
@@ -502,6 +506,81 @@ abstract class IntegrationTestBase :
             renderingStage = { _: RootPageNode, _: DokkaContext ->
                 verifyOutput(writerPlugin.writer.contents, outputBaseDir)
                 verifyOutput(logFiles(explodedSourcesDir), loggingDir)
+            }
+        }
+    }
+
+    /**
+     * Runs dackka on a test project located in `testData/[path]` which uses the `DackkaTestPlugin`
+     * to write a source set JSON file.
+     *
+     * Verifies that the docs output matches the files in the `docs` subdirectory of the test
+     * project and that the logged lines match the files in `logs` subdirectory.
+     */
+    fun validate(
+        path: String,
+        docRootPath: String = "reference",
+        projectPath: String = "dokkatest",
+        javaDocsDirectory: String? = "",
+        kotlinDocsDirectory: String? = "kotlin",
+        includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
+        includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
+        hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
+        includeHiddenParentSymbols: Boolean = false,
+        versionMetadata: Boolean = false,
+        useAndroidxBaseSourceLink: Boolean = false,
+    ) {
+        val outputBaseDir = "testData/$path/docs"
+        val loggingDir = "testData/$path/logs"
+
+        // The WriteSourceSets task in buildSrc creates this file for DackkaTestPlugin projects.
+        val sourceSets = File("testData/$path/build/sourceSets.json")
+
+        val versionMetadataFiles =
+            if (versionMetadata) {
+                val versionMetadataBaseDir = "testData/$path/versionMetadata"
+                File(versionMetadataBaseDir).listFiles()?.map { it.absolutePath }
+            } else {
+                null
+            }
+
+        val configuration =
+            makeExternalConfiguration(
+                makeSourceSets = {
+                    // Read source sets as JSON from the project file.
+                    sourceSets {
+                        addAll(
+                            jacksonObjectMapper()
+                                .readValue<List<DokkaSourceSetImpl>>(sourceSets)
+                                .map { lazyOf(it) }
+                        )
+                    }
+                },
+                docRootPath = docRootPath,
+                projectPath = projectPath,
+                javaDocsPath = javaDocsDirectory,
+                kotlinDocsPath = kotlinDocsDirectory,
+                includedHeadTagsPathJava = includedHeadTagsPathJava,
+                includedHeadTagsPathKotlin = includedHeadTagsPathKotlin,
+                useAndroidxBaseSourceLink = useAndroidxBaseSourceLink,
+                versionMetadataFilesnames = versionMetadataFiles,
+                hidingAnnotations = hidingAnnotations,
+                includeHiddenParentSymbols = includeHiddenParentSymbols,
+            )
+
+        // Find the common source root for the project. If there are multiple source sets (or a
+        // single source set with multiple source roots), the longest common prefix is used.
+        val sourceRootPath =
+            configuration.sourceSets
+                .flatMap { it.sourceRoots }
+                .map { it.absolutePath }
+                .reduce { currPrefix, nextPath -> currPrefix.commonPrefixWith(nextPath) }
+
+        val writerPlugin = TestOutputWriterPlugin()
+        testFromData(configuration, pluginOverrides = listOf(writerPlugin)) {
+            renderingStage = { _: RootPageNode, _: DokkaContext ->
+                verifyOutput(writerPlugin.writer.contents, outputBaseDir)
+                verifyOutput(logFiles(sourceRootPath), loggingDir)
             }
         }
     }

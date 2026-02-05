@@ -24,17 +24,17 @@ import org.junit.Test
 class BasicTest : IntegrationTestBase() {
     @Test
     fun `Validate simple classes`() {
-        validateDirectory("simple")
+        validate("simple")
     }
 
     @Test
     fun `Validate simple top-level functions`() {
-        validateDirectory("topLevelFunctions")
+        validate("topLevelFunctions")
     }
 
     @Test
     fun `Validate inner classes`() {
-        validateDirectory("innerClasses")
+        validate("innerClasses")
     }
 
     @Test
@@ -103,30 +103,27 @@ class BasicTest : IntegrationTestBase() {
 
     @Test
     fun `Validate complicated Platform files`() {
-        validateDirectory("complicatedPlatform")
+        validate("complicatedPlatform")
     }
 
     @Test
     fun `Validate inheritance tests`() {
-        validateDirectory("inheritance")
+        validate("inheritance")
     }
 
     @Test // A non-hidden package is necessary because of an upstream explicit !! after filtering
     fun `Validate package-level @hide and custom hide annotations`() {
-        validateDirectory(
-            "hidden",
-            hidingAnnotations = listOf("dokkatest.nothidden.CustomHideAnnotation"),
-        )
+        validate("hidden", hidingAnnotations = listOf("dokkatest.nothidden.CustomHideAnnotation"))
     }
 
     @Test // Currently only checks the links for enums resolve
     fun `Validate linking`() { // CURRENT STATUS: BROKEN: LinkerClass.html enums aren't linked
-        validateDirectory("linking")
+        validate("linking")
     }
 
     @Test
     fun `Validate non-standard path arguments`() {
-        validateDirectory(
+        validate(
             path = "differentDocPath",
             docRootPath = "reference/tools/gradle-api/7.0",
             projectPath = "",
@@ -138,46 +135,46 @@ class BasicTest : IntegrationTestBase() {
 
     @Test
     fun `Validate @RestrictTo`() {
-        validateDirectory("restrictTo")
+        validate("restrictTo")
     }
 
     @Test
     fun `Validate getters setters and modifiers`() {
-        validateDirectory("getterSetterModifier")
+        validate("getterSetterModifier")
     }
 
     @Test
     fun `Validate @JvmMultifileClass`() {
-        validateDirectory("multifile")
+        validate("multifile", projectPath = "multifile")
     }
 
     @Test
     fun `Validate companion-static interop`() {
-        validateDirectory("companionStatic")
+        validate("companionStatic")
     }
 
     @Test
     fun `Validate default hidden parents`() {
-        validateDirectory("hiddenParents")
+        validate("hiddenParents")
     }
 
     @Test
     fun `Validate hidden parents with included symbols`() {
-        validateDirectory("hiddenParents-include", includeHiddenParentSymbols = true)
+        validate("hiddenParents-include", includeHiddenParentSymbols = true)
     }
 
     @Test
     fun `Validate @VisibleForTesting`() {
-        validateDirectory("visibleForTesting")
+        validate("visibleForTesting")
     }
 
     @Test
     fun `Validate that Java and Kotlin paths cannot have the same value`() {
         assertThrows(IllegalStateException::class.java) {
-            validateDirectory("simple", javaDocsDirectory = null, kotlinDocsDirectory = null)
+            validate("simple", javaDocsDirectory = null, kotlinDocsDirectory = null)
         }
         assertThrows(IllegalStateException::class.java) {
-            validateDirectory("simple", javaDocsDirectory = "", kotlinDocsDirectory = "")
+            validate("simple", javaDocsDirectory = "", kotlinDocsDirectory = "")
         }
     }
 }

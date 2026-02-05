@@ -1,6 +1,28 @@
+/*
+ * Copyright 2026 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dokkatest.platform;
 
+import android.annotation.TestApi;
+import android.content.res.Resources;
+
 import java.lang.annotation.*;
+
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 
 /**
@@ -38,7 +60,7 @@ public @interface InspectableProperty {
      *
      * @return The attribute ID of the property or {@link Resources#ID_NULL}
      */
-    int attributeId() default Resources.ID_NULL;
+    int attributeId() default 0; // Resources.ID_NULL; element value must be a constant expression
 
     /**
      * If this property has an attribute ID.

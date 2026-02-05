@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Android Open Source Project
+ * Copyright 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,20 @@
  * limitations under the License.
  */
 
-package dokkatest.simple
-
-/**
- * Sample interface 2
- *
- * ## Two is One Big Deal
- */
-interface Two {
-    val x: One
-
-    fun z()
+plugins {
+    `java-library`
+    id("dackka-test-plugin")
 }
 
-/*
- * Interface Four is for extending
- */
-interface Four {
-    val fore: String
+dependencies {
+    api(libs.kotlin.stdlib)
+    api("androidx.annotation:annotation:1.9.1")
 }
 
-/** from jetbrains Kotlin documentation examples [copyWhenGreater], [Fraggy.createType] */
-fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
-    where T : CharSequence, T : Comparable<T> {
-    return list.filter { it > threshold }.map { it.toString() }
+sourceSets {
+    main {
+        java {
+            setSrcDirs(listOf("source"))
+        }
+    }
 }

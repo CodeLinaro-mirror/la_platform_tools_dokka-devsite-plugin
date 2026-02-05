@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Android Open Source Project
+ * Copyright 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,20 @@
  * limitations under the License.
  */
 
-package dokkatest.simple
+plugins {
+    `java-library`
+    id("dackka-test-plugin")
+}
 
-enum class Three(val letter: String) {
-    A("A"),
-    B("B"),
-    @Deprecated("use B") C("C"),
+dependencies {
+    api("org.robolectric:android-all-instrumented:13-robolectric-9030017-i7")
+    api("org.robolectric:sandbox:4.12.2")
+}
+
+sourceSets {
+    main {
+        java {
+            setSrcDirs(listOf("source"))
+        }
+    }
 }

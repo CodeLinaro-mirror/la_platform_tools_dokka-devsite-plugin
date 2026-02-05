@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.google.devsite.WriteSourceSetsTask
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -28,7 +29,7 @@ version = "1.7.0" // This is appended to archiveBaseName in the ShadowJar task.
 val useK2 = false
 
 plugins {
-    alias(libs.plugins.kotlin)
+    kotlin("jvm")
     alias(libs.plugins.shadow)
     alias(libs.plugins.ktfmt)
     id("application")
@@ -325,6 +326,8 @@ val testTask =
     tasks.named<Test>("test") {
         dependsOn(classpathForTests)
         dependsOn(tasks.withType<KotlinCompile>())
+        // Ensure all source set information for integration tests is written out.
+        subprojects { dependsOn(tasks.withType<WriteSourceSetsTask>()) }
 
         maxHeapSize = "16g"
         maxParallelForks = Runtime.getRuntime().availableProcessors()

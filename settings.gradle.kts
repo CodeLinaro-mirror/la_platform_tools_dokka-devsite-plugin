@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,36 @@
 rootProject.name = "dokka-devsite-plugin"
 
 include(":integration-tests:cli")
+
+include(":testData:companionStatic")
+
+include(":testData:complicatedPlatform")
+
+include(":testData:differentDocPath")
+
+include(":testData:getterSetterModifier")
+
+include(":testData:hidden")
+
+include(":testData:hiddenParents")
+
+include(":testData:hiddenParents-include")
+
+include(":testData:inheritance")
+
+include(":testData:innerClasses")
+
+include(":testData:linking")
+
+include(":testData:multifile")
+
+include(":testData:restrictTo")
+
+include(":testData:simple")
+
+include(":testData:topLevelFunctions")
+
+include(":testData:visibleForTesting")
 
 pluginManagement { repositories { maven("../../prebuilts/androidx/external") } }
 
