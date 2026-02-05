@@ -18,6 +18,10 @@ rootProject.name = "dokka-devsite-plugin"
 
 include(":integration-tests:cli")
 
+include(":testData:annotation-kmp")
+
+include(":testData:collections")
+
 include(":testData:companionStatic")
 
 include(":testData:complicatedPlatform")

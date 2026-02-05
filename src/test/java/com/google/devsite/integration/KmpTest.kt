@@ -42,13 +42,12 @@ class KmpTest : IntegrationTestBase() {
 
     @Test
     fun `Validate prod AndroidX collections prebuilts`() {
-        validatePrebuilts(testName = "collections", artifactNames = listOf("collection"))
+        validate("collections", projectPath = "androidx", useAndroidxBaseSourceLink = true)
     }
 
     @Test
     fun `Validate prod AndroidX annotations prebuilts`() {
-        squashAndroid = true
-        validatePrebuilts(testName = "annotation-kmp", artifactNames = listOf("annotation"))
+        validate("annotation-kmp", projectPath = "androidx", useAndroidxBaseSourceLink = true)
     }
 
     @Test

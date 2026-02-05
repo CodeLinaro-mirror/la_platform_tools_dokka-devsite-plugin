@@ -16,6 +16,7 @@
 
 package com.google.devsite
 
+import java.io.File
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.attributes.Category
@@ -64,6 +65,7 @@ object SourceRootConfiguration {
     fun configureUnzipSources(
         project: Project,
         artifactConfiguration: Configuration,
+        isKmp: Boolean = false,
     ): TaskProvider<Sync> {
         val sourcesConfiguration =
             project.getOrCreateConfiguration("test-sources") { configuration ->
@@ -72,7 +74,12 @@ object SourceRootConfiguration {
                 configuration.isCanBeConsumed = false
                 configuration.isCanBeResolved = true
                 configuration.attributes {
-                    it.attribute(Usage.USAGE_ATTRIBUTE, project.objects.named(Usage.JAVA_RUNTIME))
+                    it.attribute(
+                        Usage.USAGE_ATTRIBUTE,
+                        project.objects.named(
+                            if (isKmp) "androidx-multiplatform-docs" else Usage.JAVA_RUNTIME
+                        ),
+                    )
                     it.attribute(
                         Category.CATEGORY_ATTRIBUTE,
                         project.objects.named<Category>(Category.DOCUMENTATION),
@@ -106,6 +113,22 @@ object SourceRootConfiguration {
             task.from(jars)
             task.rewriteSamplesTags()
         }
+    }
+
+    /**
+     * Based on the [sourceSetName], returns the source root subdirectory from the
+     * [unzippedSourcesTask] output.
+     */
+    fun sourceRootsForKmpPrebuilts(
+        project: Project,
+        sourceSetName: String,
+        unzippedSourcesTask: TaskProvider<Sync>,
+    ): FileCollection {
+        return project.files(
+            unzippedSourcesTask.map { unzippedSourcesTask ->
+                File(unzippedSourcesTask.destinationDir, sourceSetName)
+            }
+        )
     }
 
     /**
