@@ -39,61 +39,22 @@ class BasicTest : IntegrationTestBase() {
 
     @Test
     fun `Validate prod AndroidX fragment prebuilts`() {
-        validatePrebuilts(
-            testName = "fragment",
-            artifactNames = listOf("fragment"),
-            samples = true,
+        validate(
+            "fragment",
+            projectPath = "androidx",
+            useAndroidxBaseSourceLink = true,
             versionMetadata = true,
         )
     }
 
     @Test
     fun `Validate prod AndroidX lifecycle prebuilts`() {
-        // lifecycle-common-java8 and lifecycle-extensions no longer exist
-        validatePrebuilts(
-            testName = "lifecycle",
-            artifactNames =
-                listOf(
-                    "lifecycle-common",
-                    "lifecycle-compiler",
-                    "lifecycle-livedata",
-                    "lifecycle-livedata-core",
-                    "lifecycle-livedata-core-ktx",
-                    "lifecycle-livedata-ktx",
-                    "lifecycle-process",
-                    "lifecycle-reactivestreams",
-                    "lifecycle-reactivestreams-ktx",
-                    "lifecycle-runtime",
-                    "lifecycle-runtime-ktx",
-                    "lifecycle-runtime-testing",
-                    "lifecycle-service",
-                    "lifecycle-viewmodel",
-                    "lifecycle-viewmodel-ktx",
-                    "lifecycle-viewmodel-savedstate",
-                ),
-        )
+        validate(path = "lifecycle", projectPath = "androidx", useAndroidxBaseSourceLink = true)
     }
 
     @Test
     fun `Validate AndroidX paging prebuilts`() {
-        validatePrebuilts(
-            testName = "paging",
-            artifactNames =
-                listOf(
-                    "paging-common",
-                    "paging-common-ktx",
-                    "paging-runtime",
-                    "paging-runtime-ktx",
-                    "paging-rxjava2",
-                    "paging-rxjava2-ktx",
-                    "paging-rxjava3",
-                    "paging-guava",
-                    // Either don't compile testData/paging/source or dackka applies the compose
-                    // plugin
-                    // "paging-compose"
-                ),
-            samples = true,
-        )
+        validate("paging", projectPath = "androidx", useAndroidxBaseSourceLink = true)
     }
 
     @Test

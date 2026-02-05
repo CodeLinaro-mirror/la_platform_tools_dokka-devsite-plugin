@@ -18,7 +18,9 @@ package com.google.devsite
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
+import java.io.FileOutputStream
 import java.net.URI
+import java.util.zip.ZipInputStream
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
@@ -34,6 +36,7 @@ import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import org.jetbrains.dokka.DokkaConfiguration
@@ -59,6 +62,12 @@ abstract class WriteSourceSetsTask : DefaultTask() {
 
     /** The file to write source sets as JSON. */
     @get:OutputFile abstract val sourceSetOutputFile: RegularFileProperty
+
+    /**
+     * Directory in which to store jars files unzipped from any aars included in the classpath of a
+     * source set, because dackka can't process aars directly.
+     */
+    @get:OutputDirectory abstract val explodedAarsDir: DirectoryProperty
 
     @TaskAction
     fun run() {
@@ -87,7 +96,7 @@ abstract class WriteSourceSetsTask : DefaultTask() {
                         displayName = sourceSet.name
 
                         sourceRoots = sourceRootDirs.map { it.absolutePath }
-                        classpath = sourceSet.classpath.map { it.absolutePath }
+                        classpath = listClasspath(sourceSet.classpath)
 
                         analysisPlatform = sourceSet.analysisPlatform
                         dependentSourceSets =
@@ -128,6 +137,49 @@ abstract class WriteSourceSetsTask : DefaultTask() {
         }
 
         jacksonObjectMapper().writeValue(sourceSetOutputFile.asFile.get(), dokkaSourceSets)
+    }
+
+    /**
+     * Returns the paths of all files which should be included in a classpath based on the input
+     * [classpath]. Dackka cannot process aars, so all aar files are unzipped and the `classes.jar`
+     * files inside is used instead (the unzipped jars are placed in [explodedAarsDir].
+     *
+     * In the AndroidX build the aar -> jar transformation is handled with AGP, but this build
+     * doesn't depend on AGP.
+     */
+    fun listClasspath(classpath: FileCollection): List<String> {
+        val (aars, other) = classpath.partition { it.extension == "aar" }
+
+        val transformedAars =
+            if (aars.isNotEmpty()) {
+                val transformedAarDir = explodedAarsDir.asFile.get()
+                transformedAarDir.mkdirs()
+
+                // Take the `classes.jar` file from each aar, rename it based on the aar file name,
+                // and store it in the exploded aars dir.
+                aars.map { aar ->
+                    val outputFile = File(transformedAarDir, aar.nameWithoutExtension + ".jar")
+                    ZipInputStream(aar.inputStream()).use { zis ->
+                        var entry = zis.nextEntry
+                        while (entry != null) {
+                            if (entry.name.endsWith("classes.jar")) {
+                                val fos = FileOutputStream(outputFile)
+                                fos.write(zis.readBytes())
+                                break
+                            }
+                            entry = zis.nextEntry
+                        }
+                        zis.closeEntry()
+                        zis.close()
+                    }
+                    outputFile
+                }
+            } else {
+                emptyList()
+            }
+
+        val classpathFiles = other + transformedAars
+        return classpathFiles.map { it.absolutePath }
     }
 
     /** Returns the external link configuration for the package lists from [packageListDir]. */
@@ -182,6 +234,7 @@ abstract class WriteSourceSetsTask : DefaultTask() {
                         }
                     }
                 )
+                task.explodedAarsDir.set(project.layout.buildDirectory.dir("explodedAars"))
             }
         }
     }

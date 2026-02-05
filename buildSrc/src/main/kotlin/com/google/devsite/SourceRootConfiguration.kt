@@ -17,11 +17,18 @@
 package com.google.devsite
 
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Configuration
+import org.gradle.api.attributes.Category
+import org.gradle.api.attributes.DocsType
+import org.gradle.api.attributes.LibraryElements
+import org.gradle.api.attributes.Usage
 import org.gradle.api.file.CopySpec
 import org.gradle.api.file.FileCollection
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Sync
+import org.gradle.api.tasks.TaskProvider
+import org.gradle.kotlin.dsl.named
 
 /** Utilities to configure the source roots of a source set. */
 object SourceRootConfiguration {
@@ -50,6 +57,54 @@ object SourceRootConfiguration {
             } else {
                 sources
             }
+        }
+    }
+
+    /** Unzips the source jars for the prebuilts from [artifactConfiguration]. */
+    fun configureUnzipSources(
+        project: Project,
+        artifactConfiguration: Configuration,
+    ): TaskProvider<Sync> {
+        val sourcesConfiguration =
+            project.getOrCreateConfiguration("test-sources") { configuration ->
+                configuration.extendsFrom(artifactConfiguration)
+                configuration.isTransitive = false
+                configuration.isCanBeConsumed = false
+                configuration.isCanBeResolved = true
+                configuration.attributes {
+                    it.attribute(Usage.USAGE_ATTRIBUTE, project.objects.named(Usage.JAVA_RUNTIME))
+                    it.attribute(
+                        Category.CATEGORY_ATTRIBUTE,
+                        project.objects.named<Category>(Category.DOCUMENTATION),
+                    )
+                    it.attribute(
+                        DocsType.DOCS_TYPE_ATTRIBUTE,
+                        project.objects.named<DocsType>(DocsType.SOURCES),
+                    )
+                    it.attribute(
+                        LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE,
+                        project.objects.named<LibraryElements>(LibraryElements.JAR),
+                    )
+                }
+            }
+
+        // When unzipping the source jars, exclude the META-INF directory, which isn't needed for
+        // docs and will cause duplicate files between source jars.
+        val jars =
+            sourcesConfiguration.incoming
+                .artifactView {}
+                .files
+                .elements
+                .map { fileLocations ->
+                    fileLocations.map { fileLocation ->
+                        project.zipTree(fileLocation.asFile).matching { it.exclude("META-INF/") }
+                    }
+                }
+
+        return project.tasks.register("unzipSources", Sync::class.java) { task ->
+            task.into(project.layout.buildDirectory.dir("source"))
+            task.from(jars)
+            task.rewriteSamplesTags()
         }
     }
 

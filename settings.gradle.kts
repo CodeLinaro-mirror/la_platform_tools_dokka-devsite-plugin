@@ -24,6 +24,8 @@ include(":testData:complicatedPlatform")
 
 include(":testData:differentDocPath")
 
+include(":testData:fragment")
+
 include(":testData:getterSetterModifier")
 
 include(":testData:hidden")
@@ -36,9 +38,13 @@ include(":testData:inheritance")
 
 include(":testData:innerClasses")
 
+include(":testData:lifecycle")
+
 include(":testData:linking")
 
 include(":testData:multifile")
+
+include(":testData:paging")
 
 include(":testData:restrictTo")
 
