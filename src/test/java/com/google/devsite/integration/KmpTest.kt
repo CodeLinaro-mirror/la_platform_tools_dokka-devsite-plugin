@@ -50,31 +50,7 @@ class KmpTest : IntegrationTestBase() {
 
     @Test
     fun `Validate prod AndroidX compose prebuilts`() {
-        validatePrebuilts(
-            testName = "compose",
-            artifactNames =
-                listOf(
-                    "animation",
-                    "animation-core",
-                    "animation-graphics",
-                    "foundation",
-                    "foundation-layout",
-                    "material3",
-                    "material3-window-size-class",
-                    "runtime",
-                    "ui",
-                    "ui-geometry",
-                    "ui-graphics",
-                    "ui-text",
-                    "ui-unit",
-                    "ui-util",
-                    "ui-tooling",
-                    "ui-tooling-preview",
-                    "ui-test",
-                    "ui-test-junit4",
-                ),
-            samples = true,
-        )
+        validate("compose", projectPath = "androidx", useAndroidxBaseSourceLink = true)
     }
 
     private var squashAndroid = true

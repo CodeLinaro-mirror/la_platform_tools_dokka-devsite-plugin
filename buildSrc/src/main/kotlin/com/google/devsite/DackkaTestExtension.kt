@@ -28,4 +28,13 @@ abstract class DackkaTestExtension @Inject constructor(objects: ObjectFactory) {
      * to be in a `samples` subdirectory of the project.
      */
     val hasSourceSamples: Property<Boolean> = objects.property<Boolean>().convention(false)
+
+    /**
+     * Whether to create a fake android target for a KMP test, which is merged into a jvm source
+     * set. The reason for not using a real android target is because it would require using AGP and
+     * having an android sdk as part of the dackka checkout (robolectric jars are used as fake
+     * android dependencies where they are needed). The android source set is combined with the jvm
+     * source set because dackka does not treat them as different platform types.
+     */
+    val createAndroidTarget: Property<Boolean> = objects.property<Boolean>().convention(false)
 }

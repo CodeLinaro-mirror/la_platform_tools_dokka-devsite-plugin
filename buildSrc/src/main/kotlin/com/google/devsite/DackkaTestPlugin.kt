@@ -70,7 +70,11 @@ class DackkaTestPlugin : Plugin<Project> {
                     is JavaLibraryPlugin ->
                         singleSourceSet(project, dackkaTestExtension.hasSourceSamples)
                     is KotlinMultiplatformPluginWrapper ->
-                        multiplatformSourceSets(project, dackkaTestExtension.hasSourceSamples)
+                        multiplatformSourceSets(
+                            project,
+                            dackkaTestExtension.hasSourceSamples,
+                            dackkaTestExtension.createAndroidTarget,
+                        )
                     else -> return@configureEach
                 }
             WriteSourceSetsTask.setupTask(project, sourceSets, dackkaTestExtension.hasSourceSamples)
@@ -124,6 +128,7 @@ class DackkaTestPlugin : Plugin<Project> {
     fun multiplatformSourceSets(
         project: Project,
         hasSamples: Property<Boolean>,
+        createAndroidTarget: Property<Boolean>,
     ): Provider<List<WriteSourceSetsTask.SourceSet>> {
         // Unzip the source jar for a prebuilts test, which contains all source sets.
         val artifactConfiguration = getArtifactConfiguration(project)
@@ -142,7 +147,7 @@ class DackkaTestPlugin : Plugin<Project> {
             allCompilations.add(mainCompilation)
         }
 
-        return allCompilations.map { allCompilations ->
+        return allCompilations.zip(createAndroidTarget) { allCompilations, addAndroidTarget ->
             kmpExtension.sourceSets.mapNotNull { sourceSet ->
                 // Only use main source sets.
                 if (sourceSet.name.endsWith("Test")) return@mapNotNull null
@@ -175,8 +180,32 @@ class DackkaTestPlugin : Plugin<Project> {
                         project,
                         sourceSet.name,
                         unzippedSourcesTask,
-                    )
-                val prebuiltsClasspath = classpathForKmpPrebuilts(project, associatedCompilations)
+                    ) +
+                        // If this is the jvm source set and there needs to be a combined android
+                        // target, also include the androidMain source root.
+                        if (addAndroidTarget && sourceSet.name == "jvmMain") {
+                            SourceRootConfiguration.sourceRootsForKmpPrebuilts(
+                                project,
+                                "androidMain",
+                                unzippedSourcesTask,
+                            )
+                        } else {
+                            project.files()
+                        }
+
+                val prebuiltsClasspath =
+                    classpathForKmpPrebuilts(project, associatedCompilations) +
+                        // If this is the jvm source set and there needs to be a combined android
+                        // target, also find all dependencies with the android target type.
+                        if (addAndroidTarget && sourceSet.name == "jvmMain") {
+                            createClasspathFromArtifacts(
+                                project,
+                                artifactConfiguration,
+                                multiplatformTargetType = KotlinPlatformType.androidJvm,
+                            )
+                        } else {
+                            project.files()
+                        }
 
                 // Find which platform this source set should be considered. If it is part of
                 // compilations of more than one platform type, it is treated as common.

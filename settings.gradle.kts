@@ -26,6 +26,8 @@ include(":testData:companionStatic")
 
 include(":testData:complicatedPlatform")
 
+include(":testData:compose")
+
 include(":testData:differentDocPath")
 
 include(":testData:fragment")
