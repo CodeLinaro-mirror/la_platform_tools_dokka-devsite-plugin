@@ -24,4 +24,8 @@ fun hiddenFileTopLevelFunction(): Int = 1
 
 val hiddenFileTopLevelProperty = 2
 
-class VisibleClassInHiddenFile
+class VisibleClassInHiddenFile {
+    val propertyOfVisibleClass: Int = 0
+
+    fun functionOfVisibleClass() = Unit
+}

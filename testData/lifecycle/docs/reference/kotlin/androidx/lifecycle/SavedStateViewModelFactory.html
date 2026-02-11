@@ -8,6 +8,9 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="SavedStateViewModelFactory">
       <meta itemprop="path" content="androidx.lifecycle">
+      <meta itemprop="property" content="create(java.lang.Class)">
+      <meta itemprop="property" content="create(kotlin.String,java.lang.Class)">
+      <meta itemprop="property" content="create(java.lang.Class,androidx.lifecycle.viewmodel.CreationExtras)">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -57,6 +60,42 @@
             <td>
               <div><code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#SavedStateViewModelFactory(android.app.Application,androidx.savedstate.SavedStateRegistryOwner,android.os.Bundle)">SavedStateViewModelFactory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;application:&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html">Application</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;owner:&nbsp;<a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;defaultArgs:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>)</code></div>
               <p>Creates <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html">SavedStateViewModelFactory</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#create(java.lang.Class)">create</a>(modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;)</code></div>
+              <p>{@inheritDoc}</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#create(kotlin.String,java.lang.Class)">create</a>(key:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,&nbsp;modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;)</code></div>
+              <p>Creates a new instance of the given <code>Class</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#create(java.lang.Class,androidx.lifecycle.viewmodel.CreationExtras)">create</a>(modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;,&nbsp;extras:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>)</code></div>
+              <p>{@inheritDoc}</p>
             </td>
           </tr>
         </tbody>
@@ -170,6 +209,147 @@
                 <td><code>defaultArgs:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
                 <td>
                   <p>values from this <code>Bundle</code> will be used as defaults by <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> if there is no previously saved state or previously saved state misses a value by such key.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="create-java.lang.Class-"></a><a name="create"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="create(java.lang.Class)">create</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#create(java.lang.Class)">create</a>(modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;):&nbsp;T</pre>
+        <p>{@inheritDoc}</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code></td>
+                <td>
+                  <p>if the given modelClass does not have a classname</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="create(kotlin.String, java.lang.Class)"></a><a name="create-kotlin.String-java.lang.Class-"></a><a name="create"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="create(kotlin.String,java.lang.Class)">create</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#create(kotlin.String,java.lang.Class)">create</a>(key:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,&nbsp;modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;):&nbsp;T</pre>
+        <p>Creates a new instance of the given <code>Class</code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>key:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code></td>
+                <td>
+                  <p>a key associated with the requested ViewModel</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;</code></td>
+                <td>
+                  <p>a <code>Class</code> whose instance is requested</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>T</code></td>
+                <td>
+                  <p>a newly created ViewModel</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unsupported-operation-exception/index.html">UnsupportedOperationException</a></code></td>
+                <td>
+                  <p>if the there is no lifecycle</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="create(java.lang.Class, androidx.lifecycle.viewmodel.CreationExtras)"></a><a name="create-java.lang.Class-androidx.lifecycle.viewmodel.CreationExtras-"></a><a name="create"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="create(java.lang.Class,androidx.lifecycle.viewmodel.CreationExtras)">create</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#create(java.lang.Class,androidx.lifecycle.viewmodel.CreationExtras)">create</a>(modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;,&nbsp;extras:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>):&nbsp;T</pre>
+        <p>{@inheritDoc}</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code></td>
+                <td>
+                  <p>if the provided extras do not provide a <code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.NewInstanceFactory.html#VIEW_MODEL_KEY()">ViewModelProvider.NewInstanceFactory.VIEW_MODEL_KEY</a></code></p>
                 </td>
               </tr>
             </tbody>
