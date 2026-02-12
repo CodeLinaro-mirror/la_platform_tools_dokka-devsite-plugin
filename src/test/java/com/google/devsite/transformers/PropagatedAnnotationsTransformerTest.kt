@@ -266,4 +266,37 @@ class PropagatedAnnotationsTransformerTest :
             }
         }
     }
+
+    @Test
+    fun `test propagation when there are file level annotations`() {
+        testInline(
+            """
+            /src/com/sample/Foo.kt
+            @file:Suppress("SomeIssue")
+            package com.sample
+            @Deprecated
+            class Foo {
+                var v = 0
+                fun foo() = Unit
+                companion object
+                inner class Bar
+            }
+            """
+                .trimIndent(),
+            configuration,
+            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
+        ) {
+            documentablesTransformationStage = { mod ->
+                val fooClass = mod.packages.single().classlikes.single() as DClass
+                assertTrue(fooClass.isDeprecated())
+                assertTrue(fooClass.constructors.single().isDeprecated())
+                assertTrue(fooClass.functions.single().isDeprecated())
+                assertTrue(fooClass.properties.single().isDeprecated())
+                assertTrue(fooClass.companion()!!.isDeprecated())
+                assertTrue(
+                    (fooClass.classlikes.single { it.name == "Bar" } as DClass).isDeprecated()
+                )
+            }
+        }
+    }
 }

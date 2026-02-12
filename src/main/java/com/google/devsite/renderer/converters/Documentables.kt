@@ -405,13 +405,16 @@ fun <T> PropertyContainer<T>.addAnnotations(
 ): PropertyContainer<T> where T : AnnotationTarget {
     val newAnnotationsObject =
         this[Annotations]?.let { annotations ->
-            // There are existing annotations, add the new elements to each source set
-            val newDirectAnnotations =
+            // There are existing annotations, add the new elements to each source set. The content
+            // for Annotations takes a list with both direct and file annotations, so include both
+            // previous lists for the new annotations.
+            val newAnnotations =
                 sourceSets.associateWith {
-                    val previous = annotations.directAnnotations[it] ?: emptyList()
-                    previous + newAnnotationElements
+                    val previousDirect = annotations.directAnnotations[it] ?: emptyList()
+                    val previousFile = annotations.fileLevelAnnotations[it] ?: emptyList()
+                    previousDirect + previousFile + newAnnotationElements
                 }
-            annotations.copy(myContent = newDirectAnnotations + annotations.fileLevelAnnotations)
+            annotations.copy(myContent = newAnnotations)
         }
             // No existing annotations, create them with the new elements in each source set
             ?: Annotations(sourceSets.associateWith { newAnnotationElements.toList() })
