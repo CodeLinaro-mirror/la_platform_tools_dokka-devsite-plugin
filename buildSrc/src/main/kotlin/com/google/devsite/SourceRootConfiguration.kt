@@ -112,7 +112,13 @@ object SourceRootConfiguration {
                 .files
                 .elements
                 .map { fileLocations ->
-                    fileLocations.map { fileLocation ->
+                    // The sources configuration will include both source jars and samples source
+                    // jars, filter out the samples jars.
+                    val sources =
+                        fileLocations.filter { fileLocation ->
+                            !fileLocation.asFile.name.contains("samples")
+                        }
+                    sources.map { fileLocation ->
                         project.zipTree(fileLocation.asFile).matching { it.exclude("META-INF/") }
                     }
                 }
