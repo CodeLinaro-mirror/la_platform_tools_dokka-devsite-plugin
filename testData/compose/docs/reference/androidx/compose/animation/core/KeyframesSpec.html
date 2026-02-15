@@ -8,9 +8,7 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="KeyframesSpec">
       <meta itemprop="path" content="androidx.compose.animation.core">
-      <meta itemprop="property" content="equals(kotlin.Any)">
       <meta itemprop="property" content="getConfig()">
-      <meta itemprop="property" content="hashCode()">
       <meta itemprop="property" content="vectorize(androidx.compose.animation.core.TwoWayConverter)">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -54,9 +52,24 @@ import androidx.compose.animation.core.keyframes
 // time between 50 and 100ms
 keyframes&lt;Float&gt; {
     durationMillis = 100
-    0f at 0 with FastOutSlowInEasing
-    1.5f at 50 with LinearOutSlowInEasing
+    0f at 0 using FastOutSlowInEasing
+    1.5f at 50 using LinearOutSlowInEasing
     1f at 100
+}</pre>
+    <p>Values can be animated using arcs of quarter of an Ellipse with <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).using(androidx.compose.animation.core.ArcMode)">KeyframesSpecConfig.using</a></code> and <code><a href="/reference/androidx/compose/animation/core/ArcMode.html">ArcMode</a></code>:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.ArcMode.Companion.ArcAbove
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.keyframes
+import androidx.compose.ui.geometry.Offset
+
+keyframes&lt;Offset&gt; {
+    // Animate for 1.2 seconds
+    durationMillis = 1200
+
+    // Animate to Offset(100f, 100f) at 50% of the animation using LinearEasing then, animate
+    // using ArcAbove for the rest of the animation
+    Offset(100f, 100f) atFraction 0.5f using LinearEasing using ArcAbove
 }</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
@@ -73,14 +86,14 @@ keyframes&lt;Float&gt; {
         <tbody class="list">
           <tr>
             <td>
-              <div><code>public final class <a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></div>
+              <div><code>public final class <a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; extends <a href="/reference/androidx/compose/animation/core/KeyframeBaseEntity.html">KeyframeBaseEntity</a></code></div>
               <p>Holder class for building a keyframes animation.</p>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>public final class <a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></div>
-              <p><code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> stores a mutable configuration of the key frames, including <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a></code>, <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#delayMillis()">delayMillis</a></code>, and all the key frames.</p>
+              <div><code>public final class <a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; extends <a href="/reference/androidx/compose/animation/core/KeyframesSpecBaseConfig.html">KeyframesSpecBaseConfig</a></code></div>
+              <p><code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> stores a mutable configuration of the key frames, including <code><a href="/reference/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#durationMillis()">durationMillis</a></code>, <code><a href="/reference/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#delayMillis()">delayMillis</a></code>, and all the key frames.</p>
             </td>
           </tr>
         </tbody>
@@ -119,21 +132,9 @@ keyframes&lt;Float&gt; {
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
-            </td>
-          </tr>
-          <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.html#getConfig()">getConfig</a>()</code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>int</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.html#hashCode()">hashCode</a>()</code></div>
             </td>
           </tr>
           <tr>
@@ -159,14 +160,6 @@ keyframes&lt;Float&gt; {
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
-        <div class="api-name-block">
-          <div>
-            <h3 id="equals(kotlin.Any)">equals</h3>
-          </div>
-        </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/KeyframesSpec.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
-      </div>
       <div class="api-item"><a name="getConfig--"></a><a name="getconfig"></a>
         <div class="api-name-block">
           <div>
@@ -174,14 +167,6 @@ keyframes&lt;Float&gt; {
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/KeyframesSpec.html#getConfig()">getConfig</a>()</pre>
-      </div>
-      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
-        <div class="api-name-block">
-          <div>
-            <h3 id="hashCode()">hashCode</h3>
-          </div>
-        </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/KeyframesSpec.html#hashCode()">hashCode</a>()</pre>
       </div>
       <div class="api-item"><a name="vectorize-androidx.compose.animation.core.TwoWayConverter-"></a><a name="vectorize"></a>
         <div class="api-name-block">

@@ -38,7 +38,35 @@
       </div>
     </devsite-filter >
     <hr>
-    <p>An instance to hold a value provided by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> and is created by the <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">ProvidableCompositionLocal.provides</a></code> infixed operator. If <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html#(androidx.compose.runtime.CompositionLocal,kotlin.Any,kotlin.Boolean)">canOverride</a></code> is <code>false</code>, the provided value will not overwrite a potentially already existing value in the scope.</p>
+    <p>An instance to hold a value provided by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> and is created by the <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">ProvidableCompositionLocal.provides</a></code> infix operator. If <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html#canOverride()">canOverride</a></code> is <code>false</code>, the provided value will not overwrite a potentially already existing value in the scope.</p>
+    <p>This value cannot be created directly. It can only be created by using one of the <code>provides</code> operators of <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code>.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">provides</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#providesDefault(kotlin.Any)">providesDefault</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#providesComputed(kotlin.Function1)">providesComputed</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">
@@ -58,6 +86,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html#canOverride()">canOverride</a></code></div>
+                <p>This value is <code>true</code> if the provided value will override any value provided above it.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -67,6 +96,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;T&gt;</code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html#compositionLocal()">compositionLocal</a></code></div>
+                <p>The composition local that is provided by this value.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -76,6 +106,7 @@
               <td><code>T</code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html#value()">value</a></code></div>
+                <p>The value provided by the <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">ProvidableCompositionLocal.provides</a></code> infix operator.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -100,6 +131,30 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html#canOverride()">canOverride</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>This value is <code>true</code> if the provided value will override any value provided above it. This value is <code>true</code> when using <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">ProvidableCompositionLocal.provides</a></code> but <code>false</code> when using <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#providesDefault(kotlin.Any)">ProvidableCompositionLocal.providesDefault</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">provides</a></code></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#providesDefault(kotlin.Any)">providesDefault</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="getCompositionLocal()"></a><a name="setCompositionLocal()"></a><a name="getCompositionLocal--"></a><a name="setCompositionLocal--"></a>
           <div class="api-name-block">
@@ -112,6 +167,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html#compositionLocal()">compositionLocal</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;T&gt;</pre>
+          <p>The composition local that is provided by this value. This is the left-hand side of the <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">ProvidableCompositionLocal.provides</a></code> infix operator.</p>
         </div>
         <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
           <div class="api-name-block">
@@ -124,6 +180,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html#value()">value</a>:&nbsp;T</pre>
+          <p>The value provided by the <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">ProvidableCompositionLocal.provides</a></code> infix operator. This is the right-hand side of the operator.</p>
         </div>
       </div>
     </devsite-filter >

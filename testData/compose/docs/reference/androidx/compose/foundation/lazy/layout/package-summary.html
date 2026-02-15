@@ -13,6 +13,10 @@
       <meta itemprop="property" content="LazyLayoutMeasureScope">
       <meta itemprop="property" content="PinnedItem">
       <meta itemprop="property" content="PrefetchHandle">
+      <meta itemprop="property" content="NestedPrefetchScope">
+      <meta itemprop="property" content="PrefetchRequest">
+      <meta itemprop="property" content="PrefetchRequestScope">
+      <meta itemprop="property" content="PrefetchScheduler">
       <meta itemprop="property" content="Interval">
       <meta itemprop="property" content="LazyLayoutIntervalContent">
       <meta itemprop="property" content="LazyLayoutItemProviderKt">
@@ -21,6 +25,7 @@
       <meta itemprop="property" content="LazyLayoutPinnedItemList">
       <meta itemprop="property" content="LazyLayoutPrefetchState">
       <meta itemprop="property" content="MutableIntervalList">
+      <meta itemprop="property" content="LazyLayout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">
       <meta itemprop="property" content="LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">
       <meta itemprop="property" content="LazyLayoutPinnableItem(kotlin.Any,kotlin.Int,androidx.compose.foundation.lazy.layout.LazyLayoutPinnedItemList,kotlin.Function0)">
       <meta itemprop="property" content="getDefaultLazyLayoutKey(kotlin.Int)">
@@ -76,6 +81,30 @@
           <tr>
             <td><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.PrefetchHandle.html">LazyLayoutPrefetchState.PrefetchHandle</a></code></td>
             <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html">NestedPrefetchScope</a></code></td>
+            <td>
+              <p>A scope which allows nested prefetches to be requested for the precomposition of a LazyLayout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/foundation/lazy/layout/PrefetchRequest.html">PrefetchRequest</a></code></td>
+            <td>
+              <p>A request for prefetch which can be submitted to a <code><a href="/reference/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html">PrefetchScheduler</a></code> to execute during idle time.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/foundation/lazy/layout/PrefetchRequestScope.html">PrefetchRequestScope</a></code></td>
+            <td>
+              <p>Scope for <code><a href="/reference/androidx/compose/foundation/lazy/layout/PrefetchRequest.html#(androidx.compose.foundation.lazy.layout.PrefetchRequestScope).execute()">PrefetchRequest.execute</a></code>, supplying info about how much time it has to execute requests.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html">PrefetchScheduler</a></code></td>
+            <td>
+              <p>Implementations of this interface accept prefetch requests via <code><a href="/reference/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html#schedulePrefetch(androidx.compose.foundation.lazy.layout.PrefetchRequest)">schedulePrefetch</a></code> and decide when to execute them in a way that will have minimal impact on user experience, e.g. during frame idle time.</p>
+            </td>
           </tr>
         </tbody>
       </table>

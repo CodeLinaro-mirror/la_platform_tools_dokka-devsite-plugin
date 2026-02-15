@@ -7,14 +7,19 @@
   <body>
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="androidx.compose.ui.text">
+      <meta itemprop="property" content="LinkInteractionListener">
       <meta itemprop="property" content="Paragraph">
       <meta itemprop="property" content="ParagraphIntrinsics">
+      <meta itemprop="property" content="TextInclusionStrategy">
       <meta itemprop="property" content="AnnotatedString">
       <meta itemprop="property" content="Builder">
       <meta itemprop="property" content="Range">
       <meta itemprop="property" content="AnnotatedStringKt">
-      <meta itemprop="property" content="AtomicReference">
       <meta itemprop="property" content="EmojiSupportMatch">
+      <meta itemprop="property" content="HtmlKt">
+      <meta itemprop="property" content="LinkAnnotation">
+      <meta itemprop="property" content="Clickable">
+      <meta itemprop="property" content="Url">
       <meta itemprop="property" content="MultiParagraph">
       <meta itemprop="property" content="MultiParagraphIntrinsics">
       <meta itemprop="property" content="ParagraphIntrinsicsKt">
@@ -30,8 +35,10 @@
       <meta itemprop="property" content="SpanStyle">
       <meta itemprop="property" content="SpanStyleKt">
       <meta itemprop="property" content="StringKt">
+      <meta itemprop="property" content="TextGranularity">
       <meta itemprop="property" content="TextLayoutInput">
       <meta itemprop="property" content="TextLayoutResult">
+      <meta itemprop="property" content="TextLinkStyles">
       <meta itemprop="property" content="TextMeasurer">
       <meta itemprop="property" content="TextMeasurerHelperKt">
       <meta itemprop="property" content="TextPainterKt">
@@ -42,6 +49,9 @@
       <meta itemprop="property" content="TtsAnnotation">
       <meta itemprop="property" content="UrlAnnotation">
       <meta itemprop="property" content="VerbatimTtsAnnotation">
+      <meta itemprop="property" content="Companion">
+      <meta itemprop="property" content="Companion">
+      <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="Companion">
@@ -77,8 +87,10 @@
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.TtsAnnotation,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(kotlin.String,kotlin.String,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withLink(androidx.compose.ui.text.LinkAnnotation,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Companion).fromHtml(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString).capitalize(androidx.compose.ui.text.intl.LocaleList)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString).decapitalize(androidx.compose.ui.text.intl.LocaleList)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString).toLowerCase(androidx.compose.ui.text.intl.LocaleList)">
@@ -132,6 +144,12 @@
         </colgroup>
         <tbody class="list">
           <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/LinkInteractionListener.html">LinkInteractionListener</a></code></td>
+            <td>
+              <p>An interface triggered when a user interacts with a link in the text</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/androidx/compose/ui/text/Paragraph.html">Paragraph</a></code></td>
             <td>
               <p>A paragraph of text that is laid out.</p>
@@ -141,6 +159,12 @@
             <td><code><a href="/reference/androidx/compose/ui/text/ParagraphIntrinsics.html">ParagraphIntrinsics</a></code></td>
             <td>
               <p>Calculates and presents the intrinsic width and height of text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/TextInclusionStrategy.html">TextInclusionStrategy</a></code></td>
+            <td>
+              <p>The text inclusion strategy used by <code><a href="/reference/androidx/compose/ui/text/Paragraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">Paragraph.getRangeForRect</a></code>, it specifies when a range of text is inside the given rect based on the geometric relation between the text range's bounding box and the given rect.</p>
             </td>
           </tr>
         </tbody>
@@ -177,13 +201,31 @@
             <td></td>
           </tr>
           <tr>
-            <td><code><a href="/reference/androidx/compose/ui/text/AtomicReference.html">AtomicReference</a></code></td>
-            <td></td>
-          </tr>
-          <tr>
             <td><code><a href="/reference/androidx/compose/ui/text/EmojiSupportMatch.html">EmojiSupportMatch</a></code></td>
             <td>
               <p>When to replace emoji with support emoji using androidx.emoji2.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/HtmlKt.html">HtmlKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a></code></td>
+            <td>
+              <p>An annotation that represents a clickable part of the text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/LinkAnnotation.Clickable.html">LinkAnnotation.Clickable</a></code></td>
+            <td>
+              <p>An annotation that contains a clickable marked with <code><a href="/reference/androidx/compose/ui/text/LinkAnnotation.Clickable.html#(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">tag</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/LinkAnnotation.Url.html">LinkAnnotation.Url</a></code></td>
+            <td>
+              <p>An annotation that contains a <code><a href="/reference/androidx/compose/ui/text/LinkAnnotation.Url.html#(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">url</a></code> string.</p>
             </td>
           </tr>
           <tr>
@@ -265,6 +307,12 @@
             <td></td>
           </tr>
           <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/TextGranularity.html">TextGranularity</a></code></td>
+            <td>
+              <p>Used by <code><a href="/reference/androidx/compose/ui/text/Paragraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">Paragraph.getRangeForRect</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/androidx/compose/ui/text/TextLayoutInput.html">TextLayoutInput</a></code></td>
             <td>
               <p>The data class which holds the set of parameters of the text layout computation.</p>
@@ -274,6 +322,12 @@
             <td><code><a href="/reference/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a></code></td>
             <td>
               <p>The data class which holds text layout result.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/TextLinkStyles.html">TextLinkStyles</a></code></td>
+            <td>
+              <p>Represents the styles of the links in the <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code> in different states</p>
             </td>
           </tr>
           <tr>
@@ -319,7 +373,7 @@
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code></td>
             <td>
-              <p>An annotation that contains the metadata intended for text-to-speech engine.</p>
+              <p><strong>This class is deprecated.</strong> Use LinkAnnotatation.Url(url) instead</p>
             </td>
           </tr>
           <tr>
@@ -327,6 +381,10 @@
             <td>
               <p>The text associated with this annotation is a series of characters that have to be read verbatim.</p>
             </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.Companion.html">AnnotatedString.Companion</a></code></td>
+            <td></td>
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/text/EmojiSupportMatch.Companion.html">EmojiSupportMatch.Companion</a></code></td>
@@ -342,6 +400,14 @@
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.Companion.html">PlatformSpanStyle.Companion</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/TextGranularity.Companion.html">TextGranularity.Companion</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/TextInclusionStrategy.Companion.html">TextInclusionStrategy.Companion</a></code></td>
             <td></td>
           </tr>
           <tr>

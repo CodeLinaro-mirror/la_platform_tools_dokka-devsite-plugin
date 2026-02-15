@@ -10,6 +10,7 @@
       <meta itemprop="path" content="androidx.compose.animation.core">
       <meta itemprop="property" content="equals(kotlin.Any)">
       <meta itemprop="property" content="hashCode()">
+      <meta itemprop="property" content="toString()">
       <meta itemprop="property" content="transform(kotlin.Float)">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -31,7 +32,8 @@
     <hr>
     <p>A cubic polynomial easing.</p>
     <p>The <code><a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html">CubicBezierEasing</a></code> class implements third-order Bézier curves.</p>
-    <p>This is equivalent to the Android <code>PathInterpolator</code></p>
+    <p>This is equivalent to the Android <code>PathInterpolator</code> when a single cubic Bézier curve is specified.</p>
+    <p>Note: <code><a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html">CubicBezierEasing</a></code> instances are stateless and can be used concurrently from multiple threads.</p>
     <p>Rather than creating a new instance, consider using one of the common cubic <code><a href="/reference/androidx/compose/animation/core/Easing.html">Easing</a></code>s:</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -106,9 +108,16 @@
             </td>
           </tr>
           <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
             <td><code>float</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html#transform(kotlin.Float)">transform</a>(float&nbsp;fraction)</code></div>
+              <p>Transforms the specified <code><a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html#transform(kotlin.Float)">fraction</a></code> in the range 0..1 by this cubic Bézier curve.</p>
             </td>
           </tr>
         </tbody>
@@ -182,6 +191,14 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html#hashCode()">hashCode</a>()</pre>
       </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="toString()">toString</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html#toString()">toString</a>()</pre>
+      </div>
       <div class="api-item"><a name="transform-kotlin.Float-"></a><a name="transform"></a>
         <div class="api-name-block">
           <div>
@@ -189,6 +206,28 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;float&nbsp;<a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html#transform(kotlin.Float)">transform</a>(float&nbsp;fraction)</pre>
+        <p>Transforms the specified <code><a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html#transform(kotlin.Float)">fraction</a></code> in the range 0..1 by this cubic Bézier curve. To solve the curve, <code><a href="/reference/androidx/compose/animation/core/CubicBezierEasing.html#transform(kotlin.Float)">fraction</a></code> is used as the x coordinate along the curve, and the corresponding y coordinate on the curve is returned. If no solution exists, this method throws an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code></td>
+                <td>
+                  <p>If the cubic Bézier curve cannot be solved</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

@@ -1,0 +1,169 @@
+<html devsite="true">
+  <head>
+    <title>PathSegment</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="PathSegment">
+      <meta itemprop="path" content="androidx.compose.ui.graphics">
+      <meta itemprop="property" content="equals(kotlin.Any)">
+      <meta itemprop="property" content="getPoints()">
+      <meta itemprop="property" content="getType()">
+      <meta itemprop="property" content="getWeight()">
+      <meta itemprop="property" content="hashCode()">
+      <meta itemprop="property" content="toString()">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>PathSegment</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/graphics/PathSegment.kt+class:androidx.compose.ui.graphics.PathSegment&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/graphics/PathSegment.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/graphics/PathSegment.html">PathSegment</a></pre>
+    </p>
+    <hr>
+    <p>A path segment represents a curve (line, cubic, quadratic or conic) or a command inside a fully formed <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> object.</p>
+    <p>A segment is identified by a <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html">type</a></code> which in turns defines how many <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#(androidx.compose.ui.graphics.PathSegment.Type,kotlin.FloatArray,kotlin.Float)">points</a></code> are available (from 0 to 4 points, each point is represented by 2 floats) and whether the <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#(androidx.compose.ui.graphics.PathSegment.Type,kotlin.FloatArray,kotlin.Float)">weight</a></code> is meaningful. Please refer to the documentation of each <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html">type</a></code> for more information.</p>
+    <p>A segment with the <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Move">Move</a></code> or <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Close">Close</a></code> is usually represented by the singletons <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#DoneSegment()">DoneSegment</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#CloseSegment()">CloseSegment</a></code> respectively.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public enum <a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html">PathSegment.Type</a> extends <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a></code></div>
+              <p>Type of a given segment in a <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>, either a command (<code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Move">Type.Move</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Close">Type.Close</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Done">Type.Done</a></code>) or a curve (<code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Line">Type.Line</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Cubic">Type.Cubic</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Quadratic">Type.Quadratic</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Conic">Type.Conic</a></code>).</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#getPoints()">getPoints</a>()</code></div>
+              <p>An array of points (2 floats per point) describing this segment, whose                   size depends on <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#(androidx.compose.ui.graphics.PathSegment.Type,kotlin.FloatArray,kotlin.Float)">type</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html">PathSegment.Type</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#getType()">getType</a>()</code></div>
+              <p>The type that identifies this segment and defines the number of points.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#getWeight()">getWeight</a>()</code></div>
+              <p>Conic weight, only valid if <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#(androidx.compose.ui.graphics.PathSegment.Type,kotlin.FloatArray,kotlin.Float)">type</a></code> is <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Conic">Type.Conic</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="equals(kotlin.Any)">equals</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSegment.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="getPoints--"></a><a name="getpoints"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getPoints()">getPoints</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSegment.html#getPoints()">getPoints</a>()</pre>
+        <p>An array of points (2 floats per point) describing this segment, whose                   size depends on <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#(androidx.compose.ui.graphics.PathSegment.Type,kotlin.FloatArray,kotlin.Float)">type</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getType--"></a><a name="gettype"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getType()">getType</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html">PathSegment.Type</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSegment.html#getType()">getType</a>()</pre>
+        <p>The type that identifies this segment and defines the number of points.</p>
+      </div>
+      <div class="api-item"><a name="getWeight--"></a><a name="getweight"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getWeight()">getWeight</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSegment.html#getWeight()">getWeight</a>()</pre>
+        <p>Conic weight, only valid if <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.html#(androidx.compose.ui.graphics.PathSegment.Type,kotlin.FloatArray,kotlin.Float)">type</a></code> is <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Conic">Type.Conic</a></code>. See <code><a href="/reference/androidx/compose/ui/graphics/PathSegment.Type.html#Conic">Type.Conic</a></code>                   for more information.</p>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="hashCode()">hashCode</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSegment.html#hashCode()">hashCode</a>()</pre>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="toString()">toString</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSegment.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+  </body>
+</html>

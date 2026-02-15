@@ -11,10 +11,15 @@
       <meta itemprop="property" content="get(androidx.compose.ui.layout.AlignmentLine)">
       <meta itemprop="property" content="localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">
       <meta itemprop="property" content="localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">
+      <meta itemprop="property" content="localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">
       <meta itemprop="property" content="localToRoot(androidx.compose.ui.geometry.Offset)">
+      <meta itemprop="property" content="localToScreen(androidx.compose.ui.geometry.Offset)">
       <meta itemprop="property" content="localToWindow(androidx.compose.ui.geometry.Offset)">
+      <meta itemprop="property" content="screenToLocal(androidx.compose.ui.geometry.Offset)">
       <meta itemprop="property" content="transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">
+      <meta itemprop="property" content="transformToScreen(androidx.compose.ui.graphics.Matrix)">
       <meta itemprop="property" content="windowToLocal(androidx.compose.ui.geometry.Offset)">
+      <meta itemprop="property" content="introducesMotionFrameOfReference()">
       <meta itemprop="property" content="isAttached()">
       <meta itemprop="property" content="parentCoordinates()">
       <meta itemprop="property" content="parentLayoutCoordinates()">
@@ -27,6 +32,7 @@
       <meta itemprop="property" content="(androidx.compose.ui.layout.LayoutCoordinates).positionInParent()">
       <meta itemprop="property" content="(androidx.compose.ui.layout.LayoutCoordinates).positionInRoot()">
       <meta itemprop="property" content="(androidx.compose.ui.layout.LayoutCoordinates).positionInWindow()">
+      <meta itemprop="property" content="(androidx.compose.ui.layout.LayoutCoordinates).positionOnScreen()">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -53,28 +59,6 @@
         </ul>
       </div>
     </devsite-filter >
-    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></div>
-      </span>
-      <div id="subclasses-direct-summary">
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code></td>
-                <td>
-                  <p><strong>This interface is deprecated.</strong> LookaheadLayoutCoordinates class has been removed. localLookaheadPositionOfcan be achieved in LookaheadScope using LayoutCoordinates.localLookaheadPositionOf(LayoutCoordinates) function.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-</devsite-expandable>    </div>
     <hr>
     <p>A holder of the measured bounds for the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code>.</p>
     <h2>Summary</h2>
@@ -123,10 +107,30 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">localPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;relativeToSource:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;includeMotionFrameOfReference:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Converts an <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">relativeToSource</a></code> in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">sourceCoordinates</a></code> space into local coordinates.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToRoot(androidx.compose.ui.geometry.Offset)">localToRoot</a>(relativeToLocal:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
                 <p>Converts a local position within this layout into an offset from the root composable.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToScreen(androidx.compose.ui.geometry.Offset)">localToScreen</a>(relativeToLocal:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+                <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToScreen(androidx.compose.ui.geometry.Offset)">relativeToLocal</a></code> position within this layout into an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to the device's screen.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -143,10 +147,30 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#screenToLocal(androidx.compose.ui.geometry.Offset)">screenToLocal</a>(relativeToScreen:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+                <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#screenToLocal(androidx.compose.ui.geometry.Offset)">relativeToScreen</a></code> relative to the device's screen's origin into an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to this layout.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">transformFrom</a>(sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,&nbsp;matrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Matrix.html">Matrix</a>)</code></div>
                 <p>Modifies <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">matrix</a></code> to be a transform to convert a coordinate in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">sourceCoordinates</a></code> to a coordinate in <code>this</code> <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformToScreen(androidx.compose.ui.graphics.Matrix)">transformToScreen</a>(matrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Matrix.html">Matrix</a>)</code></div>
+                <p>Takes a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformToScreen(androidx.compose.ui.graphics.Matrix)">matrix</a></code> which transforms some coordinate system <code>C</code> to local coordinates, and updates the matrix to transform from <code>C</code> to screen coordinates instead.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -180,6 +204,16 @@
             </tr>
           </thead>
           <tbody class="list">
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#introducesMotionFrameOfReference()">introducesMotionFrameOfReference</a></code></div>
+                <p>Indicates whether the corresponding Layout is expected to change its <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> in small increments (such as when its parent is a <code>Scroll</code>).</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
@@ -318,6 +352,16 @@
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
             </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).positionOnScreen()">positionOnScreen</a>()</code></div>
+                <p>The position of this layout on the device's screen.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
           </tbody>
         </table>
       </devsite-filter >
@@ -365,6 +409,22 @@
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">localPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;relativeToSource:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
           <p>Converts an <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">relativeToSource</a></code> in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">sourceCoordinates</a></code> space into local coordinates. <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">sourceCoordinates</a></code> may be any <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> that belong to the same compose layout hierarchy.</p>
+          <p>By default, includes the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> when <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#introducesMotionFrameOfReference()">introducesMotionFrameOfReference</a></code> is <code>true</code>. But you may exclude it from the calculation by using the overload that takes <code>includeMotionFrameOfReference</code> and passing it as <code>false</code>.</p>
+        </div>
+        <div class="api-item"><a name="localPositionOf(androidx.compose.ui.layout.LayoutCoordinates, androidx.compose.ui.geometry.Offset, kotlin.Boolean)"></a><a name="localPositionOf-androidx.compose.ui.layout.LayoutCoordinates-androidx.compose.ui.geometry.Offset-kotlin.Boolean-"></a><a name="localpositionof"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">localPositionOf</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">localPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;relativeToSource:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = Offset.Zero,<br>&nbsp;&nbsp;&nbsp;&nbsp;includeMotionFrameOfReference:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>Converts an <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">relativeToSource</a></code> in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">sourceCoordinates</a></code> space into local coordinates. <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">sourceCoordinates</a></code> may be any <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> that belong to the same compose layout hierarchy.</p>
+          <p>Use <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">includeMotionFrameOfReference</a></code> to decide whether to include the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of any <code>LayoutCoordinate</code> that returns <code>true</code> in the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">includeMotionFrameOfReference</a></code> flag.</p>
+          <p>In other words, passing <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">includeMotionFrameOfReference</a></code> as <code>false</code>, returns a calculation that excludes the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> set from Layouts that place their children using <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html#withMotionFrameOfReferencePlacement(kotlin.Function1)">Placeable.PlacementScope.withMotionFrameOfReferencePlacement</a></code>.</p>
         </div>
         <div class="api-item"><a name="localToRoot-androidx.compose.ui.geometry.Offset-"></a><a name="localtoroot"></a>
           <div class="api-name-block">
@@ -379,6 +439,19 @@
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToRoot(androidx.compose.ui.geometry.Offset)">localToRoot</a>(relativeToLocal:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
           <p>Converts a local position within this layout into an offset from the root composable.</p>
         </div>
+        <div class="api-item"><a name="localToScreen-androidx.compose.ui.geometry.Offset-"></a><a name="localtoscreen"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="localToScreen(androidx.compose.ui.geometry.Offset)">localToScreen</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToScreen(androidx.compose.ui.geometry.Offset)">localToScreen</a>(relativeToLocal:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToScreen(androidx.compose.ui.geometry.Offset)">relativeToLocal</a></code> position within this layout into an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to the device's screen. Returns <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">Offset.Unspecified</a></code> if the conversion cannot be performed.</p>
+        </div>
         <div class="api-item"><a name="localToWindow-androidx.compose.ui.geometry.Offset-"></a><a name="localtowindow"></a>
           <div class="api-name-block">
             <div>
@@ -392,6 +465,19 @@
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToWindow(androidx.compose.ui.geometry.Offset)">localToWindow</a>(relativeToLocal:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
           <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToWindow(androidx.compose.ui.geometry.Offset)">relativeToLocal</a></code> position within this layout into an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to the window's origin.</p>
         </div>
+        <div class="api-item"><a name="screenToLocal-androidx.compose.ui.geometry.Offset-"></a><a name="screentolocal"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="screenToLocal(androidx.compose.ui.geometry.Offset)">screenToLocal</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#screenToLocal(androidx.compose.ui.geometry.Offset)">screenToLocal</a>(relativeToScreen:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#screenToLocal(androidx.compose.ui.geometry.Offset)">relativeToScreen</a></code> relative to the device's screen's origin into an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to this layout. Returns <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">Offset.Unspecified</a></code> if the conversion cannot be performed.</p>
+        </div>
         <div class="api-item"><a name="transformFrom(androidx.compose.ui.layout.LayoutCoordinates, androidx.compose.ui.graphics.Matrix)"></a><a name="transformFrom-androidx.compose.ui.layout.LayoutCoordinates-androidx.compose.ui.graphics.Matrix-"></a><a name="transformfrom"></a>
           <div class="api-name-block">
             <div>
@@ -404,6 +490,19 @@
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">transformFrom</a>(sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,&nbsp;matrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Matrix.html">Matrix</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Modifies <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">matrix</a></code> to be a transform to convert a coordinate in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">sourceCoordinates</a></code> to a coordinate in <code>this</code> <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="transformToScreen-androidx.compose.ui.graphics.Matrix-"></a><a name="transformtoscreen"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="transformToScreen(androidx.compose.ui.graphics.Matrix)">transformToScreen</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformToScreen(androidx.compose.ui.graphics.Matrix)">transformToScreen</a>(matrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Matrix.html">Matrix</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Takes a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformToScreen(androidx.compose.ui.graphics.Matrix)">matrix</a></code> which transforms some coordinate system <code>C</code> to local coordinates, and updates the matrix to transform from <code>C</code> to screen coordinates instead.</p>
         </div>
         <div class="api-item"><a name="windowToLocal-androidx.compose.ui.geometry.Offset-"></a><a name="windowtolocal"></a>
           <div class="api-name-block">
@@ -424,6 +523,46 @@
       <div class="list">
         <h2 data-title="platform-Common/All">Public properties
           <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getIntroducesMotionFrameOfReference()"></a><a name="setIntroducesMotionFrameOfReference()"></a><a name="getIntroducesMotionFrameOfReference--"></a><a name="setIntroducesMotionFrameOfReference--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="introducesMotionFrameOfReference()">introducesMotionFrameOfReference</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#introducesMotionFrameOfReference()">introducesMotionFrameOfReference</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Indicates whether the corresponding Layout is expected to change its <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> in small increments (such as when its parent is a <code>Scroll</code>).</p>
+          <p>In those situations, the corresponding placed <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> will have their <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#introducesMotionFrameOfReference()">introducesMotionFrameOfReference</a></code> return <code>true</code>.</p>
+          <p>Custom Layouts that are expected to have similar behaviors should place their children using <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html#withMotionFrameOfReferencePlacement(kotlin.Function1)">Placeable.PlacementScope.withMotionFrameOfReferencePlacement</a></code>.</p>
+          <p>You may then use <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">localPositionOf</a></code> with <code>includeMotionFrameOfReference = false</code> to query a Layout's position such that it excludes all <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> introduced by those Layouts.</p>
+          <p>This is typically helpful when deciding when to animate an <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">approachLayout</a></code> using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code> coordinates. As you probably don't want to trigger animations on small positional increments.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html#withMotionFrameOfReferencePlacement(kotlin.Function1)">withMotionFrameOfReferencePlacement</a></code></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">localPositionOf</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div class="api-item"><a name="getIsAttached()"></a><a name="setIsAttached()"></a><a name="getIsAttached--"></a><a name="setIsAttached--"></a>
           <div class="api-name-block">
             <div>
@@ -585,6 +724,19 @@
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInWindow()">positionInWindow</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
           <p>The position of this layout relative to the window.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.positionOnScreen--"></a><a name="positiononscreen"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.layout.LayoutCoordinates).positionOnScreen()">positionOnScreen</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).positionOnScreen()">positionOnScreen</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The position of this layout on the device's screen. Returns <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">Offset.Unspecified</a></code> if the conversion cannot be performed.</p>
         </div>
       </div>
     </devsite-filter >

@@ -10,10 +10,11 @@
       <meta itemprop="path" content="androidx.compose.ui.graphics">
       <meta itemprop="property" content="addArc(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="addArcRad(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float)">
-      <meta itemprop="property" content="addOval(androidx.compose.ui.geometry.Rect)">
+      <meta itemprop="property" content="addOval(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">
       <meta itemprop="property" content="addPath(androidx.compose.ui.graphics.Path,androidx.compose.ui.geometry.Offset)">
-      <meta itemprop="property" content="addRect(androidx.compose.ui.geometry.Rect)">
-      <meta itemprop="property" content="addRoundRect(androidx.compose.ui.geometry.RoundRect)">
+      <meta itemprop="property" content="addRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">
+      <meta itemprop="property" content="addRoundRect(androidx.compose.ui.geometry.RoundRect,androidx.compose.ui.graphics.Path.Direction)">
+      <meta itemprop="property" content="and(androidx.compose.ui.graphics.Path)">
       <meta itemprop="property" content="arcTo(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">
       <meta itemprop="property" content="arcToRad(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">
       <meta itemprop="property" content="close()">
@@ -22,22 +23,36 @@
       <meta itemprop="property" content="getFillType()">
       <meta itemprop="property" content="isConvex()">
       <meta itemprop="property" content="isEmpty()">
+      <meta itemprop="property" content="iterator()">
+      <meta itemprop="property" content="iterator(androidx.compose.ui.graphics.PathIterator.ConicEvaluation,kotlin.Float)">
       <meta itemprop="property" content="lineTo(kotlin.Float,kotlin.Float)">
+      <meta itemprop="property" content="minus(androidx.compose.ui.graphics.Path)">
       <meta itemprop="property" content="moveTo(kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="op(androidx.compose.ui.graphics.Path,androidx.compose.ui.graphics.Path,androidx.compose.ui.graphics.PathOperation)">
+      <meta itemprop="property" content="or(androidx.compose.ui.graphics.Path)">
+      <meta itemprop="property" content="plus(androidx.compose.ui.graphics.Path)">
       <meta itemprop="property" content="quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">
+      <meta itemprop="property" content="quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="relativeLineTo(kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="relativeMoveTo(kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">
+      <meta itemprop="property" content="relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="reset()">
       <meta itemprop="property" content="rewind()">
       <meta itemprop="property" content="setFillType(androidx.compose.ui.graphics.PathFillType)">
       <meta itemprop="property" content="transform(androidx.compose.ui.graphics.Matrix)">
       <meta itemprop="property" content="translate(androidx.compose.ui.geometry.Offset)">
+      <meta itemprop="property" content="xor(androidx.compose.ui.graphics.Path)">
       <meta itemprop="property" content="combine(androidx.compose.ui.graphics.PathOperation,androidx.compose.ui.graphics.Path,androidx.compose.ui.graphics.Path)">
       <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).asAndroidPath()">
       <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).addOutline(androidx.compose.ui.graphics.Outline)">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).computeDirection()">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).divide(kotlin.collections.MutableList)">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).reverse(androidx.compose.ui.graphics.Path)">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).copy()">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -94,6 +109,12 @@
               <div><code>public static class <a href="/reference/androidx/compose/ui/graphics/Path.Companion.html">Path.Companion</a></code></div>
             </td>
           </tr>
+          <tr>
+            <td>
+              <div><code>public enum <a href="/reference/androidx/compose/ui/graphics/Path.Direction.html">Path.Direction</a> extends <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a></code></div>
+              <p>Specifies how closed shapes (e.g. rectangles, ovals) are wound (oriented) when they are added to a path.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -126,7 +147,7 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#addOval(androidx.compose.ui.geometry.Rect)">addOval</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;oval)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#addOval(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">addOval</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;oval,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.Direction.html">Path.Direction</a>&nbsp;direction)</code></div>
               <p>Adds a new subpath that consists of a curve that forms the ellipse that fills the given rectangle.</p>
             </td>
           </tr>
@@ -140,15 +161,22 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#addRect(androidx.compose.ui.geometry.Rect)">addRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#addRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">addRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.Direction.html">Path.Direction</a>&nbsp;direction)</code></div>
               <p>Adds a new subpath that consists of four lines that outline the given rectangle.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#addRoundRect(androidx.compose.ui.geometry.RoundRect)">addRoundRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/RoundRect.html">RoundRect</a>&nbsp;roundRect)</code></div>
-              <p>Add a round rectangle shape to the path from the given <code><a href="/reference/androidx/compose/ui/geometry/RoundRect.html">RoundRect</a></code></p>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#addRoundRect(androidx.compose.ui.geometry.RoundRect,androidx.compose.ui.graphics.Path.Direction)">addRoundRect</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/RoundRect.html">RoundRect</a>&nbsp;roundRect,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.Direction.html">Path.Direction</a>&nbsp;direction<br>)</code></div>
+              <p>Add a round rectangle shape to the path from the given <code><a href="/reference/androidx/compose/ui/geometry/RoundRect.html">RoundRect</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#and(androidx.compose.ui.graphics.Path)">and</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</code></div>
+              <p>Returns the intersection of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -208,10 +236,31 @@
             </td>
           </tr>
           <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathIterator.html">PathIterator</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#iterator()">iterator</a>()</code></div>
+              <p>Creates a new <code><a href="/reference/androidx/compose/ui/graphics/PathIterator.html">PathIterator</a></code> for this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> that evaluates conics as quadratics.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathIterator.html">PathIterator</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#iterator(androidx.compose.ui.graphics.PathIterator.ConicEvaluation,kotlin.Float)">iterator</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathIterator.ConicEvaluation.html">PathIterator.ConicEvaluation</a>&nbsp;conicEvaluation,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;tolerance<br>)</code></div>
+              <p>Creates a new <code><a href="/reference/androidx/compose/ui/graphics/PathIterator.html">PathIterator</a></code> for this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#lineTo(kotlin.Float,kotlin.Float)">lineTo</a>(float&nbsp;x,&nbsp;float&nbsp;y)</code></div>
               <p>Adds a straight line segment from the current point to the given point</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#minus(androidx.compose.ui.graphics.Path)">minus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</code></div>
+              <p>Returns the difference of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -229,10 +278,31 @@
             </td>
           </tr>
           <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#or(androidx.compose.ui.graphics.Path)">or</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</code></div>
+              <p>Returns the union of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#plus(androidx.compose.ui.graphics.Path)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</code></div>
+              <p>Returns the union of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticBezierTo</a>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2)</code></div>
-              <p>Adds a quadratic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), using the control point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>).</p>
+              <div><code><span><del><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticBezierTo</a></del></span>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2)</code></div>
+              <p><strong>This method is deprecated.</strong> Use quadraticTo() for consistency with cubicTo()</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticTo</a>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2)</code></div>
+              <p>Adds a quadratic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), using the control point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>).</p>
             </td>
           </tr>
           <tr>
@@ -259,8 +329,15 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticBezierTo</a>(float&nbsp;dx1,&nbsp;float&nbsp;dy1,&nbsp;float&nbsp;dx2,&nbsp;float&nbsp;dy2)</code></div>
-              <p>Adds a quadratic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point, using the control point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) from the current point.</p>
+              <div><code><span><del><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticBezierTo</a></del></span>(float&nbsp;dx1,&nbsp;float&nbsp;dy1,&nbsp;float&nbsp;dx2,&nbsp;float&nbsp;dy2)</code></div>
+              <p><strong>This method is deprecated.</strong> Use relativeQuadraticTo() for consistency with relativeCubicTo()</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticTo</a>(float&nbsp;dx1,&nbsp;float&nbsp;dy1,&nbsp;float&nbsp;dx2,&nbsp;float&nbsp;dy2)</code></div>
+              <p>Adds a quadratic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point, using the control point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) from the current point.</p>
             </td>
           </tr>
           <tr>
@@ -298,6 +375,13 @@
               <p>Translates all the segments of every subpath by the given offset.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#xor(androidx.compose.ui.graphics.Path)">xor</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</code></div>
+              <p>Returns the union minus the intersection of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -326,6 +410,48 @@
               <p>Adds the <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).addOutline(androidx.compose.ui.graphics.Outline)">outline</a></code> to the <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.Direction.html">Path.Direction</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathGeometryKt.html">PathGeometryKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).computeDirection()">computeDirection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver)</code></div>
+              <p>Computes this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>'s direction (or winding, or orientation), which can be either <code><a href="/reference/androidx/compose/ui/graphics/Path.Direction.html#Clockwise">Path.Direction.Clockwise</a></code> or <code><a href="/reference/androidx/compose/ui/graphics/Path.Direction.html#CounterClockwise">Path.Direction.CounterClockwise</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathGeometryKt.html">PathGeometryKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).divide(kotlin.collections.MutableList)">divide</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&gt;&nbsp;contours<br>)</code></div>
+              <p>Divides this path into a list of paths.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathGeometryKt.html">PathGeometryKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).reverse(androidx.compose.ui.graphics.Path)">reverse</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;destination)</code></div>
+              <p>Reverses the segments of this path into the specified <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).reverse(androidx.compose.ui.graphics.Path)">destination</a></code>, turning a clockwise path into a counter-clockwise path and vice-versa.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathKt.html">PathKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).copy()">copy</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver)</code></div>
+              <p>Create a new path, copying the contents from the src path.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSvgKt.html">PathSvgKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">addSvg</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;pathData)</code></div>
+              <p>Adds the specified SVG <a href="https://www.w3.org/TR/SVG2/paths.html#PathData">path data</a> to this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSvgKt.html">PathSvgKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">toSvg</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;boolean&nbsp;asDocument)</code></div>
+              <p>Returns an SVG representation of this path.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -349,15 +475,16 @@
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#addArcRad(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float)">addArcRad</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;oval,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startAngleRadians,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;sweepAngleRadians<br>)</pre>
         <p>Adds a new subpath with one arc segment that consists of the arc that follows the edge of the oval bounded by the given rectangle, from startAngle radians around the oval up to startAngle + sweepAngle radians around the oval, with zero radians being the point on the right hand side of the oval that crosses the horizontal line that intersects the center of the rectangle and with positive angles going clockwise around the oval.</p>
       </div>
-      <div class="api-item"><a name="addOval-androidx.compose.ui.geometry.Rect-"></a><a name="addoval"></a>
+      <div class="api-item"><a name="addOval(androidx.compose.ui.geometry.Rect, androidx.compose.ui.graphics.Path.Direction)"></a><a name="addOval-androidx.compose.ui.geometry.Rect-androidx.compose.ui.graphics.Path.Direction-"></a><a name="addoval"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="addOval(androidx.compose.ui.geometry.Rect)">addOval</h3>
+            <h3 id="addOval(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">addOval</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#addOval(androidx.compose.ui.geometry.Rect)">addOval</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;oval)</pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#addOval(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">addOval</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;oval,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.Direction.html">Path.Direction</a>&nbsp;direction)</pre>
         <p>Adds a new subpath that consists of a curve that forms the ellipse that fills the given rectangle.</p>
         <p>To add a circle, pass an appropriate rectangle as <code>oval</code>. <code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code> can be used to easily describe the circle's center <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> and radius.</p>
+        <p>The direction to wind the rectangle's contour is specified by <code><a href="/reference/androidx/compose/ui/graphics/Path.html#addOval(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">direction</a></code>.</p>
       </div>
       <div class="api-item"><a name="addPath(androidx.compose.ui.graphics.Path, androidx.compose.ui.geometry.Offset)"></a><a name="addPath-androidx.compose.ui.graphics.Path-androidx.compose.ui.geometry.Offset-"></a><a name="addpath"></a>
         <div class="api-name-block">
@@ -368,23 +495,32 @@
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#addPath(androidx.compose.ui.graphics.Path,androidx.compose.ui.geometry.Offset)">addPath</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;offset)</pre>
         <p>Adds a new subpath that consists of the given <code>path</code> offset by the given <code>offset</code>.</p>
       </div>
-      <div class="api-item"><a name="addRect-androidx.compose.ui.geometry.Rect-"></a><a name="addrect"></a>
+      <div class="api-item"><a name="addRect(androidx.compose.ui.geometry.Rect, androidx.compose.ui.graphics.Path.Direction)"></a><a name="addRect-androidx.compose.ui.geometry.Rect-androidx.compose.ui.graphics.Path.Direction-"></a><a name="addrect"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="addRect(androidx.compose.ui.geometry.Rect)">addRect</h3>
+            <h3 id="addRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">addRect</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#addRect(androidx.compose.ui.geometry.Rect)">addRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect)</pre>
-        <p>Adds a new subpath that consists of four lines that outline the given rectangle.</p>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#addRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">addRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.Direction.html">Path.Direction</a>&nbsp;direction)</pre>
+        <p>Adds a new subpath that consists of four lines that outline the given rectangle. The direction to wind the rectangle's contour is specified by <code><a href="/reference/androidx/compose/ui/graphics/Path.html#addRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Path.Direction)">direction</a></code>.</p>
       </div>
-      <div class="api-item"><a name="addRoundRect-androidx.compose.ui.geometry.RoundRect-"></a><a name="addroundrect"></a>
+      <div class="api-item"><a name="addRoundRect(androidx.compose.ui.geometry.RoundRect, androidx.compose.ui.graphics.Path.Direction)"></a><a name="addRoundRect-androidx.compose.ui.geometry.RoundRect-androidx.compose.ui.graphics.Path.Direction-"></a><a name="addroundrect"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="addRoundRect(androidx.compose.ui.geometry.RoundRect)">addRoundRect</h3>
+            <h3 id="addRoundRect(androidx.compose.ui.geometry.RoundRect,androidx.compose.ui.graphics.Path.Direction)">addRoundRect</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#addRoundRect(androidx.compose.ui.geometry.RoundRect)">addRoundRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/RoundRect.html">RoundRect</a>&nbsp;roundRect)</pre>
-        <p>Add a round rectangle shape to the path from the given <code><a href="/reference/androidx/compose/ui/geometry/RoundRect.html">RoundRect</a></code></p>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#addRoundRect(androidx.compose.ui.geometry.RoundRect,androidx.compose.ui.graphics.Path.Direction)">addRoundRect</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/RoundRect.html">RoundRect</a>&nbsp;roundRect,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.Direction.html">Path.Direction</a>&nbsp;direction<br>)</pre>
+        <p>Add a round rectangle shape to the path from the given <code><a href="/reference/androidx/compose/ui/geometry/RoundRect.html">RoundRect</a></code>. The direction to wind the rectangle's contour is specified by <code><a href="/reference/androidx/compose/ui/graphics/Path.html#addRoundRect(androidx.compose.ui.geometry.RoundRect,androidx.compose.ui.graphics.Path.Direction)">direction</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="and-androidx.compose.ui.graphics.Path-"></a><a name="and"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="and(androidx.compose.ui.graphics.Path)">and</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#and(androidx.compose.ui.graphics.Path)">and</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</pre>
+        <p>Returns the intersection of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>. If the paths do not intersect, returns an empty path.</p>
       </div>
       <div class="api-item"><a name="arcTo(androidx.compose.ui.geometry.Rect, kotlin.Float, kotlin.Float, kotlin.Boolean)"></a><a name="arcTo-androidx.compose.ui.geometry.Rect-kotlin.Float-kotlin.Float-kotlin.Boolean-"></a><a name="arcto"></a>
         <div class="api-name-block">
@@ -488,6 +624,51 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="iterator--"></a><a name="iterator"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="iterator()">iterator</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathIterator.html">PathIterator</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#iterator()">iterator</a>()</pre>
+        <p>Creates a new <code><a href="/reference/androidx/compose/ui/graphics/PathIterator.html">PathIterator</a></code> for this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> that evaluates conics as quadratics. To preserve conics, use the <code><a href="/reference/androidx/compose/ui/graphics/Path.html#iterator()">Path.iterator</a></code> function that takes a <code><a href="/reference/androidx/compose/ui/graphics/PathIterator.ConicEvaluation.html">PathIterator.ConicEvaluation</a></code> parameter.</p>
+      </div>
+      <div class="api-item"><a name="iterator(androidx.compose.ui.graphics.PathIterator.ConicEvaluation, kotlin.Float)"></a><a name="iterator-androidx.compose.ui.graphics.PathIterator.ConicEvaluation-kotlin.Float-"></a><a name="iterator"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="iterator(androidx.compose.ui.graphics.PathIterator.ConicEvaluation,kotlin.Float)">iterator</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathIterator.html">PathIterator</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#iterator(androidx.compose.ui.graphics.PathIterator.ConicEvaluation,kotlin.Float)">iterator</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathIterator.ConicEvaluation.html">PathIterator.ConicEvaluation</a>&nbsp;conicEvaluation,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;tolerance<br>)</pre>
+        <p>Creates a new <code><a href="/reference/androidx/compose/ui/graphics/PathIterator.html">PathIterator</a></code> for this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>. To preserve conics as conics (not convert them to quadratics), set <code><a href="/reference/androidx/compose/ui/graphics/Path.html#iterator(androidx.compose.ui.graphics.PathIterator.ConicEvaluation,kotlin.Float)">conicEvaluation</a></code> to <code><a href="/reference/androidx/compose/ui/graphics/PathIterator.ConicEvaluation.html#AsConic">PathIterator.ConicEvaluation.AsConic</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathIterator.ConicEvaluation.html">PathIterator.ConicEvaluation</a>&nbsp;conicEvaluation</code></td>
+                <td>
+                  <p>Indicates how to evaluate conic segments</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;tolerance</code></td>
+                <td>
+                  <p>When <code><a href="/reference/androidx/compose/ui/graphics/Path.html#iterator(androidx.compose.ui.graphics.PathIterator.ConicEvaluation,kotlin.Float)">conicEvaluation</a></code> is set to <code><a href="/reference/androidx/compose/ui/graphics/PathIterator.ConicEvaluation.html#AsQuadratics">PathIterator.ConicEvaluation.AsQuadratics</a></code>         defines the maximum distance between the original conic curve and its quadratic         approximations</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="lineTo(kotlin.Float, kotlin.Float)"></a><a name="lineTo-kotlin.Float-kotlin.Float-"></a><a name="lineto"></a>
         <div class="api-name-block">
           <div>
@@ -496,6 +677,15 @@
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#lineTo(kotlin.Float,kotlin.Float)">lineTo</a>(float&nbsp;x,&nbsp;float&nbsp;y)</pre>
         <p>Adds a straight line segment from the current point to the given point</p>
+      </div>
+      <div class="api-item"><a name="minus-androidx.compose.ui.graphics.Path-"></a><a name="minus"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="minus(androidx.compose.ui.graphics.Path)">minus</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#minus(androidx.compose.ui.graphics.Path)">minus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</pre>
+        <p>Returns the difference of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
       </div>
       <div class="api-item"><a name="moveTo(kotlin.Float, kotlin.Float)"></a><a name="moveTo-kotlin.Float-kotlin.Float-"></a><a name="moveto"></a>
         <div class="api-name-block">
@@ -538,6 +728,12 @@
                   <p>The second operand (for difference, the subtrahend)</p>
                 </td>
               </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathOperation.html">PathOperation</a>&nbsp;operation</code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/ui/graphics/PathOperation.html">PathOperation</a></code> to apply to the 2 specified paths</p>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -563,14 +759,42 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="or-androidx.compose.ui.graphics.Path-"></a><a name="or"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="or(androidx.compose.ui.graphics.Path)">or</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#or(androidx.compose.ui.graphics.Path)">or</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</pre>
+        <p>Returns the union of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="plus-androidx.compose.ui.graphics.Path-"></a><a name="plus"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="plus(androidx.compose.ui.graphics.Path)">plus</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#plus(androidx.compose.ui.graphics.Path)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</pre>
+        <p>Returns the union of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+      </div>
       <div class="api-item"><a name="quadraticBezierTo(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="quadraticBezierTo-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="quadraticbezierto"></a>
         <div class="api-name-block">
           <div>
             <h3 id="quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticBezierTo</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticBezierTo</a>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2)</pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<span><del><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticBezierTo</a></del></span>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use quadraticTo() for consistency with cubicTo()</aside>
         <p>Adds a quadratic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), using the control point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>).</p>
+      </div>
+      <div class="api-item"><a name="quadraticTo(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="quadraticTo-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="quadraticto"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticTo</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticTo</a>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2)</pre>
+        <p>Adds a quadratic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), using the control point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>).</p>
       </div>
       <div class="api-item"><a name="relativeCubicTo(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="relativeCubicTo-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="relativecubicto"></a>
         <div class="api-name-block">
@@ -605,8 +829,18 @@
             <h3 id="relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticBezierTo</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticBezierTo</a>(float&nbsp;dx1,&nbsp;float&nbsp;dy1,&nbsp;float&nbsp;dx2,&nbsp;float&nbsp;dy2)</pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<span><del><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticBezierTo</a></del></span>(float&nbsp;dx1,&nbsp;float&nbsp;dy1,&nbsp;float&nbsp;dx2,&nbsp;float&nbsp;dy2)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use relativeQuadraticTo() for consistency with relativeCubicTo()</aside>
         <p>Adds a quadratic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point, using the control point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) from the current point.</p>
+      </div>
+      <div class="api-item"><a name="relativeQuadraticTo(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="relativeQuadraticTo-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="relativequadraticto"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticTo</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticTo</a>(float&nbsp;dx1,&nbsp;float&nbsp;dy1,&nbsp;float&nbsp;dx2,&nbsp;float&nbsp;dy2)</pre>
+        <p>Adds a quadratic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point, using the control point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) from the current point.</p>
       </div>
       <div class="api-item"><a name="reset--"></a><a name="reset"></a>
         <div class="api-name-block">
@@ -654,6 +888,15 @@
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#translate(androidx.compose.ui.geometry.Offset)">translate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;offset)</pre>
         <p>Translates all the segments of every subpath by the given offset.</p>
       </div>
+      <div class="api-item"><a name="xor-androidx.compose.ui.graphics.Path-"></a><a name="xor"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="xor(androidx.compose.ui.graphics.Path)">xor</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#xor(androidx.compose.ui.graphics.Path)">xor</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path)</pre>
+        <p>Returns the union minus the intersection of two paths as a new <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+      </div>
     </div>
     <div class="list">
       <h2>Extension functions</h2>
@@ -679,7 +922,7 @@
               <tr>
                 <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unsupported-operation-exception/index.html">UnsupportedOperationException</a></code></td>
                 <td>
-                  <p>if this Path is not backed by an android.graphics.Path</p>
+                  <p>if this Path is not backed by an <code><a href="https://developer.android.com/reference/android/graphics/Path.html">android.graphics.Path</a></code>.</p>
                 </td>
               </tr>
             </tbody>
@@ -694,6 +937,237 @@
         </div>
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/OutlineKt.html">OutlineKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).addOutline(androidx.compose.ui.graphics.Outline)">addOutline</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Outline.html">Outline</a>&nbsp;outline)</pre>
         <p>Adds the <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).addOutline(androidx.compose.ui.graphics.Outline)">outline</a></code> to the <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Path-.computeDirection--"></a><a name="computedirection"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.Path).computeDirection()">PathGeometryKt.computeDirection</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.Direction.html">Path.Direction</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathGeometryKt.html">PathGeometryKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).computeDirection()">computeDirection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver)</pre>
+        <p>Computes this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>'s direction (or winding, or orientation), which can be either <code><a href="/reference/androidx/compose/ui/graphics/Path.Direction.html#Clockwise">Path.Direction.Clockwise</a></code> or <code><a href="/reference/androidx/compose/ui/graphics/Path.Direction.html#CounterClockwise">Path.Direction.CounterClockwise</a></code>.</p>
+        <p>If the path is made of multiple contours (the path contains multiple &quot;move&quot; commands), the direction returned by this property is the direction of the first contour.</p>
+        <p>If the path is empty (contains no lines/curves), the direction is <code><a href="/reference/androidx/compose/ui/graphics/Path.Direction.html#Clockwise">Path.Direction.Clockwise</a></code>.</p>
+        <p>If the path has no area (single straight line), the direction is <code><a href="/reference/androidx/compose/ui/graphics/Path.Direction.html#Clockwise">Path.Direction.Clockwise</a></code>.</p>
+        <p>Calling this property does not cache the result, the direction is computed Calling this method does not cache the result, the direction is computed every time the method is called.</p>
+        <p>If you need to query the direction of individual contours, you should <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).divide(kotlin.collections.MutableList)">divide</a></code> the path first.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Path-.divide-kotlin.collections.MutableList-"></a><a name="divide"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.Path).divide(kotlin.collections.MutableList)">PathGeometryKt.divide</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathGeometryKt.html">PathGeometryKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).divide(kotlin.collections.MutableList)">divide</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&gt;&nbsp;contours<br>)</pre>
+        <p>Divides this path into a list of paths. Each contour inside this path is returned as a separate <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>. For instance the following code snippet creates two rectangular contours:</p>
+        <pre class="prettyprint">val p = Path()<br>p.addRect(...)<br>p.addRect(...)<br><br>val contours = p.divide()</pre>
+        <p>The list returned by calling <code>p.divide()</code> will contain two <code>Path</code> instances, each representing one of the two rectangles.</p>
+        <p>Empty contours (contours with no lines/curves) are omitted from the resulting list.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&gt;&nbsp;contours</code></td>
+                <td>
+                  <p>An optional mutable list of <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> that will hold the result of the division.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&gt;</code></td>
+                <td>
+                  <p>A list of <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> representing all the contours in this path. The returned list is either a newly allocated list if the <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).divide(kotlin.collections.MutableList)">contours</a></code> parameter was left unspecified, or the <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).divide(kotlin.collections.MutableList)">contours</a></code> parameter.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Path-.reverse-androidx.compose.ui.graphics.Path-"></a><a name="reverse"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.Path).reverse(androidx.compose.ui.graphics.Path)">PathGeometryKt.reverse</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathGeometryKt.html">PathGeometryKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).reverse(androidx.compose.ui.graphics.Path)">reverse</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;destination)</pre>
+        <p>Reverses the segments of this path into the specified <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).reverse(androidx.compose.ui.graphics.Path)">destination</a></code>, turning a clockwise path into a counter-clockwise path and vice-versa. Each contour in the path is reversed independently, and the contours appear in the <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).reverse(androidx.compose.ui.graphics.Path)">destination</a></code> in reverse order.</p>
+        <p>This method preserves the general structure of this path as much as possible:</p>
+        <ul>
+          <li>
+            <p>Lines become lines</p>
+          </li>
+          <li>
+            <p>Quadratic Bézier curves become quadratic Bézier curves</p>
+          </li>
+          <li>
+            <p>Cubic Bézier curves become cubic Bézier curves</p>
+          </li>
+          <li>
+            <p>Close and move commands remain close and move commands</p>
+          </li>
+          <li>
+            <p>Conic segments become quadratic Bézier curves</p>
+          </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+                <td>
+                  <p>A <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> containing the reverse of this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>. The returned path is either a newly allocated <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> if the <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).reverse(androidx.compose.ui.graphics.Path)">destination</a></code> parameter was left unspecified, or the <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).reverse(androidx.compose.ui.graphics.Path)">destination</a></code> parameter.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Path-.copy--"></a><a name="copy"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.Path).copy()">PathKt.copy</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathKt.html">PathKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).copy()">copy</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver)</pre>
+        <p>Create a new path, copying the contents from the src path.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Path-.addSvg-kotlin.String-"></a><a name="addsvg"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">PathSvgKt.addSvg</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSvgKt.html">PathSvgKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">addSvg</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;pathData)</pre>
+        <p>Adds the specified SVG <a href="https://www.w3.org/TR/SVG2/paths.html#PathData">path data</a> to this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>. The SVG path data encodes a series of instructions that will be applied to this path. For instance, the following path data:</p>
+        <p><code>M200,300 Q400,50 600,300 L1000,300</code></p>
+        <p>Will generate the following series of instructions for this path:</p>
+        <pre class="prettyprint">moveTo(200f, 300f)<br>quadraticTo(400f, 50f, 600f, 300f)<br>lineTo(1000f, 300f)</pre>
+        <p>To convert a <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> to its SVG path data representation, please refer to <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">Path.toSvg</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code></td>
+                <td>
+                  <p>if the path data contains an invalid instruction</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">toSvg</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Path-.toSvg-kotlin.Boolean-"></a><a name="tosvg"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">PathSvgKt.toSvg</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSvgKt.html">PathSvgKt</a>.<a href="/reference/androidx/compose/ui/graphics/Path.html#(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">toSvg</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;boolean&nbsp;asDocument)</pre>
+        <p>Returns an SVG representation of this path. The caller can choose whether the returned SVG represents a fully-formed SVG document or only the <a href="https://www.w3.org/TR/SVG2/paths.html#PathData">path data</a>. By default, only the path data is returned which can be used either with <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">Path.addSvg</a></code> or <code><a href="/reference/androidx/compose/ui/graphics/vector/PathParser.html">androidx.compose.ui.graphics.vector.PathParser</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean&nbsp;asDocument</code></td>
+                <td>
+                  <p>When set to true, this function returns a fully-formed SVG document,         otherwise returns only the path data.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/vector/PathParser.html">PathParser</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">addSvg</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

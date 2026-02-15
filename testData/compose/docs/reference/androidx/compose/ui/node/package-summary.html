@@ -19,6 +19,7 @@
       <meta itemprop="property" content="PointerInputModifierNode">
       <meta itemprop="property" content="RootForTest">
       <meta itemprop="property" content="SemanticsModifierNode">
+      <meta itemprop="property" content="TraversableNode">
       <meta itemprop="property" content="CompositionLocalConsumerModifierNodeKt">
       <meta itemprop="property" content="DelegatableNodeKt">
       <meta itemprop="property" content="DelegatingNode">
@@ -29,12 +30,27 @@
       <meta itemprop="property" content="ParentDataModifierNodeKt">
       <meta itemprop="property" content="Ref">
       <meta itemprop="property" content="SemanticsModifierNodeKt">
+      <meta itemprop="property" content="TraversableNodeKt">
+      <meta itemprop="property" content="WeakReference">
+      <meta itemprop="property" content="TraverseDescendantsAction">
+      <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="InternalCoreApi">
+      <meta itemprop="property" content="(androidx.compose.ui.node.TraversableNode).findNearestAncestor()">
       <meta itemprop="property" content="(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">
+      <meta itemprop="property" content="(androidx.compose.ui.node.TraversableNode).traverseAncestors(kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.node.TraversableNode).traverseChildren(kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.node.TraversableNode).traverseDescendants(kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).findNearestAncestor(kotlin.Any)">
       <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">
       <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireDensity()">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireGraphicsContext()">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireLayoutCoordinates()">
       <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireView()">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.node.DrawModifierNode).invalidateDraw()">
       <meta itemprop="property" content="(androidx.compose.ui.node.LayoutModifierNode).invalidateLayer()">
       <meta itemprop="property" content="(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurement()">
@@ -121,7 +137,7 @@
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html">ObserverModifierNode</a></code></td>
             <td>
-              <p><code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that implement ObserverNode can provide their own implementation of <code><a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> that will be called whenever the value of read object has changed.</p>
+              <p><code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that implement ObserverNode can provide their own implementation of <code><a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> that will be called in response to changes to snapshot objects read within an <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block.</p>
             </td>
           </tr>
           <tr>
@@ -146,6 +162,12 @@
             <td><code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a></code></td>
             <td>
               <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that adds semantics key/value for use in testing, accessibility, and similar use cases.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a></code></td>
+            <td>
+              <p>Allows <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> classes to traverse up/down the Node tree for classes of the same type or for a particular key (traverseKey).</p>
             </td>
           </tr>
         </tbody>
@@ -204,6 +226,35 @@
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNodeKt.html">SemanticsModifierNodeKt</a></code></td>
             <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/TraversableNodeKt.html">TraversableNodeKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/WeakReference.html">WeakReference</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/TraversableNode.Companion.html">TraversableNode.Companion</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Enums</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/TraversableNode.Companion.TraverseDescendantsAction.html">TraversableNode.Companion.TraverseDescendantsAction</a></code></td>
+            <td>
+              <p>Tree traversal actions for the traverseDescendantsIf related functions:</p>
+            </td>
           </tr>
         </tbody>
       </table>

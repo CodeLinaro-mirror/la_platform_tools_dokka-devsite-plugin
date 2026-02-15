@@ -1,0 +1,364 @@
+<html devsite="true">
+  <head>
+    <title>ContextualFlowColumnScope</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="ContextualFlowColumnScope">
+      <meta itemprop="path" content="androidx.compose.foundation.layout">
+      <meta itemprop="property" content="getIndexInLine()">
+      <meta itemprop="property" content="getLineIndex()">
+      <meta itemprop="property" content="getMaxHeightInLine()">
+      <meta itemprop="property" content="getMaxWidth()">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>ContextualFlowColumnScope</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/layout/ContextualFlowLayout.kt+class:androidx.compose.foundation.layout.ContextualFlowColumnScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/layout/ContextualFlowColumnScope.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>@<a href="/reference/androidx/compose/foundation/layout/LayoutScopeMarker.html">LayoutScopeMarker</a><br>@<a href="/reference/androidx/compose/foundation/layout/ExperimentalLayoutApi.html">ExperimentalLayoutApi</a><br>public interface <a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html">ContextualFlowColumnScope</a> extends <a href="/reference/androidx/compose/foundation/layout/FlowColumnScope.html">FlowColumnScope</a></pre>
+    </p>
+    <hr>
+    <p>Provides a scope for items within a <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#ContextualFlowColumn(kotlin.Int,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,kotlin.Int,kotlin.Int,androidx.compose.foundation.layout.ContextualFlowColumnOverflow,kotlin.Function2)">ContextualFlowColumn</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#getIndexInLine()">getIndexInLine</a>()</code></div>
+              <p>Marks the index within the current row/column where the next component is to be inserted, assuming it conforms to the row's or column's <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#maxWidth()">maxWidth</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#maxHeightInLine()">maxHeightInLine</a></code> limitations.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#getLineIndex()">getLineIndex</a>()</code></div>
+              <p>Identifies the row or column index where the UI component(s) are to be placed, provided they do not exceed the specified <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#maxWidth()">maxWidth</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#maxHeightInLine()">maxHeightInLine</a></code> for that row or column.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#getMaxHeightInLine()">getMaxHeightInLine</a>()</code></div>
+              <p>Establishes the maximum height (main-axis dimension) permissible for the next UI component, aligned with its <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#lineIndex()">lineIndex</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#indexInLine()">indexInLine</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#getMaxWidth()">getMaxWidth</a>()</code></div>
+              <p>Sets the maximum width (cross-axis dimension) that the upcoming UI component can occupy, based on its <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#lineIndex()">lineIndex</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#indexInLine()">indexInLine</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/foundation/layout/ColumnScope.html">androidx.compose.foundation.layout.ColumnScope</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/foundation/layout/ColumnKt.html">ColumnKt</a>.<a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).align(androidx.compose.ui.Alignment.Horizontal)">align</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Alignment.Horizontal.html">Alignment.Horizontal</a>&nbsp;alignment<br>)</code></div>
+                        <p>Align the element horizontally within the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/foundation/layout/ColumnKt.html">ColumnKt</a>.<a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(kotlin.Function1)">alignBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/Measured.html">Measured</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;alignmentLineBlock<br>)</code></div>
+                        <p>Position the element horizontally such that the alignment line for the content as determined by <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(kotlin.Function1)">alignmentLineBlock</a></code> aligns with sibling elements also configured to <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(kotlin.Function1)">alignBy</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/foundation/layout/ColumnKt.html">ColumnKt</a>.<a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/VerticalAlignmentLine.html">VerticalAlignmentLine</a>&nbsp;alignmentLine<br>)</code></div>
+                        <p>Position the element horizontally such that its <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignmentLine</a></code> aligns with sibling elements also configured to <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/foundation/layout/ColumnKt.html">ColumnKt</a>.<a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">weight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;weight,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;fill<br>)</code></div>
+                        <p>Size the element's height proportional to its <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">weight</a></code> relative to other weighted sibling elements in the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/foundation/layout/FlowColumnScope.html">androidx.compose.foundation.layout.FlowColumnScope</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code>@<a href="/reference/androidx/compose/foundation/layout/ExperimentalLayoutApi.html">ExperimentalLayoutApi</a><br><a href="/reference/androidx/compose/foundation/layout/FlowLayoutKt.html">FlowLayoutKt</a>.<a href="/reference/androidx/compose/foundation/layout/FlowColumnScope.html#(androidx.compose.ui.Modifier).fillMaxColumnWidth(kotlin.Float)">fillMaxColumnWidth</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;fraction<br>)</code></div>
+                        <p>Have the item fill (possibly only partially) the max width of the widest item in the column it was placed in, within the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#FlowColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,kotlin.Int,kotlin.Int,androidx.compose.foundation.layout.FlowColumnOverflow,kotlin.Function1)">FlowColumn</a></code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getIndexInLine--"></a><a name="getindexinline"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getIndexInLine()">getIndexInLine</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#getIndexInLine()">getIndexInLine</a>()</pre>
+        <p>Marks the index within the current row/column where the next component is to be inserted, assuming it conforms to the row's or column's <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#maxWidth()">maxWidth</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#maxHeightInLine()">maxHeightInLine</a></code> limitations.</p>
+        <p>In scenarios where multiple UI components are returned in one index call, this parameter is relevant solely to the first returned UI component, presuming it complies with the row's or column's defined constraints.</p>
+        <p>Example:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ContextualFlowRow
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+Text(&quot;Ln: Line No\nPs: Position No. in Line&quot;, modifier = Modifier.padding(20.dp))
+ContextualFlowRow(
+    modifier = Modifier
+        .fillMaxWidth(1f)
+        .height(210.dp)
+        .padding(20.dp),
+    horizontalArrangement = Arrangement.spacedBy(10.dp),
+    verticalArrangement = Arrangement.spacedBy(20.dp),
+    maxItemsInEachRow = 4,
+    itemCount = 12
+) {
+    val width = Random.nextInt(80, 100).dp.coerceAtMost(maxWidthInLine)
+    val height = 50.dp.coerceAtMost(maxHeight)
+    Box(
+        Modifier
+            .width(width)
+            .height(height)
+            .background(MatchingColors.getByIndex(indexInLine)!!.color)
+    ) {
+        Text(
+            text = &quot;Ln: ${this@ContextualFlowRow.lineIndex}&quot; +
+                &quot;\nPs: ${this@ContextualFlowRow.indexInLine}&quot;,
+            fontSize = 18.sp,
+            modifier = Modifier.padding(3.dp)
+        )
+    }
+}</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ContextualFlowColumn
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+Text(&quot;Ln: Line No\nPs: Position No. in Line&quot;, modifier = Modifier.padding(20.dp))
+ContextualFlowColumn(
+    modifier = Modifier
+        .fillMaxHeight(1f)
+        .width(210.dp)
+        .padding(20.dp),
+    horizontalArrangement = Arrangement.spacedBy(10.dp),
+    verticalArrangement = Arrangement.spacedBy(20.dp),
+    maxItemsInEachColumn = 4,
+    itemCount = 12
+) {
+    val width = 50.dp.coerceAtMost(maxWidth)
+    val height = Random.nextInt(80, 100).dp.coerceAtMost(maxHeightInLine)
+    Box(
+        Modifier
+            .width(width)
+            .height(height)
+            .background(MatchingColors.getByIndex(indexInLine)!!.color)
+    ) {
+        Text(
+            text = &quot;Ln: ${this@ContextualFlowColumn.lineIndex}&quot; +
+                &quot;\nPs: ${this@ContextualFlowColumn.indexInLine}&quot;,
+            fontSize = 18.sp,
+            modifier = Modifier.padding(3.dp)
+        )
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getLineIndex--"></a><a name="getlineindex"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getLineIndex()">getLineIndex</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#getLineIndex()">getLineIndex</a>()</pre>
+        <p>Identifies the row or column index where the UI component(s) are to be placed, provided they do not exceed the specified <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#maxWidth()">maxWidth</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#maxHeightInLine()">maxHeightInLine</a></code> for that row or column.</p>
+        <p>Should the component(s) surpass these dimensions, their placement may shift to the subsequent row/column or they may be omitted from display, contingent upon the defined constraints.</p>
+        <p>Example:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ContextualFlowRow
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+Text(&quot;Ln: Line No\nPs: Position No. in Line&quot;, modifier = Modifier.padding(20.dp))
+ContextualFlowRow(
+    modifier = Modifier
+        .fillMaxWidth(1f)
+        .height(210.dp)
+        .padding(20.dp),
+    horizontalArrangement = Arrangement.spacedBy(10.dp),
+    verticalArrangement = Arrangement.spacedBy(20.dp),
+    maxItemsInEachRow = 4,
+    itemCount = 12
+) {
+    val width = Random.nextInt(80, 100).dp.coerceAtMost(maxWidthInLine)
+    val height = 50.dp.coerceAtMost(maxHeight)
+    Box(
+        Modifier
+            .width(width)
+            .height(height)
+            .background(MatchingColors.getByIndex(indexInLine)!!.color)
+    ) {
+        Text(
+            text = &quot;Ln: ${this@ContextualFlowRow.lineIndex}&quot; +
+                &quot;\nPs: ${this@ContextualFlowRow.indexInLine}&quot;,
+            fontSize = 18.sp,
+            modifier = Modifier.padding(3.dp)
+        )
+    }
+}</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ContextualFlowColumn
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+Text(&quot;Ln: Line No\nPs: Position No. in Line&quot;, modifier = Modifier.padding(20.dp))
+ContextualFlowColumn(
+    modifier = Modifier
+        .fillMaxHeight(1f)
+        .width(210.dp)
+        .padding(20.dp),
+    horizontalArrangement = Arrangement.spacedBy(10.dp),
+    verticalArrangement = Arrangement.spacedBy(20.dp),
+    maxItemsInEachColumn = 4,
+    itemCount = 12
+) {
+    val width = 50.dp.coerceAtMost(maxWidth)
+    val height = Random.nextInt(80, 100).dp.coerceAtMost(maxHeightInLine)
+    Box(
+        Modifier
+            .width(width)
+            .height(height)
+            .background(MatchingColors.getByIndex(indexInLine)!!.color)
+    ) {
+        Text(
+            text = &quot;Ln: ${this@ContextualFlowColumn.lineIndex}&quot; +
+                &quot;\nPs: ${this@ContextualFlowColumn.indexInLine}&quot;,
+            fontSize = 18.sp,
+            modifier = Modifier.padding(3.dp)
+        )
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getMaxHeightInLine--"></a><a name="getmaxheightinline"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getMaxHeightInLine()">getMaxHeightInLine</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#getMaxHeightInLine()">getMaxHeightInLine</a>()</pre>
+        <p>Establishes the maximum height (main-axis dimension) permissible for the next UI component, aligned with its <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#lineIndex()">lineIndex</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#indexInLine()">indexInLine</a></code>. Should the component's height exceed this limit, it may be shifted to the subsequent column in <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#ContextualFlowColumn(kotlin.Int,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,kotlin.Int,kotlin.Int,androidx.compose.foundation.layout.ContextualFlowColumnOverflow,kotlin.Function2)">ContextualFlowColumn</a></code>, subject to the predefined constraints.</p>
+      </div>
+      <div class="api-item"><a name="getMaxWidth--"></a><a name="getmaxwidth"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getMaxWidth()">getMaxWidth</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#getMaxWidth()">getMaxWidth</a>()</pre>
+        <p>Sets the maximum width (cross-axis dimension) that the upcoming UI component can occupy, based on its <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#lineIndex()">lineIndex</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnScope.html#indexInLine()">indexInLine</a></code>. Exceeding this width might result in the component not being displayed, depending on the <code><a href="/reference/androidx/compose/foundation/layout/ContextualFlowColumnOverflow.Companion.html#Visible()">ContextualFlowColumnOverflow.Visible</a></code> overflow configuration.</p>
+      </div>
+    </div>
+  </body>
+</html>

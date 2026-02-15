@@ -1,0 +1,221 @@
+<html devsite="true">
+  <head>
+    <title>IndicationNodeFactory</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="IndicationNodeFactory">
+      <meta itemprop="path" content="androidx.compose.foundation">
+      <meta itemprop="property" content="create(androidx.compose.foundation.interaction.InteractionSource)">
+      <meta itemprop="property" content="equals(kotlin.Any)">
+      <meta itemprop="property" content="hashCode()">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>IndicationNodeFactory</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/Indication.kt+class:androidx.compose.foundation.IndicationNodeFactory&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/IndicationNodeFactory.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html">IndicationNodeFactory</a> : <a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>IndicationNodeFactory is an Indication that creates <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instances to render visual effects that occur when certain interactions happens. For example: showing a ripple effect when a component is pressed, or a highlight when a component is focused.</p>
+    <p>An instance of IndicationNodeFactory is responsible for creating individual nodes on demand for each component that needs to render indication. IndicationNodeFactory instances should be very simple - they just hold the relevant configuration properties needed to create the node instances that are responsible for drawing visual effects.</p>
+    <p>IndicationNodeFactory is conceptually similar to <code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> - it is designed to be able to be created outside of composition, and re-used in multiple places.</p>
+    <p>Indication is typically provided throughout the hierarchy through <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> - you can provide a custom Indication to <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> to change the default <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> used for components such as <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">clickable</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#create(androidx.compose.foundation.interaction.InteractionSource)">create</a>(interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>)</code></div>
+                <p>Creates a node that will be applied to a specific component and render indication for the provided <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#create(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+                <p>Require equals() to be implemented.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#hashCode()">hashCode</a>()</code></div>
+                <p>Require hashCode() to be implemented.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/foundation/Indication.html">androidx.compose.foundation.Indication</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code></td>
+                        <td>
+                          <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><span><del><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">rememberUpdatedInstance</a></del></span>(interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>)</code></div>
+                          <p><strong>This function is deprecated.</strong> rememberUpdatedInstance has been deprecated - implementers should instead implement IndicationNodeFactory#create for improved performance and efficiency.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="create-androidx.compose.foundation.interaction.InteractionSource-"></a><a name="create"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="create(androidx.compose.foundation.interaction.InteractionSource)">create</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#create(androidx.compose.foundation.interaction.InteractionSource)">create</a>(interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+          <p>Creates a node that will be applied to a specific component and render indication for the provided <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#create(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code>. This method will be re-invoked for a given layout node if a new <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#create(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code> is provided or if <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#hashCode()">hashCode</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#equals(kotlin.Any)">equals</a></code> change for this IndicationNodeFactory over time, allowing a new node to be created using the new properties in this IndicationNodeFactory. If you instead want to gracefully update the existing node over time, consider replacing those properties with <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">androidx.compose.runtime.State</a></code> properties, so when the value of the State changes, <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#equals(kotlin.Any)">equals</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#hashCode()">hashCode</a></code> remain the same, and the same node instance can just query the updated state value.</p>
+          <p>The returned <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> should implement <code><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a></code>, or delegate to a node that implements <code><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a></code>, so that it can draw visual effects. Inside <code><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html#(androidx.compose.ui.graphics.drawscope.ContentDrawScope).draw()">DrawModifierNode.draw</a></code>, make sure to call <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html#drawContent()">ContentDrawScope.drawContent</a></code> to render the component in addition to any visual effects.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code></td>
+                  <td>
+                    <p>the <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> representing the stream of <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s the returned node should render visual effects for</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code></td>
+                  <td>
+                    <p>a <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> that renders visual effects for the provided <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#create(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code> by also implementing / delegating to a <code><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a></code></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="equals(kotlin.Any)">equals</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Require equals() to be implemented. Using a data class is sufficient. Singletons may implement this function with referential equality (<code>this === other</code>). Instances with no properties may implement this function by checking the type of the other object.</p>
+        </div>
+        <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="hashCode()">hashCode</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html#hashCode()">hashCode</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>Require hashCode() to be implemented. Using a data class is sufficient. Singletons and instances with no properties may implement this function by returning an arbitrary constant.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

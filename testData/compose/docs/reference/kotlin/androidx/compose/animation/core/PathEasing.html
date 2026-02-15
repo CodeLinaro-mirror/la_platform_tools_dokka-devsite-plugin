@@ -1,0 +1,205 @@
+<html devsite="true">
+  <head>
+    <title>PathEasing</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="PathEasing">
+      <meta itemprop="path" content="androidx.compose.animation.core">
+      <meta itemprop="property" content="transform(kotlin.Float)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>PathEasing</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/core/PathEasing.kt+class:androidx.compose.animation.core.PathEasing&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/animation/core/PathEasing.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/PathEasing.html">PathEasing</a> : <a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>An easing function for an arbitrary <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+    <p>The <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code> must begin at <code>(0, 0)</code> and end at <code>(1, 1)</code>. The x-coordinate along the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code> is the input value and the output is the y coordinate of the line at that point. This means that the Path must conform to a function <code>y = f(x)</code>.</p>
+    <p>The <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code> must be continuous along the x axis. The <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code> should also be monotonically increasing along the x axis. If the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code> is not monotonic and there are multiple y values for a given x, the chosen y value is implementation dependent and may vary.</p>
+    <p>The <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code> must not contain any <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html#close()">Path.close</a></code> command as it would force the path to restart from the beginning.</p>
+    <p>This is equivalent to the Android <code>PathInterpolator</code>.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/animation/core/CubicBezierEasing.html">CubicBezierEasing</a></code> should be used if a single bezier curve is required as it performs fewer allocations. <code><a href="/reference/kotlin/androidx/compose/animation/core/PathEasing.html">PathEasing</a></code> should be used when creating an arbitrary path.</p>
+    <p>Note: a <code><a href="/reference/kotlin/androidx/compose/animation/core/PathEasing.html">PathEasing</a></code> instance can be used from any thread, but not concurrently.</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.PathEasing
+import androidx.compose.animation.core.animateIntOffsetAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+
+// Creates a custom PathEasing curve and applies it to an animation
+var toggled by remember {
+    mutableStateOf(true)
+}
+val pathForAnimation = remember {
+    Path().apply {
+        moveTo(0f, 0f)
+        cubicTo(0.05f, 0f, 0.133333f, 0.06f, 0.166666f, 0.4f)
+        cubicTo(0.208333f, 0.82f, 0.25f, 1f, 1f, 1f)
+    }
+}
+val offset by animateIntOffsetAsState(
+    targetValue =
+    if (toggled) IntOffset.Zero else IntOffset(300, 300),
+    label = &quot;offset&quot;,
+    animationSpec = tween(durationMillis = 1000, easing = PathEasing(pathForAnimation))
+)
+Box(modifier = Modifier
+    .fillMaxSize()
+    .clickable {
+        toggled = !toggled
+    }) {
+    Box(modifier = Modifier
+        .offset {
+            offset
+        }
+        .size(100.dp)
+        .background(Color.Blue))
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/PathEasing.html#PathEasing(androidx.compose.ui.graphics.Path)">PathEasing</a>(path:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/PathEasing.html#transform(kotlin.Float)">transform</a>(fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public constructors
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="PathEasing-androidx.compose.ui.graphics.Path-"></a><a name="patheasing"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="PathEasing(androidx.compose.ui.graphics.Path)">PathEasing</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/animation/core/PathEasing.html#PathEasing(androidx.compose.ui.graphics.Path)">PathEasing</a>(path:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>)</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>path:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+                  <td>
+                    <p>The <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code> to use to make the curve representing the easing curve.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="transform-kotlin.Float-"></a><a name="transform"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="transform(kotlin.Float)">transform</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/PathEasing.html#transform(kotlin.Float)">transform</a>(fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

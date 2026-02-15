@@ -15,7 +15,7 @@
       <meta itemprop="property" content="setContent(kotlin.Function0)">
       <meta itemprop="property" content="unregisterIdlingResource(androidx.compose.ui.test.IdlingResource)">
       <meta itemprop="property" content="waitForIdle()">
-      <meta itemprop="property" content="waitUntil(kotlin.Long,kotlin.Function0)">
+      <meta itemprop="property" content="waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">
       <meta itemprop="property" content="density()">
       <meta itemprop="property" content="mainClock()">
       <meta itemprop="property" content="(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">
@@ -182,8 +182,8 @@
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a>(timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>,&nbsp;condition:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
-                <p>Blocks until the given <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">condition</a></code> is satisfied.</p>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;conditionDescription:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;condition:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Blocks until the given <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">condition</a></code> is satisfied.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -490,10 +490,10 @@
           <p>Waits for compose to be idle. If <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">auto advancement</a></code> is enabled on the <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#mainClock()">mainClock</a></code>, this method will actively advance the clock to process any pending composition, invalidation and animation. If auto advancement is not enabled, the clock will not be advanced actively which usually means that the Compose UI appears to be frozen. This is ideal for testing animations in a deterministic way. In either case, this method will wait for all <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code>s to become idle.</p>
           <p>Note that some processes are driven by the host operating system and will therefore still execute when auto advancement is disabled. For example, on Android measure, layout and draw can still happen if the host view is invalidated by other parts of the View hierarchy.</p>
         </div>
-        <div class="api-item"><a name="waitUntil(kotlin.Long, kotlin.Function0)"></a><a name="waitUntil-kotlin.Long-kotlin.Function0-"></a><a name="waituntil"></a>
+        <div class="api-item"><a name="waitUntil(kotlin.String, kotlin.Long, kotlin.Function0)"></a><a name="waitUntil-kotlin.String-kotlin.Long-kotlin.Function0-"></a><a name="waituntil"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</h3>
+              <h3 id="waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
@@ -501,11 +501,11 @@
                 <!--platform-Android/JVM--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a>(timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>,&nbsp;condition:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Blocks until the given <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">condition</a></code> is satisfied.</p>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;conditionDescription:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;condition:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Blocks until the given <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">condition</a></code> is satisfied.</p>
           <p>If <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">auto advancement</a></code> is enabled on the <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#mainClock()">mainClock</a></code>, this method will actively advance the clock to process any pending composition, invalidation and animation. If auto advancement is not enabled, the clock will not be advanced actively which usually means that the Compose UI appears to be frozen. This is ideal for testing animations in a deterministic way. In either case, this method will wait for all <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code>s to become idle.</p>
           <p>Note that some processes are driven by the host operating system and will therefore still execute when auto advancement is disabled. For example, on Android measure, layout and draw can still happen if the host view is invalidated by other parts of the View hierarchy.</p>
-          <p>Compared to <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">MainTestClock.advanceTimeUntil</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a></code> sleeps after every iteration to give the host operating system the opportunity to do measure/layout/draw passes. This gives <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a></code> a better integration with the host, but it is less preferred from a performance viewpoint. Therefore, we recommend that you try using <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">MainTestClock.advanceTimeUntil</a></code> before resorting to <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a></code>.</p>
+          <p>Compared to <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">MainTestClock.advanceTimeUntil</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a></code> sleeps after every iteration to give the host operating system the opportunity to do measure/layout/draw passes. This gives <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a></code> a better integration with the host, but it is less preferred from a performance viewpoint. Therefore, we recommend that you try using <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">MainTestClock.advanceTimeUntil</a></code> before resorting to <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a></code>.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -518,6 +518,12 @@
                 </tr>
               </thead>
               <tbody class="list">
+                <tr>
+                  <td><code>conditionDescription:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>? = null</code></td>
+                  <td>
+                    <p>An optional human-readable description of <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">condition</a></code> that will be included in the timeout exception if thrown.</p>
+                  </td>
+                </tr>
                 <tr>
                   <td><code>timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code></td>
                   <td>
@@ -548,7 +554,7 @@
                 <tr>
                   <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeTimeoutException.html">androidx.compose.ui.test.ComposeTimeoutException</a></code></td>
                   <td>
-                    <p>If the condition is not satisfied after <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">timeoutMillis</a></code> (in wall clock time).</p>
+                    <p>If the condition is not satisfied after <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">timeoutMillis</a></code> (in wall clock time).</p>
                   </td>
                 </tr>
               </tbody>
@@ -668,7 +674,7 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a></code></td>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a></code></td>
                   <td></td>
                 </tr>
               </tbody>
@@ -748,7 +754,7 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a></code></td>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a></code></td>
                   <td></td>
                 </tr>
               </tbody>
@@ -828,7 +834,7 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a></code></td>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a></code></td>
                   <td></td>
                 </tr>
               </tbody>
@@ -868,7 +874,7 @@
                 <tr>
                   <td><code>count:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
                   <td>
-                    <p>The number of nodes that are expected to</p>
+                    <p>The number of nodes that are expected to be matched.</p>
                   </td>
                 </tr>
                 <tr>
@@ -914,7 +920,7 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a></code></td>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a></code></td>
                   <td></td>
                 </tr>
               </tbody>

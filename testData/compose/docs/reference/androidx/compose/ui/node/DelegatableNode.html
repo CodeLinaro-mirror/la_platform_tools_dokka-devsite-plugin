@@ -11,7 +11,14 @@
       <meta itemprop="property" content="getNode()">
       <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">
       <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireDensity()">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireGraphicsContext()">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireLayoutCoordinates()">
       <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).requireView()">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).findNearestAncestor(kotlin.Any)">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -30,7 +37,7 @@
       <pre>public interface <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
     </p>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a>, <a href="/reference/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a>, <a href="/reference/androidx/compose/ui/focus/FocusEventModifierNode.html">FocusEventModifierNode</a>, <a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a>, <a href="/reference/androidx/compose/ui/focus/FocusRequesterModifierNode.html">FocusRequesterModifierNode</a>, <a href="/reference/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a>, <a href="/reference/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html">GlobalPositionAwareModifierNode</a>, <a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html">KeyInputModifierNode</a>, <a href="/reference/androidx/compose/ui/node/LayoutAwareModifierNode.html">LayoutAwareModifierNode</a>, <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>, <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>, <a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html">ModifierLocalModifierNode</a>, <a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html">ObserverModifierNode</a>, <a href="/reference/androidx/compose/ui/node/ParentDataModifierNode.html">ParentDataModifierNode</a>, <a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a>, <a href="/reference/androidx/compose/ui/input/rotary/RotaryInputModifierNode.html">RotaryInputModifierNode</a>, <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>, <a href="/reference/androidx/compose/ui/input/key/SoftKeyboardInterceptionModifierNode.html">SoftKeyboardInterceptionModifierNode</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a>, <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropModifierNode.html">DragAndDropModifierNode</a>, <a href="/reference/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a>, <a href="/reference/androidx/compose/ui/focus/FocusEventModifierNode.html">FocusEventModifierNode</a>, <a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a>, <a href="/reference/androidx/compose/ui/focus/FocusRequesterModifierNode.html">FocusRequesterModifierNode</a>, <a href="/reference/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a>, <a href="/reference/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html">GlobalPositionAwareModifierNode</a>, <a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html">KeyInputModifierNode</a>, <a href="/reference/androidx/compose/ui/node/LayoutAwareModifierNode.html">LayoutAwareModifierNode</a>, <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>, <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>, <a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html">ModifierLocalModifierNode</a>, <a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html">ObserverModifierNode</a>, <a href="/reference/androidx/compose/ui/node/ParentDataModifierNode.html">ParentDataModifierNode</a>, <a href="/reference/androidx/compose/ui/platform/PlatformTextInputModifierNode.html">PlatformTextInputModifierNode</a>, <a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a>, <a href="/reference/androidx/compose/ui/input/rotary/RotaryInputModifierNode.html">RotaryInputModifierNode</a>, <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>, <a href="/reference/androidx/compose/ui/input/key/SoftKeyboardInterceptionModifierNode.html">SoftKeyboardInterceptionModifierNode</a>, <a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -44,6 +51,12 @@
                 <td><code><a href="/reference/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a></code></td>
                 <td>
                   <p>Implementing this interface allows your <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> subclass to read <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocals</a></code> via the <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</a></code> function.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropModifierNode.html">DragAndDropModifierNode</a></code></td>
+                <td>
+                  <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> providing low level access to platform drag and drop operations.</p>
                 </td>
               </tr>
               <tr>
@@ -115,13 +128,19 @@
               <tr>
                 <td><code><a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html">ObserverModifierNode</a></code></td>
                 <td>
-                  <p><code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that implement ObserverNode can provide their own implementation of <code><a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> that will be called whenever the value of read object has changed.</p>
+                  <p><code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that implement ObserverNode can provide their own implementation of <code><a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> that will be called in response to changes to snapshot objects read within an <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block.</p>
                 </td>
               </tr>
               <tr>
                 <td><code><a href="/reference/androidx/compose/ui/node/ParentDataModifierNode.html">ParentDataModifierNode</a></code></td>
                 <td>
                   <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that provides data to the parent <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputModifierNode.html">PlatformTextInputModifierNode</a></code></td>
+                <td>
+                  <p>A modifier node that can connect to the platform's text input IME system.</p>
                 </td>
               </tr>
               <tr>
@@ -148,13 +167,19 @@
                   <p>Implement this interface to create a <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that can intercept hardware Key events before they are sent to the software keyboard.</p>
                 </td>
               </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a></code></td>
+                <td>
+                  <p>Allows <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> classes to traverse up/down the Node tree for classes of the same type or for a particular key (traverseKey).</p>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
 </devsite-expandable>    </div>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
-        <div class="showalways" id="subclasses-indirect"><a href="/reference/androidx/compose/ui/draw/CacheDrawModifierNode.html">CacheDrawModifierNode</a>, <a href="/reference/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a>, <a href="/reference/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a></div>
+        <div class="showalways" id="subclasses-indirect"><a href="/reference/androidx/compose/ui/layout/ApproachLayoutModifierNode.html">ApproachLayoutModifierNode</a>, <a href="/reference/androidx/compose/ui/draw/CacheDrawModifierNode.html">CacheDrawModifierNode</a>, <a href="/reference/androidx/compose/foundation/CombinedClickableNode.html">CombinedClickableNode</a>, <a href="/reference/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a>, <a href="/reference/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a></div>
       </span>
       <div id="subclasses-indirect-summary">
         <div class="devsite-table-wrapper">
@@ -165,9 +190,21 @@
             </colgroup>
             <tbody class="list">
               <tr>
+                <td><code><a href="/reference/androidx/compose/ui/layout/ApproachLayoutModifierNode.html">ApproachLayoutModifierNode</a></code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/ui/layout/ApproachLayoutModifierNode.html">ApproachLayoutModifierNode</a></code> is designed to support gradually approaching the destination layout calculated in the lookahead pass.</p>
+                </td>
+              </tr>
+              <tr>
                 <td><code><a href="/reference/androidx/compose/ui/draw/CacheDrawModifierNode.html">CacheDrawModifierNode</a></code></td>
                 <td>
                   <p>Expands on the <code><a href="/reference/androidx/compose/ui/node/DrawModifierNode.html">androidx.compose.ui.node.DrawModifierNode</a></code> by adding the ability to invalidate the draw cache for changes in things like shapes and bitmaps (see Modifier.border for a usage examples).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/CombinedClickableNode.html">CombinedClickableNode</a></code></td>
+                <td>
+                  <p>Public interface for the internal node used inside <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).combinedClickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.String,kotlin.Function0,kotlin.Function0,kotlin.Function0)">combinedClickable</a></code>, to allow for custom modifier nodes to delegate to it.</p>
                 </td>
               </tr>
               <tr>
@@ -262,10 +299,59 @@
             </td>
           </tr>
           <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html">GraphicsContext</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html">DelegatableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireGraphicsContext()">requireGraphicsContext</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver<br>)</code></div>
+              <p>Returns the current <code><a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html">GraphicsContext</a></code> of the <code><a href="/reference/androidx/compose/ui/node/Owner.html">Owner</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html">DelegatableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireLayoutCoordinates()">requireLayoutCoordinates</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver<br>)</code></div>
+              <p>Returns the <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of this node.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html">DelegatableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">requireLayoutDirection</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver<br>)</code></div>
               <p>Returns the current <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the LayoutNode that this <code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html">DelegatableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireView()">requireView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</code></div>
+              <p>The Android <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> hosting the composition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final <a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/TraversableNodeKt.html">TraversableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).findNearestAncestor(kotlin.Any)">findNearestAncestor</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key<br>)</code></div>
+              <p>Finds the nearest traversable ancestor with a matching <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).findNearestAncestor(kotlin.Any)">key</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/TraversableNodeKt.html">TraversableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">traverseAncestors</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;block<br>)</code></div>
+              <p>Executes <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">block</a></code> for all ancestors with a matching <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">key</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/TraversableNodeKt.html">TraversableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">traverseChildren</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;block<br>)</code></div>
+              <p>Executes <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">block</a></code> for all direct children of the node with a matching <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">key</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/TraversableNodeKt.html">TraversableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">traverseDescendants</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/TraversableNode.Companion.TraverseDescendantsAction.html">TraversableNode.Companion.TraverseDescendantsAction</a>&gt;&nbsp;block<br>)</code></div>
+              <p>Conditionally executes <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">block</a></code> for each descendant with a matching <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">key</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -280,7 +366,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#getNode()">getNode</a>()</pre>
-        <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy. If the node is a delegate of another node, this will point to that node. Otherwise, this will point to itself.</p>
+        <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy. If the node is a delegate of another node, this will point to the root delegating node that is actually part of the node tree. Otherwise, this will point to itself.</p>
       </div>
     </div>
     <div class="list">
@@ -304,6 +390,46 @@
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html">DelegatableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireDensity()">requireDensity</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</pre>
         <p>Returns the current <code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code> of the LayoutNode that this <code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to. If the node is not attached, this function will throw an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
       </div>
+      <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.requireGraphicsContext--"></a><a name="requiregraphicscontext"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.node.DelegatableNode).requireGraphicsContext()">DelegatableNodeKt.requireGraphicsContext</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html">GraphicsContext</a>&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html">DelegatableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireGraphicsContext()">requireGraphicsContext</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver<br>)</pre>
+        <p>Returns the current <code><a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html">GraphicsContext</a></code> of the <code><a href="/reference/androidx/compose/ui/node/Owner.html">Owner</a></code></p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.requireLayoutCoordinates--"></a><a name="requirelayoutcoordinates"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.node.DelegatableNode).requireLayoutCoordinates()">DelegatableNodeKt.requireLayoutCoordinates</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html">DelegatableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireLayoutCoordinates()">requireLayoutCoordinates</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver<br>)</pre>
+        <p>Returns the <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of this node.</p>
+        <p>To get a signal when the <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> become available, or when its parent places it, implement <code><a href="/reference/androidx/compose/ui/node/LayoutAwareModifierNode.html">LayoutAwareModifierNode</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code></td>
+                <td>
+                  <p>When either this node is not attached, or the <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> object is not attached.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.requireLayoutDirection--"></a><a name="requirelayoutdirection"></a>
         <div class="api-name-block">
           <div>
@@ -312,6 +438,132 @@
         </div>
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html">DelegatableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">requireLayoutDirection</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver<br>)</pre>
         <p>Returns the current <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the LayoutNode that this <code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to. If the node is not attached, this function will throw an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.requireView--"></a><a name="requireview"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.node.DelegatableNode).requireView()">DelegatableNodeKt.requireView</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html">DelegatableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireView()">requireView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</pre>
+        <p>The Android <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> hosting the composition.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code></td>
+                <td>
+                  <p>If the modifier node is not <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#isAttached()">attached</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.findNearestAncestor-kotlin.Any-"></a><a name="findnearestancestor"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.node.DelegatableNode).findNearestAncestor(kotlin.Any)">TraversableNodeKt.findNearestAncestor</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a>&nbsp;<a href="/reference/androidx/compose/ui/node/TraversableNodeKt.html">TraversableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).findNearestAncestor(kotlin.Any)">findNearestAncestor</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key<br>)</pre>
+        <p>Finds the nearest traversable ancestor with a matching <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).findNearestAncestor(kotlin.Any)">key</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any, kotlin.Function1)"></a><a name="-androidx.compose.ui.node.DelegatableNode-.traverseAncestors-kotlin.Any-kotlin.Function1-"></a><a name="traverseancestors"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">TraversableNodeKt.traverseAncestors</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/TraversableNodeKt.html">TraversableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">traverseAncestors</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;block<br>)</pre>
+        <p>Executes <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">block</a></code> for all ancestors with a matching <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">key</a></code>.</p>
+        <p>Note: The parameter <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseAncestors(kotlin.Any,kotlin.Function1)">block</a></code>'s return boolean value will determine if the traversal will continue (true = continue, false = cancel).</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.node.traverseAncestors
+
+val customTraversableModifierNode = CustomTraversableModifierNode()
+
+with(customTraversableModifierNode) {
+    traverseAncestors(traverseKey) {
+        if (it is CustomTraversableModifierNode) {
+            it.doSomethingWithAncestor()
+        }
+        // Return true to continue searching the tree after a match. If you were looking to
+        // match only some of the nodes, you could return false and stop executing the search.
+        true
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any, kotlin.Function1)"></a><a name="-androidx.compose.ui.node.DelegatableNode-.traverseChildren-kotlin.Any-kotlin.Function1-"></a><a name="traversechildren"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">TraversableNodeKt.traverseChildren</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/TraversableNodeKt.html">TraversableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">traverseChildren</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;block<br>)</pre>
+        <p>Executes <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">block</a></code> for all direct children of the node with a matching <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">key</a></code>.</p>
+        <p>Note 1: This stops at the children and does not include grandchildren and so on down the tree.</p>
+        <p>Note 2: The parameter <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseChildren(kotlin.Any,kotlin.Function1)">block</a></code>'s return boolean value will determine if the traversal will continue (true = continue, false = cancel).</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.node.traverseChildren
+
+val customTraversableModifierNode = CustomTraversableModifierNode()
+
+with(customTraversableModifierNode) {
+    traverseChildren(traverseKey) {
+        if (it is CustomTraversableModifierNode) {
+            it.doSomethingWithChild()
+        }
+        // Return true to continue searching the tree after a match. If you were looking to
+        // match only some of the nodes, you could return false and stop executing the search.
+        true
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any, kotlin.Function1)"></a><a name="-androidx.compose.ui.node.DelegatableNode-.traverseDescendants-kotlin.Any-kotlin.Function1-"></a><a name="traversedescendants"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">TraversableNodeKt.traverseDescendants</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/TraversableNodeKt.html">TraversableNodeKt</a>.<a href="/reference/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">traverseDescendants</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/TraversableNode.html">TraversableNode</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/TraversableNode.Companion.TraverseDescendantsAction.html">TraversableNode.Companion.TraverseDescendantsAction</a>&gt;&nbsp;block<br>)</pre>
+        <p>Conditionally executes <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">block</a></code> for each descendant with a matching <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">key</a></code>.</p>
+        <p>Note 1: For nodes that do not have the same key, it will continue to execute the <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">block</a></code> for descendants below that non-matching node (where there may be a node that matches).</p>
+        <p>Note 2: The parameter <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).traverseDescendants(kotlin.Any,kotlin.Function1)">block</a></code>'s return value <code><a href="/reference/androidx/compose/ui/node/TraversableNode.Companion.TraverseDescendantsAction.html">TraverseDescendantsAction</a></code> will determine the next step in the traversal.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.node.TraversableNode.Companion.TraverseDescendantsAction
+import androidx.compose.ui.node.traverseDescendants
+
+val customTraversableModifierNode = CustomTraversableModifierNode()
+
+with(customTraversableModifierNode) {
+    traverseDescendants(traverseKey) {
+        if (it is CustomTraversableModifierNode) {
+            it.doSomethingWithDescendant()
+        }
+
+        // [traverseDescendants()] actually has three options:
+        // - ContinueTraversal
+        // - SkipSubtreeAndContinueTraversal - rarely used
+        // - CancelTraversal
+        // They are pretty self explanatory. Usually, you just want to continue or cancel the
+        // search. In some rare cases, you might want to skip the subtree but continue searching
+        // the tree.
+        TraverseDescendantsAction.ContinueTraversal
+    }
+}</pre>
       </div>
     </div>
   </body>

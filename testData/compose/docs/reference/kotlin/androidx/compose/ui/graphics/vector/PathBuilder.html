@@ -13,7 +13,6 @@
       <meta itemprop="property" content="close()">
       <meta itemprop="property" content="curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="curveToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">
-      <meta itemprop="property" content="getNodes()">
       <meta itemprop="property" content="horizontalLineTo(kotlin.Float)">
       <meta itemprop="property" content="horizontalLineToRelative(kotlin.Float)">
       <meta itemprop="property" content="lineTo(kotlin.Float,kotlin.Float)">
@@ -28,6 +27,7 @@
       <meta itemprop="property" content="reflectiveQuadToRelative(kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="verticalLineTo(kotlin.Float)">
       <meta itemprop="property" content="verticalLineToRelative(kotlin.Float)">
+      <meta itemprop="property" content="nodes()">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -55,6 +55,7 @@
       </div>
     </devsite-filter >
     <hr>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code> provides a fluent API to creates a list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code>, used to describe a path.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">
@@ -99,6 +100,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">arcTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;horizontalEllipseRadius:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;verticalEllipseRadius:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;theta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isMoreThanHalf:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isPositiveArc:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+                <p>Add an elliptical arc from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">y1</a></code>) by adding <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.ArcTo.html">PathNode.ArcTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -108,6 +110,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">arcToRelative</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;a:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;b:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;theta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isMoreThanHalf:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isPositiveArc:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+                <p>Add an elliptical arc by adding <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeArcTo.html">PathNode.RelativeArcTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -117,6 +120,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#close()">close</a>()</code></div>
+                <p>Closes the current contour by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.Close.html">PathNode.Close</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -126,6 +130,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">curveTo</a>(x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;x2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;x3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a cubic Bézier from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x3</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y3</a></code>), approaching the control points (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>) and (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.CurveTo.html">PathNode.CurveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -135,15 +140,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">curveToRelative</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dx2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dy2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dx3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dy3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#getNodes()">getNodes</a>()</code></div>
+                <p>Add a cubic Bézier by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.CurveTo.html">PathNode.CurveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -153,6 +150,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#horizontalLineTo(kotlin.Float)">horizontalLineTo</a>(x:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a line from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#horizontalLineTo(kotlin.Float)">x</a></code>, <code>oy</code>), where <code>oy</code> is the y coordinate of the last point, by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.HorizontalTo.html">PathNode.HorizontalTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -162,6 +160,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#horizontalLineToRelative(kotlin.Float)">horizontalLineToRelative</a>(dx:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a line from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#horizontalLineToRelative(kotlin.Float)">dx</a></code> <code>+ ox</code>, <code>oy</code>), where <code>ox</code> and <code>oy</code> are the x and y coordinates of the last point, by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeHorizontalTo.html">PathNode.RelativeHorizontalTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -171,6 +170,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineTo(kotlin.Float,kotlin.Float)">lineTo</a>(x:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a line from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineTo(kotlin.Float,kotlin.Float)">x</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineTo(kotlin.Float,kotlin.Float)">y</a></code>) by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.LineTo.html">PathNode.LineTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -180,6 +180,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineToRelative(kotlin.Float,kotlin.Float)">lineToRelative</a>(dx:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a line from the last point to the offset (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineToRelative(kotlin.Float,kotlin.Float)">dx</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineToRelative(kotlin.Float,kotlin.Float)">dy</a></code>) relative to the last point by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeLineTo.html">PathNode.RelativeLineTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -189,6 +190,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a>(x:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Start a new contour at position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">x</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">y</a></code>) by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.MoveTo.html">PathNode.MoveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -198,6 +200,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveToRelative(kotlin.Float,kotlin.Float)">moveToRelative</a>(dx:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Start a new contour at the offset (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveToRelative(kotlin.Float,kotlin.Float)">dx</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveToRelative(kotlin.Float,kotlin.Float)">dy</a></code>) relative to the last path position by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeMoveTo.html">PathNode.RelativeMoveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -207,6 +210,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadTo</a>(x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;x2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a quadratic Bézier from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), approaching the control point (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>), by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.QuadTo.html">PathNode.QuadTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -216,6 +220,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadToRelative</a>(dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dx2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a quadratic Bézier by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeQuadTo.html">PathNode.RelativeQuadTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -225,6 +230,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">reflectiveCurveTo</a>(x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;x2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a cubic Bézier from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>).</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -234,6 +240,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">reflectiveCurveToRelative</a>(dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dx2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a cubic Bézier by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeReflectiveCurveTo.html">PathNode.RelativeReflectiveCurveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -243,6 +250,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveQuadTo(kotlin.Float,kotlin.Float)">reflectiveQuadTo</a>(x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a quadratic Bézier from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveQuadTo(kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveQuadTo(kotlin.Float,kotlin.Float)">y1</a></code>).</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -252,6 +260,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveQuadToRelative(kotlin.Float,kotlin.Float)">reflectiveQuadToRelative</a>(dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a quadratic Bézier by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeReflectiveQuadTo.html">PathNode.RelativeReflectiveQuadTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -261,6 +270,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#verticalLineTo(kotlin.Float)">verticalLineTo</a>(y:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a line from the last point to the position (<code>ox</code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#verticalLineTo(kotlin.Float)">y</a></code>), where <code>ox</code> is the x coordinate of the last point, by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.VerticalTo.html">PathNode.VerticalTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -270,6 +280,35 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#verticalLineToRelative(kotlin.Float)">verticalLineToRelative</a>(dy:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Add a line from the last point to the position (<code>ox</code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#verticalLineToRelative(kotlin.Float)">dy</a></code> <code>+ oy</code>), where <code>ox</code> and <code>oy</code> are the x and y coordinates of the last point, by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeVerticalTo.html">PathNode.RelativeVerticalTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code></div>
+                <p>Returns the list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> currently held in this builder.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -312,6 +351,76 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">arcTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;horizontalEllipseRadius:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;verticalEllipseRadius:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;theta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isMoreThanHalf:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isPositiveArc:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add an elliptical arc from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">y1</a></code>) by adding <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.ArcTo.html">PathNode.ArcTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the arc is set to (0, 0).</p>
+          <p>The ellipse is defined by 3 parameters:</p>
+          <ul>
+            <li>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">horizontalEllipseRadius</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">verticalEllipseRadius</a></code> to define the size of the ellipse</p>
+            </li>
+            <li>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">theta</a></code> to define the orientation (as an X-axis rotation) of the ellipse</p>
+            </li>
+          </ul>
+          <p>In most situations, there are four arc candidates that can be drawn from the origin to (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">y1</a></code>). Which of the arcs is used is influenced by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">isMoreThanHalf</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">isPositiveArc</a></code>.</p>
+          <p>When <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">isMoreThanHalf</a></code> is set to <code>true</code>, the added arc will be chosen amongst the two candidates that represent an arc sweep greater than or equal to 180 degrees.</p>
+          <p>When <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">isPositiveArc</a></code> is set to <code>true</code>, the added arc will be chosen amongst the two candidates with a positive-angle direction (counter-clockwise)</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>horizontalEllipseRadius:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The horizontal radius of the ellipse</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>verticalEllipseRadius:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The vertical radius of the ellipse</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>theta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The rotation of the ellipse around the X-axis, in degrees</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>isMoreThanHalf:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>Defines whether to use an arc candidate with a sweep greater         than or equal to 180 degrees</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>isPositiveArc:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>Defines whether to use an arc candidate that's         counter-clockwise or not</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the end point of the arc</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the end point of the arc</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="arcToRelative(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Boolean, kotlin.Boolean, kotlin.Float, kotlin.Float)"></a><a name="arcToRelative-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Boolean-kotlin.Boolean-kotlin.Float-kotlin.Float-"></a><a name="arctorelative"></a>
           <div class="api-name-block">
@@ -324,6 +433,76 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">arcToRelative</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;a:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;b:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;theta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isMoreThanHalf:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isPositiveArc:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add an elliptical arc by adding <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeArcTo.html">PathNode.RelativeArcTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the arc is set to (0, 0). The arc Bézier end point is defined by an offset relative to the last point.</p>
+          <p>The ellipse is defined by 3 parameters:</p>
+          <ul>
+            <li>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">a</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">b</a></code> to define the size of the ellipse</p>
+            </li>
+            <li>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">theta</a></code> to define the orientation (as an X-axis rotation) of the ellipse</p>
+            </li>
+          </ul>
+          <p>In most situations, there are four arc candidates that can be drawn from the origin to the end point. Which of the arcs is used is influenced by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">isMoreThanHalf</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">isPositiveArc</a></code>.</p>
+          <p>When <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">isMoreThanHalf</a></code> is set to <code>true</code>, the added arc will be chosen amongst the two candidates that represent an arc sweep greater than or equal to 180 degrees.</p>
+          <p>When <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#arcToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Float,kotlin.Float)">isPositiveArc</a></code> is set to <code>true</code>, the added arc will be chosen amongst the two candidates with a positive-angle direction (counter-clockwise)</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>a:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The horizontal radius of the ellipse</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>b:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The vertical radius of the ellipse</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>theta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The rotation of the ellipse around the X-axis, in degrees</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>isMoreThanHalf:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>Defines whether to use an arc candidate with a sweep         greater than or equal to 180 degrees</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>isPositiveArc:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>Defines whether to use an arc candidate that's         counter-clockwise or not</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the end point of the arc, relative to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the end point of the arc, relative to the last path position</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="close--"></a><a name="close"></a>
           <div class="api-name-block">
@@ -336,6 +515,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#close()">close</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Closes the current contour by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.Close.html">PathNode.Close</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
         </div>
         <div class="api-item"><a name="curveTo(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="curveTo-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="curveto"></a>
           <div class="api-name-block">
@@ -348,6 +528,58 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">curveTo</a>(x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;x2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;x3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a cubic Bézier from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x3</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y3</a></code>), approaching the control points (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>) and (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.CurveTo.html">PathNode.CurveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the curve is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the first control point of the cubic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the first control point of the cubic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>x2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the second control point of the cubic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the second control point of the cubic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>x3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the end point of the cubic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the end point of the cubic curve</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="curveToRelative(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="curveToRelative-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="curvetorelative"></a>
           <div class="api-name-block">
@@ -360,18 +592,58 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#curveToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">curveToRelative</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dx2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dy2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dx3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dy3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
-        </div>
-        <div class="api-item"><a name="getNodes--"></a><a name="getnodes"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="getNodes()">getNodes</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
+          <p>Add a cubic Bézier by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.CurveTo.html">PathNode.CurveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the curve is set to (0, 0). The cubic Bézier control and end points are defined by offsets relative to the last point.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the first control point of the cubic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the first control point of the cubic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dx2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the second control point of the cubic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the second control point of the cubic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dx3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the end point of the cubic curve, relative to the             last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the end point of the cubic curve, relative to the             last path position</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#getNodes()">getNodes</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</pre>
         </div>
         <div class="api-item"><a name="horizontalLineTo-kotlin.Float-"></a><a name="horizontallineto"></a>
           <div class="api-name-block">
@@ -384,6 +656,28 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#horizontalLineTo(kotlin.Float)">horizontalLineTo</a>(x:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a line from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#horizontalLineTo(kotlin.Float)">x</a></code>, <code>oy</code>), where <code>oy</code> is the y coordinate of the last point, by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.HorizontalTo.html">PathNode.HorizontalTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the line is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>x:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the end of the line</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="horizontalLineToRelative-kotlin.Float-"></a><a name="horizontallinetorelative"></a>
           <div class="api-name-block">
@@ -396,6 +690,28 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#horizontalLineToRelative(kotlin.Float)">horizontalLineToRelative</a>(dx:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a line from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#horizontalLineToRelative(kotlin.Float)">dx</a></code> <code>+ ox</code>, <code>oy</code>), where <code>ox</code> and <code>oy</code> are the x and y coordinates of the last point, by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeHorizontalTo.html">PathNode.RelativeHorizontalTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the line is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>dx:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the end of the line, relative to the last path position</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="lineTo(kotlin.Float, kotlin.Float)"></a><a name="lineTo-kotlin.Float-kotlin.Float-"></a><a name="lineto"></a>
           <div class="api-name-block">
@@ -408,6 +724,34 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineTo(kotlin.Float,kotlin.Float)">lineTo</a>(x:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a line from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineTo(kotlin.Float,kotlin.Float)">x</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineTo(kotlin.Float,kotlin.Float)">y</a></code>) by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.LineTo.html">PathNode.LineTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the line is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>x:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the end of the line</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the end of the line</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="lineToRelative(kotlin.Float, kotlin.Float)"></a><a name="lineToRelative-kotlin.Float-kotlin.Float-"></a><a name="linetorelative"></a>
           <div class="api-name-block">
@@ -420,6 +764,34 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineToRelative(kotlin.Float,kotlin.Float)">lineToRelative</a>(dx:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a line from the last point to the offset (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineToRelative(kotlin.Float,kotlin.Float)">dx</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#lineToRelative(kotlin.Float,kotlin.Float)">dy</a></code>) relative to the last point by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeLineTo.html">PathNode.RelativeLineTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the line is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>dx:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the end of the line, relative to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the end of the line, relative to the last path position</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="moveTo(kotlin.Float, kotlin.Float)"></a><a name="moveTo-kotlin.Float-kotlin.Float-"></a><a name="moveto"></a>
           <div class="api-name-block">
@@ -432,6 +804,34 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a>(x:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Start a new contour at position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">x</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">y</a></code>) by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.MoveTo.html">PathNode.MoveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>x:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the start of the new contour</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the start of the new contour</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="moveToRelative(kotlin.Float, kotlin.Float)"></a><a name="moveToRelative-kotlin.Float-kotlin.Float-"></a><a name="movetorelative"></a>
           <div class="api-name-block">
@@ -444,6 +844,34 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveToRelative(kotlin.Float,kotlin.Float)">moveToRelative</a>(dx:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Start a new contour at the offset (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveToRelative(kotlin.Float,kotlin.Float)">dx</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveToRelative(kotlin.Float,kotlin.Float)">dy</a></code>) relative to the last path position by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeMoveTo.html">PathNode.RelativeMoveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>dx:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the start of the new contour, relative to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the start of the new contour, relative to the last path position</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="quadTo(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="quadTo-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="quadto"></a>
           <div class="api-name-block">
@@ -456,6 +884,46 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadTo</a>(x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;x2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a quadratic Bézier from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), approaching the control point (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>), by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.QuadTo.html">PathNode.QuadTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the curve is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the control point of the quadratic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the control point of the quadratic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>x2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the end point of the quadratic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the end point of the quadratic curve</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="quadToRelative(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="quadToRelative-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="quadtorelative"></a>
           <div class="api-name-block">
@@ -468,6 +936,46 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#quadToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadToRelative</a>(dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dx2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a quadratic Bézier by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeQuadTo.html">PathNode.RelativeQuadTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the curve is set to (0, 0). The control point and end point of the curve are defined by offsets relative to the last point.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the control point of the quadratic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the control point of the quadratic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dx2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the end point of the quadratic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the end point of the quadratic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="reflectiveCurveTo(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="reflectiveCurveTo-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="reflectivecurveto"></a>
           <div class="api-name-block">
@@ -480,6 +988,46 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">reflectiveCurveTo</a>(x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;x2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a cubic Bézier from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>). The first control point is the reflection of the second control point of the previous command. If there is no previous command or the previous command is not a cubic Bézier, the first control point is set to the last path position. The second control point is defined by (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>). Calling this method adds a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.ReflectiveCurveTo.html">PathNode.ReflectiveCurveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the curve is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the second control point of the cubic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the second control point of the cubic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>x2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the end point of the cubic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the end point of the cubic curve</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="reflectiveCurveToRelative(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="reflectiveCurveToRelative-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="reflectivecurvetorelative"></a>
           <div class="api-name-block">
@@ -492,6 +1040,46 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveToRelative(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">reflectiveCurveToRelative</a>(dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dx2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a cubic Bézier by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeReflectiveCurveTo.html">PathNode.RelativeReflectiveCurveTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the curve is set to (0, 0). The cubic Bézier second control point and end points are defined by offsets relative to the last point. The reflective nature of the curve is described in <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveCurveTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">reflectiveCurveTo</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the second control point of the cubic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the second control point of the cubic curve, relative             to the last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dx2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the end point of the cubic curve, relative to the             last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the end point of the cubic curve, relative to the             last path position</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="reflectiveQuadTo(kotlin.Float, kotlin.Float)"></a><a name="reflectiveQuadTo-kotlin.Float-kotlin.Float-"></a><a name="reflectivequadto"></a>
           <div class="api-name-block">
@@ -504,6 +1092,34 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveQuadTo(kotlin.Float,kotlin.Float)">reflectiveQuadTo</a>(x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a quadratic Bézier from the last point to the position (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveQuadTo(kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveQuadTo(kotlin.Float,kotlin.Float)">y1</a></code>). The control point is the reflection of the control point of the previous command. If there is no previous command or the previous command is not a quadratic Bézier, the control point is set to the last path position. Calling this method adds a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.ReflectiveQuadTo.html">PathNode.ReflectiveQuadTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the curve is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>x1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x coordinate of the end point of the quadratic curve</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>y1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the end point of the quadratic curve</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="reflectiveQuadToRelative(kotlin.Float, kotlin.Float)"></a><a name="reflectiveQuadToRelative-kotlin.Float-kotlin.Float-"></a><a name="reflectivequadtorelative"></a>
           <div class="api-name-block">
@@ -516,6 +1132,34 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveQuadToRelative(kotlin.Float,kotlin.Float)">reflectiveQuadToRelative</a>(dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a quadratic Bézier by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeReflectiveQuadTo.html">PathNode.RelativeReflectiveQuadTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the curve is set to (0, 0). The quadratic Bézier end point is defined by an offset relative to the last point. The reflective nature of the curve is described in <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#reflectiveQuadTo(kotlin.Float,kotlin.Float)">reflectiveQuadTo</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>dx1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The x offset of the end point of the quadratic curve, relative to the             last path position</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dy1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the end point of the quadratic curve, relative to the             last path position</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="verticalLineTo-kotlin.Float-"></a><a name="verticallineto"></a>
           <div class="api-name-block">
@@ -528,6 +1172,28 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#verticalLineTo(kotlin.Float)">verticalLineTo</a>(y:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a line from the last point to the position (<code>ox</code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#verticalLineTo(kotlin.Float)">y</a></code>), where <code>ox</code> is the x coordinate of the last point, by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.VerticalTo.html">PathNode.VerticalTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the line is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>y:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y coordinate of the end of the line</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="verticalLineToRelative-kotlin.Float-"></a><a name="verticallinetorelative"></a>
           <div class="api-name-block">
@@ -540,6 +1206,47 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#verticalLineToRelative(kotlin.Float)">verticalLineToRelative</a>(dy:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html">PathBuilder</a></pre>
+          <p>Add a line from the last point to the position (<code>ox</code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#verticalLineToRelative(kotlin.Float)">dy</a></code> <code>+ oy</code>), where <code>ox</code> and <code>oy</code> are the x and y coordinates of the last point, by adding a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.RelativeVerticalTo.html">PathNode.RelativeVerticalTo</a></code> to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a></code>. If no contour has been created by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#moveTo(kotlin.Float,kotlin.Float)">moveTo</a></code> first, the origin of the line is set to (0, 0).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>dy:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The y offset of the end of the line, relative to the last path position</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public properties
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getNodes()"></a><a name="setNodes()"></a><a name="getNodes--"></a><a name="setNodes--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="nodes()">nodes</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathBuilder.html#nodes()">nodes</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</pre>
+          <p>Returns the list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> currently held in this builder.</p>
         </div>
       </div>
     </devsite-filter >

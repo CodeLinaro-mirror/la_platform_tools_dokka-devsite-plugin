@@ -1,0 +1,168 @@
+<html devsite="true">
+  <head>
+    <title>PathSvgKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="PathSvgKt">
+      <meta itemprop="path" content="androidx.compose.ui.graphics">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>PathSvgKt</h1>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/graphics/package-summary.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/graphics/PathSvgKt.html">PathSvgKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSvgKt.html#(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">addSvg</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;pathData)</code></div>
+              <p>Adds the specified SVG <a href="https://www.w3.org/TR/SVG2/paths.html#PathData">path data</a> to this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathSvgKt.html#(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">toSvg</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;boolean&nbsp;asDocument)</code></div>
+              <p>Returns an SVG representation of this path.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Path-.addSvg-kotlin.String-"></a><a name="addsvg"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">addSvg</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSvgKt.html#(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">addSvg</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;pathData)</pre>
+        <p>Adds the specified SVG <a href="https://www.w3.org/TR/SVG2/paths.html#PathData">path data</a> to this <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>. The SVG path data encodes a series of instructions that will be applied to this path. For instance, the following path data:</p>
+        <p><code>M200,300 Q400,50 600,300 L1000,300</code></p>
+        <p>Will generate the following series of instructions for this path:</p>
+        <pre class="prettyprint">moveTo(200f, 300f)<br>quadraticTo(400f, 50f, 600f, 300f)<br>lineTo(1000f, 300f)</pre>
+        <p>To convert a <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> to its SVG path data representation, please refer to <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">Path.toSvg</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code></td>
+                <td>
+                  <p>if the path data contains an invalid instruction</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">toSvg</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Path-.toSvg-kotlin.Boolean-"></a><a name="tosvg"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">toSvg</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathSvgKt.html#(androidx.compose.ui.graphics.Path).toSvg(kotlin.Boolean)">toSvg</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;receiver,&nbsp;boolean&nbsp;asDocument)</pre>
+        <p>Returns an SVG representation of this path. The caller can choose whether the returned SVG represents a fully-formed SVG document or only the <a href="https://www.w3.org/TR/SVG2/paths.html#PathData">path data</a>. By default, only the path data is returned which can be used either with <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">Path.addSvg</a></code> or <code><a href="/reference/androidx/compose/ui/graphics/vector/PathParser.html">androidx.compose.ui.graphics.vector.PathParser</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean&nbsp;asDocument</code></td>
+                <td>
+                  <p>When set to true, this function returns a fully-formed SVG document,         otherwise returns only the path data.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/vector/PathParser.html">PathParser</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Path).addSvg(kotlin.String)">addSvg</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

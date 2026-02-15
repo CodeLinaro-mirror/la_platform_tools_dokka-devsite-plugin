@@ -9,6 +9,8 @@
       <meta itemprop="name" content="ActionsKt">
       <meta itemprop="path" content="androidx.compose.ui.test">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).performClick()">
+      <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabel(kotlin.String)">
+      <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).performGesture(kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).performKeyInput(kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).performMouseInput(kotlin.Function1)">
@@ -21,6 +23,7 @@
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).performSemanticsAction(androidx.compose.ui.semantics.SemanticsPropertyKey)">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).performSemanticsAction(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteraction).requestFocus()">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -54,6 +57,20 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/test/ActionsKt.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performClick()">performClick</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;receiver)</code></div>
               <p>Performs a click action on the element represented by the given semantics node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/ActionsKt.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabel(kotlin.String)">performCustomAccessibilityActionWithLabel</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;label<br>)</code></div>
+              <p>Finds the <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> in the node's <code><a href="/reference/androidx/compose/ui/semantics/SemanticsActions.html#CustomActions()">CustomActions</a></code> list whose label is equal to <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabel(kotlin.String)">label</a></code> and then invokes it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/ActionsKt.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String,kotlin.Function1)">performCustomAccessibilityActionWithLabelMatching</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;predicateDescription,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;labelPredicate<br>)</code></div>
+              <p>Finds the <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> in the node's <code><a href="/reference/androidx/compose/ui/semantics/SemanticsActions.html#CustomActions()">CustomActions</a></code> list whose label satisfies a predicate function and then invokes it.</p>
             </td>
           </tr>
           <tr>
@@ -140,6 +157,13 @@
               <p>Executes the touch gesture specified in the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">block</a></code>.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/ActionsKt.html#(androidx.compose.ui.test.SemanticsNodeInteraction).requestFocus()">requestFocus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;receiver)</code></div>
+              <p>Requests the focus system to give focus to this node by invoking the <code><a href="/reference/androidx/compose/ui/semantics/SemanticsActions.html#RequestFocus()">RequestFocus</a></code> semantics action.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -170,6 +194,153 @@
                 <td>
                   <p>The <code><a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code> that is the receiver of this method</p>
                 </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteraction-.performCustomAccessibilityActionWithLabel-kotlin.String-"></a><a name="performcustomaccessibilityactionwithlabel"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabel(kotlin.String)">performCustomAccessibilityActionWithLabel</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;<a href="/reference/androidx/compose/ui/test/ActionsKt.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabel(kotlin.String)">performCustomAccessibilityActionWithLabel</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;label<br>)</pre>
+        <p>Finds the <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> in the node's <code><a href="/reference/androidx/compose/ui/semantics/SemanticsActions.html#CustomActions()">CustomActions</a></code> list whose label is equal to <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabel(kotlin.String)">label</a></code> and then invokes it.</p>
+        <p>To use your own logic to find the action to perform instead of matching on the full label, use <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String,kotlin.Function1)">performCustomAccessibilityActionWithLabelMatching</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;label</code></td>
+                <td>
+                  <p>The exact label of the <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> to perform.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-assertion-error/index.html">AssertionError</a></code></td>
+                <td>
+                  <p>If no <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> is found, or no <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> has <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabel(kotlin.String)">label</a></code>, or more than one <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> has <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabel(kotlin.String)">label</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String,kotlin.Function1)">performCustomAccessibilityActionWithLabelMatching</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String, kotlin.Function1)"></a><a name="-androidx.compose.ui.test.SemanticsNodeInteraction-.performCustomAccessibilityActionWithLabelMatching-kotlin.String-kotlin.Function1-"></a><a name="performcustomaccessibilityactionwithlabelmatching"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String,kotlin.Function1)">performCustomAccessibilityActionWithLabelMatching</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;<a href="/reference/androidx/compose/ui/test/ActionsKt.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String,kotlin.Function1)">performCustomAccessibilityActionWithLabelMatching</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;predicateDescription,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;labelPredicate<br>)</pre>
+        <p>Finds the <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> in the node's <code><a href="/reference/androidx/compose/ui/semantics/SemanticsActions.html#CustomActions()">CustomActions</a></code> list whose label satisfies a predicate function and then invokes it.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;predicateDescription</code></td>
+                <td>
+                  <p>A description of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String,kotlin.Function1)">labelPredicate</a></code> that will be included in the error message if zero or >1 actions match.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;labelPredicate</code></td>
+                <td>
+                  <p>A predicate function used to select the <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> to perform.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-assertion-error/index.html">AssertionError</a></code></td>
+                <td>
+                  <p>If no <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> is found, or no <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> matches <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String,kotlin.Function1)">labelPredicate</a></code>, or more than one <code><a href="/reference/androidx/compose/ui/semantics/CustomAccessibilityAction.html">CustomAccessibilityAction</a></code> matches <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabelMatching(kotlin.String,kotlin.Function1)">labelPredicate</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performCustomAccessibilityActionWithLabel(kotlin.String)">performCustomAccessibilityActionWithLabel</a></code></td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -329,6 +500,7 @@ import androidx.compose.ui.test.performMouseInput
 
 composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
     .performMouseInput {
+        // Click in the middle of the node
         click(center)
     }</pre>
         <p>Example of scrolling the mouse wheel while the mouse button is pressed:</p>
@@ -336,13 +508,17 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performMouseInput
 
-composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
+composeTestRule.onNodeWithTag(&quot;verticalScrollable&quot;)
+    // Scroll downwards while keeping a button pressed:
     .performMouseInput {
+        // Presses the primary mouse button
         press()
+        // Scroll the scroll wheel by 6 units
         repeat(6) {
             advanceEventTime()
-            scroll(-1f)
+            scroll(1f)
         }
+        // And release the mouse button
         advanceEventTime()
         release()
     }</pre>
@@ -936,6 +1112,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
     .performTouchInput { swipeUp() }</pre>
         <p>Example of performing an off-center click:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performTouchInput
@@ -1025,6 +1202,15 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;).performTouchInput {
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteraction-.requestFocus--"></a><a name="requestfocus"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.SemanticsNodeInteraction).requestFocus()">requestFocus</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;<a href="/reference/androidx/compose/ui/test/ActionsKt.html#(androidx.compose.ui.test.SemanticsNodeInteraction).requestFocus()">requestFocus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a>&nbsp;receiver)</pre>
+        <p>Requests the focus system to give focus to this node by invoking the <code><a href="/reference/androidx/compose/ui/semantics/SemanticsActions.html#RequestFocus()">RequestFocus</a></code> semantics action.</p>
       </div>
     </div>
   </body>

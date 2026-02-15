@@ -1,0 +1,140 @@
+<html devsite="true">
+  <head>
+    <title>OutputTransformation</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="OutputTransformation">
+      <meta itemprop="path" content="androidx.compose.foundation.text.input">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer).transformOutput()">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>OutputTransformation</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/text/input/OutputTransformation.kt+class:androidx.compose.foundation.text.input.OutputTransformation&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/text/input/OutputTransformation.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>fun interface <a href="/reference/kotlin/androidx/compose/foundation/text/input/OutputTransformation.html">OutputTransformation</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>A function (<code><a href="/reference/kotlin/androidx/compose/foundation/text/input/OutputTransformation.html#(androidx.compose.foundation.text.input.TextFieldBuffer).transformOutput()">transformOutput</a></code>) that transforms the text presented to a user by a <code><a href="/reference/kotlin/androidx/compose/foundation/text/package-summary.html#BasicTextField(androidx.compose.foundation.text.input.TextFieldState,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.text.input.InputTransformation,androidx.compose.ui.text.TextStyle,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.input.KeyboardActionHandler,androidx.compose.foundation.text.input.TextFieldLineLimits,kotlin.Function2,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Brush,androidx.compose.foundation.text.input.OutputTransformation,androidx.compose.foundation.text.input.TextFieldDecorator,androidx.compose.foundation.ScrollState)">BasicTextField</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/OutputTransformation.html#(androidx.compose.foundation.text.input.TextFieldBuffer).transformOutput()">transformOutput</a>()</code></div>
+                <p>Given a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code> that contains the contents of a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code>, modifies the text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldBuffer-.transformOutput--"></a><a name="transformoutput"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer).transformOutput()">transformOutput</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/OutputTransformation.html#(androidx.compose.foundation.text.input.TextFieldBuffer).transformOutput()">transformOutput</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Given a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code> that contains the contents of a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code>, modifies the text. After this function returns, the contents of the buffer will be presented to the user as the contents of the text field instead of the raw contents of the <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code>.</p>
+          <p>Use this function to change the visual and semantics representation of the text. For example, a phone number field can format the raw input by adding parentheses and white spaces in between characters.</p>
+          <p>The result of this transformation is purely representational and does not affect the contents of <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code>.</p>
+          <p>Selection and cursor positions are managed internally by <code><a href="/reference/kotlin/androidx/compose/foundation/text/package-summary.html#BasicTextField(androidx.compose.foundation.text.input.TextFieldState,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.text.input.InputTransformation,androidx.compose.ui.text.TextStyle,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.input.KeyboardActionHandler,androidx.compose.foundation.text.input.TextFieldLineLimits,kotlin.Function2,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Brush,androidx.compose.foundation.text.input.OutputTransformation,androidx.compose.foundation.text.input.TextFieldDecorator,androidx.compose.foundation.ScrollState)">BasicTextField</a></code>. If there's a range of inserted characters via this <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/OutputTransformation.html">OutputTransformation</a></code>, selection or cursor never goes in between these inserted characters.</p>
+          <p>Note that this transformation is called every time a new text needs to be displayed. This implies that the contents of <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code> will always be what the <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code> holds currently. All the changes made here are discarded after text is presented to the user.</p>
+          <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.OutputTransformation
+import androidx.compose.foundation.text.input.TextFieldBuffer
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.insert
+import androidx.compose.foundation.text.input.maxLength
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.foundation.text.input.then
+import androidx.compose.material.Text
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.remember
+
+@Stable
+data class PhoneNumberOutputTransformation(
+    private val pad: Boolean
+) : OutputTransformation {
+    override fun TextFieldBuffer.transformOutput() {
+        if (pad) {
+            // Pad the text with placeholder chars if too short.
+            // (___) ___-____
+            val padCount = 10 - length
+            repeat(padCount) {
+                append('_')
+            }
+        }
+
+        // (123) 456-7890
+        if (length &gt; 0) insert(0, &quot;(&quot;)
+        if (length &gt; 4) insert(4, &quot;) &quot;)
+        if (length &gt; 9) insert(9, &quot;-&quot;)
+    }
+}
+
+val state = rememberTextFieldState()
+BasicTextField(
+    state,
+    inputTransformation = InputTransformation
+        .maxLength(10)
+        .then {
+            if (!TextUtils.isDigitsOnly(asCharSequence())) {
+                revertAllChanges()
+            }
+        },
+    outputTransformation = PhoneNumberOutputTransformation(false)
+)</pre>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

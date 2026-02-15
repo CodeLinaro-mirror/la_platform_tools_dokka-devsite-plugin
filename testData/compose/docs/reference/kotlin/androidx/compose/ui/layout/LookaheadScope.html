@@ -8,9 +8,7 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="LookaheadScope">
       <meta itemprop="path" content="androidx.compose.ui.layout">
-      <meta itemprop="property" content="(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">
-      <meta itemprop="property" content="(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates)">
-      <meta itemprop="property" content="(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">
+      <meta itemprop="property" content="(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">
       <meta itemprop="property" content="(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">
       <meta itemprop="property" content="(androidx.compose.ui.layout.Placeable.PlacementScope).lookaheadScopeCoordinates()">
       <meta itemprop="language" content="KOTLIN">
@@ -34,13 +32,13 @@
           <li>
             <div class="kotlin-platform" data-title="Common/All">Cmn</div>
             <!--platform-Common/All-->
-            <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></pre>
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></pre>
           </li>
         </ul>
       </div>
     </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -51,9 +49,9 @@
             </colgroup>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a></code></td>
                 <td>
-                  <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> provides access to lookahead results to allow <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to leverage lookahead results to define intermediate measurements and placements to gradually converge with lookahead.</p>
+                  <p><code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a></code> provides a coordinator space in which shared elements/ shared bounds (when matched) will transform their bounds from one to another.</p>
                 </td>
               </tr>
             </tbody>
@@ -62,10 +60,10 @@
       </div>
 </devsite-expandable>    </div>
     <hr>
-    <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code> provides a receiver scope for all (direct and indirect) child layouts in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>. This receiver scope allows access to <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.Placeable.PlacementScope).lookaheadScopeCoordinates()">lookaheadScopeCoordinates</a></code> from any child's <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code>. It also allows any child to convert <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> (which can be retrieved in <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code>) to <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a></code>.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code> provides a receiver scope for all (direct and indirect) child layouts in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>. This receiver scope allows access to <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.Placeable.PlacementScope).lookaheadScopeCoordinates()">lookaheadScopeCoordinates</a></code> from any child's <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code>. It also allows any child to convert <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> (which can be retrieved in <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code>) to <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> in lookahead coordinate space using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a></code>.</p>
     <pre class="prettyprint lang-kotlin">
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.DeferredTargetAnimation
 import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -78,66 +76,105 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ApproachLayoutModifierNode
+import androidx.compose.ui.layout.ApproachMeasureScope
+import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.LookaheadScope
-import androidx.compose.ui.layout.intermediateLayout
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 
-// Creates a custom modifier to animate the local position of the layout within the
-// given LookaheadScope, whenever the relative position changes.
-fun Modifier.animatePlacementInScope(lookaheadScope: LookaheadScope) = composed {
-    // Creates an offset animation
-    var offsetAnimation: Animatable&lt;IntOffset, AnimationVector2D&gt;? by mutableStateOf(
-        null
-    )
-    var targetOffset: IntOffset? by mutableStateOf(null)
+/**
+ * Creates a custom implementation of ApproachLayoutModifierNode to approach the placement
+ * of the layout using an animation.
+ */
+class AnimatedPlacementModifierNode(
+    var lookaheadScope: LookaheadScope
+) : ApproachLayoutModifierNode, Modifier.Node() {
+    // Creates an offset animation, the target of which will be known during placement.
+    val offsetAnimation: DeferredTargetAnimation&lt;IntOffset, AnimationVector2D&gt; =
+        DeferredTargetAnimation(
+            IntOffset.VectorConverter
+        )
 
-    this.intermediateLayout { measurable, constraints -&gt;
+    override fun isMeasurementApproachInProgress(lookaheadSize: IntSize): Boolean {
+        // Since we only animate the placement here, we can consider measurement approach
+        // complete.
+        return false
+    }
+
+    // Returns true when the offset animation is in progress, false otherwise.
+    override fun Placeable.PlacementScope.isPlacementApproachInProgress(
+        lookaheadCoordinates: LayoutCoordinates
+    ): Boolean {
+        val target = with(lookaheadScope) {
+            lookaheadScopeCoordinates.localLookaheadPositionOf(lookaheadCoordinates).round()
+        }
+        offsetAnimation.updateTarget(target, coroutineScope)
+        return !offsetAnimation.isIdle
+    }
+
+    @ExperimentalComposeUiApi
+    override fun ApproachMeasureScope.approachMeasure(
+        measurable: Measurable,
+        constraints: Constraints
+    ): MeasureResult {
         val placeable = measurable.measure(constraints)
-        layout(placeable.width, placeable.height) {
-            // Converts coordinates of the current layout to LookaheadCoordinates
+        return layout(placeable.width, placeable.height) {
             val coordinates = coordinates
             if (coordinates != null) {
                 // Calculates the target offset within the lookaheadScope
                 val target = with(lookaheadScope) {
                     lookaheadScopeCoordinates
                         .localLookaheadPositionOf(coordinates)
-                        .round().also { targetOffset = it }
+                        .round()
                 }
 
                 // Uses the target offset to start an offset animation
-                if (target != offsetAnimation?.targetValue) {
-                    offsetAnimation?.run {
-                        launch { animateTo(target) }
-                    } ?: Animatable(target, IntOffset.VectorConverter).let {
-                        offsetAnimation = it
-                    }
-                }
+                val animatedOffset = offsetAnimation.updateTarget(target, coroutineScope)
                 // Calculates the *current* offset within the given LookaheadScope
-                val placementOffset =
+                val placementOffset = with(lookaheadScope) {
                     lookaheadScopeCoordinates.localPositionOf(
                         coordinates,
                         Offset.Zero
                     ).round()
+                }
                 // Calculates the delta between animated position in scope and current
                 // position in scope, and places the child at the delta offset. This puts
                 // the child layout at the animated position.
-                val (x, y) = requireNotNull(offsetAnimation).run { value - placementOffset }
+                val (x, y) = animatedOffset - placementOffset
                 placeable.place(x, y)
             } else {
                 placeable.place(0, 0)
             }
         }
+    }
+}
+
+// Creates a custom node element for the AnimatedPlacementModifierNode above.
+data class AnimatePlacementNodeElement(val lookaheadScope: LookaheadScope) :
+    ModifierNodeElement&lt;AnimatedPlacementModifierNode&gt;() {
+
+    override fun update(node: AnimatedPlacementModifierNode) {
+        node.lookaheadScope = lookaheadScope
+    }
+
+    override fun create(): AnimatedPlacementModifierNode {
+        return AnimatedPlacementModifierNode(lookaheadScope)
     }
 }
 
@@ -156,7 +193,9 @@ LookaheadScope {
                     Modifier
                         .padding(15.dp)
                         .size(100.dp, 80.dp)
-                        .animatePlacementInScope(this)
+                        .then(
+                            AnimatePlacementNodeElement(this)
+                        )
                         .background(color, RoundedCornerShape(20))
                 )
             }
@@ -168,7 +207,7 @@ LookaheadScope {
             .fillMaxSize()
             .clickable { isInColumn = !isInColumn }
     ) {
-        // As the items get moved between Column and Row, their positions in LookaheadLayout
+        // As the items get moved between Column and Row, their positions in LookaheadScope
         // will change. The `animatePlacementInScope` modifier created above will
         // observe that final position change via `localLookaheadPositionOf`, and create
         // a position animation.
@@ -197,30 +236,10 @@ LookaheadScope {
           </thead>
           <tbody class="list">
             <tr>
-              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measure:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>.(measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>, constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>, lookaheadSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
-                <p><strong>This function is deprecated.</strong> </p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
               <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates)">localLookaheadPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a><br>)</code></div>
-                <p>Calculates the localPosition in the Lookahead coordinate space.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">onPlaced</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onPlaced:&nbsp;(lookaheadScopeCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>, layoutCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
-                <p><strong>This function is deprecated.</strong> onPlaced in LookaheadLayoutScope has been deprecated.</p>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">localLookaheadPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;relativeToSource:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;includeMotionFrameOfReference:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">relativeToSource</a></code> in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">sourceCoordinates</a></code>'s lookahead coordinate space into local lookahead coordinates.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -230,7 +249,7 @@ LookaheadScope {
               <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a>()</code></div>
-                <p>Converts a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> into a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> in the Lookahead coordinates space.</p>
+                <p>Converts a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> into a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> in the Lookahead coordinate space.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -272,248 +291,19 @@ LookaheadScope {
       <div class="list">
         <h2 data-title="platform-Common/All">Public functions
           <!--platform-Common/All--></h2>
-        <div class="api-item"><a name="-androidx.compose.ui.Modifier-.intermediateLayout-kotlin.Function4-"></a><a name="intermediatelayout"></a>
+        <div class="api-item"><a name="(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates, androidx.compose.ui.geometry.Offset, kotlin.Boolean)"></a><a name="-androidx.compose.ui.layout.LayoutCoordinates-.localLookaheadPositionOf-androidx.compose.ui.layout.LayoutCoordinates-androidx.compose.ui.geometry.Offset-kotlin.Boolean-"></a><a name="locallookaheadpositionof"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</h3>
+              <h3 id="(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">localLookaheadPositionOf</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measure:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>.(measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>, constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>, lookaheadSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-          <aside class="caution"><strong>This function is deprecated.</strong><br></aside>
-          <p>Creates an intermediate layout based on target size of the child layout calculated in the lookahead. This allows the intermediate layout to morph the child layout after lookahead through <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">measure</a></code>, in which the size of the child layout calculated from the lookahead is provided. <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> does <em>not</em> participate in the lookahead. It is only invoked for retroactively changing the layout based on the lookahead before the layout is drawn.</p>
-          <pre class="prettyprint lang-kotlin">
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.AnimationVector2D
-import androidx.compose.animation.core.VectorConverter
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.intermediateLayout
-import androidx.compose.ui.layout.layout
-import androidx.compose.ui.unit.Constraints
-import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.round
-
-// Creates a custom modifier that animates the constraints and measures child with the
-// animated constraints. This modifier is built on top of `Modifier.intermediateLayout`, which
-// allows access to the lookahead size of the layout. A resize animation will be kicked off
-// whenever the lookahead size changes, to animate children from current size to lookahead size.
-// Fixed constraints created based on the animation value will be used to measure
-// child, so the child layout gradually changes its size and potentially its child's placement
-// to fit within the animated constraints.
-fun Modifier.animateConstraints() = composed {
-    // Creates a size animation
-    var sizeAnimation: Animatable&lt;IntSize, AnimationVector2D&gt;? by remember {
-        mutableStateOf(null)
-    }
-
-    this.intermediateLayout { measurable, _ -&gt;
-        // When layout changes, the lookahead pass will calculate a new final size for the
-        // child layout. This lookahead size can be used to animate the size
-        // change, such that the animation starts from the current size and gradually
-        // change towards `lookaheadSize`.
-        if (lookaheadSize != sizeAnimation?.targetValue) {
-            sizeAnimation?.run {
-                launch { animateTo(lookaheadSize) }
-            } ?: Animatable(lookaheadSize, IntSize.VectorConverter).let {
-                sizeAnimation = it
-            }
-        }
-        val (width, height) = sizeAnimation!!.value
-        // Creates a fixed set of constraints using the animated size
-        val animatedConstraints = Constraints.fixed(width, height)
-        // Measure child with animated constraints.
-        val placeable = measurable.measure(animatedConstraints)
-        layout(placeable.width, placeable.height) {
-            placeable.place(0, 0)
-        }
-    }
-}
-
-var fullWidth by remember { mutableStateOf(false) }
-Row(
-    (if (fullWidth) Modifier.fillMaxWidth() else Modifier.width(100.dp))
-        .height(200.dp)
-        // Use the custom modifier created above to animate the constraints passed
-        // to the child, and therefore resize children in an animation.
-        .animateConstraints()
-        .clickable { fullWidth = !fullWidth }) {
-    Box(
-        Modifier
-            .weight(1f)
-            .fillMaxHeight()
-            .background(Color.Red)
-    )
-    Box(
-        Modifier
-            .weight(2f)
-            .fillMaxHeight()
-            .background(Color.Yellow)
-    )
-}</pre>
-        </div>
-        <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.localLookaheadPositionOf-androidx.compose.ui.layout.LayoutCoordinates-"></a><a name="locallookaheadpositionof"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates)">localLookaheadPositionOf</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates)">localLookaheadPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
-          <p>Calculates the localPosition in the Lookahead coordinate space. This is a convenient method for 1) converting the given <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> to lookahead coordinates using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a></code>, and 2) invoking <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">LayoutCoordinates.localPositionOf</a></code> with the converted coordinates.</p>
-        </div>
-        <div class="api-item"><a name="-androidx.compose.ui.Modifier-.onPlaced-kotlin.Function2-"></a><a name="onplaced"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">onPlaced</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">onPlaced</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onPlaced:&nbsp;(lookaheadScopeCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>, layoutCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-          <aside class="caution"><strong>This function is deprecated.</strong><br>onPlaced in LookaheadLayoutScope has been deprecated. It's replaced with reading LookaheadLayoutCoordinates directly during placement in IntermediateMeasureScope. See example below.</aside>
-          <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">onPlaced</a></code> gets invoked after the parent <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> has been placed and before child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> is placed. This allows child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> to adjust its own placement based on its parent.</p>
-          <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">onPlaced</a></code> callback will be invoked with the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of the LayoutNode emitted by <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code> as the first parameter, and the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of this modifier as the second parameter. Given the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code>s, both lookahead position and current position of this modifier in the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code>'s coordinates system can be calculated using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates)">LookaheadLayoutCoordinates.localLookaheadPositionOf</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">LookaheadLayoutCoordinates.localPositionOf</a></code>, respectively.</p>
-          <pre class="prettyprint lang-kotlin">
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.AnimationVector2D
-import androidx.compose.animation.core.VectorConverter
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.movableContentOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.LookaheadScope
-import androidx.compose.ui.layout.intermediateLayout
-import androidx.compose.ui.layout.layout
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.round
-
-// Creates a custom modifier to animate the local position of the layout within the
-// given LookaheadScope, whenever the relative position changes.
-fun Modifier.animatePlacementInScope(lookaheadScope: LookaheadScope) = composed {
-    // Creates an offset animation
-    var offsetAnimation: Animatable&lt;IntOffset, AnimationVector2D&gt;? by mutableStateOf(
-        null
-    )
-    var targetOffset: IntOffset? by mutableStateOf(null)
-
-    this.intermediateLayout { measurable, constraints -&gt;
-        val placeable = measurable.measure(constraints)
-        layout(placeable.width, placeable.height) {
-            // Converts coordinates of the current layout to LookaheadCoordinates
-            val coordinates = coordinates
-            if (coordinates != null) {
-                // Calculates the target offset within the lookaheadScope
-                val target = with(lookaheadScope) {
-                    lookaheadScopeCoordinates
-                        .localLookaheadPositionOf(coordinates)
-                        .round().also { targetOffset = it }
-                }
-
-                // Uses the target offset to start an offset animation
-                if (target != offsetAnimation?.targetValue) {
-                    offsetAnimation?.run {
-                        launch { animateTo(target) }
-                    } ?: Animatable(target, IntOffset.VectorConverter).let {
-                        offsetAnimation = it
-                    }
-                }
-                // Calculates the *current* offset within the given LookaheadScope
-                val placementOffset =
-                    lookaheadScopeCoordinates.localPositionOf(
-                        coordinates,
-                        Offset.Zero
-                    ).round()
-                // Calculates the delta between animated position in scope and current
-                // position in scope, and places the child at the delta offset. This puts
-                // the child layout at the animated position.
-                val (x, y) = requireNotNull(offsetAnimation).run { value - placementOffset }
-                placeable.place(x, y)
-            } else {
-                placeable.place(0, 0)
-            }
-        }
-    }
-}
-
-val colors = listOf(
-    Color(0xffff6f69), Color(0xffffcc5c), Color(0xff264653), Color(0xff2a9d84)
-)
-
-var isInColumn by remember { mutableStateOf(true) }
-LookaheadScope {
-    // Creates movable content containing 4 boxes. They will be put either in a [Row] or in a
-    // [Column] depending on the state
-    val items = remember {
-        movableContentOf {
-            colors.forEach { color -&gt;
-                Box(
-                    Modifier
-                        .padding(15.dp)
-                        .size(100.dp, 80.dp)
-                        .animatePlacementInScope(this)
-                        .background(color, RoundedCornerShape(20))
-                )
-            }
-        }
-    }
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .clickable { isInColumn = !isInColumn }
-    ) {
-        // As the items get moved between Column and Row, their positions in LookaheadLayout
-        // will change. The `animatePlacementInScope` modifier created above will
-        // observe that final position change via `localLookaheadPositionOf`, and create
-        // a position animation.
-        if (isInColumn) {
-            Column(Modifier.fillMaxSize()) {
-                items()
-            }
-        } else {
-            Row { items() }
-        }
-    }
-}</pre>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">localLookaheadPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;relativeToSource:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = Offset.Zero,<br>&nbsp;&nbsp;&nbsp;&nbsp;includeMotionFrameOfReference:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">relativeToSource</a></code> in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">sourceCoordinates</a></code>'s lookahead coordinate space into local lookahead coordinates. This is a convenient method for 1) converting both <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">this</a></code> coordinates and <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">sourceCoordinates</a></code> into lookahead space coordinates using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a></code>, and 2) invoking <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">LayoutCoordinates.localPositionOf</a></code> with the converted coordinates.</p>
+          <p>For layouts where <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#introducesMotionFrameOfReference()">LayoutCoordinates.introducesMotionFrameOfReference</a></code> returns <code>true</code> (placed under <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html#withMotionFrameOfReferencePlacement(kotlin.Function1)">Placeable.PlacementScope.withMotionFrameOfReferencePlacement</a></code>) you may pass <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">includeMotionFrameOfReference</a></code> as <code>false</code> to get their position while excluding the additional Offset.</p>
         </div>
         <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.toLookaheadCoordinates--"></a><a name="tolookaheadcoordinates"></a>
           <div class="api-name-block">
@@ -526,7 +316,7 @@ LookaheadScope {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></pre>
-          <p>Converts a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> into a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> in the Lookahead coordinates space. This is only applicable to child layouts within <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>.</p>
+          <p>Converts a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> into a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> in the Lookahead coordinate space. This can be used for layouts within <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>.</p>
         </div>
       </div>
     </devsite-filter >
@@ -546,6 +336,7 @@ LookaheadScope {
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.Placeable.PlacementScope).lookaheadScopeCoordinates()">lookaheadScopeCoordinates</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></pre>
           <p>Returns the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>. This is only accessible from <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code> (i.e. during placement time).</p>
+          <p>Note: The returned coordinates is <b>not</b> coordinates in the lookahead coordinate space. If the lookahead coordinates of the lookaheadScope is needed, suggest converting the returned coordinates using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a></code>.</p>
         </div>
       </div>
     </devsite-filter >

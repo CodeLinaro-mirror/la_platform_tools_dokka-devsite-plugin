@@ -9,8 +9,15 @@
       <meta itemprop="name" content="DrawContext">
       <meta itemprop="path" content="androidx.compose.ui.graphics.drawscope">
       <meta itemprop="property" content="getCanvas()">
+      <meta itemprop="property" content="getDensity()">
+      <meta itemprop="property" content="getGraphicsLayer()">
+      <meta itemprop="property" content="getLayoutDirection()">
       <meta itemprop="property" content="getSize()">
       <meta itemprop="property" content="getTransform()">
+      <meta itemprop="property" content="setCanvas(androidx.compose.ui.graphics.Canvas)">
+      <meta itemprop="property" content="setDensity(androidx.compose.ui.unit.Density)">
+      <meta itemprop="property" content="setGraphicsLayer(androidx.compose.ui.graphics.layer.GraphicsLayer)">
+      <meta itemprop="property" content="setLayoutDirection(androidx.compose.ui.unit.LayoutDirection)">
       <meta itemprop="property" content="setSize(androidx.compose.ui.geometry.Size)">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -46,10 +53,31 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code></td>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getCanvas()">getCanvas</a>()</code></div>
               <p>The target canvas to issue drawing commands</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getDensity()">getDensity</a>()</code></div>
+              <p><code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code> used to assist in conversions of density independent pixels to raw pixels to draw</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default <a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getGraphicsLayer()">getGraphicsLayer</a>()</code></div>
+              <p>Current <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> we are drawing into.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getLayoutDirection()">getLayoutDirection</a>()</code></div>
+              <p><code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the layout being drawn in.</p>
             </td>
           </tr>
           <tr>
@@ -64,6 +92,34 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getTransform()">getTransform</a>()</code></div>
               <p>The controller for issuing transformations to the drawing environment</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#setCanvas(androidx.compose.ui.graphics.Canvas)">setCanvas</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;&lt;unused var&gt;)</code></div>
+              <p>The target canvas to issue drawing commands</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#setDensity(androidx.compose.ui.unit.Density)">setDensity</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;&lt;unused var&gt;)</code></div>
+              <p><code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code> used to assist in conversions of density independent pixels to raw pixels to draw</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#setGraphicsLayer(androidx.compose.ui.graphics.layer.GraphicsLayer)">setGraphicsLayer</a>(<a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a>&nbsp;&lt;unused var&gt;)</code></div>
+              <p>Current <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> we are drawing into.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#setLayoutDirection(androidx.compose.ui.unit.LayoutDirection)">setLayoutDirection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;&lt;unused var&gt;)</code></div>
+              <p><code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the layout being drawn in.</p>
             </td>
           </tr>
           <tr>
@@ -84,8 +140,35 @@
             <h3 id="getCanvas()">getCanvas</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getCanvas()">getCanvas</a>()</pre>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getCanvas()">getCanvas</a>()</pre>
         <p>The target canvas to issue drawing commands</p>
+      </div>
+      <div class="api-item"><a name="getDensity--"></a><a name="getdensity"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getDensity()">getDensity</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getDensity()">getDensity</a>()</pre>
+        <p><code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code> used to assist in conversions of density independent pixels to raw pixels to draw</p>
+      </div>
+      <div class="api-item"><a name="getGraphicsLayer--"></a><a name="getgraphicslayer"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getGraphicsLayer()">getGraphicsLayer</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;<a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getGraphicsLayer()">getGraphicsLayer</a>()</pre>
+        <p>Current <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> we are drawing into. Might be null if the <code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#canvas()">canvas</a></code> is not provided by a <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code>, for example in the case of a software-accelerated drawing.</p>
+      </div>
+      <div class="api-item"><a name="getLayoutDirection--"></a><a name="getlayoutdirection"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getLayoutDirection()">getLayoutDirection</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getLayoutDirection()">getLayoutDirection</a>()</pre>
+        <p><code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the layout being drawn in.</p>
       </div>
       <div class="api-item"><a name="getSize--"></a><a name="getsize"></a>
         <div class="api-name-block">
@@ -104,6 +187,42 @@
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#getTransform()">getTransform</a>()</pre>
         <p>The controller for issuing transformations to the drawing environment</p>
+      </div>
+      <div class="api-item"><a name="setCanvas-androidx.compose.ui.graphics.Canvas-"></a><a name="setcanvas"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setCanvas(androidx.compose.ui.graphics.Canvas)">setCanvas</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#setCanvas(androidx.compose.ui.graphics.Canvas)">setCanvas</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;&lt;unused var&gt;)</pre>
+        <p>The target canvas to issue drawing commands</p>
+      </div>
+      <div class="api-item"><a name="setDensity-androidx.compose.ui.unit.Density-"></a><a name="setdensity"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setDensity(androidx.compose.ui.unit.Density)">setDensity</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#setDensity(androidx.compose.ui.unit.Density)">setDensity</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;&lt;unused var&gt;)</pre>
+        <p><code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code> used to assist in conversions of density independent pixels to raw pixels to draw</p>
+      </div>
+      <div class="api-item"><a name="setGraphicsLayer-androidx.compose.ui.graphics.layer.GraphicsLayer-"></a><a name="setgraphicslayer"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setGraphicsLayer(androidx.compose.ui.graphics.layer.GraphicsLayer)">setGraphicsLayer</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#setGraphicsLayer(androidx.compose.ui.graphics.layer.GraphicsLayer)">setGraphicsLayer</a>(<a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a>&nbsp;&lt;unused var&gt;)</pre>
+        <p>Current <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> we are drawing into. Might be null if the <code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#canvas()">canvas</a></code> is not provided by a <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code>, for example in the case of a software-accelerated drawing.</p>
+      </div>
+      <div class="api-item"><a name="setLayoutDirection-androidx.compose.ui.unit.LayoutDirection-"></a><a name="setlayoutdirection"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setLayoutDirection(androidx.compose.ui.unit.LayoutDirection)">setLayoutDirection</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#setLayoutDirection(androidx.compose.ui.unit.LayoutDirection)">setLayoutDirection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;&lt;unused var&gt;)</pre>
+        <p><code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the layout being drawn in.</p>
       </div>
       <div class="api-item"><a name="setSize-androidx.compose.ui.geometry.Size-"></a><a name="setsize"></a>
         <div class="api-name-block">

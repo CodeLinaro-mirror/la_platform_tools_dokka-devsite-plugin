@@ -1,0 +1,239 @@
+<html devsite="true">
+  <head>
+    <title>DeferredTargetAnimation</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="DeferredTargetAnimation">
+      <meta itemprop="path" content="androidx.compose.animation.core">
+      <meta itemprop="property" content="getPendingTarget()">
+      <meta itemprop="property" content="isIdle()">
+      <meta itemprop="property" content="updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>DeferredTargetAnimation</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/core/DeferredTargetAnimation.kt+class:androidx.compose.animation.core.DeferredTargetAnimation&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/animation/core/DeferredTargetAnimation.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>@<a href="/reference/androidx/compose/animation/core/ExperimentalAnimatableApi.html">ExperimentalAnimatableApi</a><br>public final class <a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html">DeferredTargetAnimation</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt;</pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html">DeferredTargetAnimation</a></code> is intended for animations where the target is unknown at the time of instantiation. Such use cases include, but are not limited to, size or position animations created during composition or the initialization of a Modifier.Node, yet the target size or position stays unknown until the later measure and placement phase.</p>
+    <p><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html">DeferredTargetAnimation</a></code> offers a declarative <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a></code> function, which requires a target to either set up the animation or update the animation, and to read the current value of the animation.</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.DeferredTargetAnimation
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.approachLayout
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
+
+// Creates a custom modifier that animates the constraints and measures child with the
+// animated constraints. This modifier is built on top of `Modifier.approachLayout` to approach
+// th destination size determined by the lookahead pass. A resize animation will be kicked off
+// whenever the lookahead size changes, to animate children from current size to destination
+// size. Fixed constraints created based on the animation value will be used to measure
+// child, so the child layout gradually changes its animated constraints until the approach
+// completes.
+fun Modifier.animateConstraints(
+    sizeAnimation: DeferredTargetAnimation&lt;IntSize, AnimationVector2D&gt;,
+    coroutineScope: CoroutineScope
+) = this.approachLayout(
+    isMeasurementApproachInProgress = { lookaheadSize -&gt;
+        // Update the target of the size animation.
+        sizeAnimation.updateTarget(lookaheadSize, coroutineScope)
+        // Return true if the size animation has pending target change or is currently
+        // running.
+        !sizeAnimation.isIdle
+    }
+) { measurable, _ -&gt;
+    // In the measurement approach, the goal is to gradually reach the destination size
+    // (i.e. lookahead size). To achieve that, we use an animation to track the current
+    // size, and animate to the destination size whenever it changes. Once the animation
+    // finishes, the approach is complete.
+
+    // First, update the target of the animation, and read the current animated size.
+    val (width, height) = sizeAnimation.updateTarget(lookaheadSize, coroutineScope)
+    // Then create fixed size constraints using the animated size
+    val animatedConstraints = Constraints.fixed(width, height)
+    // Measure child with animated constraints.
+    val placeable = measurable.measure(animatedConstraints)
+    layout(placeable.width, placeable.height) {
+        placeable.place(0, 0)
+    }
+}
+
+var fullWidth by remember { mutableStateOf(false) }
+
+// Creates a size animation with a target unknown at the time of instantiation.
+val sizeAnimation = remember { DeferredTargetAnimation(IntSize.VectorConverter) }
+val coroutineScope = rememberCoroutineScope()
+Row(
+    (if (fullWidth) Modifier.fillMaxWidth() else Modifier.width(100.dp))
+        .height(200.dp)
+        // Use the custom modifier created above to animate the constraints passed
+        // to the child, and therefore resize children in an animation.
+        .animateConstraints(sizeAnimation, coroutineScope)
+        .clickable { fullWidth = !fullWidth }) {
+    Box(
+        Modifier
+            .weight(1f)
+            .fillMaxHeight()
+            .background(Color(0xffff6f69)),
+    )
+    Box(
+        Modifier
+            .weight(2f)
+            .fillMaxHeight()
+            .background(Color(0xffffcc5c))
+    )
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#DeferredTargetAnimation(androidx.compose.animation.core.TwoWayConverter)">DeferredTargetAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;vectorConverter<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#getPendingTarget()">getPendingTarget</a>()</code></div>
+              <p>Returns the target value from the most recent <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a></code> call.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#isIdle()">isIdle</a>()</code></div>
+              <p><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#isIdle()">isIdle</a></code> returns true when the animation has finished running and reached its <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#pendingTarget()">pendingTarget</a></code>, or when the animation has not been set up (i.e. <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a></code> has never been called).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;target,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ERROR CLASS: Symbol not found for CoroutineScope&nbsp;coroutineScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec<br>)</code></div>
+              <p><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a></code> sets up an animation, or updates an already running animation, based on the <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">target</a></code> in the given <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">coroutineScope</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="DeferredTargetAnimation-androidx.compose.animation.core.TwoWayConverter-"></a><a name="deferredtargetanimation"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="DeferredTargetAnimation(androidx.compose.animation.core.TwoWayConverter)">DeferredTargetAnimation</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#DeferredTargetAnimation(androidx.compose.animation.core.TwoWayConverter)">DeferredTargetAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;vectorConverter<br>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getPendingTarget--"></a><a name="getpendingtarget"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getPendingTarget()">getPendingTarget</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#getPendingTarget()">getPendingTarget</a>()</pre>
+        <p>Returns the target value from the most recent <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a></code> call.</p>
+      </div>
+      <div class="api-item"><a name="isIdle--"></a><a name="isidle"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="isIdle()">isIdle</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#isIdle()">isIdle</a>()</pre>
+        <p><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#isIdle()">isIdle</a></code> returns true when the animation has finished running and reached its <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#pendingTarget()">pendingTarget</a></code>, or when the animation has not been set up (i.e. <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a></code> has never been called).</p>
+      </div>
+      <div class="api-item"><a name="updateTarget(kotlin.Any, &lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope, androidx.compose.animation.core.FiniteAnimationSpec)"></a><a name="updateTarget-kotlin.Any-&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope-androidx.compose.animation.core.FiniteAnimationSpec-"></a><a name="updatetarget"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;target,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ERROR CLASS: Symbol not found for CoroutineScope&nbsp;coroutineScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec<br>)</pre>
+        <p><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a></code> sets up an animation, or updates an already running animation, based on the <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">target</a></code> in the given <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">coroutineScope</a></code>. <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#pendingTarget()">pendingTarget</a></code> will be updated to track the last seen <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">target</a></code>.</p>
+        <p><code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">updateTarget</a></code> will return the current value of the animation after launching the animation in the given <code><a href="/reference/androidx/compose/animation/core/DeferredTargetAnimation.html#updateTarget(kotlin.Any,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for CoroutineScope,androidx.compose.animation.core.FiniteAnimationSpec)">coroutineScope</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+                <td>
+                  <p>current value of the animation</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

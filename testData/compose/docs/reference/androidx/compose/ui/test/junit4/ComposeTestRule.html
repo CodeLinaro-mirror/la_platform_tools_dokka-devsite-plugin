@@ -17,6 +17,7 @@
       <meta itemprop="property" content="unregisterIdlingResource(androidx.compose.ui.test.IdlingResource)">
       <meta itemprop="property" content="waitForIdle()">
       <meta itemprop="property" content="waitUntil(kotlin.Long,kotlin.Function0)">
+      <meta itemprop="property" content="waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">
       <meta itemprop="property" content="waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">
       <meta itemprop="property" content="waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">
       <meta itemprop="property" content="waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">
@@ -159,6 +160,13 @@
             <td><code>abstract void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;condition<br>)</code></div>
+              <p>Blocks until the given condition is satisfied.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;conditionDescription,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;condition<br>)</code></div>
               <p>Blocks until the given condition is satisfied.</p>
             </td>
           </tr>
@@ -387,6 +395,72 @@
                 <td><code><a href="/reference/androidx/compose/ui/test/ComposeTimeoutException.html">androidx.compose.ui.test.ComposeTimeoutException</a></code></td>
                 <td>
                   <p>If the condition is not satisfied after <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntil(kotlin.Long,kotlin.Function0)">timeoutMillis</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="waitUntil(kotlin.String, kotlin.Long, kotlin.Function0)"></a><a name="waitUntil-kotlin.String-kotlin.Long-kotlin.Function0-"></a><a name="waituntil"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">waitUntil</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;conditionDescription,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;condition<br>)</pre>
+        <p>Blocks until the given condition is satisfied.</p>
+        <p>In case the main clock auto advancement is enabled (by default is), this will also keep advancing the clock on a frame by frame basis and yield for other async work at the end of each frame. If the advancement of the main clock is not enabled this will work as a countdown latch without any other advancements.</p>
+        <p>There is also <code><a href="/reference/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">MainTestClock.advanceTimeUntil</a></code> which is faster as it does not yield back the UI thread.</p>
+        <p>This method should be used in cases where <code><a href="/reference/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">MainTestClock.advanceTimeUntil</a></code> is not enough.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;conditionDescription</code></td>
+                <td>
+                  <p>A human-readable description of <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">condition</a></code> that will be included in the timeout exception if thrown.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;timeoutMillis</code></td>
+                <td>
+                  <p>The time after which this method throws an exception if the given condition is not satisfied. This is the wall clock time not the main clock one.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;condition</code></td>
+                <td>
+                  <p>Condition that must be satisfied in order for this method to successfully finish.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/test/ComposeTimeoutException.html">androidx.compose.ui.test.ComposeTimeoutException</a></code></td>
+                <td>
+                  <p>If the condition is not satisfied after <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntil(kotlin.String,kotlin.Long,kotlin.Function0)">timeoutMillis</a></code>.</p>
                 </td>
               </tr>
             </tbody>

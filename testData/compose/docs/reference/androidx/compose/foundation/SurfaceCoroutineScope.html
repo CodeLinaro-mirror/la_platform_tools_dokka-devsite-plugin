@@ -1,0 +1,164 @@
+<html devsite="true">
+  <head>
+    <title>SurfaceCoroutineScope</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="SurfaceCoroutineScope">
+      <meta itemprop="path" content="androidx.compose.foundation">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>SurfaceCoroutineScope</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/AndroidExternalSurface.android.kt+class:androidx.compose.foundation.SurfaceCoroutineScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/SurfaceCoroutineScope.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/foundation/SurfaceCoroutineScope.html">SurfaceCoroutineScope</a> extends <a href="/reference/androidx/compose/foundation/SurfaceScope.html">SurfaceScope</a>, <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/foundation/SurfaceCoroutineScope.html">SurfaceCoroutineScope</a></code> is a scoped environment provided by <code><a href="/reference/androidx/compose/foundation/package-summary.html#AndroidExternalSurface(androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.unit.IntSize,androidx.compose.foundation.AndroidExternalSurfaceZOrder,kotlin.Boolean,kotlin.Function1)">AndroidExternalSurface</a></code> and <code><a href="/reference/androidx/compose/foundation/package-summary.html#AndroidEmbeddedExternalSurface(androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.unit.IntSize,androidx.compose.ui.graphics.Matrix,kotlin.Function1)">AndroidEmbeddedExternalSurface</a></code> when a new <code><a href="https://developer.android.com/reference/android/view/Surface.html">Surface</a></code> is created. This environment is a coroutine scope that also provides access to a <code><a href="/reference/androidx/compose/foundation/SurfaceScope.html">SurfaceScope</a></code> environment which can itself be used to handle other <code><a href="https://developer.android.com/reference/android/view/Surface.html">Surface</a></code> lifecycle events.</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.AndroidExternalSurface
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.runtime.withFrameNanos
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.unit.dp
+
+AndroidExternalSurface(
+    modifier = Modifier.fillMaxWidth().height(400.dp)
+) {
+    // Resources can be initialized/cached here
+
+    // A surface is available, we can start rendering
+    onSurface { surface, width, height -&gt;
+        var w = width
+        var h = height
+
+        // Initial draw to avoid a black frame
+        surface.lockCanvas(Rect(0, 0, w, h)).apply {
+            drawColor(Color.Blue.toArgb())
+            surface.unlockCanvasAndPost(this)
+        }
+
+        // React to surface dimension changes
+        surface.onChanged { newWidth, newHeight -&gt;
+            w = newWidth
+            h = newHeight
+        }
+
+        // Cleanup if needed
+        surface.onDestroyed {
+        }
+
+        // Render loop, automatically cancelled on surface destruction
+        while (true) {
+            withFrameNanos { time -&gt;
+                surface.lockCanvas(Rect(0, 0, w, h)).apply {
+                    val timeMs = time / 1_000_000L
+                    val t = 0.5f + 0.5f * sin(timeMs / 1_000.0f)
+                    drawColor(lerp(Color.Blue, Color.Green, t).toArgb())
+                    surface.unlockCanvasAndPost(this)
+                }
+            }
+        }
+    }
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/foundation/SurfaceScope.html">SurfaceScope</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/foundation/AndroidExternalSurfaceScope.html">AndroidExternalSurfaceScope</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">kotlinx.coroutines.CoroutineScope</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/get-coroutine-context.html">getCoroutineContext</a>()</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/foundation/SurfaceScope.html">androidx.compose.foundation.SurfaceScope</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/foundation/AndroidExternalSurfaceKt.html">AndroidExternalSurfaceKt</a>.<a href="/reference/androidx/compose/foundation/SurfaceScope.html#(android.view.Surface).onChanged(kotlin.Function3)">onChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/Surface.html">Surface</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function3&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/Surface.html">Surface</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onChanged<br>)</code></div>
+                        <p>Invokes <code><a href="/reference/androidx/compose/foundation/SurfaceScope.html#(android.view.Surface).onChanged(kotlin.Function3)">onChanged</a></code> when the surface's geometry (width and height) changes.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/foundation/AndroidExternalSurfaceKt.html">AndroidExternalSurfaceKt</a>.<a href="/reference/androidx/compose/foundation/SurfaceScope.html#(android.view.Surface).onDestroyed(kotlin.Function1)">onDestroyed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/Surface.html">Surface</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/Surface.html">Surface</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDestroyed<br>)</code></div>
+                        <p>Invokes <code><a href="/reference/androidx/compose/foundation/SurfaceScope.html#(android.view.Surface).onDestroyed(kotlin.Function1)">onDestroyed</a></code> when the surface is destroyed.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

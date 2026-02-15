@@ -10,6 +10,7 @@
       <meta itemprop="path" content="androidx.compose.ui.input.pointer.util">
       <meta itemprop="property" content="addDataPoint(kotlin.Long,kotlin.Float)">
       <meta itemprop="property" content="calculateVelocity()">
+      <meta itemprop="property" content="calculateVelocity(kotlin.Float)">
       <meta itemprop="property" content="resetTracking()">
       <meta itemprop="property" content="isDataDifferential()">
       <meta itemprop="language" content="KOTLIN">
@@ -97,6 +98,16 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#calculateVelocity()">calculateVelocity</a>()</code></div>
+                <p>Computes the estimated velocity at the time of the last provided data point.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#calculateVelocity(kotlin.Float)">calculateVelocity</a>(maximumVelocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
                 <p>Computes the estimated velocity at the time of the last provided data point.</p>
               </td>
               <td>
@@ -215,8 +226,44 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#calculateVelocity()">calculateVelocity</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
-          <p>Computes the estimated velocity at the time of the last provided data point. The units of velocity will be <code>units/second</code>, where <code>units</code> is the units of the data points provided via <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#addDataPoint(kotlin.Long,kotlin.Float)">addDataPoint</a></code>.</p>
+          <p>Computes the estimated velocity at the time of the last provided data point.</p>
+          <p>The units of velocity will be <code>units/second</code>, where <code>units</code> is the units of the data points provided via <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#addDataPoint(kotlin.Long,kotlin.Float)">addDataPoint</a></code>.</p>
           <p>This can be expensive. Only call this when you need the velocity.</p>
+        </div>
+        <div class="api-item"><a name="calculateVelocity-kotlin.Float-"></a><a name="calculatevelocity"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="calculateVelocity(kotlin.Float)">calculateVelocity</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#calculateVelocity(kotlin.Float)">calculateVelocity</a>(maximumVelocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Computes the estimated velocity at the time of the last provided data point.</p>
+          <p>The method allows specifying the maximum absolute value for the calculated velocity. If the absolute value of the calculated velocity exceeds the specified maximum, the return value will be clamped down to the maximum. For example, if the absolute maximum velocity is specified as &quot;20&quot;, a calculated velocity of &quot;25&quot; will be returned as &quot;20&quot;, and a velocity of &quot;-30&quot; will be returned as &quot;-20&quot;.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>maximumVelocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>the absolute value of the maximum velocity to be returned in units/second, where <code>units</code> is the units of the positions provided to this VelocityTracker.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="resetTracking--"></a><a name="resettracking"></a>
           <div class="api-name-block">

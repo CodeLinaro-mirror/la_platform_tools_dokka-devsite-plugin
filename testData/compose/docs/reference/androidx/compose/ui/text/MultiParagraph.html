@@ -8,6 +8,7 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="MultiParagraph">
       <meta itemprop="path" content="androidx.compose.ui.text">
+      <meta itemprop="property" content="fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">
       <meta itemprop="property" content="getBidiRunDirection(kotlin.Int)">
       <meta itemprop="property" content="getBoundingBox(kotlin.Int)">
       <meta itemprop="property" content="getCursorRect(kotlin.Int)">
@@ -17,6 +18,7 @@
       <meta itemprop="property" content="getHorizontalPosition(kotlin.Int,kotlin.Boolean)">
       <meta itemprop="property" content="getIntrinsics()">
       <meta itemprop="property" content="getLastBaseline()">
+      <meta itemprop="property" content="getLineBaseline(kotlin.Int)">
       <meta itemprop="property" content="getLineBottom(kotlin.Int)">
       <meta itemprop="property" content="getLineCount()">
       <meta itemprop="property" content="getLineEnd(kotlin.Int,kotlin.Boolean)">
@@ -35,6 +37,7 @@
       <meta itemprop="property" content="getParagraphDirection(kotlin.Int)">
       <meta itemprop="property" content="getPathForRange(kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="getPlaceholderRects()">
+      <meta itemprop="property" content="getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">
       <meta itemprop="property" content="getWidth()">
       <meta itemprop="property" content="getWordBoundary(kotlin.Int)">
       <meta itemprop="property" content="isLineEllipsized(kotlin.Int)">
@@ -117,6 +120,13 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">fillBoundingBoxes</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;range,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;array,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> int&nbsp;arrayStart<br>)</code></div>
+              <p>Fills the bounding boxes for characters provided in the <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">range</a></code> into <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">array</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/ResolvedTextDirection.html">ResolvedTextDirection</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getBidiRunDirection(kotlin.Int)">getBidiRunDirection</a>(int&nbsp;offset)</code></div>
@@ -177,6 +187,13 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getLastBaseline()">getLastBaseline</a>()</code></div>
               <p>The distance from the top of the paragraph to the alphabetic baseline of the first line, in logical pixels.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getLineBaseline(kotlin.Int)">getLineBaseline</a>(int&nbsp;lineIndex)</code></div>
+              <p>Returns the distance from the top of the <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html">MultiParagraph</a></code> to the alphabetic baseline of the given line.</p>
             </td>
           </tr>
           <tr>
@@ -303,6 +320,13 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getPlaceholderRects()">getPlaceholderRects</a>()</code></div>
               <p>The bounding boxes reserved for the input placeholders in this MultiParagraph.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">getRangeForRect</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextGranularity.html">TextGranularity</a>&nbsp;granularity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextInclusionStrategy.html">TextInclusionStrategy</a>&nbsp;inclusionStrategy<br>)</code></div>
+              <p>Find the range of text which is inside the specified <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">rect</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -782,6 +806,53 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
+      <div class="api-item"><a name="fillBoundingBoxes(androidx.compose.ui.text.TextRange, kotlin.FloatArray, kotlin.Int)"></a><a name="fillBoundingBoxes-androidx.compose.ui.text.TextRange-kotlin.FloatArray-kotlin.Int-"></a><a name="fillboundingboxes"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">fillBoundingBoxes</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;<a href="/reference/androidx/compose/ui/text/MultiParagraph.html#fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">fillBoundingBoxes</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;range,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;array,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> int&nbsp;arrayStart<br>)</pre>
+        <p>Fills the bounding boxes for characters provided in the <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">range</a></code> into <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">array</a></code>. The array is filled starting from <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">arrayStart</a></code> (inclusive). The coordinates are in local text layout coordinates.</p>
+        <p>The returned information consists of left/right of a character; line top and bottom for the same character.</p>
+        <p>For the grapheme consists of multiple code points, e.g. ligatures, combining marks, the first character has the total width and the remaining are returned as zero-width.</p>
+        <p>The array divided into segments of four where each index in that segment represents left, top, right, bottom of the character.</p>
+        <p>The size of the provided <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">array</a></code> should be greater or equal than the four times * <code><a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code> length.</p>
+        <p>The final order of characters in the <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#fillBoundingBoxes(androidx.compose.ui.text.TextRange,kotlin.FloatArray,kotlin.Int)">array</a></code> is from <code><a href="/reference/androidx/compose/ui/text/TextRange.html#min()">TextRange.min</a></code> to <code><a href="/reference/androidx/compose/ui/text/TextRange.html#max()">TextRange.max</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;range</code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code> representing the start and end indices in the <code><a href="/reference/androidx/compose/ui/text/Paragraph.html">Paragraph</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;array</code></td>
+                <td>
+                  <p>the array to fill in the values. The array divided into segments of four where each index in that segment represents left, top, right, bottom of the character.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> int&nbsp;arrayStart</code></td>
+                <td>
+                  <p>the inclusive start index in the array where the function will start filling in the values from</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="getBidiRunDirection-kotlin.Int-"></a><a name="getbidirundirection"></a>
         <div class="api-name-block">
           <div>
@@ -918,6 +989,15 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getLastBaseline()">getLastBaseline</a>()</pre>
         <p>The distance from the top of the paragraph to the alphabetic baseline of the first line, in logical pixels.</p>
+      </div>
+      <div class="api-item"><a name="getLineBaseline-kotlin.Int-"></a><a name="getlinebaseline"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getLineBaseline(kotlin.Int)">getLineBaseline</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getLineBaseline(kotlin.Int)">getLineBaseline</a>(int&nbsp;lineIndex)</pre>
+        <p>Returns the distance from the top of the <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html">MultiParagraph</a></code> to the alphabetic baseline of the given line.</p>
       </div>
       <div class="api-item"><a name="getLineBottom-kotlin.Int-"></a><a name="getlinebottom"></a>
         <div class="api-name-block">
@@ -1129,6 +1209,69 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;<a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getPlaceholderRects()">getPlaceholderRects</a>()</pre>
         <p>The bounding boxes reserved for the input placeholders in this MultiParagraph. Their locations are relative to this MultiParagraph's coordinate. The order of this list corresponds to that of input placeholders. Notice that <code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code> in <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#placeholderRects()">placeholderRects</a></code> is nullable. When <code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code> is null, it indicates that the corresponding <code><a href="/reference/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code> is ellipsized.</p>
+      </div>
+      <div class="api-item"><a name="getRangeForRect(androidx.compose.ui.geometry.Rect, androidx.compose.ui.text.TextGranularity, androidx.compose.ui.text.TextInclusionStrategy)"></a><a name="getRangeForRect-androidx.compose.ui.geometry.Rect-androidx.compose.ui.text.TextGranularity-androidx.compose.ui.text.TextInclusionStrategy-"></a><a name="getrangeforrect"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">getRangeForRect</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;<a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">getRangeForRect</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextGranularity.html">TextGranularity</a>&nbsp;granularity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextInclusionStrategy.html">TextInclusionStrategy</a>&nbsp;inclusionStrategy<br>)</pre>
+        <p>Find the range of text which is inside the specified <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">rect</a></code>. This method will break text into small text segments based on the given <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">granularity</a></code> such as character or word. It also support different <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">inclusionStrategy</a></code>, which determines when a small text segments is considered as inside the <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">rect</a></code>. Note that the word/character breaking is both operating system and language dependent. In the certain cases, the text may be break into smaller segments than the specified the <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">granularity</a></code>. If a text segment spans multiple lines or multiple directional runs (e.g. a hyphenated word), the text segment is divided into pieces at the line and run breaks, then the text segment is considered to be inside the area if any of its pieces are inside the area.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect</code></td>
+                <td>
+                  <p>the rectangle area in which the text range will be found.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextGranularity.html">TextGranularity</a>&nbsp;granularity</code></td>
+                <td>
+                  <p>the granularity of the text, it controls how text is segmented.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextInclusionStrategy.html">TextInclusionStrategy</a>&nbsp;inclusionStrategy</code></td>
+                <td>
+                  <p>the strategy that determines whether a range of text's bounds is inside the given <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">rect</a></code> or not.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code> that is inside the given <code><a href="/reference/androidx/compose/ui/text/MultiParagraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">rect</a></code>, or <code><a href="/reference/androidx/compose/ui/text/TextRange.Companion.html#Zero()">TextRange.Zero</a></code> if no text is found.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="getWidth--"></a><a name="getwidth"></a>
         <div class="api-name-block">

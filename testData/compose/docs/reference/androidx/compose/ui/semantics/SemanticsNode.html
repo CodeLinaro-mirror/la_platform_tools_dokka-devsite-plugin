@@ -19,6 +19,7 @@
       <meta itemprop="property" content="getParent()">
       <meta itemprop="property" content="getPositionInRoot()">
       <meta itemprop="property" content="getPositionInWindow()">
+      <meta itemprop="property" content="getPositionOnScreen()">
       <meta itemprop="property" content="getRoot()">
       <meta itemprop="property" content="getSize()">
       <meta itemprop="property" content="getTouchBoundsInRoot()">
@@ -74,7 +75,7 @@
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#getBoundsInWindow()">getBoundsInWindow</a>()</code></div>
-              <p>The bounding box for this node relative to the screen, with clipping applied.</p>
+              <p>The bounding box for this node relative to the window, with clipping applied.</p>
             </td>
           </tr>
           <tr>
@@ -129,6 +130,13 @@
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#getPositionInWindow()">getPositionInWindow</a>()</code></div>
+              <p>The position of this node relative to the window, with no clipping applied</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#getPositionOnScreen()">getPositionOnScreen</a>()</code></div>
               <p>The position of this node relative to the screen, with no clipping applied</p>
             </td>
           </tr>
@@ -190,7 +198,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#getBoundsInWindow()">getBoundsInWindow</a>()</pre>
-        <p>The bounding box for this node relative to the screen, with clipping applied. To get the bounds with no clipping applied, use PxBounds(<code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#positionInWindow()">positionInWindow</a></code>, <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#size()">size</a></code>.toSize())</p>
+        <p>The bounding box for this node relative to the window, with clipping applied. To get the bounds with no clipping applied, use PxBounds(<code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#positionInWindow()">positionInWindow</a></code>, <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#size()">size</a></code>.toSize())</p>
       </div>
       <div class="api-item"><a name="getChildren--"></a><a name="getchildren"></a>
         <div class="api-name-block">
@@ -263,6 +271,15 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#getPositionInWindow()">getPositionInWindow</a>()</pre>
+        <p>The position of this node relative to the window, with no clipping applied</p>
+      </div>
+      <div class="api-item"><a name="getPositionOnScreen--"></a><a name="getpositiononscreen"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getPositionOnScreen()">getPositionOnScreen</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html#getPositionOnScreen()">getPositionOnScreen</a>()</pre>
         <p>The position of this node relative to the screen, with no clipping applied</p>
       </div>
       <div class="api-item"><a name="getRoot--"></a><a name="getroot"></a>

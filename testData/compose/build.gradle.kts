@@ -26,8 +26,8 @@ dackkaTest {
 
 kotlin { jvm() }
 
-val composeVersion = "1.5.0"
-val composeMaterial3Version = "1.2.0"
+val composeVersion = "1.7.8"
+val composeMaterial3Version = "1.3.2"
 
 dependencies {
     testArtifact("androidx.compose.animation:animation:$composeVersion")

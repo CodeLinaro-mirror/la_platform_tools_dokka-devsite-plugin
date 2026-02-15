@@ -10,15 +10,30 @@
       <meta itemprop="path" content="androidx.compose.ui.util">
       <meta itemprop="property" content="(kotlin.collections.List).fastAll(kotlin.Function1)">
       <meta itemprop="property" content="(kotlin.collections.List).fastAny(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastDistinctBy(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastFilter(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastFilterNotNull()">
+      <meta itemprop="property" content="(kotlin.collections.List).fastFirst(kotlin.Function1)">
       <meta itemprop="property" content="(kotlin.collections.List).fastFirstOrNull(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastFlatMap(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastFold(kotlin.Any,kotlin.Function2)">
       <meta itemprop="property" content="(kotlin.collections.List).fastForEach(kotlin.Function1)">
       <meta itemprop="property" content="(kotlin.collections.List).fastForEachIndexed(kotlin.Function2)">
       <meta itemprop="property" content="(kotlin.collections.List).fastForEachReversed(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">
       <meta itemprop="property" content="(kotlin.collections.List).fastLastOrNull(kotlin.Function1)">
       <meta itemprop="property" content="(kotlin.collections.List).fastMap(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastMapIndexed(kotlin.Function2)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastMapIndexedNotNull(kotlin.Function2)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastMapNotNull(kotlin.Function1)">
       <meta itemprop="property" content="(kotlin.collections.List).fastMapTo(kotlin.collections.MutableCollection,kotlin.Function1)">
       <meta itemprop="property" content="(kotlin.collections.List).fastMaxBy(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastMaxOfOrNull(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastMinByOrNull(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastReduce(kotlin.Function2)">
       <meta itemprop="property" content="(kotlin.collections.List).fastSumBy(kotlin.Function1)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastZip(kotlin.collections.List,kotlin.Function2)">
+      <meta itemprop="property" content="(kotlin.collections.List).fastZipWithNext(kotlin.Function2)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -62,10 +77,52 @@
             </td>
           </tr>
           <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;K&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastDistinctBy(kotlin.Function1)">fastDistinctBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> K&gt;&nbsp;selector<br>)</code></div>
+              <p>Returns a list containing only elements from the given collection having distinct keys returned by the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastDistinctBy(kotlin.Function1)">selector</a></code> function.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFilter(kotlin.Function1)">fastFilter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+              <p>Returns a list containing only elements matching the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFilter(kotlin.Function1)">predicate</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFilterNotNull()">fastFilterNotNull</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;T&gt;&nbsp;receiver)</code></div>
+              <p>Returns a list containing all elements that are not null</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFirst(kotlin.Function1)">fastFirst</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+              <p>Returns the first value that <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFirst(kotlin.Function1)">predicate</a></code> returns <code>true</code> for</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>static&nbsp;final T</code></td>
             <td>
               <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFirstOrNull(kotlin.Function1)">fastFirstOrNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
               <p>Returns the first value that <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFirstOrNull(kotlin.Function1)">predicate</a></code> returns <code>true</code> for or <code>null</code> if nothing matches.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFlatMap(kotlin.Function1)">fastFlatMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&gt;&nbsp;transform<br>)</code></div>
+              <p>Returns a single list of all elements yielded from results of <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFlatMap(kotlin.Function1)">transform</a></code> function being invoked on each element of original collection.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFold(kotlin.Any,kotlin.Function2)">fastFold</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> acc,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+              <p>Accumulates value starting with <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFold(kotlin.Any,kotlin.Function2)">initial</a></code> value and applying <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFold(kotlin.Any,kotlin.Function2)">operation</a></code> from left to right to current accumulator value and each element.</p>
             </td>
           </tr>
           <tr>
@@ -90,6 +147,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">fastJoinToString</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&nbsp;separator,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&nbsp;prefix,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&nbsp;postfix,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;limit,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&nbsp;truncated,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&gt;&nbsp;transform<br>)</code></div>
+              <p>Creates a string from all the elements separated using <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">separator</a></code> and using the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">prefix</a></code> and <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">postfix</a></code> if supplied.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>static&nbsp;final T</code></td>
             <td>
               <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastLastOrNull(kotlin.Function1)">fastLastOrNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
@@ -101,6 +165,27 @@
             <td>
               <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMap(kotlin.Function1)">fastMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;transform<br>)</code></div>
               <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastMap(kotlin.Function1)">transform</a></code> function to each element in the original collection.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMapIndexed(kotlin.Function2)">fastMapIndexed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;transform<br>)</code></div>
+              <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastMapIndexed(kotlin.Function2)">transform</a></code> function to each element in the original collection.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMapIndexedNotNull(kotlin.Function2)">fastMapIndexedNotNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;R&gt;&nbsp;transform<br>)</code></div>
+              <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastMapIndexedNotNull(kotlin.Function2)">transform</a></code> function to each element in the original collection.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMapNotNull(kotlin.Function1)">fastMapNotNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;R&gt;&nbsp;transform<br>)</code></div>
+              <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastMapNotNull(kotlin.Function1)">transform</a></code> function to each element in the original collection.</p>
             </td>
           </tr>
           <tr>
@@ -118,10 +203,45 @@
             </td>
           </tr>
           <tr>
+            <td><code>static&nbsp;final R</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Comparable.html">Comparable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMaxOfOrNull(kotlin.Function1)">fastMaxOfOrNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;selector<br>)</code></div>
+              <p>Returns the largest value among all values produced by selector function applied to each element in the collection or null if there are no elements.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Comparable.html">Comparable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMinByOrNull(kotlin.Function1)">fastMinByOrNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;selector<br>)</code></div>
+              <p>Returns the first element yielding the largest value of the given function or <code>null</code> if there are no elements.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S</code></td>
+            <td>
+              <div><code>&lt;S&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;T&nbsp;extends&nbsp;S&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastReduce(kotlin.Function2)">fastReduce</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> acc,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&gt;&nbsp;operation<br>)</code></div>
+              <p>Accumulates value starting with the first element and applying <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastReduce(kotlin.Function2)">operation</a></code> from left to right to current accumulator value and each element.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>static&nbsp;final int</code></td>
             <td>
               <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastSumBy(kotlin.Function1)">fastSumBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;selector<br>)</code></div>
               <p>Returns the sum of all values produced by <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastSumBy(kotlin.Function1)">selector</a></code> function applied to each element in the list.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastZip(kotlin.collections.List,kotlin.Function2)">fastZip</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;other,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> a,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> b,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;transform<br>)</code></div>
+              <p>Returns a list of values built from the elements of <code>this</code> collection and the <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastZip(kotlin.collections.List,kotlin.Function2)">other</a></code> collection with the same index using the provided <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastZip(kotlin.collections.List,kotlin.Function2)">transform</a></code> function applied to each pair of elements.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastZipWithNext(kotlin.Function2)">fastZipWithNext</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;transform<br>)</code></div>
+              <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastZipWithNext(kotlin.Function2)">transform</a></code> function to each pair of two adjacent elements in this collection.</p>
             </td>
           </tr>
         </tbody>
@@ -149,6 +269,68 @@
         <p>Returns <code>true</code> if at least one element matches the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastAny(kotlin.Function1)">predicate</a></code>.</p>
         <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
       </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastDistinctBy-kotlin.Function1-"></a><a name="fastdistinctby"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastDistinctBy(kotlin.Function1)">fastDistinctBy</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;K&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastDistinctBy(kotlin.Function1)">fastDistinctBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> K&gt;&nbsp;selector<br>)</pre>
+        <p>Returns a list containing only elements from the given collection having distinct keys returned by the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastDistinctBy(kotlin.Function1)">selector</a></code> function.</p>
+        <p>The elements in the resulting list are in the same order as they were in the source collection.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastFilter-kotlin.Function1-"></a><a name="fastfilter"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastFilter(kotlin.Function1)">fastFilter</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFilter(kotlin.Function1)">fastFilter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</pre>
+        <p>Returns a list containing only elements matching the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFilter(kotlin.Function1)">predicate</a></code>.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastFilterNotNull--"></a><a name="fastfilternotnull"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastFilterNotNull()">fastFilterNotNull</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFilterNotNull()">fastFilterNotNull</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;T&gt;&nbsp;receiver)</pre>
+        <p>Returns a list containing all elements that are not null</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastFirst-kotlin.Function1-"></a><a name="fastfirst"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastFirst(kotlin.Function1)">fastFirst</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFirst(kotlin.Function1)">fastFirst</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</pre>
+        <p>Returns the first value that <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFirst(kotlin.Function1)">predicate</a></code> returns <code>true</code> for</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-no-such-element-exception/index.html">NoSuchElementException</a></code></td>
+                <td>
+                  <p>if no such element is found</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="-kotlin.collections.List-.fastFirstOrNull-kotlin.Function1-"></a><a name="fastfirstornull"></a>
         <div class="api-name-block">
           <div>
@@ -157,6 +339,27 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFirstOrNull(kotlin.Function1)">fastFirstOrNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</pre>
         <p>Returns the first value that <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFirstOrNull(kotlin.Function1)">predicate</a></code> returns <code>true</code> for or <code>null</code> if nothing matches.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastFlatMap-kotlin.Function1-"></a><a name="fastflatmap"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastFlatMap(kotlin.Function1)">fastFlatMap</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFlatMap(kotlin.Function1)">fastFlatMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&gt;&nbsp;transform<br>)</pre>
+        <p>Returns a single list of all elements yielded from results of <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFlatMap(kotlin.Function1)">transform</a></code> function being invoked on each element of original collection.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="(kotlin.collections.List).fastFold(kotlin.Any, kotlin.Function2)"></a><a name="-kotlin.collections.List-.fastFold-kotlin.Any-kotlin.Function2-"></a><a name="fastfold"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastFold(kotlin.Any,kotlin.Function2)">fastFold</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastFold(kotlin.Any,kotlin.Function2)">fastFold</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> acc,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</pre>
+        <p>Accumulates value starting with <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFold(kotlin.Any,kotlin.Function2)">initial</a></code> value and applying <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFold(kotlin.Any,kotlin.Function2)">operation</a></code> from left to right to current accumulator value and each element.</p>
+        <p>Returns the specified <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastFold(kotlin.Any,kotlin.Function2)">initial</a></code> value if the collection is empty.</p>
         <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
       </div>
       <div class="api-item"><a name="-kotlin.collections.List-.fastForEach-kotlin.Function1-"></a><a name="fastforeach"></a>
@@ -189,6 +392,17 @@
         <p>Iterates through a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a></code> in reverse order using the index and calls <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastForEachReversed(kotlin.Function1)">action</a></code> for each item. This does not allocate an iterator like <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/index.html">Iterable.forEach</a></code>.</p>
         <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
       </div>
+      <div class="api-item"><a name="(kotlin.collections.List).fastJoinToString(kotlin.CharSequence, kotlin.CharSequence, kotlin.CharSequence, kotlin.Int, kotlin.CharSequence, kotlin.Function1)"></a><a name="-kotlin.collections.List-.fastJoinToString-kotlin.CharSequence-kotlin.CharSequence-kotlin.CharSequence-kotlin.Int-kotlin.CharSequence-kotlin.Function1-"></a><a name="fastjointostring"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">fastJoinToString</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">fastJoinToString</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&nbsp;separator,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&nbsp;prefix,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&nbsp;postfix,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;limit,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&nbsp;truncated,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&gt;&nbsp;transform<br>)</pre>
+        <p>Creates a string from all the elements separated using <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">separator</a></code> and using the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">prefix</a></code> and <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">postfix</a></code> if supplied.</p>
+        <p>If the collection could be huge, you can specify a non-negative value of <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">limit</a></code>, in which case only the first <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">limit</a></code> elements will be appended, followed by the <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastJoinToString(kotlin.CharSequence,kotlin.CharSequence,kotlin.CharSequence,kotlin.Int,kotlin.CharSequence,kotlin.Function1)">truncated</a></code> string (which defaults to &quot;...&quot;).</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
       <div class="api-item"><a name="-kotlin.collections.List-.fastLastOrNull-kotlin.Function1-"></a><a name="fastlastornull"></a>
         <div class="api-name-block">
           <div>
@@ -207,6 +421,36 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMap(kotlin.Function1)">fastMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;transform<br>)</pre>
         <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastMap(kotlin.Function1)">transform</a></code> function to each element in the original collection.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastMapIndexed-kotlin.Function2-"></a><a name="fastmapindexed"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastMapIndexed(kotlin.Function2)">fastMapIndexed</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMapIndexed(kotlin.Function2)">fastMapIndexed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;transform<br>)</pre>
+        <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastMapIndexed(kotlin.Function2)">transform</a></code> function to each element in the original collection.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastMapIndexedNotNull-kotlin.Function2-"></a><a name="fastmapindexednotnull"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastMapIndexedNotNull(kotlin.Function2)">fastMapIndexedNotNull</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMapIndexedNotNull(kotlin.Function2)">fastMapIndexedNotNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;R&gt;&nbsp;transform<br>)</pre>
+        <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastMapIndexedNotNull(kotlin.Function2)">transform</a></code> function to each element in the original collection.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastMapNotNull-kotlin.Function1-"></a><a name="fastmapnotnull"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastMapNotNull(kotlin.Function1)">fastMapNotNull</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMapNotNull(kotlin.Function1)">fastMapNotNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;R&gt;&nbsp;transform<br>)</pre>
+        <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastMapNotNull(kotlin.Function1)">transform</a></code> function to each element in the original collection.</p>
         <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
       </div>
       <div class="api-item"><a name="(kotlin.collections.List).fastMapTo(kotlin.collections.MutableCollection, kotlin.Function1)"></a><a name="-kotlin.collections.List-.fastMapTo-kotlin.collections.MutableCollection-kotlin.Function1-"></a><a name="fastmapto"></a>
@@ -229,6 +473,79 @@
         <p>Returns the first element yielding the largest value of the given function or <code>null</code> if there are no elements.</p>
         <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
       </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastMaxOfOrNull-kotlin.Function1-"></a><a name="fastmaxofornull"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastMaxOfOrNull(kotlin.Function1)">fastMaxOfOrNull</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;R&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Comparable.html">Comparable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMaxOfOrNull(kotlin.Function1)">fastMaxOfOrNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;selector<br>)</pre>
+        <p>Returns the largest value among all values produced by selector function applied to each element in the collection or null if there are no elements.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastMinByOrNull-kotlin.Function1-"></a><a name="fastminbyornull"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastMinByOrNull(kotlin.Function1)">fastMinByOrNull</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Comparable.html">Comparable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastMinByOrNull(kotlin.Function1)">fastMinByOrNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;selector<br>)</pre>
+        <p>Returns the first element yielding the largest value of the given function or <code>null</code> if there are no elements.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastReduce-kotlin.Function2-"></a><a name="fastreduce"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastReduce(kotlin.Function2)">fastReduce</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&nbsp;&lt;S&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;T&nbsp;extends&nbsp;S&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastReduce(kotlin.Function2)">fastReduce</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> acc,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&gt;&nbsp;operation<br>)</pre>
+        <p>Accumulates value starting with the first element and applying <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastReduce(kotlin.Function2)">operation</a></code> from left to right to current accumulator value and each element.</p>
+        <p>Throws an exception if this collection is empty. If the collection can be empty in an expected way, please use <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/index.html">reduceOrNull</a></code> instead. It returns <code>null</code> when its receiver is empty.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> acc,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&gt;&nbsp;operation</code></td>
+                <td>
+                  <p>function that takes current accumulator value and an element, and calculates the next accumulator value.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unsupported-operation-exception/index.html">UnsupportedOperationException</a></code></td>
+                <td>
+                  <p>if this collection is empty</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="-kotlin.collections.List-.fastSumBy-kotlin.Function1-"></a><a name="fastsumby"></a>
         <div class="api-name-block">
           <div>
@@ -237,6 +554,27 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastSumBy(kotlin.Function1)">fastSumBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;selector<br>)</pre>
         <p>Returns the sum of all values produced by <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastSumBy(kotlin.Function1)">selector</a></code> function applied to each element in the list.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="(kotlin.collections.List).fastZip(kotlin.collections.List, kotlin.Function2)"></a><a name="-kotlin.collections.List-.fastZip-kotlin.collections.List-kotlin.Function2-"></a><a name="fastzip"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastZip(kotlin.collections.List,kotlin.Function2)">fastZip</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastZip(kotlin.collections.List,kotlin.Function2)">fastZip</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;other,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> a,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> b,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;transform<br>)</pre>
+        <p>Returns a list of values built from the elements of <code>this</code> collection and the <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastZip(kotlin.collections.List,kotlin.Function2)">other</a></code> collection with the same index using the provided <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastZip(kotlin.collections.List,kotlin.Function2)">transform</a></code> function applied to each pair of elements. The returned list has length of the shortest collection.</p>
+        <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
+      </div>
+      <div class="api-item"><a name="-kotlin.collections.List-.fastZipWithNext-kotlin.Function2-"></a><a name="fastzipwithnext"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.collections.List).fastZipWithNext(kotlin.Function2)">fastZipWithNext</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/util/ListUtilsKt.html#(kotlin.collections.List).fastZipWithNext(kotlin.Function2)">fastZipWithNext</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;transform<br>)</pre>
+        <p>Returns a list containing the results of applying the given <code><a href="/reference/androidx/compose/ui/util/package-summary.html#(kotlin.collections.List).fastZipWithNext(kotlin.Function2)">transform</a></code> function to each pair of two adjacent elements in this collection.</p>
+        <p>The returned list is empty if this collection contains less than two elements.</p>
         <p><b>Do not use for collections that come from public APIs</b>, since they may not support random access in an efficient way, and this method may actually be a lot slower. Only use for collections that are created by code we control and are known to support random access.</p>
       </div>
     </div>

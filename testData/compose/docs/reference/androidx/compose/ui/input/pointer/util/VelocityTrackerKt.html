@@ -9,6 +9,10 @@
       <meta itemprop="name" content="VelocityTrackerKt">
       <meta itemprop="path" content="androidx.compose.ui.input.pointer.util">
       <meta itemprop="property" content="(androidx.compose.ui.input.pointer.util.VelocityTracker).addPointerInputChange(androidx.compose.ui.input.pointer.PointerInputChange)">
+      <meta itemprop="property" content="getVelocityTrackerAddPointsFix()">
+      <meta itemprop="property" content="getVelocityTrackerStrategyUseImpulse()">
+      <meta itemprop="property" content="setVelocityTrackerAddPointsFix(kotlin.Boolean)">
+      <meta itemprop="property" content="setVelocityTrackerStrategyUseImpulse(kotlin.Boolean)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -42,6 +46,34 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#(androidx.compose.ui.input.pointer.util.VelocityTracker).addPointerInputChange(androidx.compose.ui.input.pointer.PointerInputChange)">addPointerInputChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker.html">VelocityTracker</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;event<br>)</code></div>
               <p>Track the positions and timestamps inside this event change.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final boolean</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#getVelocityTrackerAddPointsFix()">getVelocityTrackerAddPointsFix</a>()</code></div>
+              <p>A flag to indicate that we'll use the fix of how we add points to the velocity tracker.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final boolean</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#getVelocityTrackerStrategyUseImpulse()">getVelocityTrackerStrategyUseImpulse</a>()</code></div>
+              <p>Selecting flag to enable impulse strategy for the velocity trackers.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#setVelocityTrackerAddPointsFix(kotlin.Boolean)">setVelocityTrackerAddPointsFix</a>(boolean&nbsp;value)</code></div>
+              <p>A flag to indicate that we'll use the fix of how we add points to the velocity tracker.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#setVelocityTrackerStrategyUseImpulse(kotlin.Boolean)">setVelocityTrackerStrategyUseImpulse</a>(boolean&nbsp;value)</code></div>
+              <p>Selecting flag to enable impulse strategy for the velocity trackers.</p>
             </td>
           </tr>
         </tbody>
@@ -80,6 +112,44 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="getVelocityTrackerAddPointsFix--"></a><a name="getvelocitytrackeraddpointsfix"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getVelocityTrackerAddPointsFix()">getVelocityTrackerAddPointsFix</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;static&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#getVelocityTrackerAddPointsFix()">getVelocityTrackerAddPointsFix</a>()</pre>
+        <p>A flag to indicate that we'll use the fix of how we add points to the velocity tracker.</p>
+        <p>This is an experiment flag and will be removed once the experiments with the fix a finished. The final goal is that we will use the true path once the flag is removed. If you find any issues with the new fix, flip this flag to false to confirm they are newly introduced then file a bug. Tracking bug: (b/318621681)</p>
+      </div>
+      <div class="api-item"><a name="getVelocityTrackerStrategyUseImpulse--"></a><a name="getvelocitytrackerstrategyuseimpulse"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getVelocityTrackerStrategyUseImpulse()">getVelocityTrackerStrategyUseImpulse</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;static&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#getVelocityTrackerStrategyUseImpulse()">getVelocityTrackerStrategyUseImpulse</a>()</pre>
+        <p>Selecting flag to enable impulse strategy for the velocity trackers. This is an experiment flag and will be removed once the experiments with the fix a finished. The final goal is that we will use the true path once the flag is removed. If you find any issues with the new fix, flip this flag to false to confirm they are newly introduced then file a bug. Tracking bug: (b/318621681)</p>
+      </div>
+      <div class="api-item"><a name="setVelocityTrackerAddPointsFix-kotlin.Boolean-"></a><a name="setvelocitytrackeraddpointsfix"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setVelocityTrackerAddPointsFix(kotlin.Boolean)">setVelocityTrackerAddPointsFix</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#setVelocityTrackerAddPointsFix(kotlin.Boolean)">setVelocityTrackerAddPointsFix</a>(boolean&nbsp;value)</pre>
+        <p>A flag to indicate that we'll use the fix of how we add points to the velocity tracker.</p>
+        <p>This is an experiment flag and will be removed once the experiments with the fix a finished. The final goal is that we will use the true path once the flag is removed. If you find any issues with the new fix, flip this flag to false to confirm they are newly introduced then file a bug. Tracking bug: (b/318621681)</p>
+      </div>
+      <div class="api-item"><a name="setVelocityTrackerStrategyUseImpulse-kotlin.Boolean-"></a><a name="setvelocitytrackerstrategyuseimpulse"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setVelocityTrackerStrategyUseImpulse(kotlin.Boolean)">setVelocityTrackerStrategyUseImpulse</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#setVelocityTrackerStrategyUseImpulse(kotlin.Boolean)">setVelocityTrackerStrategyUseImpulse</a>(boolean&nbsp;value)</pre>
+        <p>Selecting flag to enable impulse strategy for the velocity trackers. This is an experiment flag and will be removed once the experiments with the fix a finished. The final goal is that we will use the true path once the flag is removed. If you find any issues with the new fix, flip this flag to false to confirm they are newly introduced then file a bug. Tracking bug: (b/318621681)</p>
       </div>
     </div>
   </body>

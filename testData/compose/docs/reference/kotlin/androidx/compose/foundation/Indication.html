@@ -35,9 +35,31 @@
         </ul>
       </div>
     </devsite-filter >
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html">IndicationNodeFactory</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html">IndicationNodeFactory</a></code></td>
+                <td>
+                  <p>IndicationNodeFactory is an Indication that creates <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instances to render visual effects that occur when certain interactions happens.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
     <hr>
     <p>Indication represents visual effects that occur when certain interactions happens. For example: showing a ripple effect when a component is pressed, or a highlight when a component is focused.</p>
-    <p>An instance of Indication is a factory that is required to produce <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code>s on demand for each component that uses an <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a></code> modifier using <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">rememberUpdatedInstance</a></code>.</p>
+    <p>To implement your own Indication, see <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationNodeFactory.html">IndicationNodeFactory</a></code> - an optimized <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> that allows for more efficient implementations than the deprecated <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">rememberUpdatedInstance</a></code>.</p>
     <p>Indication is typically provided throughout the hierarchy through <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> - you can provide a custom Indication to <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> to change the default <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> used for components such as <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">clickable</a></code>.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
@@ -55,10 +77,10 @@
           </thead>
           <tbody class="list">
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code></td>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code></td>
               <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">rememberUpdatedInstance</a>(interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>)</code></div>
-                <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>s a new <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code>, and updates its state based on Interactions emitted via <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code> .</p>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><span><del><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">rememberUpdatedInstance</a></del></span>(interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>)</code></div>
+                <p><strong>This function is deprecated.</strong> rememberUpdatedInstance has been deprecated - implementers should instead implement IndicationNodeFactory#create for improved performance and efficiency.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -82,9 +104,10 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">rememberUpdatedInstance</a>(interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></pre>
-          <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>s a new <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code>, and updates its state based on Interactions emitted via <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code> . Typically this will be called by <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a></code>, so one <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code> will be used for one component that draws <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code>, such as a button.</p>
-          <p>Implementations of this function should observe Interactions using <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code>, using them to launch animations / state changes inside <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code> that will then be reflected inside <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html#(androidx.compose.ui.graphics.drawscope.ContentDrawScope).drawIndication()">IndicationInstance.drawIndication</a></code>.</p>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>open&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">rememberUpdatedInstance</a></del></span>(interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></pre>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>rememberUpdatedInstance has been deprecated - implementers should instead implement IndicationNodeFactory#create for improved performance and efficiency. Callers should check if the Indication is an IndicationNodeFactory, and call that API instead. For a migration guide and background information, please visit developer.android.com</aside>
+          <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>s a new <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code>, and updates its state based on <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted via <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code> . Typically this will be called by <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a></code>, so one <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code> will be used for one component that draws <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code>, such as a button.</p>
+          <p>Implementations of this function should observe <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s using <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code>, using them to launch animations / state changes inside <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code> that will then be reflected inside <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html#(androidx.compose.ui.graphics.drawscope.ContentDrawScope).drawIndication()">IndicationInstance.drawIndication</a></code>.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -100,7 +123,7 @@
                 <tr>
                   <td><code>interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code></td>
                   <td>
-                    <p>the <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> representing the stream of Interactions the returned <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code> should represent</p>
+                    <p>the <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> representing the stream of <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s the returned <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code> should represent</p>
                   </td>
                 </tr>
               </tbody>
@@ -121,7 +144,7 @@
                 <tr>
                   <td><code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code></td>
                   <td>
-                    <p>an <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code> that represents the stream of Interactions emitted by <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code></p>
+                    <p>an <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code> that represents the stream of <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted by <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">interactionSource</a></code></p>
                   </td>
                 </tr>
               </tbody>

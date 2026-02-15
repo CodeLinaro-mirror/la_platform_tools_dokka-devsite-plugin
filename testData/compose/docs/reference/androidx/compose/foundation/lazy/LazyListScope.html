@@ -139,7 +139,7 @@
               <tr>
                 <td><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key</code></td>
                 <td>
-                  <p>a stable and unique key representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a stable and unique key representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling 'requestScrollToItem' on the 'LazyListState'.</p>
                 </td>
               </tr>
               <tr>
@@ -187,7 +187,7 @@
               <tr>
                 <td><code>Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;key</code></td>
                 <td>
-                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling 'requestScrollToItem' on the 'LazyListState'.</p>
                 </td>
               </tr>
               <tr>
@@ -216,6 +216,7 @@
         <p>Adds a sticky header item, which will remain pinned even when scrolling after it. The header will remain pinned until the next header will take its place.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -233,7 +234,10 @@ LazyColumn(reverseLayout = true, contentPadding = PaddingValues(6.dp)) {
         stickyHeader {
             Text(
                 &quot;Section $section&quot;,
-                Modifier.fillMaxWidth().background(Color.LightGray).padding(8.dp)
+                Modifier
+                    .fillMaxWidth()
+                    .background(Color.LightGray)
+                    .padding(8.dp)
             )
         }
         items(10) {
@@ -256,7 +260,7 @@ LazyColumn(reverseLayout = true, contentPadding = PaddingValues(6.dp)) {
               <tr>
                 <td><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key</code></td>
                 <td>
-                  <p>a stable and unique key representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a stable and unique key representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling 'requestScrollToItem' on the 'LazyListState'.</p>
                 </td>
               </tr>
               <tr>
@@ -269,6 +273,7 @@ LazyColumn(reverseLayout = true, contentPadding = PaddingValues(6.dp)) {
                 <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
                 <td>
                   <p>the content of the header</p>
+                  <p>Note: More investigations needed to make sure sticky headers API is suitable for various more generic usecases, e.g. in grids. This API is experimental until the answer is found.</p>
                 </td>
               </tr>
             </tbody>
@@ -307,7 +312,7 @@ LazyColumn(reverseLayout = true, contentPadding = PaddingValues(6.dp)) {
               <tr>
                 <td><code>Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> item,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;key</code></td>
                 <td>
-                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling 'requestScrollToItem' on the 'LazyListState'.</p>
                 </td>
               </tr>
               <tr>
@@ -355,7 +360,7 @@ LazyColumn(reverseLayout = true, contentPadding = PaddingValues(6.dp)) {
               <tr>
                 <td><code>Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> item,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;key</code></td>
                 <td>
-                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling 'requestScrollToItem' on the 'LazyListState'.</p>
                 </td>
               </tr>
               <tr>
@@ -403,7 +408,7 @@ LazyColumn(reverseLayout = true, contentPadding = PaddingValues(6.dp)) {
               <tr>
                 <td><code>Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> item,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;key</code></td>
                 <td>
-                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling 'requestScrollToItem' on the 'LazyListState'.</p>
                 </td>
               </tr>
               <tr>
@@ -451,7 +456,7 @@ LazyColumn(reverseLayout = true, contentPadding = PaddingValues(6.dp)) {
               <tr>
                 <td><code>Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> item,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;key</code></td>
                 <td>
-                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling 'requestScrollToItem' on the 'LazyListState'.</p>
                 </td>
               </tr>
               <tr>

@@ -1,0 +1,234 @@
+<html devsite="true">
+  <head>
+    <title>DragAndDropModifierNode</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="DragAndDropModifierNode">
+      <meta itemprop="path" content="androidx.compose.ui.draganddrop">
+      <meta itemprop="property" content="acceptDragAndDropTransfer(androidx.compose.ui.draganddrop.DragAndDropEvent)">
+      <meta itemprop="property" content="drag(androidx.compose.ui.draganddrop.DragAndDropTransferData,androidx.compose.ui.geometry.Size,kotlin.Function1)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>DragAndDropModifierNode</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/draganddrop/DragAndDropNode.kt+class:androidx.compose.ui.draganddrop.DragAndDropModifierNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/draganddrop/DragAndDropModifierNode.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropModifierNode.html">DragAndDropModifierNode</a> extends <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>, <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html">DragAndDropTarget</a></pre>
+    </p>
+    <hr>
+    <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> providing low level access to platform drag and drop operations. In most cases, you will want to delegate to the <code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropModifierNode.html">DragAndDropModifierNode</a></code> returned by the eponymous factory method.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropModifierNode.html#acceptDragAndDropTransfer(androidx.compose.ui.draganddrop.DragAndDropEvent)">acceptDragAndDropTransfer</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropEvent.html">DragAndDropEvent</a>&nbsp;startEvent)</code></div>
+              <p>The entry point to register interest in a drag and drop session for receiving data.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropModifierNode.html#drag(androidx.compose.ui.draganddrop.DragAndDropTransferData,androidx.compose.ui.geometry.Size,kotlin.Function1)">drag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTransferData.html">DragAndDropTransferData</a>&nbsp;transferData,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;decorationSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;drawDragDecoration<br>)</code></div>
+              <p>Begins a drag and drop session for transferring data.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">androidx.compose.ui.node.DelegatableNode</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html#getNode()">getNode</a>()</code></div>
+                        <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html">androidx.compose.ui.draganddrop.DragAndDropTarget</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>default void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html#onChanged(androidx.compose.ui.draganddrop.DragAndDropEvent)">onChanged</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropEvent.html">DragAndDropEvent</a>&nbsp;event)</code></div>
+                        <p>An event in the current drag and drop session has changed within this <code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html">DragAndDropTarget</a></code> bounds.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html#onDrop(androidx.compose.ui.draganddrop.DragAndDropEvent)">onDrop</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropEvent.html">DragAndDropEvent</a>&nbsp;event)</code></div>
+                        <p>An item has been dropped inside this <code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html">DragAndDropTarget</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html#onEnded(androidx.compose.ui.draganddrop.DragAndDropEvent)">onEnded</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropEvent.html">DragAndDropEvent</a>&nbsp;event)</code></div>
+                        <p>The drag and drop session has been completed.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html#onEntered(androidx.compose.ui.draganddrop.DragAndDropEvent)">onEntered</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropEvent.html">DragAndDropEvent</a>&nbsp;event)</code></div>
+                        <p>An item being dropped has entered into the bounds of this <code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html">DragAndDropTarget</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html#onExited(androidx.compose.ui.draganddrop.DragAndDropEvent)">onExited</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropEvent.html">DragAndDropEvent</a>&nbsp;event)</code></div>
+                        <p>An item being dropped has moved outside the bounds of this <code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html">DragAndDropTarget</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html#onMoved(androidx.compose.ui.draganddrop.DragAndDropEvent)">onMoved</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropEvent.html">DragAndDropEvent</a>&nbsp;event)</code></div>
+                        <p>An item being dropped has moved within the bounds of this <code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html">DragAndDropTarget</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html#onStarted(androidx.compose.ui.draganddrop.DragAndDropEvent)">onStarted</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropEvent.html">DragAndDropEvent</a>&nbsp;event)</code></div>
+                        <p>A drag and drop session has just been started and this <code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html">DragAndDropTarget</a></code> is eligible to receive it.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="acceptDragAndDropTransfer-androidx.compose.ui.draganddrop.DragAndDropEvent-"></a><a name="acceptdraganddroptransfer"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="acceptDragAndDropTransfer(androidx.compose.ui.draganddrop.DragAndDropEvent)">acceptDragAndDropTransfer</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/draganddrop/DragAndDropModifierNode.html#acceptDragAndDropTransfer(androidx.compose.ui.draganddrop.DragAndDropEvent)">acceptDragAndDropTransfer</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropEvent.html">DragAndDropEvent</a>&nbsp;startEvent)</pre>
+        <p>The entry point to register interest in a drag and drop session for receiving data.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>true to indicate interest in the contents of a drag and drop session, false indicates no interest. If false is returned, this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> will not receive any <code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTarget.html">DragAndDropTarget</a></code> events.</p>
+                  <p>All <code><a href="/reference/androidx/compose/ui/draganddrop/DragAndDropModifierNode.html">DragAndDropModifierNode</a></code> instances in the hierarchy will be given an opportunity to participate in a drag and drop session via this method.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="drag(androidx.compose.ui.draganddrop.DragAndDropTransferData, androidx.compose.ui.geometry.Size, kotlin.Function1)"></a><a name="drag-androidx.compose.ui.draganddrop.DragAndDropTransferData-androidx.compose.ui.geometry.Size-kotlin.Function1-"></a><a name="drag"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="drag(androidx.compose.ui.draganddrop.DragAndDropTransferData,androidx.compose.ui.geometry.Size,kotlin.Function1)">drag</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/draganddrop/DragAndDropModifierNode.html#drag(androidx.compose.ui.draganddrop.DragAndDropTransferData,androidx.compose.ui.geometry.Size,kotlin.Function1)">drag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTransferData.html">DragAndDropTransferData</a>&nbsp;transferData,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;decorationSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;drawDragDecoration<br>)</pre>
+        <p>Begins a drag and drop session for transferring data.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draganddrop/DragAndDropTransferData.html">DragAndDropTransferData</a>&nbsp;transferData</code></td>
+                <td>
+                  <p>the data to be transferred after successful completion of the drag and drop gesture.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;decorationSize</code></td>
+                <td>
+                  <p>the size of the drag decoration to be drawn.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;drawDragDecoration</code></td>
+                <td>
+                  <p>provides the visual representation of the item dragged during the drag and drop gesture.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

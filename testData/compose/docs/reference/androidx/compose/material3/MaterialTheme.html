@@ -110,6 +110,17 @@
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/ColorScheme.html">ColorScheme</a>&nbsp;<a href="/reference/androidx/compose/material3/MaterialTheme.html#getColorScheme()">getColorScheme</a>()</pre>
         <p>Retrieves the current <code><a href="/reference/androidx/compose/material3/ColorScheme.html">ColorScheme</a></code> at the call site's position in the hierarchy.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
+
+val colorScheme = MaterialTheme.colorScheme
+Box(Modifier.aspectRatio(1f).fillMaxSize().background(color = colorScheme.primary))</pre>
       </div>
       <div class="api-item"><a name="getShapes--"></a><a name="getshapes"></a>
         <div class="api-name-block">
@@ -119,6 +130,13 @@
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/Shapes.html">Shapes</a>&nbsp;<a href="/reference/androidx/compose/material3/MaterialTheme.html#getShapes()">getShapes</a>()</pre>
         <p>Retrieves the current <code><a href="/reference/androidx/compose/material3/Shapes.html">Shapes</a></code> at the call site's position in the hierarchy.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+
+val shape = MaterialTheme.shapes
+Button(shape = shape.small, onClick = {}) { Text(&quot;FAB with ${shape.small} shape&quot;) }</pre>
       </div>
       <div class="api-item"><a name="getTypography--"></a><a name="gettypography"></a>
         <div class="api-name-block">
@@ -128,6 +146,12 @@
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/Typography.html">Typography</a>&nbsp;<a href="/reference/androidx/compose/material3/MaterialTheme.html#getTypography()">getTypography</a>()</pre>
         <p>Retrieves the current <code><a href="/reference/androidx/compose/material3/Typography.html">Typography</a></code> at the call site's position in the hierarchy.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+
+val typography = MaterialTheme.typography
+Text(text = &quot;Headline small styled text&quot;, style = typography.headlineSmall)</pre>
       </div>
     </div>
   </body>

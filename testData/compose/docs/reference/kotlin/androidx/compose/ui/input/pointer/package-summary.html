@@ -18,7 +18,6 @@
       <meta itemprop="property" content="NativePointerKeyboardModifiers">
       <meta itemprop="property" content="PointerButtons">
       <meta itemprop="property" content="PointerEvent">
-      <meta itemprop="property" content="PointerEventTimeoutCancellationException">
       <meta itemprop="property" content="PointerEventType">
       <meta itemprop="property" content="PointerId">
       <meta itemprop="property" content="PointerInputChange">
@@ -27,6 +26,7 @@
       <meta itemprop="property" content="PointerType">
       <meta itemprop="property" content="RequestDisallowInterceptTouchEvent">
       <meta itemprop="property" content="PointerEventPass">
+      <meta itemprop="property" content="PointerEventTimeoutCancellationException">
       <meta itemprop="property" content="PointerIcon(android.view.PointerIcon)">
       <meta itemprop="property" content="PointerIcon(kotlin.Int)">
       <meta itemprop="property" content="SuspendingPointerInputModifierNode(kotlin.coroutines.SuspendFunction1)">
@@ -205,15 +205,6 @@
                 <!--platform-Android/JVM--></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventTimeoutCancellationException.html">PointerEventTimeoutCancellationException</a></code></td>
-              <td>
-                <p>An exception thrown from <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html#withTimeout(kotlin.Long,kotlin.coroutines.SuspendFunction1)">AwaitPointerEventScope.withTimeout</a></code> when the execution time of the coroutine is too long.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventType.html">PointerEventType</a></code></td>
               <td>
                 <p>Indicates the primary reason that the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a></code> was sent.</p>
@@ -273,6 +264,31 @@
                 <p>Function that can be passed to <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/RequestDisallowInterceptTouchEvent.html#pointerInteropFilter()">pointerInteropFilter</a></code> and then later invoked which provides an analog to <code><a href="https://developer.android.com/reference/android/view/ViewParent.html#requestDisallowInterceptTouchEvent(kotlin.Boolean)">ViewParent.requestDisallowInterceptTouchEvent</a></code>.</p>
               </td>
               <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <h2>Exceptions</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventTimeoutCancellationException.html">PointerEventTimeoutCancellationException</a></code></td>
+              <td>
+                <p>An exception thrown from <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html#withTimeout(kotlin.Long,kotlin.coroutines.SuspendFunction1)">AwaitPointerEventScope.withTimeout</a></code> when the execution time of the coroutine is too long.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All-->
                 <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
                 <!--platform-Android/JVM--></td>
             </tr>
@@ -496,7 +512,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).motionEventSpy(kotlin.Function1)">motionEventSpy</a>(watcher:&nbsp;(motionEvent:&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).motionEventSpy(kotlin.Function1)">motionEventSpy</a>(watcher:&nbsp;(motionEvent:&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
                 <p>Calls <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).motionEventSpy(kotlin.Function1)">watcher</a></code> with each <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code> that the layout area or any child <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInput(kotlin.coroutines.SuspendFunction1)">pointerInput</a></code> receives.</p>
               </td>
               <td>
@@ -1051,11 +1067,12 @@
             <!--platform-Android/JVM--></div>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).motionEventSpy(kotlin.Function1)">motionEventSpy</a>(watcher:&nbsp;(motionEvent:&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).motionEventSpy(kotlin.Function1)">motionEventSpy</a>(watcher:&nbsp;(motionEvent:&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Calls <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).motionEventSpy(kotlin.Function1)">watcher</a></code> with each <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code> that the layout area or any child <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInput(kotlin.coroutines.SuspendFunction1)">pointerInput</a></code> receives. The <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code> may or may not have been transformed to the local coordinate system. The Compose View will be considered as handling the <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code> in the area that the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).motionEventSpy(kotlin.Function1)">motionEventSpy</a></code> is active.</p>
       <p>This method can only be used to observe <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code>s and can not be used to capture an event stream.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).motionEventSpy(kotlin.Function1)">watcher</a></code> is called during the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Initial">PointerEventPass.Initial</a></code> pass.</p>
       <p>Developers should use <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInput(kotlin.coroutines.SuspendFunction1)">pointerInput</a></code> to handle pointer input processing within Compose. <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).motionEventSpy(kotlin.Function1)">motionEventSpy</a></code> is only useful as part of Android View interoperability.</p>
+      <p>If you need to handle and consume <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code>s, use <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent,kotlin.Function1)">pointerInteropFilter</a></code>.</p>
     </div>
     <div class="api-item"><a name="(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon, kotlin.Boolean)"></a><a name="-androidx.compose.ui.Modifier-.pointerHoverIcon-androidx.compose.ui.input.pointer.PointerIcon-kotlin.Boolean-"></a><a name="pointerhovericon"></a>
       <div class="api-name-block">
@@ -1068,7 +1085,7 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon,kotlin.Boolean)">pointerHoverIcon</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;icon:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerIcon.html">PointerIcon</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;overrideDescendants:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-      <p>Modifier that lets a developer define a pointer icon to display when the cursor is hovered over the element. When <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon,kotlin.Boolean)">overrideDescendants</a></code> is set to true, children cannot override the pointer icon using this modifier.</p>
+      <p>Modifier that lets a developer define a pointer icon to display when the cursor is hovered over the element. When <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon,kotlin.Boolean)">overrideDescendants</a></code> is set to true, descendants cannot override the pointer icon using this modifier.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -1110,7 +1127,7 @@ Column(Modifier.pointerHoverIcon(PointerIcon.Crosshair)) {
             <tr>
               <td><code>overrideDescendants:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
               <td>
-                <p>when false (by default) descendants are able to set their own pointer icon. If true, all children under this parent will receive the requested pointer <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon,kotlin.Boolean)">icon</a></code> and are no longer allowed to override their own pointer icon.</p>
+                <p>when false (by default) descendants are able to set their own pointer icon. If true, no descendants under this parent are eligible to change the icon (it will be set to the this the parent's icon).</p>
               </td>
             </tr>
           </tbody>
@@ -1197,6 +1214,7 @@ fun MyComposable(parameter: String) {
             }
     )
 }</pre>
+      <p><em><b>Note</b></em> Any removal operations on Android Views from <code>pointerInput</code> should wrap the <code>block</code> in a <code>post { }</code> block to guarantee the event dispatch completes before executing the removal. (You do not need to do this when removing a composable because Compose guarantees it completes via the snapshot state system.)</p>
     </div>
     <div class="api-item"><a name="(androidx.compose.ui.Modifier).pointerInput(kotlin.Array, kotlin.coroutines.SuspendFunction1)"></a><a name="-androidx.compose.ui.Modifier-.pointerInput-kotlin.Array-kotlin.coroutines.SuspendFunction1-"></a><a name="pointerinput"></a>
       <div class="api-name-block">
@@ -1263,6 +1281,7 @@ fun MyComposable(parameter: String) {
             }
     )
 }</pre>
+      <p><em><b>Note</b></em> Any removal operations on Android Views from <code>pointerInput</code> should wrap the <code>block</code> in a <code>post { }</code> block to guarantee the event dispatch completes before executing the removal. (You do not need to do this when removing a composable because Compose guarantees it completes via the snapshot state system.)</p>
     </div>
     <div class="api-item"><a name="(androidx.compose.ui.Modifier).pointerInput(kotlin.Any, kotlin.Any, kotlin.coroutines.SuspendFunction1)"></a><a name="-androidx.compose.ui.Modifier-.pointerInput-kotlin.Any-kotlin.Any-kotlin.coroutines.SuspendFunction1-"></a><a name="pointerinput"></a>
       <div class="api-name-block">
@@ -1329,6 +1348,7 @@ fun MyComposable(parameter: String) {
             }
     )
 }</pre>
+      <p><em><b>Note</b></em> Any removal operations on Android Views from <code>pointerInput</code> should wrap the <code>block</code> in a <code>post { }</code> block to guarantee the event dispatch completes before executing the removal. (You do not need to do this when removing a composable because Compose guarantees it completes via the snapshot state system.)</p>
     </div>
     <div class="api-item"><a name="(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent, kotlin.Function1)"></a><a name="-androidx.compose.ui.Modifier-.pointerInteropFilter-androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent-kotlin.Function1-"></a><a name="pointerinteropfilter"></a>
       <div class="api-name-block">

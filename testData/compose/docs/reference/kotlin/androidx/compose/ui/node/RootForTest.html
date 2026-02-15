@@ -8,8 +8,10 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="RootForTest">
       <meta itemprop="path" content="androidx.compose.ui.node">
+      <meta itemprop="property" content="forceAccessibilityForTesting(kotlin.Boolean)">
       <meta itemprop="property" content="measureAndLayoutForTest()">
       <meta itemprop="property" content="sendKeyEvent(androidx.compose.ui.input.key.KeyEvent)">
+      <meta itemprop="property" content="setAccessibilityEventBatchIntervalMillis(kotlin.Long)">
       <meta itemprop="property" content="density()">
       <meta itemprop="property" content="semanticsOwner()">
       <meta itemprop="property" content="textInputService()">
@@ -81,6 +83,16 @@
             <tr>
               <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#forceAccessibilityForTesting(kotlin.Boolean)">forceAccessibilityForTesting</a>(enable:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                <p>Force accessibility to be enabled for testing.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
                 <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#measureAndLayoutForTest()">measureAndLayoutForTest</a>()</code></div>
                 <p>Requests another layout (measure + placement) pass be performed for any nodes that need it.</p>
               </td>
@@ -93,6 +105,16 @@
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#sendKeyEvent(androidx.compose.ui.input.key.KeyEvent)">sendKeyEvent</a>(keyEvent:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>)</code></div>
                 <p>Send this <code><a href="/reference/kotlin/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></code> to the focused component in this <code><a href="/reference/kotlin/androidx/compose/ui/node/Owner.html">Owner</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#setAccessibilityEventBatchIntervalMillis(kotlin.Long)">setAccessibilityEventBatchIntervalMillis</a>(intervalMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+                <p>Set the time interval between sending accessibility events in milliseconds.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -140,7 +162,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#textInputService()">textInputService</a></code></div>
-                <p>The service handling text input.</p>
+                <p><strong>This property is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -154,6 +176,40 @@
       <div class="list">
         <h2 data-title="platform-Common/All">Public functions
           <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="forceAccessibilityForTesting-kotlin.Boolean-"></a><a name="forceaccessibilityfortesting"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="forceAccessibilityForTesting(kotlin.Boolean)">forceAccessibilityForTesting</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#forceAccessibilityForTesting(kotlin.Boolean)">forceAccessibilityForTesting</a>(enable:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Force accessibility to be enabled for testing.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>enable:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>force enable accessibility if true.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div class="api-item"><a name="measureAndLayoutForTest--"></a><a name="measureandlayoutfortest"></a>
           <div class="api-name-block">
             <div>
@@ -202,6 +258,20 @@
             </table>
           </div>
         </div>
+        <div class="api-item"><a name="setAccessibilityEventBatchIntervalMillis-kotlin.Long-"></a><a name="setaccessibilityeventbatchintervalmillis"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="setAccessibilityEventBatchIntervalMillis(kotlin.Long)">setAccessibilityEventBatchIntervalMillis</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#setAccessibilityEventBatchIntervalMillis(kotlin.Long)">setAccessibilityEventBatchIntervalMillis</a>(intervalMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Set the time interval between sending accessibility events in milliseconds.</p>
+          <p>This is the delay before dispatching a recurring accessibility event in milliseconds. It delays the loop that sends events to the accessibility and content capture framework in batches. A recurring event will be sent at most once during the <code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#setAccessibilityEventBatchIntervalMillis(kotlin.Long)">intervalMillis</a></code> timeframe. The default time delay is 100 milliseconds.</p>
+        </div>
       </div>
     </devsite-filter >
     <devsite-filter  select-el-container-id="platform">
@@ -245,6 +315,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#textInputService()">textInputService</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a></pre>
+          <aside class="caution"><strong>This property is deprecated.</strong><br>Use PlatformTextInputModifierNode instead.</aside>
           <p>The service handling text input.</p>
         </div>
       </div>

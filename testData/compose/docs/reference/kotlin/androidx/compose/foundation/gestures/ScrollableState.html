@@ -13,6 +13,8 @@
       <meta itemprop="property" content="canScrollBackward()">
       <meta itemprop="property" content="canScrollForward()">
       <meta itemprop="property" content="isScrollInProgress()">
+      <meta itemprop="property" content="lastScrolledBackward()">
+      <meta itemprop="property" content="lastScrolledForward()">
       <meta itemprop="property" content="(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">
       <meta itemprop="property" content="(androidx.compose.foundation.gestures.ScrollableState).scrollBy(kotlin.Float)">
       <meta itemprop="property" content="(androidx.compose.foundation.gestures.ScrollableState).stopScroll(androidx.compose.foundation.MutatePriority)">
@@ -43,7 +45,7 @@
       </div>
     </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html">LazyGridState</a>, <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html">LazyListState</a>, <a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html">LazyStaggeredGridState</a>, <a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a>, <a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/material3/carousel/CarouselState.html">CarouselState</a>, <a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html">LazyGridState</a>, <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html">LazyListState</a>, <a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html">LazyStaggeredGridState</a>, <a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a>, <a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -53,6 +55,12 @@
               <col>
             </colgroup>
             <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/material3/carousel/CarouselState.html">CarouselState</a></code></td>
+                <td>
+                  <p>The state that can be used to control all types of carousels.</p>
+                </td>
+              </tr>
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html">LazyGridState</a></code></td>
                 <td>
@@ -74,7 +82,7 @@
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a></code></td>
                 <td>
-                  <p>The state that can be used to control <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#VerticalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function2)">VerticalPager</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#HorizontalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function2)">HorizontalPager</a></code></p>
+                  <p>The state that can be used to control <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#VerticalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">VerticalPager</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#HorizontalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">HorizontalPager</a></code></p>
                 </td>
               </tr>
               <tr>
@@ -192,6 +200,26 @@
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#isScrollInProgress()">isScrollInProgress</a></code></div>
                 <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#lastScrolledBackward()">lastScrolledBackward</a></code></div>
+                <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#lastScrolledForward()">lastScrolledForward</a></code></div>
+                <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -474,6 +502,48 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#isScrollInProgress()">isScrollInProgress</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
+        </div>
+        <div class="api-item"><a name="getLastScrolledBackward()"></a><a name="setLastScrolledBackward()"></a><a name="getLastScrolledBackward--"></a><a name="setLastScrolledBackward--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="lastScrolledBackward()">lastScrolledBackward</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#lastScrolledBackward()">lastScrolledBackward</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+          <ul>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling backward.</p>
+            </li>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> was scrolling backward in its last scroll action.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="api-item"><a name="getLastScrolledForward()"></a><a name="setLastScrolledForward()"></a><a name="getLastScrolledForward--"></a><a name="setLastScrolledForward--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="lastScrolledForward()">lastScrolledForward</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#lastScrolledForward()">lastScrolledForward</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+          <ul>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling forward.</p>
+            </li>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> was scrolling forward in its last scroll action.</p>
+            </li>
+          </ul>
         </div>
       </div>
     </devsite-filter >

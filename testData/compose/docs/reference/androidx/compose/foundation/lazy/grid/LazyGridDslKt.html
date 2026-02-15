@@ -115,7 +115,10 @@ import androidx.compose.ui.unit.dp
 val itemsList = (0..5).toList()
 val itemsIndexedList = listOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
 
-val itemModifier = Modifier.border(1.dp, Color.Blue).width(80.dp).wrapContentSize()
+val itemModifier = Modifier
+    .border(1.dp, Color.Blue)
+    .width(80.dp)
+    .wrapContentSize()
 
 LazyHorizontalGrid(
     rows = GridCells.Fixed(3),
@@ -159,7 +162,10 @@ LazyHorizontalGrid(
         item(span = { GridItemSpan(maxLineSpan) }) {
             Text(
                 &quot;This is section $index&quot;,
-                Modifier.border(1.dp, Color.Gray).width(80.dp).wrapContentSize()
+                Modifier
+                    .border(1.dp, Color.Gray)
+                    .width(80.dp)
+                    .wrapContentSize()
             )
         }
         items(
@@ -169,7 +175,10 @@ LazyHorizontalGrid(
         ) {
             Text(
                 &quot;Item $it&quot;,
-                Modifier.border(1.dp, Color.Blue).width(80.dp).wrapContentSize()
+                Modifier
+                    .border(1.dp, Color.Blue)
+                    .width(80.dp)
+                    .wrapContentSize()
             )
         }
     }
@@ -275,7 +284,10 @@ import androidx.compose.ui.unit.dp
 val itemsList = (0..5).toList()
 val itemsIndexedList = listOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
 
-val itemModifier = Modifier.border(1.dp, Color.Blue).height(80.dp).wrapContentSize()
+val itemModifier = Modifier
+    .border(1.dp, Color.Blue)
+    .height(80.dp)
+    .wrapContentSize()
 
 LazyVerticalGrid(
     columns = GridCells.Fixed(3)
@@ -315,7 +327,10 @@ LazyVerticalGrid(
         item(span = { GridItemSpan(maxLineSpan) }) {
             Text(
                 &quot;This is section $index&quot;,
-                Modifier.border(1.dp, Color.Gray).height(80.dp).wrapContentSize()
+                Modifier
+                    .border(1.dp, Color.Gray)
+                    .height(80.dp)
+                    .wrapContentSize()
             )
         }
         items(
@@ -325,7 +340,10 @@ LazyVerticalGrid(
         ) {
             Text(
                 &quot;Item $it&quot;,
-                Modifier.border(1.dp, Color.Blue).height(80.dp).wrapContentSize()
+                Modifier
+                    .border(1.dp, Color.Blue)
+                    .height(80.dp)
+                    .wrapContentSize()
             )
         }
     }
@@ -435,7 +453,7 @@ LazyVerticalGrid(
               <tr>
                 <td><code>Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> item,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;key</code></td>
                 <td>
-                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.This can be overridden by calling <code><a href="/reference/androidx/compose/foundation/lazy/grid/LazyGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">LazyGridState.requestScrollToItem</a></code>.</p>
                 </td>
               </tr>
               <tr>
@@ -489,7 +507,7 @@ LazyVerticalGrid(
               <tr>
                 <td><code>Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> item,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;key</code></td>
                 <td>
-                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling <code><a href="/reference/androidx/compose/foundation/lazy/grid/LazyGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">LazyGridState.requestScrollToItem</a></code>.</p>
                 </td>
               </tr>
               <tr>
@@ -543,7 +561,7 @@ LazyVerticalGrid(
               <tr>
                 <td><code>Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> item,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;key</code></td>
                 <td>
-                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling <code><a href="/reference/androidx/compose/foundation/lazy/grid/LazyGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">LazyGridState.requestScrollToItem</a></code>.</p>
                 </td>
               </tr>
               <tr>
@@ -597,7 +615,7 @@ LazyVerticalGrid(
               <tr>
                 <td><code>Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> item,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;key</code></td>
                 <td>
-                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling <code><a href="/reference/androidx/compose/foundation/lazy/grid/LazyGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">LazyGridState.requestScrollToItem</a></code>.</p>
                 </td>
               </tr>
               <tr>

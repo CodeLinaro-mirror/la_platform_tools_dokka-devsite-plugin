@@ -88,8 +88,8 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
     <p><b>Component ranges:</b> the ranges defined in the tables below indicate the ranges that can be encoded in a color long. They do not represent the actual ranges as they may differ per color space. For instance, the RGB components of a color in the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#DisplayP3()">Display P3</a></code> color space use the <code>[0..1]</code> range. Please refer to the documentation of the various <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html">color spaces</a></code> to find their respective ranges.</p>
     <p><b>Alpha range:</b> while alpha is encoded in a color long using a 10 bit integer (thus using a range of <code>[0..1023]</code>), it is converted to and from <code>[0..1]</code> float values when decoding and encoding color longs.</p>
     <p><b>sRGB color space:</b> for compatibility reasons and ease of use, <code>Color</code> encoded <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> colors do not use the same encoding as other color longs.</p>
-    <pre class="prettyprint">| Component | Name        | Size    | Range                 |<br>|-----------|-------------|---------|-----------------------|<br>| [RGB][ColorSpace.Model.Rgb] color model |<br>| R         | Red         | 16 bits | `[-65504.0, 65504.0]` |<br>| G         | Green       | 16 bits | `[-65504.0, 65504.0]` |<br>| B         | Blue        | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |<br>| [SRGB][ColorSpaces.Srgb] color space |<br>| R         | Red         | 8 bits  | `[0..255]`            |<br>| G         | Green       | 8 bits  | `[0..255]`            |<br>| B         | Blue        | 8 bits  | `[0..255]`            |<br>| A         | Alpha       | 8 bits  | `[0..255]`            |<br>| X         | Unused      | 32 bits | `[0]`                 |<br>| [XYZ][ColorSpace.Model.Xyz] color model |<br>| X         | X           | 16 bits | `[-65504.0, 65504.0]` |<br>| Y         | Y           | 16 bits | `[-65504.0, 65504.0]` |<br>| Z         | Z           | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |<br>| [Lab][ColorSpace.Model.Lab] color model |<br>| L         | L           | 16 bits | `[-65504.0, 65504.0]` |<br>| a         | a           | 16 bits | `[-65504.0, 65504.0]` |<br>| b         | b           | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |</pre>
-    <p>The components in this table are listed in encoding order (see below), which is why color longs in the RGB model are called RGBA colors (even if this doesn't quite hold for the special case of sRGB colors).</p>
+    <pre class="prettyprint">| Component | Name        | Size    | Range                 |<br>|-----------|-------------|---------|-----------------------|<br>| [RGB][ColorSpace.Model.Rgb] color model                   |<br>| R         | Red         | 16 bits | `[-65504.0, 65504.0]` |<br>| G         | Green       | 16 bits | `[-65504.0, 65504.0]` |<br>| B         | Blue        | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |<br>| [SRGB][ColorSpaces.Srgb] color space                      |<br>| A         | Alpha       | 8 bits  | `[0..255]`            |<br>| R         | Red         | 8 bits  | `[0..255]`            |<br>| G         | Green       | 8 bits  | `[0..255]`            |<br>| B         | Blue        | 8 bits  | `[0..255]`            |<br>| X         | Unused      | 32 bits | `[0]`                 |<br>| [XYZ][ColorSpace.Model.Xyz] color model                   |<br>| X         | X           | 16 bits | `[-65504.0, 65504.0]` |<br>| Y         | Y           | 16 bits | `[-65504.0, 65504.0]` |<br>| Z         | Z           | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |<br>| [Lab][ColorSpace.Model.Lab] color model                   |<br>| L         | L           | 16 bits | `[-65504.0, 65504.0]` |<br>| a         | a           | 16 bits | `[-65504.0, 65504.0]` |<br>| b         | b           | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |</pre>
+    <p>The components in this table are listed in encoding order, which is why color longs in the RGB model are called RGBA colors (even if this doesn't quite hold for the special case of sRGB colors).</p>
     <p>The color encoding relies on half-precision float values (fp16). If you wish to know more about the limitations of half-precision float values, please refer to the documentation of the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Float16.html">Float16</a></code> class.</p>
     <p>The values returned by these methods depend on the color space encoded in the color long. The values are however typically in the <code>[0..1]</code> range for RGB colors. Please refer to the documentation of the various <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html">color spaces</a></code> for the exact ranges.</p>
     <h2>Summary</h2>
@@ -327,7 +327,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
           </thead>
           <tbody class="list">
             <tr>
-              <td><code>operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td><code>inline&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component1()">component1</a>()</code></div>
               </td>
@@ -336,7 +336,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code>operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td><code>inline&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component2()">component2</a>()</code></div>
               </td>
@@ -345,7 +345,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code>operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td><code>inline&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component3()">component3</a>()</code></div>
               </td>
@@ -354,7 +354,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code>operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td><code>inline&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component4()">component4</a>()</code></div>
               </td>
@@ -363,7 +363,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code>operator <a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+              <td><code>inline&nbsp;operator <a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component5()">component5</a>()</code></div>
               </td>
@@ -529,7 +529,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).toArgb()">toArgb</a>()</code></div>
+                <div><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).toArgb()">toArgb</a>()</code></div>
                 <p>Converts this color to an ARGB color int.</p>
               </td>
               <td>
@@ -625,6 +625,12 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                   </td>
                 </tr>
                 <tr>
+                  <td><code>alpha:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 1.0f</code></td>
+                  <td>
+                    <p>Alpha channel to apply to the computed color</p>
+                  </td>
+                </tr>
+                <tr>
                   <td><code>colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html">Rgb</a> = ColorSpaces.Srgb</code></td>
                   <td>
                     <p>The RGB color space used to calculate the Color from the HSL values.</p>
@@ -674,6 +680,12 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                   <td><code>value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
                   <td>
                     <p>The strength of the color, where 0 is black.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>alpha:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 1.0f</code></td>
+                  <td>
+                    <p>Alpha channel to apply to the computed color</p>
                   </td>
                 </tr>
                 <tr>
@@ -883,7 +895,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component1()">component1</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component1()">component1</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
         </div>
         <div class="api-item"><a name="component2--"></a><a name="component2"></a>
           <div class="api-name-block">
@@ -895,7 +907,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component2()">component2</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component2()">component2</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
         </div>
         <div class="api-item"><a name="component3--"></a><a name="component3"></a>
           <div class="api-name-block">
@@ -907,7 +919,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component3()">component3</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component3()">component3</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
         </div>
         <div class="api-item"><a name="component4--"></a><a name="component4"></a>
           <div class="api-name-block">
@@ -919,7 +931,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component4()">component4</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component4()">component4</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
         </div>
         <div class="api-item"><a name="component5--"></a><a name="component5"></a>
           <div class="api-name-block">
@@ -931,7 +943,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component5()">component5</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></pre>
+          <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component5()">component5</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></pre>
         </div>
         <div class="api-item"><a name="convert-androidx.compose.ui.graphics.colorspace.ColorSpace-"></a><a name="convert"></a>
           <div class="api-name-block">
@@ -1374,7 +1386,7 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).toArgb()">toArgb</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).toArgb()">toArgb</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>Converts this color to an ARGB color int. A color int is always in the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> color space. This implies a color space conversion is applied if needed.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">

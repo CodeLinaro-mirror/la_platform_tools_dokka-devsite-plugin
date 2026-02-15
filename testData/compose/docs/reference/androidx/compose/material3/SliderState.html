@@ -14,6 +14,7 @@
       <meta itemprop="property" content="getSteps()">
       <meta itemprop="property" content="getValue()">
       <meta itemprop="property" content="getValueRange()">
+      <meta itemprop="property" content="setOnValueChangeFinished(kotlin.Function0)">
       <meta itemprop="property" content="setValue(kotlin.Float)">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -92,7 +93,7 @@
             <td><code>final int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/material3/SliderState.html#getSteps()">getSteps</a>()</code></div>
-              <p>if greater than 0, specifies the amounts of discrete values, evenly distributed between across the whole value range.</p>
+              <p>if positive, specifies the amount of discrete allowable values (in addition to the endpoints of the value range).</p>
             </td>
           </tr>
           <tr>
@@ -107,6 +108,12 @@
             <td>
               <div><code><a href="/reference/androidx/compose/material3/SliderState.html#getValueRange()">getValueRange</a>()</code></div>
               <p>range of values that Slider values can take.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/SliderState.html#setOnValueChangeFinished(kotlin.Function0)">setOnValueChangeFinished</a>(Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;value)</code></div>
             </td>
           </tr>
           <tr>
@@ -149,7 +156,7 @@
               <tr>
                 <td><code>@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> int&nbsp;steps</code></td>
                 <td>
-                  <p>if greater than 0, specifies the amounts of discrete values, evenly distributed between across the whole value range. If 0, range slider will behave as a continuous slider and allow to choose any value from the range specified. Must not be negative.</p>
+                  <p>if positive, specifies the amount of discrete allowable values (in addition to the endpoints of the value range). Step values are evenly distributed across the range. If 0, the slider will behave continuously and allow any value from the range. Must not be negative.</p>
                 </td>
               </tr>
               <tr>
@@ -257,7 +264,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/material3/SliderState.html#getSteps()">getSteps</a>()</pre>
-        <p>if greater than 0, specifies the amounts of discrete values, evenly distributed between across the whole value range. If 0, range slider will behave as a continuous slider and allow to choose any value from the range specified. Must not be negative.</p>
+        <p>if positive, specifies the amount of discrete allowable values (in addition to the endpoints of the value range). Step values are evenly distributed across the range. If 0, the slider will behave continuously and allow any value from the range. Must not be negative.</p>
       </div>
       <div class="api-item"><a name="getValue--"></a><a name="getvalue"></a>
         <div class="api-name-block">
@@ -276,6 +283,35 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;<a href="/reference/androidx/compose/material3/SliderState.html#getValueRange()">getValueRange</a>()</pre>
         <p>range of values that Slider values can take. <code><a href="/reference/androidx/compose/material3/SliderState.html#(kotlin.Float,kotlin.Int,kotlin.Function0,kotlin.ranges.ClosedFloatingPointRange)">value</a></code> will be coerced to this range.</p>
+      </div>
+      <div class="api-item"><a name="setOnValueChangeFinished-kotlin.Function0-"></a><a name="setonvaluechangefinished"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setOnValueChangeFinished(kotlin.Function0)">setOnValueChangeFinished</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/SliderState.html#setOnValueChangeFinished(kotlin.Function0)">setOnValueChangeFinished</a>(Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;value)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;value</code></td>
+                <td>
+                  <p>lambda to be invoked when value change has ended. This callback shouldn't be used to update the range slider values (use <code><a href="/reference/androidx/compose/material3/SliderState.html#onValueChange()">onValueChange</a></code> for that), but rather to know when the user has completed selecting a new value by ending a drag or a click.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="setValue-kotlin.Float-"></a><a name="setvalue"></a>
         <div class="api-name-block">

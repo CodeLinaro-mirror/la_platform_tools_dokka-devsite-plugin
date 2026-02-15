@@ -8,8 +8,11 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="ClipboardManager">
       <meta itemprop="path" content="androidx.compose.ui.platform">
+      <meta itemprop="property" content="getClip()">
+      <meta itemprop="property" content="getNativeClipboard()">
       <meta itemprop="property" content="getText()">
       <meta itemprop="property" content="hasText()">
+      <meta itemprop="property" content="setClip(androidx.compose.ui.platform.ClipEntry)">
       <meta itemprop="property" content="setText(androidx.compose.ui.text.AnnotatedString)">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -44,6 +47,20 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>default <a href="/reference/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#getClip()">getClip</a>()</code></div>
+              <p>Returns the clipboard entry that's provided by the platform's ClipboardManager.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/NativeClipboard.html">NativeClipboard</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#getNativeClipboard()">getNativeClipboard</a>()</code></div>
+              <p>Returns the native clipboard that exposes the full functionality of platform clipboard.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#getText()">getText</a>()</code></div>
@@ -58,6 +75,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#setClip(androidx.compose.ui.platform.ClipEntry)">setClip</a>(<a href="/reference/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a>&nbsp;clipEntry)</code></div>
+              <p>Puts the given <code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#setClip(androidx.compose.ui.platform.ClipEntry)">clipEntry</a></code> in platform's ClipboardManager.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#setText(androidx.compose.ui.text.AnnotatedString)">setText</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;annotatedString)</code></div>
@@ -69,6 +93,47 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
+      <div class="api-item"><a name="getClip--"></a><a name="getclip"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getClip()">getClip</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;<a href="/reference/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#getClip()">getClip</a>()</pre>
+        <p>Returns the clipboard entry that's provided by the platform's ClipboardManager.</p>
+        <p>This item can include arbitrary content like images, videos, or any data that may be provided through a mediator. Returned entry may contain multiple items with different types.</p>
+        <p>It's safe to call this function without triggering Clipboard access warnings on mobile platforms.</p>
+      </div>
+      <div class="api-item"><a name="getNativeClipboard--"></a><a name="getnativeclipboard"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getNativeClipboard()">getNativeClipboard</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/NativeClipboard.html">NativeClipboard</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#getNativeClipboard()">getNativeClipboard</a>()</pre>
+        <p>Returns the native clipboard that exposes the full functionality of platform clipboard.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unsupported-operation-exception/index.html">UnsupportedOperationException</a></code></td>
+                <td>
+                  <p>If the current platform does not offer a native Clipboard interface.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="getText--"></a><a name="gettext"></a>
         <div class="api-name-block">
           <div>
@@ -107,6 +172,36 @@
         </div>
         <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#hasText()">hasText</a>()</pre>
         <p>This method returns true if there is a text in the Clipboard, false otherwise.</p>
+      </div>
+      <div class="api-item"><a name="setClip-androidx.compose.ui.platform.ClipEntry-"></a><a name="setclip"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setClip(androidx.compose.ui.platform.ClipEntry)">setClip</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#setClip(androidx.compose.ui.platform.ClipEntry)">setClip</a>(<a href="/reference/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a>&nbsp;clipEntry)</pre>
+        <p>Puts the given <code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#setClip(androidx.compose.ui.platform.ClipEntry)">clipEntry</a></code> in platform's ClipboardManager.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a>&nbsp;clipEntry</code></td>
+                <td>
+                  <p>Platform specific clip object that either holds data or links to it. Pass null to clear the clipboard.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="setText-androidx.compose.ui.text.AnnotatedString-"></a><a name="settext"></a>
         <div class="api-name-block">

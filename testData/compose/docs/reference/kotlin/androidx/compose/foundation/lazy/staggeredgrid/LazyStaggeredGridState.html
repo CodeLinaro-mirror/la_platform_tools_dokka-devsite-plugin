@@ -10,6 +10,7 @@
       <meta itemprop="path" content="androidx.compose.foundation.lazy.staggeredgrid">
       <meta itemprop="property" content="animateScrollToItem(kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="dispatchRawDelta(kotlin.Float)">
+      <meta itemprop="property" content="requestScrollToItem(kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">
       <meta itemprop="property" content="scrollToItem(kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="canScrollBackward()">
@@ -18,6 +19,8 @@
       <meta itemprop="property" content="firstVisibleItemScrollOffset()">
       <meta itemprop="property" content="interactionSource()">
       <meta itemprop="property" content="isScrollInProgress()">
+      <meta itemprop="property" content="lastScrolledBackward()">
+      <meta itemprop="property" content="lastScrolledForward()">
       <meta itemprop="property" content="layoutInfo()">
       <meta itemprop="property" content="Saver()">
       <meta itemprop="language" content="KOTLIN">
@@ -137,6 +140,16 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">requestScrollToItem</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;scrollOffset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Requests the item at <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">index</a></code> to be at the start of the viewport during the next remeasure, offset by <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">scrollOffset</a></code>, and schedules a remeasure.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code>open&nbsp;suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>,&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
@@ -229,6 +242,26 @@
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#isScrollInProgress()">isScrollInProgress</a></code></div>
                 <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#scrollableState()">scrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#lastScrolledBackward()">lastScrolledBackward</a></code></div>
+                <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#lastScrolledForward()">lastScrolledForward</a></code></div>
+                <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -407,6 +440,48 @@
                   <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
                   <td>
                     <p>the amount of delta consumed</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="requestScrollToItem(kotlin.Int, kotlin.Int)"></a><a name="requestScrollToItem-kotlin.Int-kotlin.Int-"></a><a name="requestscrolltoitem"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="requestScrollToItem(kotlin.Int,kotlin.Int)">requestScrollToItem</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">requestScrollToItem</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;scrollOffset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Requests the item at <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">index</a></code> to be at the start of the viewport during the next remeasure, offset by <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">scrollOffset</a></code>, and schedules a remeasure.</p>
+          <p>The scroll position will be updated to the requested position rather than maintain the index based on the first visible item key (when a data set change will also be applied during the next remeasure), but <em>only</em> for the next remeasure.</p>
+          <p>Any scroll in progress will be cancelled.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>the index to which to scroll. Must be non-negative.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>scrollOffset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+                  <td>
+                    <p>the offset that the item should end up after the scroll. Note that positive offset refers to forward scroll, so in a top-to-bottom list, positive offset will scroll the item further upward (taking it partly offscreen).</p>
                   </td>
                 </tr>
               </tbody>
@@ -658,6 +733,48 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#isScrollInProgress()">isScrollInProgress</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#scrollableState()">scrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
+        </div>
+        <div class="api-item"><a name="getLastScrolledBackward()"></a><a name="setLastScrolledBackward()"></a><a name="getLastScrolledBackward--"></a><a name="setLastScrolledBackward--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="lastScrolledBackward()">lastScrolledBackward</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#lastScrolledBackward()">lastScrolledBackward</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+          <ul>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling backward.</p>
+            </li>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> was scrolling backward in its last scroll action.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="api-item"><a name="getLastScrolledForward()"></a><a name="setLastScrolledForward()"></a><a name="getLastScrolledForward--"></a><a name="setLastScrolledForward--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="lastScrolledForward()">lastScrolledForward</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#lastScrolledForward()">lastScrolledForward</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+          <ul>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling forward.</p>
+            </li>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> was scrolling forward in its last scroll action.</p>
+            </li>
+          </ul>
         </div>
         <div class="api-item"><a name="getLayoutInfo()"></a><a name="setLayoutInfo()"></a><a name="getLayoutInfo--"></a><a name="setLayoutInfo--"></a>
           <div class="api-name-block">

@@ -10,10 +10,6 @@
       <meta itemprop="property" content="EditCommand">
       <meta itemprop="property" content="InputEventCallback">
       <meta itemprop="property" content="OffsetMapping">
-      <meta itemprop="property" content="PlatformTextInput">
-      <meta itemprop="property" content="PlatformTextInputAdapter">
-      <meta itemprop="property" content="PlatformTextInputPlugin">
-      <meta itemprop="property" content="PlatformTextInputPluginRegistry">
       <meta itemprop="property" content="PlatformTextInputService">
       <meta itemprop="property" content="VisualTransformation">
       <meta itemprop="property" content="BackspaceCommand">
@@ -29,9 +25,9 @@
       <meta itemprop="property" content="KeyboardCapitalization">
       <meta itemprop="property" content="KeyboardType">
       <meta itemprop="property" content="MoveCursorCommand">
+      <meta itemprop="property" content="PartialGapBuffer">
       <meta itemprop="property" content="PasswordVisualTransformation">
-      <meta itemprop="property" content="PlatformTextInputPluginRegistryImpl">
-      <meta itemprop="property" content="AdapterHandle">
+      <meta itemprop="property" content="PlatformImeOptions">
       <meta itemprop="property" content="SetComposingRegionCommand">
       <meta itemprop="property" content="SetComposingTextCommand">
       <meta itemprop="property" content="SetSelectionCommand">
@@ -92,49 +88,9 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInput.html">PlatformTextInput</a></code></td>
-              <td>
-                <p>Represents the text input plugin system to instances of <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code>, and provides methods that allow adapters to interact with it.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code></td>
-              <td>
-                <p>See kdoc on actual interfaces.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All-->
-                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
-                <!--platform-Android/JVM--></td>
-            </tr>
-            <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a></code></td>
-              <td>
-                <p>See kdoc on actual interfaces.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All-->
-                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
-                <!--platform-Android/JVM--></td>
-            </tr>
-            <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html">PlatformTextInputPluginRegistry</a></code></td>
-              <td>
-                <p>The entry point to the text input plugin API.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputService.html">PlatformTextInputService</a></code></td>
               <td>
-                <p>Platform specific text input service.</p>
+                <p><strong>This interface is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -281,6 +237,15 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PartialGapBuffer.html">PartialGapBuffer</a></code></td>
+              <td>
+                <p>An editing buffer that uses Gap Buffer only around the cursor location.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PasswordVisualTransformation.html">PasswordVisualTransformation</a></code></td>
               <td>
                 <p>The Visual Filter can be used for password Input Field.</p>
@@ -290,20 +255,15 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html">PlatformTextInputPluginRegistryImpl</a></code></td>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformImeOptions.html">PlatformImeOptions</a></code></td>
               <td>
-                <p>Implementation of <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html">PlatformTextInputPluginRegistry</a></code> that manages a map of adapters to cached services and allows retrieval of the first active one.</p>
+                <p>Used to configure the platform specific IME options.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.AdapterHandle.html">PlatformTextInputPluginRegistryImpl.AdapterHandle</a></code></td>
-              <td></td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
+                <!--platform-Common/All-->
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
             </tr>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/SetComposingRegionCommand.html">SetComposingRegionCommand</a></code></td>
@@ -344,7 +304,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a></code></td>
               <td>
-                <p>Handles communication with the IME.</p>
+                <p><strong>This class is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -353,7 +313,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code></td>
               <td>
-                <p>Represents a input session for interactions between a soft keyboard and editable text.</p>
+                <p><strong>This class is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>

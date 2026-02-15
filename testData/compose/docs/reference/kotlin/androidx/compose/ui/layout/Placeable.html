@@ -9,6 +9,7 @@
       <meta itemprop="name" content="Placeable">
       <meta itemprop="path" content="androidx.compose.ui.layout">
       <meta itemprop="property" content="placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">
+      <meta itemprop="property" content="placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">
       <meta itemprop="property" content="apparentToRealOffset()">
       <meta itemprop="property" content="height()">
       <meta itemprop="property" content="measuredHeight()">
@@ -60,7 +61,7 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>abstract class <a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/layout/PlacementScopeMarker.html">PlacementScopeMarker</a><br>abstract class <a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code></div>
               <p>Receiver scope that permits explicit placement of a <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>.</p>
             </td>
           </tr>
@@ -111,6 +112,16 @@
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">placeAt</a>(position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>,&nbsp;zIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;layerBlock:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?)</code></div>
                 <p>Positions the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> at <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">position</a></code> in its parent's coordinate system.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">placeAt</a>(position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>,&nbsp;zIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;layer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a>)</code></div>
+                <p>Positions the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> at <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">position</a></code> in its parent's coordinate system.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -358,6 +369,46 @@
                   <td><code>layerBlock:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?</code></td>
                   <td>
                     <p>when non-null this <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> should be placed with an introduced graphic layer. You can configure any layer property available on <code><a href="/reference/kotlin/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a></code> via this block. Also if the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> will be placed with a new <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">position</a></code> next time only the graphic layer will be moved without requiring to redrawn the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> content.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="placeAt(androidx.compose.ui.unit.IntOffset, kotlin.Float, androidx.compose.ui.graphics.layer.GraphicsLayer)"></a><a name="placeAt-androidx.compose.ui.unit.IntOffset-kotlin.Float-androidx.compose.ui.graphics.layer.GraphicsLayer-"></a><a name="placeat"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">placeAt</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">protected&nbsp;open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">placeAt</a>(position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>,&nbsp;zIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;layer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Positions the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> at <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">position</a></code> in its parent's coordinate system.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>zIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>controls the drawing order for the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>. A <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> with larger <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">zIndex</a></code> will be drawn on top of all the children with smaller <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">zIndex</a></code>. When children have the same <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">zIndex</a></code> the order in which the items were placed is used.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>layer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code></td>
+                  <td>
+                    <p><code><a href="/reference/kotlin/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> to place this placeable with. If the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> will be placed with a new <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,androidx.compose.ui.graphics.layer.GraphicsLayer)">position</a></code> next time only the graphic layer will be moved without requiring to redrawn the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> content.</p>
                   </td>
                 </tr>
               </tbody>

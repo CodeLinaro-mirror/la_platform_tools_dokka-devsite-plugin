@@ -10,6 +10,8 @@
       <meta itemprop="path" content="androidx.compose.animation.core">
       <meta itemprop="property" content="infiniteRepeatable(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">
       <meta itemprop="property" content="keyframes(kotlin.Function1)">
+      <meta itemprop="property" content="keyframesWithSpline(kotlin.Function1)">
+      <meta itemprop="property" content="keyframesWithSpline(kotlin.Float,kotlin.Function1)">
       <meta itemprop="property" content="repeatable(kotlin.Int,androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">
       <meta itemprop="property" content="snap(kotlin.Int)">
       <meta itemprop="property" content="spring(kotlin.Float,kotlin.Float,kotlin.Any)">
@@ -54,6 +56,20 @@
             <td>
               <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationSpecKt.html#keyframes(kotlin.Function1)">keyframes</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;init<br>)</code></div>
               <p>Creates a <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code> animation, initialized with <code><a href="/reference/androidx/compose/animation/core/package-summary.html#keyframes(kotlin.Function1)">init</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationSpecKt.html#keyframesWithSpline(kotlin.Function1)">keyframesWithSpline</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;init<br>)</code></div>
+              <p>Creates a <code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation, initialized with <code><a href="/reference/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Function1)">init</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationSpecKt.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">keyframesWithSpline</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;periodicBias,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;init<br>)</code></div>
+              <p>Creates a <em>periodic</em> <code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation, initialized with <code><a href="/reference/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">init</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -225,9 +241,24 @@ import androidx.compose.animation.core.keyframes
 // time between 50 and 100ms
 keyframes&lt;Float&gt; {
     durationMillis = 100
-    0f at 0 with FastOutSlowInEasing
-    1.5f at 50 with LinearOutSlowInEasing
+    0f at 0 using FastOutSlowInEasing
+    1.5f at 50 using LinearOutSlowInEasing
     1f at 100
+}</pre>
+        <p>Values can be animated using arcs of quarter of an Ellipse with <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).using(androidx.compose.animation.core.ArcMode)">KeyframesSpecConfig.using</a></code> and <code><a href="/reference/androidx/compose/animation/core/ArcMode.html">ArcMode</a></code>:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.ArcMode.Companion.ArcAbove
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.keyframes
+import androidx.compose.ui.geometry.Offset
+
+keyframes&lt;Offset&gt; {
+    // Animate for 1.2 seconds
+    durationMillis = 1200
+
+    // Animate to Offset(100f, 100f) at 50% of the animation using LinearEasing then, animate
+    // using ArcAbove for the rest of the animation
+    Offset(100f, 100f) atFraction 0.5f using LinearEasing using ArcAbove
 }</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -264,6 +295,204 @@ keyframes&lt;Float&gt; {
             <tbody class="list">
               <tr>
                 <td><code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="keyframesWithSpline-kotlin.Function1-"></a><a name="keyframeswithspline"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="keyframesWithSpline(kotlin.Function1)">keyframesWithSpline</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationSpecKt.html#keyframesWithSpline(kotlin.Function1)">keyframesWithSpline</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;init<br>)</pre>
+        <p>Creates a <code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation, initialized with <code><a href="/reference/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Function1)">init</a></code>. For example:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.ui.geometry.Offset
+
+keyframesWithSpline {
+    durationMillis = 200
+    Offset(0f, 0f) at 0
+    Offset(500f, 100f) at 100
+    Offset(400f, 50f) at 150
+}</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.IntOffset
+
+keyframesWithSpline {
+    durationMillis = 200
+    IntOffset(0, 0) at 0
+    IntOffset(500, 100) at 100
+    IntOffset(400, 50) at 150
+}</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.dp
+
+keyframesWithSpline {
+    durationMillis = 200
+    DpOffset(0.dp, 0.dp) at 0
+    DpOffset(500.dp, 100.dp) at 100
+    DpOffset(400.dp, 50.dp) at 150
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;init</code></td>
+                <td>
+                  <p>Initialization function for the <code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="keyframesWithSpline(kotlin.Float, kotlin.Function1)"></a><a name="keyframesWithSpline-kotlin.Float-kotlin.Function1-"></a><a name="keyframeswithspline"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="keyframesWithSpline(kotlin.Float,kotlin.Function1)">keyframesWithSpline</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationSpecKt.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">keyframesWithSpline</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;periodicBias,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;init<br>)</pre>
+        <p>Creates a <em>periodic</em> <code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation, initialized with <code><a href="/reference/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">init</a></code>.</p>
+        <p>Use overload without <code><a href="/reference/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">periodicBias</a></code> parameter for the non-periodic implementation.</p>
+        <p>A periodic spline is one such that the starting and ending velocities are equal. This makes them useful to crete smooth repeatable animations. Such as an infinite pulsating animation:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
+
+var alpha by remember { mutableFloatStateOf(0f) }
+LaunchedEffect(Unit) {
+    animate(
+        initialValue = 0f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(
+            // With a periodicBias of 0.5f it creates a similar animation to a sinusoidal curve
+            // so the transition as the animation repeats is completely seamless
+            animation = keyframesWithSpline(periodicBias = 0.5f) {
+                durationMillis = 2000
+
+                1f at 1000 using LinearEasing
+            },
+            repeatMode = RepeatMode.Restart
+        )
+    ) { value, _ -&gt;
+        alpha = value
+    }
+}
+Image(
+    imageVector = Icons.Filled.Favorite,
+    contentDescription = null,
+    modifier = Modifier
+        .size(150.dp)
+        .graphicsLayer { this.alpha = alpha },
+    colorFilter = ColorFilter.tint(Color.Red)
+)</pre>
+        <p>The <code><a href="/reference/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">periodicBias</a></code> value (from 0.0 to 1.0) indicates how much of the original starting and final velocity are modified to achieve periodicity:</p>
+        <ul>
+          <li>
+            <p>0f: Modifies only the starting velocity to match the final velocity</p>
+          </li>
+          <li>
+            <p>1f: Modifies only the final velocity to match the starting velocity</p>
+          </li>
+          <li>
+            <p>0.5f: Modifies both velocities equally, picking the average between the two</p>
+          </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;periodicBias</code></td>
+                <td>
+                  <p>A value from 0f to 1f, indicating how much the starting or ending velocities are modified respectively to achieve periodicity.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;init</code></td>
+                <td>
+                  <p>Initialization function for the <code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a></code></td>
                 <td></td>
               </tr>
             </tbody>

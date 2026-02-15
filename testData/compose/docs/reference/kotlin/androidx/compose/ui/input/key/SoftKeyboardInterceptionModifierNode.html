@@ -37,7 +37,7 @@
       </div>
     </devsite-filter >
     <hr>
-    <p>Implement this interface to create a <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that can intercept hardware Key events before they are sent to the software keyboard.</p>
+    <p>Implement this interface to create a <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that can intercept hardware Key events before they are sent to the software keyboard. This can be used to intercept key input from a DPad, or physical keyboard connected to the device and is not applicable to input that is sent to the soft keyboard via spell check or autocomplete.</p>
     <p>The event is routed to the focused item. Before reaching the focused item, <code><a href="/reference/kotlin/androidx/compose/ui/input/key/SoftKeyboardInterceptionModifierNode.html#onPreInterceptKeyBeforeSoftKeyboard(androidx.compose.ui.input.key.KeyEvent)">onPreInterceptKeyBeforeSoftKeyboard</a></code> is called for parents of the focused item. If the parents don't consume the event, <a href="">onPreSoftwareKeyboardKeyEvent</a> is called for the focused item. If the event is still not consumed, <code><a href="/reference/kotlin/androidx/compose/ui/input/key/SoftKeyboardInterceptionModifierNode.html#onInterceptKeyBeforeSoftKeyboard(androidx.compose.ui.input.key.KeyEvent)">onInterceptKeyBeforeSoftKeyboard</a></code> is called on the focused item's parents.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">

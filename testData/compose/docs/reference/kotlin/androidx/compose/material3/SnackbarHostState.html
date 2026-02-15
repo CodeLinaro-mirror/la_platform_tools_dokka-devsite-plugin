@@ -191,14 +191,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-class SnackbarVisualsWithError(
-    override val message: String,
-    val isError: Boolean
-) : SnackbarVisuals {
+class SnackbarVisualsWithError(override val message: String, val isError: Boolean) :
+    SnackbarVisuals {
     override val actionLabel: String
         get() = if (isError) &quot;Error&quot; else &quot;OK&quot;
+
     override val withDismissAction: Boolean
         get() = false
+
     override val duration: SnackbarDuration
         get() = SnackbarDuration.Indefinite
 }
@@ -211,26 +211,28 @@ Scaffold(
         SnackbarHost(snackbarHostState) { data -&gt;
             // custom snackbar with the custom action button color and border
             val isError = (data.visuals as? SnackbarVisualsWithError)?.isError ?: false
-            val buttonColor = if (isError) {
-                ButtonDefaults.textButtonColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.error
-                )
-            } else {
-                ButtonDefaults.textButtonColors(
-                    contentColor = MaterialTheme.colorScheme.inversePrimary
-                )
-            }
+            val buttonColor =
+                if (isError) {
+                    ButtonDefaults.textButtonColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer,
+                        contentColor = MaterialTheme.colorScheme.error
+                    )
+                } else {
+                    ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.inversePrimary
+                    )
+                }
 
             Snackbar(
-                modifier = Modifier
-                    .border(2.dp, MaterialTheme.colorScheme.secondary)
-                    .padding(12.dp),
+                modifier =
+                    Modifier.border(2.dp, MaterialTheme.colorScheme.secondary).padding(12.dp),
                 action = {
                     TextButton(
                         onClick = { if (isError) data.dismiss() else data.performAction() },
                         colors = buttonColor
-                    ) { Text(data.visuals.actionLabel ?: &quot;&quot;) }
+                    ) {
+                        Text(data.visuals.actionLabel ?: &quot;&quot;)
+                    }
                 }
             ) {
                 Text(data.visuals.message)
@@ -250,15 +252,14 @@ Scaffold(
                     )
                 }
             }
-        ) { Text(&quot;Show snackbar&quot;) }
+        ) {
+            Text(&quot;Show snackbar&quot;)
+        }
     },
     content = { innerPadding -&gt;
         Text(
             text = &quot;Custom Snackbar Demo&quot;,
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-                .wrapContentSize()
+            modifier = Modifier.padding(innerPadding).fillMaxSize().wrapContentSize()
         )
     }
 )</pre>
@@ -342,10 +343,11 @@ val snackbarHostState = remember { SnackbarHostState() }
 val channel = remember { Channel&lt;Int&gt;(Channel.CONFLATED) }
 LaunchedEffect(channel) {
     channel.receiveAsFlow().collect { index -&gt;
-        val result = snackbarHostState.showSnackbar(
-            message = &quot;Snackbar # $index&quot;,
-            actionLabel = &quot;Action on $index&quot;
-        )
+        val result =
+            snackbarHostState.showSnackbar(
+                message = &quot;Snackbar # $index&quot;,
+                actionLabel = &quot;Action on $index&quot;
+            )
         when (result) {
             SnackbarResult.ActionPerformed -&gt; {
                 /* action has been performed */
@@ -365,15 +367,14 @@ Scaffold(
                 // offset snackbar data to the business logic
                 channel.trySend(++clickCount)
             }
-        ) { Text(&quot;Show snackbar&quot;) }
+        ) {
+            Text(&quot;Show snackbar&quot;)
+        }
     },
     content = { innerPadding -&gt;
         Text(
             &quot;Snackbar demo&quot;,
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-                .wrapContentSize()
+            modifier = Modifier.padding(innerPadding).fillMaxSize().wrapContentSize()
         )
     }
 )</pre>

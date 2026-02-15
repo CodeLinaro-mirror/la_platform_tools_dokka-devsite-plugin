@@ -17,9 +17,11 @@
       <meta itemprop="property" content="takeNestedSnapshot(kotlin.Function1)">
       <meta itemprop="property" content="unsafeEnter()">
       <meta itemprop="property" content="unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">
+      <meta itemprop="property" content="PreexistingSnapshotId()">
       <meta itemprop="property" content="getCurrent()">
       <meta itemprop="property" content="global(kotlin.Function0)">
       <meta itemprop="property" content="isApplyObserverNotificationPending()">
+      <meta itemprop="property" content="isInSnapshot()">
       <meta itemprop="property" content="notifyObjectsInitialized()">
       <meta itemprop="property" content="observe(kotlin.Function1,kotlin.Function1,kotlin.Function0)">
       <meta itemprop="property" content="openSnapshotCount()">
@@ -30,8 +32,10 @@
       <meta itemprop="property" content="takeSnapshot(kotlin.Function1)">
       <meta itemprop="property" content="withMutableSnapshot(kotlin.Function0)">
       <meta itemprop="property" content="withoutReadObservation(kotlin.Function0)">
+      <meta itemprop="property" content="PreexistingSnapshotId()">
       <meta itemprop="property" content="current()">
       <meta itemprop="property" content="isApplyObserverNotificationPending()">
+      <meta itemprop="property" content="isInSnapshot()">
       <meta itemprop="property" content="(androidx.compose.runtime.snapshots.Snapshot).asContextElement()">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -127,6 +131,28 @@
           <tr>
             <td>
               <div><code>public static class <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html">Snapshot.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Constants</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#PreexistingSnapshotId()">PreexistingSnapshotId</a> = 1</code></div>
+              <p>All new state objects initial state records should be <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#PreexistingSnapshotId()">PreexistingSnapshotId</a></code> which then allows snapshots outside the creating snapshot to access the object with its initial state.</p>
             </td>
           </tr>
         </tbody>
@@ -251,6 +277,18 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="list">
+      <h2>Constants</h2>
+      <div class="api-item"><a name="getPreexistingSnapshotId()"></a><a name="setPreexistingSnapshotId()"></a><a name="getPreexistingSnapshotId--"></a><a name="setPreexistingSnapshotId--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="PreexistingSnapshotId()">PreexistingSnapshotId</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#PreexistingSnapshotId()">PreexistingSnapshotId</a> = 1</pre>
+        <p>All new state objects initial state records should be <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#PreexistingSnapshotId()">PreexistingSnapshotId</a></code> which then allows snapshots outside the creating snapshot to access the object with its initial state.</p>
+      </div>
     </div>
     <div class="list">
       <h2>Protected constructors</h2>

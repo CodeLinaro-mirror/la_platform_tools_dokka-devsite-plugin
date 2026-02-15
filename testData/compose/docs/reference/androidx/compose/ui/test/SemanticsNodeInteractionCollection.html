@@ -13,6 +13,7 @@
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAll(androidx.compose.ui.test.SemanticsMatcher)">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAny(androidx.compose.ui.test.SemanticsMatcher)">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">
+      <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).invokeGlobalAssertions()">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToLog(kotlin.String,kotlin.Int)">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToString(kotlin.Int)">
       <meta itemprop="property" content="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filter(androidx.compose.ui.test.SemanticsMatcher)">
@@ -132,6 +133,13 @@ composeTestRule.onAllNodes(hasClickAction())
             <td>
               <div><code><a href="/reference/androidx/compose/ui/test/AssertionsKt.html">AssertionsKt</a>.<a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">assertCountEquals</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;expectedSize<br>)</code></div>
               <p>Asserts that this collection of nodes is equal to the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">expectedSize</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/GlobalAssertions.html">GlobalAssertions</a>.<a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).invokeGlobalAssertions()">invokeGlobalAssertions</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>&nbsp;receiver<br>)</code></div>
+              <p>Executes all of the assertions registered by <code><a href="/reference/androidx/compose/ui/test/package-summary.html#addGlobalAssertion(kotlin.String,kotlin.Function1)">addGlobalAssertion</a></code>, each of which will receive the first node of this collection.</p>
             </td>
           </tr>
           <tr>
@@ -378,6 +386,36 @@ composeTestRule.onAllNodes(hasClickAction())
                 <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-assertion-error/index.html">AssertionError</a></code></td>
                 <td>
                   <p>if the size is not equal to <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">expectedSize</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.invokeGlobalAssertions--"></a><a name="invokeglobalassertions"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).invokeGlobalAssertions()">GlobalAssertions.invokeGlobalAssertions</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>&nbsp;<a href="/reference/androidx/compose/ui/test/GlobalAssertions.html">GlobalAssertions</a>.<a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).invokeGlobalAssertions()">invokeGlobalAssertions</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>&nbsp;receiver<br>)</pre>
+        <p>Executes all of the assertions registered by <code><a href="/reference/androidx/compose/ui/test/package-summary.html#addGlobalAssertion(kotlin.String,kotlin.Function1)">addGlobalAssertion</a></code>, each of which will receive the first node of this collection. This may be useful in a custom test action.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code> that is the receiver of this method</p>
                 </td>
               </tr>
             </tbody>

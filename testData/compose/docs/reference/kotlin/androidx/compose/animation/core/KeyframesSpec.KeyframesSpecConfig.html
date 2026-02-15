@@ -10,11 +10,8 @@
       <meta itemprop="path" content="androidx.compose.animation.core">
       <meta itemprop="property" content="(kotlin.Any).at(kotlin.Int)">
       <meta itemprop="property" content="(kotlin.Any).atFraction(kotlin.Float)">
-      <meta itemprop="property" content="equals(kotlin.Any)">
-      <meta itemprop="property" content="hashCode()">
+      <meta itemprop="property" content="(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).using(androidx.compose.animation.core.ArcMode)">
       <meta itemprop="property" content="(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).with(androidx.compose.animation.core.Easing)">
-      <meta itemprop="property" content="delayMillis()">
-      <meta itemprop="property" content="durationMillis()">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -36,13 +33,31 @@
           <li>
             <div class="kotlin-platform" data-title="Common/All">Cmn</div>
             <!--platform-Common/All-->
-            <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+            <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html">KeyframesSpecBaseConfig</a></pre>
           </li>
         </ul>
       </div>
     </devsite-filter >
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">kotlin.Any</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html">androidx.compose.animation.core.KeyframesSpecBaseConfig</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">androidx.compose.animation.core.KeyframesSpec.KeyframesSpecConfig</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <hr>
-    <p><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> stores a mutable configuration of the key frames, including <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#delayMillis()">delayMillis</a></code>, and all the key frames. Each key frame defines what the animation value should be at a particular time. Once the key frames are fully configured, the <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> can be used to create a <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code>.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> stores a mutable configuration of the key frames, including <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#durationMillis()">durationMillis</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#delayMillis()">delayMillis</a></code>, and all the key frames. Each key frame defines what the animation value should be at a particular time. Once the key frames are fully configured, the <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> can be used to create a <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code>.</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
@@ -55,8 +70,8 @@ import androidx.compose.ui.unit.dp
 // time between 50 and 100ms
 keyframes&lt;DpOffset&gt; {
     durationMillis = 200
-    DpOffset(0.dp, 0.dp) at 0 with LinearEasing
-    DpOffset(500.dp, 100.dp) at 100 with LinearOutSlowInEasing
+    DpOffset(0.dp, 0.dp) at 0 using LinearEasing
+    DpOffset(500.dp, 100.dp) at 100 using LinearOutSlowInEasing
     DpOffset(400.dp, 50.dp) at 150
 }</pre>
     <div class="devsite-table-wrapper">
@@ -72,7 +87,7 @@ keyframes&lt;DpOffset&gt; {
         </thead>
         <tbody class="list">
           <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#keyframes()">keyframes</a></code></td>
+            <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#keyframes()">keyframes</a></code></td>
             <td></td>
           </tr>
         </tbody>
@@ -119,9 +134,9 @@ keyframes&lt;DpOffset&gt; {
           </thead>
           <tbody class="list">
             <tr>
-              <td><code>infix <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</code></td>
+              <td><code>open&nbsp;infix <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</code></td>
               <td>
-                <div><code>T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).at(kotlin.Int)">at</a>(timeStamp:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code>T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).at(kotlin.Int)">at</a>(timeStamp:&nbsp;@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>Adds a keyframe so that animation value will be <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">this</a></code> at time: <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).at(kotlin.Int)">timeStamp</a></code>.</p>
               </td>
               <td>
@@ -129,28 +144,20 @@ keyframes&lt;DpOffset&gt; {
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code>open&nbsp;infix <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</code></td>
+              <td>
+                <div><code>T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).atFraction(kotlin.Float)">atFraction</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Adds a keyframe so that the animation value will be the value specified at a fraction of the total <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#durationMillis()">durationMillis</a></code> set.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code>infix <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</code></td>
               <td>
-                <div><code>T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).atFraction(kotlin.Float)">atFraction</a>(fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
-                <p>Adds a keyframe so that the animation value will be the value specified at a fraction of the total <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a></code> set.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#hashCode()">hashCode</a>()</code></div>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).using(androidx.compose.animation.core.ArcMode)">using</a>(arcMode:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/ArcMode.html">ArcMode</a>)</code></div>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/ArcMode.html">ArcMode</a></code> applied from this keyframe to the next.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -159,8 +166,8 @@ keyframes&lt;DpOffset&gt; {
             <tr>
               <td><code>infix <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).with(androidx.compose.animation.core.Easing)">with</a>(easing:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a>)</code></div>
-                <p>Adds an <code><a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a></code> for the interval started with the just provided timestamp.</p>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;.<span><del><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).with(androidx.compose.animation.core.Easing)">with</a></del></span>(easing:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a>)</code></div>
+                <p><strong>This function is deprecated.</strong> Use version that returns an instance of the entity so it can be re-used in other keyframe builders.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -171,42 +178,90 @@ keyframes&lt;DpOffset&gt; {
       </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <devsite-filter  select-el-container-id="platform">
-        <table class="fixed">
-          <colgroup>
-            <col width="35%">
-            <col width="58%">
-            <col>
-          </colgroup>
-          <thead>
-            <tr>
-              <th colspan="100%"><h3>Public properties</h3></th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#delayMillis()">delayMillis</a></code></div>
-                <p>The amount of time that the animation should be delayed.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a></code></div>
-                <p>Duration of the animation in milliseconds.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-          </tbody>
-        </table>
-      </devsite-filter >
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html">androidx.compose.animation.core.KeyframesSpecBaseConfig</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>infix <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#(androidx.compose.animation.core.KeyframeBaseEntity).using(androidx.compose.animation.core.Easing)">using</a>(easing:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a>)</code></div>
+                          <p>Adds an <code><a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a></code> for the interval started with the just provided timestamp.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html">androidx.compose.animation.core.KeyframesSpecBaseConfig</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#delayMillis()">delayMillis</a></code></div>
+                          <p>The amount of time that the animation should be delayed.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#durationMillis()">durationMillis</a></code></div>
+                          <p>Duration of the animation in milliseconds.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <devsite-filter  select-el-container-id="platform">
       <div class="list">
@@ -240,7 +295,7 @@ keyframes&lt;DpOffset&gt; {
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">infix&nbsp;fun&nbsp;T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).at(kotlin.Int)">at</a>(timeStamp:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</pre>
+          <pre class="api-signature no-pretty-print">open&nbsp;infix&nbsp;fun&nbsp;T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).at(kotlin.Int)">at</a>(timeStamp:&nbsp;@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</pre>
           <p>Adds a keyframe so that animation value will be <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">this</a></code> at time: <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).at(kotlin.Int)">timeStamp</a></code>. For example:      0.8f at 150 // ms</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
@@ -255,7 +310,7 @@ keyframes&lt;DpOffset&gt; {
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code>timeStamp:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td><code>timeStamp:&nbsp;@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
                   <td>
                     <p>The time in the during when animation should reach value: <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">this</a></code>, with a minimum value of <code>0</code>.</p>
                   </td>
@@ -295,8 +350,8 @@ keyframes&lt;DpOffset&gt; {
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">infix&nbsp;fun&nbsp;T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).atFraction(kotlin.Float)">atFraction</a>(fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</pre>
-          <p>Adds a keyframe so that the animation value will be the value specified at a fraction of the total <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a></code> set. For example:       0.8f atFraction 0.50f // half of the overall duration set</p>
+          <pre class="api-signature no-pretty-print">open&nbsp;infix&nbsp;fun&nbsp;T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).atFraction(kotlin.Float)">atFraction</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</pre>
+          <p>Adds a keyframe so that the animation value will be the value specified at a fraction of the total <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#durationMillis()">durationMillis</a></code> set. For example:       0.8f atFraction 0.50f // half of the overall duration set</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -310,7 +365,7 @@ keyframes&lt;DpOffset&gt; {
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code>fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
                   <td>
                     <p>The fraction when the animation should reach specified value.</p>
                   </td>
@@ -340,29 +395,22 @@ keyframes&lt;DpOffset&gt; {
             </table>
           </div>
         </div>
-        <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <div class="api-item"><a name="-androidx.compose.animation.core.KeyframesSpec.KeyframeEntity-.using-androidx.compose.animation.core.ArcMode-"></a><a name="using"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="equals(kotlin.Any)">equals</h3>
+              <h3 id="(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).using(androidx.compose.animation.core.ArcMode)">using</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        </div>
-        <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="hashCode()">hashCode</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#hashCode()">hashCode</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>infix&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).using(androidx.compose.animation.core.ArcMode)">using</a>(arcMode:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/ArcMode.html">ArcMode</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</pre>
+          <p><code><a href="/reference/kotlin/androidx/compose/animation/core/ArcMode.html">ArcMode</a></code> applied from this keyframe to the next.</p>
+          <p>Note that arc modes are meant for objects with even dimensions (such as <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> and its variants). Where each value pair is animated as an arc. So, if the object has odd dimensions the last value will always animate linearly.</p>
+          <p> </p>
+          <p>The order of each value in an object with multiple dimensions is given by the applied vector converter in <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">KeyframesSpec.vectorize</a></code>.</p>
+          <p>E.g.: <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#RectToVector()">RectToVector</a></code> assigns its values as <code>[left, top, right, bottom]</code> so the pairs of dimensions animated as arcs are: <code>[left, top]</code> and <code>[right, bottom]</code>.</p>
         </div>
         <div class="api-item"><a name="-androidx.compose.animation.core.KeyframesSpec.KeyframeEntity-.with-androidx.compose.animation.core.Easing-"></a><a name="with"></a>
           <div class="api-name-block">
@@ -374,7 +422,8 @@ keyframes&lt;DpOffset&gt; {
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">infix&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).with(androidx.compose.animation.core.Easing)">with</a>(easing:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <pre class="api-signature no-pretty-print">infix&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;.<span><del><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).with(androidx.compose.animation.core.Easing)">with</a></del></span>(easing:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>Use version that returns an instance of the entity so it can be re-used in other keyframe builders.</aside>
           <p>Adds an <code><a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a></code> for the interval started with the just provided timestamp. For example:      0f at 50 with LinearEasing</p>
           <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -385,8 +434,8 @@ import androidx.compose.animation.core.keyframes
 // time between 50 and 100ms
 keyframes&lt;Float&gt; {
     durationMillis = 100
-    0f at 0 with FastOutSlowInEasing
-    1.5f at 50 with LinearOutSlowInEasing
+    0f at 0 using FastOutSlowInEasing
+    1.5f at 50 using LinearOutSlowInEasing
     1f at 100
 }</pre>
           <div class="devsite-table-wrapper">
@@ -410,38 +459,27 @@ keyframes&lt;Float&gt; {
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-    </devsite-filter >
-    <devsite-filter  select-el-container-id="platform">
-      <div class="list">
-        <h2 data-title="platform-Common/All">Public properties
-          <!--platform-Common/All--></h2>
-        <div class="api-item"><a name="getDelayMillis()"></a><a name="setDelayMillis()"></a><a name="getDelayMillis--"></a><a name="setDelayMillis--"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="delayMillis()">delayMillis</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                  <td>
+                    <p>the same <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframeEntity</a></code> instance so that other implementations can expand on the builder pattern</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#delayMillis()">delayMillis</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
-          <p>The amount of time that the animation should be delayed. The minimum is <code>0</code> and defaults to 0.</p>
-        </div>
-        <div class="api-item"><a name="getDurationMillis()"></a><a name="setDurationMillis()"></a><a name="getDurationMillis--"></a><a name="setDurationMillis--"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="durationMillis()">durationMillis</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
-          <p>Duration of the animation in milliseconds. The minimum is <code>0</code> and defaults to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationConstants.html#DefaultDurationMillis()">DefaultDurationMillis</a></code></p>
         </div>
       </div>
     </devsite-filter >

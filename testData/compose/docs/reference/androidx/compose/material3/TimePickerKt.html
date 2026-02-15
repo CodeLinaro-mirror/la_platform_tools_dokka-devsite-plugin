@@ -10,6 +10,7 @@
       <meta itemprop="path" content="androidx.compose.material3">
       <meta itemprop="property" content="TimeInput(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors)">
       <meta itemprop="property" content="TimePicker(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors,androidx.compose.material3.TimePickerLayoutType)">
+      <meta itemprop="property" content="TimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">
       <meta itemprop="property" content="rememberTimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -50,7 +51,14 @@
             <td><code>static&nbsp;final void</code></td>
             <td>
               <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/TimePickerKt.html#TimePicker(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors,androidx.compose.material3.TimePickerLayoutType)">TimePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/TimePickerState.html">TimePickerState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/TimePickerColors.html">TimePickerColors</a>&nbsp;colors,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/TimePickerLayoutType.html">TimePickerLayoutType</a>&nbsp;layoutType<br>)</code></div>
-              <p><a href="https://m3.material.io/components/time-pickers/overview" class="external" target="_blank">Material Design time picker</a>.</p>
+              <p><a href=&quot;https://m3.material.io/components/time-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design time picker</a>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/TimePickerState.html">TimePickerState</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/TimePickerKt.html#TimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">TimePickerState</a>(int&nbsp;initialHour,&nbsp;int&nbsp;initialMinute,&nbsp;boolean&nbsp;is24Hour)</code></div>
+              <p>Factory function for the default implementation of <code><a href="/reference/androidx/compose/material3/package-summary.html#rememberTimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">TimePickerState</a></code> should be used in most cases.</p>
             </td>
           </tr>
           <tr>
@@ -97,10 +105,7 @@ val snackState = remember { SnackbarHostState() }
 val snackScope = rememberCoroutineScope()
 
 Box(propagateMinConstraints = false) {
-    Button(
-        modifier = Modifier.align(Alignment.Center),
-        onClick = { showTimePicker = true }
-    ) {
+    Button(modifier = Modifier.align(Alignment.Center), onClick = { showTimePicker = true }) {
         Text(&quot;Set Time&quot;)
     }
     SnackbarHost(hostState = snackState)
@@ -164,10 +169,11 @@ if (showTimePicker) {
           </div>
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/TimePickerKt.html#TimePicker(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors,androidx.compose.material3.TimePickerLayoutType)">TimePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/TimePickerState.html">TimePickerState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/TimePickerColors.html">TimePickerColors</a>&nbsp;colors,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/TimePickerLayoutType.html">TimePickerLayoutType</a>&nbsp;layoutType<br>)</pre>
-        <p><a href="https://m3.material.io/components/time-pickers/overview" class="external" target="_blank">Material Design time picker</a>.</p>
+        <p><a href=&quot;https://m3.material.io/components/time-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design time picker</a>.</p>
         <p>Time pickers help users select and set a specific time.</p>
         <p>Shows a picker that allows the user to select time. Subscribe to updates through <code><a href="/reference/androidx/compose/material3/TimePickerState.html">TimePickerState</a></code></p>
-        <p><img alt="Time picker image" src="https://developer.android.com/images/reference/androidx/compose/material3/time-picker.png"></p>
+        <p><img alt="Time picker
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/time-picker.png"></p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Button
@@ -190,10 +196,7 @@ val snackState = remember { SnackbarHostState() }
 val snackScope = rememberCoroutineScope()
 
 Box(propagateMinConstraints = false) {
-    Button(
-        modifier = Modifier.align(Alignment.Center),
-        onClick = { showTimePicker = true }
-    ) {
+    Button(modifier = Modifier.align(Alignment.Center), onClick = { showTimePicker = true }) {
         Text(&quot;Set Time&quot;)
     }
     SnackbarHost(hostState = snackState)
@@ -247,10 +250,7 @@ val snackScope = rememberCoroutineScope()
 val configuration = LocalConfiguration.current
 
 Box(propagateMinConstraints = false) {
-    Button(
-        modifier = Modifier.align(Alignment.Center),
-        onClick = { showTimePicker = true }
-    ) {
+    Button(modifier = Modifier.align(Alignment.Center), onClick = { showTimePicker = true }) {
         Text(&quot;Set Time&quot;)
     }
     SnackbarHost(hostState = snackState)
@@ -258,11 +258,12 @@ Box(propagateMinConstraints = false) {
 
 if (showTimePicker) {
     TimePickerDialog(
-        title = if (showingPicker.value) {
-            &quot;Select Time &quot;
-        } else {
-            &quot;Enter Time&quot;
-        },
+        title =
+            if (showingPicker.value) {
+                &quot;Select Time &quot;
+            } else {
+                &quot;Enter Time&quot;
+            },
         onCancel = { showTimePicker = false },
         onConfirm = {
             val cal = Calendar.getInstance()
@@ -277,18 +278,20 @@ if (showTimePicker) {
         toggle = {
             if (configuration.screenHeightDp &gt; 400) {
                 IconButton(onClick = { showingPicker.value = !showingPicker.value }) {
-                    val icon = if (showingPicker.value) {
-                        Icons.Outlined.Keyboard
-                    } else {
-                        Icons.Outlined.Schedule
-                    }
+                    val icon =
+                        if (showingPicker.value) {
+                            Icons.Outlined.Keyboard
+                        } else {
+                            Icons.Outlined.Schedule
+                        }
                     Icon(
                         icon,
-                        contentDescription = if (showingPicker.value) {
-                            &quot;Switch to Text Input&quot;
-                        } else {
-                            &quot;Switch to Touch Input&quot;
-                        }
+                        contentDescription =
+                            if (showingPicker.value) {
+                                &quot;Switch to Text Input&quot;
+                            } else {
+                                &quot;Switch to Touch Input&quot;
+                            }
                     )
                 }
             }
@@ -342,6 +345,48 @@ if (showTimePicker) {
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="TimePickerState(kotlin.Int, kotlin.Int, kotlin.Boolean)"></a><a name="TimePickerState-kotlin.Int-kotlin.Int-kotlin.Boolean-"></a><a name="timepickerstate"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="TimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">TimePickerState</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/TimePickerState.html">TimePickerState</a>&nbsp;<a href="/reference/androidx/compose/material3/TimePickerKt.html#TimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">TimePickerState</a>(int&nbsp;initialHour,&nbsp;int&nbsp;initialMinute,&nbsp;boolean&nbsp;is24Hour)</pre>
+        <p>Factory function for the default implementation of <code><a href="/reference/androidx/compose/material3/package-summary.html#rememberTimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">TimePickerState</a></code> should be used in most cases.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;initialHour</code></td>
+                <td>
+                  <p>starting hour for this state, will be displayed in the time picker when launched Ranges from 0 to 23</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;initialMinute</code></td>
+                <td>
+                  <p>starting minute for this state, will be displayed in the time picker when launched. Ranges from 0 to 59</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;is24Hour</code></td>
+                <td>
+                  <p>The format for this time picker. <code>false</code> for 12 hour format with an AM/PM toggle or <code>true</code> for 24 hour format without toggle. Defaults to follow system setting.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="rememberTimePickerState(kotlin.Int, kotlin.Int, kotlin.Boolean)"></a><a name="rememberTimePickerState-kotlin.Int-kotlin.Int-kotlin.Boolean-"></a><a name="remembertimepickerstate"></a>
         <div class="api-name-block">
           <div>
@@ -365,7 +410,7 @@ if (showTimePicker) {
               <tr>
                 <td><code>int&nbsp;initialHour</code></td>
                 <td>
-                  <p>starting hour for this state, will be displayed in the time picker when launched Ranges from 0 to 23</p>
+                  <p>starting hour for this state, will be displayed in the time picker when launched. Ranges from 0 to 23</p>
                 </td>
               </tr>
               <tr>

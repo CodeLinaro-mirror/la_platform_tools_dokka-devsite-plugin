@@ -10,6 +10,11 @@
       <meta itemprop="property" content="AnimatedContentScope">
       <meta itemprop="property" content="AnimatedContentTransitionScope">
       <meta itemprop="property" content="AnimatedVisibilityScope">
+      <meta itemprop="property" content="BoundsTransform">
+      <meta itemprop="property" content="SharedTransitionScope">
+      <meta itemprop="property" content="OverlayClip">
+      <meta itemprop="property" content="PlaceHolderSize">
+      <meta itemprop="property" content="ResizeMode">
       <meta itemprop="property" content="SizeTransform">
       <meta itemprop="property" content="AnimatedContentKt">
       <meta itemprop="property" content="SlideDirection">
@@ -22,6 +27,8 @@
       <meta itemprop="property" content="EnterExitTransitionKt">
       <meta itemprop="property" content="EnterTransition">
       <meta itemprop="property" content="ExitTransition">
+      <meta itemprop="property" content="SharedContentState">
+      <meta itemprop="property" content="SharedTransitionScopeKt">
       <meta itemprop="property" content="SingleValueAnimationKt">
       <meta itemprop="property" content="SplineBasedDecayKt">
       <meta itemprop="property" content="SplineBasedFloatDecayAnimationSpec">
@@ -30,13 +37,17 @@
       <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="Companion">
+      <meta itemprop="property" content="Companion">
+      <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="ExperimentalAnimationApi">
+      <meta itemprop="property" content="ExperimentalSharedTransitionApi">
       <meta itemprop="property" content="Animatable(androidx.compose.ui.graphics.Color)">
       <meta itemprop="property" content="AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.String,kotlin.Function1,kotlin.Function2)">
-      <meta itemprop="property" content="AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Boolean,kotlin.Function0)">
       <meta itemprop="property" content="AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="AnimatedVisibility(androidx.compose.animation.core.MutableTransitionState,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="Crossfade(kotlin.Any,androidx.compose.ui.Modifier,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.String,kotlin.Function1)">
+      <meta itemprop="property" content="SharedTransitionLayout(androidx.compose.ui.Modifier,kotlin.Function1)">
+      <meta itemprop="property" content="SharedTransitionScope(kotlin.Function2)">
       <meta itemprop="property" content="SizeTransform(kotlin.Boolean,kotlin.Function2)">
       <meta itemprop="property" content="animateColorAsState(androidx.compose.ui.graphics.Color,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="defaultDecayAnimationSpec()">
@@ -70,6 +81,7 @@
       <meta itemprop="property" content="(androidx.compose.foundation.layout.RowScope).AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.foundation.layout.RowScope).AnimatedVisibility(androidx.compose.animation.core.MutableTransitionState,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,kotlin.Function2)">
       <meta itemprop="property" content="(androidx.compose.ui.graphics.Color.Companion).VectorConverter()">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -92,6 +104,10 @@
         <tbody class="list">
           <tr>
             <td><code><a href="/reference/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/ExperimentalSharedTransitionApi.html">ExperimentalSharedTransitionApi</a></code></td>
             <td></td>
           </tr>
         </tbody>
@@ -121,6 +137,36 @@
             <td><code><a href="/reference/androidx/compose/animation/AnimatedVisibilityScope.html">AnimatedVisibilityScope</a></code></td>
             <td>
               <p>This is the scope for the content of <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/BoundsTransform.html">BoundsTransform</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/animation/BoundsTransform.html">BoundsTransform</a></code> defines the animation spec used to animate from initial bounds to the target bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a></code> provides a coordinator space in which shared elements/ shared bounds (when matched) will transform their bounds from one to another.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.OverlayClip.html">SharedTransitionScope.OverlayClip</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.OverlayClip.html">OverlayClip</a></code> defines a specific clipping that should be applied to a <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code> or <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedElement(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedElement</a></code> in the overlay.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.PlaceHolderSize.html">SharedTransitionScope.PlaceHolderSize</a></code></td>
+            <td>
+              <p>PlaceHolderSize defines the size of the space that was or will be occupied by the exiting or entering <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedElement(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedElement</a></code>/<code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.html">SharedTransitionScope.ResizeMode</a></code></td>
+            <td>
+              <p>There are two different modes to resize child layout of <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code> during bounds transform: 1) <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html#ScaleToBounds(androidx.compose.ui.layout.ContentScale,androidx.compose.ui.Alignment)">ScaleToBounds</a></code> and 2) <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html#RemeasureToBounds()">RemeasureToBounds</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -193,6 +239,16 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.SharedContentState.html">SharedTransitionScope.SharedContentState</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.SharedContentState.html">SharedContentState</a></code> is designed to allow access of the properties of <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code>/<code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedElement(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedElement</a></code>, such as whether a match of the same <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.SharedContentState.html#(kotlin.Any)">key</a></code> has been found in the <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a></code>, its <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.SharedContentState.html#clipPathInOverlay()">clipPathInOverlay</a></code> and <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.SharedContentState.html#parentSharedContentState()">parentSharedContentState</a></code> if there is a parent <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code> in the layout tree.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/SharedTransitionScopeKt.html">SharedTransitionScopeKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/androidx/compose/animation/SingleValueAnimationKt.html">SingleValueAnimationKt</a></code></td>
             <td></td>
           </tr>
@@ -220,6 +276,14 @@
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/compose/animation/ExitTransition.Companion.html">ExitTransition.Companion</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.PlaceHolderSize.Companion.html">SharedTransitionScope.PlaceHolderSize.Companion</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html">SharedTransitionScope.ResizeMode.Companion</a></code></td>
             <td></td>
           </tr>
         </tbody>

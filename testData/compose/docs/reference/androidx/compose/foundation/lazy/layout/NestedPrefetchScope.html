@@ -1,0 +1,133 @@
+<html devsite="true">
+  <head>
+    <title>NestedPrefetchScope</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="NestedPrefetchScope">
+      <meta itemprop="path" content="androidx.compose.foundation.lazy.layout">
+      <meta itemprop="property" content="schedulePrefetch(kotlin.Int)">
+      <meta itemprop="property" content="schedulePrefetch(kotlin.Int,androidx.compose.ui.unit.Constraints)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>NestedPrefetchScope</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.kt+class:androidx.compose.foundation.lazy.layout.NestedPrefetchScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public sealed interface <a href="/reference/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html">NestedPrefetchScope</a></pre>
+    </p>
+    <hr>
+    <p>A scope which allows nested prefetches to be requested for the precomposition of a LazyLayout.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html#schedulePrefetch(kotlin.Int)">schedulePrefetch</a>(int&nbsp;index)</code></div>
+              <p>Requests a child index to be prefetched as part of the prefetch of a parent LazyLayout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html#schedulePrefetch(kotlin.Int,androidx.compose.ui.unit.Constraints)">schedulePrefetch</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints)</code></div>
+              <p>Requests a child index to be prefetched as part of the prefetch of a parent LazyLayout.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="schedulePrefetch-kotlin.Int-"></a><a name="scheduleprefetch"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="schedulePrefetch(kotlin.Int)">schedulePrefetch</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html#schedulePrefetch(kotlin.Int)">schedulePrefetch</a>(int&nbsp;index)</pre>
+        <p>Requests a child index to be prefetched as part of the prefetch of a parent LazyLayout.</p>
+        <p>The prefetch will only do the precomposition for the new item. If you also want to premeasure please use a second overload accepting a <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> param.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;index</code></td>
+                <td>
+                  <p>item index to prefetch.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="schedulePrefetch(kotlin.Int, androidx.compose.ui.unit.Constraints)"></a><a name="schedulePrefetch-kotlin.Int-androidx.compose.ui.unit.Constraints-"></a><a name="scheduleprefetch"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="schedulePrefetch(kotlin.Int,androidx.compose.ui.unit.Constraints)">schedulePrefetch</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html#schedulePrefetch(kotlin.Int,androidx.compose.ui.unit.Constraints)">schedulePrefetch</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints)</pre>
+        <p>Requests a child index to be prefetched as part of the prefetch of a parent LazyLayout.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;index</code></td>
+                <td>
+                  <p>the index of the child to prefetch.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints</code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> to use for premeasuring. If null, the child will not be premeasured.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

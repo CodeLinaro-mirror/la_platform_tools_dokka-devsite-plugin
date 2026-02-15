@@ -16,7 +16,7 @@
         <h1>PageSize</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/pager/Pager.kt+class:androidx.compose.foundation.pager.PageSize&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/pager/PageSize.kt+class:androidx.compose.foundation.pager.PageSize&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
 
@@ -30,7 +30,7 @@
           <li>
             <div class="kotlin-platform" data-title="Common/All">Cmn</div>
             <!--platform-Common/All-->
-            <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html">PageSize</a></pre>
+            <pre>interface <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html">PageSize</a></pre>
           </li>
         </ul>
       </div>
@@ -64,7 +64,7 @@
       </div>
 </devsite-expandable>    </div>
     <hr>
-    <p>This is used to determine how Pages are laid out in <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code>. By changing the size of the pages one can change how many pages are shown.</p>
+    <p>This is used to determine how Pages are laid out in <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">Pager</a></code>. By changing the size of the pages one can change how many pages are shown.</p>
     <p>Please refer to the sample to learn how to use this API.</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
@@ -75,6 +75,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
@@ -131,13 +132,13 @@ HorizontalPager(
         <tbody class="list">
           <tr>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>object <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.Fill.html">PageSize.Fill</a> : <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html">PageSize</a></code></div>
+              <div><code>object <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.Fill.html">PageSize.Fill</a> : <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html">PageSize</a></code></div>
               <p>Pages take up the whole Pager size.</p>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>class <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.Fixed.html">PageSize.Fixed</a> : <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html">PageSize</a></code></div>
+              <div><code>class <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.Fixed.html">PageSize.Fixed</a> : <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html">PageSize</a></code></div>
               <p>Multiple pages in a viewport</p>
             </td>
           </tr>
@@ -203,13 +204,13 @@ HorizontalPager(
                 <tr>
                   <td><code>availableSpace:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
                   <td>
-                    <p>The amount of space the pages in this Pager can use.</p>
+                    <p>The amount of space in pixels the pages in this Pager can use.</p>
                   </td>
                 </tr>
                 <tr>
                   <td><code>pageSpacing:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
                   <td>
-                    <p>The amount of space used to separate pages.</p>
+                    <p>The amount of space in pixels used to separate pages.</p>
                   </td>
                 </tr>
               </tbody>

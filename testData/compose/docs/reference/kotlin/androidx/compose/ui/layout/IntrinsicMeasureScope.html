@@ -37,7 +37,7 @@
       </div>
     </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachIntrinsicMeasureScope.html">ApproachIntrinsicMeasureScope</a>, <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -47,6 +47,12 @@
               <col>
             </colgroup>
             <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachIntrinsicMeasureScope.html">ApproachIntrinsicMeasureScope</a></code></td>
+                <td>
+                  <p>The receiver scope of a layout's intrinsic approach measurements lambdas.</p>
+                </td>
+              </tr>
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a></code></td>
                 <td>
@@ -59,7 +65,7 @@
       </div>
 </devsite-expandable>    </div>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
-        <div class="showalways" id="subclasses-indirect"><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a>, <a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>, <a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a>, <a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a></div>
+        <div class="showalways" id="subclasses-indirect"><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a>, <a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>, <a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a></div>
       </span>
       <div id="subclasses-indirect-summary">
         <div class="devsite-table-wrapper">
@@ -70,21 +76,15 @@
             </colgroup>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a></code></td>
                 <td>
-                  <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> provides access to lookahead results to allow <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to leverage lookahead results to define intermediate measurements and placements to gradually converge with lookahead.</p>
+                  <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a></code> provides access to lookahead results to allow <code><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachLayoutModifierNode.html">ApproachLayoutModifierNode</a></code> to leverage lookahead results to define how measurements and placements approach their destination.</p>
                 </td>
               </tr>
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a></code></td>
                 <td>
                   <p>The receiver scope of a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code>'s measure lambda.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a></code></td>
-                <td>
-                  <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a></code> is the receiver scope for the intermediate measurer policy that gets invoked during the intermediate measure pass.</p>
                 </td>
               </tr>
               <tr>
@@ -118,7 +118,7 @@
             <tr>
               <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a></code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a></code></div>
                 <p>This indicates whether the ongoing measurement is for lookahead pass.</p>
               </td>
               <td>
@@ -173,16 +173,6 @@
                         <td>
                           <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>()</code></div>
                           <p>Convert Sp to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
-                        </td>
-                        <td>
-                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                          <!--platform-Common/All--></td>
-                      </tr>
-                      <tr>
-                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
-                        <td>
-                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>()</code></div>
-                          <p>Convert Sp to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
                         </td>
                         <td>
                           <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -261,16 +251,6 @@
                       <tr>
                         <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                         <td>
-                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>()</code></div>
-                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
-                        </td>
-                        <td>
-                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                          <!--platform-Common/All--></td>
-                      </tr>
-                      <tr>
-                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
-                        <td>
                           <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>()</code></div>
                           <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
                         </td>
@@ -283,6 +263,43 @@
                         <td>
                           <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>()</code></div>
                           <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html">androidx.compose.ui.unit.FontScaling</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>()</code></div>
+                          <p>Convert Sp to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
                         </td>
                         <td>
                           <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -326,10 +343,27 @@
                           <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                           <!--platform-Common/All--></td>
                       </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html">androidx.compose.ui.unit.FontScaling</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
                       <tr>
                         <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
                         <td>
-                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#fontScale()">fontScale</a></code></div>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html#fontScale()">fontScale</a></code></div>
                           <p>Current user preference for the scaling factor for fonts.</p>
                         </td>
                         <td>
@@ -359,7 +393,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>This indicates whether the ongoing measurement is for lookahead pass. <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a></code> implementations, especially <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a></code> implementations should override this flag to reflect whether the measurement is intended for lookahead pass.</p>
           <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable

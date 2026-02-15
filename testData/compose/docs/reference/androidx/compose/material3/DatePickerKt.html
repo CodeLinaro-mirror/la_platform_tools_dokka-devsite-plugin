@@ -43,7 +43,7 @@
             <td><code>static&nbsp;final void</code></td>
             <td>
               <div><code>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/material3/DatePickerKt.html#DatePicker(androidx.compose.material3.DatePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.DatePickerFormatter,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.DatePickerColors)">DatePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerState.html">DatePickerState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerFormatter.html">DatePickerFormatter</a>&nbsp;dateFormatter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;title,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;headline,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;showModeToggle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerColors.html">DatePickerColors</a>&nbsp;colors<br>)</code></div>
-              <p><a href="https://m3.material.io/components/date-pickers/overview" class="external" target="_blank">Material Design date picker</a>.</p>
+              <p><a href=&quot;https://m3.material.io/components/date-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design date picker</a>.</p>
             </td>
           </tr>
           <tr>
@@ -72,10 +72,11 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/DatePickerKt.html#DatePicker(androidx.compose.material3.DatePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.DatePickerFormatter,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.DatePickerColors)">DatePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerState.html">DatePickerState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerFormatter.html">DatePickerFormatter</a>&nbsp;dateFormatter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;title,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;headline,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;showModeToggle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerColors.html">DatePickerColors</a>&nbsp;colors<br>)</pre>
-        <p><a href="https://m3.material.io/components/date-pickers/overview" class="external" target="_blank">Material Design date picker</a>.</p>
+        <p><a href=&quot;https://m3.material.io/components/date-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design date picker</a>.</p>
         <p>Date pickers let people select a date and preferably should be embedded into Dialogs. See DatePickerDialog.</p>
         <p>By default, a date picker lets you pick a date via a calendar UI. However, it also allows switching into a date input mode for a manual entry of dates using the numbers on a keyboard.</p>
-        <p><img alt="Date picker image" src="https://developer.android.com/images/reference/androidx/compose/material3/date-picker.png"></p>
+        <p><img alt="Date picker
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/date-picker.png"></p>
         <p>A simple DatePicker looks like:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Arrangement
@@ -135,28 +136,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-val datePickerState = rememberDatePickerState(
-    selectableDates = object : SelectableDates {
-        // Blocks Sunday and Saturday from being selected.
-        override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-            return if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {
-                val dayOfWeek = Instant.ofEpochMilli(utcTimeMillis).atZone(ZoneId.of(&quot;UTC&quot;))
-                    .toLocalDate().dayOfWeek
-                dayOfWeek != DayOfWeek.SUNDAY &amp;&amp; dayOfWeek != DayOfWeek.SATURDAY
-            } else {
-                val calendar = Calendar.getInstance(TimeZone.getTimeZone(&quot;UTC&quot;))
-                calendar.timeInMillis = utcTimeMillis
-                calendar[Calendar.DAY_OF_WEEK] != Calendar.SUNDAY &amp;&amp;
-                    calendar[Calendar.DAY_OF_WEEK] != Calendar.SATURDAY
-            }
-        }
+val datePickerState =
+    rememberDatePickerState(
+        selectableDates =
+            object : SelectableDates {
+                // Blocks Sunday and Saturday from being selected.
+                override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                    return if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {
+                        val dayOfWeek =
+                            Instant.ofEpochMilli(utcTimeMillis)
+                                .atZone(ZoneId.of(&quot;UTC&quot;))
+                                .toLocalDate()
+                                .dayOfWeek
+                        dayOfWeek != DayOfWeek.SUNDAY &amp;&amp; dayOfWeek != DayOfWeek.SATURDAY
+                    } else {
+                        val calendar = Calendar.getInstance(TimeZone.getTimeZone(&quot;UTC&quot;))
+                        calendar.timeInMillis = utcTimeMillis
+                        calendar[Calendar.DAY_OF_WEEK] != Calendar.SUNDAY &amp;&amp;
+                            calendar[Calendar.DAY_OF_WEEK] != Calendar.SATURDAY
+                    }
+                }
 
-        // Allow selecting dates from year 2023 forward.
-        override fun isSelectableYear(year: Int): Boolean {
-            return year &gt; 2022
-        }
-    }
-)
+                // Allow selecting dates from year 2023 forward.
+                override fun isSelectableYear(year: Int): Boolean {
+                    return year &gt; 2022
+                }
+            }
+    )
 
 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
     DatePicker(state = datePickerState)

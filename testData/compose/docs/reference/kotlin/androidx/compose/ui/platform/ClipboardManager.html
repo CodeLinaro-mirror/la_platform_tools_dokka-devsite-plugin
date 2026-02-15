@@ -8,9 +8,12 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="ClipboardManager">
       <meta itemprop="path" content="androidx.compose.ui.platform">
+      <meta itemprop="property" content="getClip()">
       <meta itemprop="property" content="getText()">
       <meta itemprop="property" content="hasText()">
+      <meta itemprop="property" content="setClip(androidx.compose.ui.platform.ClipEntry)">
       <meta itemprop="property" content="setText(androidx.compose.ui.text.AnnotatedString)">
+      <meta itemprop="property" content="nativeClipboard()">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -55,6 +58,16 @@
           </thead>
           <tbody class="list">
             <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a>?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#getClip()">getClip</a>()</code></div>
+                <p>Returns the clipboard entry that's provided by the platform's ClipboardManager.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>?</code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#getText()">getText</a>()</code></div>
@@ -75,6 +88,16 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#setClip(androidx.compose.ui.platform.ClipEntry)">setClip</a>(clipEntry:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a>?)</code></div>
+                <p>Puts the given <code><a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#setClip(androidx.compose.ui.platform.ClipEntry)">clipEntry</a></code> in platform's ClipboardManager.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#setText(androidx.compose.ui.text.AnnotatedString)">setText</a>(annotatedString:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>)</code></div>
@@ -88,10 +111,53 @@
         </table>
       </devsite-filter >
     </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/platform/NativeClipboard.html">NativeClipboard</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#nativeClipboard()">nativeClipboard</a></code></div>
+                <p>Returns the native clipboard that exposes the full functionality of platform clipboard.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
     <devsite-filter  select-el-container-id="platform">
       <div class="list">
         <h2 data-title="platform-Common/All">Public functions
           <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getClip--"></a><a name="getclip"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="getClip()">getClip</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#getClip()">getClip</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a>?</pre>
+          <p>Returns the clipboard entry that's provided by the platform's ClipboardManager.</p>
+          <p>This item can include arbitrary content like images, videos, or any data that may be provided through a mediator. Returned entry may contain multiple items with different types.</p>
+          <p>It's safe to call this function without triggering Clipboard access warnings on mobile platforms.</p>
+        </div>
         <div class="api-item"><a name="getText--"></a><a name="gettext"></a>
           <div class="api-name-block">
             <div>
@@ -139,6 +205,40 @@
           <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#hasText()">hasText</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>This method returns true if there is a text in the Clipboard, false otherwise.</p>
         </div>
+        <div class="api-item"><a name="setClip-androidx.compose.ui.platform.ClipEntry-"></a><a name="setclip"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="setClip(androidx.compose.ui.platform.ClipEntry)">setClip</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#setClip(androidx.compose.ui.platform.ClipEntry)">setClip</a>(clipEntry:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a>?):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Puts the given <code><a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#setClip(androidx.compose.ui.platform.ClipEntry)">clipEntry</a></code> in platform's ClipboardManager.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>clipEntry:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a>?</code></td>
+                  <td>
+                    <p>Platform specific clip object that either holds data or links to it. Pass null to clear the clipboard.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div class="api-item"><a name="setText-androidx.compose.ui.text.AnnotatedString-"></a><a name="settext"></a>
           <div class="api-name-block">
             <div>
@@ -167,6 +267,46 @@
                   <td><code>annotatedString:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
                   <td>
                     <p>The <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code> to be put into Clipboard.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public properties
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getNativeClipboard()"></a><a name="setNativeClipboard()"></a><a name="getNativeClipboard--"></a><a name="setNativeClipboard--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="nativeClipboard()">nativeClipboard</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ClipboardManager.html#nativeClipboard()">nativeClipboard</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/NativeClipboard.html">NativeClipboard</a></pre>
+          <p>Returns the native clipboard that exposes the full functionality of platform clipboard.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unsupported-operation-exception/index.html">UnsupportedOperationException</a></code></td>
+                  <td>
+                    <p>If the current platform does not offer a native Clipboard interface.</p>
                   </td>
                 </tr>
               </tbody>

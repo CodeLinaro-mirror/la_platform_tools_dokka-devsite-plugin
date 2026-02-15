@@ -17,6 +17,7 @@
       <meta itemprop="property" content="Previous()">
       <meta itemprop="property" content="Search()">
       <meta itemprop="property" content="Send()">
+      <meta itemprop="property" content="Unspecified()">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -64,7 +65,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Default()">Default</a></code></div>
-                <p>Use the platform and keyboard defaults and let the keyboard to decide the action.</p>
+                <p>Use the platform and keyboard defaults and let the keyboard decide the action it is going to show.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -140,6 +141,16 @@
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
             </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Unspecified()">Unspecified</a></code></div>
+                <p>The action is not specified.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
           </tbody>
         </table>
       </devsite-filter >
@@ -186,7 +197,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Default()">Default</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></pre>
-          <p>Use the platform and keyboard defaults and let the keyboard to decide the action. The keyboards will mostly show one of <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Done()">Done</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#None()">None</a></code> actions based on the single/multi line configuration.</p>
+          <p>Use the platform and keyboard defaults and let the keyboard decide the action it is going to show. The keyboards will mostly show one of <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Done()">Done</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#None()">None</a></code> actions based on the single/multi line configuration. This action will never be sent as the performed action to IME action callbacks.</p>
         </div>
         <div class="api-item"><a name="getDone()"></a><a name="setDone()"></a><a name="getDone--"></a><a name="setDone--"></a>
           <div class="api-name-block">
@@ -238,7 +249,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#None()">None</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></pre>
-          <p>Represents that no action is expected from the keyboard. Keyboard might choose to show an action which mostly will be newline, however this action is not carried into the app via any androidx.compose.foundation.text.KeyboardAction.</p>
+          <p>Represents that no action is expected from the keyboard. Keyboard might choose to show an action which mostly will be newline, however this action will never be sent as the performed action to IME action callbacks.</p>
         </div>
         <div class="api-item"><a name="getPrevious()"></a><a name="setPrevious()"></a><a name="getPrevious--"></a><a name="setPrevious--"></a>
           <div class="api-name-block">
@@ -278,6 +289,19 @@
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Send()">Send</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></pre>
           <p>Represents that the user wants to send the text in the input, i.e. an SMS.</p>
+        </div>
+        <div class="api-item"><a name="getUnspecified()"></a><a name="setUnspecified()"></a><a name="getUnspecified--"></a><a name="setUnspecified--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="Unspecified()">Unspecified</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Unspecified()">Unspecified</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></pre>
+          <p>The action is not specified. This defaults to <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Default()">Default</a></code>, which explicitly requests the platform and keyboard to make the decision, but <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Default()">Default</a></code> will take precedence when merging <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code>s.</p>
         </div>
       </div>
     </devsite-filter >

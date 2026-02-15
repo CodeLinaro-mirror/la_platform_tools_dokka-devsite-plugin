@@ -1,0 +1,329 @@
+<html devsite="true">
+  <head>
+    <title>BringIntoViewSpec</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="BringIntoViewSpec">
+      <meta itemprop="path" content="androidx.compose.foundation.gestures">
+      <meta itemprop="property" content="calculateScrollDistance(kotlin.Float,kotlin.Float,kotlin.Float)">
+      <meta itemprop="property" content="scrollAnimationSpec()">
+      <meta itemprop="property" content="DefaultScrollAnimationSpec()">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>BringIntoViewSpec</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/gestures/BringIntoViewSpec.kt+class:androidx.compose.foundation.gestures.BringIntoViewSpec&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/gestures/BringIntoViewSpec.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/gestures/BringIntoViewSpec.html">BringIntoViewSpec</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>The configuration of how a scrollable reacts to bring into view requests.</p>
+    <p>Note: API shape and naming are still being refined, therefore API is marked as experimental.</p>
+    <p>Check the following sample for a use case usage of this API:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.gestures.BringIntoViewSpec
+import androidx.compose.foundation.gestures.LocalBringIntoViewSpec
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Text
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+// a bring into view spec that pivots around the center of the scrollable container
+val customBringIntoViewSpec = object : BringIntoViewSpec {
+    val customAnimationSpec = tween&lt;Float&gt;(easing = LinearEasing)
+    override val scrollAnimationSpec: AnimationSpec&lt;Float&gt;
+        get() = customAnimationSpec
+
+    override fun calculateScrollDistance(
+        offset: Float,
+        size: Float,
+        containerSize: Float
+    ): Float {
+        val trailingEdgeOfItemRequestingFocus = offset + size
+
+        val sizeOfItemRequestingFocus =
+            abs(trailingEdgeOfItemRequestingFocus - offset)
+        val childSmallerThanParent = sizeOfItemRequestingFocus &lt;= containerSize
+        val initialTargetForLeadingEdge =
+            containerSize / 2f - (sizeOfItemRequestingFocus / 2f)
+        val spaceAvailableToShowItem = containerSize - initialTargetForLeadingEdge
+
+        val targetForLeadingEdge =
+            if (childSmallerThanParent &amp;&amp;
+                spaceAvailableToShowItem &lt; sizeOfItemRequestingFocus
+            ) {
+                containerSize - sizeOfItemRequestingFocus
+            } else {
+                initialTargetForLeadingEdge
+            }
+
+        return offset - targetForLeadingEdge
+    }
+}
+
+// LocalBringIntoViewSpec will apply to all scrollables in the hierarchy.
+CompositionLocalProvider(LocalBringIntoViewSpec provides customBringIntoViewSpec) {
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        items(100) {
+            var color by remember { mutableStateOf(Color.White) }
+            Box(
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(4.dp)
+                    .background(Color.Gray)
+                    .onFocusChanged {
+                        color = if (it.isFocused) Color.Red else Color.White
+                    }
+                    .border(5.dp, color)
+                    .focusable(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = it.toString())
+            }
+        }
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public companion properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/BringIntoViewSpec.html#DefaultScrollAnimationSpec()">DefaultScrollAnimationSpec</a></code></div>
+                <p>The default animation spec used by <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">Modifier.scrollable</a></code> to run Bring Into View requests.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/BringIntoViewSpec.html#calculateScrollDistance(kotlin.Float,kotlin.Float,kotlin.Float)">calculateScrollDistance</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;size:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;containerSize:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Calculate the offset needed to bring one of the scrollable container's child into view.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/BringIntoViewSpec.html#scrollAnimationSpec()">scrollAnimationSpec</a></code></div>
+                <p>An Animation Spec to be used as the animation to run to fulfill the BringIntoView requests.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public companion properties
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getDefaultScrollAnimationSpec()"></a><a name="setDefaultScrollAnimationSpec()"></a><a name="getDefaultScrollAnimationSpec--"></a><a name="setDefaultScrollAnimationSpec--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="DefaultScrollAnimationSpec()">DefaultScrollAnimationSpec</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/BringIntoViewSpec.html#DefaultScrollAnimationSpec()">DefaultScrollAnimationSpec</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</pre>
+          <p>The default animation spec used by <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">Modifier.scrollable</a></code> to run Bring Into View requests.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="calculateScrollDistance(kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="calculateScrollDistance-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="calculatescrolldistance"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="calculateScrollDistance(kotlin.Float,kotlin.Float,kotlin.Float)">calculateScrollDistance</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/BringIntoViewSpec.html#calculateScrollDistance(kotlin.Float,kotlin.Float,kotlin.Float)">calculateScrollDistance</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;size:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;containerSize:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Calculate the offset needed to bring one of the scrollable container's child into view. This will be called for every frame of the scrolling animation. This means that, as the animation progresses, the offset will naturally change to fulfill the scroll request.</p>
+          <p>All distances below are represented in pixels.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>offset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>from the side closest to the start of the container.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>size:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>is the child size.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>containerSize:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>Is the main axis size of the scrollable container.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The necessary amount to scroll to satisfy the bring into view request. Returning zero from here means that the request was satisfied and the scrolling animation should stop.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public properties
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getScrollAnimationSpec()"></a><a name="setScrollAnimationSpec()"></a><a name="getScrollAnimationSpec--"></a><a name="setScrollAnimationSpec--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="scrollAnimationSpec()">scrollAnimationSpec</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/BringIntoViewSpec.html#scrollAnimationSpec()">scrollAnimationSpec</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</pre>
+          <p>An Animation Spec to be used as the animation to run to fulfill the BringIntoView requests.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

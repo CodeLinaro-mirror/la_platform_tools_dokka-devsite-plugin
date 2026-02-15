@@ -134,7 +134,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#steps()">steps</a></code></div>
-                <p>if greater than 0, specifies the amounts of discrete values, evenly distributed between across the whole value range.</p>
+                <p>if positive, specifies the amount of discrete allowable values (in addition to the endpoints of the value range).</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -200,7 +200,7 @@
                 <tr>
                   <td><code>steps:&nbsp;@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
                   <td>
-                    <p>if greater than 0, specifies the amounts of discrete values, evenly distributed between across the whole value range. If 0, range slider will behave as a continuous slider and allow to choose any value from the range specified. Must not be negative.</p>
+                    <p>if positive, specifies the amount of discrete allowable values (in addition to the endpoints of the value range). Step values are evenly distributed across the range. If 0, the slider will behave continuously and allow any value from the range. Must not be negative.</p>
                   </td>
                 </tr>
                 <tr>
@@ -319,7 +319,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/SliderState.html#onValueChangeFinished()">onValueChangeFinished</a>:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?</pre>
+          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/material3/SliderState.html#onValueChangeFinished()">onValueChangeFinished</a>:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?</pre>
           <p>lambda to be invoked when value change has ended. This callback shouldn't be used to update the range slider values (use <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#onValueChange()">onValueChange</a></code> for that), but rather to know when the user has completed selecting a new value by ending a drag or a click.</p>
         </div>
         <div class="api-item"><a name="getSteps()"></a><a name="setSteps()"></a><a name="getSteps--"></a><a name="setSteps--"></a>
@@ -333,7 +333,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/SliderState.html#steps()">steps</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
-          <p>if greater than 0, specifies the amounts of discrete values, evenly distributed between across the whole value range. If 0, range slider will behave as a continuous slider and allow to choose any value from the range specified. Must not be negative.</p>
+          <p>if positive, specifies the amount of discrete allowable values (in addition to the endpoints of the value range). Step values are evenly distributed across the range. If 0, the slider will behave continuously and allow any value from the range. Must not be negative.</p>
         </div>
         <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
           <div class="api-name-block">

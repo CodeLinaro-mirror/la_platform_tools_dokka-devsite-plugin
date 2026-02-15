@@ -1,0 +1,259 @@
+<html devsite="true">
+  <head>
+    <title>PlatformTextInputModifierNode</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="PlatformTextInputModifierNode">
+      <meta itemprop="path" content="androidx.compose.ui.platform">
+      <meta itemprop="property" content="(androidx.compose.ui.platform.PlatformTextInputModifierNode).establishTextInputSession(kotlin.coroutines.SuspendFunction1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>PlatformTextInputModifierNode</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/platform/PlatformTextInputModifierNode.kt+class:androidx.compose.ui.platform.PlatformTextInputModifierNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/platform/PlatformTextInputModifierNode.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputModifierNode.html">PlatformTextInputModifierNode</a> : <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>A modifier node that can connect to the platform's text input IME system. To initiate a text input session, call <code><a href="/reference/kotlin/androidx/compose/ui/platform/package-summary.html#(androidx.compose.ui.platform.PlatformTextInputModifierNode).establishTextInputSession(kotlin.coroutines.SuspendFunction1)">establishTextInputSession</a></code>.</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusEventModifierNode
+import androidx.compose.ui.focus.FocusState
+import androidx.compose.ui.platform.PlatformTextInputMethodRequest
+import androidx.compose.ui.platform.PlatformTextInputModifierNode
+import androidx.compose.ui.platform.PlatformTextInputSession
+import androidx.compose.ui.platform.establishTextInputSession
+
+class PlatformTextInputModifierNodeSample : Modifier.Node(),
+    FocusEventModifierNode,
+    PlatformTextInputModifierNode {
+
+    private var focusedJob: Job? = null
+
+    override fun onFocusEvent(focusState: FocusState) {
+        focusedJob?.cancel()
+        focusedJob = if (focusState.isFocused) {
+            // establishTextInputSession is a suspend function, so it must be called from a
+            // coroutine. Launching it into this modifier node's coroutine scope ensures the
+            // session will automatically be torn down when the node is detached.
+            coroutineScope.launch {
+                // This will automatically cancel any currently-active session.
+                establishTextInputSession {
+                    launch {
+                        // TODO: Observe text field state, call into system to update it as
+                        //  required by the platform.
+                    }
+
+                    // Call out to a platform-specific expect/actual function to create the
+                    // platform-specific request.
+                    val request: PlatformTextInputMethodRequest = createInputRequest()
+                    startInputMethod(request)
+                }
+            }
+        } else {
+            null
+        }
+    }
+
+    // This would probably be an expect/actual function.
+    private fun PlatformTextInputSession.createInputRequest(): PlatformTextInputMethodRequest {
+        TODO(&quot;Create platform-specific request&quot;)
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-nothing/index.html">Nothing</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputModifierNode.html">PlatformTextInputModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputModifierNode.html#(androidx.compose.ui.platform.PlatformTextInputModifierNode).establishTextInputSession(kotlin.coroutines.SuspendFunction1)">establishTextInputSession</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputSessionScope.html">PlatformTextInputSessionScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-nothing/index.html">Nothing</a><br>)</code></div>
+                <p>Starts a new text input session and suspends until the session is closed.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">androidx.compose.ui.node.DelegatableNode</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
+                          <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Extension functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="-androidx.compose.ui.platform.PlatformTextInputModifierNode-.establishTextInputSession-kotlin.coroutines.SuspendFunction1-"></a><a name="establishtextinputsession"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.platform.PlatformTextInputModifierNode).establishTextInputSession(kotlin.coroutines.SuspendFunction1)">establishTextInputSession</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputModifierNode.html">PlatformTextInputModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputModifierNode.html#(androidx.compose.ui.platform.PlatformTextInputModifierNode).establishTextInputSession(kotlin.coroutines.SuspendFunction1)">establishTextInputSession</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputSessionScope.html">PlatformTextInputSessionScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-nothing/index.html">Nothing</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-nothing/index.html">Nothing</a></pre>
+          <p>Starts a new text input session and suspends until the session is closed.</p>
+          <p>The <code><a href="/reference/kotlin/androidx/compose/ui/platform/package-summary.html#(androidx.compose.ui.platform.PlatformTextInputModifierNode).establishTextInputSession(kotlin.coroutines.SuspendFunction1)">block</a></code> function must call <code><a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputSession.html#startInputMethod(androidx.compose.ui.platform.PlatformTextInputMethodRequest)">PlatformTextInputSession.startInputMethod</a></code> to actually show and initiate the connection with the input method. If it does not, the session will end when this function returns without showing the input method.</p>
+          <p>If this function is called while another session is active, the sessions will not overlap. The new session will interrupt the old one, which will be cancelled and allowed to finish running any cancellation tasks (e.g. <code>finally</code> blocks) before running the new <code><a href="/reference/kotlin/androidx/compose/ui/platform/package-summary.html#(androidx.compose.ui.platform.PlatformTextInputModifierNode).establishTextInputSession(kotlin.coroutines.SuspendFunction1)">block</a></code> function.</p>
+          <p>The session will be closed when:</p>
+          <ul>
+            <li>
+              <p>The session function throws an exception.</p>
+            </li>
+            <li>
+              <p>The requesting coroutine is cancelled.</p>
+            </li>
+            <li>
+              <p>Another session is started via this method, either from the same modifier or a different one.</p>
+            </li>
+          </ul>
+          <p>The session may remain open when:</p>
+          <ul>
+            <li>
+              <p>The system closes the connection. This behavior currently only exists on Android depending on OS version. Android platform may intermittently close the active connection to immediately start it back again. In these cases the session will not be prematurely closed, so that it can serve the follow-up requests.</p>
+            </li>
+          </ul>
+          <p>This function should only be called from the modifier node's <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html#coroutineScope()">coroutineScope</a></code>. If it is not, the session will <em>not</em> automatically be closed if the modifier is detached.</p>
+          <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusEventModifierNode
+import androidx.compose.ui.focus.FocusState
+import androidx.compose.ui.platform.PlatformTextInputMethodRequest
+import androidx.compose.ui.platform.PlatformTextInputModifierNode
+import androidx.compose.ui.platform.PlatformTextInputSession
+import androidx.compose.ui.platform.establishTextInputSession
+
+class PlatformTextInputModifierNodeSample : Modifier.Node(),
+    FocusEventModifierNode,
+    PlatformTextInputModifierNode {
+
+    private var focusedJob: Job? = null
+
+    override fun onFocusEvent(focusState: FocusState) {
+        focusedJob?.cancel()
+        focusedJob = if (focusState.isFocused) {
+            // establishTextInputSession is a suspend function, so it must be called from a
+            // coroutine. Launching it into this modifier node's coroutine scope ensures the
+            // session will automatically be torn down when the node is detached.
+            coroutineScope.launch {
+                // This will automatically cancel any currently-active session.
+                establishTextInputSession {
+                    launch {
+                        // TODO: Observe text field state, call into system to update it as
+                        //  required by the platform.
+                    }
+
+                    // Call out to a platform-specific expect/actual function to create the
+                    // platform-specific request.
+                    val request: PlatformTextInputMethodRequest = createInputRequest()
+                    startInputMethod(request)
+                }
+            }
+        } else {
+            null
+        }
+    }
+
+    // This would probably be an expect/actual function.
+    private fun PlatformTextInputSession.createInputRequest(): PlatformTextInputMethodRequest {
+        TODO(&quot;Create platform-specific request&quot;)
+    }
+}</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputSessionScope.html">PlatformTextInputSessionScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-nothing/index.html">Nothing</a></code></td>
+                  <td>
+                    <p>A suspend function that will be called when the session is started and that must call <code><a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputSession.html#startInputMethod(androidx.compose.ui.platform.PlatformTextInputMethodRequest)">PlatformTextInputSession.startInputMethod</a></code> to actually show and initiate the connection with the input method.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

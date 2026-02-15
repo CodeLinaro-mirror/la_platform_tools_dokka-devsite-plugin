@@ -16,6 +16,7 @@
       <meta itemprop="property" content="getPrevious()">
       <meta itemprop="property" content="getSearch()">
       <meta itemprop="property" content="getSend()">
+      <meta itemprop="property" content="getUnspecified()">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -51,7 +52,7 @@
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#getDefault()">getDefault</a>()</code></div>
-              <p>Use the platform and keyboard defaults and let the keyboard to decide the action.</p>
+              <p>Use the platform and keyboard defaults and let the keyboard decide the action it is going to show.</p>
             </td>
           </tr>
           <tr>
@@ -103,6 +104,13 @@
               <p>Represents that the user wants to send the text in the input, i.e. an SMS.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#getUnspecified()">getUnspecified</a>()</code></div>
+              <p>The action is not specified.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -115,7 +123,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#getDefault()">getDefault</a>()</pre>
-        <p>Use the platform and keyboard defaults and let the keyboard to decide the action. The keyboards will mostly show one of <code><a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#Done()">Done</a></code> or <code><a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#None()">None</a></code> actions based on the single/multi line configuration.</p>
+        <p>Use the platform and keyboard defaults and let the keyboard decide the action it is going to show. The keyboards will mostly show one of <code><a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#Done()">Done</a></code> or <code><a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#None()">None</a></code> actions based on the single/multi line configuration. This action will never be sent as the performed action to IME action callbacks.</p>
       </div>
       <div class="api-item"><a name="getDone--"></a><a name="getdone"></a>
         <div class="api-name-block">
@@ -151,7 +159,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#getNone()">getNone</a>()</pre>
-        <p>Represents that no action is expected from the keyboard. Keyboard might choose to show an action which mostly will be newline, however this action is not carried into the app via any androidx.compose.foundation.text.KeyboardAction.</p>
+        <p>Represents that no action is expected from the keyboard. Keyboard might choose to show an action which mostly will be newline, however this action will never be sent as the performed action to IME action callbacks.</p>
       </div>
       <div class="api-item"><a name="getPrevious--"></a><a name="getprevious"></a>
         <div class="api-name-block">
@@ -179,6 +187,15 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#getSend()">getSend</a>()</pre>
         <p>Represents that the user wants to send the text in the input, i.e. an SMS.</p>
+      </div>
+      <div class="api-item"><a name="getUnspecified--"></a><a name="getunspecified"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getUnspecified()">getUnspecified</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#getUnspecified()">getUnspecified</a>()</pre>
+        <p>The action is not specified. This defaults to <code><a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#Default()">Default</a></code>, which explicitly requests the platform and keyboard to make the decision, but <code><a href="/reference/androidx/compose/ui/text/input/ImeAction.Companion.html#Default()">Default</a></code> will take precedence when merging <code><a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code>s.</p>
       </div>
     </div>
   </body>

@@ -1,0 +1,91 @@
+<html devsite="true">
+  <head>
+    <title>PlatformTextInputMethodOverrideKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="PlatformTextInputMethodOverrideKt">
+      <meta itemprop="path" content="androidx.compose.ui.test">
+      <meta itemprop="property" content="PlatformTextInputMethodTestOverride(androidx.compose.ui.platform.PlatformTextInputSession,kotlin.Function0)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>PlatformTextInputMethodOverrideKt</h1>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/test/package-summary.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/test/PlatformTextInputMethodOverrideKt.html">PlatformTextInputMethodOverrideKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><span><del><a href="/reference/androidx/compose/ui/test/PlatformTextInputMethodOverrideKt.html#PlatformTextInputMethodTestOverride(androidx.compose.ui.platform.PlatformTextInputSession,kotlin.Function0)">PlatformTextInputMethodTestOverride</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/PlatformTextInputSession.html">PlatformTextInputSession</a>&nbsp;sessionHandler,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> Use InterceptPlatformTextInput instead</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="PlatformTextInputMethodTestOverride(androidx.compose.ui.platform.PlatformTextInputSession, kotlin.Function0)"></a><a name="PlatformTextInputMethodTestOverride-androidx.compose.ui.platform.PlatformTextInputSession-kotlin.Function0-"></a><a name="platformtextinputmethodtestoverride"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="PlatformTextInputMethodTestOverride(androidx.compose.ui.platform.PlatformTextInputSession,kotlin.Function0)">PlatformTextInputMethodTestOverride</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/compose/ui/test/PlatformTextInputMethodOverrideKt.html#PlatformTextInputMethodTestOverride(androidx.compose.ui.platform.PlatformTextInputSession,kotlin.Function0)">PlatformTextInputMethodTestOverride</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/PlatformTextInputSession.html">PlatformTextInputSession</a>&nbsp;sessionHandler,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use InterceptPlatformTextInput instead</aside>
+        <p>Installs a custom <code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputSession.html">PlatformTextInputSession</a></code> implementation to run when <code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputSession.html#startInputMethod(androidx.compose.ui.platform.PlatformTextInputMethodRequest)">PlatformTextInputSession.startInputMethod</a></code> is called by text editors inside <code><a href="/reference/androidx/compose/ui/test/package-summary.html#PlatformTextInputMethodTestOverride(androidx.compose.ui.platform.PlatformTextInputSession,kotlin.Function0)">content</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/PlatformTextInputSession.html">PlatformTextInputSession</a>&nbsp;sessionHandler</code></td>
+                <td>
+                  <p>The <code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputSession.html">PlatformTextInputSession</a></code> to use to handle input method requests. This object does <em>not</em> need to worry about synchronizing calls to <code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputSession.html#startInputMethod(androidx.compose.ui.platform.PlatformTextInputMethodRequest)">PlatformTextInputSession.startInputMethod</a></code> – this composable will handle the session management the same way as in production.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>The composable content for which to override the input method handler.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

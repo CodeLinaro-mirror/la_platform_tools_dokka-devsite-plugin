@@ -11,6 +11,7 @@
       <meta itemprop="property" content="placeChildren()">
       <meta itemprop="property" content="alignmentLines()">
       <meta itemprop="property" content="height()">
+      <meta itemprop="property" content="rulers()">
       <meta itemprop="property" content="width()">
       <meta itemprop="language" content="KOTLIN">
     </div>
@@ -59,6 +60,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#placeChildren()">placeChildren</a>()</code></div>
+                <p>A method used to place children of this layout.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -86,6 +88,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>&gt;</code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#alignmentLines()">alignmentLines</a></code></div>
+                <p>Alignment lines that can be used by parents to align this layout.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -95,6 +98,17 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#height()">height</a></code></div>
+                <p>The measured height of the layout, in pixels.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open (<a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html">RulerScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#rulers()">rulers</a></code></div>
+                <p>An optional lambda function used to create <code><a href="/reference/kotlin/androidx/compose/ui/layout/Ruler.html">Ruler</a></code>s for child layout.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -104,6 +118,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#width()">width</a></code></div>
+                <p>The measured width of the layout, in pixels.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -128,6 +143,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#placeChildren()">placeChildren</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>A method used to place children of this layout. It may also be used to measure children that were not needed for determining the size of this layout.</p>
         </div>
       </div>
     </devsite-filter >
@@ -146,6 +162,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#alignmentLines()">alignmentLines</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>&gt;</pre>
+          <p>Alignment lines that can be used by parents to align this layout. This only includes the alignment lines of this layout and not children.</p>
         </div>
         <div class="api-item"><a name="getHeight()"></a><a name="setHeight()"></a><a name="getHeight--"></a><a name="setHeight--"></a>
           <div class="api-name-block">
@@ -158,6 +175,20 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#height()">height</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The measured height of the layout, in pixels.</p>
+        </div>
+        <div class="api-item"><a name="getRulers()"></a><a name="setRulers()"></a><a name="getRulers--"></a><a name="setRulers--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="rulers()">rulers</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#rulers()">rulers</a>:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html">RulerScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?</pre>
+          <p>An optional lambda function used to create <code><a href="/reference/kotlin/androidx/compose/ui/layout/Ruler.html">Ruler</a></code>s for child layout. This may be reevealuated when the layout's position moves.</p>
         </div>
         <div class="api-item"><a name="getWidth()"></a><a name="setWidth()"></a><a name="getWidth--"></a><a name="setWidth--"></a>
           <div class="api-name-block">
@@ -170,6 +201,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html#width()">width</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The measured width of the layout, in pixels.</p>
         </div>
       </div>
     </devsite-filter >

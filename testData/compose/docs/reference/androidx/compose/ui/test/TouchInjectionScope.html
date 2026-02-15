@@ -75,6 +75,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
     .performTouchInput { swipeUp() }</pre>
     <p>Example of performing an L-shaped gesture:</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performTouchInput
 
@@ -192,14 +193,14 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
             <td><code>default void</code></td>
             <td>
               <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;historicalCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</code></div>
-              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions.</p>
+              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions, while adding the <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">historicalCoordinates</a></code> at the <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">relativeHistoricalTimes</a></code> to the move event.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract void</code></td>
             <td>
               <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistoryMultiPointer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&gt;&nbsp;historicalCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</code></div>
-              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions.</p>
+              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions, while adding the <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">historicalCoordinates</a></code> at the <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">relativeHistoricalTimes</a></code> to the move event.</p>
             </td>
           </tr>
           <tr>
@@ -350,13 +351,6 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                       </td>
                     </tr>
                     <tr>
-                      <td><code>abstract float</code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#getFontScale()">getFontScale</a>()</code></div>
-                        <p>Current user preference for the scaling factor for fonts.</p>
-                      </td>
-                    </tr>
-                    <tr>
                       <td><code>default int</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
@@ -368,13 +362,6 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                       <td>
                         <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
-                        <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
@@ -429,13 +416,6 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
-                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
-                      <td>
                         <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
                         <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
                       </td>
@@ -445,6 +425,41 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                       <td>
                         <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/unit/FontScaling.html">androidx.compose.ui.unit.FontScaling</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/FontScaling.html#getFontScale()">getFontScale</a>()</code></div>
+                        <p>Current user preference for the scaling factor for fonts.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/FontScalingKt.html">FontScalingKt</a>.<a href="/reference/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/FontScalingKt.html">FontScalingKt</a>.<a href="/reference/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
                       </td>
                     </tr>
                   </tbody>
@@ -929,7 +944,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
           </div>
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;historicalCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</pre>
-        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions.</p>
+        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions, while adding the <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">historicalCoordinates</a></code> at the <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">relativeHistoricalTimes</a></code> to the move event. This corresponds to the scenario where a touch screen generates touch events quicker than can be dispatched and batches them together.</p>
         <p>This overload is a convenience method for the common case where the gesture only has one pointer.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -972,8 +987,41 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
           </div>
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistoryMultiPointer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&gt;&nbsp;historicalCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</pre>
-        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions.</p>
-        <p>This overload supports gestures with multiple pointers.</p>
+        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions, while adding the <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">historicalCoordinates</a></code> at the <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">relativeHistoricalTimes</a></code> to the move event. This corresponds to the scenario where a touch screen generates touch events quicker than can be dispatched and batches them together.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performTouchInput
+
+// Move two fingers in a horizontal line, one on y=100 and one on y=500
+composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
+    .performTouchInput {
+        // First, make contact with the screen with both pointers:
+        down(0, Offset(300f, 100f))
+        down(1, Offset(300f, 500f))
+        // Update the pointer locations for the next event
+        updatePointerTo(0, Offset(400f, 100f))
+        updatePointerTo(1, Offset(400f, 500f))
+        // And send the move event with historical data
+        @OptIn(ExperimentalTestApi::class)
+        moveWithHistoryMultiPointer(
+            // Let's add 3 historical events
+            relativeHistoricalTimes = listOf(-12, -8, -4),
+            // Now, for each pointer we supply the historical coordinates
+            historicalCoordinates = listOf(
+                // Pointer 0 moves along y=100
+                listOf(Offset(325f, 100f), Offset(350f, 100f), Offset(375f, 100f)),
+                // Pointer 1 moves along y=500
+                listOf(Offset(325f, 500f), Offset(350f, 500f), Offset(375f, 500f)),
+            ),
+            // The actual move event will be sent 16ms after the previous event
+            delayMillis = 16
+        )
+        // And finish the gesture by lifting both fingers. Can be done in any order
+        up(1)
+        up(0)
+    }</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -995,7 +1043,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&gt;&nbsp;historicalCoordinates</code></td>
                 <td>
-                  <p>Coordinates of each historical event, in the same coordinate space as <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code>. The outer list must have the same size as the number of pointers in the event, and each inner list must have the same size as <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">relativeHistoricalTimes</a></code>.</p>
+                  <p>Coordinates of each historical event, in the same coordinate space as <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code>. The outer list must have the same size as the number of pointers in the event, and each inner list must have the same size as <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">relativeHistoricalTimes</a></code>. The <code>i</code>th pointer is assigned the <code>i</code>th history, with the pointers sorted on ascending pointerId.</p>
                 </td>
               </tr>
               <tr>

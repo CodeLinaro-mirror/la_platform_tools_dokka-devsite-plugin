@@ -1,0 +1,424 @@
+<html devsite="true">
+  <head>
+    <title>RulerScope</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="RulerScope">
+      <meta itemprop="path" content="androidx.compose.ui.layout">
+      <meta itemprop="property" content="(androidx.compose.ui.layout.Ruler).provides(kotlin.Float)">
+      <meta itemprop="property" content="(androidx.compose.ui.layout.VerticalRuler).providesRelative(kotlin.Float)">
+      <meta itemprop="property" content="coordinates()">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>RulerScope</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/MeasureScope.kt+class:androidx.compose.ui.layout.RulerScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/layout/RulerScope.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScopeMarker.html">MeasureScopeMarker</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html">RulerScope</a> : <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>A scope used in <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1)">MeasureScope.layout</a></code> for the <code>rulers</code> parameter to allow a layout to define <code><a href="/reference/kotlin/androidx/compose/ui/layout/Ruler.html">Ruler</a></code> values for children.</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.safeContent
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
+
+val safeInsets = WindowInsets.safeContent
+
+Box(Modifier.fillMaxSize().layout { measurable, constraints -&gt;
+    val placeable = measurable.measure(constraints)
+    layout(
+        width = placeable.width,
+        height = placeable.height,
+        rulers = {
+            val height = coordinates.size.height
+            SafeBottomRuler provides (height - safeInsets.getBottom(this)).toFloat()
+        }
+    ) {
+        placeable.place(0, 0)
+    }
+}, content = content)</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>infix <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Ruler.html">Ruler</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html#(androidx.compose.ui.layout.Ruler).provides(kotlin.Float)">provides</a>(value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Provides a constant value for a <code><a href="/reference/kotlin/androidx/compose/ui/layout/Ruler.html">Ruler</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>infix <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/VerticalRuler.html">VerticalRuler</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html#(androidx.compose.ui.layout.VerticalRuler).providesRelative(kotlin.Float)">providesRelative</a>(value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Provides a <code><a href="/reference/kotlin/androidx/compose/ui/layout/VerticalRuler.html">VerticalRuler</a></code> value that is relative to the left side in an LTR layout or right side on an RTL layout.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html#coordinates()">coordinates</a></code></div>
+                <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of the position in the hierarchy that the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Ruler.html">Ruler</a></code> will be <code><a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html#(androidx.compose.ui.layout.Ruler).provides(kotlin.Float)">provided</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>()</code></div>
+                          <p>Convert Sp to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>()</code></div>
+                          <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>()</code></div>
+                          <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Dp</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>()</code></div>
+                          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to pixels.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>()</code></div>
+                          <p>Convert Sp to pixels.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/DpRect.html">DpRect</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>()</code></div>
+                          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpRect.html">DpRect</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>()</code></div>
+                          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>()</code></div>
+                          <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>()</code></div>
+                          <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html">androidx.compose.ui.unit.FontScaling</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>()</code></div>
+                          <p>Convert Sp to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#density()">density</a></code></div>
+                          <p>The logical density of the display.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html">androidx.compose.ui.unit.FontScaling</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html#fontScale()">fontScale</a></code></div>
+                          <p>Current user preference for the scaling factor for fonts.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="-androidx.compose.ui.layout.Ruler-.provides-kotlin.Float-"></a><a name="provides"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.layout.Ruler).provides(kotlin.Float)">provides</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">infix&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Ruler.html">Ruler</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html#(androidx.compose.ui.layout.Ruler).provides(kotlin.Float)">provides</a>(value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Provides a constant value for a <code><a href="/reference/kotlin/androidx/compose/ui/layout/Ruler.html">Ruler</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.layout.VerticalRuler-.providesRelative-kotlin.Float-"></a><a name="providesrelative"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.layout.VerticalRuler).providesRelative(kotlin.Float)">providesRelative</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">infix&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/VerticalRuler.html">VerticalRuler</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html#(androidx.compose.ui.layout.VerticalRuler).providesRelative(kotlin.Float)">providesRelative</a>(value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Provides a <code><a href="/reference/kotlin/androidx/compose/ui/layout/VerticalRuler.html">VerticalRuler</a></code> value that is relative to the left side in an LTR layout or right side on an RTL layout.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public properties
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getCoordinates()"></a><a name="setCoordinates()"></a><a name="getCoordinates--"></a><a name="setCoordinates--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="coordinates()">coordinates</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html#coordinates()">coordinates</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></pre>
+          <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of the position in the hierarchy that the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Ruler.html">Ruler</a></code> will be <code><a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html#(androidx.compose.ui.layout.Ruler).provides(kotlin.Float)">provided</a></code>.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

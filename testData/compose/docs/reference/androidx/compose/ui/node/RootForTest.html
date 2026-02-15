@@ -8,11 +8,13 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="RootForTest">
       <meta itemprop="path" content="androidx.compose.ui.node">
+      <meta itemprop="property" content="forceAccessibilityForTesting(kotlin.Boolean)">
       <meta itemprop="property" content="getDensity()">
       <meta itemprop="property" content="getSemanticsOwner()">
       <meta itemprop="property" content="getTextInputService()">
       <meta itemprop="property" content="measureAndLayoutForTest()">
       <meta itemprop="property" content="sendKeyEvent(androidx.compose.ui.input.key.KeyEvent)">
+      <meta itemprop="property" content="setAccessibilityEventBatchIntervalMillis(kotlin.Long)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -68,6 +70,13 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/node/RootForTest.html#forceAccessibilityForTesting(kotlin.Boolean)">forceAccessibilityForTesting</a>(boolean&nbsp;enable)</code></div>
+              <p>Force accessibility to be enabled for testing.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/node/RootForTest.html#getDensity()">getDensity</a>()</code></div>
@@ -84,8 +93,8 @@
           <tr>
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/node/RootForTest.html#getTextInputService()">getTextInputService</a>()</code></div>
-              <p>The service handling text input.</p>
+              <div><code><span><del><a href="/reference/androidx/compose/ui/node/RootForTest.html#getTextInputService()">getTextInputService</a></del></span>()</code></div>
+              <p><strong>This method is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
             </td>
           </tr>
           <tr>
@@ -102,11 +111,48 @@
               <p>Send this <code><a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></code> to the focused component in this <code><a href="/reference/androidx/compose/ui/node/Owner.html">Owner</a></code>.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/node/RootForTest.html#setAccessibilityEventBatchIntervalMillis(kotlin.Long)">setAccessibilityEventBatchIntervalMillis</a>(long&nbsp;intervalMillis)</code></div>
+              <p>Set the time interval between sending accessibility events in milliseconds.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
     <div class="list">
       <h2>Public methods</h2>
+      <div class="api-item"><a name="forceAccessibilityForTesting-kotlin.Boolean-"></a><a name="forceaccessibilityfortesting"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="forceAccessibilityForTesting(kotlin.Boolean)">forceAccessibilityForTesting</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/RootForTest.html#forceAccessibilityForTesting(kotlin.Boolean)">forceAccessibilityForTesting</a>(boolean&nbsp;enable)</pre>
+        <p>Force accessibility to be enabled for testing.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean&nbsp;enable</code></td>
+                <td>
+                  <p>force enable accessibility if true.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="getDensity--"></a><a name="getdensity"></a>
         <div class="api-name-block">
           <div>
@@ -131,7 +177,8 @@
             <h3 id="getTextInputService()">getTextInputService</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a>&nbsp;<a href="/reference/androidx/compose/ui/node/RootForTest.html#getTextInputService()">getTextInputService</a>()</pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a>&nbsp;<span><del><a href="/reference/androidx/compose/ui/node/RootForTest.html#getTextInputService()">getTextInputService</a></del></span>()</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use PlatformTextInputModifierNode instead.</aside>
         <p>The service handling text input.</p>
       </div>
       <div class="api-item"><a name="measureAndLayoutForTest--"></a><a name="measureandlayoutfortest"></a>
@@ -173,6 +220,16 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="setAccessibilityEventBatchIntervalMillis-kotlin.Long-"></a><a name="setaccessibilityeventbatchintervalmillis"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setAccessibilityEventBatchIntervalMillis(kotlin.Long)">setAccessibilityEventBatchIntervalMillis</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/RootForTest.html#setAccessibilityEventBatchIntervalMillis(kotlin.Long)">setAccessibilityEventBatchIntervalMillis</a>(long&nbsp;intervalMillis)</pre>
+        <p>Set the time interval between sending accessibility events in milliseconds.</p>
+        <p>This is the delay before dispatching a recurring accessibility event in milliseconds. It delays the loop that sends events to the accessibility and content capture framework in batches. A recurring event will be sent at most once during the <code><a href="/reference/androidx/compose/ui/node/RootForTest.html#setAccessibilityEventBatchIntervalMillis(kotlin.Long)">intervalMillis</a></code> timeframe. The default time delay is 100 milliseconds.</p>
       </div>
     </div>
   </body>

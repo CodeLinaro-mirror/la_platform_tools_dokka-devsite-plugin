@@ -358,7 +358,7 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/key/package-summary.html#(androidx.compose.ui.Modifier).onInterceptKeyBeforeSoftKeyboard(kotlin.Function1)">onInterceptKeyBeforeSoftKeyboard</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInterceptKeyBeforeSoftKeyboard:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-      <p>Adding this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">modifier</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">modifier</a></code> parameter of a component will allow it to intercept hardware key events before they are sent to the software keyboard.</p>
+      <p>Adding this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">modifier</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">modifier</a></code> parameter of a component will allow it to intercept hardware key events before they are sent to the software keyboard. This can be used to intercept key input from a DPad, or physical keyboard connected to the device and is not applicable to input that is sent to the soft keyboard via spell check or autocomplete.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
@@ -474,7 +474,7 @@ Box(
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/key/package-summary.html#(androidx.compose.ui.Modifier).onPreInterceptKeyBeforeSoftKeyboard(kotlin.Function1)">onPreInterceptKeyBeforeSoftKeyboard</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onPreInterceptKeyBeforeSoftKeyboard:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-      <p>Adding this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">modifier</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">modifier</a></code> parameter of a component will allow it to intercept hardware key events before they are sent to the software keyboard. This modifier is similar to <code><a href="/reference/kotlin/androidx/compose/ui/input/key/package-summary.html#(androidx.compose.ui.Modifier).onInterceptKeyBeforeSoftKeyboard(kotlin.Function1)">onInterceptKeyBeforeSoftKeyboard</a></code>, but allows a parent composable to intercept the hardware key event before any child.</p>
+      <p>Adding this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">modifier</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">modifier</a></code> parameter of a component will allow it to intercept hardware key events before they are sent to the software keyboard. This can be used to intercept key input from a DPad, or physical keyboard connected to the device and is not applicable to input that is sent to the soft keyboard via spell check or autocomplete. This modifier is similar to <code><a href="/reference/kotlin/androidx/compose/ui/input/key/package-summary.html#(androidx.compose.ui.Modifier).onInterceptKeyBeforeSoftKeyboard(kotlin.Function1)">onInterceptKeyBeforeSoftKeyboard</a></code>, but allows a parent composable to intercept the hardware key event before any child.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
@@ -797,10 +797,10 @@ Box(
     Modifier
         .onKeyEvent {
             when (it.type) {
-                KeyUp -&gt; println(&quot; KeyUp Pressed&quot;)
-                KeyDown -&gt; println(&quot; KeyUp Pressed&quot;)
+                KeyUp -&gt; println(&quot;KeyUp Pressed&quot;)
+                KeyDown -&gt; println(&quot;KeyUp Pressed&quot;)
                 Unknown -&gt; println(&quot;Unknown key type&quot;)
-                else -&gt; println(&quot;New KeyTpe (For Future Use)&quot;)
+                else -&gt; println(&quot;New KeyType (for future use)&quot;)
             }
             false
         }

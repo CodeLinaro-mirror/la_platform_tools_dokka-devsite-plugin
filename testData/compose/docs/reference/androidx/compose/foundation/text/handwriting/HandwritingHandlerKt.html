@@ -1,0 +1,178 @@
+<html devsite="true">
+  <head>
+    <title>HandwritingHandlerKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="HandwritingHandlerKt">
+      <meta itemprop="path" content="androidx.compose.foundation.text.handwriting">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).handwritingHandler()">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>HandwritingHandlerKt</h1>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/text/handwriting/package-summary.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/foundation/text/handwriting/HandwritingHandlerKt.html">HandwritingHandlerKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/handwriting/HandwritingHandlerKt.html#(androidx.compose.ui.Modifier).handwritingHandler()">handwritingHandler</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</code></div>
+              <p>Configures an element to act as a stylus handwriting handler which can handle text input from a handwriting session which was triggered by stylus handwriting on a handwriting detector.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.Modifier-.handwritingHandler--"></a><a name="handwritinghandler"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).handwritingHandler()">handwritingHandler</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/text/handwriting/HandwritingHandlerKt.html#(androidx.compose.ui.Modifier).handwritingHandler()">handwritingHandler</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
+        <p>Configures an element to act as a stylus handwriting handler which can handle text input from a handwriting session which was triggered by stylus handwriting on a handwriting detector.</p>
+        <p>When this element gains focus, if there is an ongoing stylus handwriting delegation which was triggered by stylus handwriting on a handwriting detector, this element will receive text input from the handwriting session via its input connection.</p>
+        <p>A common use case is a component which looks like a text input field but does not actually support text input itself, and clicking on this fake text input field causes a real text input field to be shown. To support handwriting initiation in this case, a <code><a href="/reference/androidx/compose/foundation/text/handwriting/package-summary.html#(androidx.compose.ui.Modifier).handwritingDetector(kotlin.Function0)">handwritingDetector</a></code> modifier can be applied to the fake text input field to configure it as a detector, and this modifier can be applied to the real text input field. The <code>callback</code> implementation for the fake text field's <code><a href="/reference/androidx/compose/foundation/text/handwriting/package-summary.html#(androidx.compose.ui.Modifier).handwritingDetector(kotlin.Function0)">handwritingDetector</a></code> modifier is typically the same as the <code>onClick</code> implementation its <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">clickable</a></code> modifier, which shows and focuses the real text input field.</p>
+        <p>This function returns a no-op modifier on API levels below Android U (34) as stylus handwriting is not supported.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.handwriting.handwritingDetector
+import androidx.compose.foundation.text.handwriting.handwritingHandler
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Card
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+
+var openDialog by remember { mutableStateOf(false) }
+val focusRequester = remember { FocusRequester() }
+
+Column(
+    Modifier
+        .imePadding()
+        .requiredWidth(300.dp)
+        .verticalScroll(rememberScrollState()),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+) {
+    Text(
+        &quot;This is not an actual text field, but it is a handwriting detector so you can use &quot; +
+            &quot;a stylus to write here.&quot;
+    )
+    Spacer(Modifier.size(16.dp))
+    Text(&quot;Fake text field&quot;,
+        Modifier
+            .fillMaxWidth()
+            .handwritingDetector { openDialog = !openDialog }
+            .padding(4.dp)
+            .border(
+                1.dp,
+                MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
+                RoundedCornerShape(4.dp)
+            )
+            .padding(16.dp),
+        color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium))
+}
+
+if (openDialog) {
+    Dialog(onDismissRequest = { openDialog = false }) {
+        Card(
+            modifier = Modifier.width(300.dp), shape = RoundedCornerShape(16.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(24.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(&quot;This text field is a handwriting handler.&quot;)
+                Spacer(Modifier.size(16.dp))
+                val state = remember { TextFieldState() }
+                BasicTextField(
+                    state = state,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .focusRequester(focusRequester)
+                        .handwritingHandler(),
+                    decorator = { innerTextField -&gt;
+                        Box(
+                            Modifier
+                                .padding(4.dp)
+                                .border(
+                                    1.dp,
+                                    MaterialTheme.colors.onSurface,
+                                    RoundedCornerShape(4.dp)
+                                )
+                                .padding(16.dp)
+                        ) {
+                            innerTextField()
+                        }
+                    }
+                )
+            }
+        }
+
+        val windowInfo = LocalWindowInfo.current
+        LaunchedEffect(windowInfo) {
+            snapshotFlow { windowInfo.isWindowFocused }.collect { isWindowFocused -&gt;
+                if (isWindowFocused) {
+                    focusRequester.requestFocus()
+                }
+            }
+        }
+    }
+}</pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -33,6 +33,8 @@
       <meta itemprop="property" content="setTransitionGroup(kotlin.Boolean)">
       <meta itemprop="property" content="setViewCompositionStrategy(androidx.compose.ui.platform.ViewCompositionStrategy)">
       <meta itemprop="property" content="shouldDelayChildPressedState()">
+      <meta itemprop="property" content="(androidx.compose.ui.platform.AbstractComposeView).getConsumeWindowInsets()">
+      <meta itemprop="property" content="(androidx.compose.ui.platform.AbstractComposeView).setConsumeWindowInsets(kotlin.Boolean)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -99,6 +101,7 @@
     <hr>
     <p>Base class for custom <code><a href="https://developer.android.com/reference/android/view/View.html">android.view.View</a></code>s implemented using Jetpack Compose UI. Subclasses should implement the <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#Content()">Content</a></code> function with the appropriate content. Calls to <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#addView(android.view.View)">addView</a></code> and its variants and overloads will fail with <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
     <p>By default, the composition is disposed according to <code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.Companion.html#Default()">ViewCompositionStrategy.Default</a></code>. Call <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#disposeComposition()">disposeComposition</a></code> to dispose of the underlying composition earlier, or if the view is never initially attached to a window. (The requirement to dispose of the composition explicitly in the event that the view is never (re)attached is temporary.)</p>
+    <p><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a></code> only supports being added into view hierarchies propagating <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> and <code><a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a></code> via <code><a href="/reference/androidx/lifecycle/package-summary.html#(android.view.View).setViewTreeLifecycleOwner(androidx.lifecycle.LifecycleOwner)">androidx.lifecycle.setViewTreeLifecycleOwner</a></code> and <code><a href="/reference/androidx/savedstate/package-summary.html#(android.view.View).setViewTreeSavedStateRegistryOwner(androidx.savedstate.SavedStateRegistryOwner)">androidx.savedstate.setViewTreeSavedStateRegistryOwner</a></code>. In most cases you will already have it set up correctly as <code><a href="/reference/androidx/activity/ComponentActivity.html">androidx.activity.ComponentActivity</a></code>, androidx.fragment.app.Fragment and androidx.navigation.NavController will provide the correct values.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -304,6 +307,35 @@
             <td><code>final void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#onMeasure(kotlin.Int,kotlin.Int)">onMeasure</a>(int&nbsp;widthMeasureSpec,&nbsp;int&nbsp;heightMeasureSpec)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/WindowInsetsKt.html">WindowInsetsKt</a>.<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#(androidx.compose.ui.platform.AbstractComposeView).getConsumeWindowInsets()">getConsumeWindowInsets</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>&nbsp;receiver<br>)</code></div>
+              <p>Indicates whether access to <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> within the <code><a href="/reference/androidx/compose/ui/platform/ComposeView.html#setContent(kotlin.Function0)">content</a></code> should consume the Android  <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">android.view.WindowInsets</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/WindowInsetsKt.html">WindowInsetsKt</a>.<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#(androidx.compose.ui.platform.AbstractComposeView).setConsumeWindowInsets(kotlin.Boolean)">setConsumeWindowInsets</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;value<br>)</code></div>
+              <p>Indicates whether access to <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> within the <code><a href="/reference/androidx/compose/ui/platform/ComposeView.html#setContent(kotlin.Function0)">content</a></code> should consume the Android  <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">android.view.WindowInsets</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -6493,7 +6525,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#createComposition()">createComposition</a>()</pre>
-        <p>Perform initial composition for this view. Once this method is called or the view becomes attached to a window, either <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#disposeComposition()">disposeComposition</a></code> must be called or the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/androidx/lifecycle/package-summary.html#(android.view.View).findViewTreeLifecycleOwner()">findViewTreeLifecycleOwner</a></code> must reach the <code><a href="/reference/androidx/lifecycle/Lifecycle.State.DESTROYED.html">Lifecycle.State.DESTROYED</a></code> state for the composition to be cleaned up properly. (This restriction is temporary.)</p>
+        <p>Perform initial composition for this view. Once this method is called or the view becomes attached to a window, either <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#disposeComposition()">disposeComposition</a></code> must be called or the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/androidx/lifecycle/package-summary.html#findViewTreeLifecycleOwner(android.view.View)">findViewTreeLifecycleOwner</a></code> must reach the <code><a href="/reference/androidx/lifecycle/Lifecycle.State.DESTROYED.html">Lifecycle.State.DESTROYED</a></code> state for the composition to be cleaned up properly. (This restriction is temporary.)</p>
         <p>If this method is called when the composition has already been created it has no effect.</p>
         <p>This method should only be called if this view <code><a href="https://developer.android.com/reference/android/view/View.html#isAttachedToWindow()">isAttachedToWindow</a></code> or if a parent <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> has been <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#setParentCompositionContext(androidx.compose.runtime.CompositionContext)">set</a></code> explicitly.</p>
       </div>
@@ -6522,7 +6554,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#getShowLayoutBounds()">getShowLayoutBounds</a>()</pre>
-        <p>Enables the display of visual layout bounds for the Compose UI content of this view. This is typically managed</p>
+        <p>Enables the display of visual layout bounds for the Compose UI content of this view. This is typically configured using the system developer setting for &quot;Show layout bounds.&quot;</p>
       </div>
       <div class="api-item"><a name="isTransitionGroup--"></a><a name="istransitiongroup"></a>
         <div class="api-name-block">
@@ -6564,7 +6596,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#setShowLayoutBounds(kotlin.Boolean)">setShowLayoutBounds</a>(boolean&nbsp;value)</pre>
-        <p>Enables the display of visual layout bounds for the Compose UI content of this view. This is typically managed</p>
+        <p>Enables the display of visual layout bounds for the Compose UI content of this view. This is typically configured using the system developer setting for &quot;Show layout bounds.&quot;</p>
       </div>
       <div class="api-item"><a name="setTransitionGroup-kotlin.Boolean-"></a><a name="settransitiongroup"></a>
         <div class="api-name-block">
@@ -6653,6 +6685,29 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">protected&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#onMeasure(kotlin.Int,kotlin.Int)">onMeasure</a>(int&nbsp;widthMeasureSpec,&nbsp;int&nbsp;heightMeasureSpec)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.platform.AbstractComposeView-.getConsumeWindowInsets--"></a><a name="getconsumewindowinsets"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.platform.AbstractComposeView).getConsumeWindowInsets()">WindowInsetsKt.getConsumeWindowInsets</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/WindowInsetsKt.html">WindowInsetsKt</a>.<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#(androidx.compose.ui.platform.AbstractComposeView).getConsumeWindowInsets()">getConsumeWindowInsets</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>&nbsp;receiver<br>)</pre>
+        <p>Indicates whether access to <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> within the <code><a href="/reference/androidx/compose/ui/platform/ComposeView.html#setContent(kotlin.Function0)">content</a></code> should consume the Android  <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">android.view.WindowInsets</a></code>. The default value is <code>true</code>, meaning that access to <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.Companion.html">WindowInsets.Companion</a></code> will consume the Android WindowInsets.</p>
+        <p>This property should be set prior to first composition.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.platform.AbstractComposeView-.setConsumeWindowInsets-kotlin.Boolean-"></a><a name="setconsumewindowinsets"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.platform.AbstractComposeView).setConsumeWindowInsets(kotlin.Boolean)">WindowInsetsKt.setConsumeWindowInsets</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/WindowInsetsKt.html">WindowInsetsKt</a>.<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#(androidx.compose.ui.platform.AbstractComposeView).setConsumeWindowInsets(kotlin.Boolean)">setConsumeWindowInsets</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;value<br>)</pre>
+        <p>Indicates whether access to <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> within the <code><a href="/reference/androidx/compose/ui/platform/ComposeView.html#setContent(kotlin.Function0)">content</a></code> should consume the Android  <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">android.view.WindowInsets</a></code>. The default value is <code>true</code>, meaning that access to <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.Companion.html">WindowInsets.Companion</a></code> will consume the Android WindowInsets.</p>
+        <p>This property should be set prior to first composition.</p>
       </div>
     </div>
   </body>

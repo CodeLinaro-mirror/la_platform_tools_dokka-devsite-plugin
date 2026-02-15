@@ -8,13 +8,11 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="PullToRefreshState">
       <meta itemprop="path" content="androidx.compose.material3.pulltorefresh">
-      <meta itemprop="property" content="endRefresh()">
-      <meta itemprop="property" content="startRefresh()">
-      <meta itemprop="property" content="isRefreshing()">
-      <meta itemprop="property" content="nestedScrollConnection()">
-      <meta itemprop="property" content="positionalThreshold()">
-      <meta itemprop="property" content="progress()">
-      <meta itemprop="property" content="verticalOffset()">
+      <meta itemprop="property" content="animateToHidden()">
+      <meta itemprop="property" content="animateToThreshold()">
+      <meta itemprop="property" content="snapTo(kotlin.Float)">
+      <meta itemprop="property" content="distanceFraction()">
+      <meta itemprop="property" content="isAnimating()">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -42,45 +40,80 @@
       </div>
     </devsite-filter >
     <hr>
-    <p>The state that is associated with a <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code>. Each instance of <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code> should have its own <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code>.</p>
+    <p>The state of a <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a></code> which tracks the distance that the container and indicator have been pulled.</p>
+    <p>Each instance of <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a></code> should have its own <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code>.</p>
     <p><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code> can be used with other progress indicators like so:</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.pulltorefresh.PullToRefreshState
+import androidx.compose.material3.pulltorefresh.pullToRefresh
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 
-var itemCount by remember { mutableStateOf(15) }
+var itemCount by remember { mutableIntStateOf(15) }
+var isRefreshing by remember { mutableStateOf(false) }
 val state = rememberPullToRefreshState()
-if (state.isRefreshing) {
-    LaunchedEffect(true) {
+val coroutineScope = rememberCoroutineScope()
+val onRefresh: () -&gt; Unit = {
+    isRefreshing = true
+    coroutineScope.launch {
         // fetch something
         delay(1500)
         itemCount += 5
-        state.endRefresh()
+        isRefreshing = false
     }
 }
-Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
-    LazyColumn(Modifier.fillMaxSize()) {
-        if (!state.isRefreshing) {
-            items(itemCount) {
-                ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) })
+
+Scaffold(
+    modifier =
+        Modifier.pullToRefresh(
+            state = state,
+            isRefreshing = isRefreshing,
+            onRefresh = onRefresh
+        ),
+    topBar = {
+        TopAppBar(
+            title = { Text(&quot;TopAppBar&quot;) },
+            // Provide an accessible alternative to trigger refresh.
+            actions = {
+                IconButton(onClick = onRefresh) {
+                    Icon(Icons.Filled.Refresh, &quot;Trigger Refresh&quot;)
+                }
+            }
+        )
+    }
+) {
+    Box(Modifier.padding(it)) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            if (!isRefreshing) {
+                items(itemCount) { ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) }) }
             }
         }
-    }
-    if (state.isRefreshing) {
-        LinearProgressIndicator()
-    } else {
-        LinearProgressIndicator(progress = { state.progress })
+        if (isRefreshing) {
+            LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+        } else {
+            LinearProgressIndicator(
+                modifier = Modifier.fillMaxWidth(),
+                progress = { state.distanceFraction }
+            )
+        }
     }
 }</pre>
     <h2>Summary</h2>
@@ -99,20 +132,30 @@ Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
           </thead>
           <tbody class="list">
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#endRefresh()">endRefresh</a>()</code></div>
-                <p>Sets <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to false.</p>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#animateToHidden()">animateToHidden</a>()</code></div>
+                <p>Animate the distance towards the position where the indicator will be hidden when idle</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#startRefresh()">startRefresh</a>()</code></div>
-                <p>Sets <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to true.</p>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#animateToThreshold()">animateToThreshold</a>()</code></div>
+                <p>Animate the distance towards the anchor or threshold position, where the indicator will be shown when refreshing.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#snapTo(kotlin.Float)">snapTo</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> targetValue:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Snap the indicator to the desired threshold fraction</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -137,50 +180,20 @@ Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
           </thead>
           <tbody class="list">
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code></div>
-                <p>Indicates whether a refresh is occurring.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#nestedScrollConnection()">nestedScrollConnection</a></code></div>
-                <p>A <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that should be attached to a <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">Modifier.nestedScroll</a></code> in order to keep track of the scroll events.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a></code></div>
-                <p>The threshold (in pixels), above which if a release occurs, a refresh will be called</p>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#distanceFraction()">distanceFraction</a></code></div>
+                <p>Distance percentage towards the refresh threshold.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#progress()">progress</a></code></div>
-                <p>PullRefresh progress towards <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a></code>.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#verticalOffset()">verticalOffset</a></code></div>
-                <p>The vertical offset (in pixels) for the <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code> to consume</p>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isAnimating()">isAnimating</a></code></div>
+                <p>Whether the state is currently animating</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -194,31 +207,44 @@ Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
       <div class="list">
         <h2 data-title="platform-Common/All">Public functions
           <!--platform-Common/All--></h2>
-        <div class="api-item"><a name="endRefresh--"></a><a name="endrefresh"></a>
+        <div class="api-item"><a name="animateToHidden--"></a><a name="animatetohidden"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="endRefresh()">endRefresh</h3>
+              <h3 id="animateToHidden()">animateToHidden</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#endRefresh()">endRefresh</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Sets <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to false.</p>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#animateToHidden()">animateToHidden</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Animate the distance towards the position where the indicator will be hidden when idle</p>
         </div>
-        <div class="api-item"><a name="startRefresh--"></a><a name="startrefresh"></a>
+        <div class="api-item"><a name="animateToThreshold--"></a><a name="animatetothreshold"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="startRefresh()">startRefresh</h3>
+              <h3 id="animateToThreshold()">animateToThreshold</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#startRefresh()">startRefresh</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Sets <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to true.</p>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#animateToThreshold()">animateToThreshold</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Animate the distance towards the anchor or threshold position, where the indicator will be shown when refreshing.</p>
+        </div>
+        <div class="api-item"><a name="snapTo-kotlin.Float-"></a><a name="snapto"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="snapTo(kotlin.Float)">snapTo</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#snapTo(kotlin.Float)">snapTo</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> targetValue:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Snap the indicator to the desired threshold fraction</p>
         </div>
       </div>
     </devsite-filter >
@@ -226,70 +252,31 @@ Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
       <div class="list">
         <h2 data-title="platform-Common/All">Public properties
           <!--platform-Common/All--></h2>
-        <div class="api-item"><a name="getIsRefreshing()"></a><a name="setIsRefreshing()"></a><a name="getIsRefreshing--"></a><a name="setIsRefreshing--"></a>
+        <div class="api-item"><a name="getDistanceFraction()"></a><a name="setDistanceFraction()"></a><a name="getDistanceFraction--"></a><a name="setDistanceFraction--"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="isRefreshing()">isRefreshing</h3>
+              <h3 id="distanceFraction()">distanceFraction</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-          <p>Indicates whether a refresh is occurring.</p>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#distanceFraction()">distanceFraction</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Distance percentage towards the refresh threshold. 0.0 indicates no distance, 1.0 indicates being at the threshold offset, > 1.0 indicates overshoot beyond the provided threshold.</p>
         </div>
-        <div class="api-item"><a name="getNestedScrollConnection()"></a><a name="setNestedScrollConnection()"></a><a name="getNestedScrollConnection--"></a><a name="setNestedScrollConnection--"></a>
+        <div class="api-item"><a name="getIsAnimating()"></a><a name="setIsAnimating()"></a><a name="getIsAnimating--"></a><a name="setIsAnimating--"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="nestedScrollConnection()">nestedScrollConnection</h3>
+              <h3 id="isAnimating()">isAnimating</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#nestedScrollConnection()">nestedScrollConnection</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></pre>
-          <p>A <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that should be attached to a <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">Modifier.nestedScroll</a></code> in order to keep track of the scroll events.</p>
-        </div>
-        <div class="api-item"><a name="getPositionalThreshold()"></a><a name="setPositionalThreshold()"></a><a name="getPositionalThreshold--"></a><a name="setPositionalThreshold--"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="positionalThreshold()">positionalThreshold</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
-          <p>The threshold (in pixels), above which if a release occurs, a refresh will be called</p>
-        </div>
-        <div class="api-item"><a name="getProgress()"></a><a name="setProgress()"></a><a name="getProgress--"></a><a name="setProgress--"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="progress()">progress</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#progress()">progress</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
-          <p>PullRefresh progress towards <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a></code>. 0.0 indicates no progress, 1.0 indicates complete progress, > 1.0 indicates overshoot beyond the provided threshold</p>
-        </div>
-        <div class="api-item"><a name="getVerticalOffset()"></a><a name="setVerticalOffset()"></a><a name="getVerticalOffset--"></a><a name="setVerticalOffset--"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="verticalOffset()">verticalOffset</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#verticalOffset()">verticalOffset</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
-          <p>The vertical offset (in pixels) for the <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code> to consume</p>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isAnimating()">isAnimating</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Whether the state is currently animating</p>
         </div>
       </div>
     </devsite-filter >

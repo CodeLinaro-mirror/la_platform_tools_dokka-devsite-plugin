@@ -207,6 +207,7 @@ fun Modifier.logSize(id: String) = this then LogSizeElement(id)</pre>
         </div>
         <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutAwareModifierNode.html#onPlaced(androidx.compose.ui.layout.LayoutCoordinates)">onPlaced</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;coordinates)</pre>
         <p><code><a href="/reference/androidx/compose/ui/node/LayoutAwareModifierNode.html#onPlaced(androidx.compose.ui.layout.LayoutCoordinates)">onPlaced</a></code> is called after the parent <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> and parent layout has been placed and before child <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> is placed. This allows child <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> to adjust its own placement based on where the parent is.</p>
+        <p>If you only need to access the current <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> at a single point in time from outside this method, use currentLayoutCoordinates.</p>
       </div>
       <div class="api-item"><a name="onRemeasured-androidx.compose.ui.unit.IntSize-"></a><a name="onremeasured"></a>
         <div class="api-name-block">

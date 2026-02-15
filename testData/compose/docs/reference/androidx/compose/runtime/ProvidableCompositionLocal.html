@@ -9,6 +9,7 @@
       <meta itemprop="name" content="ProvidableCompositionLocal">
       <meta itemprop="path" content="androidx.compose.runtime">
       <meta itemprop="property" content="provides(kotlin.Any)">
+      <meta itemprop="property" content="providesComputed(kotlin.Function1)">
       <meta itemprop="property" content="providesDefault(kotlin.Any)">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -101,6 +102,13 @@
           <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
             <td>
+              <div><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#providesComputed(kotlin.Function1)">providesComputed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocalAccessorScope.html">CompositionLocalAccessorScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;compute<br>)</code></div>
+              <p>Associates a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key to a lambda, <code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#providesComputed(kotlin.Function1)">compute</a></code>, in a call to <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
               <div><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#providesDefault(kotlin.Any)">providesDefault</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</code></div>
               <p>Associates a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key to a value in a call to <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> if the key does not already have an associated value.</p>
             </td>
@@ -164,6 +172,118 @@
             <tbody class="list">
               <tr>
                 <td><code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="providesComputed-kotlin.Function1-"></a><a name="providescomputed"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="providesComputed(kotlin.Function1)">providesComputed</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#providesComputed(kotlin.Function1)">providesComputed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocalAccessorScope.html">CompositionLocalAccessorScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;compute<br>)</pre>
+        <p>Associates a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key to a lambda, <code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#providesComputed(kotlin.Function1)">compute</a></code>, in a call to <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>. The <code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#providesComputed(kotlin.Function1)">compute</a></code> lambda is invoked whenever the key is retrieved. The lambda is executed in the context of a <code><a href="/reference/androidx/compose/runtime/CompositionLocalContext.html">CompositionLocalContext</a></code> which allow retrieving the current values of other composition locals by calling <code><a href="/reference/androidx/compose/runtime/CompositionLocalAccessorScope.html#(androidx.compose.runtime.CompositionLocal).currentValue()">CompositionLocalAccessorScope.currentValue</a></code>, which is an extension function provided by the context for a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key.</p>
+        <p>The lambda passed to <code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#providesComputed(kotlin.Function1)">providesComputed</a></code> will be invoked every time the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html#current()">CompositionLocal.current</a></code> is evaluated for the composition local and computes its value based on the current value of the locals referenced in the lambda at the time <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html#current()">CompositionLocal.current</a></code> is evaluated. This allows providing values that can be derived from other locals. For example, if accent colors can be calculated from a single base color, the accent colors can be provided as computed composition locals. Providing a new base color would automatically update all the accent colors.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+
+val LocalValue = compositionLocalOf { 10 }
+val LocalLargerValue = compositionLocalOf { 12 }
+
+@Composable
+fun App() {
+    CompositionLocalProvider(
+        LocalLargerValue providesComputed {
+            LocalValue.currentValue + 10
+        }
+    ) {
+        SomeScreen()
+    }
+}</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.compositionLocalWithComputedDefaultOf
+
+val LocalValue = compositionLocalOf { 10 }
+val LocalLargerValue = compositionLocalOf { 12 }
+val LocalComputedValue = compositionLocalWithComputedDefaultOf {
+    LocalValue.currentValue + 4
+}
+
+// In this example `LocalLargerValue` needs to be re-provided
+// whenever `LocalValue` is provided to keep its value larger
+// then `LocalValue`. However, `LocalComputedValue` does not
+// need to be re-provided to stay larger than `LocalValue` as
+// it is calculated based on the currently provided value for
+// `LocalValue`. Whenever `LocalValue` is provided the value
+// of `LocalComputedValue` is computed based on the currently
+// provided value for `LocalValue`.
+
+@Composable
+fun App() {
+    // Value is 10, the default value for LocalValue
+    val value = LocalValue.current
+    // Value is 12, the default value
+    val largerValue = LocalLargerValue.current
+    // Value is computed to be 14
+    val computedValue = LocalComputedValue.current
+    CompositionLocalProvider(
+        LocalValue provides 20
+    ) {
+        // Value is 20 provided above
+        val nestedValue = LocalValue.current
+        // Value is still 12 as an updated value was not re-provided
+        val nestedLargerValue = LocalLargerValue.current
+        // Values is computed to be 24; LocalValue.current + 4
+        val nestedComputedValue = LocalComputedValue.current
+        CompositionLocalProvider(
+            LocalLargerValue provides LocalValue.current + 2
+        ) {
+            // Value is 22 provided above
+            val newLargerValue = LocalLargerValue.current
+
+            CompositionLocalProvider(
+                LocalValue provides 50
+            ) {
+                // Value is now 50 provided above
+                val finalValue = LocalValue.current
+                // Value is still 22
+                val finalLargerValue = LocalLargerValue.current
+                // Value is now computed to be 54
+                val finalComputed = LocalComputedValue.current
+            }
+        }
+    }
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/CompositionLocalContext.html">CompositionLocalContext</a></code></td>
                 <td></td>
               </tr>
               <tr>

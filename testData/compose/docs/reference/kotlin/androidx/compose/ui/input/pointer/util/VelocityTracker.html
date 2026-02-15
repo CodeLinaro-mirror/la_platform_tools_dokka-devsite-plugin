@@ -10,6 +10,7 @@
       <meta itemprop="path" content="androidx.compose.ui.input.pointer.util">
       <meta itemprop="property" content="addPosition(kotlin.Long,androidx.compose.ui.geometry.Offset)">
       <meta itemprop="property" content="calculateVelocity()">
+      <meta itemprop="property" content="calculateVelocity(androidx.compose.ui.unit.Velocity)">
       <meta itemprop="property" content="resetTracking()">
       <meta itemprop="property" content="(androidx.compose.ui.input.pointer.util.VelocityTracker).addPointerInputChange(androidx.compose.ui.input.pointer.PointerInputChange)">
       <meta itemprop="language" content="KOTLIN">
@@ -97,6 +98,16 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker.html#calculateVelocity()">calculateVelocity</a>()</code></div>
+                <p>Computes the estimated velocity of the pointer at the time of the last provided data point.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker.html#calculateVelocity(androidx.compose.ui.unit.Velocity)">calculateVelocity</a>(maximumVelocity:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a>)</code></div>
                 <p>Computes the estimated velocity of the pointer at the time of the last provided data point.</p>
               </td>
               <td>
@@ -212,7 +223,43 @@
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker.html#calculateVelocity()">calculateVelocity</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></pre>
           <p>Computes the estimated velocity of the pointer at the time of the last provided data point.</p>
+          <p>The velocity calculated will not be limited. Unlike calculateVelocity(maximumVelocity) the resulting velocity won't be limited.</p>
           <p>This can be expensive. Only call this when you need the velocity.</p>
+        </div>
+        <div class="api-item"><a name="calculateVelocity-androidx.compose.ui.unit.Velocity-"></a><a name="calculatevelocity"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="calculateVelocity(androidx.compose.ui.unit.Velocity)">calculateVelocity</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker.html#calculateVelocity(androidx.compose.ui.unit.Velocity)">calculateVelocity</a>(maximumVelocity:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></pre>
+          <p>Computes the estimated velocity of the pointer at the time of the last provided data point.</p>
+          <p>The method allows specifying the maximum absolute value for the calculated velocity. If the absolute value of the calculated velocity exceeds the specified maximum, the return value will be clamped down to the maximum. For example, if the absolute maximum velocity is specified as &quot;20&quot;, a calculated velocity of &quot;25&quot; will be returned as &quot;20&quot;, and a velocity of &quot;-30&quot; will be returned as &quot;-20&quot;.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>maximumVelocity:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
+                  <td>
+                    <p>the absolute values of the X and Y maximum velocities to be returned in units/second. <code>units</code> is the units of the positions provided to this VelocityTracker.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="resetTracking--"></a><a name="resettracking"></a>
           <div class="api-name-block">

@@ -9,6 +9,7 @@
       <meta itemprop="name" content="LazyLayoutPrefetchState.PrefetchHandle">
       <meta itemprop="path" content="androidx.compose.foundation.lazy.layout">
       <meta itemprop="property" content="cancel()">
+      <meta itemprop="property" content="markAsUrgent()">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -47,6 +48,13 @@
               <p>Notifies the prefetcher that previously scheduled item is no longer needed.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.PrefetchHandle.html#markAsUrgent()">markAsUrgent</a>()</code></div>
+              <p>Marks this prefetch request as urgent, which is a way to communicate that the requested item is expected to be needed during the next frame.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -60,6 +68,16 @@
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.PrefetchHandle.html#cancel()">cancel</a>()</pre>
         <p>Notifies the prefetcher that previously scheduled item is no longer needed. If the item was precomposed already it will be disposed.</p>
+      </div>
+      <div class="api-item"><a name="markAsUrgent--"></a><a name="markasurgent"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="markAsUrgent()">markAsUrgent</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.PrefetchHandle.html#markAsUrgent()">markAsUrgent</a>()</pre>
+        <p>Marks this prefetch request as urgent, which is a way to communicate that the requested item is expected to be needed during the next frame.</p>
+        <p>For urgent requests we can proceed with doing the prefetch even if the available time in the frame is less than we spend on similar prefetch requests on average.</p>
       </div>
     </div>
   </body>

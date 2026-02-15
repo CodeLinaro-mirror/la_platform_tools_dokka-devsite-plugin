@@ -10,7 +10,10 @@
       <meta itemprop="path" content="androidx.compose.ui.platform">
       <meta itemprop="property" content="getDoubleTapMinTimeMillis()">
       <meta itemprop="property" content="getDoubleTapTimeoutMillis()">
+      <meta itemprop="property" content="getHandwritingGestureLineMargin()">
+      <meta itemprop="property" content="getHandwritingSlop()">
       <meta itemprop="property" content="getLongPressTimeoutMillis()">
+      <meta itemprop="property" content="getMaximumFlingVelocity()">
       <meta itemprop="property" content="getTouchSlop()">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -30,6 +33,7 @@
       <pre>public final class <a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html">AndroidViewConfiguration</a> implements <a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></pre>
     </p>
     <hr>
+    <p>A <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> with Android's default configurations. Derived from <code><a href="https://developer.android.com/reference/android/view/ViewConfiguration.html">android.view.ViewConfiguration</a></code></p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -78,10 +82,31 @@
             </td>
           </tr>
           <tr>
+            <td><code>float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html#getHandwritingGestureLineMargin()">getHandwritingGestureLineMargin</a>()</code></div>
+              <p>Margin in pixels around text line bounds where stylus handwriting gestures should be supported.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html#getHandwritingSlop()">getHandwritingSlop</a>()</code></div>
+              <p>Distance in pixels a stylus touch can wander before we think the user is handwriting.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>long</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html#getLongPressTimeoutMillis()">getLongPressTimeoutMillis</a>()</code></div>
               <p>The duration before a press turns into a long press.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html#getMaximumFlingVelocity()">getMaximumFlingVelocity</a>()</code></div>
+              <p>The maximum velocity a fling have at any given time.</p>
             </td>
           </tr>
           <tr>
@@ -157,6 +182,24 @@
         <pre class="api-signature no-pretty-print">public&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html#getDoubleTapTimeoutMillis()">getDoubleTapTimeoutMillis</a>()</pre>
         <p>The duration between the first tap's up event and the second tap's down event for an interaction to be considered a double-tap.</p>
       </div>
+      <div class="api-item"><a name="getHandwritingGestureLineMargin--"></a><a name="gethandwritinggesturelinemargin"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getHandwritingGestureLineMargin()">getHandwritingGestureLineMargin</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html#getHandwritingGestureLineMargin()">getHandwritingGestureLineMargin</a>()</pre>
+        <p>Margin in pixels around text line bounds where stylus handwriting gestures should be supported.</p>
+      </div>
+      <div class="api-item"><a name="getHandwritingSlop--"></a><a name="gethandwritingslop"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getHandwritingSlop()">getHandwritingSlop</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html#getHandwritingSlop()">getHandwritingSlop</a>()</pre>
+        <p>Distance in pixels a stylus touch can wander before we think the user is handwriting.</p>
+      </div>
       <div class="api-item"><a name="getLongPressTimeoutMillis--"></a><a name="getlongpresstimeoutmillis"></a>
         <div class="api-name-block">
           <div>
@@ -165,6 +208,15 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html#getLongPressTimeoutMillis()">getLongPressTimeoutMillis</a>()</pre>
         <p>The duration before a press turns into a long press.</p>
+      </div>
+      <div class="api-item"><a name="getMaximumFlingVelocity--"></a><a name="getmaximumflingvelocity"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getMaximumFlingVelocity()">getMaximumFlingVelocity</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html#getMaximumFlingVelocity()">getMaximumFlingVelocity</a>()</pre>
+        <p>The maximum velocity a fling have at any given time. This value should be in pixels/second.</p>
       </div>
       <div class="api-item"><a name="getTouchSlop--"></a><a name="gettouchslop"></a>
         <div class="api-name-block">

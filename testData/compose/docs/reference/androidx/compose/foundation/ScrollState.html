@@ -13,8 +13,11 @@
       <meta itemprop="property" content="getCanScrollBackward()">
       <meta itemprop="property" content="getCanScrollForward()">
       <meta itemprop="property" content="getInteractionSource()">
+      <meta itemprop="property" content="getLastScrolledBackward()">
+      <meta itemprop="property" content="getLastScrolledForward()">
       <meta itemprop="property" content="getMaxValue()">
       <meta itemprop="property" content="getValue()">
+      <meta itemprop="property" content="getViewportSize()">
       <meta itemprop="property" content="isScrollInProgress()">
       <meta itemprop="property" content="scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">
       <meta itemprop="property" content="scrollTo(kotlin.Int)">
@@ -187,6 +190,20 @@ Column {
             </td>
           </tr>
           <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/ScrollState.html#getLastScrolledBackward()">getLastScrolledBackward</a>()</code></div>
+              <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/ScrollState.html#getLastScrolledForward()">getLastScrolledForward</a>()</code></div>
+              <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>final int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/ScrollState.html#getMaxValue()">getMaxValue</a>()</code></div>
@@ -198,6 +215,13 @@ Column {
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/ScrollState.html#getValue()">getValue</a>()</code></div>
               <p>current scroll position value in pixels</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/ScrollState.html#getViewportSize()">getViewportSize</a>()</code></div>
+              <p>Size of the viewport on the scrollable axis, or 0 if still unknown.</p>
             </td>
           </tr>
           <tr>
@@ -480,6 +504,40 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getInteractionSource()">getInteractionSource</a>()</pre>
         <p><code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> that will be used to dispatch drag events when this list is being dragged. If you want to know whether the fling (or smooth scroll) is in progress, use <code><a href="/reference/androidx/compose/foundation/ScrollState.html#isScrollInProgress()">isScrollInProgress</a></code>.</p>
       </div>
+      <div class="api-item"><a name="getLastScrolledBackward--"></a><a name="getlastscrolledbackward"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getLastScrolledBackward()">getLastScrolledBackward</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getLastScrolledBackward()">getLastScrolledBackward</a>()</pre>
+        <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+        <ul>
+          <li>
+            <p>This <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling backward.</p>
+          </li>
+          <li>
+            <p>This <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> was scrolling backward in its last scroll action.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="api-item"><a name="getLastScrolledForward--"></a><a name="getlastscrolledforward"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getLastScrolledForward()">getLastScrolledForward</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getLastScrolledForward()">getLastScrolledForward</a>()</pre>
+        <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+        <ul>
+          <li>
+            <p>This <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling forward.</p>
+          </li>
+          <li>
+            <p>This <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> was scrolling forward in its last scroll action.</p>
+          </li>
+        </ul>
+      </div>
       <div class="api-item"><a name="getMaxValue--"></a><a name="getmaxvalue"></a>
         <div class="api-name-block">
           <div>
@@ -497,6 +555,15 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getValue()">getValue</a>()</pre>
         <p>current scroll position value in pixels</p>
+      </div>
+      <div class="api-item"><a name="getViewportSize--"></a><a name="getviewportsize"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getViewportSize()">getViewportSize</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getViewportSize()">getViewportSize</a>()</pre>
+        <p>Size of the viewport on the scrollable axis, or 0 if still unknown. Note that this value is only populated after the first measure pass.</p>
       </div>
       <div class="api-item"><a name="isScrollInProgress--"></a><a name="isscrollinprogress"></a>
         <div class="api-name-block">

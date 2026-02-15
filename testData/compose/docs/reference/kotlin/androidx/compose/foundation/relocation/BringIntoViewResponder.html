@@ -38,7 +38,7 @@
     </devsite-filter >
     <hr>
     <p>A parent that can respond to <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a></code> requests from its children, and scroll so that the item is visible on screen. To apply a responder to an element, pass it to the <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/package-summary.html#(androidx.compose.ui.Modifier).bringIntoViewResponder(androidx.compose.foundation.relocation.BringIntoViewResponder)">bringIntoViewResponder</a></code> modifier.</p>
-    <p>When a component calls <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">BringIntoViewRequester.bringIntoView</a></code>, the <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/package-summary.html#ModifierLocalBringIntoViewParent()">BringIntoView ModifierLocal</a></code> is read to gain access to the <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html">BringIntoViewResponder</a></code>, which is responsible for, in order:</p>
+    <p>When a component calls <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">BringIntoViewRequester.bringIntoView</a></code>, the nearest <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html">BringIntoViewResponder</a></code> is found, which is responsible for, in order:</p>
     <ol>
       <li>
         <p>Calculating a rectangle that its parent responder should bring into view by returning it from     <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">calculateRectForParent</a></code>.</p>
@@ -155,7 +155,9 @@ with(LocalDensity.current) {
         <tbody class="list">
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></code></td>
-            <td></td>
+            <td>
+              <p>Note: this API is experimental while we optimise the performance and find the right API shape for it</p>
+            </td>
           </tr>
         </tbody>
       </table>

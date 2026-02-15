@@ -8,9 +8,12 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="Constraints.Companion">
       <meta itemprop="path" content="androidx.compose.ui.unit">
+      <meta itemprop="property" content="fitPrioritizingHeight(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">
+      <meta itemprop="property" content="fitPrioritizingWidth(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="fixed(kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="fixedHeight(kotlin.Int)">
       <meta itemprop="property" content="fixedWidth(kotlin.Int)">
+      <meta itemprop="property" content="restrictConstraints(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Boolean)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -45,6 +48,20 @@
           <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
             <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#fitPrioritizingHeight(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">fitPrioritizingHeight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxHeight<br>)</code></div>
+              <p>Returns <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> that match as close as possible to the values passed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#fitPrioritizingWidth(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">fitPrioritizingWidth</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxHeight<br>)</code></div>
+              <p>Returns <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> that match as close as possible to the values passed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
+            <td>
               <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#fixed(kotlin.Int,kotlin.Int)">fixed</a>(int&nbsp;width,&nbsp;int&nbsp;height)</code></div>
               <p>Creates constraints for fixed size in both dimensions.</p>
             </td>
@@ -63,11 +80,40 @@
               <p>Creates constraints for fixed width and unspecified height.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><span><del><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#restrictConstraints(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Boolean)">restrictConstraints</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;prioritizeWidth<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> Replace with fitPrioritizingWidth</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
     <div class="list">
       <h2>Public methods</h2>
+      <div class="api-item"><a name="fitPrioritizingHeight(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="fitPrioritizingHeight-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="fitprioritizingheight"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="fitPrioritizingHeight(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">fitPrioritizingHeight</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#fitPrioritizingHeight(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">fitPrioritizingHeight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxHeight<br>)</pre>
+        <p>Returns <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> that match as close as possible to the values passed. If the dimensions are outside of those that can be represented, the constraints are limited to those that can be represented.</p>
+        <p><code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> is a <code>value class</code> based on a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code> and 4 integers must be limited to fit within its size. The larger dimension has up to 18 bits (262,143) and the smaller as few as 13 bits (8191). The height is granted as much space as it needs or caps the size to 18 bits. The width is given the remaining space.</p>
+        <p>This can be useful when layout constraints are possible to be extremely large, but not everything is possible to display on the device. For example a text layout where an entire chapter of a book is measured in one Layout and it isn't possible to break up the content to show in a <code>LazyColumn</code>.</p>
+      </div>
+      <div class="api-item"><a name="fitPrioritizingWidth(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="fitPrioritizingWidth-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="fitprioritizingwidth"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="fitPrioritizingWidth(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">fitPrioritizingWidth</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#fitPrioritizingWidth(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">fitPrioritizingWidth</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxHeight<br>)</pre>
+        <p>Returns <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> that match as close as possible to the values passed. If the dimensions are outside of those that can be represented, the constraints are limited to those that can be represented.</p>
+        <p><code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> is a <code>value class</code> based on a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code> and 4 integers must be limited to fit within its size. The larger dimension has up to 18 bits (262,143) and the smaller as few as 13 bits (8191). The width is granted as much space as it needs or caps the size to 18 bits. The height is given the remaining space.</p>
+        <p>This can be useful when layout constraints are possible to be extremely large, but not everything is possible to display on the device. For example a text layout where an entire chapter of a book is measured in one Layout and it isn't possible to break up the content to show in a <code>LazyColumn</code>.</p>
+      </div>
       <div class="api-item"><a name="fixed(kotlin.Int, kotlin.Int)"></a><a name="fixed-kotlin.Int-kotlin.Int-"></a><a name="fixed"></a>
         <div class="api-name-block">
           <div>
@@ -94,6 +140,15 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#fixedWidth(kotlin.Int)">fixedWidth</a>(int&nbsp;width)</pre>
         <p>Creates constraints for fixed width and unspecified height.</p>
+      </div>
+      <div class="api-item"><a name="restrictConstraints(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Boolean)"></a><a name="restrictConstraints-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Boolean-"></a><a name="restrictconstraints"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="restrictConstraints(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Boolean)">restrictConstraints</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;<span><del><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#restrictConstraints(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Boolean)">restrictConstraints</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;prioritizeWidth<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Replace with fitPrioritizingWidth</aside>
       </div>
     </div>
   </body>

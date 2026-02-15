@@ -8,8 +8,9 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="PagerDefaults">
       <meta itemprop="path" content="androidx.compose.foundation.pager">
-      <meta itemprop="property" content="flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">
-      <meta itemprop="property" content="pageNestedScrollConnection(androidx.compose.foundation.gestures.Orientation)">
+      <meta itemprop="property" content="flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">
+      <meta itemprop="property" content="pageNestedScrollConnection(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.gestures.Orientation)">
+      <meta itemprop="property" content="BeyondViewportPageCount()">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -31,14 +32,42 @@
           <li>
             <div class="kotlin-platform" data-title="Common/All">Cmn</div>
             <!--platform-Common/All-->
-            <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>object <a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html">PagerDefaults</a></pre>
+            <pre>object <a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html">PagerDefaults</a></pre>
           </li>
         </ul>
       </div>
     </devsite-filter >
     <hr>
-    <p>Contains the default values used by <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code>.</p>
+    <p>Contains the default values used by <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">Pager</a></code>.</p>
     <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Constants</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>const <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#BeyondViewportPageCount()">BeyondViewportPageCount</a> = 0</code></div>
+                <p>The default value of beyondViewportPageCount used to specify the number of pages to compose and layout before and after the visible pages.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">
         <table class="fixed">
@@ -54,10 +83,10 @@
           </thead>
           <tbody class="list">
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapFlingBehavior.html">SnapFlingBehavior</a></code></td>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TargetedFlingBehavior.html">TargetedFlingBehavior</a></code></td>
               <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">flingBehavior</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;pagerSnapDistance:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerSnapDistance.html">PagerSnapDistance</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lowVelocityAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;highVelocityAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapVelocityThreshold:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapPositionalThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
-                <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapFlingBehavior.html">SnapFlingBehavior</a></code> that will snap pages to the start of the layout.</p>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">flingBehavior</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;pagerSnapDistance:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerSnapDistance.html">PagerSnapDistance</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> snapPositionalThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/package-summary.html#snapFlingBehavior(androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec)">snapFlingBehavior</a></code> that will snap pages to the start of the layout.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -66,7 +95,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#pageNestedScrollConnection(androidx.compose.foundation.gestures.Orientation)">pageNestedScrollConnection</a>(orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a>)</code></div>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#pageNestedScrollConnection(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.gestures.Orientation)">pageNestedScrollConnection</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a>,&nbsp;orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a>)</code></div>
                 <p>The default implementation of Pager's pageNestedScrollConnection.</p>
               </td>
               <td>
@@ -79,23 +108,42 @@
     </div>
     <devsite-filter  select-el-container-id="platform">
       <div class="list">
-        <h2 data-title="platform-Common/All">Public functions
+        <h2 data-title="platform-Common/All">Constants
           <!--platform-Common/All--></h2>
-        <div class="api-item"><a name="flingBehavior(androidx.compose.foundation.pager.PagerState, androidx.compose.foundation.pager.PagerSnapDistance, androidx.compose.animation.core.AnimationSpec, androidx.compose.animation.core.DecayAnimationSpec, androidx.compose.animation.core.AnimationSpec, androidx.compose.ui.unit.Dp, kotlin.Float)"></a><a name="flingBehavior-androidx.compose.foundation.pager.PagerState-androidx.compose.foundation.pager.PagerSnapDistance-androidx.compose.animation.core.AnimationSpec-androidx.compose.animation.core.DecayAnimationSpec-androidx.compose.animation.core.AnimationSpec-androidx.compose.ui.unit.Dp-kotlin.Float-"></a><a name="flingbehavior"></a>
+        <div class="api-item"><a name="getBeyondViewportPageCount()"></a><a name="setBeyondViewportPageCount()"></a><a name="getBeyondViewportPageCount--"></a><a name="setBeyondViewportPageCount--"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">flingBehavior</h3>
+              <h3 id="BeyondViewportPageCount()">BeyondViewportPageCount</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">flingBehavior</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;pagerSnapDistance:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerSnapDistance.html">PagerSnapDistance</a> = PagerSnapDistance.atMost(1),<br>&nbsp;&nbsp;&nbsp;&nbsp;lowVelocityAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = tween(
-            easing = LinearEasing,
-            durationMillis = LowVelocityAnimationDefaultDuration
-        ),<br>&nbsp;&nbsp;&nbsp;&nbsp;highVelocityAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = rememberSplineBasedDecay(),<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = spring(stiffness = Spring.StiffnessMediumLow),<br>&nbsp;&nbsp;&nbsp;&nbsp;snapVelocityThreshold:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = MinFlingVelocityDp,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapPositionalThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.5f<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapFlingBehavior.html">SnapFlingBehavior</a></pre>
-          <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapFlingBehavior.html">SnapFlingBehavior</a></code> that will snap pages to the start of the layout. One can use the given parameters to control how the snapping animation will happen.</p>
+          <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#BeyondViewportPageCount()">BeyondViewportPageCount</a> = 0:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The default value of beyondViewportPageCount used to specify the number of pages to compose and layout before and after the visible pages. It does not include the pages automatically composed and laid out by the pre-fetcher in the direction of the scroll during scroll events.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="flingBehavior(androidx.compose.foundation.pager.PagerState, androidx.compose.foundation.pager.PagerSnapDistance, androidx.compose.animation.core.DecayAnimationSpec, androidx.compose.animation.core.AnimationSpec, kotlin.Float)"></a><a name="flingBehavior-androidx.compose.foundation.pager.PagerState-androidx.compose.foundation.pager.PagerSnapDistance-androidx.compose.animation.core.DecayAnimationSpec-androidx.compose.animation.core.AnimationSpec-kotlin.Float-"></a><a name="flingbehavior"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">flingBehavior</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">flingBehavior</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;pagerSnapDistance:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerSnapDistance.html">PagerSnapDistance</a> = PagerSnapDistance.atMost(1),<br>&nbsp;&nbsp;&nbsp;&nbsp;decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = rememberSplineBasedDecay(),<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = spring(
+            stiffness = Spring.StiffnessMediumLow,
+            visibilityThreshold = Int.VisibilityThreshold.toFloat()
+        ),<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> snapPositionalThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.5f<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/TargetedFlingBehavior.html">TargetedFlingBehavior</a></pre>
+          <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/package-summary.html#snapFlingBehavior(androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec)">snapFlingBehavior</a></code> that will snap pages to the start of the layout. One can use the given parameters to control how the snapping animation will happen.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -117,40 +165,28 @@
                 <tr>
                   <td><code>pagerSnapDistance:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerSnapDistance.html">PagerSnapDistance</a> = PagerSnapDistance.atMost(1)</code></td>
                   <td>
-                    <p>A way to control the snapping destination for this <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code>. The default behavior will result in any fling going to the next page in the direction of the fling (if the fling has enough velocity, otherwise we'll bounce back). Use <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerSnapDistance.html#atMost(kotlin.Int)">PagerSnapDistance.atMost</a></code> to define a maximum number of pages this <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code> is allowed to fling after scrolling is finished and fling has started.</p>
+                    <p>A way to control the snapping destination for this <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">Pager</a></code>. The default behavior will result in any fling going to the next page in the direction of the fling (if the fling has enough velocity, otherwise  the Pager will bounce back). Use <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerSnapDistance.html#atMost(kotlin.Int)">PagerSnapDistance.atMost</a></code> to define a maximum number of pages this <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">Pager</a></code> is allowed to fling after scrolling is finished and fling has started.</p>
                   </td>
                 </tr>
                 <tr>
-                  <td><code>lowVelocityAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = tween(
-            easing = LinearEasing,
-            durationMillis = LowVelocityAnimationDefaultDuration
+                  <td><code>decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = rememberSplineBasedDecay()</code></td>
+                  <td>
+                    <p>The animation spec used to approach the target offset. When the fling velocity is large enough. Large enough means large enough to naturally decay. For single page snapping this usually never happens since there won't be enough space to run a decay animation.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = spring(
+            stiffness = Spring.StiffnessMediumLow,
+            visibilityThreshold = Int.VisibilityThreshold.toFloat()
         )</code></td>
                   <td>
-                    <p>The animation spec used to approach the target offset. When the fling velocity is not large enough. Large enough means large enough to naturally decay.</p>
+                    <p>The animation spec used to finally snap to the position. This animation will be often used in 2 cases: 1) There was enough space to an approach animation, the Pager will use <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">snapAnimationSpec</a></code> in the last step of the animation to settle the page into position. 2) There was not enough space to run the approach animation.</p>
                   </td>
                 </tr>
                 <tr>
-                  <td><code>highVelocityAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = rememberSplineBasedDecay()</code></td>
+                  <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> snapPositionalThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.5f</code></td>
                   <td>
-                    <p>The animation spec used to approach the target offset. When the fling velocity is large enough. Large enough means large enough to naturally decay.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><code>snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = spring(stiffness = Spring.StiffnessMediumLow)</code></td>
-                  <td>
-                    <p>The animation spec used to finally snap to the position.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><code>snapVelocityThreshold:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = MinFlingVelocityDp</code></td>
-                  <td>
-                    <p>The minimum velocity required for a fling to be considered high enough to make pages animate through <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">lowVelocityAnimationSpec</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">highVelocityAnimationSpec</a></code>.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><code>snapPositionalThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.5f</code></td>
-                  <td>
-                    <p>If the fling has a low velocity (e.g. slow scroll), this fling behavior will use this snap threshold in order to determine if the pager should snap back or move forward. Use a number between 0 and 1 as a fraction of the page size that needs to be scrolled before we consider it should move to the next page. For instance, if snapPositionalThreshold = 0.35, it means if this pager is scrolled with a slow velocity and we scroll more than 35% of the page size, then will jump to the next page, if not we scroll back. The default value is 50% meaning if we scroll the page more than 50% and let go it will snap to the next page. Note that any fling that has high enough velocity will <em>always</em> move to the next page in the direction of the fling.</p>
+                    <p>If the fling has a low velocity (e.g. slow scroll), this fling behavior will use this snap threshold in order to determine if the pager should snap back or move forward. Use a number between 0 and 1 as a fraction of the page size that needs to be scrolled before the Pager considers it should move to the next page. For instance, if snapPositionalThreshold = 0.35, it means if this pager is scrolled with a slow velocity and the Pager scrolls more than 35% of the page size, then will jump to the next page, if not it scrolls back. Note that any fling that has high enough velocity will <em>always</em> move to the next page in the direction of the fling.</p>
                   </td>
                 </tr>
               </tbody>
@@ -169,9 +205,9 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapFlingBehavior.html">SnapFlingBehavior</a></code></td>
+                  <td><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TargetedFlingBehavior.html">TargetedFlingBehavior</a></code></td>
                   <td>
-                    <p>An instance of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html">FlingBehavior</a></code> that will perform Snapping to the next page by default. The animation will be governed by the post scroll velocity and we'll use either <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">lowVelocityAnimationSpec</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">highVelocityAnimationSpec</a></code> to approach the snapped position and the last step of the animation will be performed by <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">snapAnimationSpec</a></code>. If a velocity is not high enough (lower than <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">snapVelocityThreshold</a></code>) the pager will use <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">snapAnimationSpec</a></code> to reach the snapped position. If the velocity is high enough, we'll use the logic described in <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">highVelocityAnimationSpec</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,androidx.compose.ui.unit.Dp,kotlin.Float)">lowVelocityAnimationSpec</a></code>.</p>
+                    <p>An instance of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html">FlingBehavior</a></code> that will perform Snapping to the next page by default. The animation will be governed by the post scroll velocity and the Pager will use either <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">snapAnimationSpec</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">decayAnimationSpec</a></code> to approach the snapped position If a velocity is not high enough the pager will use <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">snapAnimationSpec</a></code> to reach the snapped position. If the velocity is high enough, the Pager will use the logic described in <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">decayAnimationSpec</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">snapAnimationSpec</a></code>.</p>
                   </td>
                 </tr>
               </tbody>
@@ -190,27 +226,37 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapFlingBehavior.html">SnapFlingBehavior</a></code></td>
+                  <td><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/package-summary.html#snapFlingBehavior(androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec)">snapFlingBehavior</a></code></td>
                   <td>
                     <p>for more information on what which parameter controls in the overall snapping animation.</p>
+                    <p>The animation specs used by the fling behavior will depend on 2 factors:</p>
+                    <ol>
+                      <li>
+                        <p>The gesture velocity.</p>
+                      </li>
+                      <li>
+                        <p>The target page proposed by <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">pagerSnapDistance</a></code>.</p>
+                      </li>
+                    </ol>
+                    <p>If you're using single page snapping (the most common use case for <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">Pager</a></code>), there won't be enough space to actually run a decay animation to approach the target page, so the Pager will always use the snapping animation from <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">snapAnimationSpec</a></code>. If you're using multi-page snapping (this means you're abs(targetPage - currentPage) > 1) the Pager may use <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">decayAnimationSpec</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">snapAnimationSpec</a></code> to approach the targetPage, it will depend on the velocity generated by the triggering gesture. If the gesture has a high enough velocity to approach the target page, the Pager will use <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">decayAnimationSpec</a></code> followed by <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">snapAnimationSpec</a></code> for the final step of the animation. If the gesture doesn't have enough velocity, the Pager will use <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">snapAnimationSpec</a></code> + <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#flingBehavior(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.pager.PagerSnapDistance,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec,kotlin.Float)">snapAnimationSpec</a></code> in a similar fashion.</p>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="api-item"><a name="pageNestedScrollConnection-androidx.compose.foundation.gestures.Orientation-"></a><a name="pagenestedscrollconnection"></a>
+        <div class="api-item"><a name="pageNestedScrollConnection(androidx.compose.foundation.pager.PagerState, androidx.compose.foundation.gestures.Orientation)"></a><a name="pageNestedScrollConnection-androidx.compose.foundation.pager.PagerState-androidx.compose.foundation.gestures.Orientation-"></a><a name="pagenestedscrollconnection"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="pageNestedScrollConnection(androidx.compose.foundation.gestures.Orientation)">pageNestedScrollConnection</h3>
+              <h3 id="pageNestedScrollConnection(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.gestures.Orientation)">pageNestedScrollConnection</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#pageNestedScrollConnection(androidx.compose.foundation.gestures.Orientation)">pageNestedScrollConnection</a>(orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></pre>
-          <p>The default implementation of Pager's pageNestedScrollConnection. All fling scroll deltas will be consumed by the Pager.</p>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerDefaults.html#pageNestedScrollConnection(androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.gestures.Orientation)">pageNestedScrollConnection</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a>,&nbsp;orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></pre>
+          <p>The default implementation of Pager's pageNestedScrollConnection.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -224,9 +270,15 @@
               </thead>
               <tbody class="list">
                 <tr>
+                  <td><code>state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a></code></td>
+                  <td>
+                    <p>state of the pager</p>
+                  </td>
+                </tr>
+                <tr>
                   <td><code>orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a></code></td>
                   <td>
-                    <p>The orientation of the pager. This will be used to determine which direction it will consume everything. The other direction will not be consumed.</p>
+                    <p>The orientation of the pager. This will be used to determine which direction the nested scroll connection will operate and react on.</p>
                   </td>
                 </tr>
               </tbody>

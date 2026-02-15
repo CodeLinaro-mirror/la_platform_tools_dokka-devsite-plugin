@@ -257,6 +257,31 @@
           </li>
         </ul>
         <p>Additionally, for <code><a href="/reference/androidx/compose/material3/package-summary.html#Text(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1,androidx.compose.ui.text.TextStyle)">color</a></code>, if <code><a href="/reference/androidx/compose/material3/package-summary.html#Text(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1,androidx.compose.ui.text.TextStyle)">color</a></code> is not set, and <code><a href="/reference/androidx/compose/material3/package-summary.html#Text(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1,androidx.compose.ui.text.TextStyle)">style</a></code> does not have a color, then <code><a href="/reference/androidx/compose/material3/package-summary.html#LocalContentColor()">LocalContentColor</a></code> will be used.</p>
+        <p>See an example of displaying text with links where links apply the styling from the theme:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withLink
+
+val url = &quot;https://developer.android.com/jetpack/compose&quot;
+
+val linkColor = MaterialTheme.colorScheme.primary
+val linkStyle = SpanStyle(color = linkColor, textDecoration = TextDecoration.Underline)
+
+val annotatedString = buildAnnotatedString {
+    append(&quot;Build better apps faster with &quot;)
+    withLink(LinkAnnotation.Url(url = url, styles = TextLinkStyles(style = linkStyle))) {
+        append(&quot;Jetpack Compose&quot;)
+    }
+}
+// Note that if your string is defined in resources, you can pass the same link style object
+// when constructing the AnnotatedString using the AnnotatedString.fromHtml method.
+Text(annotatedString)</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>

@@ -1,0 +1,939 @@
+<html devsite="true">
+  <head>
+    <title>androidx.compose.foundation.text.input</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="androidx.compose.foundation.text.input">
+      <meta itemprop="property" content="InputTransformation">
+      <meta itemprop="property" content="KeyboardActionHandler">
+      <meta itemprop="property" content="OutputTransformation">
+      <meta itemprop="property" content="ChangeList">
+      <meta itemprop="property" content="TextFieldDecorator">
+      <meta itemprop="property" content="TextFieldLineLimits">
+      <meta itemprop="property" content="TextFieldBuffer">
+      <meta itemprop="property" content="MultiLine">
+      <meta itemprop="property" content="TextFieldState">
+      <meta itemprop="property" content="TextObfuscationMode">
+      <meta itemprop="property" content="UndoState">
+      <meta itemprop="property" content="Companion">
+      <meta itemprop="property" content="SingleLine">
+      <meta itemprop="property" content="Saver">
+      <meta itemprop="property" content="rememberTextFieldState(kotlin.String,androidx.compose.ui.text.TextRange)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.InputTransformation).allCaps(androidx.compose.ui.text.intl.Locale)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer).placeCursorAtEnd()">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer).selectAll()">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldState).clearText()">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldState).setTextAndPlaceCursorAtEnd(kotlin.String)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldState).setTextAndSelectAll(kotlin.String)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>androidx.compose.foundation.text.input</h1>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/text/input/package-summary.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option></select></devsite-select >
+    <h2>Interfaces</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+              <td>
+                <p>A function that is ran after every change made to a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code> by user input and can change or reject that input.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/KeyboardActionHandler.html">KeyboardActionHandler</a></code></td>
+              <td></td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/OutputTransformation.html">OutputTransformation</a></code></td>
+              <td>
+                <p>A function (<code><a href="/reference/kotlin/androidx/compose/foundation/text/input/OutputTransformation.html#(androidx.compose.foundation.text.input.TextFieldBuffer).transformOutput()">transformOutput</a></code>) that transforms the text presented to a user by a <code><a href="/reference/kotlin/androidx/compose/foundation/text/package-summary.html#BasicTextField(androidx.compose.foundation.text.input.TextFieldState,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.text.input.InputTransformation,androidx.compose.ui.text.TextStyle,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.input.KeyboardActionHandler,androidx.compose.foundation.text.input.TextFieldLineLimits,kotlin.Function2,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Brush,androidx.compose.foundation.text.input.OutputTransformation,androidx.compose.foundation.text.input.TextFieldDecorator,androidx.compose.foundation.ScrollState)">BasicTextField</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a></code></td>
+              <td>
+                <p>The ordered list of non-overlapping and discontinuous changes performed on a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code> during the current <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html#edit(kotlin.Function1)">edit</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.TextFieldBuffer).transformInput()">filter</a></code> operation.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldDecorator.html">TextFieldDecorator</a></code></td>
+              <td>
+                <p>Composable interface that allows to add decorations around text field, such as icon, placeholder, helper messages or similar, and automatically increase the hit target area of the text field.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.html">TextFieldLineLimits</a></code></td>
+              <td>
+                <p>Values that specify the text wrapping, scrolling, and height measurement behavior for text fields.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <h2>Classes</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code></td>
+              <td>
+                <p>A text buffer that can be edited, similar to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.text/-string-builder/index.html">StringBuilder</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.MultiLine.html">TextFieldLineLimits.MultiLine</a></code></td>
+              <td>
+                <p>The text field will be at least <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.MultiLine.html#(kotlin.Int,kotlin.Int)">minHeightInLines</a></code> tall, if the text overflows it will wrap, and if the text ends up being more than one line the field will grow until it is <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.MultiLine.html#(kotlin.Int,kotlin.Int)">maxHeightInLines</a></code> tall and then start scrolling vertically.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code></td>
+              <td>
+                <p>The editable text state of a text field, including both the <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html#text()">text</a></code> itself and position of the cursor or selection.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextObfuscationMode.html">TextObfuscationMode</a></code></td>
+              <td>
+                <p>Defines how the text will be obscured in secure text fields.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/UndoState.html">UndoState</a></code></td>
+              <td>
+                <p>Defines an interactable undo history.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <h2>Objects</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.Companion.html">InputTransformation.Companion</a></code></td>
+              <td></td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.SingleLine.html">TextFieldLineLimits.SingleLine</a></code></td>
+              <td>
+                <p>The text field is always a single line tall, ignores newlines in the text, and scrolls horizontally when the text overflows.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.Saver.html">TextFieldState.Saver</a></code></td>
+              <td>
+                <p>Saves and restores a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code> for rememberSaveable.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <h2>Top-level functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#rememberTextFieldState(kotlin.String,androidx.compose.ui.text.TextRange)">rememberTextFieldState</a>(initialText:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,&nbsp;initialSelection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>)</code></div>
+                <p>Create and remember a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <h2>Extension functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).allCaps(androidx.compose.ui.text.intl.Locale)">allCaps</a>(locale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/intl/Locale.html">Locale</a>)</code></div>
+                <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that forces all text to be uppercase.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">byValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transformation:&nbsp;(current:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a>, proposed:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><br>)</code></div>
+                <p>Creates an <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> from a function that accepts both the current and proposed <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldCharSequence.html">TextFieldCharSequence</a></code> and returns the <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldCharSequence.html">TextFieldCharSequence</a></code> to use for the field.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).clearText()">clearText</a>()</code></div>
+                <p>Deletes all the text in the state.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">delete</a>(start:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;end:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Delete the text between <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">start</a></code> (inclusive) and <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">end</a></code> (exclusive).</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">forEachChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;(range:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>, originalRange:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                <p>Iterates over all the changes in this <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">ChangeList</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">forEachChangeReversed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;(range:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>, originalRange:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                <p>Iterates over all the changes in this <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">ChangeList</a></code> in reverse order.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">insert</a>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>)</code></div>
+                <p>Insert <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">text</a></code> at the given <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">index</a></code> in this value.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</a>(maxLength:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Returns <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that rejects input which causes the total length of the text field to be more than <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</a></code> characters.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).placeCursorAtEnd()">placeCursorAtEnd</a>()</code></div>
+                <p>Places the cursor at the end of the text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).selectAll()">selectAll</a>()</code></div>
+                <p>Places the selection around all the text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndPlaceCursorAtEnd(kotlin.String)">setTextAndPlaceCursorAtEnd</a>(text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>)</code></div>
+                <p>Sets the text in this <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code> to <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndPlaceCursorAtEnd(kotlin.String)">text</a></code>, replacing any text that was previously there, and places the cursor at the end of the new text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndSelectAll(kotlin.String)">setTextAndSelectAll</a>(text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>)</code></div>
+                <p>Sets the text in this <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code> to <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndSelectAll(kotlin.String)">text</a></code>, replacing any text that was previously there, and selects all the text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">then</a>(next:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>)</code></div>
+                <p>Creates a filter chain that will run <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">next</a></code> after this.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <h2>Top-level functions</h2>
+    <div class="api-item"><a name="rememberTextFieldState(kotlin.String, androidx.compose.ui.text.TextRange)"></a><a name="rememberTextFieldState-kotlin.String-androidx.compose.ui.text.TextRange-"></a><a name="remembertextfieldstate"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="rememberTextFieldState(kotlin.String,androidx.compose.ui.text.TextRange)">rememberTextFieldState</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#rememberTextFieldState(kotlin.String,androidx.compose.ui.text.TextRange)">rememberTextFieldState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialText:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialSelection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a> = TextRange(initialText.length)<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></pre>
+      <p>Create and remember a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code>. The state is remembered using rememberSaveable and so will be saved and restored with the composition.</p>
+      <p>If you need to store a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code> in another object, use the <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.Saver.html">TextFieldState.Saver</a></code> object to manually save and restore the state.</p>
+    </div>
+    <h2>Extension functions</h2>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.InputTransformation-.allCaps-androidx.compose.ui.text.intl.Locale-"></a><a name="allcaps"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.InputTransformation).allCaps(androidx.compose.ui.text.intl.Locale)">allCaps</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).allCaps(androidx.compose.ui.text.intl.Locale)">allCaps</a>(locale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/intl/Locale.html">Locale</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></pre>
+      <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that forces all text to be uppercase.</p>
+      <p>This transformation automatically configures the keyboard to capitalize all characters.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>locale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/intl/Locale.html">Locale</a></code></td>
+              <td>
+                <p>The <code><a href="/reference/kotlin/androidx/compose/ui/text/intl/Locale.html">Locale</a></code> in which to perform the case conversion.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.InputTransformation-.byValue-kotlin.Function2-"></a><a name="byvalue"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">byValue</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">byValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transformation:&nbsp;(current:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a>, proposed:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></pre>
+      <p>Creates an <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> from a function that accepts both the current and proposed <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldCharSequence.html">TextFieldCharSequence</a></code> and returns the <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldCharSequence.html">TextFieldCharSequence</a></code> to use for the field.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">transformation</a></code> can return either <code>current</code>, <code>proposed</code>, or a completely different value.</p>
+      <p>The selection or cursor will be updated automatically. For more control of selection implement <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> directly.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.byValue
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.sp
+
+val state = remember { TextFieldState() }
+BasicTextField(
+    state,
+    // Reject whitespace.
+    inputTransformation = InputTransformation.byValue { current, proposed -&gt;
+        if (&quot;&quot;&quot;\s&quot;&quot;&quot;.toRegex() in proposed) current else proposed
+    }
+)</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.byValue
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.sp
+
+val state = remember { TextFieldState() }
+BasicTextField(
+    state,
+    // Convert tabs to spaces.
+    inputTransformation = InputTransformation.byValue { _, proposed -&gt;
+        proposed.replace(&quot;&quot;&quot;\t&quot;&quot;&quot;.toRegex(), &quot;  &quot;)
+    }
+)</pre>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldState-.clearText--"></a><a name="cleartext"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.TextFieldState).clearText()">clearText</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).clearText()">clearText</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Deletes all the text in the state.</p>
+      <p>To perform more complicated edits on the text, call <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html#edit(kotlin.Function1)">TextFieldState.edit</a></code>. This function is equivalent to calling:</p>
+      <pre class="prettyprint">edit {<br>  delete(0, length)<br>  placeCursorAtEnd()<br>}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndPlaceCursorAtEnd(kotlin.String)">setTextAndPlaceCursorAtEnd</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndSelectAll(kotlin.String)">setTextAndSelectAll</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int, kotlin.Int)"></a><a name="-androidx.compose.foundation.text.input.TextFieldBuffer-.delete-kotlin.Int-kotlin.Int-"></a><a name="delete"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">delete</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">delete</a>(start:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;end:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Delete the text between <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">start</a></code> (inclusive) and <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">end</a></code> (exclusive). Pass 0 as <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">start</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html#length()">TextFieldBuffer.length</a></code> as <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">end</a></code> to delete everything in this buffer.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>start:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <p>The character offset of the first character to delete.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>end:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <p>The character offset of the first character after the deleted range.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html#replace(kotlin.Int,kotlin.Int,kotlin.CharSequence)">replace</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html#append(kotlin.CharSequence)">append</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">insert</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList-.forEachChange-kotlin.Function2-"></a><a name="foreachchange"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">forEachChange</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">forEachChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;(range:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>, originalRange:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Iterates over all the changes in this <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">ChangeList</a></code>.</p>
+      <p>Changes are iterated by index, so any changes made by <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">block</a></code> after the current one will be visited by <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">block</a></code>. <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">block</a></code> should not make any new changes <em>before</em> the current one or changes will be visited more than once. If you need to make changes, consider using <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">forEachChangeReversed</a></code>.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.forEachChange
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.text.substring
+
+// Print a log message every time the text is changed.
+BasicTextField(state = rememberTextFieldState(), inputTransformation = {
+    changes.forEachChange { sourceRange, replacedLength -&gt;
+        val newString = asCharSequence().substring(sourceRange)
+        println(&quot;&quot;&quot;$replacedLength characters were replaced with &quot;$newString&quot;&quot;&quot;&quot;)
+    }
+})</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">forEachChangeReversed</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList-.forEachChangeReversed-kotlin.Function2-"></a><a name="foreachchangereversed"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">forEachChangeReversed</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">forEachChangeReversed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;(range:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>, originalRange:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Iterates over all the changes in this <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">ChangeList</a></code> in reverse order.</p>
+      <p>Changes are iterated by index, so <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">block</a></code> should not perform any new changes before the current one or changes may be skipped. <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">block</a></code> may make non-overlapping changes after the current one safely, such changes will not be visited.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.delete
+import androidx.compose.foundation.text.input.forEachChange
+import androidx.compose.foundation.text.input.forEachChangeReversed
+import androidx.compose.foundation.text.input.insert
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+
+// Make a text field behave in &quot;insert mode&quot; – inserted text overwrites the text ahead of it
+// instead of being inserted.
+BasicTextField(state = rememberTextFieldState(), inputTransformation = {
+    changes.forEachChangeReversed { range, originalRange -&gt;
+        if (!range.collapsed &amp;&amp; originalRange.collapsed) {
+            // New text was inserted, delete the text ahead of it.
+            delete(
+                range.end.coerceAtMost(length),
+                (range.end + range.length).coerceAtMost(length)
+            )
+        }
+    }
+})</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">forEachChange</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int, kotlin.String)"></a><a name="-androidx.compose.foundation.text.input.TextFieldBuffer-.insert-kotlin.Int-kotlin.String-"></a><a name="insert"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">insert</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">insert</a>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Insert <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">text</a></code> at the given <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">index</a></code> in this value. Pass 0 to insert <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">text</a></code> at the beginning of this buffer, and pass <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html#length()">TextFieldBuffer.length</a></code> to insert <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">text</a></code> at the end of this buffer.</p>
+      <p>This is equivalent to calling <code>replace(index, index, text)</code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <p>The character offset at which to insert <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).insert(kotlin.Int,kotlin.String)">text</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <p>The text to insert.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html#replace(kotlin.Int,kotlin.Int,kotlin.CharSequence)">replace</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html#append(kotlin.CharSequence)">append</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).delete(kotlin.Int,kotlin.Int)">delete</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.InputTransformation-.maxLength-kotlin.Int-"></a><a name="maxlength"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</a>(maxLength:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></pre>
+      <p>Returns <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that rejects input which causes the total length of the text field to be more than <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</a></code> characters.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldBuffer-.placeCursorAtEnd--"></a><a name="placecursoratend"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer).placeCursorAtEnd()">placeCursorAtEnd</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).placeCursorAtEnd()">placeCursorAtEnd</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Places the cursor at the end of the text.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldBuffer-.selectAll--"></a><a name="selectall"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer).selectAll()">selectAll</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).selectAll()">selectAll</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Places the selection around all the text.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldState-.setTextAndPlaceCursorAtEnd-kotlin.String-"></a><a name="settextandplacecursoratend"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.TextFieldState).setTextAndPlaceCursorAtEnd(kotlin.String)">setTextAndPlaceCursorAtEnd</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndPlaceCursorAtEnd(kotlin.String)">setTextAndPlaceCursorAtEnd</a>(text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Sets the text in this <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code> to <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndPlaceCursorAtEnd(kotlin.String)">text</a></code>, replacing any text that was previously there, and places the cursor at the end of the new text.</p>
+      <p>To perform more complicated edits on the text, call <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html#edit(kotlin.Function1)">TextFieldState.edit</a></code>. This function is equivalent to calling:</p>
+      <pre class="prettyprint">edit {<br>  replace(0, length, text)<br>  placeCursorAtEnd()<br>}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndSelectAll(kotlin.String)">setTextAndSelectAll</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).clearText()">clearText</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).placeCursorAtEnd()">placeCursorAtEnd</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldState-.setTextAndSelectAll-kotlin.String-"></a><a name="settextandselectall"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.TextFieldState).setTextAndSelectAll(kotlin.String)">setTextAndSelectAll</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndSelectAll(kotlin.String)">setTextAndSelectAll</a>(text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Sets the text in this <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code> to <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndSelectAll(kotlin.String)">text</a></code>, replacing any text that was previously there, and selects all the text.</p>
+      <p>To perform more complicated edits on the text, call <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState.html#edit(kotlin.Function1)">TextFieldState.edit</a></code>. This function is equivalent to calling:</p>
+      <pre class="prettyprint">edit {<br>  replace(0, length, text)<br>  selectAll()<br>}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).setTextAndPlaceCursorAtEnd(kotlin.String)">setTextAndPlaceCursorAtEnd</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldState).clearText()">clearText</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer).selectAll()">selectAll</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.foundation.text.input.InputTransformation-.then-androidx.compose.foundation.text.input.InputTransformation-"></a><a name="then"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">then</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>.<a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">then</a>(next:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></pre>
+      <p>Creates a filter chain that will run <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">next</a></code> after this. Filters are applied sequentially, so any changes made by this filter will be visible to <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">next</a></code>.</p>
+      <p>The returned filter will use the <code><a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a></code> from <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">next</a></code> if non-null, otherwise it will use the options from this transformation.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.then
+
+val removeFirstEFilter = InputTransformation {
+    val index = asCharSequence().indexOf('e')
+    if (index != -1) {
+        replace(index, index + 1, &quot;&quot;)
+    }
+}
+val printECountFilter = InputTransformation {
+    println(&quot;found ${asCharSequence().count { it == 'e' }} 'e's in the string&quot;)
+}
+
+// Returns a filter that always prints 0 e's.
+removeFirstEFilter.then(printECountFilter)
+
+// Returns a filter that prints the number of e's before the first one is removed.
+printECountFilter.then(removeFirstEFilter)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>next:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+              <td>
+                <p>The <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that will be ran after this one.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

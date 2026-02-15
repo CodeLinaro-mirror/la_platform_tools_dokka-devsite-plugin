@@ -28,8 +28,8 @@
     </p>
     <hr>
     <p>Can be used to send <code><a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView</a></code> requests. Pass it as a parameter to <code><a href="/reference/androidx/compose/foundation/relocation/package-summary.html#(androidx.compose.ui.Modifier).bringIntoViewRequester(androidx.compose.foundation.relocation.BringIntoViewRequester)">Modifier.bringIntoViewRequester()</a></code>.</p>
-    <p>For instance, you can call <code><a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView()</a></code> to make all the scrollable parents scroll so that the specified item is brought into the parent bounds.</p>
-    <p>Here is a sample where a composable is brought into view:</p>
+    <p>For instance, you can call <code><a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView()</a></code> to make all the scrollable parents scroll so that the specified item is brought into the scroll viewport.</p>
+    <p>Note: this API is experimental while we optimise the performance and find the right API shape for it.</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
@@ -66,7 +66,6 @@ Row(Modifier.horizontalScroll(rememberScrollState())) {
         )
     }
 }</pre>
-    <p>Here is a sample where part of a composable is brought into view:</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
@@ -193,7 +192,6 @@ Row(Modifier.horizontalScroll(rememberScrollState())) {
         )
     }
 }</pre>
-        <p>Here is a sample where a part of a composable is brought into view:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
@@ -266,7 +264,6 @@ with(LocalDensity.current) {
                 <td><code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect</code></td>
                 <td>
                   <p>The rectangle (In local coordinates) that should be brought into view. If you don't specify the coordinates, the coordinates of the <code><a href="/reference/androidx/compose/foundation/relocation/package-summary.html#(androidx.compose.ui.Modifier).bringIntoViewRequester(androidx.compose.foundation.relocation.BringIntoViewRequester)">Modifier.bringIntoViewRequester()</a></code> associated with this <code><a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></code> will be used.</p>
-                  <p>Here is a sample where a composable is brought into view:</p>
                 </td>
               </tr>
             </tbody>

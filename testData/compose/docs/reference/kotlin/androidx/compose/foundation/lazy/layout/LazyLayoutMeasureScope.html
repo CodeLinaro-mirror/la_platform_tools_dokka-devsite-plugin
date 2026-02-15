@@ -46,6 +46,7 @@
     <hr>
     <p>The receiver scope of a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code>'s measure lambda. The return value of the measure lambda is <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code>, which should be returned by <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1)">layout</a></code>.</p>
     <p>Main difference from the regular flow of writing any custom layout is that you have a new function <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html#measure(kotlin.Int,androidx.compose.ui.unit.Constraints)">measure</a></code> which accepts item index and constraints, composes the item based and then measures all the layouts emitted in the item content block.</p>
+    <p>Note: this interface is a part of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code> harness that allows for building custom lazy layouts. LazyLayout and all corresponding APIs are still under development and are subject to change.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">
@@ -251,6 +252,16 @@
                           <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                           <!--platform-Common/All--></td>
                       </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1,kotlin.Function1)">layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignmentLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;rulers:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/RulerScope.html">RulerScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;placementBlock:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                          <p>Sets the size and alignment lines of the measured layout, as well as the positioning block that defines the children positioning logic.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
                     </tbody>
                   </table>
                 </devsite-filter >
@@ -289,10 +300,27 @@
                           <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                           <!--platform-Common/All--></td>
                       </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html">androidx.compose.ui.unit.FontScaling</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
                       <tr>
                         <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
                         <td>
-                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#fontScale()">fontScale</a></code></div>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/FontScaling.html#fontScale()">fontScale</a></code></div>
                           <p>Current user preference for the scaling factor for fonts.</p>
                         </td>
                         <td>
@@ -319,7 +347,7 @@
                       <tr>
                         <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
                         <td>
-                          <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a></code></div>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a></code></div>
                           <p>This indicates whether the ongoing measurement is for lookahead pass.</p>
                         </td>
                         <td>

@@ -37,6 +37,7 @@
     <hr>
     <p>The receiver scope of a <code><a href="/reference/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code>'s measure lambda. The return value of the measure lambda is <code><a href="/reference/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code>, which should be returned by <code><a href="/reference/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1)">layout</a></code>.</p>
     <p>Main difference from the regular flow of writing any custom layout is that you have a new function <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html#measure(kotlin.Int,androidx.compose.ui.unit.Constraints)">measure</a></code> which accepts item index and constraints, composes the item based and then measures all the layouts emitted in the item content block.</p>
+    <p>Note: this interface is a part of <code><a href="/reference/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code> harness that allows for building custom lazy layouts. LazyLayout and all corresponding APIs are still under development and are subject to change.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -141,13 +142,6 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><code>abstract float</code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#getFontScale()">getFontScale</a>()</code></div>
-                        <p>Current user preference for the scaling factor for fonts.</p>
-                      </td>
-                    </tr>
-                    <tr>
                       <td><code>default int</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
@@ -188,6 +182,27 @@
 </devsite-expandable>            </td>
           </tr>
           <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/unit/FontScaling.html">androidx.compose.ui.unit.FontScaling</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/FontScaling.html#getFontScale()">getFontScale</a>()</code></div>
+                        <p>Current user preference for the scaling factor for fonts.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/layout/IntrinsicMeasureScope.html">androidx.compose.ui.layout.IntrinsicMeasureScope</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
@@ -206,7 +221,7 @@
                     <tr>
                       <td><code>default boolean</code></td>
                       <td>
-                        <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a>()</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a>()</code></div>
                         <p>This indicates whether the ongoing measurement is for lookahead pass.</p>
                       </td>
                     </tr>
@@ -228,6 +243,13 @@
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
                       <td>
                         <div><code><a href="/reference/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1)">layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;width,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;height,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;alignmentLines,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;placementBlock<br>)</code></div>
+                        <p>Sets the size and alignment lines of the measured layout, as well as the positioning block that defines the children positioning logic.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1,kotlin.Function1)">layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;width,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;height,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;alignmentLines,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/RulerScope.html">RulerScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;rulers,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;placementBlock<br>)</code></div>
                         <p>Sets the size and alignment lines of the measured layout, as well as the positioning block that defines the children positioning logic.</p>
                       </td>
                     </tr>

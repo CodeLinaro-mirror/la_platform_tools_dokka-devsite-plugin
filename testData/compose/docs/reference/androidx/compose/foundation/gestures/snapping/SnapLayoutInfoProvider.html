@@ -8,9 +8,8 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="SnapLayoutInfoProvider">
       <meta itemprop="path" content="androidx.compose.foundation.gestures.snapping">
-      <meta itemprop="property" content="(androidx.compose.ui.unit.Density).calculateApproachOffset(kotlin.Float)">
-      <meta itemprop="property" content="(androidx.compose.ui.unit.Density).calculateSnapStepSize()">
-      <meta itemprop="property" content="(androidx.compose.ui.unit.Density).calculateSnappingOffset(kotlin.Float)">
+      <meta itemprop="property" content="calculateApproachOffset(kotlin.Float,kotlin.Float)">
+      <meta itemprop="property" content="calculateSnapOffset(kotlin.Float)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -26,21 +25,20 @@
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_java_switcher2.md" %}
     <p>
-      <pre>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public interface <a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html">SnapLayoutInfoProvider</a></pre>
+      <pre>public interface <a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html">SnapLayoutInfoProvider</a></pre>
     </p>
     <hr>
-    <p>Provides information about the layout that is using a SnapFlingBehavior. The provider should give the following information:</p>
+    <p>Provides information about the layout that is using a <code><a href="/reference/androidx/compose/foundation/gestures/snapping/package-summary.html#snapFlingBehavior(androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec)">snapFlingBehavior</a></code>. The provider should give the following information:</p>
     <ol>
       <li>
-        <p>Snapping bounds, the previous and the next snap position offset.</p>
+        <p>Snapping offset: The next snap position offset. This needs to be provided by the layout where the snapping is happened and will represent the final settling position of this layout.</p>
       </li>
       <li>
-        <p>Snap Step Size, the minimum size that the SnapFlingBehavior can animate.</p>
-      </li>
-      <li>
-        <p>Approach offset calculation, an offset to be consumed before snapping to a defined bound.</p>
+        <p>Approach offset: An offset to be consumed before snapping to a defined bound. If not overridden this will provide a decayed snapping behavior.</p>
       </li>
     </ol>
+    <p>In snapping, the approach offset and the snapping offset can be used to control how a snapping animation will look in a given layout. The complete snapping animation can be split into 2 phases: approach and snapping.</p>
+    <p>Approach: animate to the offset returned by <code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateApproachOffset(kotlin.Float,kotlin.Float)">calculateApproachOffset</a></code>. This will use a decay animation if possible, otherwise the snap animation. Snapping: once the approach offset is reached, snap to the offset returned by <code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateSnapOffset(kotlin.Float)">calculateSnapOffset</a></code> using the snap animation.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -55,23 +53,16 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>abstract float</code></td>
+            <td><code>default float</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateApproachOffset(kotlin.Float)">calculateApproachOffset</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;receiver,&nbsp;float&nbsp;initialVelocity)</code></div>
+              <div><code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateApproachOffset(kotlin.Float,kotlin.Float)">calculateApproachOffset</a>(float&nbsp;velocity,&nbsp;float&nbsp;decayOffset)</code></div>
               <p>Calculate the distance to navigate before settling into the next snapping bound.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract float</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateSnapStepSize()">calculateSnapStepSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;receiver)</code></div>
-              <p>The minimum offset that snapping will use to animate.(e.g. an item size)</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract float</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateSnappingOffset(kotlin.Float)">calculateSnappingOffset</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;receiver,&nbsp;float&nbsp;currentVelocity)</code></div>
+              <div><code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateSnapOffset(kotlin.Float)">calculateSnapOffset</a>(float&nbsp;velocity)</code></div>
               <p>Given a target placement in a layout, the snapping offset is the next snapping position this layout can be placed in.</p>
             </td>
           </tr>
@@ -80,14 +71,14 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="-androidx.compose.ui.unit.Density-.calculateApproachOffset-kotlin.Float-"></a><a name="calculateapproachoffset"></a>
+      <div class="api-item"><a name="calculateApproachOffset(kotlin.Float, kotlin.Float)"></a><a name="calculateApproachOffset-kotlin.Float-kotlin.Float-"></a><a name="calculateapproachoffset"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="(androidx.compose.ui.unit.Density).calculateApproachOffset(kotlin.Float)">calculateApproachOffset</h3>
+            <h3 id="calculateApproachOffset(kotlin.Float,kotlin.Float)">calculateApproachOffset</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateApproachOffset(kotlin.Float)">calculateApproachOffset</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;receiver,&nbsp;float&nbsp;initialVelocity)</pre>
-        <p>Calculate the distance to navigate before settling into the next snapping bound.</p>
+        <pre class="api-signature no-pretty-print">default&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateApproachOffset(kotlin.Float,kotlin.Float)">calculateApproachOffset</a>(float&nbsp;velocity,&nbsp;float&nbsp;decayOffset)</pre>
+        <p>Calculate the distance to navigate before settling into the next snapping bound. By default this is <code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateApproachOffset(kotlin.Float,kotlin.Float)">decayOffset</a></code> a suggested offset given by <code><a href="/reference/androidx/compose/foundation/gestures/snapping/package-summary.html#snapFlingBehavior(androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec)">snapFlingBehavior</a></code> to indicate where the animation would naturally decay if using <code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateApproachOffset(kotlin.Float,kotlin.Float)">velocity</a></code>. Returning a value higher than <code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateApproachOffset(kotlin.Float,kotlin.Float)">decayOffset</a></code> is valid and will force <code><a href="/reference/androidx/compose/foundation/gestures/snapping/package-summary.html#snapFlingBehavior(androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec)">snapFlingBehavior</a></code> to use a target based animation spec to run the approach phase since we won't be able to naturally decay to the proposed offset. If a value smaller than or equal to <code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateApproachOffset(kotlin.Float,kotlin.Float)">decayOffset</a></code> is returned <code><a href="/reference/androidx/compose/foundation/gestures/snapping/package-summary.html#snapFlingBehavior(androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider,androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.AnimationSpec)">snapFlingBehavior</a></code> will run a decay animation until it reaches the returned value. If zero is specified, that means there won't be an approach phase and there will only be snapping.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -101,32 +92,29 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>float&nbsp;initialVelocity</code></td>
+                <td><code>float&nbsp;velocity</code></td>
                 <td>
-                  <p>The current fling movement velocity. You can use this tho calculate a velocity based offset.</p>
+                  <p>The current fling movement velocity. You can use this to calculate a velocity based offset.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;decayOffset</code></td>
+                <td>
+                  <p>A suggested offset indicating where the animation would naturally decay to.</p>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="-androidx.compose.ui.unit.Density-.calculateSnapStepSize--"></a><a name="calculatesnapstepsize"></a>
+      <div class="api-item"><a name="calculateSnapOffset-kotlin.Float-"></a><a name="calculatesnapoffset"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="(androidx.compose.ui.unit.Density).calculateSnapStepSize()">calculateSnapStepSize</h3>
+            <h3 id="calculateSnapOffset(kotlin.Float)">calculateSnapOffset</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateSnapStepSize()">calculateSnapStepSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;receiver)</pre>
-        <p>The minimum offset that snapping will use to animate.(e.g. an item size)</p>
-      </div>
-      <div class="api-item"><a name="-androidx.compose.ui.unit.Density-.calculateSnappingOffset-kotlin.Float-"></a><a name="calculatesnappingoffset"></a>
-        <div class="api-name-block">
-          <div>
-            <h3 id="(androidx.compose.ui.unit.Density).calculateSnappingOffset(kotlin.Float)">calculateSnappingOffset</h3>
-          </div>
-        </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateSnappingOffset(kotlin.Float)">calculateSnappingOffset</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;receiver,&nbsp;float&nbsp;currentVelocity)</pre>
-        <p>Given a target placement in a layout, the snapping offset is the next snapping position this layout can be placed in. If this is a short snapping, <code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateSnappingOffset(kotlin.Float)">currentVelocity</a></code> is guaranteed to be 0.If it is a long snapping, this method  will be called after <code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateApproachOffset(kotlin.Float)">calculateApproachOffset</a></code>.</p>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateSnapOffset(kotlin.Float)">calculateSnapOffset</a>(float&nbsp;velocity)</pre>
+        <p>Given a target placement in a layout, the snapping offset is the next snapping position this layout can be placed in. The target placement should be in the direction of <code><a href="/reference/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#calculateSnapOffset(kotlin.Float)">velocity</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -140,7 +128,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>float&nbsp;currentVelocity</code></td>
+                <td><code>float&nbsp;velocity</code></td>
                 <td>
                   <p>The current fling movement velocity. This may change throughout the fling animation.</p>
                 </td>

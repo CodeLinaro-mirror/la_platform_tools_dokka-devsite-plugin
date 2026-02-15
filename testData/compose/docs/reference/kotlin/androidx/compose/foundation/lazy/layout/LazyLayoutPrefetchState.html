@@ -8,6 +8,7 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="LazyLayoutPrefetchState">
       <meta itemprop="path" content="androidx.compose.foundation.lazy.layout">
+      <meta itemprop="property" content="schedulePrefetch(kotlin.Int)">
       <meta itemprop="property" content="schedulePrefetch(kotlin.Int,androidx.compose.ui.unit.Constraints)">
       <meta itemprop="language" content="KOTLIN">
     </div>
@@ -37,6 +38,7 @@
     </devsite-filter >
     <hr>
     <p>State for lazy items prefetching, used by lazy layouts to instruct the prefetcher.</p>
+    <p>Note: this class is a part of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code> harness that allows for building custom lazy layouts. LazyLayout and all corresponding APIs are still under development and are subject to change.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -73,7 +75,7 @@
           <tbody class="list">
             <tr>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html#LazyLayoutPrefetchState()">LazyLayoutPrefetchState</a>()</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html#LazyLayoutPrefetchState(androidx.compose.foundation.lazy.layout.PrefetchScheduler,kotlin.Function1)">LazyLayoutPrefetchState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchScheduler:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html">PrefetchScheduler</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onNestedPrefetch:&nbsp;(<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html">NestedPrefetchScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?<br>)</code></div>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -100,6 +102,16 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.PrefetchHandle.html">LazyLayoutPrefetchState.PrefetchHandle</a></code></td>
               <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html#schedulePrefetch(kotlin.Int)">schedulePrefetch</a>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Schedules precomposition for the new item.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.PrefetchHandle.html">LazyLayoutPrefetchState.PrefetchHandle</a></code></td>
+              <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html#schedulePrefetch(kotlin.Int,androidx.compose.ui.unit.Constraints)">schedulePrefetch</a>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>)</code></div>
                 <p>Schedules precomposition and premeasure for the new item.</p>
               </td>
@@ -115,17 +127,44 @@
       <div class="list">
         <h2 data-title="platform-Common/All">Public constructors
           <!--platform-Common/All--></h2>
-        <div class="api-item"><a name="LazyLayoutPrefetchState--"></a><a name="lazylayoutprefetchstate"></a>
+        <div class="api-item"><a name="LazyLayoutPrefetchState(androidx.compose.foundation.lazy.layout.PrefetchScheduler, kotlin.Function1)"></a><a name="LazyLayoutPrefetchState-androidx.compose.foundation.lazy.layout.PrefetchScheduler-kotlin.Function1-"></a><a name="lazylayoutprefetchstate"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="LazyLayoutPrefetchState()">LazyLayoutPrefetchState</h3>
+              <h3 id="LazyLayoutPrefetchState(androidx.compose.foundation.lazy.layout.PrefetchScheduler,kotlin.Function1)">LazyLayoutPrefetchState</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html#LazyLayoutPrefetchState()">LazyLayoutPrefetchState</a>()</pre>
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html#LazyLayoutPrefetchState(androidx.compose.foundation.lazy.layout.PrefetchScheduler,kotlin.Function1)">LazyLayoutPrefetchState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchScheduler:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html">PrefetchScheduler</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;onNestedPrefetch:&nbsp;(<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html">NestedPrefetchScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null<br>)</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>prefetchScheduler:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html">PrefetchScheduler</a>? = null</code></td>
+                  <td>
+                    <p>the <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html">PrefetchScheduler</a></code> implementation to use to execute prefetch requests. If null is provided, the default <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html">PrefetchScheduler</a></code> for the platform will be used.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>onNestedPrefetch:&nbsp;(<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html">NestedPrefetchScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+                  <td>
+                    <p>a callback which will be invoked when this LazyLayout is prefetched in context of a parent LazyLayout, giving a chance to recursively prefetch its own children. See <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html">NestedPrefetchScope</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </devsite-filter >
@@ -133,6 +172,40 @@
       <div class="list">
         <h2 data-title="platform-Common/All">Public functions
           <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="schedulePrefetch-kotlin.Int-"></a><a name="scheduleprefetch"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="schedulePrefetch(kotlin.Int)">schedulePrefetch</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html#schedulePrefetch(kotlin.Int)">schedulePrefetch</a>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.PrefetchHandle.html">LazyLayoutPrefetchState.PrefetchHandle</a></pre>
+          <p>Schedules precomposition for the new item. If you also want to premeasure the item please use a second overload accepting a <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> param.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>item index to prefetch.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div class="api-item"><a name="schedulePrefetch(kotlin.Int, androidx.compose.ui.unit.Constraints)"></a><a name="schedulePrefetch-kotlin.Int-androidx.compose.ui.unit.Constraints-"></a><a name="scheduleprefetch"></a>
           <div class="api-name-block">
             <div>

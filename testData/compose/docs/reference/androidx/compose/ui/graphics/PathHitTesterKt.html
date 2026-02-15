@@ -1,0 +1,93 @@
+<html devsite="true">
+  <head>
+    <title>PathHitTesterKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="PathHitTesterKt">
+      <meta itemprop="path" content="androidx.compose.ui.graphics">
+      <meta itemprop="property" content="PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>PathHitTesterKt</h1>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/graphics/package-summary.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/graphics/PathHitTesterKt.html">PathHitTesterKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathHitTester.html">PathHitTester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PathHitTesterKt.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">PathHitTester</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path,&nbsp;@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;tolerance)</code></div>
+              <p>Creates a new <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">PathHitTester</a></code> to query whether certain x/y coordinates lie inside a given <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="PathHitTester(androidx.compose.ui.graphics.Path, kotlin.Float)"></a><a name="PathHitTester-androidx.compose.ui.graphics.Path-kotlin.Float-"></a><a name="pathhittester"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">PathHitTester</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathHitTester.html">PathHitTester</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/PathHitTesterKt.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">PathHitTester</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path,&nbsp;@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;tolerance)</pre>
+        <p>Creates a new <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">PathHitTester</a></code> to query whether certain x/y coordinates lie inside a given <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code>. A <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">PathHitTester</a></code> is optimized to perform multiple queries against a single path.</p>
+        <p>The result of a query depends on the <code><a href="/reference/androidx/compose/ui/graphics/Path.html#fillType()">fill type</a></code> of the path.</p>
+        <p>If the content of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">path</a></code> changes, you must call <code><a href="/reference/androidx/compose/ui/graphics/PathHitTester.html#updatePath(androidx.compose.ui.graphics.Path,kotlin.Float)">PathHitTester.updatePath</a></code> or create a new <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">PathHitTester</a></code> as <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">PathHitTester</a></code> will cache precomputed values to speed up queries.</p>
+        <p>If <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">path</a></code> contains conic curves, they are converted to quadratic curves during the query process. The tolerance of that conversion is defined by <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">tolerance</a></code>. The tolerance should be appropriate to the coordinate systems used by the caller. For instance if the path is defined in pixels, 0.5 (half a pixel) or 1.0 (a pixel) are appropriate tolerances. If the path is normalized and defined in the domain 0..1, the caller should choose a more appropriate tolerance close to or equal to one &quot;query unit&quot;. The tolerance must be >= 0.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a>&nbsp;path</code></td>
+                <td>
+                  <p>The <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> to run queries against.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;tolerance</code></td>
+                <td>
+                  <p>When <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#PathHitTester(androidx.compose.ui.graphics.Path,kotlin.Float)">path</a></code> contains conic curves, defines the maximum distance between         the original conic curve and its quadratic approximations. Set to 0.5 by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

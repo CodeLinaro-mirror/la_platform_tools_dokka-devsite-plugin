@@ -30,8 +30,8 @@
       <pre>public final class <a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a>&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; implements <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a></pre>
     </p>
     <hr>
-    <p><code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> class manages the animation based on the values defined at different timestamps in the duration of the animation (i.e. different keyframes). Each keyframe can be provided via <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#(kotlin.collections.Map,kotlin.Int,kotlin.Int)">keyframes</a></code> parameter. <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> allows very specific animation definitions with a precision to millisecond.</p>
-    <p>Here's an example of creating a <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> animation: (<code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#(kotlin.collections.Map,kotlin.Int,kotlin.Int)">keyframes</a></code> and <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a></code> could make defining key frames much more readable.)</p>
+    <p><code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> class manages the animation based on the values defined at different timestamps in the duration of the animation (i.e. different keyframes). Each keyframe can be provided via <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for IntList,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for IntObjectMap&lt;androidx/compose/animation/core/VectorizedKeyframeSpecElementInfo&lt;V&gt;&gt;,kotlin.Int,kotlin.Int,androidx.compose.animation.core.Easing,androidx.compose.animation.core.ArcMode)">keyframes</a></code> parameter. <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> allows very specific animation definitions with a precision to millisecond.</p>
+    <p>Here's an example of creating a <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> animation: (<code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for IntList,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for IntObjectMap&lt;androidx/compose/animation/core/VectorizedKeyframeSpecElementInfo&lt;V&gt;&gt;,kotlin.Int,kotlin.Int,androidx.compose.animation.core.Easing,androidx.compose.animation.core.ArcMode)">keyframes</a></code> and <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a></code> could make defining key frames much more readable.)</p>
     <pre class="prettyprint">val delay = 120
 val startValue = AnimationVector3D(100f, 200f, 300f)
 val endValue = AnimationVector3D(200f, 100f, 0f)
@@ -43,6 +43,7 @@ val keyframes = VectorizedKeyframesSpec<AnimationVector3D>(
      durationMillis = 200,
      delayMillis = delay
 )</pre>
+    <p>The interpolation between each value is dictated by <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframeSpecElementInfo.html#arcMode()">VectorizedKeyframeSpecElementInfo.arcMode</a></code> on each keyframe. If no keyframe information is provided, <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for IntList,&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for IntObjectMap&lt;androidx/compose/animation/core/VectorizedKeyframeSpecElementInfo&lt;V&gt;&gt;,kotlin.Int,kotlin.Int,androidx.compose.animation.core.Easing,androidx.compose.animation.core.ArcMode)">initialArcMode</a></code> is used.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -99,21 +100,20 @@ val keyframes = VectorizedKeyframesSpec<AnimationVector3D>(
             <td><code>int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#getDelayMillis()">getDelayMillis</a>()</code></div>
-              <p>the amount of the time the animation should wait before it starts.</p>
+              <p>delay defines the amount of time that animation can be delayed.</p>
             </td>
           </tr>
           <tr>
             <td><code>int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#getDurationMillis()">getDurationMillis</a>()</code></div>
-              <p>total duration of the animation</p>
+              <p>duration is the amount of time while animation is not yet finished.</p>
             </td>
           </tr>
           <tr>
             <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity<br>)</code></div>
-              <p>Calculates the value of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
             </td>
           </tr>
           <tr>
@@ -224,7 +224,7 @@ val keyframes = VectorizedKeyframesSpec<AnimationVector3D>(
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-pair/index.html">Pair</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Easing.html">Easing</a>&gt;&gt;&nbsp;keyframes</code></td>
                 <td>
-                  <p>a map from time to a value/easing function pair. The value in each entry                   defines the animation value at that time, and the easing curve is used in the                   interval starting from that time.</p>
+                  <p>a map from time to a value/easing function pair. The value in each entry                   defines the animation value at that time, and the easing curve is used in                   the interval starting from that time.</p>
                 </td>
               </tr>
               <tr>
@@ -236,7 +236,7 @@ val keyframes = VectorizedKeyframesSpec<AnimationVector3D>(
               <tr>
                 <td><code>int&nbsp;delayMillis</code></td>
                 <td>
-                  <p>the amount of the time the animation should wait before it starts. Defaults to                     0.</p>
+                  <p>the amount of the time the animation should wait before it starts.                     Defaults to 0.</p>
                 </td>
               </tr>
             </tbody>
@@ -253,7 +253,7 @@ val keyframes = VectorizedKeyframesSpec<AnimationVector3D>(
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#getDelayMillis()">getDelayMillis</a>()</pre>
-        <p>the amount of the time the animation should wait before it starts. Defaults to                     0.</p>
+        <p>delay defines the amount of time that animation can be delayed.</p>
       </div>
       <div class="api-item"><a name="getDurationMillis--"></a><a name="getdurationmillis"></a>
         <div class="api-name-block">
@@ -262,7 +262,7 @@ val keyframes = VectorizedKeyframesSpec<AnimationVector3D>(
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#getDurationMillis()">getDurationMillis</a>()</pre>
-        <p>total duration of the animation</p>
+        <p>duration is the amount of time while animation is not yet finished.</p>
       </div>
       <div class="api-item"><a name="getValueFromNanos(kotlin.Long, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getValueFromNanos-kotlin.Long-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getvaluefromnanos"></a>
         <div class="api-name-block">
@@ -271,7 +271,6 @@ val keyframes = VectorizedKeyframesSpec<AnimationVector3D>(
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity<br>)</pre>
-        <p>Calculates the value of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -280,32 +279,14 @@ val keyframes = VectorizedKeyframesSpec<AnimationVector3D>(
             </colgroup>
             <thead>
               <tr>
-                <th colspan="100%">Parameters</th>
+                <th colspan="100%">Throws</th>
               </tr>
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>long&nbsp;playTimeNanos</code></td>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code></td>
                 <td>
-                  <p>time since the start of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue</code></td>
-                <td>
-                  <p>start value of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue</code></td>
-                <td>
-                  <p>end value of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity</code></td>
-                <td>
-                  <p>start velocity of the animation</p>
+                  <p>When the initial or final value to animate within a keyframe is missing.</p>
                 </td>
               </tr>
             </tbody>

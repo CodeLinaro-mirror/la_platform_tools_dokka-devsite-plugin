@@ -1,0 +1,282 @@
+<html devsite="true">
+  <head>
+    <title>IntervalTree</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="IntervalTree">
+      <meta itemprop="path" content="androidx.compose.ui.graphics">
+      <meta itemprop="property" content="addInterval(kotlin.Float,kotlin.Float,kotlin.Any)">
+      <meta itemprop="property" content="clear()">
+      <meta itemprop="property" content="contains(kotlin.ranges.ClosedFloatingPointRange)">
+      <meta itemprop="property" content="contains(kotlin.Float)">
+      <meta itemprop="property" content="findFirstOverlap(kotlin.ranges.ClosedFloatingPointRange)">
+      <meta itemprop="property" content="findFirstOverlap(kotlin.Float,kotlin.Float)">
+      <meta itemprop="property" content="findOverlaps(kotlin.ranges.ClosedFloatingPointRange,kotlin.collections.MutableList)">
+      <meta itemprop="property" content="findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">
+      <meta itemprop="property" content="iterator()">
+      <meta itemprop="property" content="plusAssign(androidx.compose.ui.graphics.Interval)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>IntervalTree</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/graphics/IntervalTree.kt+class:androidx.compose.ui.graphics.IntervalTree&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/graphics/IntervalTree.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>public final class <a href="/reference/androidx/compose/ui/graphics/IntervalTree.html">IntervalTree</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
+    </p>
+    <hr>
+    <p>An interval tree holds a list of intervals and allows for fast queries of intervals that overlap any given interval. This can be used for instance to perform fast spatial queries like finding all the segments in a path that overlap with a given vertical interval.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#IntervalTree()">IntervalTree</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#addInterval(kotlin.Float,kotlin.Float,kotlin.Any)">addInterval</a>(float&nbsp;start,&nbsp;float&nbsp;end,&nbsp;T&nbsp;data)</code></div>
+              <p>Adds the interval defined between a <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#addInterval(kotlin.Float,kotlin.Float,kotlin.Any)">start</a></code> and an <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#addInterval(kotlin.Float,kotlin.Float,kotlin.Any)">end</a></code> coordinate.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#clear()">clear</a>()</code></div>
+              <p>Clears this tree and prepares it for reuse.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#contains(kotlin.ranges.ClosedFloatingPointRange)">contains</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;interval)</code></div>
+              <p>Returns true if the specified <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#contains(kotlin.ranges.ClosedFloatingPointRange)">interval</a></code> overlaps with any of the intervals in this tree.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#contains(kotlin.Float)">contains</a>(float&nbsp;value)</code></div>
+              <p>Returns true if <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#contains(kotlin.Float)">value</a></code> is inside any of the intervals in this tree.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.ranges.ClosedFloatingPointRange)">findFirstOverlap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;interval<br>)</code></div>
+              <p>Finds the first interval that overlaps with the specified <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.ranges.ClosedFloatingPointRange)">interval</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.Float,kotlin.Float)">findFirstOverlap</a>(float&nbsp;start,&nbsp;float&nbsp;end)</code></div>
+              <p>Finds the first interval that overlaps with the interval defined by <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.Float,kotlin.Float)">start</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.Float,kotlin.Float)">end</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.ranges.ClosedFloatingPointRange,kotlin.collections.MutableList)">findOverlaps</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;interval,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;results<br>)</code></div>
+              <p>Finds all the intervals that overlap with the specified <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.ranges.ClosedFloatingPointRange,kotlin.collections.MutableList)">interval</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">findOverlaps</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;start,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;end,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;results<br>)</code></div>
+              <p>Finds all the intervals that overlap with the interval defined by <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">start</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">end</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Iterator.html">Iterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#iterator()">iterator</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#plusAssign(androidx.compose.ui.graphics.Interval)">plusAssign</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;interval)</code></div>
+              <p>Adds the specified <code><a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a></code> to the interval tree.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="IntervalTree--"></a><a name="intervaltree"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="IntervalTree()">IntervalTree</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#IntervalTree()">IntervalTree</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="addInterval(kotlin.Float, kotlin.Float, kotlin.Any)"></a><a name="addInterval-kotlin.Float-kotlin.Float-kotlin.Any-"></a><a name="addinterval"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="addInterval(kotlin.Float,kotlin.Float,kotlin.Any)">addInterval</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#addInterval(kotlin.Float,kotlin.Float,kotlin.Any)">addInterval</a>(float&nbsp;start,&nbsp;float&nbsp;end,&nbsp;T&nbsp;data)</pre>
+        <p>Adds the interval defined between a <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#addInterval(kotlin.Float,kotlin.Float,kotlin.Any)">start</a></code> and an <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#addInterval(kotlin.Float,kotlin.Float,kotlin.Any)">end</a></code> coordinate.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float&nbsp;start</code></td>
+                <td>
+                  <p>The start coordinate of the interval</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;end</code></td>
+                <td>
+                  <p>The end coordinate of the interval, must be >= <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#addInterval(kotlin.Float,kotlin.Float,kotlin.Any)">start</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>T&nbsp;data</code></td>
+                <td>
+                  <p>Data to associate with the interval</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="clear--"></a><a name="clear"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="clear()">clear</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#clear()">clear</a>()</pre>
+        <p>Clears this tree and prepares it for reuse. After calling <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#clear()">clear</a></code>, any call to <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.ranges.ClosedFloatingPointRange,kotlin.collections.MutableList)">findOverlaps</a></code> returns false.</p>
+      </div>
+      <div class="api-item"><a name="contains-kotlin.ranges.ClosedFloatingPointRange-"></a><a name="contains"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="contains(kotlin.ranges.ClosedFloatingPointRange)">contains</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#contains(kotlin.ranges.ClosedFloatingPointRange)">contains</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;interval)</pre>
+        <p>Returns true if the specified <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#contains(kotlin.ranges.ClosedFloatingPointRange)">interval</a></code> overlaps with any of the intervals in this tree.</p>
+      </div>
+      <div class="api-item"><a name="contains-kotlin.Float-"></a><a name="contains"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="contains(kotlin.Float)">contains</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#contains(kotlin.Float)">contains</a>(float&nbsp;value)</pre>
+        <p>Returns true if <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#contains(kotlin.Float)">value</a></code> is inside any of the intervals in this tree.</p>
+      </div>
+      <div class="api-item"><a name="findFirstOverlap-kotlin.ranges.ClosedFloatingPointRange-"></a><a name="findfirstoverlap"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="findFirstOverlap(kotlin.ranges.ClosedFloatingPointRange)">findFirstOverlap</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.ranges.ClosedFloatingPointRange)">findFirstOverlap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;interval<br>)</pre>
+        <p>Finds the first interval that overlaps with the specified <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.ranges.ClosedFloatingPointRange)">interval</a></code>. If no overlap can be found, return <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#EmptyInterval()">EmptyInterval</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="findFirstOverlap(kotlin.Float, kotlin.Float)"></a><a name="findFirstOverlap-kotlin.Float-kotlin.Float-"></a><a name="findfirstoverlap"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="findFirstOverlap(kotlin.Float,kotlin.Float)">findFirstOverlap</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.Float,kotlin.Float)">findFirstOverlap</a>(float&nbsp;start,&nbsp;float&nbsp;end)</pre>
+        <p>Finds the first interval that overlaps with the interval defined by <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.Float,kotlin.Float)">start</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.Float,kotlin.Float)">end</a></code>. If no overlap can be found, return <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#EmptyInterval()">EmptyInterval</a></code>. <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.Float,kotlin.Float)">start</a></code> <em>must</em> be lesser than or equal to <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findFirstOverlap(kotlin.Float,kotlin.Float)">end</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="findOverlaps(kotlin.ranges.ClosedFloatingPointRange, kotlin.collections.MutableList)"></a><a name="findOverlaps-kotlin.ranges.ClosedFloatingPointRange-kotlin.collections.MutableList-"></a><a name="findoverlaps"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="findOverlaps(kotlin.ranges.ClosedFloatingPointRange,kotlin.collections.MutableList)">findOverlaps</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.ranges.ClosedFloatingPointRange,kotlin.collections.MutableList)">findOverlaps</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;interval,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;results<br>)</pre>
+        <p>Finds all the intervals that overlap with the specified <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.ranges.ClosedFloatingPointRange,kotlin.collections.MutableList)">interval</a></code>. If <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.ranges.ClosedFloatingPointRange,kotlin.collections.MutableList)">results</a></code> is specified, <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.ranges.ClosedFloatingPointRange,kotlin.collections.MutableList)">results</a></code> is returned, otherwise a new <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a></code> is returned.</p>
+      </div>
+      <div class="api-item"><a name="findOverlaps(kotlin.Float, kotlin.Float, kotlin.collections.MutableList)"></a><a name="findOverlaps-kotlin.Float-kotlin.Float-kotlin.collections.MutableList-"></a><a name="findoverlaps"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">findOverlaps</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">findOverlaps</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;start,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;end,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;results<br>)</pre>
+        <p>Finds all the intervals that overlap with the interval defined by <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">start</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">end</a></code>. <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">start</a></code> <em>must</em> be lesser than or equal to <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">end</a></code>. If <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">results</a></code> is specified, <code><a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#findOverlaps(kotlin.Float,kotlin.Float,kotlin.collections.MutableList)">results</a></code> is returned, otherwise a new <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a></code> is returned.</p>
+      </div>
+      <div class="api-item"><a name="iterator--"></a><a name="iterator"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="iterator()">iterator</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Iterator.html">Iterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#iterator()">iterator</a>()</pre>
+      </div>
+      <div class="api-item"><a name="plusAssign-androidx.compose.ui.graphics.Interval-"></a><a name="plusassign"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="plusAssign(androidx.compose.ui.graphics.Interval)">plusAssign</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/IntervalTree.html#plusAssign(androidx.compose.ui.graphics.Interval)">plusAssign</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;interval)</pre>
+        <p>Adds the specified <code><a href="/reference/androidx/compose/ui/graphics/Interval.html">Interval</a></code> to the interval tree.</p>
+      </div>
+    </div>
+  </body>
+</html>

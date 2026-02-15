@@ -10,6 +10,7 @@
       <meta itemprop="path" content="androidx.compose.foundation">
       <meta itemprop="property" content="mutate(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction0)">
       <meta itemprop="property" content="mutateWith(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">
+      <meta itemprop="property" content="tryMutate(kotlin.Function0)">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -175,6 +176,16 @@ fun ScrollControls(scrollState: ScrollState) {
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
             </tr>
+            <tr>
+              <td><code>inline <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#tryMutate(kotlin.Function0)">tryMutate</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Attempt to mutate synchronously if there is no other active caller.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
           </tbody>
         </table>
       </devsite-filter >
@@ -304,6 +315,62 @@ class ScrollState(position: Int = 0) {
                   <td><code>block:&nbsp;suspend&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> R</code></td>
                   <td>
                     <p>mutation code to run mutually exclusive with any other call to <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#mutate(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction0)">mutate</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#mutateWith(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">mutateWith</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="tryMutate-kotlin.Function0-"></a><a name="trymutate"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="tryMutate(kotlin.Function0)">tryMutate</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#tryMutate(kotlin.Function0)">tryMutate</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Attempt to mutate synchronously if there is no other active caller. If there is no other active caller, the <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#tryMutate(kotlin.Function0)">block</a></code> will be executed in a lock. If there is another active caller, this method will return false, indicating that the active caller needs to be cancelled through a <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#mutate(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction0)">mutate</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#mutateWith(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">mutateWith</a></code> call with an equal or higher mutation priority.</p>
+          <p>Calls to <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#mutate(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction0)">mutate</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#mutateWith(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">mutateWith</a></code> will suspend until execution of the <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#tryMutate(kotlin.Function0)">block</a></code> has finished.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                  <td>
+                    <p>mutation code to run mutually exclusive with any other call to <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#mutate(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction0)">mutate</a></code>, <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#mutateWith(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">mutateWith</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#tryMutate(kotlin.Function0)">tryMutate</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>true if the <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#tryMutate(kotlin.Function0)">block</a></code> was executed, false if there was another active caller and the <code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html#tryMutate(kotlin.Function0)">block</a></code> was not executed.</p>
                   </td>
                 </tr>
               </tbody>

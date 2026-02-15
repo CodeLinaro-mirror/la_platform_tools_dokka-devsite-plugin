@@ -11,6 +11,7 @@
       <meta itemprop="property" content="addPathNodes(kotlin.collections.List)">
       <meta itemprop="property" content="clear()">
       <meta itemprop="property" content="parsePathString(kotlin.String)">
+      <meta itemprop="property" content="pathStringToNodes(kotlin.String,kotlin.collections.ArrayList)">
       <meta itemprop="property" content="toNodes()">
       <meta itemprop="property" content="toPath(androidx.compose.ui.graphics.Path)">
       <meta itemprop="language" content="KOTLIN">
@@ -84,6 +85,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html">PathParser</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#addPathNodes(kotlin.collections.List)">addPathNodes</a>(nodes:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;)</code></div>
+                <p>Adds the list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#addPathNodes(kotlin.collections.List)">PathNode</a></code> to this parser's internal list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -93,6 +95,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#clear()">clear</a>()</code></div>
+                <p>Clears the collection of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> stored in this parser and returned by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#toNodes()">toNodes</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -102,16 +105,27 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html">PathParser</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#parsePathString(kotlin.String)">parsePathString</a>(pathData:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>)</code></div>
-                <p>Parses the path string to create a collection of PathNode instances with their corresponding arguments</p>
+                <p>Parses the SVG path string to extract <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> instances for each path instruction (<code>lineTo</code>, <code>moveTo</code>, etc.).</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-array-list/index.html">ArrayList</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#pathStringToNodes(kotlin.String,kotlin.collections.ArrayList)">pathStringToNodes</a>(pathData:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,&nbsp;nodes:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-array-list/index.html">ArrayList</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;)</code></div>
+                <p>Parses the path string and adds the corresponding <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> instances to the specified <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#pathStringToNodes(kotlin.String,kotlin.collections.ArrayList)">nodes</a></code> collection.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#toNodes()">toNodes</a>()</code></div>
+                <p>Returns this parser's list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -121,6 +135,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#toPath(androidx.compose.ui.graphics.Path)">toPath</a>(target:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>)</code></div>
+                <p>Converts this parser's list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> instances into a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -163,6 +178,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#addPathNodes(kotlin.collections.List)">addPathNodes</a>(nodes:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html">PathParser</a></pre>
+          <p>Adds the list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#addPathNodes(kotlin.collections.List)">PathNode</a></code> to this parser's internal list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code>. The resulting list can be obtained by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#toNodes()">toNodes</a></code>.</p>
         </div>
         <div class="api-item"><a name="clear--"></a><a name="clear"></a>
           <div class="api-name-block">
@@ -175,6 +191,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#clear()">clear</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Clears the collection of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> stored in this parser and returned by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#toNodes()">toNodes</a></code>.</p>
         </div>
         <div class="api-item"><a name="parsePathString-kotlin.String-"></a><a name="parsepathstring"></a>
           <div class="api-name-block">
@@ -187,7 +204,20 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#parsePathString(kotlin.String)">parsePathString</a>(pathData:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html">PathParser</a></pre>
-          <p>Parses the path string to create a collection of PathNode instances with their corresponding arguments</p>
+          <p>Parses the SVG path string to extract <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> instances for each path instruction (<code>lineTo</code>, <code>moveTo</code>, etc.). The <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> are stored in this parser's internal list of nodes which can be queried by calling <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#toNodes()">toNodes</a></code>. Calling this method replaces any existing content in the current nodes list.</p>
+        </div>
+        <div class="api-item"><a name="pathStringToNodes(kotlin.String, kotlin.collections.ArrayList)"></a><a name="pathStringToNodes-kotlin.String-kotlin.collections.ArrayList-"></a><a name="pathstringtonodes"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="pathStringToNodes(kotlin.String,kotlin.collections.ArrayList)">pathStringToNodes</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#pathStringToNodes(kotlin.String,kotlin.collections.ArrayList)">pathStringToNodes</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pathData:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;nodes:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-array-list/index.html">ArrayList</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt; = ArrayList()<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-array-list/index.html">ArrayList</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</pre>
+          <p>Parses the path string and adds the corresponding <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> instances to the specified <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#pathStringToNodes(kotlin.String,kotlin.collections.ArrayList)">nodes</a></code> collection. This method returns <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#pathStringToNodes(kotlin.String,kotlin.collections.ArrayList)">nodes</a></code>.</p>
         </div>
         <div class="api-item"><a name="toNodes--"></a><a name="tonodes"></a>
           <div class="api-name-block">
@@ -199,7 +229,8 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#toNodes()">toNodes</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#toNodes()">toNodes</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a>&gt;</pre>
+          <p>Returns this parser's list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code>. Note: this function does not return a copy of the list. The caller should make a copy when appropriate.</p>
         </div>
         <div class="api-item"><a name="toPath-androidx.compose.ui.graphics.Path-"></a><a name="topath"></a>
           <div class="api-name-block">
@@ -212,6 +243,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathParser.html#toPath(androidx.compose.ui.graphics.Path)">toPath</a>(target:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a> = Path()):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></pre>
+          <p>Converts this parser's list of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/PathNode.html">PathNode</a></code> instances into a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code>. A new <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code> is returned every time this method is invoked.</p>
         </div>
       </div>
     </devsite-filter >

@@ -13,11 +13,16 @@
       <meta itemprop="property" content="LazyLayoutMeasureScope">
       <meta itemprop="property" content="PinnedItem">
       <meta itemprop="property" content="PrefetchHandle">
+      <meta itemprop="property" content="NestedPrefetchScope">
+      <meta itemprop="property" content="PrefetchRequest">
+      <meta itemprop="property" content="PrefetchRequestScope">
+      <meta itemprop="property" content="PrefetchScheduler">
       <meta itemprop="property" content="Interval">
       <meta itemprop="property" content="LazyLayoutIntervalContent">
       <meta itemprop="property" content="LazyLayoutPinnedItemList">
       <meta itemprop="property" content="LazyLayoutPrefetchState">
       <meta itemprop="property" content="MutableIntervalList">
+      <meta itemprop="property" content="LazyLayout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">
       <meta itemprop="property" content="LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">
       <meta itemprop="property" content="LazyLayoutPinnableItem(kotlin.Any,kotlin.Int,androidx.compose.foundation.lazy.layout.LazyLayoutPinnedItemList,kotlin.Function0)">
       <meta itemprop="property" content="getDefaultLazyLayoutKey(kotlin.Int)">
@@ -91,6 +96,42 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.PrefetchHandle.html">LazyLayoutPrefetchState.PrefetchHandle</a></code></td>
               <td></td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/NestedPrefetchScope.html">NestedPrefetchScope</a></code></td>
+              <td>
+                <p>A scope which allows nested prefetches to be requested for the precomposition of a LazyLayout.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchRequest.html">PrefetchRequest</a></code></td>
+              <td>
+                <p>A request for prefetch which can be submitted to a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html">PrefetchScheduler</a></code> to execute during idle time.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchRequestScope.html">PrefetchRequestScope</a></code></td>
+              <td>
+                <p>Scope for <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchRequest.html#(androidx.compose.foundation.lazy.layout.PrefetchRequestScope).execute()">PrefetchRequest.execute</a></code>, supplying info about how much time it has to execute requests.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html">PrefetchScheduler</a></code></td>
+              <td>
+                <p>Implementations of this interface accept prefetch requests via <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/PrefetchScheduler.html#schedulePrefetch(androidx.compose.foundation.lazy.layout.PrefetchRequest)">schedulePrefetch</a></code> and decide when to execute them in a way that will have minimal impact on user experience, e.g. during frame idle time.</p>
+              </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
@@ -171,8 +212,18 @@
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;itemProvider:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchState:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html">LazyLayoutPrefetchState</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;itemProvider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchState:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html">LazyLayoutPrefetchState</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
                 <p>A layout that only composes and lays out currently needed items.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><span><del><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;itemProvider:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchState:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html">LazyLayoutPrefetchState</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
+                <p><strong>This function is deprecated.</strong> Use an overload accepting a lambda prodicing an item provider instead</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -205,6 +256,59 @@
       </devsite-filter >
     </div>
     <h2>Top-level functions</h2>
+    <div class="api-item"><a name="LazyLayout(kotlin.Function0, androidx.compose.ui.Modifier, androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState, kotlin.Function2)"></a><a name="LazyLayout-kotlin.Function0-androidx.compose.ui.Modifier-androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState-kotlin.Function2-"></a><a name="lazylayout"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="LazyLayout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;itemProvider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchState:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html">LazyLayoutPrefetchState</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>A layout that only composes and lays out currently needed items. Can be used to build efficient scrollable layouts.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>itemProvider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></code></td>
+              <td>
+                <p>lambda producing an item provider containing all the needed info about the items which could be used to compose and measure items as part of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">measurePolicy</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>to apply on the layout</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>prefetchState:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html">LazyLayoutPrefetchState</a>? = null</code></td>
+              <td>
+                <p>allows to schedule items for prefetching</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+              <td>
+                <p>Measure policy which allows to only compose and measure needed items.</p>
+                <p>Note: this function is a part of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code> harness that allows for building custom lazy layouts. LazyLayout and all corresponding APIs are still under development and are subject to change.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="api-item"><a name="LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider, androidx.compose.ui.Modifier, androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState, kotlin.Function2)"></a><a name="LazyLayout-androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider-androidx.compose.ui.Modifier-androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState-kotlin.Function2-"></a><a name="lazylayout"></a>
       <div class="api-name-block">
         <div>
@@ -215,7 +319,8 @@
             <!--platform-Common/All--></div>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;itemProvider:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchState:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html">LazyLayoutPrefetchState</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;itemProvider:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchState:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutPrefetchState.html">LazyLayoutPrefetchState</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use an overload accepting a lambda prodicing an item provider instead</aside>
       <p>A layout that only composes and lays out currently needed items. Can be used to build efficient scrollable layouts.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -303,6 +408,7 @@
               <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <p>inner content of this item</p>
+                <p>Note: this function is a part of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code> harness that allows for building custom lazy layouts. LazyLayout and all corresponding APIs are still under development and are subject to change.</p>
               </td>
             </tr>
           </tbody>
@@ -333,6 +439,7 @@
           <p>This objects can't be equals to any object which could be provided by a user as a custom key.</p>
         </li>
       </ol>
+      <p>Note: this function is a part of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code> harness that allows for building custom lazy layouts. LazyLayout and all corresponding APIs are still under development and are subject to change.</p>
     </div>
   </body>
 </html>

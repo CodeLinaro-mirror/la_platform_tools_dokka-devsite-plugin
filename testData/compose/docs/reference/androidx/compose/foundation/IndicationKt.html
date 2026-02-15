@@ -65,7 +65,7 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/Indication.html">Indication</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/IndicationKt.html#getLocalIndication()">getLocalIndication</a>()</pre>
         <p>CompositionLocal that provides an <code><a href="/reference/androidx/compose/foundation/Indication.html">Indication</a></code> through the hierarchy. This <code><a href="/reference/androidx/compose/foundation/Indication.html">Indication</a></code> will be used by default to draw visual effects for interactions such as press and drag in components such as <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">clickable</a></code>.</p>
-        <p>By default this will provide <code><a href="/reference/androidx/compose/foundation/DefaultDebugIndication.html">DefaultDebugIndication</a></code>.</p>
+        <p>By default this will provide a debug indication, this should always be replaced.</p>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource, androidx.compose.foundation.Indication)"></a><a name="-androidx.compose.ui.Modifier-.indication-androidx.compose.foundation.interaction.InteractionSource-androidx.compose.foundation.Indication-"></a><a name="indication"></a>
         <div class="api-name-block">
@@ -85,7 +85,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -95,10 +94,10 @@ Column {
     Text(
         text = &quot;Click me and my neighbour will indicate as well!&quot;,
         modifier = Modifier
-            // clickable will dispatch events using MutableInteractionSource and show ripple
+            // clickable will dispatch events using MutableInteractionSource
             .clickable(
                 interactionSource = interactionSource,
-                indication = rememberRipple()
+                indication = LocalIndication.current
             ) {
                 /**do something */
             }
@@ -129,7 +128,7 @@ Column {
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;interactionSource</code></td>
                 <td>
-                  <p><code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> that will be used by <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a></code> to draw visual effects - this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> represents the stream of Interactions for this component.</p>
+                  <p><code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> that will be used by <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a></code> to draw visual effects - this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> represents the stream of <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s for this component.</p>
                 </td>
               </tr>
               <tr>

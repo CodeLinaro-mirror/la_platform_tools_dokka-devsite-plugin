@@ -7,13 +7,17 @@
   <body>
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="androidx.compose.ui.text">
+      <meta itemprop="property" content="LinkInteractionListener">
       <meta itemprop="property" content="Paragraph">
       <meta itemprop="property" content="ParagraphIntrinsics">
+      <meta itemprop="property" content="TextInclusionStrategy">
       <meta itemprop="property" content="AnnotatedString">
       <meta itemprop="property" content="Builder">
       <meta itemprop="property" content="Range">
-      <meta itemprop="property" content="AtomicReference">
       <meta itemprop="property" content="EmojiSupportMatch">
+      <meta itemprop="property" content="LinkAnnotation">
+      <meta itemprop="property" content="Clickable">
+      <meta itemprop="property" content="Url">
       <meta itemprop="property" content="MultiParagraph">
       <meta itemprop="property" content="MultiParagraphIntrinsics">
       <meta itemprop="property" content="ParagraphStyle">
@@ -23,14 +27,17 @@
       <meta itemprop="property" content="PlatformSpanStyle">
       <meta itemprop="property" content="PlatformTextStyle">
       <meta itemprop="property" content="SpanStyle">
+      <meta itemprop="property" content="TextGranularity">
       <meta itemprop="property" content="TextLayoutInput">
       <meta itemprop="property" content="TextLayoutResult">
+      <meta itemprop="property" content="TextLinkStyles">
       <meta itemprop="property" content="TextMeasurer">
       <meta itemprop="property" content="TextRange">
       <meta itemprop="property" content="TextStyle">
       <meta itemprop="property" content="TtsAnnotation">
       <meta itemprop="property" content="UrlAnnotation">
       <meta itemprop="property" content="VerbatimTtsAnnotation">
+      <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="TextPainter">
       <meta itemprop="property" content="ExperimentalTextApi">
       <meta itemprop="property" content="InternalTextApi">
@@ -60,8 +67,10 @@
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.TtsAnnotation,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(kotlin.String,kotlin.String,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withLink(androidx.compose.ui.text.LinkAnnotation,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString.Companion).fromHtml(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString).capitalize(androidx.compose.ui.text.intl.LocaleList)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString).decapitalize(androidx.compose.ui.text.intl.LocaleList)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString).toLowerCase(androidx.compose.ui.text.intl.LocaleList)">
@@ -99,6 +108,15 @@
           </colgroup>
           <tbody class="list">
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/LinkInteractionListener.html">LinkInteractionListener</a></code></td>
+              <td>
+                <p>An interface triggered when a user interacts with a link in the text</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html">Paragraph</a></code></td>
               <td>
                 <p>A paragraph of text that is laid out.</p>
@@ -113,6 +131,15 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/ParagraphIntrinsics.html">ParagraphIntrinsics</a></code></td>
               <td>
                 <p>Calculates and presents the intrinsic width and height of text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/TextInclusionStrategy.html">TextInclusionStrategy</a></code></td>
+              <td>
+                <p>The text inclusion strategy used by <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">Paragraph.getRangeForRect</a></code>, it specifies when a range of text is inside the given rect based on the geometric relation between the text range's bounding box and the given rect.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -160,13 +187,6 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/AtomicReference.html">AtomicReference</a></code></td>
-              <td></td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/EmojiSupportMatch.html">EmojiSupportMatch</a></code></td>
               <td>
                 <p>When to replace emoji with support emoji using androidx.emoji2.</p>
@@ -174,6 +194,33 @@
               <td>
                 <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
                 <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a></code></td>
+              <td>
+                <p>An annotation that represents a clickable part of the text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Clickable.html">LinkAnnotation.Clickable</a></code></td>
+              <td>
+                <p>An annotation that contains a clickable marked with <code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Clickable.html#(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">tag</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Url.html">LinkAnnotation.Url</a></code></td>
+              <td>
+                <p>An annotation that contains a <code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Url.html#(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">url</a></code> string.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
             </tr>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/MultiParagraph.html">MultiParagraph</a></code></td>
@@ -263,6 +310,15 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/TextGranularity.html">TextGranularity</a></code></td>
+              <td>
+                <p>Used by <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getRangeForRect(androidx.compose.ui.geometry.Rect,androidx.compose.ui.text.TextGranularity,androidx.compose.ui.text.TextInclusionStrategy)">Paragraph.getRangeForRect</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/TextLayoutInput.html">TextLayoutInput</a></code></td>
               <td>
                 <p>The data class which holds the set of parameters of the text layout computation.</p>
@@ -275,6 +331,15 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a></code></td>
               <td>
                 <p>The data class which holds text layout result.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/TextLinkStyles.html">TextLinkStyles</a></code></td>
+              <td>
+                <p>Represents the styles of the links in the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code> in different states</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -319,7 +384,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code></td>
               <td>
-                <p>An annotation that contains the metadata intended for text-to-speech engine.</p>
+                <p><strong>This class is deprecated.</strong> Use LinkAnnotatation.Url(url) instead</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -348,6 +413,13 @@
             <col>
           </colgroup>
           <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Companion.html">AnnotatedString.Companion</a></code></td>
+              <td></td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/TextPainter.html">TextPainter</a></code></td>
               <td></td>
@@ -715,6 +787,18 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Companion.html">AnnotatedString.Companion</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Companion).fromHtml(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">fromHtml</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;htmlString:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;linkStyles:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextLinkStyles.html">TextLinkStyles</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;linkInteractionListener:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/LinkInteractionListener.html">LinkInteractionListener</a>?<br>)</code></div>
+                <p>Converts a string with HTML tags into <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All-->
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code></td>
               <td>
                 <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(kotlin.CharSequence).substring(androidx.compose.ui.text.TextRange)">substring</a>(range:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>)</code></div>
@@ -796,8 +880,8 @@
             <tr>
               <td><code>inline R</code></td>
               <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">withAnnotation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;urlAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>)</code></div>
-                <p>Pushes an <code><a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">block</a></code> and then pops the annotation.</p>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">withAnnotation</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;urlAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>)</code></div>
+                <p><strong>This function is deprecated.</strong> Use LinkAnnotation API for links instead</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -808,6 +892,16 @@
               <td>
                 <div><code>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(kotlin.String,kotlin.String,kotlin.Function1)">withAnnotation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;tag:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;annotation:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>)</code></div>
                 <p>Pushes an annotation to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(kotlin.String,kotlin.String,kotlin.Function1)">block</a></code> and then pops the annotation.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline R</code></td>
+              <td>
+                <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withLink(androidx.compose.ui.text.LinkAnnotation,kotlin.Function1)">withLink</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;link:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>)</code></div>
+                <p>Pushes a <code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withLink(androidx.compose.ui.text.LinkAnnotation,kotlin.Function1)">block</a></code> and then pops the annotation.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -1571,7 +1665,7 @@ buildAnnotatedString {
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#rememberTextMeasurer(kotlin.Int)">rememberTextMeasurer</a>(cacheSize:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = DefaultCacheSize):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></pre>
-      <p>Creates and remembers a <code><a href="/reference/kotlin/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code>. All parameters that are required for TextMeasurer except <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#rememberTextMeasurer(kotlin.Int)">cacheSize</a></code> are read from CompositionLocals. Created TextMeasurer carries an internal <code><a href="/reference/kotlin/androidx/compose/ui/text/TextLayoutCache.html">TextLayoutCache</a></code> with <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#rememberTextMeasurer(kotlin.Int)">cacheSize</a></code> capacity. Provide 0 for <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#rememberTextMeasurer(kotlin.Int)">cacheSize</a></code> to opt-out from internal caching behavior. Moreover, the cache can be disabled at will during measure by passing in skipCache as true.</p>
+      <p>Creates and remembers a <code><a href="/reference/kotlin/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code>. All parameters that are required for <code><a href="/reference/kotlin/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code> except <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#rememberTextMeasurer(kotlin.Int)">cacheSize</a></code> are read from CompositionLocals. Created <code><a href="/reference/kotlin/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code> carries an internal <code><a href="/reference/kotlin/androidx/compose/ui/text/TextLayoutCache.html">TextLayoutCache</a></code> with <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#rememberTextMeasurer(kotlin.Int)">cacheSize</a></code> capacity. Provide 0 for <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#rememberTextMeasurer(kotlin.Int)">cacheSize</a></code> to opt-out from internal caching behavior.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <colgroup>
@@ -1587,7 +1681,7 @@ buildAnnotatedString {
             <tr>
               <td><code>cacheSize:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = DefaultCacheSize</code></td>
               <td>
-                <p>Capacity of internal cache inside TextMeasurer. Size unit is the number of unique text layout inputs that are measured.</p>
+                <p>Capacity of internal cache inside <code><a href="/reference/kotlin/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code>. Size unit is the number of unique text layout inputs that are measured. Value of this parameter highly depends on the consumer use case. Provide a cache size that is in line with how many distinct text layouts are going to be calculated by this measurer repeatedly. If you are animating font attributes, or any other layout affecting input, cache can be skipped because most repeated measure calls would miss the cache.</p>
               </td>
             </tr>
           </tbody>
@@ -2514,6 +2608,91 @@ Canvas(Modifier.fillMaxSize()) {
         </table>
       </div>
     </div>
+    <div class="api-item"><a name="(androidx.compose.ui.text.AnnotatedString.Companion).fromHtml(kotlin.String, androidx.compose.ui.text.TextLinkStyles, androidx.compose.ui.text.LinkInteractionListener)"></a><a name="-androidx.compose.ui.text.AnnotatedString.Companion-.fromHtml-kotlin.String-androidx.compose.ui.text.TextLinkStyles-androidx.compose.ui.text.LinkInteractionListener-"></a><a name="fromhtml"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.text.AnnotatedString.Companion).fromHtml(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">fromHtml</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+            <!--platform-Android/JVM--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Companion.html">AnnotatedString.Companion</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Companion).fromHtml(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">fromHtml</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;htmlString:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;linkStyles:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextLinkStyles.html">TextLinkStyles</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;linkInteractionListener:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/LinkInteractionListener.html">LinkInteractionListener</a>? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></pre>
+      <p>Converts a string with HTML tags into <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>.</p>
+      <p>If you define your string in the resources, make sure to use HTML-escaped opening brackets &quot;<&quot; instead of &quot;<&quot;.</p>
+      <p>For a list of supported tags go check <a href="https://developer.android.com/guide/topics/resources/string-resource#StylingWithHTML">Styling with HTML markup</a> guide. Note that bullet lists are not <b>yet</b> available.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.fromHtml
+
+// First, download a string as a plain text using one of the resources' methods. At this stage
+// you will be handling plurals and formatted strings in needed. Moreover, the string will be
+// resolved with respect to the current locale and available translations.
+val string = stringResource(id = R.string.example)
+
+// Next, convert a string marked with HTML tags into AnnotatedString to be displayed by Text
+val styledAnnotatedString = AnnotatedString.fromHtml(htmlString = string)
+
+BasicText(styledAnnotatedString)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>htmlString:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <p>HTML-tagged string to be parsed to construct AnnotatedString</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>linkStyles:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextLinkStyles.html">TextLinkStyles</a>? = null</code></td>
+              <td>
+                <p>style configuration to be applied to links present in the string in different styles</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>linkInteractionListener:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/LinkInteractionListener.html">LinkInteractionListener</a>? = null</code></td>
+              <td>
+                <p>a listener that will be attached to links that are present in the string and triggered when user clicks on those links. When set to null, which is a default, the system will try to open the corresponding links with the <code><a href="/reference/kotlin/androidx/compose/ui/platform/UriHandler.html">androidx.compose.ui.platform.UriHandler</a></code> composition local</p>
+                <p>Note that any link style passed directly to this method will be merged with the styles set directly on a HTML-tagged string. For example, if you set a color of the link via the span annotation to &quot;red&quot; but also pass a green color via the <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Companion).fromHtml(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">linkStyles</a></code>, the link will be displayed as green. If, however, you pass a green background via the <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Companion).fromHtml(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">linkStyles</a></code> instead, the link will be displayed as red on a green background.</p>
+                <p>Example of displaying styled string from resources</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="api-item"><a name="-kotlin.CharSequence-.substring-androidx.compose.ui.text.TextRange-"></a><a name="substring"></a>
       <div class="api-name-block">
         <div>
@@ -2954,7 +3133,8 @@ Canvas(Modifier.fillMaxSize()) {
             <!--platform-Common/All--></div>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">withAnnotation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;urlAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">withAnnotation</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;urlAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use LinkAnnotation API for links instead</aside>
       <p>Pushes an <code><a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">block</a></code> and then pops the annotation.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -3113,6 +3293,147 @@ Canvas(Modifier.fillMaxSize()) {
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pop()">pop</a></code></td>
               <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="(androidx.compose.ui.text.AnnotatedString.Builder).withLink(androidx.compose.ui.text.LinkAnnotation, kotlin.Function1)"></a><a name="-androidx.compose.ui.text.AnnotatedString.Builder-.withLink-androidx.compose.ui.text.LinkAnnotation-kotlin.Function1-"></a><a name="withlink"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.text.AnnotatedString.Builder).withLink(androidx.compose.ui.text.LinkAnnotation,kotlin.Function1)">withLink</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withLink(androidx.compose.ui.text.LinkAnnotation,kotlin.Function1)">withLink</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;link:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
+      <p>Pushes a <code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withLink(androidx.compose.ui.text.LinkAnnotation,kotlin.Function1)">block</a></code> and then pops the annotation.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withLink
+import androidx.compose.ui.unit.sp
+
+// Display a link in the text
+BasicText(
+    buildAnnotatedString {
+        append(&quot;Build better apps faster with &quot;)
+        withLink(
+            LinkAnnotation.Url(
+                &quot;https://developer.android.com/jetpack/compose&quot;,
+                TextLinkStyles(style = SpanStyle(color = Color.Blue))
+            )
+        ) {
+            append(&quot;Jetpack Compose&quot;)
+        }
+    }
+)</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withLink
+import androidx.compose.ui.unit.sp
+
+// Display a link in the text that gets an underline when hovered
+BasicText(
+    buildAnnotatedString {
+        append(&quot;Build better apps faster with &quot;)
+        val link = LinkAnnotation.Url(
+            &quot;https://developer.android.com/jetpack/compose&quot;,
+            TextLinkStyles(
+                style = SpanStyle(color = Color.Blue),
+                hoveredStyle = SpanStyle(textDecoration = TextDecoration.Underline)
+            )
+        )
+        withLink(link) { append(&quot;Jetpack Compose&quot;) }
+    }
+)</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withLink
+import androidx.compose.ui.unit.sp
+
+// Display a link in the text and log metrics whenever user clicks on it. In that case we handle
+// the link using openUri method of the LocalUriHandler
+val uriHandler = LocalUriHandler.current
+BasicText(
+    buildAnnotatedString {
+        append(&quot;Build better apps faster with &quot;)
+        val link = LinkAnnotation.Url(
+            &quot;https://developer.android.com/jetpack/compose&quot;,
+            TextLinkStyles(SpanStyle(color = Color.Blue))
+        ) {
+            val url = (it as LinkAnnotation.Url).url
+            // log some metrics
+            uriHandler.openUri(url)
+        }
+        withLink(link) { append(&quot;Jetpack Compose&quot;) }
+    }
+)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>link:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a></code></td>
+              <td>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a></code> object representing a clickable part of the text</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R</code></td>
+              <td>
+                <p>function to be executed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>R</code></td>
+              <td>
+                <p>result of the <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withLink(androidx.compose.ui.text.LinkAnnotation,kotlin.Function1)">block</a></code></p>
+              </td>
             </tr>
           </tbody>
         </table>

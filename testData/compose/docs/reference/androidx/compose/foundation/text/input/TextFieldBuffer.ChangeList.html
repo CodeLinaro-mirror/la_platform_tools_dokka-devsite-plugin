@@ -1,0 +1,275 @@
+<html devsite="true">
+  <head>
+    <title>TextFieldBuffer.ChangeList</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="TextFieldBuffer.ChangeList">
+      <meta itemprop="path" content="androidx.compose.foundation.text.input">
+      <meta itemprop="property" content="getChangeCount()">
+      <meta itemprop="property" content="getOriginalRange(kotlin.Int)">
+      <meta itemprop="property" content="getRange(kotlin.Int)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>TextFieldBuffer.ChangeList</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/text/input/TextFieldBuffer.kt+class:androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public interface <a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a></pre>
+    </p>
+    <hr>
+    <p>The ordered list of non-overlapping and discontinuous changes performed on a <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code> during the current <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldState.html#edit(kotlin.Function1)">edit</a></code> or <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.TextFieldBuffer).transformInput()">filter</a></code> operation. Changes are listed in the order they appear in the text, not the order in which they were made. Overlapping changes are represented as a single change.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#getChangeCount()">getChangeCount</a>()</code></div>
+              <p>The number of changes that have been performed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#getOriginalRange(kotlin.Int)">getOriginalRange</a>(int&nbsp;changeIndex)</code></div>
+              <p>Returns the range in the original text that was replaced.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#getRange(kotlin.Int)">getRange</a>(int&nbsp;changeIndex)</code></div>
+              <p>Returns the range in the <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code> that was changed.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/androidx/compose/foundation/text/input/TextFieldBufferKt.html">TextFieldBufferKt</a>.<a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">forEachChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</code></div>
+              <p>Iterates over all the changes in this <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">ChangeList</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/androidx/compose/foundation/text/input/TextFieldBufferKt.html">TextFieldBufferKt</a>.<a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">forEachChangeReversed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</code></div>
+              <p>Iterates over all the changes in this <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">ChangeList</a></code> in reverse order.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getChangeCount--"></a><a name="getchangecount"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getChangeCount()">getChangeCount</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#getChangeCount()">getChangeCount</a>()</pre>
+        <p>The number of changes that have been performed.</p>
+      </div>
+      <div class="api-item"><a name="getOriginalRange-kotlin.Int-"></a><a name="getoriginalrange"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getOriginalRange(kotlin.Int)">getOriginalRange</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;<a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#getOriginalRange(kotlin.Int)">getOriginalRange</a>(int&nbsp;changeIndex)</pre>
+        <p>Returns the range in the original text that was replaced.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-index-out-of-bounds-exception/index.html">IndexOutOfBoundsException</a></code></td>
+                <td>
+                  <p>If <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#getOriginalRange(kotlin.Int)">changeIndex</a></code> is not in [0, <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#changeCount()">changeCount</a></code>).</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getRange-kotlin.Int-"></a><a name="getrange"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getRange(kotlin.Int)">getRange</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;<a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#getRange(kotlin.Int)">getRange</a>(int&nbsp;changeIndex)</pre>
+        <p>Returns the range in the <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code> that was changed.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-index-out-of-bounds-exception/index.html">IndexOutOfBoundsException</a></code></td>
+                <td>
+                  <p>If <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#getRange(kotlin.Int)">changeIndex</a></code> is not in [0, <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#changeCount()">changeCount</a></code>).</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList-.forEachChange-kotlin.Function2-"></a><a name="foreachchange"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">TextFieldBufferKt.forEachChange</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/text/input/TextFieldBufferKt.html">TextFieldBufferKt</a>.<a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">forEachChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
+        <p>Iterates over all the changes in this <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">ChangeList</a></code>.</p>
+        <p>Changes are iterated by index, so any changes made by <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">block</a></code> after the current one will be visited by <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">block</a></code>. <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">block</a></code> should not make any new changes <em>before</em> the current one or changes will be visited more than once. If you need to make changes, consider using <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">forEachChangeReversed</a></code>.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.forEachChange
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.text.substring
+
+// Print a log message every time the text is changed.
+BasicTextField(state = rememberTextFieldState(), inputTransformation = {
+    changes.forEachChange { sourceRange, replacedLength -&gt;
+        val newString = asCharSequence().substring(sourceRange)
+        println(&quot;&quot;&quot;$replacedLength characters were replaced with &quot;$newString&quot;&quot;&quot;&quot;)
+    }
+})</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">forEachChangeReversed</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList-.forEachChangeReversed-kotlin.Function2-"></a><a name="foreachchangereversed"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">TextFieldBufferKt.forEachChangeReversed</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/text/input/TextFieldBufferKt.html">TextFieldBufferKt</a>.<a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">forEachChangeReversed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">TextFieldBuffer.ChangeList</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
+        <p>Iterates over all the changes in this <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.ChangeList.html">ChangeList</a></code> in reverse order.</p>
+        <p>Changes are iterated by index, so <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">block</a></code> should not perform any new changes before the current one or changes may be skipped. <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChangeReversed(kotlin.Function2)">block</a></code> may make non-overlapping changes after the current one safely, such changes will not be visited.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.delete
+import androidx.compose.foundation.text.input.forEachChange
+import androidx.compose.foundation.text.input.forEachChangeReversed
+import androidx.compose.foundation.text.input.insert
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+
+// Make a text field behave in &quot;insert mode&quot; – inserted text overwrites the text ahead of it
+// instead of being inserted.
+BasicTextField(state = rememberTextFieldState(), inputTransformation = {
+    changes.forEachChangeReversed { range, originalRange -&gt;
+        if (!range.collapsed &amp;&amp; originalRange.collapsed) {
+            // New text was inserted, delete the text ahead of it.
+            delete(
+                range.end.coerceAtMost(length),
+                (range.end + range.length).coerceAtMost(length)
+            )
+        }
+    }
+})</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.TextFieldBuffer.ChangeList).forEachChange(kotlin.Function2)">forEachChange</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

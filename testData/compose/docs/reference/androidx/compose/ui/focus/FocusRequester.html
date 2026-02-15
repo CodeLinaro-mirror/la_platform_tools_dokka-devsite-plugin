@@ -11,6 +11,8 @@
       <meta itemprop="property" content="captureFocus()">
       <meta itemprop="property" content="freeFocus()">
       <meta itemprop="property" content="requestFocus()">
+      <meta itemprop="property" content="restoreFocusedChild()">
+      <meta itemprop="property" content="saveFocusedChild()">
       <meta itemprop="property" content="createRefs()">
       <meta itemprop="property" content="getCancel()">
       <meta itemprop="property" content="getDefault()">
@@ -101,7 +103,7 @@ Box(
           </tr>
           <tr>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public static class <a href="/reference/androidx/compose/ui/focus/FocusRequester.Companion.FocusRequesterFactory.html">FocusRequester.Companion.FocusRequesterFactory</a></code></div>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/focus/FocusRequester.Companion.FocusRequesterFactory.html">FocusRequester.Companion.FocusRequesterFactory</a></code></div>
               <p>Convenient way to create multiple <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> instances.</p>
             </td>
           </tr>
@@ -159,6 +161,20 @@ Box(
             <td>
               <div><code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html#requestFocus()">requestFocus</a>()</code></div>
               <p>Use this function to request focus.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/focus/FocusRequester.html#restoreFocusedChild()">restoreFocusedChild</a>()</code></div>
+              <p>Use this function to restore focus to one of the children of the node pointed to by this <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/focus/FocusRequester.html#saveFocusedChild()">saveFocusedChild</a>()</code></div>
+              <p>Use this function to request the focus target to save a reference to the currently focused child in its saved instance state.</p>
             </td>
           </tr>
         </tbody>
@@ -333,6 +349,120 @@ Box(
         .onFocusChanged { color = if (it.isFocused) Green else Black }
         .focusable()
 )</pre>
+      </div>
+      <div class="api-item"><a name="restoreFocusedChild--"></a><a name="restorefocusedchild"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="restoreFocusedChild()">restoreFocusedChild</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusRequester.html#restoreFocusedChild()">restoreFocusedChild</a>()</pre>
+        <p>Use this function to restore focus to one of the children of the node pointed to by this <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>. This restores focus to a previously focused child that was saved by using <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html#saveFocusedChild()">saveFocusedChild</a></code>.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.FocusRequester.Companion.Cancel
+import androidx.compose.ui.focus.FocusRequester.Companion.Default
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+val focusRequester = remember { FocusRequester() }
+LazyRow(
+    Modifier
+        .focusRequester(focusRequester)
+        .focusProperties {
+            exit = { focusRequester.saveFocusedChild(); Default }
+            enter = { if (focusRequester.restoreFocusedChild()) Cancel else Default }
+        }
+) {
+    item { Button(onClick = {}) { Text(&quot;1&quot;) } }
+    item { Button(onClick = {}) { Text(&quot;2&quot;) } }
+    item { Button(onClick = {}) { Text(&quot;3&quot;) } }
+    item { Button(onClick = {}) { Text(&quot;4&quot;) } }
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>true if we successfully restored focus to one of the children of the <code><a href="/reference/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusTarget()">focusTarget</a></code> associated with this <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="saveFocusedChild--"></a><a name="savefocusedchild"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="saveFocusedChild()">saveFocusedChild</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusRequester.html#saveFocusedChild()">saveFocusedChild</a>()</pre>
+        <p>Use this function to request the focus target to save a reference to the currently focused child in its saved instance state. After calling this, focus can be restored to the saved child by making a call to <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html#restoreFocusedChild()">restoreFocusedChild</a></code>.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.FocusRequester.Companion.Cancel
+import androidx.compose.ui.focus.FocusRequester.Companion.Default
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+val focusRequester = remember { FocusRequester() }
+LazyRow(
+    Modifier
+        .focusRequester(focusRequester)
+        .focusProperties {
+            exit = { focusRequester.saveFocusedChild(); Default }
+            enter = { if (focusRequester.restoreFocusedChild()) Cancel else Default }
+        }
+) {
+    item { Button(onClick = {}) { Text(&quot;1&quot;) } }
+    item { Button(onClick = {}) { Text(&quot;2&quot;) } }
+    item { Button(onClick = {}) { Text(&quot;3&quot;) } }
+    item { Button(onClick = {}) { Text(&quot;4&quot;) } }
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>true if the focus target associated with this <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> has a focused child and we successfully saved a reference to it.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

@@ -94,7 +94,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
               <td>
                 <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/relocation/package-summary.html#(androidx.compose.ui.Modifier).bringIntoViewRequester(androidx.compose.foundation.relocation.BringIntoViewRequester)">bringIntoViewRequester</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;bringIntoViewRequester:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a><br>)</code></div>
-                <p>Modifier that can be used to send <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView</a></code> requests.</p>
+                <p>Modifier that can be used to send <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">scrollIntoView</a></code> requests.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -221,6 +221,7 @@ with(LocalDensity.current) {
         }
     }
 }</pre>
+      <p>Note: this API is experimental while we optimise the performance and find the right API shape for it</p>
     </div>
     <h2>Extension functions</h2>
     <div class="api-item"><a name="-androidx.compose.ui.Modifier-.bringIntoViewRequester-androidx.compose.foundation.relocation.BringIntoViewRequester-"></a><a name="bringintoviewrequester"></a>
@@ -234,7 +235,7 @@ with(LocalDensity.current) {
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/relocation/package-summary.html#(androidx.compose.ui.Modifier).bringIntoViewRequester(androidx.compose.foundation.relocation.BringIntoViewRequester)">bringIntoViewRequester</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;bringIntoViewRequester:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-      <p>Modifier that can be used to send <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView</a></code> requests.</p>
+      <p>Modifier that can be used to send <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">scrollIntoView</a></code> requests.</p>
       <p>The following example uses a <code>bringIntoViewRequester</code> to bring an item into the parent bounds. The example demonstrates how a composable can ask its parents to scroll so that the component using this modifier is brought into the bounds of all its parents.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.horizontalScroll
@@ -287,7 +288,8 @@ Row(Modifier.horizontalScroll(rememberScrollState())) {
             <tr>
               <td><code>bringIntoViewRequester:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></code></td>
               <td>
-                <p>An instance of <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></code>. This      hoisted object can be used to send      <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView</a></code> requests to parents      of the current composable.</p>
+                <p>An instance of <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></code>. This      hoisted object can be used to send      BringIntoViewRequester.scrollIntoView requests to parents      of the current composable.</p>
+                <p>Note: this API is experimental while we optimise the performance and find the right API shape for it</p>
               </td>
             </tr>
           </tbody>
@@ -356,7 +358,9 @@ Row(Modifier.horizontalScroll(rememberScrollState())) {
           <tbody class="list">
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></code></td>
-              <td></td>
+              <td>
+                <p>Note: this API is experimental while we optimise the performance and find the right API shape for it</p>
+              </td>
             </tr>
           </tbody>
         </table>

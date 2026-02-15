@@ -31,6 +31,7 @@
       <meta itemprop="property" content="isTransitionGroup()">
       <meta itemprop="property" content="shouldCreateCompositionOnAttachedToWindow()">
       <meta itemprop="property" content="showLayoutBounds()">
+      <meta itemprop="property" content="(androidx.compose.ui.platform.AbstractComposeView).consumeWindowInsets()">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -106,6 +107,7 @@
     <hr>
     <p>Base class for custom <code><a href="https://developer.android.com/reference/android/view/View.html">android.view.View</a></code>s implemented using Jetpack Compose UI. Subclasses should implement the <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#Content()">Content</a></code> function with the appropriate content. Calls to <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#addView(android.view.View)">addView</a></code> and its variants and overloads will fail with <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
     <p>By default, the composition is disposed according to <code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.html#Default()">ViewCompositionStrategy.Default</a></code>. Call <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#disposeComposition()">disposeComposition</a></code> to dispose of the underlying composition earlier, or if the view is never initially attached to a window. (The requirement to dispose of the composition explicitly in the event that the view is never (re)attached is temporary.)</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a></code> only supports being added into view hierarchies propagating <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> and <code><a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a></code> via <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(android.view.View).setViewTreeLifecycleOwner(androidx.lifecycle.LifecycleOwner)">androidx.lifecycle.setViewTreeLifecycleOwner</a></code> and <code><a href="/reference/kotlin/androidx/savedstate/package-summary.html#(android.view.View).setViewTreeSavedStateRegistryOwner(androidx.savedstate.SavedStateRegistryOwner)">androidx.savedstate.setViewTreeSavedStateRegistryOwner</a></code>. In most cases you will already have it set up correctly as <code><a href="/reference/kotlin/androidx/activity/ComponentActivity.html">androidx.activity.ComponentActivity</a></code>, androidx.fragment.app.Fragment and androidx.navigation.NavController will provide the correct values.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">
@@ -410,6 +412,34 @@
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#shouldCreateCompositionOnAttachedToWindow()">shouldCreateCompositionOnAttachedToWindow</a></code></div>
                 <p>If <code>true</code>, this View's composition will be created when it becomes attached to a window for the first time.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>.<a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#(androidx.compose.ui.platform.AbstractComposeView).consumeWindowInsets()">consumeWindowInsets</a></code></div>
+                <p>Indicates whether access to <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> within the <code><a href="/reference/kotlin/androidx/compose/ui/platform/ComposeView.html#setContent(kotlin.Function0)">content</a></code> should consume the Android  <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">android.view.WindowInsets</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
@@ -8269,7 +8299,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#createComposition()">createComposition</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Perform initial composition for this view. Once this method is called or the view becomes attached to a window, either <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#disposeComposition()">disposeComposition</a></code> must be called or the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(android.view.View).findViewTreeLifecycleOwner()">findViewTreeLifecycleOwner</a></code> must reach the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.DESTROYED.html">Lifecycle.State.DESTROYED</a></code> state for the composition to be cleaned up properly. (This restriction is temporary.)</p>
+          <p>Perform initial composition for this view. Once this method is called or the view becomes attached to a window, either <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#disposeComposition()">disposeComposition</a></code> must be called or the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#findViewTreeLifecycleOwner(android.view.View)">findViewTreeLifecycleOwner</a></code> must reach the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.DESTROYED.html">Lifecycle.State.DESTROYED</a></code> state for the composition to be cleaned up properly. (This restriction is temporary.)</p>
           <p>If this method is called when the composition has already been created it has no effect.</p>
           <p>This method should only be called if this view <code><a href="https://developer.android.com/reference/android/view/View.html#isAttachedToWindow()">isAttachedToWindow</a></code> or if a parent <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> has been <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#setParentCompositionContext(androidx.compose.runtime.CompositionContext)">set</a></code> explicitly.</p>
         </div>
@@ -8470,7 +8500,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/InternalComposeUiApi.html">InternalComposeUiApi</a><br>var&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#showLayoutBounds()">showLayoutBounds</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-          <p>Enables the display of visual layout bounds for the Compose UI content of this view. This is typically managed</p>
+          <p>Enables the display of visual layout bounds for the Compose UI content of this view. This is typically configured using the system developer setting for &quot;Show layout bounds.&quot;</p>
         </div>
       </div>
     </devsite-filter >
@@ -8491,6 +8521,26 @@
           <pre class="api-signature no-pretty-print">protected&nbsp;open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#shouldCreateCompositionOnAttachedToWindow()">shouldCreateCompositionOnAttachedToWindow</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>If <code>true</code>, this View's composition will be created when it becomes attached to a window for the first time. Defaults to <code>true</code>.</p>
           <p>Subclasses may choose to override this property to prevent this eager initial composition in cases where the view's content is not yet ready. Initial composition will still occur when this view is first measured.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Android/JVM">Extension properties
+          <!--platform-Android/JVM--></h2>
+        <div class="api-item"><a name="(androidx.compose.ui.platform.AbstractComposeView).getConsumeWindowInsets()"></a><a name="(androidx.compose.ui.platform.AbstractComposeView).setConsumeWindowInsets()"></a><a name="-androidx.compose.ui.platform.AbstractComposeView-.getConsumeWindowInsets--"></a><a name="-androidx.compose.ui.platform.AbstractComposeView-.setConsumeWindowInsets--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.platform.AbstractComposeView).consumeWindowInsets()">consumeWindowInsets</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>.<a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#(androidx.compose.ui.platform.AbstractComposeView).consumeWindowInsets()">consumeWindowInsets</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Indicates whether access to <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> within the <code><a href="/reference/kotlin/androidx/compose/ui/platform/ComposeView.html#setContent(kotlin.Function0)">content</a></code> should consume the Android  <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">android.view.WindowInsets</a></code>. The default value is <code>true</code>, meaning that access to <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.Companion.html">WindowInsets.Companion</a></code> will consume the Android WindowInsets.</p>
+          <p>This property should be set prior to first composition.</p>
         </div>
       </div>
     </devsite-filter >

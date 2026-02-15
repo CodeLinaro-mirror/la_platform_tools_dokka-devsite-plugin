@@ -10,6 +10,7 @@
       <meta itemprop="path" content="androidx.compose.ui.layout">
       <meta itemprop="property" content="getAlignmentLines()">
       <meta itemprop="property" content="getHeight()">
+      <meta itemprop="property" content="getRulers()">
       <meta itemprop="property" content="getWidth()">
       <meta itemprop="property" content="placeChildren()">
       <meta itemprop="language" content="JAVA">
@@ -48,24 +49,35 @@
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/layout/MeasureResult.html#getAlignmentLines()">getAlignmentLines</a>()</code></div>
+              <p>Alignment lines that can be used by parents to align this layout.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/layout/MeasureResult.html#getHeight()">getHeight</a>()</code></div>
+              <p>The measured height of the layout, in pixels.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/RulerScope.html">RulerScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/MeasureResult.html#getRulers()">getRulers</a>()</code></div>
+              <p>An optional lambda function used to create <code><a href="/reference/androidx/compose/ui/layout/Ruler.html">Ruler</a></code>s for child layout.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/layout/MeasureResult.html#getWidth()">getWidth</a>()</code></div>
+              <p>The measured width of the layout, in pixels.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/layout/MeasureResult.html#placeChildren()">placeChildren</a>()</code></div>
+              <p>A method used to place children of this layout.</p>
             </td>
           </tr>
         </tbody>
@@ -80,6 +92,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/layout/MeasureResult.html#getAlignmentLines()">getAlignmentLines</a>()</pre>
+        <p>Alignment lines that can be used by parents to align this layout. This only includes the alignment lines of this layout and not children.</p>
       </div>
       <div class="api-item"><a name="getHeight--"></a><a name="getheight"></a>
         <div class="api-name-block">
@@ -88,6 +101,16 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/layout/MeasureResult.html#getHeight()">getHeight</a>()</pre>
+        <p>The measured height of the layout, in pixels.</p>
+      </div>
+      <div class="api-item"><a name="getRulers--"></a><a name="getrulers"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getRulers()">getRulers</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/RulerScope.html">RulerScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/layout/MeasureResult.html#getRulers()">getRulers</a>()</pre>
+        <p>An optional lambda function used to create <code><a href="/reference/androidx/compose/ui/layout/Ruler.html">Ruler</a></code>s for child layout. This may be reevealuated when the layout's position moves.</p>
       </div>
       <div class="api-item"><a name="getWidth--"></a><a name="getwidth"></a>
         <div class="api-name-block">
@@ -96,6 +119,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/layout/MeasureResult.html#getWidth()">getWidth</a>()</pre>
+        <p>The measured width of the layout, in pixels.</p>
       </div>
       <div class="api-item"><a name="placeChildren--"></a><a name="placechildren"></a>
         <div class="api-name-block">
@@ -104,6 +128,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/layout/MeasureResult.html#placeChildren()">placeChildren</a>()</pre>
+        <p>A method used to place children of this layout. It may also be used to measure children that were not needed for determining the size of this layout.</p>
       </div>
     </div>
   </body>

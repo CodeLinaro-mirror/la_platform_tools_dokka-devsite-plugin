@@ -1,0 +1,386 @@
+<html devsite="true">
+  <head>
+    <title>InputTransformation</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="InputTransformation">
+      <meta itemprop="path" content="androidx.compose.foundation.text.input">
+      <meta itemprop="property" content="(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">
+      <meta itemprop="property" content="getKeyboardOptions()">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer).transformInput()">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.TextFieldBuffer).transformInput()">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.InputTransformation).allCaps(androidx.compose.ui.text.intl.Locale)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">
+      <meta itemprop="property" content="(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>InputTransformation</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/text/input/InputTransformation.kt+class:androidx.compose.foundation.text.input.InputTransformation&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/text/input/InputTransformation.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public fun interface <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.Companion.html">InputTransformation.Companion</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.Companion.html">InputTransformation.Companion</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>A function that is ran after every change made to a <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldState.html">TextFieldState</a></code> by user input and can change or reject that input.</p>
+    <p>Input transformations are ran after hardware and software keyboard events, when text is pasted or dropped into the field, or when an accessibility service changes the text.</p>
+    <p>To chain filters together, call <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">then</a></code>.</p>
+    <p>Prebuilt filters are provided for common filter operations. See:</p>
+    <ul>
+      <li>
+        <p><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code>.<code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</a></code><code>()</code></p>
+      </li>
+      <li>
+        <p><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code>.<code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).allCaps(androidx.compose.ui.text.intl.Locale)">allCaps</a></code><code>()</code></p>
+      </li>
+    </ul>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.delete
+import androidx.compose.foundation.text.input.insert
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+
+// Demonstrates how to create a custom and relatively complex InputTransformation.
+val state = remember { TextFieldState() }
+BasicTextField(state, inputTransformation = {
+    // A filter that always places newly-input text at the start of the string, after a
+    // prompt character, like a shell.
+    val promptChar = '&gt;'
+
+    fun CharSequence.countPrefix(char: Char): Int {
+        var i = 0
+        while (i &lt; length &amp;&amp; get(i) == char) i++
+        return i
+    }
+
+    // Step one: Figure out the insertion point.
+    val newPromptChars = asCharSequence().countPrefix(promptChar)
+    val insertionPoint = if (newPromptChars == 0) 0 else 1
+
+    // Step two: Ensure text is placed at the insertion point.
+    if (changes.changeCount == 1) {
+        val insertedRange = changes.getRange(0)
+        val replacedRange = changes.getOriginalRange(0)
+        if (!replacedRange.collapsed &amp;&amp; insertedRange.collapsed) {
+            // Text was deleted, delete forwards from insertion point.
+            delete(insertionPoint, insertionPoint + replacedRange.length)
+        }
+    }
+    // Else text was replaced or there were multiple changes - don't handle.
+
+    // Step three: Ensure the prompt character is there.
+    if (newPromptChars == 0) {
+        insert(0, &quot;&gt;&quot;)
+    }
+
+    // Step four: Ensure the cursor is ready for the next input.
+    placeCursorAfterCharAt(0)
+})</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.Companion.html">InputTransformation.Companion</a> implements <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">applySemantics</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver)</code></div>
+              <p>Optional semantics configuration that can update certain characteristics of the applied TextField, e.g. <code><a href="/reference/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).maxTextLength()">SemanticsPropertyReceiver.maxTextLength</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default <a href="/reference/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#getKeyboardOptions()">getKeyboardOptions</a>()</code></div>
+              <p>Optional <code><a href="/reference/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a></code> that will be used as the default keyboard options for configuring the IME.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.TextFieldBuffer).transformInput()">transformInput</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>&nbsp;receiver)</code></div>
+              <p>The transform operation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformationKt.html">InputTransformationKt</a>.<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.InputTransformation).allCaps(androidx.compose.ui.text.intl.Locale)">allCaps</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/intl/Locale.html">Locale</a>&nbsp;locale<br>)</code></div>
+              <p>Returns a <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that forces all text to be uppercase.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformationKt.html">InputTransformationKt</a>.<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">byValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&gt;&nbsp;transformation<br>)</code></div>
+              <p>Creates an <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> from a function that accepts both the current and proposed <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldCharSequence.html">TextFieldCharSequence</a></code> and returns the <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldCharSequence.html">TextFieldCharSequence</a></code> to use for the field.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformationKt.html">InputTransformationKt</a>.<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxLength<br>)</code></div>
+              <p>Returns <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that rejects input which causes the total length of the text field to be more than <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</a></code> characters.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/input/InputTransformationKt.html">InputTransformationKt</a>.<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">then</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;next<br>)</code></div>
+              <p>Creates a filter chain that will run <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">next</a></code> after this.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.semantics.SemanticsPropertyReceiver-.applySemantics--"></a><a name="applysemantics"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">applySemantics</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">applySemantics</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver)</pre>
+        <p>Optional semantics configuration that can update certain characteristics of the applied TextField, e.g. <code><a href="/reference/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).maxTextLength()">SemanticsPropertyReceiver.maxTextLength</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getKeyboardOptions--"></a><a name="getkeyboardoptions"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getKeyboardOptions()">getKeyboardOptions</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;<a href="/reference/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a>&nbsp;<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#getKeyboardOptions()">getKeyboardOptions</a>()</pre>
+        <p>Optional <code><a href="/reference/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a></code> that will be used as the default keyboard options for configuring the IME. The options passed directly to the text field composable will always override this.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.foundation.text.input.TextFieldBuffer-.transformInput--"></a><a name="transforminput"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.foundation.text.input.TextFieldBuffer).transformInput()">transformInput</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.TextFieldBuffer).transformInput()">transformInput</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a>&nbsp;receiver)</pre>
+        <p>The transform operation. For more information see the documentation on <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code>.</p>
+        <p>This function is scoped to <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code>, a buffer that can be changed in-place to alter or reject the changes or set the selection.</p>
+        <p>To reject all changes in the scoped <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code>, call <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html#revertAllChanges()">revertAllChanges</a></code>.</p>
+        <p>When multiple <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code>s are linked together, the <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.TextFieldBuffer).transformInput()">transformInput</a></code> function of the first transformation is invoked before the second one. Once the changes are made to <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code> by the initial <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> in the chain, the same instance of <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html">TextFieldBuffer</a></code> is forwarded to the subsequent transformation in the chain. Note that <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldBuffer.html#originalValue()">TextFieldBuffer.originalValue</a></code> never changes while the buffer is passed along the chain. This sequence persists until the chain reaches its conclusion.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.foundation.text.input.InputTransformation-.allCaps-androidx.compose.ui.text.intl.Locale-"></a><a name="allcaps"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.foundation.text.input.InputTransformation).allCaps(androidx.compose.ui.text.intl.Locale)">InputTransformationKt.allCaps</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;<a href="/reference/androidx/compose/foundation/text/input/InputTransformationKt.html">InputTransformationKt</a>.<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.InputTransformation).allCaps(androidx.compose.ui.text.intl.Locale)">allCaps</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/intl/Locale.html">Locale</a>&nbsp;locale<br>)</pre>
+        <p>Returns a <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that forces all text to be uppercase.</p>
+        <p>This transformation automatically configures the keyboard to capitalize all characters.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/intl/Locale.html">Locale</a>&nbsp;locale</code></td>
+                <td>
+                  <p>The <code><a href="/reference/androidx/compose/ui/text/intl/Locale.html">Locale</a></code> in which to perform the case conversion.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.foundation.text.input.InputTransformation-.byValue-kotlin.Function2-"></a><a name="byvalue"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">InputTransformationKt.byValue</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;<a href="/reference/androidx/compose/foundation/text/input/InputTransformationKt.html">InputTransformationKt</a>.<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">byValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&gt;&nbsp;transformation<br>)</pre>
+        <p>Creates an <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> from a function that accepts both the current and proposed <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldCharSequence.html">TextFieldCharSequence</a></code> and returns the <code><a href="/reference/androidx/compose/foundation/text/input/TextFieldCharSequence.html">TextFieldCharSequence</a></code> to use for the field.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).byValue(kotlin.Function2)">transformation</a></code> can return either <code>current</code>, <code>proposed</code>, or a completely different value.</p>
+        <p>The selection or cursor will be updated automatically. For more control of selection implement <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> directly.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.byValue
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.sp
+
+val state = remember { TextFieldState() }
+BasicTextField(
+    state,
+    // Reject whitespace.
+    inputTransformation = InputTransformation.byValue { current, proposed -&gt;
+        if (&quot;&quot;&quot;\s&quot;&quot;&quot;.toRegex() in proposed) current else proposed
+    }
+)</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.byValue
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.sp
+
+val state = remember { TextFieldState() }
+BasicTextField(
+    state,
+    // Convert tabs to spaces.
+    inputTransformation = InputTransformation.byValue { _, proposed -&gt;
+        proposed.replace(&quot;&quot;&quot;\t&quot;&quot;&quot;.toRegex(), &quot;  &quot;)
+    }
+)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.foundation.text.input.InputTransformation-.maxLength-kotlin.Int-"></a><a name="maxlength"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">InputTransformationKt.maxLength</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;<a href="/reference/androidx/compose/foundation/text/input/InputTransformationKt.html">InputTransformationKt</a>.<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxLength<br>)</pre>
+        <p>Returns <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that rejects input which causes the total length of the text field to be more than <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).maxLength(kotlin.Int)">maxLength</a></code> characters.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.foundation.text.input.InputTransformation-.then-androidx.compose.foundation.text.input.InputTransformation-"></a><a name="then"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">InputTransformationKt.then</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;<a href="/reference/androidx/compose/foundation/text/input/InputTransformationKt.html">InputTransformationKt</a>.<a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">then</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;next<br>)</pre>
+        <p>Creates a filter chain that will run <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">next</a></code> after this. Filters are applied sequentially, so any changes made by this filter will be visible to <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">next</a></code>.</p>
+        <p>The returned filter will use the <code><a href="/reference/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a></code> from <code><a href="/reference/androidx/compose/foundation/text/input/package-summary.html#(androidx.compose.foundation.text.input.InputTransformation).then(androidx.compose.foundation.text.input.InputTransformation)">next</a></code> if non-null, otherwise it will use the options from this transformation.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.then
+
+val removeFirstEFilter = InputTransformation {
+    val index = asCharSequence().indexOf('e')
+    if (index != -1) {
+        replace(index, index + 1, &quot;&quot;)
+    }
+}
+val printECountFilter = InputTransformation {
+    println(&quot;found ${asCharSequence().count { it == 'e' }} 'e's in the string&quot;)
+}
+
+// Returns a filter that always prints 0 e's.
+removeFirstEFilter.then(printECountFilter)
+
+// Returns a filter that prints the number of e's before the first one is removed.
+printECountFilter.then(removeFirstEFilter)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a>&nbsp;next</code></td>
+                <td>
+                  <p>The <code><a href="/reference/androidx/compose/foundation/text/input/InputTransformation.html">InputTransformation</a></code> that will be ran after this one.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

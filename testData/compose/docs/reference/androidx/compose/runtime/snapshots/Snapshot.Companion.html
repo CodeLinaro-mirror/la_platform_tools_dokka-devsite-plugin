@@ -11,6 +11,7 @@
       <meta itemprop="property" content="getCurrent()">
       <meta itemprop="property" content="global(kotlin.Function0)">
       <meta itemprop="property" content="isApplyObserverNotificationPending()">
+      <meta itemprop="property" content="isInSnapshot()">
       <meta itemprop="property" content="notifyObjectsInitialized()">
       <meta itemprop="property" content="observe(kotlin.Function1,kotlin.Function1,kotlin.Function0)">
       <meta itemprop="property" content="openSnapshotCount()">
@@ -71,6 +72,13 @@
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#isApplyObserverNotificationPending()">isApplyObserverNotificationPending</a>()</code></div>
               <p>Returns whether any threads are currently in the process of notifying observers about changes to the global snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#isInSnapshot()">isInSnapshot</a>()</code></div>
+              <p>Return <code>true</code> if the thread is currently in the context of a snapshot.</p>
             </td>
           </tr>
           <tr>
@@ -195,6 +203,15 @@
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#isApplyObserverNotificationPending()">isApplyObserverNotificationPending</a>()</pre>
         <p>Returns whether any threads are currently in the process of notifying observers about changes to the global snapshot.</p>
       </div>
+      <div class="api-item"><a name="isInSnapshot--"></a><a name="isinsnapshot"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="isInSnapshot()">isInSnapshot</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#isInSnapshot()">isInSnapshot</a>()</pre>
+        <p>Return <code>true</code> if the thread is currently in the context of a snapshot.</p>
+      </div>
       <div class="api-item"><a name="notifyObjectsInitialized--"></a><a name="notifyobjectsinitialized"></a>
         <div class="api-name-block">
           <div>
@@ -237,6 +254,12 @@
                 <td><code>Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;writeObserver</code></td>
                 <td>
                   <p>called when a state object is created or just before it is written to the first time in the snapshot or a nested mutable snapshot. This might be called several times for the same object if nested mutable snapshots are created.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block</code></td>
+                <td>
+                  <p>the code the <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#observe(kotlin.Function1,kotlin.Function1,kotlin.Function0)">readObserver</a></code> and <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#observe(kotlin.Function1,kotlin.Function1,kotlin.Function0)">writeObserver</a></code> will be observing. Once <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#observe(kotlin.Function1,kotlin.Function1,kotlin.Function0)">block</a></code> returns, the <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#observe(kotlin.Function1,kotlin.Function1,kotlin.Function0)">readObserver</a></code> and <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#observe(kotlin.Function1,kotlin.Function1,kotlin.Function0)">writeObserver</a></code> will no longer be called.</p>
                 </td>
               </tr>
             </tbody>

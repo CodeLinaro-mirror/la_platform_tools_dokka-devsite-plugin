@@ -12,8 +12,10 @@
       <meta itemprop="property" content="getFontScale()">
       <meta itemprop="property" content="getLayoutDirection()">
       <meta itemprop="property" content="getSize()">
+      <meta itemprop="property" content="obtainGraphicsLayer()">
       <meta itemprop="property" content="onDrawBehind(kotlin.Function1)">
       <meta itemprop="property" content="onDrawWithContent(kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.layer.GraphicsLayer).record(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.IntSize,kotlin.Function1)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -76,6 +78,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html#obtainGraphicsLayer()">obtainGraphicsLayer</a>()</code></div>
+              <p>Returns a managed <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> instance.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/DrawResult.html">DrawResult</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html#onDrawBehind(kotlin.Function1)">onDrawBehind</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block)</code></div>
@@ -87,6 +96,13 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html#onDrawWithContent(kotlin.Function1)">onDrawWithContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</code></div>
               <p>Issue drawing commands before or after the layout's drawing contents</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html#(androidx.compose.ui.graphics.layer.GraphicsLayer).record(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.IntSize,kotlin.Function1)">record</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</code></div>
+              <p>Record the drawing commands into the <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> with the <code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code>, <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> and <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code> are given from the provided <code><a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html">CacheDrawScope</a></code></p>
             </td>
           </tr>
         </tbody>
@@ -121,13 +137,6 @@
                       <td>
                         <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
-                        <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
@@ -182,13 +191,6 @@
                     <tr>
                       <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
-                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
-                      <td>
                         <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
                         <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
                       </td>
@@ -198,6 +200,34 @@
                       <td>
                         <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/unit/FontScaling.html">androidx.compose.ui.unit.FontScaling</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/FontScalingKt.html">FontScalingKt</a>.<a href="/reference/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/FontScalingKt.html">FontScalingKt</a>.<a href="/reference/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
                       </td>
                     </tr>
                   </tbody>
@@ -246,6 +276,15 @@
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;<a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html#getSize()">getSize</a>()</pre>
         <p>Provides the dimensions of the current drawing environment</p>
       </div>
+      <div class="api-item"><a name="obtainGraphicsLayer--"></a><a name="obtaingraphicslayer"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="obtainGraphicsLayer()">obtainGraphicsLayer</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a>&nbsp;<a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html#obtainGraphicsLayer()">obtainGraphicsLayer</a>()</pre>
+        <p>Returns a managed <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> instance. This <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> maybe newly created or return a previously allocated instance. Consumers are not expected to release this instance as it is automatically recycled upon invalidation of the CacheDrawScope and released when the <code><a href="/reference/androidx/compose/ui/draw/DrawCacheModifier.html">DrawCacheModifier</a></code> is detached.</p>
+      </div>
       <div class="api-item"><a name="onDrawBehind-kotlin.Function1-"></a><a name="ondrawbehind"></a>
         <div class="api-name-block">
           <div>
@@ -263,6 +302,15 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/DrawResult.html">DrawResult</a>&nbsp;<a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html#onDrawWithContent(kotlin.Function1)">onDrawWithContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Issue drawing commands before or after the layout's drawing contents</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.graphics.layer.GraphicsLayer).record(androidx.compose.ui.unit.Density, androidx.compose.ui.unit.LayoutDirection, androidx.compose.ui.unit.IntSize, kotlin.Function1)"></a><a name="-androidx.compose.ui.graphics.layer.GraphicsLayer-.record-androidx.compose.ui.unit.Density-androidx.compose.ui.unit.LayoutDirection-androidx.compose.ui.unit.IntSize-kotlin.Function1-"></a><a name="record"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.layer.GraphicsLayer).record(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.IntSize,kotlin.Function1)">record</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html#(androidx.compose.ui.graphics.layer.GraphicsLayer).record(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.IntSize,kotlin.Function1)">record</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
+        <p>Record the drawing commands into the <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> with the <code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code>, <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> and <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code> are given from the provided <code><a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html">CacheDrawScope</a></code></p>
       </div>
     </div>
   </body>

@@ -15,10 +15,13 @@
       <meta itemprop="property" content="getLocalDensity()">
       <meta itemprop="property" content="getLocalFocusManager()">
       <meta itemprop="property" content="getLocalFontFamilyResolver()">
+      <meta itemprop="property" content="getLocalFontLoader()">
+      <meta itemprop="property" content="getLocalGraphicsContext()">
       <meta itemprop="property" content="getLocalHapticFeedback()">
       <meta itemprop="property" content="getLocalInputModeManager()">
       <meta itemprop="property" content="getLocalLayoutDirection()">
-      <meta itemprop="property" content="getLocalPlatformTextInputPluginRegistry()">
+      <meta itemprop="property" content="getLocalScrollCaptureInProgress()">
+      <meta itemprop="property" content="getLocalSoftwareKeyboardController()">
       <meta itemprop="property" content="getLocalTextInputService()">
       <meta itemprop="property" content="getLocalTextToolbar()">
       <meta itemprop="property" content="getLocalUriHandler()">
@@ -102,6 +105,20 @@
             </td>
           </tr>
           <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.ResourceLoader.html">Font.ResourceLoader</a>&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br><span><del><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalFontLoader()">getLocalFontLoader</a></del></span>()</code></div>
+              <p><strong>This method is deprecated.</strong> LocalFontLoader is replaced with LocalFontFamilyResolver</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html">GraphicsContext</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalGraphicsContext()">getLocalGraphicsContext</a>()</code></div>
+              <p>The CompositionLocal to provide access to a <code><a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html">GraphicsContext</a></code> instance for creation of <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code>s.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/hapticfeedback/HapticFeedback.html">HapticFeedback</a>&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalHapticFeedback()">getLocalHapticFeedback</a>()</code></div>
@@ -123,17 +140,24 @@
             </td>
           </tr>
           <tr>
-            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html">PlatformTextInputPluginRegistry</a>&gt;</code></td>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalPlatformTextInputPluginRegistry()">getLocalPlatformTextInputPluginRegistry</a>()</code></div>
-              <p>The CompositionLocal to provide platform text input services.</p>
+              <div><code><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalScrollCaptureInProgress()">getLocalScrollCaptureInProgress</a>()</code></div>
+              <p>True when the system is currently capturing the contents of a scrollable in this compose view or any parent compose view.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/androidx/compose/ui/platform/SoftwareKeyboardController.html">SoftwareKeyboardController</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalSoftwareKeyboardController()">getLocalSoftwareKeyboardController</a>()</code></div>
+              <p>The <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> to provide a <code><a href="/reference/androidx/compose/ui/platform/SoftwareKeyboardController.html">SoftwareKeyboardController</a></code> that can control the current software keyboard.</p>
             </td>
           </tr>
           <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a>&gt;</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalTextInputService()">getLocalTextInputService</a>()</code></div>
-              <p>The CompositionLocal to provide communication with platform text input service.</p>
+              <div><code><span><del><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalTextInputService()">getLocalTextInputService</a></del></span>()</code></div>
+              <p><strong>This method is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
             </td>
           </tr>
           <tr>
@@ -232,6 +256,27 @@
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalFontFamilyResolver()">getLocalFontFamilyResolver</a>()</pre>
         <p>The CompositionLocal for compose font resolution from FontFamily.</p>
       </div>
+      <div class="api-item"><a name="getLocalFontLoader--"></a><a name="getlocalfontloader"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getLocalFontLoader()">getLocalFontLoader</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.ResourceLoader.html">Font.ResourceLoader</a>&gt;&nbsp;<span><del><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalFontLoader()">getLocalFontLoader</a></del></span>()</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>LocalFontLoader is replaced with LocalFontFamilyResolver</aside>
+        <p>The CompositionLocal to provide platform font loading methods.</p>
+      </div>
+      <div class="api-item"><a name="getLocalGraphicsContext--"></a><a name="getlocalgraphicscontext"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getLocalGraphicsContext()">getLocalGraphicsContext</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html">GraphicsContext</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalGraphicsContext()">getLocalGraphicsContext</a>()</pre>
+        <p>The CompositionLocal to provide access to a <code><a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html">GraphicsContext</a></code> instance for creation of <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code>s.</p>
+        <p>Consumers that access this Local directly and call <code><a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html#createGraphicsLayer()">GraphicsContext.createGraphicsLayer</a></code> are responsible for calling <code><a href="/reference/androidx/compose/ui/graphics/GraphicsContext.html#releaseGraphicsLayer(androidx.compose.ui.graphics.layer.GraphicsLayer)">GraphicsContext.releaseGraphicsLayer</a></code>.</p>
+        <p>It is recommended that consumers invoke rememberGraphicsLayer instead to ensure that a <code><a href="/reference/androidx/compose/ui/graphics/layer/GraphicsLayer.html">GraphicsLayer</a></code> is released when the corresponding composable is disposed.</p>
+      </div>
       <div class="api-item"><a name="getLocalHapticFeedback--"></a><a name="getlocalhapticfeedback"></a>
         <div class="api-name-block">
           <div>
@@ -259,15 +304,24 @@
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalLayoutDirection()">getLocalLayoutDirection</a>()</pre>
         <p>The CompositionLocal to provide the layout direction.</p>
       </div>
-      <div class="api-item"><a name="getLocalPlatformTextInputPluginRegistry--"></a><a name="getlocalplatformtextinputpluginregistry"></a>
+      <div class="api-item"><a name="getLocalScrollCaptureInProgress--"></a><a name="getlocalscrollcaptureinprogress"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getLocalPlatformTextInputPluginRegistry()">getLocalPlatformTextInputPluginRegistry</h3>
+            <h3 id="getLocalScrollCaptureInProgress()">getLocalScrollCaptureInProgress</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html">PlatformTextInputPluginRegistry</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalPlatformTextInputPluginRegistry()">getLocalPlatformTextInputPluginRegistry</a>()</pre>
-        <p>The CompositionLocal to provide platform text input services.</p>
-        <p>This is a low-level API for code that talks directly to the platform input method framework. Higher-level text input APIs in the Foundation library are more appropriate for most cases.</p>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalScrollCaptureInProgress()">getLocalScrollCaptureInProgress</a>()</pre>
+        <p>True when the system is currently capturing the contents of a scrollable in this compose view or any parent compose view.</p>
+      </div>
+      <div class="api-item"><a name="getLocalSoftwareKeyboardController--"></a><a name="getlocalsoftwarekeyboardcontroller"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getLocalSoftwareKeyboardController()">getLocalSoftwareKeyboardController</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/androidx/compose/ui/platform/SoftwareKeyboardController.html">SoftwareKeyboardController</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalSoftwareKeyboardController()">getLocalSoftwareKeyboardController</a>()</pre>
+        <p>The <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> to provide a <code><a href="/reference/androidx/compose/ui/platform/SoftwareKeyboardController.html">SoftwareKeyboardController</a></code> that can control the current software keyboard.</p>
+        <p>Will be null if the software keyboard cannot be controlled.</p>
       </div>
       <div class="api-item"><a name="getLocalTextInputService--"></a><a name="getlocaltextinputservice"></a>
         <div class="api-name-block">
@@ -275,7 +329,8 @@
             <h3 id="getLocalTextInputService()">getLocalTextInputService</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalTextInputService()">getLocalTextInputService</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a>&gt;&nbsp;<span><del><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html#getLocalTextInputService()">getLocalTextInputService</a></del></span>()</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use PlatformTextInputModifierNode instead.</aside>
         <p>The CompositionLocal to provide communication with platform text input service.</p>
       </div>
       <div class="api-item"><a name="getLocalTextToolbar--"></a><a name="getlocaltexttoolbar"></a>

@@ -10,7 +10,9 @@
       <meta itemprop="path" content="androidx.compose.ui.text.input">
       <meta itemprop="property" content="hideSoftwareKeyboard()">
       <meta itemprop="property" content="showSoftwareKeyboard()">
+      <meta itemprop="property" content="startInput()">
       <meta itemprop="property" content="startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">
+      <meta itemprop="property" content="stopInput()">
       <meta itemprop="property" content="stopInput(androidx.compose.ui.text.input.TextInputSession)">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -30,6 +32,7 @@
       <pre>public class <a href="/reference/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a></pre>
     </p>
     <hr>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>Use PlatformTextInputModifierNode instead.</aside>
     <p>Handles communication with the IME. Informs about the IME changes via <code><a href="/reference/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a></code>s and provides utilities for working with software keyboard.</p>
     <p>This class is responsible for ensuring there is only one open <code><a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code> which will interact with software keyboards. Start new a TextInputSession by calling <code><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a></code> and close it with <code><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a></code>.</p>
     <h2>Summary</h2>
@@ -47,7 +50,8 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputService.html">PlatformTextInputService</a>&nbsp;platformTextInputService<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputService.html">PlatformTextInputService</a>&nbsp;platformTextInputService<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
             </td>
           </tr>
         </tbody>
@@ -80,17 +84,31 @@
             </td>
           </tr>
           <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/InternalTextApi.html">InternalTextApi</a><br>@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br><span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#startInput()">startInput</a></del></span>()</code></div>
+              <p><strong>This method is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>&nbsp;value,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a>&nbsp;imeOptions,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onEditCommand,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onImeActionPerformed<br>)</code></div>
-              <p>Start text input session for given client.</p>
+              <div><code><span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>&nbsp;value,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a>&nbsp;imeOptions,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onEditCommand,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onImeActionPerformed<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/InternalTextApi.html">InternalTextApi</a><br>@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br><span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#stopInput()">stopInput</a></del></span>()</code></div>
+              <p><strong>This method is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>&nbsp;session)</code></div>
-              <p>Stop text input session.</p>
+              <div><code><span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>&nbsp;session)</code></div>
+              <p><strong>This method is deprecated.</strong> Use PlatformTextInputModifierNode instead.</p>
             </td>
           </tr>
         </tbody>
@@ -104,7 +122,8 @@
             <h3 id="TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextInputService.html#TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputService.html">PlatformTextInputService</a>&nbsp;platformTextInputService<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;<span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputService.html">PlatformTextInputService</a>&nbsp;platformTextInputService<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use PlatformTextInputModifierNode instead.</aside>
       </div>
     </div>
     <div class="list">
@@ -131,13 +150,24 @@
         <p>This call will be ignored if there is not an open <code><a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code>, as it means there is nothing that will accept typed input. The most common way to open a TextInputSession is to set the focus to an editable text composable.</p>
         <p>There is no guarantee that the keyboard will be shown. The software keyboard or system service may silently ignore this request.</p>
       </div>
+      <div class="api-item"><a name="startInput--"></a><a name="startinput"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="startInput()">startInput</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/InternalTextApi.html">InternalTextApi</a><br>@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#startInput()">startInput</a></del></span>()</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use PlatformTextInputModifierNode instead.</aside>
+        <p>Restart input and show the keyboard. This should only be called when starting a new <code>PlatformTextInputModifierNode.textInputSession</code>.</p>
+      </div>
       <div class="api-item"><a name="startInput(androidx.compose.ui.text.input.TextFieldValue, androidx.compose.ui.text.input.ImeOptions, kotlin.Function1, kotlin.Function1)"></a><a name="startInput-androidx.compose.ui.text.input.TextFieldValue-androidx.compose.ui.text.input.ImeOptions-kotlin.Function1-kotlin.Function1-"></a><a name="startinput"></a>
         <div class="api-name-block">
           <div>
             <h3 id="startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>&nbsp;value,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a>&nbsp;imeOptions,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onEditCommand,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onImeActionPerformed<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>&nbsp;<span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>&nbsp;value,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a>&nbsp;imeOptions,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onEditCommand,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onImeActionPerformed<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use PlatformTextInputModifierNode instead.</aside>
         <p>Start text input session for given client.</p>
         <p>If there is a previous <code><a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code> open, it will immediately be closed by this call to <code><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -180,13 +210,23 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="stopInput--"></a><a name="stopinput"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="stopInput()">stopInput</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/InternalTextApi.html">InternalTextApi</a><br>@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#stopInput()">stopInput</a></del></span>()</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use PlatformTextInputModifierNode instead.</aside>
+      </div>
       <div class="api-item"><a name="stopInput-androidx.compose.ui.text.input.TextInputSession-"></a><a name="stopinput"></a>
         <div class="api-name-block">
           <div>
             <h3 id="stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>&nbsp;session)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>&nbsp;session)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use PlatformTextInputModifierNode instead.</aside>
         <p>Stop text input session.</p>
         <p>If the <code><a href="/reference/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">session</a></code> is not the currently open session, no action will occur.</p>
         <div class="devsite-table-wrapper">

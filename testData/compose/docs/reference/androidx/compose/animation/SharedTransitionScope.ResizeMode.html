@@ -1,0 +1,58 @@
+<html devsite="true">
+  <head>
+    <title>SharedTransitionScope.ResizeMode</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="SharedTransitionScope.ResizeMode">
+      <meta itemprop="path" content="androidx.compose.animation">
+      <meta itemprop="property" content="ScaleToBounds(androidx.compose.ui.layout.ContentScale,androidx.compose.ui.Alignment)">
+      <meta itemprop="property" content="getRemeasureToBounds()">
+      <meta itemprop="property" content="RemeasureToBounds()">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>SharedTransitionScope.ResizeMode</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/SharedTransitionScope.kt+class:androidx.compose.animation.SharedTransitionScope.ResizeMode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/animation/SharedTransitionScope.ResizeMode.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public sealed interface <a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.html">SharedTransitionScope.ResizeMode</a></pre>
+    </p>
+    <hr>
+    <p>There are two different modes to resize child layout of <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code> during bounds transform: 1) <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html#ScaleToBounds(androidx.compose.ui.layout.ContentScale,androidx.compose.ui.Alignment)">ScaleToBounds</a></code> and 2) <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html#RemeasureToBounds()">RemeasureToBounds</a></code>.</p>
+    <p><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html#ScaleToBounds(androidx.compose.ui.layout.ContentScale,androidx.compose.ui.Alignment)">ScaleToBounds</a></code> first measures the child layout with the lookahead constraints, similar to <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).skipToLookaheadSize()">skipToLookaheadSize</a></code>. Then the child's stable layout will be scaled to fit in the shared bounds.</p>
+    <p>In contrast, <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html#RemeasureToBounds()">RemeasureToBounds</a></code> will remeasure and relayout the child layout of <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code> with animated fixed constraints based on the size of the bounds transform. The re-measurement is triggered by the bounds size change, which could potentially be every frame.</p>
+    <p><code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html#ScaleToBounds(androidx.compose.ui.layout.ContentScale,androidx.compose.ui.Alignment)">ScaleToBounds</a></code> works best for Texts and bespoke layouts that don't respond well to constraints change. <code><a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html#RemeasureToBounds()">RemeasureToBounds</a></code> works best for background, shared images of different aspect ratios, and other layouts that adjust themselves visually nicely and efficiently to size changes.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/animation/SharedTransitionScope.ResizeMode.Companion.html">SharedTransitionScope.ResizeMode.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

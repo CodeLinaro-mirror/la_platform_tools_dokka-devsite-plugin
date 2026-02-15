@@ -10,17 +10,21 @@
       <meta itemprop="path" content="androidx.compose.foundation.pager">
       <meta itemprop="property" content="animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">
       <meta itemprop="property" content="dispatchRawDelta(kotlin.Float)">
-      <meta itemprop="property" content="getOffsetFractionForPage(kotlin.Int)">
+      <meta itemprop="property" content="getOffsetDistanceInPages(kotlin.Int)">
+      <meta itemprop="property" content="requestScrollToPage(kotlin.Int,kotlin.Float)">
       <meta itemprop="property" content="scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">
       <meta itemprop="property" content="scrollToPage(kotlin.Int,kotlin.Float)">
+      <meta itemprop="property" content="(androidx.compose.foundation.gestures.ScrollScope).updateCurrentPage(kotlin.Int,kotlin.Float)">
+      <meta itemprop="property" content="(androidx.compose.foundation.gestures.ScrollScope).updateTargetPage(kotlin.Int)">
       <meta itemprop="property" content="canScrollBackward()">
       <meta itemprop="property" content="canScrollForward()">
       <meta itemprop="property" content="currentPage()">
       <meta itemprop="property" content="currentPageOffsetFraction()">
-      <meta itemprop="property" content="initialPage()">
-      <meta itemprop="property" content="initialPageOffsetFraction()">
       <meta itemprop="property" content="interactionSource()">
       <meta itemprop="property" content="isScrollInProgress()">
+      <meta itemprop="property" content="lastScrolledBackward()">
+      <meta itemprop="property" content="lastScrolledForward()">
+      <meta itemprop="property" content="layoutInfo()">
       <meta itemprop="property" content="pageCount()">
       <meta itemprop="property" content="settledPage()">
       <meta itemprop="property" content="targetPage()">
@@ -45,13 +49,13 @@
           <li>
             <div class="kotlin-platform" data-title="Common/All">Cmn</div>
             <!--platform-Common/All-->
-            <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>abstract class <a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a> : <a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></pre>
+            <pre>abstract class <a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html">PagerState</a> : <a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></pre>
           </li>
         </ul>
       </div>
     </devsite-filter >
     <hr>
-    <p>The state that can be used to control <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#VerticalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function2)">VerticalPager</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#HorizontalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function2)">HorizontalPager</a></code></p>
+    <p>The state that can be used to control <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#VerticalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">VerticalPager</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#HorizontalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">HorizontalPager</a></code></p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">
@@ -68,7 +72,7 @@
           <tbody class="list">
             <tr>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#PagerState(kotlin.Int,kotlin.Float)">PagerState</a>(initialPage:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;initialPageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#PagerState(kotlin.Int,kotlin.Float)">PagerState</a>(currentPage:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> currentPageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -95,7 +99,7 @@
             <tr>
               <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollToPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;<br>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollToPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;<br>)</code></div>
                 <p>Scroll animate to a given <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">page</a></code>.</p>
               </td>
               <td>
@@ -115,8 +119,18 @@
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">getOffsetFractionForPage</a>(page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetDistanceInPages(kotlin.Int)">getOffsetDistanceInPages</a>(page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>An utility function to help to calculate a given page's offset.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#requestScrollToPage(kotlin.Int,kotlin.Float)">requestScrollToPage</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Requests the <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#requestScrollToPage(kotlin.Int,kotlin.Float)">page</a></code> to be at the snapped position during the next remeasure, offset by <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#requestScrollToPage(kotlin.Int,kotlin.Float)">pageOffsetFraction</a></code>, and schedules a remeasure.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -135,8 +149,28 @@
             <tr>
               <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#scrollToPage(kotlin.Int,kotlin.Float)">scrollToPage</a>(page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#scrollToPage(kotlin.Int,kotlin.Float)">scrollToPage</a>(page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
                 <p>Scroll (jump immediately) to a given <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#scrollToPage(kotlin.Int,kotlin.Float)">page</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateCurrentPage(kotlin.Int,kotlin.Float)">updateCurrentPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+                <p>Jump immediately to a given <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateCurrentPage(kotlin.Int,kotlin.Float)">page</a></code> with a given <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateCurrentPage(kotlin.Int,kotlin.Float)">pageOffsetFraction</a></code> inside a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateTargetPage(kotlin.Int)">updateTargetPage</a>(targetPage:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Used to update <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateTargetPage(kotlin.Int)">targetPage</a></code> during a programmatic scroll operation.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -201,26 +235,6 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#initialPage()">initialPage</a></code></div>
-                <p>The initial page to be displayed</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
-              <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#initialPageOffsetFraction()">initialPageOffsetFraction</a></code></div>
-                <p>The offset of the initial page with respect to the start of the layout.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#interactionSource()">interactionSource</a></code></div>
@@ -241,10 +255,40 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#lastScrolledBackward()">lastScrolledBackward</a></code></div>
+                <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#lastScrolledForward()">lastScrolledForward</a></code></div>
+                <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerLayoutInfo.html">PagerLayoutInfo</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#layoutInfo()">layoutInfo</a></code></div>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerLayoutInfo.html">PagerLayoutInfo</a></code> that contains useful information about the Pager's last layout pass.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code>abstract <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#pageCount()">pageCount</a></code></div>
-                <p>The total amount of pages present in this pager</p>
+                <p>The total amount of pages present in this pager.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -264,7 +308,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#targetPage()">targetPage</a></code></div>
-                <p>The page this <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code> intends to settle to.</p>
+                <p>The page this <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">Pager</a></code> intends to settle to.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -288,7 +332,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#PagerState(kotlin.Int,kotlin.Float)">PagerState</a>(initialPage:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0,&nbsp;initialPageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f)</pre>
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#PagerState(kotlin.Int,kotlin.Float)">PagerState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;currentPage:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> currentPageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f<br>)</pre>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -302,13 +346,13 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code>initialPage:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+                  <td><code>currentPage:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
                   <td>
                     <p>The initial page to be displayed</p>
                   </td>
                 </tr>
                 <tr>
-                  <td><code>initialPageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                  <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> currentPageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
                   <td>
                     <p>The offset of the initial page with respect to the start of the layout.</p>
                   </td>
@@ -333,10 +377,11 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollToPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = spring(stiffness = Spring.StiffnessMediumLow)<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Scroll animate to a given <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">page</a></code>. If the <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">page</a></code> is too far away from <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code> we will not compose all pages in the way. We will pre-jump to a nearer page, compose and animate the rest of the pages until <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">page</a></code>.</p>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollToPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = spring()<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Scroll animate to a given <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">page</a></code>. If the <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">page</a></code> is too far away from <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPage</a></code> we will not compose all pages in the way. We will pre-jump to a nearer page, compose and animate the rest of the pages until <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">page</a></code>.</p>
           <p>Please refer to the sample to learn how to use this API.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.animate
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -344,6 +389,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -407,13 +453,13 @@ Column {
                   </td>
                 </tr>
                 <tr>
-                  <td><code>pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                  <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
                   <td>
                     <p>A fraction of the page size that indicates the offset the destination page will be offset from its snapped position.</p>
                   </td>
                 </tr>
                 <tr>
-                  <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = spring(stiffness = Spring.StiffnessMediumLow)</code></td>
+                  <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = spring()</code></td>
                   <td>
                     <p>An <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code> to move between pages. We'll use a <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> as the default animation.</p>
                   </td>
@@ -479,18 +525,20 @@ Column {
             </table>
           </div>
         </div>
-        <div class="api-item"><a name="getOffsetFractionForPage-kotlin.Int-"></a><a name="getoffsetfractionforpage"></a>
+        <div class="api-item"><a name="getOffsetDistanceInPages-kotlin.Int-"></a><a name="getoffsetdistanceinpages"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="getOffsetFractionForPage(kotlin.Int)">getOffsetFractionForPage</h3>
+              <h3 id="getOffsetDistanceInPages(kotlin.Int)">getOffsetDistanceInPages</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">getOffsetFractionForPage</a>(page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
-          <p>An utility function to help to calculate a given page's offset. Since this is based off <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#currentPageOffsetFraction()">currentPageOffsetFraction</a></code> the same concept applies: a fraction offset that represents how far <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">page</a></code> is from the settled position (represented by <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code> offset). The difference here is that <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#currentPageOffsetFraction()">currentPageOffsetFraction</a></code> is a value between -0.5 and 0.5 and the value calculate by this function can be larger than these numbers if <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">page</a></code> is different than <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code>.</p>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetDistanceInPages(kotlin.Int)">getOffsetDistanceInPages</a>(page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>An utility function to help to calculate a given page's offset. This is an offset that represents how far <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetDistanceInPages(kotlin.Int)">page</a></code> is from the settled position (represented by <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPage</a></code> offset). The difference here is that <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPageOffsetFraction</a></code> is a value between -0.5 and 0.5 and the value calculated by this function can be larger than these numbers if <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetDistanceInPages(kotlin.Int)">page</a></code> is different than <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPage</a></code>.</p>
+          <p>For instance, if currentPage=0 and we call <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetDistanceInPages(kotlin.Int)">getOffsetDistanceInPages</a></code> for page 3, the result will be 3, meaning the given page is 3 pages away from the current page (the sign represent the direction of the offset, positive is forward, negative is backwards). Another example is if currentPage=3 and we call <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetDistanceInPages(kotlin.Int)">getOffsetDistanceInPages</a></code> for page 1, the result would be -2, meaning we're 2 pages away (moving backwards) to the current page.</p>
+          <p>This offset also works in conjunction with <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPageOffsetFraction</a></code>, so if <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPage</a></code> is out of its snapped position (i.e. currentPageOffsetFraction!=0) then the calculated value will still represent the offset in number of pages (in this case, not whole pages). For instance, if currentPage=1 and we're slightly offset, currentPageOffsetFraction=0.2, if we call this to page 2, the result would be 0.8, that is 0.8 page away from current page (moving forward).</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -527,7 +575,49 @@ Column {
                 <tr>
                   <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
                   <td>
-                    <p>The offset of <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">page</a></code> with respect to <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code>.</p>
+                    <p>The offset of <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#getOffsetDistanceInPages(kotlin.Int)">page</a></code> with respect to <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPage</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="requestScrollToPage(kotlin.Int, kotlin.Float)"></a><a name="requestScrollToPage-kotlin.Int-kotlin.Float-"></a><a name="requestscrolltopage"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="requestScrollToPage(kotlin.Int,kotlin.Float)">requestScrollToPage</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#requestScrollToPage(kotlin.Int,kotlin.Float)">requestScrollToPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Requests the <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#requestScrollToPage(kotlin.Int,kotlin.Float)">page</a></code> to be at the snapped position during the next remeasure, offset by <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#requestScrollToPage(kotlin.Int,kotlin.Float)">pageOffsetFraction</a></code>, and schedules a remeasure.</p>
+          <p>The scroll position will be updated to the requested position rather than maintain the index based on the current page key (when a data set change will also be applied during the next remeasure), but <em>only</em> for the next remeasure.</p>
+          <p>Any scroll in progress will be cancelled.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>the index to which to scroll. Must be non-negative.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                  <td>
+                    <p>the offset fraction that the page should end up after the scroll.</p>
                   </td>
                 </tr>
               </tbody>
@@ -558,7 +648,7 @@ Column {
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#scrollToPage(kotlin.Int,kotlin.Float)">scrollToPage</a>(page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#scrollToPage(kotlin.Int,kotlin.Float)">scrollToPage</a>(page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Scroll (jump immediately) to a given <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#scrollToPage(kotlin.Int,kotlin.Float)">page</a></code>.</p>
           <p>Please refer to the sample to learn how to use this API.</p>
           <pre class="prettyprint lang-kotlin">
@@ -570,6 +660,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -629,7 +720,7 @@ Column {
                   </td>
                 </tr>
                 <tr>
-                  <td><code>pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                  <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
                   <td>
                     <p>A fraction of the page size that indicates the offset the destination page will be offset from its snapped position.</p>
                   </td>
@@ -637,6 +728,213 @@ Column {
               </tbody>
             </table>
           </div>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.foundation.gestures.ScrollScope).updateCurrentPage(kotlin.Int, kotlin.Float)"></a><a name="-androidx.compose.foundation.gestures.ScrollScope-.updateCurrentPage-kotlin.Int-kotlin.Float-"></a><a name="updatecurrentpage"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.foundation.gestures.ScrollScope).updateCurrentPage(kotlin.Int,kotlin.Float)">updateCurrentPage</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateCurrentPage(kotlin.Int,kotlin.Float)">updateCurrentPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Jump immediately to a given <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateCurrentPage(kotlin.Int,kotlin.Float)">page</a></code> with a given <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateCurrentPage(kotlin.Int,kotlin.Float)">pageOffsetFraction</a></code> inside a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a></code>. Use this method to create custom animated scrolling experiences. This will update the value of <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPage</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPageOffsetFraction</a></code> immediately, but can only be used inside a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a></code>, use <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> to gain access to a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a></code>.</p>
+          <p>Please refer to the sample to learn how to use this API.</p>
+          <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.animate
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+suspend fun PagerState.customAnimateScrollToPage(page: Int) {
+    val preJumpPosition = if (page &gt; currentPage) {
+        (page - 1).coerceAtLeast(0)
+    } else {
+        (page + 1).coerceAtMost(pageCount)
+    }
+    scroll {
+        // Update the target page
+        updateTargetPage(page)
+
+        // pre-jump to 1 page before our target page
+        updateCurrentPage(preJumpPosition, 0.0f)
+        val targetPageDiff = page - currentPage
+        val distance = targetPageDiff * layoutInfo.pageSize.toFloat()
+        var previousValue = 0.0f
+        animate(
+            0f,
+            distance,
+        ) { currentValue, _ -&gt;
+            previousValue += scrollBy(currentValue - previousValue)
+        }
+    }
+}
+
+val state = rememberPagerState(initialPage = 5) { 10 }
+val scope = rememberCoroutineScope()
+
+Column {
+    HorizontalPager(
+        modifier = Modifier
+            .fillMaxSize()
+            .weight(0.9f),
+        state = state
+    ) { page -&gt;
+        Box(
+            modifier = Modifier
+                .padding(10.dp)
+                .background(Color.Blue)
+                .fillMaxWidth()
+                .aspectRatio(1f),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = page.toString(), fontSize = 32.sp)
+        }
+    }
+
+    Button(onClick = {
+        scope.launch {
+            state.customAnimateScrollToPage(1)
+        }
+    }) {
+        Text(text = &quot;Jump to Page 1&quot;)
+    }
+}</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>page:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>The destination page to scroll to</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> pageOffsetFraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                  <td>
+                    <p>A fraction of the page size that indicates the offset the destination page will be offset from its snapped position.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.foundation.gestures.ScrollScope-.updateTargetPage-kotlin.Int-"></a><a name="updatetargetpage"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.foundation.gestures.ScrollScope).updateTargetPage(kotlin.Int)">updateTargetPage</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateTargetPage(kotlin.Int)">updateTargetPage</a>(targetPage:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Used to update <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateTargetPage(kotlin.Int)">targetPage</a></code> during a programmatic scroll operation. This can only be called inside a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a></code> and should be called anytime a custom scroll (through <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code>) is executed in order to correctly update <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateTargetPage(kotlin.Int)">targetPage</a></code>. This will not move the pages and it's still the responsibility of the caller to call <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code> in order to actually get to <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateTargetPage(kotlin.Int)">targetPage</a></code>. By the end of the <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block, when the <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">Pager</a></code> is no longer scrolling <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(androidx.compose.foundation.gestures.ScrollScope).updateTargetPage(kotlin.Int)">targetPage</a></code> will assume the value of <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPage</a></code>.</p>
+          <p>Please refer to the sample to learn how to use this API.</p>
+          <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.animate
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+suspend fun PagerState.customAnimateScrollToPage(page: Int) {
+    val preJumpPosition = if (page &gt; currentPage) {
+        (page - 1).coerceAtLeast(0)
+    } else {
+        (page + 1).coerceAtMost(pageCount)
+    }
+    scroll {
+        // Update the target page
+        updateTargetPage(page)
+
+        // pre-jump to 1 page before our target page
+        updateCurrentPage(preJumpPosition, 0.0f)
+        val targetPageDiff = page - currentPage
+        val distance = targetPageDiff * layoutInfo.pageSize.toFloat()
+        var previousValue = 0.0f
+        animate(
+            0f,
+            distance,
+        ) { currentValue, _ -&gt;
+            previousValue += scrollBy(currentValue - previousValue)
+        }
+    }
+}
+
+val state = rememberPagerState(initialPage = 5) { 10 }
+val scope = rememberCoroutineScope()
+
+Column {
+    HorizontalPager(
+        modifier = Modifier
+            .fillMaxSize()
+            .weight(0.9f),
+        state = state
+    ) { page -&gt;
+        Box(
+            modifier = Modifier
+                .padding(10.dp)
+                .background(Color.Blue)
+                .fillMaxWidth()
+                .aspectRatio(1f),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = page.toString(), fontSize = 32.sp)
+        }
+    }
+
+    Button(onClick = {
+        scope.launch {
+            state.customAnimateScrollToPage(1)
+        }
+    }) {
+        Text(text = &quot;Jump to Page 1&quot;)
+    }
+}</pre>
         </div>
       </div>
     </devsite-filter >
@@ -798,6 +1096,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
@@ -847,7 +1146,7 @@ Column(modifier = Modifier.fillMaxSize()) {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#currentPageOffsetFraction()">currentPageOffsetFraction</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
-          <p>Indicates how far the current page is to the snapped position, this will vary from -0.5 (page is offset towards the start of the layout) to 0.5 (page is offset towards the end of the layout). This is 0.0 if the <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code> is in the snapped position. The value will flip once the current page changes.</p>
+          <p>Indicates how far the current page is to the snapped position, this will vary from -0.5 (page is offset towards the start of the layout) to 0.5 (page is offset towards the end of the layout). This is 0.0 if the <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPage</a></code> is in the snapped position. The value will flip once the current page changes.</p>
           <p>This property is observable and shouldn't be used as is in a composable function due to potential performance issues. To use it in the composition, please consider using a derived state (e.g <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(kotlin.Function0)">derivedStateOf</a></code>) to only have recompositions when the derived value changes.</p>
           <p>Please refer to the sample to learn how to use this API.</p>
           <pre class="prettyprint lang-kotlin">
@@ -859,6 +1158,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
@@ -897,32 +1197,6 @@ Column(modifier = Modifier.fillMaxSize()) {
     }
 }</pre>
         </div>
-        <div class="api-item"><a name="getInitialPage()"></a><a name="setInitialPage()"></a><a name="getInitialPage--"></a><a name="setInitialPage--"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="initialPage()">initialPage</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#initialPage()">initialPage</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
-          <p>The initial page to be displayed</p>
-        </div>
-        <div class="api-item"><a name="getInitialPageOffsetFraction()"></a><a name="setInitialPageOffsetFraction()"></a><a name="getInitialPageOffsetFraction--"></a><a name="setInitialPageOffsetFraction--"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="initialPageOffsetFraction()">initialPageOffsetFraction</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#initialPageOffsetFraction()">initialPageOffsetFraction</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
-          <p>The offset of the initial page with respect to the start of the layout.</p>
-        </div>
         <div class="api-item"><a name="getInteractionSource()"></a><a name="setInteractionSource()"></a><a name="getInteractionSource--"></a><a name="setInteractionSource--"></a>
           <div class="api-name-block">
             <div>
@@ -949,6 +1223,77 @@ Column(modifier = Modifier.fillMaxSize()) {
           <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#isScrollInProgress()">isScrollInProgress</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
         </div>
+        <div class="api-item"><a name="getLastScrolledBackward()"></a><a name="setLastScrolledBackward()"></a><a name="getLastScrolledBackward--"></a><a name="setLastScrolledBackward--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="lastScrolledBackward()">lastScrolledBackward</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#lastScrolledBackward()">lastScrolledBackward</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+          <ul>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling backward.</p>
+            </li>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> was scrolling backward in its last scroll action.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="api-item"><a name="getLastScrolledForward()"></a><a name="setLastScrolledForward()"></a><a name="getLastScrolledForward--"></a><a name="setLastScrolledForward--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="lastScrolledForward()">lastScrolledForward</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#lastScrolledForward()">lastScrolledForward</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>The value of this property is true under the following scenarios, otherwise it's false.</p>
+          <ul>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling forward.</p>
+            </li>
+            <li>
+              <p>This <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> was scrolling forward in its last scroll action.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="api-item"><a name="getLayoutInfo()"></a><a name="setLayoutInfo()"></a><a name="getLayoutInfo--"></a><a name="setLayoutInfo--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="layoutInfo()">layoutInfo</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#layoutInfo()">layoutInfo</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerLayoutInfo.html">PagerLayoutInfo</a></pre>
+          <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerLayoutInfo.html">PagerLayoutInfo</a></code> that contains useful information about the Pager's last layout pass. For instance, you can query which pages are currently visible in the layout.</p>
+          <p>This property is observable and is updated after every scroll or remeasure. If you use it in the composable function it will be recomposed on every change causing potential performance issues including infinity recomposition loop. Therefore, avoid using it in the composition.</p>
+          <p>If you want to run some side effects like sending an analytics event or updating a state based on this value consider using &quot;snapshotFlow&quot;:</p>
+          <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
+
+val pagerState = rememberPagerState() { 10 }
+LaunchedEffect(pagerState) {
+    snapshotFlow { pagerState.layoutInfo.visiblePagesInfo.firstOrNull() }
+        .collect {
+            // use the new first visible page info
+        }
+}</pre>
+        </div>
         <div class="api-item"><a name="getPageCount()"></a><a name="setPageCount()"></a><a name="getPageCount--"></a><a name="setPageCount--"></a>
           <div class="api-name-block">
             <div>
@@ -960,7 +1305,7 @@ Column(modifier = Modifier.fillMaxSize()) {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">abstract&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#pageCount()">pageCount</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
-          <p>The total amount of pages present in this pager</p>
+          <p>The total amount of pages present in this pager. The source of this data should be observable.</p>
         </div>
         <div class="api-item"><a name="getSettledPage()"></a><a name="setSettledPage()"></a><a name="getSettledPage--"></a><a name="setSettledPage--"></a>
           <div class="api-name-block">
@@ -984,6 +1329,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
@@ -1033,7 +1379,7 @@ Column(modifier = Modifier.fillMaxSize()) {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#targetPage()">targetPage</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
-          <p>The page this <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code> intends to settle to. During fling or animated scroll (from <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollToPage</a></code> this will represent the page this pager intends to settle to. When no scroll is ongoing, this will be equal to <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code>.</p>
+          <p>The page this <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.TargetedFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapPosition,kotlin.Function2)">Pager</a></code> intends to settle to. During fling or animated scroll (from <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollToPage</a></code> this will represent the page this pager intends to settle to. When no scroll is ongoing, this will be equal to <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PagerState.html#(kotlin.Int,kotlin.Float,androidx.compose.foundation.lazy.layout.PrefetchScheduler)">currentPage</a></code>.</p>
           <p>Please refer to the sample to learn how to use this API.</p>
           <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
@@ -1044,6 +1390,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember

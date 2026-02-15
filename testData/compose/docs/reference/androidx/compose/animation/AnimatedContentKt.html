@@ -104,7 +104,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Surface
@@ -136,6 +136,7 @@ val cornerSize by cartOpenTransition.animateDp(
         when {
             CartState.Expanded isTransitioningTo CartState.Collapsed -&gt;
                 tween(durationMillis = 433, delayMillis = 67)
+
             else -&gt;
                 tween(durationMillis = 150)
         }
@@ -143,7 +144,8 @@ val cornerSize by cartOpenTransition.animateDp(
 ) { if (it == CartState.Expanded) 0.dp else 24.dp }
 
 Surface(
-    Modifier.shadow(8.dp, CutCornerShape(topStart = cornerSize))
+    Modifier
+        .shadow(8.dp, CutCornerShape(topStart = cornerSize))
         .clip(CutCornerShape(topStart = cornerSize)),
     color = Color(0xfffff0ea),
 ) {
@@ -154,7 +156,7 @@ Surface(
     cartOpenTransition.AnimatedContent(
         transitionSpec = {
             fadeIn(animationSpec = tween(150, delayMillis = 150))
-                .with(fadeOut(animationSpec = tween(150)))
+                .togetherWith(fadeOut(animationSpec = tween(150)))
                 .using(
                     SizeTransform { initialSize, targetSize -&gt;
                         // Using different SizeTransform for different state change
@@ -254,17 +256,29 @@ import androidx.compose.ui.unit.dp
 // enum class ContentState { Foo, Bar, Baz }
 @Composable
 fun Foo() {
-    Box(Modifier.size(200.dp).background(Color(0xffffdb00)))
+    Box(
+        Modifier
+            .size(200.dp)
+            .background(Color(0xffffdb00))
+    )
 }
 
 @Composable
 fun Bar() {
-    Box(Modifier.size(40.dp).background(Color(0xffff8100)))
+    Box(
+        Modifier
+            .size(40.dp)
+            .background(Color(0xffff8100))
+    )
 }
 
 @Composable
 fun Baz() {
-    Box(Modifier.size(80.dp, 20.dp).background(Color(0xffff4400)))
+    Box(
+        Modifier
+            .size(80.dp, 20.dp)
+            .background(Color(0xffff4400))
+    )
 }
 
 var contentState: ContentState by remember { mutableStateOf(ContentState.Foo) }
@@ -286,7 +300,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -319,11 +333,13 @@ Column(Modifier.padding(20.dp), horizontalAlignment = Alignment.CenterHorizontal
             if (targetState &gt; initialState) {
                 // If the incoming number is larger, new number slides up and fades in while
                 // the previous (smaller) number slides up to make room and fades out.
-                slideInVertically { it } + fadeIn() with slideOutVertically { -it } + fadeOut()
+                slideInVertically { it } + fadeIn() togetherWith
+                    slideOutVertically { -it } + fadeOut()
             } else {
                 // If the incoming number is smaller, new number slides down and fades in while
                 // the previous number slides down and fades out.
-                slideInVertically { -it } + fadeIn() with slideOutVertically { it } + fadeOut()
+                slideInVertically { -it } + fadeIn() togetherWith
+                    slideOutVertically { it } + fadeOut()
                 // Disable clipping since the faded slide-out is desired out of bounds, but
                 // the size transform is still needed from number getting longer
             }.using(SizeTransform(clip = false)) // Using default spring for the size change.
@@ -380,22 +396,22 @@ Column(Modifier.padding(20.dp), horizontalAlignment = Alignment.CenterHorizontal
         <p>This creates a <code><a href="/reference/androidx/compose/animation/package-summary.html#SizeTransform(kotlin.Boolean,kotlin.Function2)">SizeTransform</a></code> with the provided <code><a href="/reference/androidx/compose/animation/package-summary.html#SizeTransform(kotlin.Boolean,kotlin.Function2)">clip</a></code> and <code><a href="/reference/androidx/compose/animation/package-summary.html#SizeTransform(kotlin.Boolean,kotlin.Function2)">sizeAnimationSpec</a></code>. By default, <code><a href="/reference/androidx/compose/animation/package-summary.html#SizeTransform(kotlin.Boolean,kotlin.Function2)">clip</a></code> will be true. This means during the size animation, the content will be clipped to the animated size. <code><a href="/reference/androidx/compose/animation/package-summary.html#SizeTransform(kotlin.Boolean,kotlin.Function2)">sizeAnimationSpec</a></code> defaults to return a <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> animation.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.ui.unit.IntSize
 
 // enum class CartState { Expanded, Collapsed }
-val transitionSpec: AnimatedContentScope&lt;CartState&gt;.() -&gt; ContentTransform =
+val transitionSpec: AnimatedContentTransitionScope&lt;CartState&gt;.() -&gt; ContentTransform =
     {
         // Fade in with a delay so that it starts after fade out
         fadeIn(animationSpec = tween(150, delayMillis = 150))
-            .with(fadeOut(animationSpec = tween(150)))
+            .togetherWith(fadeOut(animationSpec = tween(150)))
             .using(
                 SizeTransform { initialSize, targetSize -&gt;
                     // Using different SizeTransform for different state change
@@ -431,22 +447,22 @@ val transitionSpec: AnimatedContentScope&lt;CartState&gt;.() -&gt; ContentTransf
         <p>This creates a <code><a href="/reference/androidx/compose/animation/ContentTransform.html">ContentTransform</a></code> using the provided <code><a href="/reference/androidx/compose/animation/EnterTransition.html">EnterTransition</a></code> and <code><a href="/reference/androidx/compose/animation/package-summary.html#(androidx.compose.animation.EnterTransition).togetherWith(androidx.compose.animation.ExitTransition)">exit</a></code>, where the enter and exit transition will be running simultaneously. For example:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.ui.unit.IntSize
 
 // enum class CartState { Expanded, Collapsed }
-val transitionSpec: AnimatedContentScope&lt;CartState&gt;.() -&gt; ContentTransform =
+val transitionSpec: AnimatedContentTransitionScope&lt;CartState&gt;.() -&gt; ContentTransform =
     {
         // Fade in with a delay so that it starts after fade out
         fadeIn(animationSpec = tween(150, delayMillis = 150))
-            .with(fadeOut(animationSpec = tween(150)))
+            .togetherWith(fadeOut(animationSpec = tween(150)))
             .using(
                 SizeTransform { initialSize, targetSize -&gt;
                     // Using different SizeTransform for different state change

@@ -36,7 +36,7 @@
       </div>
     </devsite-filter >
     <hr>
-    <p><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that implement ObserverNode can provide their own implementation of <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> that will be called whenever the value of read object has changed. To trigger <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code>, read values within an <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that implement ObserverNode can provide their own implementation of <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> that will be called in response to changes to snapshot objects read within an <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">
@@ -56,7 +56,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a>()</code></div>
-                <p>This callback is called when any values that are read within the <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block changes.</p>
+                <p>This callback is called when any values that are read within the <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block change.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -119,7 +119,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>This callback is called when any values that are read within the <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block changes.</p>
+          <p>This callback is called when any values that are read within the <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block change. It is called after the snapshot is committed. <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> is called on the UI thread, and only called once in response to snapshot observation. To continue observing further updates, you need to call <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> again.</p>
         </div>
       </div>
     </devsite-filter >

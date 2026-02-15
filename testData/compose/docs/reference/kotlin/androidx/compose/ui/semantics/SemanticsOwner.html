@@ -10,7 +10,7 @@
       <meta itemprop="path" content="androidx.compose.ui.semantics">
       <meta itemprop="property" content="rootSemanticsNode()">
       <meta itemprop="property" content="unmergedRootSemanticsNode()">
-      <meta itemprop="property" content="(androidx.compose.ui.semantics.SemanticsOwner).getAllSemanticsNodes(kotlin.Boolean)">
+      <meta itemprop="property" content="(androidx.compose.ui.semantics.SemanticsOwner).getAllSemanticsNodes(kotlin.Boolean,kotlin.Boolean)">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -94,7 +94,7 @@
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a>&gt;</code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html">SemanticsOwner</a>.<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html#(androidx.compose.ui.semantics.SemanticsOwner).getAllSemanticsNodes(kotlin.Boolean)">getAllSemanticsNodes</a>(mergingEnabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html">SemanticsOwner</a>.<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html#(androidx.compose.ui.semantics.SemanticsOwner).getAllSemanticsNodes(kotlin.Boolean,kotlin.Boolean)">getAllSemanticsNodes</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;mergingEnabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;skipDeactivatedNodes:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
                 <p>Finds all <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code>s in the tree owned by this <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html">SemanticsOwner</a></code>.</p>
               </td>
               <td>
@@ -140,18 +140,45 @@
       <div class="list">
         <h2 data-title="platform-Common/All">Extension functions
           <!--platform-Common/All--></h2>
-        <div class="api-item"><a name="-androidx.compose.ui.semantics.SemanticsOwner-.getAllSemanticsNodes-kotlin.Boolean-"></a><a name="getallsemanticsnodes"></a>
+        <div class="api-item"><a name="(androidx.compose.ui.semantics.SemanticsOwner).getAllSemanticsNodes(kotlin.Boolean, kotlin.Boolean)"></a><a name="-androidx.compose.ui.semantics.SemanticsOwner-.getAllSemanticsNodes-kotlin.Boolean-kotlin.Boolean-"></a><a name="getallsemanticsnodes"></a>
           <div class="api-name-block">
             <div>
-              <h3 id="(androidx.compose.ui.semantics.SemanticsOwner).getAllSemanticsNodes(kotlin.Boolean)">getAllSemanticsNodes</h3>
+              <h3 id="(androidx.compose.ui.semantics.SemanticsOwner).getAllSemanticsNodes(kotlin.Boolean,kotlin.Boolean)">getAllSemanticsNodes</h3>
             </div>
             <div class="api-name-platform-and-metadata">
               <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html">SemanticsOwner</a>.<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html#(androidx.compose.ui.semantics.SemanticsOwner).getAllSemanticsNodes(kotlin.Boolean)">getAllSemanticsNodes</a>(mergingEnabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a>&gt;</pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html">SemanticsOwner</a>.<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html#(androidx.compose.ui.semantics.SemanticsOwner).getAllSemanticsNodes(kotlin.Boolean,kotlin.Boolean)">getAllSemanticsNodes</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;mergingEnabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;skipDeactivatedNodes:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a>&gt;</pre>
           <p>Finds all <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code>s in the tree owned by this <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html">SemanticsOwner</a></code>. Return the results in a list.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>mergingEnabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>set to true if you want the data to be merged.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>skipDeactivatedNodes:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+                  <td>
+                    <p>set to false if you want to collect the nodes which are deactivated. For example, the children of <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">androidx.compose.ui.layout.SubcomposeLayout</a></code> which are retained to be reused in future are considered deactivated.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </devsite-filter >

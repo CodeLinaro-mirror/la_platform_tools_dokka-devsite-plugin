@@ -9,18 +9,15 @@
       <meta itemprop="name" content="Density">
       <meta itemprop="path" content="androidx.compose.ui.unit">
       <meta itemprop="property" content="getDensity()">
-      <meta itemprop="property" content="getFontScale()">
       <meta itemprop="property" content="(androidx.compose.ui.unit.Dp).roundToPx()">
       <meta itemprop="property" content="(androidx.compose.ui.unit.TextUnit).roundToPx()">
       <meta itemprop="property" content="(kotlin.Float).toDp()">
       <meta itemprop="property" content="(kotlin.Int).toDp()">
-      <meta itemprop="property" content="(androidx.compose.ui.unit.TextUnit).toDp()">
       <meta itemprop="property" content="(androidx.compose.ui.geometry.Size).toDpSize()">
       <meta itemprop="property" content="(androidx.compose.ui.unit.Dp).toPx()">
       <meta itemprop="property" content="(androidx.compose.ui.unit.TextUnit).toPx()">
       <meta itemprop="property" content="(androidx.compose.ui.unit.DpRect).toRect()">
       <meta itemprop="property" content="(androidx.compose.ui.unit.DpSize).toSize()">
-      <meta itemprop="property" content="(androidx.compose.ui.unit.Dp).toSp()">
       <meta itemprop="property" content="(kotlin.Float).toSp()">
       <meta itemprop="property" content="(kotlin.Int).toSp()">
       <meta itemprop="language" content="JAVA">
@@ -38,10 +35,10 @@
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_java_switcher2.md" %}
     <p>
-      <pre>public interface <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></pre>
+      <pre>public interface <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a> extends <a href="/reference/androidx/compose/ui/unit/FontScaling.html">FontScaling</a></pre>
     </p>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html">AwaitPointerEventScope</a>, <a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html">CacheDrawScope</a>, <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>, <a href="/reference/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a>, <a href="/reference/androidx/compose/ui/test/InjectionScope.html">InjectionScope</a>, <a href="/reference/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>, <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>, <a href="/reference/androidx/compose/foundation/gestures/PressGestureScope.html">PressGestureScope</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html">AwaitPointerEventScope</a>, <a href="/reference/androidx/compose/ui/draw/CacheDrawScope.html">CacheDrawScope</a>, <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>, <a href="/reference/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a>, <a href="/reference/androidx/compose/ui/test/InjectionScope.html">InjectionScope</a>, <a href="/reference/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>, <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>, <a href="/reference/androidx/compose/foundation/gestures/PressGestureScope.html">PressGestureScope</a>, <a href="/reference/androidx/compose/ui/layout/RulerScope.html">RulerScope</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -99,13 +96,19 @@
                   <p>Receiver scope for <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTapGestures(kotlin.Function1,kotlin.Function1,kotlin.coroutines.SuspendFunction2,kotlin.Function1)">detectTapGestures</a></code>'s <code>onPress</code> lambda.</p>
                 </td>
               </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/layout/RulerScope.html">RulerScope</a></code></td>
+                <td>
+                  <p>A scope used in <code><a href="/reference/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1)">MeasureScope.layout</a></code> for the <code>rulers</code> parameter to allow a layout to define <code><a href="/reference/androidx/compose/ui/layout/Ruler.html">Ruler</a></code> values for children.</p>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
 </devsite-expandable>    </div>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
-        <div class="showalways" id="subclasses-indirect"><a href="/reference/androidx/compose/ui/graphics/drawscope/CanvasDrawScope.html">CanvasDrawScope</a>, <a href="/reference/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>, <a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a>, <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>, <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>, <a href="/reference/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>, <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>, <a href="/reference/androidx/compose/ui/test/MultiModalInjectionScope.html">MultiModalInjectionScope</a>, <a href="/reference/androidx/compose/ui/test/RotaryInjectionScope.html">RotaryInjectionScope</a>, <a href="/reference/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a>, <a href="/reference/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>, <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a></div>
+        <div class="showalways" id="subclasses-indirect"><a href="/reference/androidx/compose/ui/layout/ApproachIntrinsicMeasureScope.html">ApproachIntrinsicMeasureScope</a>, <a href="/reference/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a>, <a href="/reference/androidx/compose/ui/graphics/drawscope/CanvasDrawScope.html">CanvasDrawScope</a>, <a href="/reference/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>, <a href="/reference/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a>, <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>, <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutMeasureScope.html">LazyLayoutMeasureScope</a>, <a href="/reference/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>, <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>, <a href="/reference/androidx/compose/ui/test/MultiModalInjectionScope.html">MultiModalInjectionScope</a>, <a href="/reference/androidx/compose/ui/test/RotaryInjectionScope.html">RotaryInjectionScope</a>, <a href="/reference/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>, <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a></div>
       </span>
       <div id="subclasses-indirect-summary">
         <div class="devsite-table-wrapper">
@@ -115,6 +118,18 @@
               <col>
             </colgroup>
             <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/layout/ApproachIntrinsicMeasureScope.html">ApproachIntrinsicMeasureScope</a></code></td>
+                <td>
+                  <p>The receiver scope of a layout's intrinsic approach measurements lambdas.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a></code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a></code> provides access to lookahead results to allow <code><a href="/reference/androidx/compose/ui/layout/ApproachLayoutModifierNode.html">ApproachLayoutModifierNode</a></code> to leverage lookahead results to define how measurements and placements approach their destination.</p>
+                </td>
+              </tr>
               <tr>
                 <td><code><a href="/reference/androidx/compose/ui/graphics/drawscope/CanvasDrawScope.html">CanvasDrawScope</a></code></td>
                 <td>
@@ -128,9 +143,9 @@
                 </td>
               </tr>
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code></td>
+                <td><code><a href="/reference/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a></code></td>
                 <td>
-                  <p><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> provides access to lookahead results to allow <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to leverage lookahead results to define intermediate measurements and placements to gradually converge with lookahead.</p>
+                  <p>A scope that allows for the detection of the start of a drag and drop gesture, and subsequently starting a drag and drop session.</p>
                 </td>
               </tr>
               <tr>
@@ -167,12 +182,6 @@
                 <td><code><a href="/reference/androidx/compose/ui/test/RotaryInjectionScope.html">RotaryInjectionScope</a></code></td>
                 <td>
                   <p>The receiver scope of rotary input injection lambda from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performRotaryScrollInput(kotlin.Function1)">performRotaryScrollInput</a></code>.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code><a href="/reference/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a></code></td>
-                <td>
-                  <p><code><a href="/reference/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a></code> is the receiver scope for the intermediate measurer policy that gets invoked during the intermediate measure pass.</p>
                 </td>
               </tr>
               <tr>
@@ -220,13 +229,6 @@ val sizeInPx = with(LocalDensity.current) { 16.dp.toPx() }</pre>
             </td>
           </tr>
           <tr>
-            <td><code>abstract float</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#getFontScale()">getFontScale</a>()</code></div>
-              <p>Current user preference for the scaling factor for fonts.</p>
-            </td>
-          </tr>
-          <tr>
             <td><code>default int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
@@ -252,13 +254,6 @@ val sizeInPx = with(LocalDensity.current) { 16.dp.toPx() }</pre>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</code></div>
               <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
-              <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -299,13 +294,6 @@ val sizeInPx = with(LocalDensity.current) { 16.dp.toPx() }</pre>
           <tr>
             <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
-              <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
-            <td>
               <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
               <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
             </td>
@@ -320,6 +308,52 @@ val sizeInPx = with(LocalDensity.current) { 16.dp.toPx() }</pre>
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/unit/FontScaling.html">androidx.compose.ui.unit.FontScaling</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/FontScaling.html#getFontScale()">getFontScale</a>()</code></div>
+                        <p>Current user preference for the scaling factor for fonts.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/FontScalingKt.html">FontScalingKt</a>.<a href="/reference/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/FontScalingKt.html">FontScalingKt</a>.<a href="/reference/androidx/compose/ui/unit/FontScaling.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="getDensity--"></a><a name="getdensity"></a>
@@ -330,15 +364,6 @@ val sizeInPx = with(LocalDensity.current) { 16.dp.toPx() }</pre>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/unit/Density.html#getDensity()">getDensity</a>()</pre>
         <p>The logical density of the display. This is a scaling factor for the <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> unit.</p>
-      </div>
-      <div class="api-item"><a name="getFontScale--"></a><a name="getfontscale"></a>
-        <div class="api-name-block">
-          <div>
-            <h3 id="getFontScale()">getFontScale</h3>
-          </div>
-        </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/unit/Density.html#getFontScale()">getFontScale</a>()</pre>
-        <p>Current user preference for the scaling factor for fonts.</p>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.unit.Dp-.roundToPx--"></a><a name="roundtopx"></a>
         <div class="api-name-block">
@@ -375,36 +400,6 @@ val sizeInPx = with(LocalDensity.current) { 16.dp.toPx() }</pre>
         </div>
         <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</pre>
         <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="-androidx.compose.ui.unit.TextUnit-.toDp--"></a><a name="todp"></a>
-        <div class="api-name-block">
-          <div>
-            <h3 id="(androidx.compose.ui.unit.TextUnit).toDp()">toDp</h3>
-          </div>
-        </div>
-        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</pre>
-        <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Throws</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code></td>
-                <td>
-                  <p>if TextUnit other than SP unit is specified.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.geometry.Size-.toDpSize--"></a><a name="todpsize"></a>
         <div class="api-name-block">
@@ -471,15 +466,6 @@ val sizeInPx = with(LocalDensity.current) { 16.dp.toPx() }</pre>
         </div>
         <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a>&nbsp;receiver)</pre>
         <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="-androidx.compose.ui.unit.Dp-.toSp--"></a><a name="tosp"></a>
-        <div class="api-name-block">
-          <div>
-            <h3 id="(androidx.compose.ui.unit.Dp).toSp()">toSp</h3>
-          </div>
-        </div>
-        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</pre>
-        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp. Sp is used for font size, etc.</p>
       </div>
       <div class="api-item"><a name="-kotlin.Float-.toSp--"></a><a name="tosp"></a>
         <div class="api-name-block">

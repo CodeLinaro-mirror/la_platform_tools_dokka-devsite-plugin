@@ -11,6 +11,7 @@
       <meta itemprop="property" content="equals(kotlin.Any)">
       <meta itemprop="property" content="get(kotlin.Int)">
       <meta itemprop="property" content="getLength()">
+      <meta itemprop="property" content="getLinkAnnotations(kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="getParagraphStyles()">
       <meta itemprop="property" content="getSpanStyles()">
       <meta itemprop="property" content="getStringAnnotations(kotlin.Int,kotlin.Int)">
@@ -18,12 +19,16 @@
       <meta itemprop="property" content="getText()">
       <meta itemprop="property" content="getTtsAnnotations(kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="getUrlAnnotations(kotlin.Int,kotlin.Int)">
+      <meta itemprop="property" content="hasEqualAnnotations(androidx.compose.ui.text.AnnotatedString)">
+      <meta itemprop="property" content="hasLinkAnnotations(kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="hasStringAnnotations(kotlin.String,kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="hashCode()">
       <meta itemprop="property" content="plus(androidx.compose.ui.text.AnnotatedString)">
       <meta itemprop="property" content="subSequence(androidx.compose.ui.text.TextRange)">
       <meta itemprop="property" content="subSequence(kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="toString()">
+      <meta itemprop="property" content="getSaver()">
+      <meta itemprop="property" content="Saver()">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString).capitalize(androidx.compose.ui.text.intl.LocaleList)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString).decapitalize(androidx.compose.ui.text.intl.LocaleList)">
       <meta itemprop="property" content="(androidx.compose.ui.text.AnnotatedString).toLowerCase(androidx.compose.ui.text.intl.LocaleList)">
@@ -64,6 +69,11 @@
             <td>
               <div><code>public final class <a href="/reference/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a> implements <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.text/-appendable/index.html">Appendable</a></code></div>
               <p>Builder class for AnnotatedString.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/text/AnnotatedString.Companion.html">AnnotatedString.Companion</a></code></div>
             </td>
           </tr>
           <tr>
@@ -127,6 +137,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a>&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getLinkAnnotations(kotlin.Int,kotlin.Int)">getLinkAnnotations</a>(int&nbsp;start,&nbsp;int&nbsp;end)</code></div>
+              <p>Query all of the <code><a href="/reference/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a></code>s attached on this <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a>&gt;&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getParagraphStyles()">getParagraphStyles</a>()</code></div>
@@ -170,8 +187,22 @@
           <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>&gt;&gt;</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getUrlAnnotations(kotlin.Int,kotlin.Int)">getUrlAnnotations</a>(int&nbsp;start,&nbsp;int&nbsp;end)</code></div>
-              <p>Query all of the <code><a href="/reference/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code>s attached on this <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>.</p>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><span><del><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getUrlAnnotations(kotlin.Int,kotlin.Int)">getUrlAnnotations</a></del></span>(int&nbsp;start,&nbsp;int&nbsp;end)</code></div>
+              <p><strong>This method is deprecated.</strong> Use LinkAnnotation API instead</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#hasEqualAnnotations(androidx.compose.ui.text.AnnotatedString)">hasEqualAnnotations</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;other)</code></div>
+              <p>Compare the annotations between this and another AnnotatedString.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#hasLinkAnnotations(kotlin.Int,kotlin.Int)">hasLinkAnnotations</a>(int&nbsp;start,&nbsp;int&nbsp;end)</code></div>
+              <p>Returns true if <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getLinkAnnotations(kotlin.Int,kotlin.Int)">getLinkAnnotations</a></code> with the same parameters would return a non-empty list</p>
             </td>
           </tr>
           <tr>
@@ -395,6 +426,63 @@ AnnotatedString(
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getLength()">getLength</a>()</pre>
       </div>
+      <div class="api-item"><a name="getLinkAnnotations(kotlin.Int, kotlin.Int)"></a><a name="getLinkAnnotations-kotlin.Int-kotlin.Int-"></a><a name="getlinkannotations"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getLinkAnnotations(kotlin.Int,kotlin.Int)">getLinkAnnotations</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a>&gt;&gt;&nbsp;<a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getLinkAnnotations(kotlin.Int,kotlin.Int)">getLinkAnnotations</a>(int&nbsp;start,&nbsp;int&nbsp;end)</pre>
+        <p>Query all of the <code><a href="/reference/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a></code>s attached on this <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;start</code></td>
+                <td>
+                  <p>the start of the query range, inclusive.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;end</code></td>
+                <td>
+                  <p>the end of the query range, exclusive.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/LinkAnnotation.html">LinkAnnotation</a>&gt;&gt;</code></td>
+                <td>
+                  <p>a list of annotations stored in <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">Range</a></code>.  Notice that All annotations that intersect with the range [start, end) will be returned. When <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getLinkAnnotations(kotlin.Int,kotlin.Int)">start</a></code> is bigger than <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getLinkAnnotations(kotlin.Int,kotlin.Int)">end</a></code>, an empty list will be returned.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="getParagraphStyles--"></a><a name="getparagraphstyles"></a>
         <div class="api-name-block">
           <div>
@@ -604,7 +692,8 @@ AnnotatedString(
             <h3 id="getUrlAnnotations(kotlin.Int,kotlin.Int)">getUrlAnnotations</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>&gt;&gt;&nbsp;<a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getUrlAnnotations(kotlin.Int,kotlin.Int)">getUrlAnnotations</a>(int&nbsp;start,&nbsp;int&nbsp;end)</pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>&gt;&gt;&nbsp;<span><del><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getUrlAnnotations(kotlin.Int,kotlin.Int)">getUrlAnnotations</a></del></span>(int&nbsp;start,&nbsp;int&nbsp;end)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use LinkAnnotation API instead</aside>
         <p>Query all of the <code><a href="/reference/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code>s attached on this <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -654,6 +743,68 @@ AnnotatedString(
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="hasEqualAnnotations-androidx.compose.ui.text.AnnotatedString-"></a><a name="hasequalannotations"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="hasEqualAnnotations(androidx.compose.ui.text.AnnotatedString)">hasEqualAnnotations</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/text/AnnotatedString.html#hasEqualAnnotations(androidx.compose.ui.text.AnnotatedString)">hasEqualAnnotations</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;other)</pre>
+        <p>Compare the annotations between this and another AnnotatedString.</p>
+        <p>This may be used for fast partial equality checks.</p>
+        <p>Note that this only checks annotations, and <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#equals(kotlin.Any)">equals</a></code> still may be false if any of <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#spanStyles()">spanStyles</a></code>, <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#paragraphStyles()">paragraphStyles</a></code>, or <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#(kotlin.String,kotlin.collections.List,kotlin.collections.List,kotlin.collections.List)">text</a></code> are different.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;other</code></td>
+                <td>
+                  <p>to compare annotations with</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>true if and only if this compares equal on annotations with other</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="hasLinkAnnotations(kotlin.Int, kotlin.Int)"></a><a name="hasLinkAnnotations-kotlin.Int-kotlin.Int-"></a><a name="haslinkannotations"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="hasLinkAnnotations(kotlin.Int,kotlin.Int)">hasLinkAnnotations</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/text/AnnotatedString.html#hasLinkAnnotations(kotlin.Int,kotlin.Int)">hasLinkAnnotations</a>(int&nbsp;start,&nbsp;int&nbsp;end)</pre>
+        <p>Returns true if <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html#getLinkAnnotations(kotlin.Int,kotlin.Int)">getLinkAnnotations</a></code> with the same parameters would return a non-empty list</p>
       </div>
       <div class="api-item"><a name="hasStringAnnotations(kotlin.String, kotlin.Int, kotlin.Int)"></a><a name="hasStringAnnotations-kotlin.String-kotlin.Int-kotlin.Int-"></a><a name="hasstringannotations"></a>
         <div class="api-name-block">

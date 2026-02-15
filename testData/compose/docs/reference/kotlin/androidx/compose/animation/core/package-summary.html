@@ -30,27 +30,37 @@
       <meta itemprop="property" content="AnimationVector2D">
       <meta itemprop="property" content="AnimationVector3D">
       <meta itemprop="property" content="AnimationVector4D">
-      <meta itemprop="property" content="AtomicReference">
+      <meta itemprop="property" content="ArcAnimationSpec">
+      <meta itemprop="property" content="ArcMode">
       <meta itemprop="property" content="CubicBezierEasing">
       <meta itemprop="property" content="DecayAnimation">
+      <meta itemprop="property" content="DeferredTargetAnimation">
       <meta itemprop="property" content="FloatExponentialDecaySpec">
       <meta itemprop="property" content="FloatSpringSpec">
       <meta itemprop="property" content="FloatTweenSpec">
       <meta itemprop="property" content="InfiniteRepeatableSpec">
       <meta itemprop="property" content="InfiniteTransition">
       <meta itemprop="property" content="TransitionAnimationState">
+      <meta itemprop="property" content="KeyframeBaseEntity">
       <meta itemprop="property" content="KeyframesSpec">
       <meta itemprop="property" content="KeyframeEntity">
       <meta itemprop="property" content="KeyframesSpecConfig">
+      <meta itemprop="property" content="KeyframesSpecBaseConfig">
+      <meta itemprop="property" content="KeyframesWithSplineSpec">
+      <meta itemprop="property" content="KeyframesWithSplineSpecConfig">
       <meta itemprop="property" content="MutableTransitionState">
+      <meta itemprop="property" content="PathEasing">
       <meta itemprop="property" content="RepeatableSpec">
+      <meta itemprop="property" content="SeekableTransitionState">
       <meta itemprop="property" content="SnapSpec">
       <meta itemprop="property" content="SpringSpec">
       <meta itemprop="property" content="StartOffset">
       <meta itemprop="property" content="StartOffsetType">
       <meta itemprop="property" content="TargetBasedAnimation">
       <meta itemprop="property" content="Transition">
+      <meta itemprop="property" content="DeferredAnimation">
       <meta itemprop="property" content="TransitionAnimationState">
+      <meta itemprop="property" content="TransitionState">
       <meta itemprop="property" content="TweenSpec">
       <meta itemprop="property" content="VectorizedFloatAnimationSpec">
       <meta itemprop="property" content="VectorizedInfiniteRepeatableSpec">
@@ -63,6 +73,8 @@
       <meta itemprop="property" content="RepeatMode">
       <meta itemprop="property" content="AnimationConstants">
       <meta itemprop="property" content="Spring">
+      <meta itemprop="property" content="ExperimentalAnimatableApi">
+      <meta itemprop="property" content="ExperimentalAnimationSpecApi">
       <meta itemprop="property" content="ExperimentalTransitionApi">
       <meta itemprop="property" content="InternalAnimationApi">
       <meta itemprop="property" content="Animatable(kotlin.Float,kotlin.Float)">
@@ -87,10 +99,16 @@
       <meta itemprop="property" content="animateRectAsState(androidx.compose.ui.geometry.Rect,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="animateSizeAsState(androidx.compose.ui.geometry.Size,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="animateValueAsState(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.String,kotlin.Function1)">
+      <meta itemprop="property" content="estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">
+      <meta itemprop="property" content="estimateAnimationDurationMillis(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">
+      <meta itemprop="property" content="estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">
       <meta itemprop="property" content="exponentialDecay(kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="infiniteRepeatable(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">
       <meta itemprop="property" content="keyframes(kotlin.Function1)">
+      <meta itemprop="property" content="keyframesWithSpline(kotlin.Function1)">
+      <meta itemprop="property" content="keyframesWithSpline(kotlin.Float,kotlin.Function1)">
       <meta itemprop="property" content="rememberInfiniteTransition(kotlin.String)">
+      <meta itemprop="property" content="rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">
       <meta itemprop="property" content="repeatable(kotlin.Int,androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">
       <meta itemprop="property" content="snap(kotlin.Int)">
       <meta itemprop="property" content="spring(kotlin.Float,kotlin.Float,kotlin.Any)">
@@ -119,7 +137,9 @@
       <meta itemprop="property" content="(androidx.compose.animation.core.Transition).animateSize(kotlin.Function1,kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.animation.core.Transition).animateValue(androidx.compose.animation.core.TwoWayConverter,kotlin.Function1,kotlin.String,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.animation.core.Transition).createDeferredAnimation(androidx.compose.animation.core.TwoWayConverter,kotlin.String)">
       <meta itemprop="property" content="(androidx.compose.animation.core.TwoWayConverter).createZeroVectorFrom(kotlin.Any)">
+      <meta itemprop="property" content="(androidx.compose.animation.core.VectorizedAnimationSpec).createAnimation(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">
       <meta itemprop="property" content="Ease()">
       <meta itemprop="property" content="EaseIn()">
       <meta itemprop="property" content="EaseInBack()">
@@ -420,8 +440,19 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/AtomicReference.html">AtomicReference</a></code></td>
-              <td></td>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/ArcAnimationSpec.html">ArcAnimationSpec</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> that interpolates 2-dimensional values using arcs of quarter of an Ellipse.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/ArcMode.html">ArcMode</a></code></td>
+              <td>
+                <p>Interpolation mode for Arc-based animation spec.</p>
+              </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
@@ -439,6 +470,15 @@
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code></td>
               <td>
                 <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#(androidx.compose.animation.core.VectorizedDecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">initialVelocityVector</a></code> as time goes on.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/DeferredTargetAnimation.html">DeferredTargetAnimation</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DeferredTargetAnimation.html">DeferredTargetAnimation</a></code> is intended for animations where the target is unknown at the time of instantiation.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -499,6 +539,15 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframeBaseEntity.html">KeyframeBaseEntity</a></code></td>
+              <td>
+                <p>Base holder class for building a keyframes animation.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code></td>
               <td>
                 <p><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code> creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> animation.</p>
@@ -519,8 +568,33 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a></code></td>
               <td>
-                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> stores a mutable configuration of the key frames, including <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#delayMillis()">delayMillis</a></code>, and all the key frames.</p>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> stores a mutable configuration of the key frames, including <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#durationMillis()">durationMillis</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html#delayMillis()">delayMillis</a></code>, and all the key frames.</p>
               </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpecBaseConfig.html">KeyframesSpecBaseConfig</a></code></td>
+              <td>
+                <p>Shared configuration class used as DSL for keyframe based animations.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> creates a keyframe based <code><a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> using the Monotone cubic Hermite spline to interpolate between the values in <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html#(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig)">config</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a></code></td>
+              <td></td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
@@ -535,9 +609,27 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/PathEasing.html">PathEasing</a></code></td>
+              <td>
+                <p>An easing function for an arbitrary <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/RepeatableSpec.html">RepeatableSpec</a></code></td>
               <td>
                 <p><code><a href="/reference/kotlin/androidx/compose/animation/core/RepeatableSpec.html">RepeatableSpec</a></code> takes another <code><a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> and plays it <code><a href="/reference/kotlin/androidx/compose/animation/core/RepeatableSpec.html#(kotlin.Int,androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">iterations</a></code> times.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/SeekableTransitionState.html">SeekableTransitionState</a></code></td>
+              <td>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/animation/core/TransitionState.html">TransitionState</a></code> that can manipulate the progress of the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> by seeking with <code><a href="/reference/kotlin/androidx/compose/animation/core/SeekableTransitionState.html#seekTo(kotlin.Float,kotlin.Any)">seekTo</a></code> or animating with <code><a href="/reference/kotlin/androidx/compose/animation/core/SeekableTransitionState.html#animateTo(kotlin.Any,androidx.compose.animation.core.FiniteAnimationSpec)">animateTo</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -598,9 +690,27 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.DeferredAnimation.html">Transition.DeferredAnimation</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.DeferredAnimation.html">DeferredAnimation</a></code> can be constructed using <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createDeferredAnimation(androidx.compose.animation.core.TwoWayConverter,kotlin.String)">Transition.createDeferredAnimation</a></code> during composition and initialized later.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.TransitionAnimationState.html">Transition.TransitionAnimationState</a></code></td>
               <td>
                 <p>Each animation created using <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.InfiniteTransition).animateFloat(kotlin.Float,kotlin.Float,androidx.compose.animation.core.InfiniteRepeatableSpec,kotlin.String)">animateFloat</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateDp(kotlin.Function1,kotlin.String,kotlin.Function1)">animateDp</a></code>, etc is represented as a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.TransitionAnimationState.html">TransitionAnimationState</a></code> in <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/TransitionState.html">TransitionState</a></code></td>
+              <td>
+                <p>Use with <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a></code> to create a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> that can be dynamically targeted with <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> or seekable with <code><a href="/reference/kotlin/androidx/compose/animation/core/SeekableTransitionState.html">SeekableTransitionState</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -722,6 +832,20 @@
             <col>
           </colgroup>
           <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalAnimatableApi.html">ExperimentalAnimatableApi</a></code></td>
+              <td></td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a></code></td>
+              <td></td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalTransitionApi.html">ExperimentalTransitionApi</a></code></td>
               <td></td>
@@ -1003,9 +1127,39 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">estimateAnimationDurationMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;stiffness:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dampingRatio:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDisplacement:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><br>)</code></div>
+                <p>Returns the estimated time that the spring will last be at <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">delta</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">estimateAnimationDurationMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;stiffness:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dampingRatio:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDisplacement:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+                <p>Returns the estimated time that the spring will last be at <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">delta</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">estimateAnimationDurationMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;springConstant:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dampingCoefficient:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;mass:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDisplacement:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><br>)</code></div>
+                <p>Returns the estimated time that the spring will last be at <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">delta</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</code></td>
               <td>
-                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;frictionMultiplier:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;absVelocityThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> frictionMultiplier:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> absVelocityThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
                 <p>Creates a decay animation spec where the friction/deceleration is always proportional to the velocity.</p>
               </td>
               <td>
@@ -1033,10 +1187,40 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a>&lt;T&gt;</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Function1)">keyframesWithSpline</a>(init:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation, initialized with <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Function1)">init</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a>&lt;T&gt;</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">keyframesWithSpline</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> periodicBias:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;init:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Creates a <em>periodic</em> <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation, initialized with <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">init</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/InfiniteTransition.html">InfiniteTransition</a></code></td>
               <td>
                 <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberInfiniteTransition(kotlin.String)">rememberInfiniteTransition</a>(label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>)</code></div>
                 <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/InfiniteTransition.html">InfiniteTransition</a></code> that runs infinite child animations.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionState:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TransitionState.html">TransitionState</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?<br>)</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> and puts it in the <code><a href="/reference/kotlin/androidx/compose/animation/core/TransitionState.html#currentState()">currentState</a></code> of the provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">transitionState</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -1095,8 +1279,8 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</code></td>
               <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">updateTransition</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionState:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?<br>)</code></div>
-                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> and puts it in the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> of the provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">transitionState</a></code>.</p>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">updateTransition</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionState:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?<br>)</code></div>
+                <p><strong>This function is deprecated.</strong> Use rememberTransition() instead</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -1307,10 +1491,30 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">TargetBasedAnimation</a>&lt;V,&nbsp;V&gt;</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>&lt;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a>&lt;V&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.VectorizedAnimationSpec).createAnimation(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">createAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>)</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">TargetBasedAnimation</a></code> from a given <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> of <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> type.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code>inline <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</code></td>
               <td>
                 <div><code>@<a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalTransitionApi.html">ExperimentalTransitionApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;S&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">createChildTransition</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;transformToChildState:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (parentState) <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
                 <p><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">createChildTransition</a></code> creates a child Transition based on the mapping between parent state to child state provided in <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">transformToChildState</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.DeferredAnimation.html">Transition.DeferredAnimation</a>&lt;T,&nbsp;V&gt;</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;S&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createDeferredAnimation(androidx.compose.animation.core.TwoWayConverter,kotlin.String)">createDeferredAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><br>)</code></div>
+                <p>This creates a DeferredAnimation, which will not animate until it is set up using DeferredAnimation.animate.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -1957,6 +2161,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -3516,6 +3721,45 @@ fun ArbitraryValueTypeAnimation(enabled: Boolean) {
         </table>
       </div>
     </div>
+    <div class="api-item"><a name="estimateAnimationDurationMillis(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double)"></a><a name="estimateAnimationDurationMillis-kotlin.Double-kotlin.Double-kotlin.Double-kotlin.Double-kotlin.Double-"></a><a name="estimateanimationdurationmillis"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">estimateAnimationDurationMillis</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">estimateAnimationDurationMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;stiffness:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dampingRatio:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDisplacement:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>Returns the estimated time that the spring will last be at <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">delta</a></code></p>
+    </div>
+    <div class="api-item"><a name="estimateAnimationDurationMillis(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="estimateAnimationDurationMillis-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="estimateanimationdurationmillis"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="estimateAnimationDurationMillis(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">estimateAnimationDurationMillis</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">estimateAnimationDurationMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;stiffness:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dampingRatio:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDisplacement:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>Returns the estimated time that the spring will last be at <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">delta</a></code></p>
+    </div>
+    <div class="api-item"><a name="estimateAnimationDurationMillis(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double)"></a><a name="estimateAnimationDurationMillis-kotlin.Double-kotlin.Double-kotlin.Double-kotlin.Double-kotlin.Double-kotlin.Double-"></a><a name="estimateanimationdurationmillis"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">estimateAnimationDurationMillis</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">estimateAnimationDurationMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;springConstant:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dampingCoefficient:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;mass:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDisplacement:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>Returns the estimated time that the spring will last be at <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#estimateAnimationDurationMillis(kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double,kotlin.Double)">delta</a></code></p>
+    </div>
     <div class="api-item"><a name="exponentialDecay(kotlin.Float, kotlin.Float)"></a><a name="exponentialDecay-kotlin.Float-kotlin.Float-"></a><a name="exponentialdecay"></a>
       <div class="api-name-block">
         <div>
@@ -3526,7 +3770,7 @@ fun ArbitraryValueTypeAnimation(enabled: Boolean) {
             <!--platform-Common/All--></div>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;frictionMultiplier:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 1.0f,<br>&nbsp;&nbsp;&nbsp;&nbsp;absVelocityThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.1f<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> frictionMultiplier:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 1.0f,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> absVelocityThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.1f<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</pre>
       <p>Creates a decay animation spec where the friction/deceleration is always proportional to the velocity. As a result, the velocity goes under an exponential decay. The constructor parameter, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">frictionMultiplier</a></code>, can be tuned to adjust the amount of friction applied in the decay. The higher the multiplier, the higher the friction, the sooner the animation will stop, and the shorter distance the animation will travel with the same starting condition. <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">absVelocityThreshold</a></code> describes the absolute value of a velocity threshold, below which the animation is considered finished.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -3541,13 +3785,13 @@ fun ArbitraryValueTypeAnimation(enabled: Boolean) {
           </thead>
           <tbody class="list">
             <tr>
-              <td><code>frictionMultiplier:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 1.0f</code></td>
+              <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> frictionMultiplier:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 1.0f</code></td>
               <td>
                 <p>The decay friction multiplier. This must be greater than <code>0</code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>absVelocityThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.1f</code></td>
+              <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> absVelocityThreshold:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.1f</code></td>
               <td>
                 <p>The minimum speed, below which the animation is considered finished. Must be greater than <code>0</code>.</p>
               </td>
@@ -3700,9 +3944,24 @@ import androidx.compose.animation.core.keyframes
 // time between 50 and 100ms
 keyframes&lt;Float&gt; {
     durationMillis = 100
-    0f at 0 with FastOutSlowInEasing
-    1.5f at 50 with LinearOutSlowInEasing
+    0f at 0 using FastOutSlowInEasing
+    1.5f at 50 using LinearOutSlowInEasing
     1f at 100
+}</pre>
+      <p>Values can be animated using arcs of quarter of an Ellipse with <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).using(androidx.compose.animation.core.ArcMode)">KeyframesSpecConfig.using</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/ArcMode.html">ArcMode</a></code>:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.ArcMode.Companion.ArcAbove
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.keyframes
+import androidx.compose.ui.geometry.Offset
+
+keyframes&lt;Offset&gt; {
+    // Animate for 1.2 seconds
+    durationMillis = 1200
+
+    // Animate to Offset(100f, 100f) at 50% of the animation using LinearEasing then, animate
+    // using ArcAbove for the rest of the animation
+    Offset(100f, 100f) atFraction 0.5f using LinearEasing using ArcAbove
 }</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -3739,6 +3998,212 @@ keyframes&lt;Float&gt; {
           <tbody class="list">
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="keyframesWithSpline-kotlin.Function1-"></a><a name="keyframeswithspline"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="keyframesWithSpline(kotlin.Function1)">keyframesWithSpline</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Function1)">keyframesWithSpline</a>(init:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a>&lt;T&gt;</pre>
+      <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation, initialized with <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Function1)">init</a></code>. For example:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.ui.geometry.Offset
+
+keyframesWithSpline {
+    durationMillis = 200
+    Offset(0f, 0f) at 0
+    Offset(500f, 100f) at 100
+    Offset(400f, 50f) at 150
+}</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.IntOffset
+
+keyframesWithSpline {
+    durationMillis = 200
+    IntOffset(0, 0) at 0
+    IntOffset(500, 100) at 100
+    IntOffset(400, 50) at 150
+}</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.dp
+
+keyframesWithSpline {
+    durationMillis = 200
+    DpOffset(0.dp, 0.dp) at 0
+    DpOffset(500.dp, 100.dp) at 100
+    DpOffset(400.dp, 50.dp) at 150
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>init:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>Initialization function for the <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="keyframesWithSpline(kotlin.Float, kotlin.Function1)"></a><a name="keyframesWithSpline-kotlin.Float-kotlin.Function1-"></a><a name="keyframeswithspline"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="keyframesWithSpline(kotlin.Float,kotlin.Function1)">keyframesWithSpline</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">keyframesWithSpline</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> periodicBias:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,&nbsp;init:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a>&lt;T&gt;</pre>
+      <p>Creates a <em>periodic</em> <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation, initialized with <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">init</a></code>.</p>
+      <p>Use overload without <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">periodicBias</a></code> parameter for the non-periodic implementation.</p>
+      <p>A periodic spline is one such that the starting and ending velocities are equal. This makes them useful to crete smooth repeatable animations. Such as an infinite pulsating animation:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
+
+var alpha by remember { mutableFloatStateOf(0f) }
+LaunchedEffect(Unit) {
+    animate(
+        initialValue = 0f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(
+            // With a periodicBias of 0.5f it creates a similar animation to a sinusoidal curve
+            // so the transition as the animation repeats is completely seamless
+            animation = keyframesWithSpline(periodicBias = 0.5f) {
+                durationMillis = 2000
+
+                1f at 1000 using LinearEasing
+            },
+            repeatMode = RepeatMode.Restart
+        )
+    ) { value, _ -&gt;
+        alpha = value
+    }
+}
+Image(
+    imageVector = Icons.Filled.Favorite,
+    contentDescription = null,
+    modifier = Modifier
+        .size(150.dp)
+        .graphicsLayer { this.alpha = alpha },
+    colorFilter = ColorFilter.tint(Color.Red)
+)</pre>
+      <p>The <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Float,kotlin.Function1)">periodicBias</a></code> value (from 0.0 to 1.0) indicates how much of the original starting and final velocity are modified to achieve periodicity:</p>
+      <ul>
+        <li>
+          <p>0f: Modifies only the starting velocity to match the final velocity</p>
+        </li>
+        <li>
+          <p>1f: Modifies only the final velocity to match the starting velocity</p>
+        </li>
+        <li>
+          <p>0.5f: Modifies both velocities equally, picking the average between the two</p>
+        </li>
+      </ul>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> periodicBias:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <p>A value from 0f to 1f, indicating how much the starting or ending velocities are modified respectively to achieve periodicity.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>init:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>Initialization function for the <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a></code></td>
               <td></td>
             </tr>
           </tbody>
@@ -3845,6 +4310,203 @@ fun InfinitelyPulsingHeart() {
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="api-item"><a name="rememberTransition(androidx.compose.animation.core.TransitionState, kotlin.String)"></a><a name="rememberTransition-androidx.compose.animation.core.TransitionState-kotlin.String-"></a><a name="remembertransition"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionState:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TransitionState.html">TransitionState</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</pre>
+      <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> and puts it in the <code><a href="/reference/kotlin/androidx/compose/animation/core/TransitionState.html#currentState()">currentState</a></code> of the provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">transitionState</a></code>. If the <code><a href="/reference/kotlin/androidx/compose/animation/core/TransitionState.html#targetState()">TransitionState.targetState</a></code> changes, the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> will change where it will animate to.</p>
+      <p><b>Remember</b>: The provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">transitionState</a></code> needs to be <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>ed.</p>
+      <p>Compared to <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a></code> that takes a targetState, this function supports a different initial state than the first targetState. Here is an example:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.Transition
+import androidx.compose.animation.core.animateDp
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberTransition
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
+
+// This composable enters the composition with a custom enter transition. This is achieved by
+// defining a different initialState than the first target state using `MutableTransitionState`
+@Composable
+fun PoppingInCard() {
+    // Creates a transition state with an initial state where visible = false
+    val visibleState = remember { MutableTransitionState(false) }
+    // Sets the target state of the transition state to true. As it's different than the initial
+    // state, a transition from not visible to visible will be triggered.
+    visibleState.targetState = true
+
+    // Creates a transition with the transition state created above.
+    val transition = rememberTransition(visibleState)
+    // Adds a scale animation to the transition to scale the card up when transitioning in.
+    val scale by transition.animateFloat(
+        // Uses a custom spring for the transition.
+        transitionSpec = { spring(dampingRatio = Spring.DampingRatioMediumBouncy) }
+    ) { visible -&gt;
+        if (visible) 1f else 0.8f
+    }
+    // Adds an elevation animation that animates the dp value of the animation.
+    val elevation by transition.animateDp(
+        // Uses a tween animation
+        transitionSpec = {
+            // Uses different animations for when animating from visible to not visible, and
+            // the other way around
+            if (false isTransitioningTo true) {
+                tween(1000)
+            } else {
+                spring()
+            }
+        }
+    ) { visible -&gt;
+        if (visible) 10.dp else 0.dp
+    }
+
+    Card(
+        Modifier
+            .graphicsLayer(scaleX = scale, scaleY = scale)
+            .size(200.dp, 100.dp)
+            .fillMaxWidth(),
+        elevation = elevation
+    ) {}
+}</pre>
+      <p>In most cases, it is recommended to reuse the same <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">transitionState</a></code> that is <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>ed, such that <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> preserves continuity when <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is changed. However, in some rare cases it is more critical to immediately <em>snap</em> to a state change (e.g. in response to a user interaction). This can be achieved by creating a new <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">transitionState</a></code>:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.Transition
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.keyframes
+import androidx.compose.animation.core.rememberTransition
+import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+
+// enum class LikedStates { Initial, Liked, Disappeared }
+@Composable
+fun doubleTapToLike() {
+    // Creates a transition state that starts in [Disappeared] State
+    var transitionState by remember {
+        mutableStateOf(MutableTransitionState(LikedStates.Disappeared))
+    }
+
+    Box(
+        Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        // This creates a new `MutableTransitionState` object. When a new
+                        // `MutableTransitionState` object gets passed to `updateTransition`, a
+                        // new transition will be created. All existing values, velocities will
+                        // be lost as a result. Hence, in most cases, this is not recommended.
+                        // The exception is when it's more important to respond immediately to
+                        // user interaction than preserving continuity.
+                        transitionState = MutableTransitionState(LikedStates.Initial)
+                    }
+                )
+            }
+    ) {
+        // This ensures sequential states: Initial -&gt; Liked -&gt; Disappeared
+        if (transitionState.currentState == LikedStates.Initial) {
+            transitionState.targetState = LikedStates.Liked
+        } else if (transitionState.currentState == LikedStates.Liked) {
+            // currentState will be updated to targetState when the transition is finished, so
+            // it can be used as a signal to start the next transition.
+            transitionState.targetState = LikedStates.Disappeared
+        }
+
+        // Creates a transition using the TransitionState object that gets recreated at each
+        // double tap.
+        val transition = rememberTransition(transitionState)
+        // Creates an alpha animation, as a part of the transition.
+        val alpha by transition.animateFloat(
+            transitionSpec = {
+                when {
+                    // Uses different animation specs for transitioning from/to different states
+                    LikedStates.Initial isTransitioningTo LikedStates.Liked -&gt;
+                        keyframes {
+                            durationMillis = 500
+                            0f at 0 // optional
+                            0.5f at 100
+                            1f at 225 // optional
+                        }
+                    LikedStates.Liked isTransitioningTo LikedStates.Disappeared -&gt;
+                        tween(durationMillis = 200)
+                    else -&gt; snap()
+                }
+            }
+        ) {
+            if (it == LikedStates.Liked) 1f else 0f
+        }
+
+        // Creates a scale animation, as a part of the transition
+        val scale by transition.animateFloat(
+            transitionSpec = {
+                when {
+                    // Uses different animation specs for transitioning from/to different states
+                    LikedStates.Initial isTransitioningTo LikedStates.Liked -&gt;
+                        spring(dampingRatio = Spring.DampingRatioHighBouncy)
+                    LikedStates.Liked isTransitioningTo LikedStates.Disappeared -&gt;
+                        tween(200)
+                    else -&gt; snap()
+                }
+            }
+        ) {
+            when (it) {
+                LikedStates.Initial -&gt; 0f
+                LikedStates.Liked -&gt; 4f
+                LikedStates.Disappeared -&gt; 2f
+            }
+        }
+
+        Icon(
+            Icons.Filled.Favorite,
+            &quot;Like&quot;,
+            Modifier
+                .align(Alignment.Center)
+                .graphicsLayer(
+                    alpha = alpha,
+                    scaleX = scale,
+                    scaleY = scale
+                ),
+            tint = Color.Red
+        )
+    }
+}</pre>
     </div>
     <div class="api-item"><a name="repeatable(kotlin.Int, androidx.compose.animation.core.DurationBasedAnimationSpec, androidx.compose.animation.core.RepeatMode, androidx.compose.animation.core.StartOffset)"></a><a name="repeatable-kotlin.Int-androidx.compose.animation.core.DurationBasedAnimationSpec-androidx.compose.animation.core.RepeatMode-androidx.compose.animation.core.StartOffset-"></a><a name="repeatable"></a>
       <div class="api-name-block">
@@ -4040,7 +4702,7 @@ fun InfinitelyPulsingHeart() {
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a>(targetState:&nbsp;T,&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>? = null):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</pre>
       <p>This sets up a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>, and updates it with the target provided by <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">targetState</a></code>. When <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">targetState</a></code> changes, <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> will run all of its child animations towards their target values specified for the new <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">targetState</a></code>. Child animations can be dynamically added using <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateFloat(kotlin.Function1,kotlin.String,kotlin.Function1)">Transition.animateFloat</a></code>,  androidx.compose.animation.animateColor, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateValue(androidx.compose.animation.core.TwoWayConverter,kotlin.Function1,kotlin.String,kotlin.Function1)">Transition.animateValue</a></code>, etc.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">label</a></code> is used to differentiate different transitions in Android Studio.</p>
-      <p><b>Note</b>: There is another <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a></code> overload that accepts a <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code>. The difference between the two is that the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> variant: 1) supports a different initial state than target state (This would allow a transition to start as soon as it enters composition.) 2) can be recreated to intentionally trigger a re-start of the transition.</p>
+      <p><b>Note</b>: There is another <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a></code> overload that accepts a <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code>. The difference between the two is that the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> variant: 1) supports a different initial state than target state (This would allow a transition to start as soon as it enters composition.) 2) can be recreated to intentionally trigger a re-start of the transition.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.Transition
@@ -4082,8 +4744,7 @@ val modifier = Modifier.pointerInput(Unit) {
 }
 
 // Defines a transition of `ComponentState`, and updates the transition when the provided
-// [targetState] changes. The tran
-// sition will run all of the child animations towards the new
+// [targetState] changes. The transition will run all of the child animations towards the new
 // [targetState] in response to the [targetState] change.
 val transition: Transition&lt;ComponentState&gt; = updateTransition(targetState = toState)
 // Defines a float animation as a child animation the transition. The current animation value
@@ -4124,14 +4785,19 @@ val color: Color by transition.animateColor(
 }
 Column {
     Button(
-        modifier = Modifier.padding(10.dp).align(Alignment.CenterHorizontally),
+        modifier = Modifier
+            .padding(10.dp)
+            .align(Alignment.CenterHorizontally),
         onClick = { useRed = !useRed }
     ) {
         Text(&quot;Change Color&quot;)
     }
     Box(
-        modifier.fillMaxSize().wrapContentSize(Alignment.Center)
-            .size((100 * scale).dp).background(color)
+        modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+            .size((100 * scale).dp)
+            .background(color)
     )
 }</pre>
       <div class="devsite-table-wrapper">
@@ -4193,19 +4859,20 @@ Column {
             <!--platform-Common/All--></div>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">updateTransition</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionState:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">updateTransition</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionState:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use rememberTransition() instead</aside>
       <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> and puts it in the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> of the provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">transitionState</a></code>. Whenever the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> of the <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">transitionState</a></code> changes, the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> will animate to the new target state.</p>
       <p><b>Remember</b>: The provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">transitionState</a></code> needs to be <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>ed.</p>
-      <p>Compared to the <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">updateTransition</a></code> variant that takes a targetState, this function supports a different initial state than the first targetState. Here is an example:</p>
+      <p>Compared to the <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a></code> variant that takes a targetState, this function supports a different initial state than the first targetState. Here is an example:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberTransition
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
@@ -4227,7 +4894,7 @@ fun PoppingInCard() {
     visibleState.targetState = true
 
     // Creates a transition with the transition state created above.
-    val transition = updateTransition(visibleState)
+    val transition = rememberTransition(visibleState)
     // Adds a scale animation to the transition to scale the card up when transitioning in.
     val scale by transition.animateFloat(
         // Uses a custom spring for the transition.
@@ -4252,8 +4919,10 @@ fun PoppingInCard() {
     }
 
     Card(
-        Modifier.graphicsLayer(scaleX = scale, scaleY = scale)
-            .size(200.dp, 100.dp).fillMaxWidth(),
+        Modifier
+            .graphicsLayer(scaleX = scale, scaleY = scale)
+            .size(200.dp, 100.dp)
+            .fillMaxWidth(),
         elevation = elevation
     ) {}
 }</pre>
@@ -4264,6 +4933,7 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.keyframes
+import androidx.compose.animation.core.rememberTransition
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
@@ -4293,19 +4963,21 @@ fun doubleTapToLike() {
     }
 
     Box(
-        Modifier.fillMaxSize().pointerInput(Unit) {
-            detectTapGestures(
-                onDoubleTap = {
-                    // This creates a new `MutableTransitionState` object. When a new
-                    // `MutableTransitionState` object gets passed to `updateTransition`, a
-                    // new transition will be created. All existing values, velocities will
-                    // be lost as a result. Hence, in most cases, this is not recommended.
-                    // The exception is when it's more important to respond immediately to
-                    // user interaction than preserving continuity.
-                    transitionState = MutableTransitionState(LikedStates.Initial)
-                }
-            )
-        }
+        Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        // This creates a new `MutableTransitionState` object. When a new
+                        // `MutableTransitionState` object gets passed to `updateTransition`, a
+                        // new transition will be created. All existing values, velocities will
+                        // be lost as a result. Hence, in most cases, this is not recommended.
+                        // The exception is when it's more important to respond immediately to
+                        // user interaction than preserving continuity.
+                        transitionState = MutableTransitionState(LikedStates.Initial)
+                    }
+                )
+            }
     ) {
         // This ensures sequential states: Initial -&gt; Liked -&gt; Disappeared
         if (transitionState.currentState == LikedStates.Initial) {
@@ -4318,7 +4990,7 @@ fun doubleTapToLike() {
 
         // Creates a transition using the TransitionState object that gets recreated at each
         // double tap.
-        val transition = updateTransition(transitionState)
+        val transition = rememberTransition(transitionState)
         // Creates an alpha animation, as a part of the transition.
         val alpha by transition.animateFloat(
             transitionSpec = {
@@ -4363,7 +5035,8 @@ fun doubleTapToLike() {
         Icon(
             Icons.Filled.Favorite,
             &quot;Like&quot;,
-            Modifier.align(Alignment.Center)
+            Modifier
+                .align(Alignment.Center)
                 .graphicsLayer(
                     alpha = alpha,
                     scaleX = scale,
@@ -4593,6 +5266,10 @@ fun AnimateAlphaAndScale(
             </tr>
           </thead>
           <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a></code></td>
+              <td></td>
+            </tr>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a></code></td>
               <td></td>
@@ -5085,6 +5762,10 @@ fun simpleAnimate(
               <td></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateFloat(kotlin.Function1,kotlin.String,kotlin.Function1)">animateFloat</a></code></td>
               <td></td>
             </tr>
@@ -5137,7 +5818,7 @@ val offsetX by infiniteTransition.animateValue(
         animation = keyframes {
             durationMillis = 500
             0.dp at 200 // ms
-            80.dp at 300 with FastOutLinearInEasing
+            80.dp at 300 using FastOutLinearInEasing
         }
         // Use the default RepeatMode.Restart to start from 0.dp after each iteration
     )
@@ -5396,6 +6077,52 @@ Box(Modifier.offset(x = offsetX)) {
         </table>
       </div>
     </div>
+    <div class="api-item"><a name="(androidx.compose.animation.core.VectorizedAnimationSpec).createAnimation(androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="-androidx.compose.animation.core.VectorizedAnimationSpec-.createAnimation-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="createanimation"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.animation.core.VectorizedAnimationSpec).createAnimation(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">createAnimation</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>fun&nbsp;&lt;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a>&lt;V&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.VectorizedAnimationSpec).createAnimation(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">createAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">TargetBasedAnimation</a>&lt;V,&nbsp;V&gt;</pre>
+      <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">TargetBasedAnimation</a></code> from a given <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> of <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> type. This convenient method is intended for when the value being animated (i.e. start value, end value, etc) is of <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> type.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>initialValue:&nbsp;V</code></td>
+              <td>
+                <p>the value that the animation will start from</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>targetValue:&nbsp;V</code></td>
+              <td>
+                <p>the value that the animation will end at</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>initialVelocity:&nbsp;V</code></td>
+              <td>
+                <p>the initial velocity to start the animation at</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="api-item"><a name="(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String, kotlin.Function1)"></a><a name="-androidx.compose.animation.core.Transition-.createChildTransition-kotlin.String-kotlin.Function1-"></a><a name="createchildtransition"></a>
       <div class="api-name-block">
         <div>
@@ -5448,7 +6175,10 @@ fun DialerButton(visibilityTransition: Transition&lt;Boolean&gt;, modifier: Modi
     val scale by visibilityTransition.animateFloat { visible -&gt;
         if (visible) 1f else 2f
     }
-    Box(modifier.scale(scale).background(Color.Black)) {
+    Box(
+        modifier
+            .scale(scale)
+            .background(Color.Black)) {
         // Content goes here
     }
 }
@@ -5471,7 +6201,10 @@ fun childTransitionSample() {
         }
 
         Box(
-            Modifier.align(Alignment.BottomCenter).widthIn(50.dp).heightIn(50.dp)
+            Modifier
+                .align(Alignment.BottomCenter)
+                .widthIn(50.dp)
+                .heightIn(50.dp)
                 .clip(RoundedCornerShape(cornerRadius))
         ) {
             NumberPad(
@@ -5503,6 +6236,46 @@ fun childTransitionSample() {
         }
     }
 }</pre>
+    </div>
+    <div class="api-item"><a name="(androidx.compose.animation.core.Transition).createDeferredAnimation(androidx.compose.animation.core.TwoWayConverter, kotlin.String)"></a><a name="-androidx.compose.animation.core.Transition-.createDeferredAnimation-androidx.compose.animation.core.TwoWayConverter-kotlin.String-"></a><a name="createdeferredanimation"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.animation.core.Transition).createDeferredAnimation(androidx.compose.animation.core.TwoWayConverter,kotlin.String)">createDeferredAnimation</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;S&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createDeferredAnimation(androidx.compose.animation.core.TwoWayConverter,kotlin.String)">createDeferredAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;DeferredAnimation&quot;<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Transition.DeferredAnimation.html">Transition.DeferredAnimation</a>&lt;T,&nbsp;V&gt;</pre>
+      <p>This creates a DeferredAnimation, which will not animate until it is set up using DeferredAnimation.animate. Once the animation is set up, it will animate from the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html#currentState()">currentState</a></code> to <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html#targetState()">targetState</a></code>. If the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> has already arrived at its target state at the time when the animation added, there will be no animation.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
+              <td>
+                <p>A converter to convert any value of type <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createDeferredAnimation(androidx.compose.animation.core.TwoWayConverter,kotlin.String)">T</a></code> from/to an <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;DeferredAnimation&quot;</code></td>
+              <td>
+                <p>A label for differentiating this animation from others in android studio.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="api-item"><a name="-androidx.compose.animation.core.TwoWayConverter-.createZeroVectorFrom-kotlin.Any-"></a><a name="createzerovectorfrom"></a>
       <div class="api-name-block">
@@ -6180,6 +6953,7 @@ fun childTransitionSample() {
       </div>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.Companion.html">IntSize.Companion</a>.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.ui.unit.IntSize.Companion).VectorConverter()">VectorConverter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector2D.html">AnimationVector2D</a>&gt;</pre>
       <p>A type converter that converts a <code><a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></code> to a <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector2D.html">AnimationVector2D</a></code>, and vice versa.</p>
+      <p>Clamps negative values to zero when converting back to <code><a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></code>.</p>
     </div>
     <div class="api-item"><a name="(kotlin.Float.Companion).getVectorConverter()"></a><a name="(kotlin.Float.Companion).setVectorConverter()"></a><a name="-kotlin.Float.Companion-.getVectorConverter--"></a><a name="-kotlin.Float.Companion-.setVectorConverter--"></a>
       <div class="api-name-block">

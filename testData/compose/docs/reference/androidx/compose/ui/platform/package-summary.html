@@ -11,6 +11,11 @@
       <meta itemprop="property" content="ClipboardManager">
       <meta itemprop="property" content="InfiniteAnimationPolicy">
       <meta itemprop="property" content="InspectableValue">
+      <meta itemprop="property" content="PlatformTextInputInterceptor">
+      <meta itemprop="property" content="PlatformTextInputMethodRequest">
+      <meta itemprop="property" content="PlatformTextInputModifierNode">
+      <meta itemprop="property" content="PlatformTextInputSession">
+      <meta itemprop="property" content="PlatformTextInputSessionScope">
       <meta itemprop="property" content="SoftwareKeyboardController">
       <meta itemprop="property" content="TextToolbar">
       <meta itemprop="property" content="UriHandler">
@@ -21,12 +26,16 @@
       <meta itemprop="property" content="WindowInfo">
       <meta itemprop="property" content="WindowRecomposerFactory">
       <meta itemprop="property" content="AbstractComposeView">
+      <meta itemprop="property" content="AndroidClipboardManagerKt">
+      <meta itemprop="property" content="AndroidComposeViewAccessibilityDelegateCompatKt">
       <meta itemprop="property" content="AndroidCompositionLocalsKt">
       <meta itemprop="property" content="AndroidUiDispatcher">
       <meta itemprop="property" content="AndroidUiFrameClock">
       <meta itemprop="property" content="AndroidUriHandler">
       <meta itemprop="property" content="AndroidViewConfiguration">
-      <meta itemprop="property" content="AtomicInt">
+      <meta itemprop="property" content="ClipEntry">
+      <meta itemprop="property" content="ClipMetadata">
+      <meta itemprop="property" content="ClipboardExtensionsKt">
       <meta itemprop="property" content="ComposeView">
       <meta itemprop="property" content="CompositionLocalsKt">
       <meta itemprop="property" content="InspectableModifier">
@@ -35,7 +44,9 @@
       <meta itemprop="property" content="InspectionModeKt">
       <meta itemprop="property" content="InspectorInfo">
       <meta itemprop="property" content="InspectorValueInfo">
+      <meta itemprop="property" content="NativeClipboard">
       <meta itemprop="property" content="NestedScrollInteropConnectionKt">
+      <meta itemprop="property" content="PlatformTextInputModifierNodeKt">
       <meta itemprop="property" content="TestTagKt">
       <meta itemprop="property" content="ValueElement">
       <meta itemprop="property" content="ValueElementSequence">
@@ -44,7 +55,6 @@
       <meta itemprop="property" content="TextToolbarStatus">
       <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="Key">
-      <meta itemprop="property" content="LocalSoftwareKeyboardController">
       <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="DisposeOnDetachedFromWindow">
       <meta itemprop="property" content="DisposeOnDetachedFromWindowOrReleasedFromPool">
@@ -52,12 +62,19 @@
       <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="Companion">
       <meta itemprop="property" content="WindowRecomposerPolicy">
+      <meta itemprop="property" content="NativeClipboard">
+      <meta itemprop="property" content="InterceptPlatformTextInput(androidx.compose.ui.platform.PlatformTextInputInterceptor,kotlin.Function0)">
       <meta itemprop="property" content="debugInspectorInfo(kotlin.Function1)">
       <meta itemprop="property" content="rememberNestedScrollInteropConnection(android.view.View)">
+      <meta itemprop="property" content="(android.content.ClipData).toClipEntry()">
+      <meta itemprop="property" content="(android.content.ClipDescription).toClipMetadata()">
       <meta itemprop="property" content="(android.view.View).createLifecycleAwareWindowRecomposer(kotlin.coroutines.CoroutineContext,androidx.lifecycle.Lifecycle)">
       <meta itemprop="property" content="(android.view.View).findViewTreeCompositionContext()">
+      <meta itemprop="property" content="(androidx.compose.ui.platform.ClipEntry).firstUriOrNull()">
+      <meta itemprop="property" content="(androidx.compose.ui.platform.PlatformTextInputModifierNode).establishTextInputSession(kotlin.coroutines.SuspendFunction1)">
       <meta itemprop="property" content="(androidx.compose.ui.Modifier).inspectable(kotlin.Function1,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.Modifier).testTag(kotlin.String)">
+      <meta itemprop="property" content="DisableContentCapture()">
       <meta itemprop="property" content="LocalAccessibilityManager()">
       <meta itemprop="property" content="LocalAutofill()">
       <meta itemprop="property" content="LocalAutofillTree()">
@@ -67,13 +84,16 @@
       <meta itemprop="property" content="LocalDensity()">
       <meta itemprop="property" content="LocalFocusManager()">
       <meta itemprop="property" content="LocalFontFamilyResolver()">
+      <meta itemprop="property" content="LocalFontLoader()">
+      <meta itemprop="property" content="LocalGraphicsContext()">
       <meta itemprop="property" content="LocalHapticFeedback()">
       <meta itemprop="property" content="LocalInputModeManager()">
       <meta itemprop="property" content="LocalInspectionMode()">
       <meta itemprop="property" content="LocalLayoutDirection()">
       <meta itemprop="property" content="LocalLifecycleOwner()">
-      <meta itemprop="property" content="LocalPlatformTextInputPluginRegistry()">
       <meta itemprop="property" content="LocalSavedStateRegistryOwner()">
+      <meta itemprop="property" content="LocalScrollCaptureInProgress()">
+      <meta itemprop="property" content="LocalSoftwareKeyboardController()">
       <meta itemprop="property" content="LocalTextInputService()">
       <meta itemprop="property" content="LocalTextToolbar()">
       <meta itemprop="property" content="LocalUriHandler()">
@@ -124,6 +144,36 @@
             <td><code><a href="/reference/androidx/compose/ui/platform/InspectableValue.html">InspectableValue</a></code></td>
             <td>
               <p>A compose value that is inspectable by tools.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputInterceptor.html">PlatformTextInputInterceptor</a></code></td>
+            <td>
+              <p>Single-function interface passed to <code><a href="/reference/androidx/compose/ui/platform/package-summary.html#InterceptPlatformTextInput(androidx.compose.ui.platform.PlatformTextInputInterceptor,kotlin.Function0)">InterceptPlatformTextInput</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputMethodRequest.html">PlatformTextInputMethodRequest</a></code></td>
+            <td>
+              <p>Represents a request to open a platform-specific text input session via <code>PlatformTextInputModifierNode.textInputSession</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputModifierNode.html">PlatformTextInputModifierNode</a></code></td>
+            <td>
+              <p>A modifier node that can connect to the platform's text input IME system.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputSession.html">PlatformTextInputSession</a></code></td>
+            <td>
+              <p>Receiver type for <code><a href="/reference/androidx/compose/ui/platform/package-summary.html#(androidx.compose.ui.platform.PlatformTextInputModifierNode).establishTextInputSession(kotlin.coroutines.SuspendFunction1)">establishTextInputSession</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputSessionScope.html">PlatformTextInputSessionScope</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputSession.html">PlatformTextInputSession</a></code> that is also a CoroutineScope.</p>
             </td>
           </tr>
           <tr>
@@ -198,6 +248,14 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AndroidClipboardManagerKt.html">AndroidClipboardManagerKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AndroidComposeViewAccessibilityDelegateCompatKt.html">AndroidComposeViewAccessibilityDelegateCompatKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/androidx/compose/ui/platform/AndroidCompositionLocalsKt.html">AndroidCompositionLocalsKt</a></code></td>
             <td></td>
           </tr>
@@ -217,10 +275,24 @@
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html">AndroidViewConfiguration</a></code></td>
-            <td></td>
+            <td>
+              <p>A <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> with Android's default configurations.</p>
+            </td>
           </tr>
           <tr>
-            <td><code><a href="/reference/androidx/compose/ui/platform/AtomicInt.html">AtomicInt</a></code></td>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ClipEntry.html">ClipEntry</a></code></td>
+            <td>
+              <p>Platform specific protocol that expresses an item in the native Clipboard.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ClipMetadata.html">ClipMetadata</a></code></td>
+            <td>
+              <p>Platform specific protocol that describes an item in the native Clipboard.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ClipboardExtensionsKt.html">ClipboardExtensionsKt</a></code></td>
             <td></td>
           </tr>
           <tr>
@@ -264,7 +336,17 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/NativeClipboard.html">NativeClipboard</a></code></td>
+            <td>
+              <p>Native Clipboard specific to each platform.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/androidx/compose/ui/platform/NestedScrollInteropConnectionKt.html">NestedScrollInteropConnectionKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/PlatformTextInputModifierNodeKt.html">PlatformTextInputModifierNodeKt</a></code></td>
             <td></td>
           </tr>
           <tr>
@@ -302,10 +384,6 @@
             <td></td>
           </tr>
           <tr>
-            <td><code><a href="/reference/androidx/compose/ui/platform/LocalSoftwareKeyboardController.html">LocalSoftwareKeyboardController</a></code></td>
-            <td></td>
-          </tr>
-          <tr>
             <td><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.Companion.html">ViewCompositionStrategy.Companion</a></code></td>
             <td>
               <p>This companion object may be used to define extension factory functions for other strategies to aid in discovery via autocomplete. e.g.: <code>fun ViewCompositionStrategy.Companion.MyStrategy(): MyStrategy</code></p>
@@ -326,7 +404,7 @@
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed.html">ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed</a></code></td>
             <td>
-              <p><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition when the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/androidx/lifecycle/package-summary.html#(android.view.View).findViewTreeLifecycleOwner()">findViewTreeLifecycleOwner</a></code> of the next window the view is attached to is <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>.</p>
+              <p><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition when the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/androidx/lifecycle/package-summary.html#findViewTreeLifecycleOwner(android.view.View)">findViewTreeLifecycleOwner</a></code> of the next window the view is attached to is <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>.</p>
             </td>
           </tr>
           <tr>

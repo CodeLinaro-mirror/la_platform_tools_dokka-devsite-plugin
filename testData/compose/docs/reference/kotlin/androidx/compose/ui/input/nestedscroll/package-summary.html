@@ -155,7 +155,7 @@
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">nestedScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;connection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dispatcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a>? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Modify element to make it participate in the nested scrolling hierarchy.</p>
       <p>There are two ways to participate in the nested scroll: as a scrolling child by dispatching scrolling events via <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> to the nested scroll chain; and as a member of nested scroll chain by providing <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code>, which will be called when another nested scrolling child below dispatches scrolling events.</p>
-      <p>It's a mandatory to participate as a <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> in the chain, but scrolling events dispatch is optional since there are cases when element wants to participate in the nested scroll, but not a scrollable thing itself.</p>
+      <p>It's mandatory to participate as a <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> in the chain, but dispatching scrolling events is optional since there are cases where an element wants to participate in nested scrolling without being directly scrollable.</p>
       <p>Here's the collapsing toolbar example that participates in a chain, but doesn't dispatch:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
@@ -293,7 +293,7 @@ Box(
                 // want to pre consume (it's a nested scroll contract)
                 val parentsConsumed = nestedScrollDispatcher.dispatchPreScroll(
                     available = Offset(x = 0f, y = delta),
-                    source = NestedScrollSource.Drag
+                    source = NestedScrollSource.UserInput
                 )
                 // adjust what's available to us since might have consumed smth
                 val adjustedAvailable = delta - parentsConsumed.y
@@ -305,7 +305,7 @@ Box(
                 nestedScrollDispatcher.dispatchPostScroll(
                     consumed = totalConsumed,
                     available = Offset(x = 0f, y = left),
-                    source = NestedScrollSource.Drag
+                    source = NestedScrollSource.UserInput
                 )
                 // we won't dispatch pre/post fling events as we have no flinging here, but the
                 // idea is very similar:

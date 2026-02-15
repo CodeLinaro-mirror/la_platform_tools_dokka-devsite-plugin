@@ -22,7 +22,7 @@
         <h1>DialogProperties</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/window/AndroidDialog.android.kt+class:androidx.compose.ui.window.DialogProperties&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/window/+class:androidx.compose.ui.window.DialogProperties&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
 
@@ -49,7 +49,7 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/window/DialogProperties.html#DialogProperties(kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy)">DialogProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a>&nbsp;securePolicy<br>)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/window/DialogProperties.html#DialogProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">DialogProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;usePlatformDefaultWidth<br>)</code></div>
             </td>
           </tr>
           <tr>
@@ -89,7 +89,7 @@
             <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/window/DialogProperties.html#getDismissOnBackPress()">getDismissOnBackPress</a>()</code></div>
-              <p>whether the dialog can be dismissed by pressing the back button.</p>
+              <p>whether the popup can be dismissed by pressing the back button</p>
             </td>
           </tr>
           <tr>
@@ -124,13 +124,13 @@
     </div>
     <div class="list">
       <h2>Public constructors</h2>
-      <div class="api-item"><a name="DialogProperties(kotlin.Boolean, kotlin.Boolean, androidx.compose.ui.window.SecureFlagPolicy)"></a><a name="DialogProperties-kotlin.Boolean-kotlin.Boolean-androidx.compose.ui.window.SecureFlagPolicy-"></a><a name="dialogproperties"></a>
+      <div class="api-item"><a name="DialogProperties(kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a><a name="DialogProperties-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-"></a><a name="dialogproperties"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="DialogProperties(kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy)">DialogProperties</h3>
+            <h3 id="DialogProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">DialogProperties</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/window/DialogProperties.html#DialogProperties(kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy)">DialogProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a>&nbsp;securePolicy<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/window/DialogProperties.html#DialogProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">DialogProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;usePlatformDefaultWidth<br>)</pre>
       </div>
       <div class="api-item"><a name="DialogProperties(kotlin.Boolean, kotlin.Boolean, androidx.compose.ui.window.SecureFlagPolicy, kotlin.Boolean, kotlin.Boolean)"></a><a name="DialogProperties-kotlin.Boolean-kotlin.Boolean-androidx.compose.ui.window.SecureFlagPolicy-kotlin.Boolean-kotlin.Boolean-"></a><a name="dialogproperties"></a>
         <div class="api-name-block">
@@ -167,7 +167,12 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/window/DialogProperties.html#getDismissOnBackPress()">getDismissOnBackPress</a>()</pre>
-        <p>whether the dialog can be dismissed by pressing the back button. If true, pressing the back button will call onDismissRequest.</p>
+        <p>whether the popup can be dismissed by pressing the back button</p>
+        <ul>
+          <li>
+            <p>on Android or escape key on desktop. If true, pressing the back button will call onDismissRequest.</p>
+          </li>
+        </ul>
       </div>
       <div class="api-item"><a name="getDismissOnClickOutside--"></a><a name="getdismissonclickoutside"></a>
         <div class="api-name-block">
@@ -194,7 +199,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/window/DialogProperties.html#getUsePlatformDefaultWidth()">getUsePlatformDefaultWidth</a>()</pre>
-        <p>Whether the width of the dialog's content should be limited to the platform default, which is smaller than the screen width.</p>
+        <p>Whether the width of the dialog's content should be limited to the platform default, which is smaller than the screen width. <b>Might be used only as named argument</b>.</p>
       </div>
       <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
         <div class="api-name-block">

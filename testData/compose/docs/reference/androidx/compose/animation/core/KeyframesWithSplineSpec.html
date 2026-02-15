@@ -1,0 +1,310 @@
+<html devsite="true">
+  <head>
+    <title>KeyframesWithSplineSpec</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="KeyframesWithSplineSpec">
+      <meta itemprop="path" content="androidx.compose.animation.core">
+      <meta itemprop="property" content="getConfig()">
+      <meta itemprop="property" content="vectorize(androidx.compose.animation.core.TwoWayConverter)">
+      <meta itemprop="language" content="JAVA">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>KeyframesWithSplineSpec</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/core/AnimationSpec.kt+class:androidx.compose.animation.core.KeyframesWithSplineSpec&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/animation/core/KeyframesWithSplineSpec.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>@<a href="/reference/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>public final class <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; implements <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> creates a keyframe based <code><a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> using the Monotone cubic Hermite spline to interpolate between the values in <code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig)">config</a></code>.</p>
+    <p><code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> is best used with 2D values such as <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code>. For example:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.ui.geometry.Offset
+
+keyframesWithSpline {
+    durationMillis = 200
+    Offset(0f, 0f) at 0
+    Offset(500f, 100f) at 100
+    Offset(400f, 50f) at 150
+}</pre>
+    <p>You may however, provide a <code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#periodicBias()">periodicBias</a></code> value (between 0f and 1f) to make a periodic spline. Periodic splines adjust the initial and final velocity to be the same. This is useful to create smooth repeatable animations. Such as an infinite pulsating animation:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
+
+var alpha by remember { mutableFloatStateOf(0f) }
+LaunchedEffect(Unit) {
+    animate(
+        initialValue = 0f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(
+            // With a periodicBias of 0.5f it creates a similar animation to a sinusoidal curve
+            // so the transition as the animation repeats is completely seamless
+            animation = keyframesWithSpline(periodicBias = 0.5f) {
+                durationMillis = 2000
+
+                1f at 1000 using LinearEasing
+            },
+            repeatMode = RepeatMode.Restart
+        )
+    ) { value, _ -&gt;
+        alpha = value
+    }
+}
+Image(
+    imageVector = Icons.Filled.Favorite,
+    contentDescription = null,
+    modifier = Modifier
+        .size(150.dp)
+        .graphicsLayer { this.alpha = alpha },
+    colorFilter = ColorFilter.tint(Color.Red)
+)</pre>
+    <p>The <code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#periodicBias()">periodicBias</a></code> value (from 0.0 to 1.0) indicates how much of the original starting and final velocity are modified to achieve periodicity:</p>
+    <ul>
+      <li>
+        <p>0f: Modifies only the starting velocity to match the final velocity</p>
+      </li>
+      <li>
+        <p>1f: Modifies only the final velocity to match the starting velocity</p>
+      </li>
+      <li>
+        <p>0.5f: Modifies both velocities equally, picking the average between the two</p>
+      </li>
+    </ul>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.IntOffset
+
+keyframesWithSpline {
+    durationMillis = 200
+    IntOffset(0, 0) at 0
+    IntOffset(500, 100) at 100
+    IntOffset(400, 50) at 150
+}</pre>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframesWithSpline
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.dp
+
+keyframesWithSpline {
+    durationMillis = 200
+    DpOffset(0.dp, 0.dp) at 0
+    DpOffset(500.dp, 100.dp) at 100
+    DpOffset(400.dp, 50.dp) at 150
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/animation/core/package-summary.html#keyframesWithSpline(kotlin.Function1)">keyframesWithSpline</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/animation/core/ExperimentalAnimationSpecApi.html">ExperimentalAnimationSpecApi</a><br>public final class <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; extends <a href="/reference/androidx/compose/animation/core/KeyframesSpecBaseConfig.html">KeyframesSpecBaseConfig</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#KeyframesWithSplineSpec(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig)">KeyframesWithSplineSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#KeyframesWithSplineSpec(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig,kotlin.Float)">KeyframesWithSplineSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;periodicBias<br>)</code></div>
+              <p>Constructor that returns a periodic spline implementation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#getConfig()">getConfig</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;</code></td>
+            <td>
+              <div><code>&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter<br>)</code></div>
+              <p>Creates a <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> with the given <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="KeyframesWithSplineSpec-androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig-"></a><a name="keyframeswithsplinespec"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="KeyframesWithSplineSpec(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig)">KeyframesWithSplineSpec</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#KeyframesWithSplineSpec(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig)">KeyframesWithSplineSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config<br>)</pre>
+      </div>
+      <div class="api-item"><a name="KeyframesWithSplineSpec(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig, kotlin.Float)"></a><a name="KeyframesWithSplineSpec-androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig-kotlin.Float-"></a><a name="keyframeswithsplinespec"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="KeyframesWithSplineSpec(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig,kotlin.Float)">KeyframesWithSplineSpec</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#KeyframesWithSplineSpec(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig,kotlin.Float)">KeyframesWithSplineSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;periodicBias<br>)</pre>
+        <p>Constructor that returns a periodic spline implementation.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config</code></td>
+                <td>
+                  <p>Keyframe configuration of the spline, should contain the set of values, timestamps and easing curves to animate through.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> float&nbsp;periodicBias</code></td>
+                <td>
+                  <p>A value from 0f to 1f, indicating how much the starting or ending velocities are modified respectively to achieve periodicity.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getConfig--"></a><a name="getconfig"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getConfig()">getConfig</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig.html">KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#getConfig()">getConfig</a>()</pre>
+      </div>
+      <div class="api-item"><a name="vectorize-androidx.compose.animation.core.TwoWayConverter-"></a><a name="vectorize"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/KeyframesWithSplineSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter<br>)</pre>
+        <p>Creates a <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> with the given <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code>.</p>
+        <p>The underlying animation system operates on <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>s. <code><a href="/reference/androidx/compose/animation/core/AnimationSpec.html">T</a></code> will be converted to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> to animate. <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> describes how the converted <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> should be animated. E.g. The animation could simply interpolate between the start and end values (i.e.<code><a href="/reference/androidx/compose/animation/core/TweenSpec.html">TweenSpec</a></code>), or apply spring physics to produce the motion (i.e. <code><a href="/reference/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code>), etc)</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter</code></td>
+                <td>
+                  <p>converts the type <code><a href="/reference/androidx/compose/animation/core/AnimationSpec.html">T</a></code> from and to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> type</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

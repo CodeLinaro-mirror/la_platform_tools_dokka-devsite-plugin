@@ -24,7 +24,7 @@
         <h1>PopupProperties</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/window/AndroidPopup.android.kt+class:androidx.compose.ui.window.PopupProperties&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/window/+class:androidx.compose.ui.window.PopupProperties&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
 
@@ -51,12 +51,23 @@
         <tbody class="list">
           <tr>
             <td>
+              <div><code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;focusable,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;clippingEnabled<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Int,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;flags,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;inheritSecurePolicy,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;excludeFromSystemGesture,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;usePlatformDefaultWidth<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <div><code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;focusable,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a>&nbsp;securePolicy,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;excludeFromSystemGesture,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;clippingEnabled<br>)</code></div>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;focusable,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a>&nbsp;securePolicy,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;excludeFromSystemGesture,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;clippingEnabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;usePlatformDefaultWidth<br>)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;focusable,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a>&nbsp;securePolicy,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;excludeFromSystemGesture,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;clippingEnabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;usePlatformDefaultWidth<br>)</code></div>
+              <p>Constructs a <code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a></code> with the given behaviors.</p>
             </td>
           </tr>
         </tbody>
@@ -91,7 +102,7 @@
             <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#getDismissOnBackPress()">getDismissOnBackPress</a>()</code></div>
-              <p>Whether the popup can be dismissed by pressing the back button.</p>
+              <p>Whether the popup can be dismissed by pressing the back button on Android or escape key on desktop.</p>
             </td>
           </tr>
           <tr>
@@ -119,7 +130,7 @@
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#getSecurePolicy()">getSecurePolicy</a>()</code></div>
-              <p>Policy for setting <code><a href="https://developer.android.com/reference/android/view/WindowManager.LayoutParams.html#FLAG_SECURE">WindowManager.LayoutParams.FLAG_SECURE</a></code> on the popup's window.</p>
+              <p>Policy for how <code><a href="https://developer.android.com/reference/android/view/WindowManager.LayoutParams.html#FLAG_SECURE">WindowManager.LayoutParams.FLAG_SECURE</a></code> is set on the popup's window.</p>
             </td>
           </tr>
           <tr>
@@ -140,6 +151,22 @@
     </div>
     <div class="list">
       <h2>Public constructors</h2>
+      <div class="api-item"><a name="PopupProperties(kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a><a name="PopupProperties-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-"></a><a name="popupproperties"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;focusable,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;clippingEnabled<br>)</pre>
+      </div>
+      <div class="api-item"><a name="PopupProperties(kotlin.Int, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a><a name="PopupProperties-kotlin.Int-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-"></a><a name="popupproperties"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="PopupProperties(kotlin.Int,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Int,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;flags,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;inheritSecurePolicy,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;excludeFromSystemGesture,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;usePlatformDefaultWidth<br>)</pre>
+      </div>
       <div class="api-item"><a name="PopupProperties(kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, androidx.compose.ui.window.SecureFlagPolicy, kotlin.Boolean, kotlin.Boolean)"></a><a name="PopupProperties-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-androidx.compose.ui.window.SecureFlagPolicy-kotlin.Boolean-kotlin.Boolean-"></a><a name="popupproperties"></a>
         <div class="api-name-block">
           <div>
@@ -154,7 +181,65 @@
             <h3 id="PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;<a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;focusable,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a>&nbsp;securePolicy,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;excludeFromSystemGesture,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;clippingEnabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;usePlatformDefaultWidth<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;focusable,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnBackPress,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;dismissOnClickOutside,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a>&nbsp;securePolicy,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;excludeFromSystemGesture,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;clippingEnabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;usePlatformDefaultWidth<br>)</pre>
+        <p>Constructs a <code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#PopupProperties(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">PopupProperties</a></code> with the given behaviors. This constructor is to support multiplatform and maintain backwards compatibility. Consider the overload that takes a <code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#(kotlin.Int,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">flags</a></code> parameter if more precise control over the popup flags is desired.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean&nbsp;focusable</code></td>
+                <td>
+                  <p>Whether the popup is focusable. When true, the popup will receive IME events and key presses, such as when the back button is pressed.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;dismissOnBackPress</code></td>
+                <td>
+                  <p>Whether the popup can be dismissed by pressing the back button. If true, pressing the back button will call onDismissRequest. Note that <code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">focusable</a></code> must be set to true in order to receive key events such as the back button. If the popup is not focusable, then this property does nothing.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;dismissOnClickOutside</code></td>
+                <td>
+                  <p>Whether the popup can be dismissed by clicking outside the popup's bounds. If true, clicking outside the popup will call onDismissRequest.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a>&nbsp;securePolicy</code></td>
+                <td>
+                  <p>Policy for setting <code><a href="https://developer.android.com/reference/android/view/WindowManager.LayoutParams.html#FLAG_SECURE">WindowManager.LayoutParams.FLAG_SECURE</a></code> on the popup's window.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;excludeFromSystemGesture</code></td>
+                <td>
+                  <p>A flag to check whether to set the systemGestureExclusionRects. The default is true.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;clippingEnabled</code></td>
+                <td>
+                  <p>Whether to allow the popup window to extend beyond the bounds of the screen. By default the window is clipped to the screen boundaries. Setting this to false will allow windows to be accurately positioned. The default value is true.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;usePlatformDefaultWidth</code></td>
+                <td>
+                  <p>Whether the width of the popup's content should be limited to the platform default, which is smaller than the screen width.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div class="list">
@@ -183,7 +268,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/window/PopupProperties.html#getDismissOnBackPress()">getDismissOnBackPress</a>()</pre>
-        <p>Whether the popup can be dismissed by pressing the back button. If true, pressing the back button will call onDismissRequest. Note that <code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.window.SecureFlagPolicy,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">focusable</a></code> must be set to true in order to receive key events such as the back button - if the popup is not focusable then this property does nothing.</p>
+        <p>Whether the popup can be dismissed by pressing the back button on Android or escape key on desktop. If true, pressing the back button will call onDismissRequest. Note that <code><a href="/reference/androidx/compose/ui/window/PopupProperties.html#(kotlin.Boolean,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">focusable</a></code> must be set to true in order to receive key events such as the back button - if the popup is not focusable then this property does nothing.</p>
       </div>
       <div class="api-item"><a name="getDismissOnClickOutside--"></a><a name="getdismissonclickoutside"></a>
         <div class="api-name-block">
@@ -219,7 +304,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/SecureFlagPolicy.html">SecureFlagPolicy</a>&nbsp;<a href="/reference/androidx/compose/ui/window/PopupProperties.html#getSecurePolicy()">getSecurePolicy</a>()</pre>
-        <p>Policy for setting <code><a href="https://developer.android.com/reference/android/view/WindowManager.LayoutParams.html#FLAG_SECURE">WindowManager.LayoutParams.FLAG_SECURE</a></code> on the popup's window.</p>
+        <p>Policy for how <code><a href="https://developer.android.com/reference/android/view/WindowManager.LayoutParams.html#FLAG_SECURE">WindowManager.LayoutParams.FLAG_SECURE</a></code> is set on the popup's window.</p>
       </div>
       <div class="api-item"><a name="getUsePlatformDefaultWidth--"></a><a name="getuseplatformdefaultwidth"></a>
         <div class="api-name-block">

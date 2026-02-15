@@ -8,9 +8,11 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="PullToRefreshKt">
       <meta itemprop="path" content="androidx.compose.material3.pulltorefresh">
-      <meta itemprop="property" content="PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">
-      <meta itemprop="property" content="PullToRefreshState(kotlin.Float,kotlin.Boolean,kotlin.Function0)">
-      <meta itemprop="property" content="rememberPullToRefreshState(androidx.compose.ui.unit.Dp,kotlin.Function0)">
+      <meta itemprop="property" content="PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">
+      <meta itemprop="property" content="PullToRefreshState()">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).pullToRefresh(kotlin.Boolean,androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,kotlin.Function0)">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).pullToRefreshIndicator(androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp)">
+      <meta itemprop="property" content="rememberPullToRefreshState()">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -42,21 +44,35 @@
           <tr>
             <td><code>static&nbsp;final void</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;indicator,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Shape.html">Shape</a>&nbsp;shape,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;containerColor,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;contentColor<br>)</code></div>
-              <p>Material Design pull-to-refresh indicator</p>
+              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isRefreshing,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onRefresh,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Alignment.html">Alignment</a>&nbsp;contentAlignment,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;indicator,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</code></div>
+              <p><code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a></code> is a container that expects a scrollable layout as content and adds gesture support for manually refreshing when the user swipes downward at the beginning of the content.</p>
             </td>
           </tr>
           <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#PullToRefreshState(kotlin.Float,kotlin.Boolean,kotlin.Function0)">PullToRefreshState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;positionalThresholdPx,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;initialRefreshing,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;enabled<br>)</code></div>
-              <p>Creates a <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshState(kotlin.Float,kotlin.Boolean,kotlin.Function0)">PullToRefreshState</a></code>.</p>
+              <div><code>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#PullToRefreshState()">PullToRefreshState</a>()</code></div>
+              <p>Creates a <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshState()">PullToRefreshState</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#(androidx.compose.ui.Modifier).pullToRefresh(kotlin.Boolean,androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,kotlin.Function0)">pullToRefresh</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isRefreshing,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;threshold,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onRefresh<br>)</code></div>
+              <p>A Modifier that adds nested scroll to a container to support a pull-to-refresh gesture.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#(androidx.compose.ui.Modifier).pullToRefreshIndicator(androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp)">pullToRefreshIndicator</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isRefreshing,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;threshold,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Shape.html">Shape</a>&nbsp;shape,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;containerColor,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;elevation<br>)</code></div>
+              <p>A Modifier that handles the size, offset, clipping, shadow, and background drawing of a pull-to-refresh indicator, useful when implementing custom indicators.</p>
             </td>
           </tr>
           <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#rememberPullToRefreshState(androidx.compose.ui.unit.Dp,kotlin.Function0)">rememberPullToRefreshState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;positionalThreshold,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;enabled<br>)</code></div>
+              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#rememberPullToRefreshState()">rememberPullToRefreshState</a>()</code></div>
               <p>Create and remember the default <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code>.</p>
             </td>
           </tr>
@@ -65,214 +81,450 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState, androidx.compose.ui.Modifier, kotlin.Function1, androidx.compose.ui.graphics.Shape, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color)"></a><a name="PullToRefreshContainer-androidx.compose.material3.pulltorefresh.PullToRefreshState-androidx.compose.ui.Modifier-kotlin.Function1-androidx.compose.ui.graphics.Shape-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-"></a><a name="pulltorefreshcontainer"></a>
+      <div class="api-item"><a name="PullToRefreshBox(kotlin.Boolean, kotlin.Function0, androidx.compose.ui.Modifier, androidx.compose.material3.pulltorefresh.PullToRefreshState, androidx.compose.ui.Alignment, kotlin.Function1, kotlin.Function1)"></a><a name="PullToRefreshBox-kotlin.Boolean-kotlin.Function0-androidx.compose.ui.Modifier-androidx.compose.material3.pulltorefresh.PullToRefreshState-androidx.compose.ui.Alignment-kotlin.Function1-kotlin.Function1-"></a><a name="pulltorefreshbox"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</h3>
+            <h3 id="PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;indicator,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Shape.html">Shape</a>&nbsp;shape,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;containerColor,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;contentColor<br>)</pre>
-        <p>Material Design pull-to-refresh indicator</p>
-        <p>A pull-to-refresh container contains a progress indicator to indicate a users drag progress towards triggering a refresh. On a refresh the progress indicator inside this container is indeterminate.</p>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isRefreshing,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onRefresh,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Alignment.html">Alignment</a>&nbsp;contentAlignment,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;indicator,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
+        <p><code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a></code> is a container that expects a scrollable layout as content and adds gesture support for manually refreshing when the user swipes downward at the beginning of the content. By default, it uses <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshDefaults.html#Indicator(androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp)">PullToRefreshDefaults.Indicator</a></code> as the refresh indicator.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.PullToRefreshState
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 
-var itemCount by remember { mutableStateOf(15) }
+var itemCount by remember { mutableIntStateOf(15) }
+var isRefreshing by remember { mutableStateOf(false) }
 val state = rememberPullToRefreshState()
-if (state.isRefreshing) {
-    LaunchedEffect(true) {
-        // fetch something
+val coroutineScope = rememberCoroutineScope()
+val onRefresh: () -&gt; Unit = {
+    isRefreshing = true
+    coroutineScope.launch {
         delay(1500)
         itemCount += 5
-        state.endRefresh()
+        isRefreshing = false
     }
 }
-Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
-    LazyColumn(Modifier.fillMaxSize()) {
-        if (!state.isRefreshing) {
-            items(itemCount) {
-                ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) })
+
+Scaffold(
+    topBar = {
+        TopAppBar(
+            title = { Text(&quot;Title&quot;) },
+            // Provide an accessible alternative to trigger refresh.
+            actions = {
+                IconButton(onClick = onRefresh) {
+                    Icon(Icons.Filled.Refresh, &quot;Trigger Refresh&quot;)
+                }
+            }
+        )
+    }
+) {
+    PullToRefreshBox(
+        modifier = Modifier.padding(it),
+        state = state,
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh,
+    ) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            items(itemCount) { ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) }) }
+        }
+    }
+}</pre>
+        <p>View models can be used as source as truth as shown in</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+
+val viewModel = remember {
+    object : ViewModel() {
+        private val refreshRequests = Channel&lt;Unit&gt;(1)
+        var isRefreshing by mutableStateOf(false)
+            private set
+
+        var itemCount by mutableStateOf(15)
+            private set
+
+        init {
+            viewModelScope.launch {
+                for (r in refreshRequests) {
+                    isRefreshing = true
+                    try {
+                        itemCount += 5
+                        delay(1000) // simulate doing real work
+                    } finally {
+                        isRefreshing = false
+                    }
+                }
+            }
+        }
+
+        fun refresh() {
+            refreshRequests.trySend(Unit)
+        }
+    }
+}
+
+Scaffold(
+    topBar = {
+        TopAppBar(
+            title = { Text(&quot;Title&quot;) },
+            // Provide an accessible alternative to trigger refresh.
+            actions = {
+                IconButton(
+                    enabled = !viewModel.isRefreshing,
+                    onClick = { viewModel.refresh() }
+                ) {
+                    Icon(Icons.Filled.Refresh, &quot;Trigger Refresh&quot;)
+                }
+            }
+        )
+    }
+) {
+    PullToRefreshBox(
+        modifier = Modifier.padding(it),
+        isRefreshing = viewModel.isRefreshing,
+        onRefresh = { viewModel.refresh() }
+    ) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            if (!viewModel.isRefreshing) {
+                items(viewModel.itemCount) {
+                    ListItem({ Text(text = &quot;Item ${viewModel.itemCount - it}&quot;) })
+                }
             }
         }
     }
-    PullToRefreshContainer(
-        modifier = Modifier.align(Alignment.TopCenter),
-        state = state,
-    )
 }</pre>
         <p>A custom state implementation can be initialized like this</p>
         <pre class="prettyprint lang-kotlin">
-import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.PullToRefreshState
-import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
-import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.unit.Velocity
 
-var itemCount by remember { mutableStateOf(15) }
-val state = remember {
-    object : PullToRefreshState {
-        override val positionalThreshold: Float = 100f
-        override val progress get() = verticalOffset / positionalThreshold
-        override var verticalOffset: Float by mutableFloatStateOf(0f)
-        override var isRefreshing: Boolean by mutableStateOf(false)
-
-        override fun startRefresh() {
-            isRefreshing = true
-        }
-        override fun endRefresh() {
-            isRefreshing = false
-        }
-
-        // Provide logic for the PullRefreshContainer to consume scrolls within a nested scroll
-        override var nestedScrollConnection: NestedScrollConnection =
-            object : NestedScrollConnection {
-                // Pre and post scroll provide the drag logic for PullRefreshContainer.
-                override fun onPreScroll(
-                    available: Offset,
-                    source: NestedScrollSource,
-                ): Offset = when {
-                    source == NestedScrollSource.Drag &amp;&amp; available.y &lt; 0 -&gt; {
-                        // Swiping up
-                        val y = if (isRefreshing) 0f else {
-                            val newOffset = (verticalOffset + available.y).coerceAtLeast(0f)
-                            val dragConsumed = newOffset - verticalOffset
-                            verticalOffset = newOffset
-                            dragConsumed
-                        }
-                        Offset(0f, y)
-                    }
-
-                    else -&gt; Offset.Zero
-                }
-
-                override fun onPostScroll(
-                    consumed: Offset,
-                    available: Offset,
-                    source: NestedScrollSource
-                ): Offset = when {
-                    source == NestedScrollSource.Drag &amp;&amp; available.y &gt; 0 -&gt; {
-                        // Swiping Down
-                        val y = if (isRefreshing) 0f else {
-                            val newOffset = (verticalOffset + available.y).coerceAtLeast(0f)
-                            val dragConsumed = newOffset - verticalOffset
-                            verticalOffset = newOffset
-                            dragConsumed
-                        }
-                        Offset(0f, y)
-                    }
-
-                    else -&gt; Offset.Zero
-                }
-
-                // Pre-Fling is called when the user releases a drag. This is where you can provide
-                // refresh logic, and verify exceeding positional threshold.
-                override suspend fun onPreFling(available: Velocity): Velocity {
-                    if (isRefreshing) return Velocity.Zero
-                    if (verticalOffset &gt; positionalThreshold) {
-                        startRefresh()
-                        itemCount += 5
-                        endRefresh()
-                    }
-                    animate(verticalOffset, 0f) { value, _ -&gt;
-                        verticalOffset = value
-                    }
-                    val consumed = when {
-                        verticalOffset == 0f -&gt; 0f
-                        available.y &lt; 0f -&gt; 0f
-                        else -&gt; available.y
-                    }
-                    return Velocity(0f, consumed)
-                }
-            }
+var itemCount by remember { mutableIntStateOf(15) }
+var isRefreshing by remember { mutableStateOf(false) }
+val coroutineScope = rememberCoroutineScope()
+val onRefresh: () -&gt; Unit = {
+    isRefreshing = true
+    coroutineScope.launch {
+        // fetch something
+        delay(1500)
+        itemCount += 5
+        isRefreshing = false
     }
 }
 
-Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
-    LazyColumn(Modifier.fillMaxSize()) {
-        if (!state.isRefreshing) {
-            items(itemCount) {
-                ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) })
+val state = remember {
+    object : PullToRefreshState {
+        private val anim = Animatable(0f, Float.VectorConverter)
+
+        override val distanceFraction
+            get() = anim.value
+
+        override suspend fun animateToThreshold() {
+            anim.animateTo(1f, spring(dampingRatio = Spring.DampingRatioHighBouncy))
+        }
+
+        override suspend fun animateToHidden() {
+            anim.animateTo(0f)
+        }
+
+        override suspend fun snapTo(targetValue: Float) {
+            anim.snapTo(targetValue)
+        }
+    }
+}
+
+Scaffold(
+    topBar = {
+        TopAppBar(
+            title = { Text(&quot;TopAppBar&quot;) },
+            // Provide an accessible alternative to trigger refresh.
+            actions = {
+                IconButton(onClick = onRefresh) {
+                    Icon(Icons.Filled.Refresh, &quot;Trigger Refresh&quot;)
+                }
+            }
+        )
+    }
+) {
+    PullToRefreshBox(
+        modifier = Modifier.padding(it),
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh,
+        state = state
+    ) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            if (!isRefreshing) {
+                items(itemCount) { ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) }) }
             }
         }
     }
-    PullToRefreshContainer(
-        modifier = Modifier.align(Alignment.TopCenter),
-        state = state,
-    )
 }</pre>
         <p>Scaling behavior can be implemented like this</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshState
+import androidx.compose.material3.pulltorefresh.pullToRefresh
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 
 var itemCount by remember { mutableStateOf(15) }
+var isRefreshing by remember { mutableStateOf(false) }
 val state = rememberPullToRefreshState()
-if (state.isRefreshing) {
-    LaunchedEffect(true) {
+val coroutineScope = rememberCoroutineScope()
+val onRefresh: () -&gt; Unit = {
+    isRefreshing = true
+    coroutineScope.launch {
         // fetch something
         delay(1500)
         itemCount += 5
-        state.endRefresh()
+        isRefreshing = false
     }
 }
-val scaleFraction = if (state.isRefreshing) 1f else
-    LinearOutSlowInEasing.transform(state.progress).coerceIn(0f, 1f)
 
-Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
-    LazyColumn(Modifier.fillMaxSize()) {
-        if (!state.isRefreshing) {
-            items(itemCount) {
-                ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) })
+val scaleFraction = {
+    if (isRefreshing) 1f
+    else LinearOutSlowInEasing.transform(state.distanceFraction).coerceIn(0f, 1f)
+}
+
+Scaffold(
+    modifier =
+        Modifier.pullToRefresh(
+            state = state,
+            isRefreshing = isRefreshing,
+            onRefresh = onRefresh
+        ),
+    topBar = {
+        TopAppBar(
+            title = { Text(&quot;TopAppBar&quot;) },
+            // Provide an accessible alternative to trigger refresh.
+            actions = {
+                IconButton(onClick = onRefresh) {
+                    Icon(Icons.Filled.Refresh, &quot;Trigger Refresh&quot;)
+                }
+            }
+        )
+    }
+) {
+    Box(Modifier.padding(it)) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            if (!isRefreshing) {
+                items(itemCount) { ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) }) }
             }
         }
+        Box(
+            Modifier.align(Alignment.TopCenter).graphicsLayer {
+                scaleX = scaleFraction()
+                scaleY = scaleFraction()
+            }
+        ) {
+            PullToRefreshDefaults.Indicator(state = state, isRefreshing = isRefreshing)
+        }
     }
-    PullToRefreshContainer(
-        modifier = Modifier
-            .align(Alignment.TopCenter)
-            .graphicsLayer(scaleX = scaleFraction, scaleY = scaleFraction),
-        state = state,
-    )
 }</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean&nbsp;isRefreshing</code></td>
+                <td>
+                  <p>whether a refresh is occurring</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onRefresh</code></td>
+                <td>
+                  <p>callback invoked when the user gesture crosses the threshold, thereby requesting a refresh.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier</code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this container</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state</code></td>
+                <td>
+                  <p>the state that keeps track of distance pulled</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Alignment.html">Alignment</a>&nbsp;contentAlignment</code></td>
+                <td>
+                  <p>The default alignment inside the Box.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;indicator</code></td>
+                <td>
+                  <p>the indicator that will be drawn on top of the content when the user begins a pull or a refresh is occurring</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>the content of the pull refresh container, typically a scrollable layout such as <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or a layout using Modifier.verticalScroll</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="PullToRefreshState--"></a><a name="pulltorefreshstate"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="PullToRefreshState()">PullToRefreshState</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#PullToRefreshState()">PullToRefreshState</a>()</pre>
+        <p>Creates a <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshState()">PullToRefreshState</a></code>.</p>
+        <p>Note that in most cases, you are advised to use <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#rememberPullToRefreshState()">rememberPullToRefreshState</a></code> when in composition.</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.Modifier).pullToRefresh(kotlin.Boolean, androidx.compose.material3.pulltorefresh.PullToRefreshState, kotlin.Boolean, androidx.compose.ui.unit.Dp, kotlin.Function0)"></a><a name="-androidx.compose.ui.Modifier-.pullToRefresh-kotlin.Boolean-androidx.compose.material3.pulltorefresh.PullToRefreshState-kotlin.Boolean-androidx.compose.ui.unit.Dp-kotlin.Function0-"></a><a name="pulltorefresh"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).pullToRefresh(kotlin.Boolean,androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,kotlin.Function0)">pullToRefresh</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#(androidx.compose.ui.Modifier).pullToRefresh(kotlin.Boolean,androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,kotlin.Function0)">pullToRefresh</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isRefreshing,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;threshold,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onRefresh<br>)</pre>
+        <p>A Modifier that adds nested scroll to a container to support a pull-to-refresh gesture. When the user pulls a distance greater than <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#(androidx.compose.ui.Modifier).pullToRefresh(kotlin.Boolean,androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,kotlin.Function0)">threshold</a></code> and releases the gesture, <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#(androidx.compose.ui.Modifier).pullToRefresh(kotlin.Boolean,androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,kotlin.Function0)">onRefresh</a></code> is invoked. <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a></code> applies this automatically.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean&nbsp;isRefreshing</code></td>
+                <td>
+                  <p>whether a refresh is occurring or not, if there is no gesture in progress when isRefreshing is false the <code>state.distanceFraction</code> will animate to 0f, otherwise it will animate to 1f</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state</code></td>
+                <td>
+                  <p>state that keeps track of the distance pulled</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;enabled</code></td>
+                <td>
+                  <p>whether nested scroll events should be consumed by this modifier</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;threshold</code></td>
+                <td>
+                  <p>how much distance can be scrolled down before <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#(androidx.compose.ui.Modifier).pullToRefresh(kotlin.Boolean,androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,kotlin.Function0)">onRefresh</a></code> is invoked</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onRefresh</code></td>
+                <td>
+                  <p>callback that is invoked when the distance pulled is greater than <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#(androidx.compose.ui.Modifier).pullToRefresh(kotlin.Boolean,androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,kotlin.Function0)">threshold</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.Modifier).pullToRefreshIndicator(androidx.compose.material3.pulltorefresh.PullToRefreshState, kotlin.Boolean, androidx.compose.ui.unit.Dp, androidx.compose.ui.graphics.Shape, androidx.compose.ui.graphics.Color, androidx.compose.ui.unit.Dp)"></a><a name="-androidx.compose.ui.Modifier-.pullToRefreshIndicator-androidx.compose.material3.pulltorefresh.PullToRefreshState-kotlin.Boolean-androidx.compose.ui.unit.Dp-androidx.compose.ui.graphics.Shape-androidx.compose.ui.graphics.Color-androidx.compose.ui.unit.Dp-"></a><a name="pulltorefreshindicator"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).pullToRefreshIndicator(androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp)">pullToRefreshIndicator</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#(androidx.compose.ui.Modifier).pullToRefreshIndicator(androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp)">pullToRefreshIndicator</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isRefreshing,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;threshold,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Shape.html">Shape</a>&nbsp;shape,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;containerColor,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;elevation<br>)</pre>
+        <p>A Modifier that handles the size, offset, clipping, shadow, and background drawing of a pull-to-refresh indicator, useful when implementing custom indicators. <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshDefaults.html#Indicator(androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp)">PullToRefreshDefaults.Indicator</a></code> applies this automatically.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -288,121 +540,51 @@ Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;state</code></td>
                 <td>
-                  <p>the state of this <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code></p>
+                  <p>the state of this modifier, will use <code>state.distanceFraction</code> and <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#(androidx.compose.ui.Modifier).pullToRefreshIndicator(androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp)">threshold</a></code> to calculate the offset</p>
                 </td>
               </tr>
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier</code></td>
+                <td><code>boolean&nbsp;isRefreshing</code></td>
                 <td>
-                  <p>the <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this container</p>
+                  <p>whether a refresh is occurring</p>
                 </td>
               </tr>
               <tr>
-                <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;indicator</code></td>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;threshold</code></td>
                 <td>
-                  <p>The indicator placed inside of the <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code>. Has access to <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">state</a></code></p>
+                  <p>how much the indicator can be pulled down before a refresh is triggered on release</p>
                 </td>
               </tr>
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Shape.html">Shape</a>&nbsp;shape</code></td>
                 <td>
-                  <p>the <code><a href="/reference/androidx/compose/ui/graphics/Shape.html">Shape</a></code> of this container</p>
+                  <p>the <code><a href="/reference/androidx/compose/ui/graphics/Shape.html">Shape</a></code> of this indicator</p>
                 </td>
               </tr>
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;containerColor</code></td>
                 <td>
-                  <p>the color of this container</p>
+                  <p>the container color of this indicator</p>
                 </td>
               </tr>
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;contentColor</code></td>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;elevation</code></td>
                 <td>
-                  <p>the color of the progress indicator</p>
+                  <p>the elevation for the indicator</p>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="PullToRefreshState(kotlin.Float, kotlin.Boolean, kotlin.Function0)"></a><a name="PullToRefreshState-kotlin.Float-kotlin.Boolean-kotlin.Function0-"></a><a name="pulltorefreshstate"></a>
+      <div class="api-item"><a name="rememberPullToRefreshState--"></a><a name="rememberpulltorefreshstate"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="PullToRefreshState(kotlin.Float,kotlin.Boolean,kotlin.Function0)">PullToRefreshState</h3>
+            <h3 id="rememberPullToRefreshState()">rememberPullToRefreshState</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#PullToRefreshState(kotlin.Float,kotlin.Boolean,kotlin.Function0)">PullToRefreshState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;positionalThresholdPx,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;initialRefreshing,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;enabled<br>)</pre>
-        <p>Creates a <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshState(kotlin.Float,kotlin.Boolean,kotlin.Function0)">PullToRefreshState</a></code>.</p>
-        <p>Note that in most cases, you are advised to use <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#rememberPullToRefreshState(androidx.compose.ui.unit.Dp,kotlin.Function0)">rememberPullToRefreshState</a></code> when in composition.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>float&nbsp;positionalThresholdPx</code></td>
-                <td>
-                  <p>The positional threshold, in pixels, in which a refresh is triggered</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>boolean&nbsp;initialRefreshing</code></td>
-                <td>
-                  <p>The initial refreshing value of <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshState(kotlin.Float,kotlin.Boolean,kotlin.Function0)">PullToRefreshState</a></code></p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;enabled</code></td>
-                <td>
-                  <p>a callback used to determine whether scroll events are to be handled by this <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshState(kotlin.Float,kotlin.Boolean,kotlin.Function0)">PullToRefreshState</a></code></p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="rememberPullToRefreshState(androidx.compose.ui.unit.Dp, kotlin.Function0)"></a><a name="rememberPullToRefreshState-androidx.compose.ui.unit.Dp-kotlin.Function0-"></a><a name="rememberpulltorefreshstate"></a>
-        <div class="api-name-block">
-          <div>
-            <h3 id="rememberPullToRefreshState(androidx.compose.ui.unit.Dp,kotlin.Function0)">rememberPullToRefreshState</h3>
-          </div>
-        </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#rememberPullToRefreshState(androidx.compose.ui.unit.Dp,kotlin.Function0)">rememberPullToRefreshState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;positionalThreshold,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;enabled<br>)</pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshKt.html#rememberPullToRefreshState()">rememberPullToRefreshState</a>()</pre>
         <p>Create and remember the default <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;positionalThreshold</code></td>
-                <td>
-                  <p>The positional threshold when a refresh would be triggered</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;enabled</code></td>
-                <td>
-                  <p>a callback used to determine whether scroll events are to be handled by this <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code></p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
   </body>

@@ -32,22 +32,40 @@
           <li>
             <div class="kotlin-platform" data-title="Common/All">Cmn</div>
             <!--platform-Common/All-->
-            <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+            <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/compose/animation/core/TransitionState.html">TransitionState</a></pre>
           </li>
         </ul>
       </div>
     </devsite-filter >
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">kotlin.Any</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/kotlin/androidx/compose/animation/core/TransitionState.html">androidx.compose.animation.core.TransitionState</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">androidx.compose.animation.core.MutableTransitionState</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <hr>
-    <p>MutableTransitionState contains two fields: <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code>. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> is initialized to the provided initialState, and can only be mutated by a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is also initialized to initialState. It can be mutated to alter the course of a transition animation that is created with the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> using <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a></code>. Both <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> are backed by a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object.</p>
+    <p>MutableTransitionState contains two fields: <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code>. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> is initialized to the provided initialState, and can only be mutated by a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is also initialized to initialState. It can be mutated to alter the course of a transition animation that is created with the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> using <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a></code>. Both <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> are backed by a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object.</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberTransition
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
@@ -69,7 +87,7 @@ fun PoppingInCard() {
     visibleState.targetState = true
 
     // Creates a transition with the transition state created above.
-    val transition = updateTransition(visibleState)
+    val transition = rememberTransition(visibleState)
     // Adds a scale animation to the transition to scale the card up when transitioning in.
     val scale by transition.animateFloat(
         // Uses a custom spring for the transition.
@@ -94,8 +112,10 @@ fun PoppingInCard() {
     }
 
     Card(
-        Modifier.graphicsLayer(scaleX = scale, scaleY = scale)
-            .size(200.dp, 100.dp).fillMaxWidth(),
+        Modifier
+            .graphicsLayer(scaleX = scale, scaleY = scale)
+            .size(200.dp, 100.dp)
+            .fillMaxWidth(),
         elevation = elevation
     ) {}
 }</pre>
@@ -112,7 +132,7 @@ fun PoppingInCard() {
         </thead>
         <tbody class="list">
           <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a></code></td>
+            <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a></code></td>
             <td></td>
           </tr>
         </tbody>
@@ -159,7 +179,7 @@ fun PoppingInCard() {
           </thead>
           <tbody class="list">
             <tr>
-              <td><code>S</code></td>
+              <td><code>open S</code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code></div>
                 <p>Current state of the transition.</p>
@@ -179,7 +199,7 @@ fun PoppingInCard() {
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code>S</code></td>
+              <td><code>open S</code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code></div>
                 <p>Target state of the transition.</p>
@@ -224,7 +244,7 @@ fun PoppingInCard() {
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a>:&nbsp;S</pre>
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a>:&nbsp;S</pre>
           <p>Current state of the transition. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> is initialized to the initialState that the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> is constructed with.</p>
           <p>It will be updated by the Transition that is created with this <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> when the transition arrives at a new state.</p>
         </div>
@@ -246,7 +266,7 @@ import androidx.compose.animation.core.ExperimentalTransitionApi
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateDp
-import androidx.compose.animation.core.updateTransition
+import androidx.compose.animation.core.rememberTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -260,7 +280,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SelectableItem(selectedState: MutableTransitionState&lt;Boolean&gt;) {
-    val transition = updateTransition(selectedState)
+    val transition = rememberTransition(selectedState)
     val cornerRadius by transition.animateDp { selected -&gt; if (selected) 10.dp else 0.dp }
     val backgroundColor by transition.animateColor { selected -&gt;
         if (selected) Color.Red else Color.White
@@ -306,7 +326,7 @@ fun ItemsSample(selectedId: Int) {
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a>:&nbsp;S</pre>
+          <pre class="api-signature no-pretty-print">open&nbsp;var&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a>:&nbsp;S</pre>
           <p>Target state of the transition. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is initialized to the initialState that the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> is constructed with.</p>
           <p>It can be updated to a new state at any time. When that happens, the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> that is created with this <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> will update its <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html#targetState()">Transition.targetState</a></code> to the same and subsequently starts a transition animation to animate from the current values to the new target.</p>
         </div>

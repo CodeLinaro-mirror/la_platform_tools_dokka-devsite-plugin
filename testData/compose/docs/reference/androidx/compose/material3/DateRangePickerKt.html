@@ -43,7 +43,7 @@
             <td><code>static&nbsp;final void</code></td>
             <td>
               <div><code>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/material3/DateRangePickerKt.html#DateRangePicker(androidx.compose.material3.DateRangePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.DatePickerFormatter,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.DatePickerColors)">DateRangePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DateRangePickerState.html">DateRangePickerState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerFormatter.html">DatePickerFormatter</a>&nbsp;dateFormatter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;title,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;headline,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;showModeToggle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerColors.html">DatePickerColors</a>&nbsp;colors<br>)</code></div>
-              <p><a href="https://m3.material.io/components/date-pickers/overview" class="external" target="_blank">Material Design date range picker</a>.</p>
+              <p><a href=&quot;https://m3.material.io/components/date-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design date range picker</a>.</p>
             </td>
           </tr>
           <tr>
@@ -72,11 +72,13 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/DateRangePickerKt.html#DateRangePicker(androidx.compose.material3.DateRangePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.DatePickerFormatter,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.DatePickerColors)">DateRangePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DateRangePickerState.html">DateRangePickerState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerFormatter.html">DatePickerFormatter</a>&nbsp;dateFormatter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;title,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;headline,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;showModeToggle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DatePickerColors.html">DatePickerColors</a>&nbsp;colors<br>)</pre>
-        <p><a href="https://m3.material.io/components/date-pickers/overview" class="external" target="_blank">Material Design date range picker</a>.</p>
+        <p><a href=&quot;https://m3.material.io/components/date-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design date range picker</a>.</p>
         <p>Date range pickers let people select a range of dates and can be embedded into Dialogs.</p>
-        <p><img alt="Date range picker image" src="https://developer.android.com/images/reference/androidx/compose/material3/range-picker.png"></p>
+        <p><img alt="Date range picker
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/range-picker.png"></p>
         <p>A simple DateRangePicker looks like:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -86,6 +88,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DateRangePicker
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.SnackbarHost
@@ -109,9 +113,10 @@ val state = rememberDateRangePickerState()
 Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top) {
     // Add a row with &quot;Save&quot; and dismiss actions.
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 12.dp, end = 12.dp),
+        modifier =
+            Modifier.fillMaxWidth()
+                .background(DatePickerDefaults.colors().containerColor)
+                .padding(start = 12.dp, end = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -121,10 +126,8 @@ Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top)
         TextButton(
             onClick = {
                 snackScope.launch {
-                    snackState.showSnackbar(
-                        &quot;Saved range (timestamps): &quot; +
-                            &quot;${state.selectedStartDateMillis!!..state.selectedEndDateMillis!!}&quot;
-                    )
+                    val range = state.selectedStartDateMillis!!..state.selectedEndDateMillis!!
+                    snackState.showSnackbar(&quot;Saved range (timestamps): $range&quot;)
                 }
             },
             enabled = state.selectedEndDateMillis != null
@@ -132,7 +135,6 @@ Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top)
             Text(text = &quot;Save&quot;)
         }
     }
-
     DateRangePicker(state = state, modifier = Modifier.weight(1f))
 }</pre>
         <div class="devsite-table-wrapper">

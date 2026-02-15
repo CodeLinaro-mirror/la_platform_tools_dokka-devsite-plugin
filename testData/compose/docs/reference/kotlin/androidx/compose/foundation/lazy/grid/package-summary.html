@@ -12,6 +12,8 @@
       <meta itemprop="property" content="LazyGridItemScope">
       <meta itemprop="property" content="LazyGridItemSpanScope">
       <meta itemprop="property" content="LazyGridLayoutInfo">
+      <meta itemprop="property" content="LazyGridPrefetchScope">
+      <meta itemprop="property" content="LazyGridPrefetchStrategy">
       <meta itemprop="property" content="LazyGridScope">
       <meta itemprop="property" content="Adaptive">
       <meta itemprop="property" content="Fixed">
@@ -20,9 +22,11 @@
       <meta itemprop="property" content="LazyGridState">
       <meta itemprop="property" content="LazyGridScopeMarker">
       <meta itemprop="property" content="GridItemSpan(kotlin.Int)">
+      <meta itemprop="property" content="LazyGridPrefetchStrategy(kotlin.Int)">
       <meta itemprop="property" content="LazyHorizontalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">
       <meta itemprop="property" content="LazyVerticalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">
       <meta itemprop="property" content="rememberLazyGridState(kotlin.Int,kotlin.Int)">
+      <meta itemprop="property" content="rememberLazyGridState(kotlin.Int,kotlin.Int,androidx.compose.foundation.lazy.grid.LazyGridPrefetchStrategy)">
       <meta itemprop="property" content="(androidx.compose.foundation.lazy.grid.LazyGridScope).items(kotlin.Array,kotlin.Function1,kotlin.Function2,kotlin.Function1,kotlin.Function2)">
       <meta itemprop="property" content="(androidx.compose.foundation.lazy.grid.LazyGridScope).items(kotlin.collections.List,kotlin.Function1,kotlin.Function2,kotlin.Function1,kotlin.Function2)">
       <meta itemprop="property" content="(androidx.compose.foundation.lazy.grid.LazyGridScope).itemsIndexed(kotlin.Array,kotlin.Function2,kotlin.Function3,kotlin.Function2,kotlin.Function3)">
@@ -95,6 +99,24 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridPrefetchScope.html">LazyGridPrefetchScope</a></code></td>
+              <td>
+                <p>Scope for callbacks in <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridPrefetchStrategy.html">LazyGridPrefetchStrategy</a></code> which allows prefetches to be requested.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridPrefetchStrategy.html">LazyGridPrefetchStrategy</a></code></td>
+              <td>
+                <p>Implementations of this interface control which indices of a LazyGrid should be prefetched (precomposed and premeasured during idle time) as the user interacts with it.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridScope.html">LazyGridScope</a></code></td>
               <td>
                 <p>Receiver scope which is used by <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyVerticalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyVerticalGrid</a></code>.</p>
@@ -147,7 +169,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridItemSpan.html">GridItemSpan</a></code></td>
               <td>
-                <p>Represents the span of an item in a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyVerticalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyVerticalGrid</a></code>.</p>
+                <p>Represents the span of an item in a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyVerticalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyVerticalGrid</a></code> or a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyHorizontalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyHorizontalGrid</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -202,8 +224,18 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridItemSpan.html">GridItemSpan</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">GridItemSpan</a>(currentLineSpan:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">GridItemSpan</a>(currentLineSpan:&nbsp;@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>Creates a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">GridItemSpan</a></code> with a specified <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">currentLineSpan</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridPrefetchStrategy.html">LazyGridPrefetchStrategy</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyGridPrefetchStrategy(kotlin.Int)">LazyGridPrefetchStrategy</a>(nestedPrefetchItemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Creates an instance of the default <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyGridPrefetchStrategy(kotlin.Int)">LazyGridPrefetchStrategy</a></code>, allowing for customization of the nested prefetch count.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -233,6 +265,16 @@
               <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html">LazyGridState</a></code></td>
               <td>
                 <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#rememberLazyGridState(kotlin.Int,kotlin.Int)">rememberLazyGridState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialFirstVisibleItemIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialFirstVisibleItemScrollOffset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html">LazyGridState</a></code> that is remembered across compositions.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html">LazyGridState</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#rememberLazyGridState(kotlin.Int,kotlin.Int,androidx.compose.foundation.lazy.grid.LazyGridPrefetchStrategy)">rememberLazyGridState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialFirstVisibleItemIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialFirstVisibleItemScrollOffset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridPrefetchStrategy.html">LazyGridPrefetchStrategy</a><br>)</code></div>
                 <p>Creates a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html">LazyGridState</a></code> that is remembered across compositions.</p>
               </td>
               <td>
@@ -308,8 +350,42 @@
             <!--platform-Common/All--></div>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">GridItemSpan</a>(currentLineSpan:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridItemSpan.html">GridItemSpan</a></pre>
-      <p>Creates a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">GridItemSpan</a></code> with a specified <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">currentLineSpan</a></code>. This will be the horizontal span for an item of a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyVerticalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyVerticalGrid</a></code>.</p>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">GridItemSpan</a>(currentLineSpan:&nbsp;@<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/index.html">IntRange</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridItemSpan.html">GridItemSpan</a></pre>
+      <p>Creates a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">GridItemSpan</a></code> with a specified <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#GridItemSpan(kotlin.Int)">currentLineSpan</a></code>. This will be the horizontal span for an item of a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyVerticalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyVerticalGrid</a></code> and the vertical span for a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyHorizontalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyHorizontalGrid</a></code>.</p>
+    </div>
+    <div class="api-item"><a name="LazyGridPrefetchStrategy-kotlin.Int-"></a><a name="lazygridprefetchstrategy"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="LazyGridPrefetchStrategy(kotlin.Int)">LazyGridPrefetchStrategy</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyGridPrefetchStrategy(kotlin.Int)">LazyGridPrefetchStrategy</a>(nestedPrefetchItemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 2):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridPrefetchStrategy.html">LazyGridPrefetchStrategy</a></pre>
+      <p>Creates an instance of the default <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyGridPrefetchStrategy(kotlin.Int)">LazyGridPrefetchStrategy</a></code>, allowing for customization of the nested prefetch count.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>nestedPrefetchItemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 2</code></td>
+              <td>
+                <p>specifies how many inner items should be prefetched when this LazyGrid is nested inside another LazyLayout. For example, if this is the state for a horizontal LazyGrid nested in a vertical LazyGrid, you might want to set this to the number of items that will be visible when this grid is scrolled into view.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="api-item"><a name="LazyHorizontalGrid(androidx.compose.foundation.lazy.grid.GridCells, androidx.compose.ui.Modifier, androidx.compose.foundation.lazy.grid.LazyGridState, androidx.compose.foundation.layout.PaddingValues, kotlin.Boolean, androidx.compose.foundation.layout.Arrangement.Horizontal, androidx.compose.foundation.layout.Arrangement.Vertical, androidx.compose.foundation.gestures.FlingBehavior, kotlin.Boolean, kotlin.Function1)"></a><a name="LazyHorizontalGrid-androidx.compose.foundation.lazy.grid.GridCells-androidx.compose.ui.Modifier-androidx.compose.foundation.lazy.grid.LazyGridState-androidx.compose.foundation.layout.PaddingValues-kotlin.Boolean-androidx.compose.foundation.layout.Arrangement.Horizontal-androidx.compose.foundation.layout.Arrangement.Vertical-androidx.compose.foundation.gestures.FlingBehavior-kotlin.Boolean-kotlin.Function1-"></a><a name="lazyhorizontalgrid"></a>
       <div class="api-name-block">
@@ -341,7 +417,10 @@ import androidx.compose.ui.unit.dp
 val itemsList = (0..5).toList()
 val itemsIndexedList = listOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
 
-val itemModifier = Modifier.border(1.dp, Color.Blue).width(80.dp).wrapContentSize()
+val itemModifier = Modifier
+    .border(1.dp, Color.Blue)
+    .width(80.dp)
+    .wrapContentSize()
 
 LazyHorizontalGrid(
     rows = GridCells.Fixed(3),
@@ -385,7 +464,10 @@ LazyHorizontalGrid(
         item(span = { GridItemSpan(maxLineSpan) }) {
             Text(
                 &quot;This is section $index&quot;,
-                Modifier.border(1.dp, Color.Gray).width(80.dp).wrapContentSize()
+                Modifier
+                    .border(1.dp, Color.Gray)
+                    .width(80.dp)
+                    .wrapContentSize()
             )
         }
         items(
@@ -395,7 +477,10 @@ LazyHorizontalGrid(
         ) {
             Text(
                 &quot;Item $it&quot;,
-                Modifier.border(1.dp, Color.Blue).width(80.dp).wrapContentSize()
+                Modifier
+                    .border(1.dp, Color.Blue)
+                    .width(80.dp)
+                    .wrapContentSize()
             )
         }
     }
@@ -505,7 +590,10 @@ import androidx.compose.ui.unit.dp
 val itemsList = (0..5).toList()
 val itemsIndexedList = listOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
 
-val itemModifier = Modifier.border(1.dp, Color.Blue).height(80.dp).wrapContentSize()
+val itemModifier = Modifier
+    .border(1.dp, Color.Blue)
+    .height(80.dp)
+    .wrapContentSize()
 
 LazyVerticalGrid(
     columns = GridCells.Fixed(3)
@@ -545,7 +633,10 @@ LazyVerticalGrid(
         item(span = { GridItemSpan(maxLineSpan) }) {
             Text(
                 &quot;This is section $index&quot;,
-                Modifier.border(1.dp, Color.Gray).height(80.dp).wrapContentSize()
+                Modifier
+                    .border(1.dp, Color.Gray)
+                    .height(80.dp)
+                    .wrapContentSize()
             )
         }
         items(
@@ -555,7 +646,10 @@ LazyVerticalGrid(
         ) {
             Text(
                 &quot;Item $it&quot;,
-                Modifier.border(1.dp, Color.Blue).height(80.dp).wrapContentSize()
+                Modifier
+                    .border(1.dp, Color.Blue)
+                    .height(80.dp)
+                    .wrapContentSize()
             )
         }
     }
@@ -677,6 +771,53 @@ LazyVerticalGrid(
         </table>
       </div>
     </div>
+    <div class="api-item"><a name="rememberLazyGridState(kotlin.Int, kotlin.Int, androidx.compose.foundation.lazy.grid.LazyGridPrefetchStrategy)"></a><a name="rememberLazyGridState-kotlin.Int-kotlin.Int-androidx.compose.foundation.lazy.grid.LazyGridPrefetchStrategy-"></a><a name="rememberlazygridstate"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="rememberLazyGridState(kotlin.Int,kotlin.Int,androidx.compose.foundation.lazy.grid.LazyGridPrefetchStrategy)">rememberLazyGridState</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#rememberLazyGridState(kotlin.Int,kotlin.Int,androidx.compose.foundation.lazy.grid.LazyGridPrefetchStrategy)">rememberLazyGridState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialFirstVisibleItemIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialFirstVisibleItemScrollOffset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridPrefetchStrategy.html">LazyGridPrefetchStrategy</a> = remember { LazyGridPrefetchStrategy() }<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html">LazyGridState</a></pre>
+      <p>Creates a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html">LazyGridState</a></code> that is remembered across compositions.</p>
+      <p>Changes to the provided initial values will <b>not</b> result in the state being recreated or changed in any way if it has already been created.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>initialFirstVisibleItemIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+              <td>
+                <p>the initial value for <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html#firstVisibleItemIndex()">LazyGridState.firstVisibleItemIndex</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>initialFirstVisibleItemScrollOffset:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+              <td>
+                <p>the initial value for <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html#firstVisibleItemScrollOffset()">LazyGridState.firstVisibleItemScrollOffset</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>prefetchStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridPrefetchStrategy.html">LazyGridPrefetchStrategy</a> = remember { LazyGridPrefetchStrategy() }</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridPrefetchStrategy.html">LazyGridPrefetchStrategy</a></code> to use for prefetching content in this grid</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <h2>Extension functions</h2>
     <div class="api-item"><a name="(androidx.compose.foundation.lazy.grid.LazyGridScope).items(kotlin.Array, kotlin.Function1, kotlin.Function2, kotlin.Function1, kotlin.Function2)"></a><a name="-androidx.compose.foundation.lazy.grid.LazyGridScope-.items-kotlin.Array-kotlin.Function1-kotlin.Function2-kotlin.Function1-kotlin.Function2-"></a><a name="items"></a>
       <div class="api-name-block">
@@ -711,7 +852,7 @@ LazyVerticalGrid(
             <tr>
               <td><code>noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
               <td>
-                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.This can be overridden by calling <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">LazyGridState.requestScrollToItem</a></code>.</p>
               </td>
             </tr>
             <tr>
@@ -769,7 +910,7 @@ LazyVerticalGrid(
             <tr>
               <td><code>noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
               <td>
-                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">LazyGridState.requestScrollToItem</a></code>.</p>
               </td>
             </tr>
             <tr>
@@ -827,7 +968,7 @@ LazyVerticalGrid(
             <tr>
               <td><code>noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
               <td>
-                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">LazyGridState.requestScrollToItem</a></code>.</p>
               </td>
             </tr>
             <tr>
@@ -885,7 +1026,7 @@ LazyVerticalGrid(
             <tr>
               <td><code>noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
               <td>
-                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the grid is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the grid will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one. This can be overridden by calling <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridState.html#requestScrollToItem(kotlin.Int,kotlin.Int)">LazyGridState.requestScrollToItem</a></code>.</p>
               </td>
             </tr>
             <tr>

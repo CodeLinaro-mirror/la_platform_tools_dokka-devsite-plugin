@@ -1,0 +1,1182 @@
+<html devsite="true">
+  <head>
+    <title>AnchoredDraggableState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="AnchoredDraggableState">
+      <meta itemprop="path" content="androidx.compose.foundation.gestures">
+      <meta itemprop="property" content="anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">
+      <meta itemprop="property" content="anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">
+      <meta itemprop="property" content="dispatchRawDelta(kotlin.Float)">
+      <meta itemprop="property" content="progress(kotlin.Any,kotlin.Any)">
+      <meta itemprop="property" content="requireOffset()">
+      <meta itemprop="property" content="settle(kotlin.Float)">
+      <meta itemprop="property" content="updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">
+      <meta itemprop="property" content="anchors()">
+      <meta itemprop="property" content="currentValue()">
+      <meta itemprop="property" content="decayAnimationSpec()">
+      <meta itemprop="property" content="isAnimationRunning()">
+      <meta itemprop="property" content="lastVelocity()">
+      <meta itemprop="property" content="offset()">
+      <meta itemprop="property" content="progress()">
+      <meta itemprop="property" content="settledValue()">
+      <meta itemprop="property" content="snapAnimationSpec()">
+      <meta itemprop="property" content="targetValue()">
+      <meta itemprop="property" content="Saver(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1,kotlin.Function0,kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Any)">
+      <meta itemprop="property" content="(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">
+      <meta itemprop="property" content="(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>AnchoredDraggableState</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/gestures/AnchoredDraggable.kt+class:androidx.compose.foundation.gestures.AnchoredDraggableState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/foundation/gestures/AnchoredDraggableState.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>class <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>State of the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).anchoredDraggable(androidx.compose.foundation.gestures.AnchoredDraggableState,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.foundation.OverscrollEffect,kotlin.Boolean)">anchoredDraggable</a></code> modifier. Use the constructor overload with anchors if the anchors are defined in composition, or update the anchors using <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">updateAnchors</a></code>.</p>
+    <p>This contains necessary information about any ongoing drag or animation and provides methods to change the state either immediately or by starting an animation.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public companion functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>ERROR CLASS: Recursive implicit type</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#Saver(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1,kotlin.Function0,kotlin.Function1)">Saver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;positionalThreshold:&nbsp;(distance:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocityThreshold:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;confirmValueChange:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>The default <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#Saver(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1,kotlin.Function0,kotlin.Function1)">Saver</a></code> implementation for <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#AnchoredDraggableState(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">AnchoredDraggableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;positionalThreshold:&nbsp;(totalDistance:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocityThreshold:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;confirmValueChange:&nbsp;(newValue) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#AnchoredDraggableState(kotlin.Any,androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">AnchoredDraggableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;anchors:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;positionalThreshold:&nbsp;(totalDistance:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocityThreshold:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;confirmValueChange:&nbsp;(newValue) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Construct an <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#AnchoredDraggableState(kotlin.Any,androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">AnchoredDraggableState</a></code> instance with anchors.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">anchoredDrag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDragScope.html">AnchoredDragScope</a>.(anchors:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                <p>Call this function to take control of drag logic and perform anchored drag with the latest anchors.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">anchoredDrag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDragScope.html">AnchoredDragScope</a>.(anchor:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;, targetValue) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                <p>Call this function to take control of drag logic and perform anchored drag with the latest anchors and target.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Drag by the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#dispatchRawDelta(kotlin.Float)">delta</a></code>, coerce it in the bounds and dispatch it to the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">progress</a>(from:&nbsp;T,&nbsp;to:&nbsp;T)</code></div>
+                <p>The fraction of the offset between <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">from</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">to</a></code>, as a fraction between 0f..1f, or 1f if <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">from</a></code> is equal to <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">to</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#requireOffset()">requireOffset</a>()</code></div>
+                <p>Require the current offset.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settle(kotlin.Float)">settle</a>(velocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Find the closest anchor, taking into account the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">velocityThreshold</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">positionalThreshold</a></code>, and settle at it with an animation.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">updateAnchors</a>(newAnchors:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;,&nbsp;newTarget:&nbsp;T)</code></div>
+                <p>Update the anchors.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchors()">anchors</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>T</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#currentValue()">currentValue</a></code></div>
+                <p>The current value of the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#decayAnimationSpec()">decayAnimationSpec</a></code></div>
+                <p>The animation spec that will be used when flinging with a large enough velocity to reach or cross the target state.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#isAnimationRunning()">isAnimationRunning</a></code></div>
+                <p>Whether an animation is currently in progress.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#lastVelocity()">lastVelocity</a></code></div>
+                <p>The velocity of the last known animation.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#offset()">offset</a></code></div>
+                <p>The current offset, or <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/-companion/-na-n.html">Float.NaN</a></code> if it has not been initialized yet.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress()">progress</a></code></div>
+                <p><strong>This property is deprecated.</strong> Use the progress function to query the progress between two specified anchors.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>T</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settledValue()">settledValue</a></code></div>
+                <p>The value the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code> is currently settled at.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#snapAnimationSpec()">snapAnimationSpec</a></code></div>
+                <p>The default animation spec that will be used to animate to a new state.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>T</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#targetValue()">targetValue</a></code></div>
+                <p>The target value.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Any)">animateTo</a>(targetValue:&nbsp;T)</code></div>
+                <p>Animate to a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Any)">targetValue</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">animateToWithDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+                <p>Attempt to animate using decay Animation to a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">targetValue</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">snapTo</a>(targetValue:&nbsp;T)</code></div>
+                <p>Snap to a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">targetValue</a></code> without any animation.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public companion functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="Saver(androidx.compose.animation.core.AnimationSpec, androidx.compose.animation.core.DecayAnimationSpec, kotlin.Function1, kotlin.Function0, kotlin.Function1)"></a><a name="Saver-androidx.compose.animation.core.AnimationSpec-androidx.compose.animation.core.DecayAnimationSpec-kotlin.Function1-kotlin.Function0-kotlin.Function1-"></a><a name="saver"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="Saver(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1,kotlin.Function0,kotlin.Function1)">Saver</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#Saver(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1,kotlin.Function0,kotlin.Function1)">Saver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;positionalThreshold:&nbsp;(distance:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocityThreshold:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;confirmValueChange:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = { true }<br>):&nbsp;ERROR CLASS: Recursive implicit type</pre>
+          <p>The default <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#Saver(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1,kotlin.Function0,kotlin.Function1)">Saver</a></code> implementation for <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code>.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public constructors
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="AnchoredDraggableState(kotlin.Any, kotlin.Function1, kotlin.Function0, androidx.compose.animation.core.AnimationSpec, androidx.compose.animation.core.DecayAnimationSpec, kotlin.Function1)"></a><a name="AnchoredDraggableState-kotlin.Any-kotlin.Function1-kotlin.Function0-androidx.compose.animation.core.AnimationSpec-androidx.compose.animation.core.DecayAnimationSpec-kotlin.Function1-"></a><a name="anchoreddraggablestate"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="AnchoredDraggableState(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">AnchoredDraggableState</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#AnchoredDraggableState(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">AnchoredDraggableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;positionalThreshold:&nbsp;(totalDistance:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocityThreshold:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;confirmValueChange:&nbsp;(newValue) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = { true }<br>)</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>initialValue:&nbsp;T</code></td>
+                  <td>
+                    <p>The initial value of the state.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>positionalThreshold:&nbsp;(totalDistance:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The positional threshold, in px, to be used when calculating the target state while a drag is in progress and when settling after the drag ends. This is the distance from the start of a transition. It will be, depending on the direction of the interaction, added or subtracted from/to the origin offset. It should always be a positive value.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>velocityThreshold:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The velocity threshold (in px per second) that the end velocity has to exceed in order to animate to the next state, even if the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">positionalThreshold</a></code> has not been reached.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+                  <td>
+                    <p>The default animation spec that will be used to animate to a new state.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+                  <td>
+                    <p>The animation spec that will be used when flinging with a large enough velocity to reach or cross the target state.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>confirmValueChange:&nbsp;(newValue) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = { true }</code></td>
+                  <td>
+                    <p>Optional callback invoked to confirm or veto a pending state change.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="AnchoredDraggableState(kotlin.Any, androidx.compose.foundation.gestures.DraggableAnchors, kotlin.Function1, kotlin.Function0, androidx.compose.animation.core.AnimationSpec, androidx.compose.animation.core.DecayAnimationSpec, kotlin.Function1)"></a><a name="AnchoredDraggableState-kotlin.Any-androidx.compose.foundation.gestures.DraggableAnchors-kotlin.Function1-kotlin.Function0-androidx.compose.animation.core.AnimationSpec-androidx.compose.animation.core.DecayAnimationSpec-kotlin.Function1-"></a><a name="anchoreddraggablestate"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="AnchoredDraggableState(kotlin.Any,androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">AnchoredDraggableState</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#AnchoredDraggableState(kotlin.Any,androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">AnchoredDraggableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;anchors:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;positionalThreshold:&nbsp;(totalDistance:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocityThreshold:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;confirmValueChange:&nbsp;(newValue) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = { true }<br>)</pre>
+          <p>Construct an <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#AnchoredDraggableState(kotlin.Any,androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">AnchoredDraggableState</a></code> instance with anchors.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>initialValue:&nbsp;T</code></td>
+                  <td>
+                    <p>The initial value of the state.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>anchors:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;</code></td>
+                  <td>
+                    <p>The anchors of the state. Use <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">updateAnchors</a></code> to update the anchors later.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>positionalThreshold:&nbsp;(totalDistance:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The positional threshold, in px, to be used when calculating the target state while a drag is in progress and when settling after the drag ends. This is the distance from the start of a transition. It will be, depending on the direction of the interaction, added or subtracted from/to the origin offset. It should always be a positive value.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>velocityThreshold:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The velocity threshold (in px per second) that the end velocity has to exceed in order to animate to the next state, even if the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">positionalThreshold</a></code> has not been reached.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>snapAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+                  <td>
+                    <p>The default animation spec that will be used to animate to a new state.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>decayAnimationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+                  <td>
+                    <p>The animation spec that will be used when flinging with a large enough velocity to reach or cross the target state.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>confirmValueChange:&nbsp;(newValue) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = { true }</code></td>
+                  <td>
+                    <p>Optional callback invoked to confirm or veto a pending state change.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="anchoredDrag(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction2)"></a><a name="anchoredDrag-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction2-"></a><a name="anchoreddrag"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">anchoredDrag</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">anchoredDrag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDragScope.html">AnchoredDragScope</a>.(anchors:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Call this function to take control of drag logic and perform anchored drag with the latest anchors.</p>
+          <p>All actions that change the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#offset()">offset</a></code> of this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code> must be performed within an <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">anchoredDrag</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
+          <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">anchoredDrag</a></code> is called from elsewhere with the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">dragPriority</a></code> higher or equal to ongoing drag, the ongoing drag will be cancelled.</p>
+          <p><b>If the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchors()">anchors</a></code> change while the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">block</a></code> is being executed, it will be cancelled and re-executed with the latest anchors and target.</b> This allows you to target the correct state.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default</code></td>
+                  <td>
+                    <p>of the drag operation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDragScope.html">AnchoredDragScope</a>.(anchors:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                  <td>
+                    <p>perform anchored drag given the current anchor provided</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="anchoredDrag(kotlin.Any, androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction3)"></a><a name="anchoredDrag-kotlin.Any-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction3-"></a><a name="anchoreddrag"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">anchoredDrag</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">anchoredDrag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDragScope.html">AnchoredDragScope</a>.(anchor:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;, targetValue) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Call this function to take control of drag logic and perform anchored drag with the latest anchors and target.</p>
+          <p>All actions that change the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#offset()">offset</a></code> of this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code> must be performed within an <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">anchoredDrag</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
+          <p>This overload allows the caller to hint the target value that this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">anchoredDrag</a></code> is intended to arrive to. This will set <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#targetValue()">AnchoredDraggableState.targetValue</a></code> to provided value so consumers can reflect it in their UIs.</p>
+          <p><b>If the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchors()">anchors</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#targetValue()">AnchoredDraggableState.targetValue</a></code> change while the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">block</a></code> is being executed, it will be cancelled and re-executed with the latest anchors and target.</b> This allows you to target the correct state.</p>
+          <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">anchoredDrag</a></code> is called from elsewhere with the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">dragPriority</a></code> higher or equal to ongoing drag, the ongoing drag will be cancelled.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>targetValue:&nbsp;T</code></td>
+                  <td>
+                    <p>hint the target value that this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction3)">anchoredDrag</a></code> is intended to arrive to</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default</code></td>
+                  <td>
+                    <p>of the drag operation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDragScope.html">AnchoredDragScope</a>.(anchor:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;, targetValue) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                  <td>
+                    <p>perform anchored drag given the current anchor provided</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="dispatchRawDelta-kotlin.Float-"></a><a name="dispatchrawdelta"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="dispatchRawDelta(kotlin.Float)">dispatchRawDelta</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Drag by the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#dispatchRawDelta(kotlin.Float)">delta</a></code>, coerce it in the bounds and dispatch it to the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The delta the consumed by the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="progress(kotlin.Any, kotlin.Any)"></a><a name="progress-kotlin.Any-kotlin.Any-"></a><a name="progress"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="progress(kotlin.Any,kotlin.Any)">progress</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">progress</a>(from:&nbsp;T,&nbsp;to:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The fraction of the offset between <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">from</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">to</a></code>, as a fraction between 0f..1f, or 1f if <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">from</a></code> is equal to <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress(kotlin.Any,kotlin.Any)">to</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>from:&nbsp;T</code></td>
+                  <td>
+                    <p>The starting value used to calculate the distance</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>to:&nbsp;T</code></td>
+                  <td>
+                    <p>The end value used to calculate the distance</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="requireOffset--"></a><a name="requireoffset"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="requireOffset()">requireOffset</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#requireOffset()">requireOffset</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Require the current offset.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code></td>
+                  <td>
+                    <p>If the offset has not been initialized yet</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#offset()">offset</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="settle-kotlin.Float-"></a><a name="settle"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="settle(kotlin.Float)">settle</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settle(kotlin.Float)">settle</a>(velocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Find the closest anchor, taking into account the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">velocityThreshold</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">positionalThreshold</a></code>, and settle at it with an animation.</p>
+          <p>If the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settle(kotlin.Float)">velocity</a></code> is lower than the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">velocityThreshold</a></code>, the closest anchor by distance and <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">positionalThreshold</a></code> will be the target. If the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settle(kotlin.Float)">velocity</a></code> is higher than the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">velocityThreshold</a></code>, the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">positionalThreshold</a></code> will <b>not</b> be considered and the next anchor in the direction indicated by the sign of the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settle(kotlin.Float)">velocity</a></code> will be the target.</p>
+          <p>Based on the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settle(kotlin.Float)">velocity</a></code>, either <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">snapAnimationSpec</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(kotlin.Any,kotlin.Function1,kotlin.Function0,androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">decayAnimationSpec</a></code> will be used to animate towards the target.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The velocity consumed in the animation</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors, kotlin.Any)"></a><a name="updateAnchors-androidx.compose.foundation.gestures.DraggableAnchors-kotlin.Any-"></a><a name="updateanchors"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">updateAnchors</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">updateAnchors</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;newAnchors:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;newTarget:&nbsp;T = if (!offset.isNaN()) {
+            newAnchors.closestAnchor(offset) ?: targetValue
+        } else targetValue<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Update the anchors. If there is no ongoing <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">anchoredDrag</a></code> operation, snap to the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">newTarget</a></code>, otherwise restart the ongoing <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchoredDrag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction2)">anchoredDrag</a></code> operation (e.g. an animation) with the new anchors.</p>
+          <p><b>If your anchors depend on the size of the layout, updateAnchors should be called in the layout (placement) phase, e.g. through Modifier.onSizeChanged.</b> This ensures that the state is set up within the same frame. For static anchors, or anchors with different data dependencies, <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">updateAnchors</a></code> is safe to be called from side effects or layout.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>newAnchors:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;</code></td>
+                  <td>
+                    <p>The new anchors.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>newTarget:&nbsp;T = if (!offset.isNaN()) {
+            newAnchors.closestAnchor(offset) ?: targetValue
+        } else targetValue</code></td>
+                  <td>
+                    <p>The new target, by default the closest anchor or the current target if there are no anchors.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public properties
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getAnchors()"></a><a name="setAnchors()"></a><a name="getAnchors--"></a><a name="setAnchors--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="anchors()">anchors</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#anchors()">anchors</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableAnchors.html">DraggableAnchors</a>&lt;T&gt;</pre>
+        </div>
+        <div class="api-item"><a name="getCurrentValue()"></a><a name="setCurrentValue()"></a><a name="getCurrentValue--"></a><a name="setCurrentValue--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="currentValue()">currentValue</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#currentValue()">currentValue</a>:&nbsp;T</pre>
+          <p>The current value of the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code>.</p>
+          <p>That is the closest anchor point that the state has passed through.</p>
+        </div>
+        <div class="api-item"><a name="getDecayAnimationSpec()"></a><a name="setDecayAnimationSpec()"></a><a name="getDecayAnimationSpec--"></a><a name="setDecayAnimationSpec--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="decayAnimationSpec()">decayAnimationSpec</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#decayAnimationSpec()">decayAnimationSpec</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</pre>
+          <p>The animation spec that will be used when flinging with a large enough velocity to reach or cross the target state.</p>
+        </div>
+        <div class="api-item"><a name="getIsAnimationRunning()"></a><a name="setIsAnimationRunning()"></a><a name="getIsAnimationRunning--"></a><a name="setIsAnimationRunning--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="isAnimationRunning()">isAnimationRunning</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#isAnimationRunning()">isAnimationRunning</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Whether an animation is currently in progress.</p>
+        </div>
+        <div class="api-item"><a name="getLastVelocity()"></a><a name="setLastVelocity()"></a><a name="getLastVelocity--"></a><a name="setLastVelocity--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="lastVelocity()">lastVelocity</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#lastVelocity()">lastVelocity</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The velocity of the last known animation. Gets reset to 0f when an animation completes successfully, but does not get reset when an animation gets interrupted. You can use this value to provide smooth reconciliation behavior when re-targeting an animation.</p>
+        </div>
+        <div class="api-item"><a name="getOffset()"></a><a name="setOffset()"></a><a name="getOffset--"></a><a name="setOffset--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="offset()">offset</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#offset()">offset</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The current offset, or <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/-companion/-na-n.html">Float.NaN</a></code> if it has not been initialized yet.</p>
+          <p>The offset will be initialized when the anchors are first set through <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#updateAnchors(androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">updateAnchors</a></code>.</p>
+          <p>Strongly consider using <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#requireOffset()">requireOffset</a></code> which will throw if the offset is read before it is initialized. This helps catch issues early in your workflow.</p>
+        </div>
+        <div class="api-item"><a name="getProgress()"></a><a name="setProgress()"></a><a name="getProgress--"></a><a name="setProgress--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="progress()">progress</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#progress()">progress</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <aside class="caution"><strong>This property is deprecated.</strong><br>Use the progress function to query the progress between two specified anchors.</aside>
+          <p>The fraction of the progress going from <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settledValue()">settledValue</a></code> to <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#targetValue()">targetValue</a></code>, within 0f..1f bounds, or 1f if the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code> is in a settled state.</p>
+        </div>
+        <div class="api-item"><a name="getSettledValue()"></a><a name="setSettledValue()"></a><a name="getSettledValue--"></a><a name="setSettledValue--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="settledValue()">settledValue</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settledValue()">settledValue</a>:&nbsp;T</pre>
+          <p>The value the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a></code> is currently settled at.</p>
+          <p>When progressing through multiple anchors, e.g. <code>A -&gt; B -&gt; C</code>, <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#settledValue()">settledValue</a></code> will stay the same until settled at an anchor, while <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#currentValue()">currentValue</a></code> will update to the closest anchor.</p>
+        </div>
+        <div class="api-item"><a name="getSnapAnimationSpec()"></a><a name="setSnapAnimationSpec()"></a><a name="getSnapAnimationSpec--"></a><a name="setSnapAnimationSpec--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="snapAnimationSpec()">snapAnimationSpec</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#snapAnimationSpec()">snapAnimationSpec</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</pre>
+          <p>The default animation spec that will be used to animate to a new state.</p>
+        </div>
+        <div class="api-item"><a name="getTargetValue()"></a><a name="setTargetValue()"></a><a name="getTargetValue--"></a><a name="setTargetValue--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="targetValue()">targetValue</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#targetValue()">targetValue</a>:&nbsp;T</pre>
+          <p>The target value. This is the closest value to the current offset. If no interactions like animations or drags are in progress, this will be the current value.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Extension functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="-androidx.compose.foundation.gestures.AnchoredDraggableState-.animateTo-kotlin.Any-"></a><a name="animateto"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Any)">animateTo</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>suspend&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Any)">animateTo</a>(targetValue:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Animate to a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Any)">targetValue</a></code>. If the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Any)">targetValue</a></code> is not in the set of anchors, the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#currentValue()">AnchoredDraggableState.currentValue</a></code> will be updated to the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Any)">targetValue</a></code> without updating the offset.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>targetValue:&nbsp;T</code></td>
+                  <td>
+                    <p>The target value of the animation</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>CancellationException</code></td>
+                  <td>
+                    <p>if the interaction interrupted by another interaction like a gesture interaction or another programmatic interaction like a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Any)">animateTo</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">snapTo</a></code> call.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any, kotlin.Float)"></a><a name="-androidx.compose.foundation.gestures.AnchoredDraggableState-.animateToWithDecay-kotlin.Any-kotlin.Float-"></a><a name="animatetowithdecay"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">animateToWithDecay</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>suspend&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">animateToWithDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Attempt to animate using decay Animation to a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">targetValue</a></code>. If the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">velocity</a></code> is high enough to get to the target offset, we'll use <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#decayAnimationSpec()">AnchoredDraggableState.decayAnimationSpec</a></code> to get to that offset and return the consumed velocity. If the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">velocity</a></code> is not high enough, we'll use <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#snapAnimationSpec()">AnchoredDraggableState.snapAnimationSpec</a></code> to reach the target offset.</p>
+          <p>If the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">targetValue</a></code> is not in the set of anchors, <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#currentValue()">AnchoredDraggableState.currentValue</a></code> will be updated ro the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateToWithDecay(kotlin.Any,kotlin.Float)">targetValue</a></code> without updating the offset.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>targetValue:&nbsp;T</code></td>
+                  <td>
+                    <p>The target value of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>velocity:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The velocity the animation should start with</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The velocity consumed in the animation</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>CancellationException</code></td>
+                  <td>
+                    <p>if the interaction interrupted bt another interaction like a gesture interaction or another programmatic interaction like <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Float,androidx.compose.foundation.gestures.AnchoredDragScope,androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">animateTo</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">snapTo</a></code> call.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.foundation.gestures.AnchoredDraggableState-.snapTo-kotlin.Any-"></a><a name="snapto"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">snapTo</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>suspend&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html">AnchoredDraggableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">snapTo</a>(targetValue:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Snap to a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">targetValue</a></code> without any animation. If the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">targetValue</a></code> is not in the set of anchors, the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState.html#currentValue()">AnchoredDraggableState.currentValue</a></code> will be updated to the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">targetValue</a></code> without updating the offset.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>targetValue:&nbsp;T</code></td>
+                  <td>
+                    <p>The target value of the animation</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>CancellationException</code></td>
+                  <td>
+                    <p>if the interaction interrupted by another interaction like a gesture interaction or another programmatic interaction like a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).animateTo(kotlin.Float,androidx.compose.foundation.gestures.AnchoredDragScope,androidx.compose.foundation.gestures.DraggableAnchors,kotlin.Any)">animateTo</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.AnchoredDraggableState).snapTo(kotlin.Any)">snapTo</a></code> call.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>
