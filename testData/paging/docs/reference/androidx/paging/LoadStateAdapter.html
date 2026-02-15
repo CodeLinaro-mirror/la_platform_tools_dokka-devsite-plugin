@@ -66,17 +66,16 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class LoadStateViewHolder(
-    parent: ViewGroup,
-    retry: () -&gt; Unit
-) : RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context)
-        .inflate(R.layout.load_state_item, parent, false)
-) {
+class LoadStateViewHolder(parent: ViewGroup, retry: () -&gt; Unit) :
+    RecyclerView.ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.load_state_item, parent, false)
+    ) {
     private val progressBar: ProgressBar = itemView.findViewById(R.id.progress_bar)
     private val errorMsg: TextView = itemView.findViewById(R.id.error_msg)
-    private val retry: Button = itemView.findViewById&lt;Button&gt;(R.id.retry_button)
-        .also { it.setOnClickListener { retry.invoke() } }
+    private val retry: Button =
+        itemView.findViewById&lt;Button&gt;(R.id.retry_button).also {
+            it.setOnClickListener { retry.invoke() }
+        }
 
     fun bind(loadState: LoadState) {
         if (loadState is LoadState.Error) {
@@ -87,20 +86,20 @@ class LoadStateViewHolder(
         errorMsg.visibility = toVisibility(loadState !is LoadState.Loading)
     }
 
-    private fun toVisibility(constraint: Boolean): Int = if (constraint) {
-        View.VISIBLE
-    } else {
-        View.GONE
-    }
+    private fun toVisibility(constraint: Boolean): Int =
+        if (constraint) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
 }
 
 /**
  * Adapter which displays a loading spinner when `state = LoadState.Loading`, and an error
  * message and retry button when `state is LoadState.Error`.
  */
-class MyLoadStateAdapter(
-    private val retry: () -&gt; Unit
-) : LoadStateAdapter&lt;LoadStateViewHolder&gt;() {
+class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
+    LoadStateAdapter&lt;LoadStateViewHolder&gt;() {
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState) =
         LoadStateViewHolder(parent, retry)
@@ -532,6 +531,12 @@ class MyLoadStateAdapter(
             </thead>
             <tbody class="list">
               <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder</code></td>
+                <td>
+                  <p>the ViewHolder to bind to</p>
+                </td>
+              </tr>
+              <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>&nbsp;loadState</code></td>
                 <td>
                   <p>LoadState to display.</p>
@@ -595,7 +600,7 @@ class MyLoadStateAdapter(
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;parent</code></td>
                 <td>
-                  <p>The ViewGroup into which the new View will be added after it is bound to                an adapter position.</p>
+                  <p>The ViewGroup into which the new View will be added after it is bound to an adapter position.</p>
                 </td>
               </tr>
               <tr>

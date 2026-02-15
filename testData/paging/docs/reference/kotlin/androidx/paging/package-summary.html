@@ -11,6 +11,7 @@
       <meta itemprop="property" content="InvalidatedCallback">
       <meta itemprop="property" content="Logger">
       <meta itemprop="property" content="PagingSourceFactory">
+      <meta itemprop="property" content="PlaceholderPaddedList">
       <meta itemprop="property" content="AdjacentItems">
       <meta itemprop="property" content="AsyncPagedListDiffer">
       <meta itemprop="property" content="AsyncPagingDataDiffer">
@@ -48,6 +49,13 @@
       <meta itemprop="property" content="PagingConfig">
       <meta itemprop="property" content="PagingData">
       <meta itemprop="property" content="PagingDataAdapter">
+      <meta itemprop="property" content="PagingDataEvent">
+      <meta itemprop="property" content="Append">
+      <meta itemprop="property" content="DropAppend">
+      <meta itemprop="property" content="DropPrepend">
+      <meta itemprop="property" content="Prepend">
+      <meta itemprop="property" content="Refresh">
+      <meta itemprop="property" content="PagingDataPresenter">
       <meta itemprop="property" content="PagingSource">
       <meta itemprop="property" content="LoadParams">
       <meta itemprop="property" content="Append">
@@ -104,6 +112,7 @@
       <meta itemprop="property" content="(kotlin.Function0).toLiveData(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">
       <meta itemprop="property" content="(kotlin.Function0).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,io.reactivex.Scheduler,io.reactivex.Scheduler)">
       <meta itemprop="property" content="(kotlin.Function0).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,io.reactivex.Scheduler,io.reactivex.Scheduler)">
+      <meta itemprop="property" content="(kotlinx.coroutines.flow.Flow).awaitNotLoading()">
       <meta itemprop="property" content="(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">
       <meta itemprop="property" content="(androidx.paging.Pager).liveData()">
       <meta itemprop="language" content="KOTLIN">
@@ -139,12 +148,20 @@
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/Logger.html">Logger</a></code></td>
-            <td></td>
+            <td>
+              <p><strong>This interface is deprecated.</strong> Logger interface is no longer supported.</p>
+            </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingSourceFactory.html">PagingSourceFactory</a></code></td>
             <td>
               <p>Interface for a factory that generates <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/PlaceholderPaddedList.html">PlaceholderPaddedList</a></code></td>
+            <td>
+              <p>Interface to paged list that could contain placeholders.</p>
             </td>
           </tr>
         </tbody>
@@ -245,7 +262,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/ListenableFutureRemoteMediator.html">ListenableFutureRemoteMediator</a></code></td>
             <td>
-              <p><code><a href="https://guava.dev/releases/18.0/api/docs/package-list/com/google/common/util/concurrent/ListenableFuture.html">ListenableFuture</a></code>-based  compatibility wrapper around <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>'s suspending APIs.</p>
+              <p><code><a href="https://guava.dev/releases/18.0/api/docs/package-list/com/google/common/util/concurrent/ListenableFuture.html">ListenableFuture</a></code>-based compatibility wrapper around <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>'s suspending APIs.</p>
             </td>
           </tr>
           <tr>
@@ -378,6 +395,48 @@
             <td><code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code></td>
             <td>
               <p><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a></code> base class for presenting paged data from <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>s in a <code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code></td>
+            <td>
+              <p>Events captured from a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that was submitted to the <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.Append.html">PagingDataEvent.Append</a></code></td>
+            <td>
+              <p>An append load event</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.DropAppend.html">PagingDataEvent.DropAppend</a></code></td>
+            <td>
+              <p>A drop event from the end of the list</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.DropPrepend.html">PagingDataEvent.DropPrepend</a></code></td>
+            <td>
+              <p>A drop event from the front of the list</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.Prepend.html">PagingDataEvent.Prepend</a></code></td>
+            <td>
+              <p>A prepend load event</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.Refresh.html">PagingDataEvent.Refresh</a></code></td>
+            <td>
+              <p>A refresh load event</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code></td>
+            <td>
+              <p>The class that connects the UI layer to the underlying Paging operations.</p>
             </td>
           </tr>
           <tr>
@@ -600,6 +659,13 @@
         </colgroup>
         <tbody class="list">
           <tr>
+            <td><code>suspend <a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>?</code></td>
+            <td>
+              <div><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).awaitNotLoading()">awaitNotLoading</a>()</code></div>
+              <p>Function to wait on a Flow<CombinedLoadStates> until a load has completed.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</code></td>
             <td>
               <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.lifecycle.LiveData).cachedIn(androidx.lifecycle.Lifecycle)">cachedIn</a>(lifecycle:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>)</code></div>
@@ -607,17 +673,17 @@
             </td>
           </tr>
           <tr>
-            <td><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</code></td>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a>(scope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>)</code></div>
-              <p>Caches the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> such that any downstream collection from this flow will share the same <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
             <td><code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</code></td>
             <td>
               <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.lifecycle.LiveData).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a>(scope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>)</code></div>
               <p>Operator which caches a <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within a <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a>(scope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>)</code></div>
+              <p>Caches the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> such that any downstream collection from this flow will share the same <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -959,6 +1025,18 @@
       </div>
     </div>
     <h2>Extension functions</h2>
+    <div class="api-item"><a name="-kotlinx.coroutines.flow.Flow-.awaitNotLoading--"></a><a name="awaitnotloading"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(kotlinx.coroutines.flow.Flow).awaitNotLoading()">awaitNotLoading</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).awaitNotLoading()">awaitNotLoading</a>():&nbsp;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>?</pre>
+      <p>Function to wait on a Flow<CombinedLoadStates> until a load has completed.</p>
+      <p>It collects on the Flow<CombinedLoadStates> and suspends until it collects and returns the firstOrNull <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> where all <code><a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a></code> have settled into a non-loading state i.e. <code><a href="/reference/kotlin/androidx/paging/LoadState.NotLoading.html">LoadState.NotLoading</a></code> or <code><a href="/reference/kotlin/androidx/paging/LoadState.Error.html">LoadState.Error</a></code>.</p>
+      <p>A use case could be scrolling to a position after refresh has completed:</p>
+      <pre class="prettyprint">override fun onCreate(savedInstanceState: Bundle?) {<br>    ...<br>    refreshButton.setOnClickListener {<br>        pagingAdapter.refresh()<br>        lifecycleScope.launch {<br>            // wait for refresh to complete<br>            pagingAdapter.loadStateFlow.awaitNotLoading()<br>            // do work after refresh<br>            recyclerView.scrollToPosition(position)<br>        }<br>   }<br>}</pre>
+    </div>
     <div class="api-item"><a name="-androidx.lifecycle.LiveData-.cachedIn-androidx.lifecycle.Lifecycle-"></a><a name="cachedin"></a>
       <div class="api-name-block">
         <div>
@@ -991,83 +1069,6 @@
         </table>
       </div>
     </div>
-    <div class="api-item"><a name="-kotlinx.coroutines.flow.Flow-.cachedIn-kotlinx.coroutines.CoroutineScope-"></a><a name="cachedin"></a>
-      <div class="api-name-block">
-        <div>
-          <h3 id="(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</h3>
-        </div>
-      </div>
-      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a>(scope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>):&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</pre>
-      <p>Caches the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> such that any downstream collection from this flow will share the same <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
-      <p>The flow is kept active as long as the given <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> is active. To avoid leaks, make sure to use a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> that is already managed (like a ViewModel scope) or manually cancel it when you don't need paging anymore.</p>
-      <p>A common use case for this caching is to cache <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> in a ViewModel. This can ensure that, upon configuration change (e.g. rotation), then new Activity will receive the existing data immediately rather than fetching it from scratch.</p>
-      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
-      <p>Note that this does not turn the <code>Flow&lt;PagingData&gt;</code> into a hot stream. It won't execute any unnecessary code unless it is being collected.</p>
-      <pre class="prettyprint lang-kotlin">
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import androidx.paging.map
-
-class MyViewModel : ViewModel() {
-    val flow = Pager(
-        config = PagingConfig(pageSize = 40),
-        pagingSourceFactory = pagingSourceFactory
-    ).flow
-        // Loads and transformations before the cachedIn operation will be cached, so that
-        // multiple observers get the same data. This is true either for simultaneous
-        // observers, or e.g. an Activity re-subscribing after being recreated
-        .cachedIn(viewModelScope)
-}
-
-class MyActivity : AppCompatActivity() {
-    val pagingAdapter = MyPagingAdapter()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val viewModel by viewModels&lt;MyViewModel&gt;()
-
-        lifecycleScope.launch {
-            viewModel.flow
-                // Any transformations after the ViewModel's cachedIn step will not be cached,
-                // and will instead by re-run immediately on Activity re-creation.
-                .map { pagingData -&gt;
-                    // example un-cached transformation
-                    pagingData.map { UiModel(it) }
-                }
-                .collectLatest {
-                    pagingAdapter.submitData(it)
-                }
-        }
-    }
-}</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <colgroup>
-            <col width="40%">
-            <col>
-          </colgroup>
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td><code>scope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code></td>
-              <td>
-                <p>The coroutine scope where this page cache will be kept alive.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
     <div class="api-item"><a name="-androidx.lifecycle.LiveData-.cachedIn-kotlinx.coroutines.CoroutineScope-"></a><a name="cachedin"></a>
       <div class="api-name-block">
         <div>
@@ -1094,6 +1095,80 @@ class MyActivity : AppCompatActivity() {
               <td><code>scope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code></td>
               <td>
                 <p>The <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> where the page cache will be kept alive. Typically this would be a managed scope such as <code>ViewModel.viewModelScope</code>, which automatically cancels after the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> stream is no longer needed. Otherwise, the provided <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> must be manually cancelled to avoid memory leaks.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-kotlinx.coroutines.flow.Flow-.cachedIn-kotlinx.coroutines.CoroutineScope-"></a><a name="cachedin"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a>(scope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>):&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</pre>
+      <p>Caches the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> such that any downstream collection from this flow will share the same <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+      <p>The flow is kept active as long as the given <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> is active. To avoid leaks, make sure to use a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> that is already managed (like a ViewModel scope) or manually cancel it when you don't need paging anymore.</p>
+      <p>A common use case for this caching is to cache <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> in a ViewModel. This can ensure that, upon configuration change (e.g. rotation), then new Activity will receive the existing data immediately rather than fetching it from scratch.</p>
+      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
+      <p>Note that this does not turn the <code>Flow&lt;PagingData&gt;</code> into a hot stream. It won't execute any unnecessary code unless it is being collected.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import androidx.paging.map
+
+class MyViewModel : ViewModel() {
+    val flow =
+        Pager(config = PagingConfig(pageSize = 40), pagingSourceFactory = pagingSourceFactory)
+            .flow
+            // Loads and transformations before the cachedIn operation will be cached, so that
+            // multiple observers get the same data. This is true either for simultaneous
+            // observers, or e.g. an Activity re-subscribing after being recreated
+            .cachedIn(viewModelScope)
+}
+
+class MyActivity : AppCompatActivity() {
+    val pagingAdapter = MyPagingAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val viewModel by viewModels&lt;MyViewModel&gt;()
+
+        lifecycleScope.launch {
+            viewModel.flow
+                // Any transformations after the ViewModel's cachedIn step will not be cached,
+                // and will instead by re-run immediately on Activity re-creation.
+                .map { pagingData -&gt;
+                    // example un-cached transformation
+                    pagingData.map { UiModel(it) }
+                }
+                .collectLatest { pagingAdapter.submitData(it) }
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>scope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code></td>
+              <td>
+                <p>The coroutine scope where this page cache will be kept alive.</p>
               </td>
             </tr>
           </tbody>
@@ -1286,7 +1361,7 @@ class MyActivity : AppCompatActivity() {
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertFooterItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">insertFooterItem</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = FULLY_COMPLETE,<br>&nbsp;&nbsp;&nbsp;&nbsp;item:&nbsp;T<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
       <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing each original element, with the passed footer <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertFooterItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> added to the end of the list.</p>
-      <p>The footer <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertFooterItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> is added to a loaded page which marks the end of the data stream in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> direction, either by returning null in <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#nextKey()">PagingSource.LoadResult.Page.nextKey</a></code>. It will be removed if the last page in the list is dropped, which can happen in the case of loaded pages exceeding <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html#maxSize()">PagedList.Config.maxSize</a></code>.</p>
+      <p>The footer <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertFooterItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> is added to a loaded page which marks the end of the data stream in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> direction, either by returning null in <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#nextKey()">PagingSource.LoadResult.Page.nextKey</a></code>. It will be removed if the last page in the list is dropped, which can happen in the case of loaded pages exceeding <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">PagingConfig.maxSize</a></code>.</p>
       <p>Note: This operation is not idempotent, calling it multiple times will continually add more footers to the end of the list, which can be useful if multiple footer items are required.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -1343,7 +1418,7 @@ class MyActivity : AppCompatActivity() {
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertHeaderItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">insertHeaderItem</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = FULLY_COMPLETE,<br>&nbsp;&nbsp;&nbsp;&nbsp;item:&nbsp;T<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
       <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing each original element, with the passed header <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertHeaderItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> added to the start of the list.</p>
-      <p>The header <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertHeaderItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> is added to a loaded page which marks the end of the data stream in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> direction by returning null in <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#prevKey()">PagingSource.LoadResult.Page.prevKey</a></code>. It will be removed if the first page in the list is dropped, which can happen in the case of loaded pages exceeding <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html#maxSize()">PagedList.Config.maxSize</a></code>.</p>
+      <p>The header <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertHeaderItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> is added to a loaded page which marks the end of the data stream in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> direction by returning null in <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#prevKey()">PagingSource.LoadResult.Page.prevKey</a></code>. It will be removed if the first page in the list is dropped, which can happen in the case of loaded pages exceeding <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">PagingConfig.maxSize</a></code>.</p>
       <p>Note: This operation is not idempotent, calling it multiple times will continually add more headers to the start of the list, which can be useful if multiple header items are required.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -1418,7 +1493,7 @@ pagingDataStream.map { pagingData -&gt;
     pagingData.insertSeparators { before: String?, after: String? -&gt;
         if (after != null &amp;&amp; before?.first() != after.first()) {
             // separator - after is first item that starts with its first letter
-            after.first().toUpperCase().toString()
+            after.first().uppercaseChar().toString()
         } else {
             // no separator - either end of list, or first letters of before/after are the same
             null
@@ -1451,9 +1526,10 @@ pagingDataStream.map { pagingData -&gt;
         .insertSeparators&lt;ItemUiModel, UiModel&gt; { before: ItemUiModel?, after: ItemUiModel? -&gt;
             if (after != null &amp;&amp; before?.item?.label?.first() != after.item.label.first()) {
                 // separator - after is first item that starts with its first letter
-                SeparatorUiModel(after.item.label.first().toUpperCase())
+                SeparatorUiModel(after.item.label.first().uppercaseChar())
             } else {
-                // no separator - either end of list, or first letters of before/after are the same
+                // no separator - either end of list, or first letters of before/after are the
+                // same
                 null
             }
         }
@@ -1492,7 +1568,7 @@ pagingDataStream.map { pagingData -&gt;
           <h3 id="(androidx.paging.PagingData).insertSeparators(androidx.paging.TerminalSeparatorType,java.util.concurrent.Executor,kotlin.Function2)">insertSeparators</h3>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;T&nbsp;:&nbsp;R&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertSeparators(androidx.paging.TerminalSeparatorType,java.util.concurrent.Executor,kotlin.Function2)">insertSeparators</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = FULLY_COMPLETE,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;generator:&nbsp;(T?, T?) <span style="white-space: nowrap;">-&gt;</span> R?<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;T&nbsp;:&nbsp;R&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertSeparators(androidx.paging.TerminalSeparatorType,java.util.concurrent.Executor,kotlin.Function2)">insertSeparators</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = TerminalSeparatorType.FULLY_COMPLETE,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;generator:&nbsp;(T?, T?) <span style="white-space: nowrap;">-&gt;</span> R?<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</pre>
       <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing each original element, with an optional separator generated by <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertSeparators(androidx.paging.TerminalSeparatorType,java.util.concurrent.Executor,kotlin.Function2)">generator</a></code>, given the elements before and after (or null, in boundary conditions).</p>
       <p>Note that this transform is applied asynchronously, as pages are loaded. Potential separators between pages are only computed once both pages are loaded.</p>
       <p><b>Kotlin callers should instead use the suspending extension function variant of insertSeparators</b></p>
@@ -1510,7 +1586,7 @@ pagingDataStream.map { pagingData -&gt;
           </thead>
           <tbody class="list">
             <tr>
-              <td><code>terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = FULLY_COMPLETE</code></td>
+              <td><code>terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = TerminalSeparatorType.FULLY_COMPLETE</code></td>
               <td>
                 <p><code><a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a></code> used to configure when the header and footer are added.</p>
               </td>
@@ -1564,16 +1640,17 @@ pagingDataStream.map { pagingData -&gt;
                     val (before, after) = it!!
                     if (after != null &amp;&amp; before?.first() != after.first()) {
                         // separator - after is first item that starts with its first letter
-                        after.first().toUpperCase().toString()
+                        after.first().uppercaseChar().toString()
                     } else {
-                        // no separator - either end of list, or first letters of before/after are the same
+                        // no separator - either end of list, or first letters of before/after
+                        // are the same
                         null
                     }
                 },
-                executor
+                executor,
             )
         },
-        executor
+        executor,
     )
 }</pre>
       <pre class="prettyprint lang-kotlin">
@@ -1607,20 +1684,22 @@ pagingDataStream.map { pagingData -&gt;
                 Futures.submit(
                     Callable&lt;UiModel&gt; {
                         val (before, after) = it!!
-                        if (after != null &amp;&amp;
-                            before?.item?.label?.first() != after.item.label.first()
+                        if (
+                            after != null &amp;&amp;
+                                before?.item?.label?.first() != after.item.label.first()
                         ) {
                             // separator - after is first item that starts with its first letter
-                            SeparatorUiModel(after.item.label.first().toUpperCase())
+                            SeparatorUiModel(after.item.label.first().uppercaseChar())
                         } else {
-                            // no separator - either end of list, or first letters of before/after are the same
+                            // no separator - either end of list, or first letters of
+                            // before/after are the same
                             null
                         }
                     },
-                    executor
+                    executor,
                 )
             },
-            executor
+            executor,
         )
 }</pre>
       <div class="devsite-table-wrapper">
@@ -2208,8 +2287,7 @@ pagingDataStream.map { pagingData -&gt;
           <h3 id="(kotlin.Function0).toLiveData(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">toLiveData</h3>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toLiveData(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">toLiveData</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> = GlobalScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchDispatcher:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor()
-        .asCoroutineDispatcher()<br>):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toLiveData(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">toLiveData</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> = GlobalScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchDispatcher:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor().asCoroutineDispatcher()<br>):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
       <p>Constructs a <code>LiveData&lt;PagedList&gt;</code>, from this PagingSource factory, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
       <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> is observed.</p>
@@ -2251,8 +2329,7 @@ pagingDataStream.map { pagingData -&gt;
               </td>
             </tr>
             <tr>
-              <td><code>fetchDispatcher:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor()
-        .asCoroutineDispatcher()</code></td>
+              <td><code>fetchDispatcher:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor().asCoroutineDispatcher()</code></td>
               <td>
                 <p><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> for fetching data from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s.</p>
               </td>
@@ -2286,8 +2363,7 @@ pagingDataStream.map { pagingData -&gt;
           <h3 id="(kotlin.Function0).toLiveData(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">toLiveData</h3>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toLiveData(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">toLiveData</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> = GlobalScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchDispatcher:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor()
-        .asCoroutineDispatcher()<br>):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toLiveData(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">toLiveData</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> = GlobalScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchDispatcher:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor().asCoroutineDispatcher()<br>):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
       <p>Constructs a <code>LiveData&lt;PagedList&gt;</code>, from this PagingSource factory, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
       <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> is observed.</p>
@@ -2329,8 +2405,7 @@ pagingDataStream.map { pagingData -&gt;
               </td>
             </tr>
             <tr>
-              <td><code>fetchDispatcher:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor()
-        .asCoroutineDispatcher()</code></td>
+              <td><code>fetchDispatcher:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor().asCoroutineDispatcher()</code></td>
               <td>
                 <p><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> for fetching data from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s.</p>
               </td>
@@ -2683,7 +2758,7 @@ pagingDataStream.map { pagingData -&gt;
       </div>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a>&lt;Key,&nbsp;Value&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.Pager).liveData()">liveData</a>:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;Value&gt;&gt;</pre>
       <p>A <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, which mirrors the stream provided by <code><a href="/reference/kotlin/androidx/paging/Pager.html#flow()">Pager.flow</a></code>, but exposes it as a <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
-      <p>NOTE: Instances of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by this <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> are not re-usable and cannot be submitted multiple times. This is especially relevant because <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> will replays the latest value downstream. To ensure you get a new instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> for each downstream observer, you should use the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> operator which multicasts the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> in a way that returns a new instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> with cached data pre-loaded.</p>
+      <p>NOTE: Instances of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by this <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> are not re-usable and cannot be submitted multiple times. This is especially relevant because <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> will replays the latest value downstream. To ensure you get a new instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> for each downstream observer, you should use the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.lifecycle.LiveData).cachedIn(androidx.lifecycle.Lifecycle)">cachedIn</a></code> operator which multicasts the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> in a way that returns a new instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> with cached data pre-loaded.</p>
     </div>
   </body>
 </html>

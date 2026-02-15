@@ -1,0 +1,757 @@
+<html devsite="true">
+  <head>
+    <title>PagingDataPresenter</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="PagingDataPresenter">
+      <meta itemprop="path" content="androidx.paging">
+      <meta itemprop="property" content="addLoadStateListener(kotlin.Function1)">
+      <meta itemprop="property" content="addOnPagesUpdatedListener(kotlin.Function0)">
+      <meta itemprop="property" content="collectFrom(androidx.paging.PagingData)">
+      <meta itemprop="property" content="get(kotlin.Int)">
+      <meta itemprop="property" content="peek(kotlin.Int)">
+      <meta itemprop="property" content="presentPagingDataEvent(androidx.paging.PagingDataEvent)">
+      <meta itemprop="property" content="refresh()">
+      <meta itemprop="property" content="removeLoadStateListener(kotlin.Function1)">
+      <meta itemprop="property" content="removeOnPagesUpdatedListener(kotlin.Function0)">
+      <meta itemprop="property" content="retry()">
+      <meta itemprop="property" content="snapshot()">
+      <meta itemprop="property" content="loadStateFlow()">
+      <meta itemprop="property" content="onPagesUpdatedFlow()">
+      <meta itemprop="property" content="size()">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>PagingDataPresenter</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:commonMain/androidx/paging/PagingDataPresenter.kt+class:androidx.paging.PagingDataPresenter&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/paging/PagingDataPresenter.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>abstract class <a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt;</pre>
+    </p>
+    <hr>
+    <p>The class that connects the UI layer to the underlying Paging operations. Takes input from UI presenters and outputs Paging events (Loads, LoadStateUpdate) in response.</p>
+    <p>Paging front ends that implement this class will be able to access loaded data, LoadStates, and callbacks from LoadState or Page updates. This class also exposes the <code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code> from a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> for custom logic on how to present Loads, Drops, and other Paging events.</p>
+    <p>For implementation examples, refer to <code><a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html">AsyncPagingDataDiffer</a></code> for RecyclerView, or LazyPagingItems for Compose.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#PagingDataPresenter(kotlin.coroutines.CoroutineContext,androidx.paging.PagingData)">PagingDataPresenter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;mainContext:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;cachedPagingData:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;?<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Add a <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a>(listener:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Add a listener which triggers after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a>(pagingData:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator T?</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#get(kotlin.Int)">get</a>(index:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the presented item at the specified position, notifying Paging of the item access to trigger any loads necessary to fulfill <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>T?</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#peek(kotlin.Int)">peek</a>(index:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract&nbsp;suspend <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#presentPagingDataEvent(androidx.paging.PagingDataEvent)">presentPagingDataEvent</a>(event:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataEvent.html">PagingDataEvent</a>&lt;T&gt;)</code></div>
+              <p>Handler for <code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#refresh()">refresh</a>()</code></div>
+              <p>Refresh the data presented by this <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Remove a previously registered <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a>(listener:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Remove a previously registered listener for updates to presented pages.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#retry()">retry</a>()</code></div>
+              <p>Retry any failed load requests that would result in a <code><a href="/reference/kotlin/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> update to this <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#snapshot()">snapshot</a>()</code></div>
+              <p>Returns a new <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> representing the currently presented items, including any placeholders if they are enabled.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>?&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#loadStateFlow()">loadStateFlow</a></code></div>
+              <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#onPagesUpdatedFlow()">onPagesUpdatedFlow</a></code></div>
+              <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> that emits after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#size()">size</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="PagingDataPresenter(kotlin.coroutines.CoroutineContext, androidx.paging.PagingData)"></a><a name="PagingDataPresenter-kotlin.coroutines.CoroutineContext-androidx.paging.PagingData-"></a><a name="pagingdatapresenter"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="PagingDataPresenter(kotlin.coroutines.CoroutineContext,androidx.paging.PagingData)">PagingDataPresenter</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#PagingDataPresenter(kotlin.coroutines.CoroutineContext,androidx.paging.PagingData)">PagingDataPresenter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;mainContext:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a> = Dispatchers.Main,<br>&nbsp;&nbsp;&nbsp;&nbsp;cachedPagingData:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;? = null<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>mainContext:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a> = Dispatchers.Main</code></td>
+                <td>
+                  <p>The coroutine context that core Paging operations will run on. Defaults to <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html">Dispatchers.Main</a></code>. Main operations executed within this context include but are not limited to:</p>
+                  <ol>
+                    <li>
+                      <p>flow collection on a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> for Loads, LoadStateUpdate etc.</p>
+                    </li>
+                    <li>
+                      <p>emitting <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> to the <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#loadStateFlow()">loadStateFlow</a></code></p>
+                    </li>
+                    <li>
+                      <p>invoking LoadState and PageUpdate listeners</p>
+                    </li>
+                    <li>
+                      <p>invoking <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#presentPagingDataEvent(androidx.paging.PagingDataEvent)">presentPagingDataEvent</a></code></p>
+                    </li>
+                  </ol>
+                </td>
+              </tr>
+              <tr>
+                <td><code>cachedPagingData:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;? = null</code></td>
+                <td>
+                  <p>a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that will initialize this PagingDataPresenter with any LoadStates or loaded data contained within it.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="addLoadStateListener-kotlin.Function1-"></a><a name="addloadstatelistener"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="addLoadStateListener(kotlin.Function1)">addLoadStateListener</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Add a <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+        <p>As new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed, the listener will be notified to reflect the current <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code>.</p>
+        <p>When a new listener is added, it will be immediately called with the current <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code>, unless this <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code> has not been hooked up to a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> yet, and thus has no state to emit.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.paging.LoadState
+
+val adapter = UserPagingAdapter()
+adapter.addLoadStateListener {
+    // show a retry button outside the list when refresh hits an error
+    retryButton.isVisible = it.refresh is LoadState.Error
+
+    // swipeRefreshLayout displays whether refresh is occurring
+    swipeRefreshLayout.isRefreshing = it.refresh is LoadState.Loading
+
+    // show an empty state over the list when loading initially, before items are loaded
+    emptyState.isVisible = it.refresh is LoadState.Loading &amp;&amp; adapter.itemCount == 0
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a></code> listener to receive updates.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="addOnPagesUpdatedListener-kotlin.Function0-"></a><a name="addonpagesupdatedlistener"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a>(listener:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Add a listener which triggers after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
+        <p>An update is triggered from one of the following:</p>
+        <ul>
+          <li>
+            <p><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a></code> is called and initial load completes, regardless of any differences in the loaded data</p>
+          </li>
+          <li>
+            <p>A <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is inserted</p>
+          </li>
+          <li>
+            <p>A <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is dropped</p>
+          </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>listener:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>called after pages presented are updated.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="collectFrom-androidx.paging.PagingData-"></a><a name="collectfrom"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="collectFrom(androidx.paging.PagingData)">collectFrom</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a>(pagingData:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      </div>
+      <div class="api-item"><a name="get-kotlin.Int-"></a><a name="get"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="get(kotlin.Int)">get</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#get(kotlin.Int)">get</a>(index:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;T?</pre>
+        <p>Returns the presented item at the specified position, notifying Paging of the item access to trigger any loads necessary to fulfill <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>index:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>Index of the presented item to return, including placeholders.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>T?</code></td>
+                <td>
+                  <p>The presented item at position <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#get(kotlin.Int)">index</a></code>, <code>null</code> if it is a placeholder.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="peek-kotlin.Int-"></a><a name="peek"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="peek(kotlin.Int)">peek</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#peek(kotlin.Int)">peek</a>(index:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;T?</pre>
+        <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>index:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>Index of the presented item to return, including placeholders.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>T?</code></td>
+                <td>
+                  <p>The presented item at position <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#peek(kotlin.Int)">index</a></code>, <code>null</code> if it is a placeholder</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="presentPagingDataEvent-androidx.paging.PagingDataEvent-"></a><a name="presentpagingdataevent"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="presentPagingDataEvent(androidx.paging.PagingDataEvent)">presentPagingDataEvent</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#presentPagingDataEvent(androidx.paging.PagingDataEvent)">presentPagingDataEvent</a>(event:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataEvent.html">PagingDataEvent</a>&lt;T&gt;):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Handler for <code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+        <p>When a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is submitted to this PagingDataPresenter through <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a></code>, page loads, drops, or LoadStateUpdates will be emitted to presenters as <code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code> through this method.</p>
+        <p>Presenter layers that communicate directly with <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code> should override this method to handle the <code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code> accordingly. For example by diffing two <code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.Refresh.html">PagingDataEvent.Refresh</a></code> lists, or appending the inserted list of data from <code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.Prepend.html">PagingDataEvent.Prepend</a></code> or <code><a href="/reference/kotlin/androidx/paging/PagingDataEvent.Append.html">PagingDataEvent.Append</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="refresh--"></a><a name="refresh"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="refresh()">refresh</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#refresh()">refresh</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Refresh the data presented by this <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code>.</p>
+        <p><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#refresh()">refresh</a></code> triggers the creation of a new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> with a new instance of <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to represent an updated snapshot of the backing dataset. If a <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> is set, calling <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#refresh()">refresh</a></code> will also trigger a call to <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">RemoteMediator.load</a></code> with <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">LoadType</a></code> to allow <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> to check for updates to the dataset backing <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+        <p>Note: This API is intended for UI-driven refresh signals, such as swipe-to-refresh. Invalidation due repository-layer signals, such as DB-updates, should instead use <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.appcompat.app.AppCompatActivity
+import androidx.paging.LoadState
+
+class MyActivity : AppCompatActivity() {
+    private lateinit var binding: MyActivityBinding
+    private val pagingAdapter = UserPagingAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = MyActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.recyclerView.adapter = pagingAdapter
+        pagingAdapter.addLoadStateListener { loadStates -&gt;
+            binding.swipeRefreshLayout.isRefreshing = loadStates.refresh is LoadState.Loading
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener { pagingAdapter.refresh() }
+    }
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="removeLoadStateListener-kotlin.Function1-"></a><a name="removeloadstatelistener"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Remove a previously registered <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>Previously registered listener.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="removeOnPagesUpdatedListener-kotlin.Function0-"></a><a name="removeonpagesupdatedlistener"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a>(listener:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Remove a previously registered listener for updates to presented pages.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>listener:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>Previously registered listener.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="retry--"></a><a name="retry"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="retry()">retry</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#retry()">retry</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Retry any failed load requests that would result in a <code><a href="/reference/kotlin/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> update to this <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code>.</p>
+        <p>Unlike <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#refresh()">refresh</a></code>, this does not invalidate <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, it only retries failed loads within the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+        <p><code><a href="/reference/kotlin/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> can be generated from two types of load requests:</p>
+        <ul>
+          <li>
+            <p><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returning <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Error.html">PagingSource.LoadResult.Error</a></code></p>
+          </li>
+          <li>
+            <p><code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">RemoteMediator.load</a></code> returning <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.MediatorResult.Error.html">RemoteMediator.MediatorResult.Error</a></code></p>
+          </li>
+        </ul>
+      </div>
+      <div class="api-item"><a name="snapshot--"></a><a name="snapshot"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="snapshot()">snapshot</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#snapshot()">snapshot</a>():&nbsp;<a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;T&gt;</pre>
+        <p>Returns a new <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> representing the currently presented items, including any placeholders if they are enabled.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getLoadStateFlow()"></a><a name="setLoadStateFlow()"></a><a name="getLoadStateFlow--"></a><a name="setLoadStateFlow--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="loadStateFlow()">loadStateFlow</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#loadStateFlow()">loadStateFlow</a>:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>?&gt;</pre>
+        <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
+        <p>This flow is conflated. It buffers the last update to <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection, unless this <code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code> has not been hooked up to a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> yet, and thus has no state to emit.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+
+val adapter = UserPagingAdapter()
+lifecycleScope.launch {
+    adapter.loadStateFlow
+        .map { it.refresh }
+        .distinctUntilChanged()
+        .collectLatest {
+            // show a retry button outside the list when refresh hits an error
+            retryButton.isVisible = it is LoadState.Error
+
+            // swipeRefreshLayout displays whether refresh is occurring
+            swipeRefreshLayout.isRefreshing = it is LoadState.Loading
+
+            // show an empty state over the list when loading initially, before items are loaded
+            emptyState.isVisible = it is LoadState.Loading &amp;&amp; adapter.itemCount == 0
+        }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getOnPagesUpdatedFlow()"></a><a name="setOnPagesUpdatedFlow()"></a><a name="getOnPagesUpdatedFlow--"></a><a name="setOnPagesUpdatedFlow--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onPagesUpdatedFlow()">onPagesUpdatedFlow</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#onPagesUpdatedFlow()">onPagesUpdatedFlow</a>:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
+        <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> that emits after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
+        <p>An update is triggered from one of the following:</p>
+        <ul>
+          <li>
+            <p><code><a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a></code> is called and initial load completes, regardless of any differences in the loaded data</p>
+          </li>
+          <li>
+            <p>A <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is inserted</p>
+          </li>
+          <li>
+            <p>A <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is dropped</p>
+          </li>
+        </ul>
+        <p>Note: This is a <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-shared-flow/index.html">SharedFlow</a></code> configured to replay 0 items with a buffer of size 64. If a collector lags behind page updates, it may trigger multiple times for each intermediate update that was presented while your collector was still working. To avoid this behavior, you can <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/index.html">conflate</a></code> this <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> so that you only receive the latest update, which is useful in cases where you are simply updating UI and don't care about tracking the exact number of page updates.</p>
+      </div>
+      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="size()">size</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataPresenter.html#size()">size</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>Total number of presented items, including placeholders.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

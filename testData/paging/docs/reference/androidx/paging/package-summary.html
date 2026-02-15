@@ -11,11 +11,13 @@
       <meta itemprop="property" content="InvalidatedCallback">
       <meta itemprop="property" content="Logger">
       <meta itemprop="property" content="PagingSourceFactory">
+      <meta itemprop="property" content="PlaceholderPaddedList">
       <meta itemprop="property" content="AdjacentItems">
       <meta itemprop="property" content="AsyncPagedListDiffer">
       <meta itemprop="property" content="AsyncPagingDataDiffer">
       <meta itemprop="property" content="CachedPagingDataKt">
       <meta itemprop="property" content="CombinedLoadStates">
+      <meta itemprop="property" content="CombinedLoadStatesKt">
       <meta itemprop="property" content="DataSource">
       <meta itemprop="property" content="Factory">
       <meta itemprop="property" content="InvalidatingPagingSourceFactory">
@@ -50,7 +52,14 @@
       <meta itemprop="property" content="PagingConfig">
       <meta itemprop="property" content="PagingData">
       <meta itemprop="property" content="PagingDataAdapter">
+      <meta itemprop="property" content="PagingDataEvent">
+      <meta itemprop="property" content="Append">
+      <meta itemprop="property" content="DropAppend">
+      <meta itemprop="property" content="DropPrepend">
+      <meta itemprop="property" content="Prepend">
+      <meta itemprop="property" content="Refresh">
       <meta itemprop="property" content="PagingDataFutures">
+      <meta itemprop="property" content="PagingDataPresenter">
       <meta itemprop="property" content="PagingDataTransforms">
       <meta itemprop="property" content="PagingLiveData">
       <meta itemprop="property" content="PagingSource">
@@ -110,6 +119,7 @@
       <meta itemprop="property" content="(kotlin.Function0).toLiveData(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">
       <meta itemprop="property" content="(kotlin.Function0).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,io.reactivex.Scheduler,io.reactivex.Scheduler)">
       <meta itemprop="property" content="(kotlin.Function0).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,io.reactivex.Scheduler,io.reactivex.Scheduler)">
+      <meta itemprop="property" content="(kotlinx.coroutines.flow.Flow).awaitNotLoading()">
       <meta itemprop="property" content="(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">
       <meta itemprop="property" content="(androidx.paging.Pager).liveData()">
       <meta itemprop="language" content="JAVA">
@@ -162,12 +172,20 @@
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/paging/Logger.html">Logger</a></code></td>
-            <td></td>
+            <td>
+              <p><strong>This interface is deprecated.</strong> Logger interface is no longer supported.</p>
+            </td>
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/paging/PagingSourceFactory.html">PagingSourceFactory</a></code></td>
             <td>
               <p>Interface for a factory that generates <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PlaceholderPaddedList.html">PlaceholderPaddedList</a></code></td>
+            <td>
+              <p>Interface to paged list that could contain placeholders.</p>
             </td>
           </tr>
         </tbody>
@@ -208,6 +226,10 @@
             <td>
               <p>Collection of pagination <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code>s for both a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>, and <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>.</p>
             </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/CombinedLoadStatesKt.html">CombinedLoadStatesKt</a></code></td>
+            <td></td>
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code></td>
@@ -272,7 +294,7 @@
           <tr>
             <td><code><a href="/reference/androidx/paging/ListenableFutureRemoteMediator.html">ListenableFutureRemoteMediator</a></code></td>
             <td>
-              <p><code><a href="https://guava.dev/releases/18.0/api/docs/package-list/com/google/common/util/concurrent/ListenableFuture.html">ListenableFuture</a></code>-based  compatibility wrapper around <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>'s suspending APIs.</p>
+              <p><code><a href="https://guava.dev/releases/18.0/api/docs/package-list/com/google/common/util/concurrent/ListenableFuture.html">ListenableFuture</a></code>-based compatibility wrapper around <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>'s suspending APIs.</p>
             </td>
           </tr>
           <tr>
@@ -412,8 +434,50 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code></td>
+            <td>
+              <p>Events captured from a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> that was submitted to the <code><a href="/reference/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataEvent.Append.html">PagingDataEvent.Append</a></code></td>
+            <td>
+              <p>An append load event</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataEvent.DropAppend.html">PagingDataEvent.DropAppend</a></code></td>
+            <td>
+              <p>A drop event from the end of the list</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataEvent.DropPrepend.html">PagingDataEvent.DropPrepend</a></code></td>
+            <td>
+              <p>A drop event from the front of the list</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataEvent.Prepend.html">PagingDataEvent.Prepend</a></code></td>
+            <td>
+              <p>A prepend load event</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataEvent.Refresh.html">PagingDataEvent.Refresh</a></code></td>
+            <td>
+              <p>A refresh load event</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/androidx/paging/PagingDataFutures.html">PagingDataFutures</a></code></td>
             <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code></td>
+            <td>
+              <p>The class that connects the UI layer to the underlying Paging operations.</p>
+            </td>
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/paging/PagingDataTransforms.html">PagingDataTransforms</a></code></td>

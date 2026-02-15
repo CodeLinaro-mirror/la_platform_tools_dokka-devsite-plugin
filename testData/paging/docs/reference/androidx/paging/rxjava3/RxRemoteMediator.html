@@ -100,7 +100,7 @@
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;state<br>)</code></div>
-              <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:</p>
+              <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:      * Stream initialization if <code><a href="/reference/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code></p>
             </td>
           </tr>
           <tr>
@@ -150,15 +150,7 @@
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html">RemoteMediator.InitializeAction</a></code></td>
                 <td>
-                  <p><code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html">InitializeAction</a></code> used to control whether <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> with load type <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> will be immediately dispatched when the first <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is submitted:</p>
-                  <ul>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code> to immediately dispatch <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>, to update paginated content when the stream is initialized. Note: This also prevents <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> from triggering <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> or <code><a href="/reference/androidx/paging/LoadType.html#APPEND">APPEND</a></code> until <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> succeeds.</p>
-                    </li>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#SKIP_INITIAL_REFRESH">SKIP_INITIAL_REFRESH</a></code> to wait for a refresh request from the UI before dispatching <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>.</p>
-                    </li>
-                  </ul>
+                  <p><code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html">InitializeAction</a></code> used to control whether <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> with load type <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> will be immediately dispatched when the first <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is submitted:      * <code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code> to immediately dispatch <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type        <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>, to update paginated content when the stream is initialized. Note: This also        prevents <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> from triggering <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> or <code><a href="/reference/androidx/paging/LoadType.html#APPEND">APPEND</a></code> until <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>        succeeds.      * SKIP_INITIAL_REFRESH to wait for a refresh request from the UI before dispatching        <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>.</p>
                 </td>
               </tr>
             </tbody>
@@ -189,15 +181,7 @@
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/io/reactivex/rxjava3/core/Single.html">Single</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html">RemoteMediator.InitializeAction</a>&gt;</code></td>
                 <td>
-                  <p><code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html">InitializeAction</a></code> indicating the action to take after initialization:</p>
-                  <ul>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code> to immediately dispatch a <code><a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType.REFRESH</a></code>, to update paginated content when the stream is initialized. Note: This also prevents <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> from triggering <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> or <code><a href="/reference/androidx/paging/LoadType.html#APPEND">APPEND</a></code> until <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> succeeds.</p>
-                    </li>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#SKIP_INITIAL_REFRESH">SKIP_INITIAL_REFRESH</a></code> to wait for a refresh request from the UI before dispatching a <code><a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> with load type <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType.REFRESH</a></code>.</p>
-                    </li>
-                  </ul>
+                  <p><code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html">InitializeAction</a></code> indicating the action to take after initialization:      * <code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code> to immediately dispatch a <code><a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type        <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType.REFRESH</a></code>, to update paginated content when the stream is initialized. Note:        This also prevents <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> from triggering PREPEND or APPEND until        REFRESH succeeds.      * <code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#SKIP_INITIAL_REFRESH">SKIP_INITIAL_REFRESH</a></code> to wait for a refresh        request from the UI before dispatching a <code><a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> with load type <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType.REFRESH</a></code>.</p>
                 </td>
               </tr>
             </tbody>
@@ -211,11 +195,8 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a>&nbsp;<a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;state<br>)</pre>
-        <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:</p>
+        <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:      * Stream initialization if <code><a href="/reference/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code></p>
         <ul>
-          <li>
-            <p>Stream initialization if <code><a href="/reference/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code></p>
-          </li>
           <li>
             <p><code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> signal driven from UI</p>
           </li>
@@ -241,26 +222,7 @@
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType</code></td>
                 <td>
-                  <p><code><a href="/reference/androidx/paging/LoadType.html">LoadType</a></code> of the condition which triggered this callback.</p>
-                  <ul>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> indicates the end of pagination in the <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> direction was reached. This occurs when <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returns a <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">LoadResult.Page</a></code> with <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html#prevKey()">LoadResult.Page.prevKey</a></code> == <code>null</code>.</p>
-                    </li>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/LoadType.html#APPEND">APPEND</a></code> indicates the end of pagination in the <code><a href="/reference/androidx/paging/LoadType.html#APPEND">APPEND</a></code> direction was reached. This occurs when <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returns a <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">LoadResult.Page</a></code> with <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html#nextKey()">LoadResult.Page.nextKey</a></code> == <code>null</code>.</p>
-                    </li>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> indicates this method was triggered due to a requested refresh. Generally, this means that a request to load remote data and <b>replace</b> all local data was made. This can happen when:</p>
-                    </li>
-                    <ul>
-                      <li>
-                        <p>Stream initialization if <code><a href="/reference/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code></p>
-                      </li>
-                      <li>
-                        <p>An explicit call to refresh driven by the UI</p>
-                      </li>
-                    </ul>
-                  </ul>
+                  <p><code><a href="/reference/androidx/paging/LoadType.html">LoadType</a></code> of the condition which triggered this callback.      * <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> indicates the end of pagination in the <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> direction was reached. This        occurs when <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returns a <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">LoadResult.Page</a></code> with        <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html#prevKey()">LoadResult.Page.prevKey</a></code> == <code>null</code>.      * <code><a href="/reference/androidx/paging/LoadType.html#APPEND">APPEND</a></code> indicates the end of pagination in the <code><a href="/reference/androidx/paging/LoadType.html#APPEND">APPEND</a></code> direction was reached. This        occurs when <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returns a <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">LoadResult.Page</a></code> with        <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html#nextKey()">LoadResult.Page.nextKey</a></code> == <code>null</code>.      * <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> indicates this method was triggered due to a requested refresh. Generally,        this means that a request to load remote data and <b>replace</b> all local data was made.        This can happen when:          * Stream initialization if <code><a href="/reference/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code>          * An explicit call to refresh driven by the UI</p>
                 </td>
               </tr>
               <tr>
@@ -301,11 +263,8 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/io/reactivex/rxjava3/core/Single.html">Single</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a>&gt;&nbsp;<a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#loadSingle(androidx.paging.LoadType,androidx.paging.PagingState)">loadSingle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;state<br>)</pre>
-        <p>Implement this method to load additional remote data, which will then be stored for the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to access. These loads take one of two forms:</p>
+        <p>Implement this method to load additional remote data, which will then be stored for the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to access. These loads take one of two forms:      * type == <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> / <code><a href="/reference/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> The <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> has loaded a        'boundary' page, with a <code>null</code> adjacent key. This means this method should load        additional remote data to append / prepend as appropriate, and store it locally.</p>
         <ul>
-          <li>
-            <p>type == <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> / <code><a href="/reference/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> The <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> has loaded a 'boundary' page, with a <code>null</code> adjacent key. This means this method should load additional remote data to append / prepend as appropriate, and store it locally.</p>
-          </li>
           <li>
             <p>type == <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType.REFRESH</a></code> The app (or <code><a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#initialize()">initialize</a></code>) has requested a remote refresh of data. This means the method should generally load remote data, and <b>replace</b> all local data.</p>
           </li>
@@ -327,18 +286,7 @@
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType</code></td>
                 <td>
-                  <p><code><a href="/reference/androidx/paging/LoadType.html">LoadType</a></code> of the boundary condition which triggered this callback.</p>
-                  <ul>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> indicates a boundary condition at the front of the list.</p>
-                    </li>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> indicates a boundary condition at the end of the list.</p>
-                    </li>
-                    <li>
-                      <p><code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType.REFRESH</a></code> indicates this callback was triggered as the result of a requested refresh - either driven by the UI, or by <code><a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#initialize()">initialize</a></code>.</p>
-                    </li>
-                  </ul>
+                  <p><code><a href="/reference/androidx/paging/LoadType.html">LoadType</a></code> of the boundary condition which triggered this callback.      * <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> indicates a boundary condition at the front of the list.      * <code><a href="/reference/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> indicates a boundary condition at the end of the list.      * <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType.REFRESH</a></code> indicates this callback was triggered as the result of a requested        refresh - either driven by the UI, or by <code><a href="/reference/androidx/paging/rxjava3/RxRemoteMediator.html#initialize()">initialize</a></code>.</p>
                 </td>
               </tr>
               <tr>

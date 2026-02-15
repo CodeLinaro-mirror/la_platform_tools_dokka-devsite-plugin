@@ -279,7 +279,7 @@ adapter.addLoadStateListener {
         <p>An update is triggered from one of the following:</p>
         <ul>
           <li>
-            <p><code><a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in      the loaded data</p>
+            <p><code><a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in the loaded data</p>
           </li>
           <li>
             <p>A <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is inserted</p>
@@ -460,9 +460,7 @@ class MyActivity : AppCompatActivity() {
             binding.swipeRefreshLayout.isRefreshing = loadStates.refresh is LoadState.Loading
         }
 
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            pagingAdapter.refresh()
-        }
+        binding.swipeRefreshLayout.setOnRefreshListener { pagingAdapter.refresh() }
     }
 }</pre>
         <div class="devsite-table-wrapper">
@@ -715,7 +713,7 @@ class MyActivity : AppCompatActivity() {
         </div>
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#loadStateFlow()">loadStateFlow</a>:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</pre>
         <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
-        <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
+        <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and delivers the current load states on collection when RecyclerView is not dispatching layout.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -748,7 +746,7 @@ lifecycleScope.launch {
         <p>An update is triggered from one of the following:</p>
         <ul>
           <li>
-            <p><code><a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in      the loaded data</p>
+            <p><code><a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in the loaded data</p>
           </li>
           <li>
             <p>A <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is inserted</p>

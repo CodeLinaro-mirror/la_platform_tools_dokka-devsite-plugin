@@ -195,7 +195,7 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/io/reactivex/Flowable.html">Flowable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;<a href="/reference/androidx/paging/rxjava2/PagingRx.html#(androidx.paging.Pager).getFlowable()">getFlowable</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/Pager.html">Pager</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;receiver)</pre>
         <p>A <code><a href="/reference/io/reactivex/Flowable.html">Flowable</a></code> of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, which mirrors the stream provided by <code><a href="/reference/androidx/paging/Pager.html#flow()">Pager.flow</a></code>, but exposes it as a <code><a href="/reference/io/reactivex/Flowable.html">Flowable</a></code>.</p>
-        <p>NOTE: Instances of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by this <code><a href="/reference/io/reactivex/Flowable.html">Flowable</a></code> are not re-usable and cannot be submitted multiple times. This is especially relevant for transforms, which would replay the latest value downstream. To ensure you get a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> for each downstream observer, you should use the <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> operator which multicasts the <code><a href="/reference/io/reactivex/Flowable.html">Flowable</a></code> in a way that returns a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with cached data pre-loaded.</p>
+        <p>NOTE: Instances of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by this <code><a href="/reference/io/reactivex/Flowable.html">Flowable</a></code> are not re-usable and cannot be submitted multiple times. This is especially relevant for transforms, which would replay the latest value downstream. To ensure you get a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> for each downstream observer, you should use the <code><a href="/reference/androidx/paging/package-summary.html#(androidx.lifecycle.LiveData).cachedIn(androidx.lifecycle.Lifecycle)">cachedIn</a></code> operator which multicasts the <code><a href="/reference/io/reactivex/Flowable.html">Flowable</a></code> in a way that returns a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with cached data pre-loaded.</p>
       </div>
       <div class="api-item"><a name="-androidx.paging.Pager-.getObservable--"></a><a name="getobservable"></a>
         <div class="api-name-block">
@@ -205,7 +205,7 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/io/reactivex/Observable.html">Observable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;<a href="/reference/androidx/paging/rxjava2/PagingRx.html#(androidx.paging.Pager).getObservable()">getObservable</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/Pager.html">Pager</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;receiver)</pre>
         <p>An <code><a href="/reference/io/reactivex/Observable.html">Observable</a></code> of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, which mirrors the stream provided by <code><a href="/reference/androidx/paging/Pager.html#flow()">Pager.flow</a></code>, but exposes it as an <code><a href="/reference/io/reactivex/Observable.html">Observable</a></code>.</p>
-        <p>NOTE: Instances of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by this <code><a href="/reference/io/reactivex/Observable.html">Observable</a></code> are not re-usable and cannot be submitted multiple times. This is especially relevant for transforms, which would replay the latest value downstream. To ensure you get a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> for each downstream observer, you should use the <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> operator which multicasts the <code><a href="/reference/io/reactivex/Observable.html">Observable</a></code> in a way that returns a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with cached data pre-loaded.</p>
+        <p>NOTE: Instances of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by this <code><a href="/reference/io/reactivex/Observable.html">Observable</a></code> are not re-usable and cannot be submitted multiple times. This is especially relevant for transforms, which would replay the latest value downstream. To ensure you get a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> for each downstream observer, you should use the <code><a href="/reference/androidx/paging/package-summary.html#(androidx.lifecycle.LiveData).cachedIn(androidx.lifecycle.Lifecycle)">cachedIn</a></code> operator which multicasts the <code><a href="/reference/io/reactivex/Observable.html">Observable</a></code> in a way that returns a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with cached data pre-loaded.</p>
       </div>
       <div class="api-item"><a name="-androidx.paging.PagingData-.insertSeparators-kotlin.Function2-"></a><a name="insertseparators"></a>
         <div class="api-name-block">
@@ -234,14 +234,16 @@ pagingDataStream.map { pagingData -&gt;
     // map outer stream, so we can perform transformations on each paging generation
     pagingData.insertSeparatorsAsync { before: String?, after: String? -&gt;
         Maybe.fromCallable&lt;String&gt; {
-            if (after != null &amp;&amp; before?.first() != after.first()) {
-                // separator - after is first item that starts with its first letter
-                after.first().toUpperCase().toString()
-            } else {
-                // no separator - either end of list, or first letters of before/after are the same
-                null
+                if (after != null &amp;&amp; before?.first() != after.first()) {
+                    // separator - after is first item that starts with its first letter
+                    after.first().uppercaseChar().toString()
+                } else {
+                    // no separator - either end of list, or first letters of before/after are
+                    // the same
+                    null
+                }
             }
-        }.subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.computation())
     }
 }</pre>
         <pre class="prettyprint lang-kotlin">
@@ -271,14 +273,19 @@ pagingDataStream.map { pagingData -&gt;
         }
         .insertSeparatorsAsync { before: ItemUiModel?, after: ItemUiModel? -&gt;
             Maybe.fromCallable&lt;UiModel&gt; {
-                if (after != null &amp;&amp; before?.item?.label?.first() != after.item.label.first()) {
-                    // separator - after is first item that starts with its first letter
-                    SeparatorUiModel(after.item.label.first().toUpperCase())
-                } else {
-                    // no separator - either end of list, or first letters of before/after are the same
-                    null
+                    if (
+                        after != null &amp;&amp;
+                            before?.item?.label?.first() != after.item.label.first()
+                    ) {
+                        // separator - after is first item that starts with its first letter
+                        SeparatorUiModel(after.item.label.first().uppercaseChar())
+                    } else {
+                        // no separator - either end of list, or first letters of before/after
+                        // are the same
+                        null
+                    }
                 }
-            }.subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.computation())
         }
 }</pre>
       </div>

@@ -17,7 +17,7 @@
         <h1>RemoteMediator</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/paging/RemoteMediator.kt+class:androidx.paging.RemoteMediator&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:commonMain/androidx/paging/RemoteMediator.kt+class:androidx.paging.RemoteMediator&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/paging/ListenableFutureRemoteMediator.html">ListenableFutureRemoteMediator</a></code></td>
                 <td>
-                  <p><code><a href="https://guava.dev/releases/18.0/api/docs/package-list/com/google/common/util/concurrent/ListenableFuture.html">ListenableFuture</a></code>-based  compatibility wrapper around <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>'s suspending APIs.</p>
+                  <p><code><a href="https://guava.dev/releases/18.0/api/docs/package-list/com/google/common/util/concurrent/ListenableFuture.html">ListenableFuture</a></code>-based compatibility wrapper around <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>'s suspending APIs.</p>
                 </td>
               </tr>
               <tr>
@@ -99,7 +99,7 @@ import androidx.room.withTransaction
 class ExampleRemoteMediator(
     private val query: String,
     private val database: RoomDb,
-    private val networkService: ExampleBackendService
+    private val networkService: ExampleBackendService,
 ) : RemoteMediator&lt;Int, User&gt;() {
     val userDao = database.userDao()
 
@@ -118,31 +118,35 @@ class ExampleRemoteMediator(
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState&lt;Int, User&gt;
+        state: PagingState&lt;Int, User&gt;,
     ): MediatorResult {
         return try {
             // The network load method takes an optional `after=&lt;user.id&gt;` parameter. For every
             // page after the first, we pass the last user ID to let it continue from where it
             // left off. For REFRESH, pass `null` to load the first page.
-            val loadKey = when (loadType) {
-                LoadType.REFRESH -&gt; null
-                // In this example, we never need to prepend, since REFRESH will always load the
-                // first page in the list. Immediately return, reporting end of pagination.
-                LoadType.PREPEND -&gt; return MediatorResult.Success(endOfPaginationReached = true)
-                LoadType.APPEND -&gt; {
-                    val lastItem = state.lastItemOrNull()
-
-                    // We must explicitly check if the last item is `null` when appending,
-                    // since passing `null` to networkService is only valid for initial load.
-                    // If lastItem is `null` it means no items were loaded after the initial
-                    // REFRESH and there are no more items to load.
-                    if (lastItem == null) {
+            val loadKey =
+                when (loadType) {
+                    LoadType.REFRESH -&gt; null
+                    // In this example, we never need to prepend, since REFRESH will always load
+                    // the
+                    // first page in the list. Immediately return, reporting end of pagination.
+                    LoadType.PREPEND -&gt;
                         return MediatorResult.Success(endOfPaginationReached = true)
-                    }
+                    LoadType.APPEND -&gt; {
+                        val lastItem = state.lastItemOrNull()
 
-                    lastItem.id
+                        // We must explicitly check if the last item is `null` when appending,
+                        // since passing `null` to networkService is only valid for initial
+                        // load.
+                        // If lastItem is `null` it means no items were loaded after the initial
+                        // REFRESH and there are no more items to load.
+                        if (lastItem == null) {
+                            return MediatorResult.Success(endOfPaginationReached = true)
+                        }
+
+                        lastItem.id
+                    }
                 }
-            }
 
             // Suspending network load via Retrofit. This doesn't need to be wrapped in a
             // withContext(Dispatcher.IO) { ... } block since Retrofit's Coroutine CallAdapter
@@ -191,7 +195,7 @@ import androidx.room.withTransaction
 class ExampleRemoteMediator(
     private val query: String,
     private val database: RoomDb,
-    private val networkService: ExampleBackendService
+    private val networkService: ExampleBackendService,
 ) : RemoteMediator&lt;Int, User&gt;() {
     val userDao = database.userDao()
     val remoteKeyDao = database.remoteKeyDao()
@@ -211,35 +215,37 @@ class ExampleRemoteMediator(
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState&lt;Int, User&gt;
+        state: PagingState&lt;Int, User&gt;,
     ): MediatorResult {
         return try {
             // The network load method takes an optional [String] parameter. For every page
             // after the first, we pass the [String] token returned from the previous page to
             // let it continue from where it left off. For REFRESH, pass `null` to load the
             // first page.
-            val loadKey = when (loadType) {
-                LoadType.REFRESH -&gt; null
-                // In this example, we never need to prepend, since REFRESH will always load the
-                // first page in the list. Immediately return, reporting end of pagination.
-                LoadType.PREPEND -&gt; return MediatorResult.Success(endOfPaginationReached = true)
-                // Query remoteKeyDao for the next RemoteKey.
-                LoadType.APPEND -&gt; {
-                    val remoteKey = database.withTransaction {
-                        remoteKeyDao.remoteKeyByQuery(query)
-                    }
-
-                    // We must explicitly check if the page key is `null` when appending,
-                    // since `null` is only valid for initial load. If we receive `null`
-                    // for APPEND, that means we have reached the end of pagination and
-                    // there are no more items to load.
-                    if (remoteKey.nextKey == null) {
+            val loadKey =
+                when (loadType) {
+                    LoadType.REFRESH -&gt; null
+                    // In this example, we never need to prepend, since REFRESH will always load
+                    // the
+                    // first page in the list. Immediately return, reporting end of pagination.
+                    LoadType.PREPEND -&gt;
                         return MediatorResult.Success(endOfPaginationReached = true)
-                    }
+                    // Query remoteKeyDao for the next RemoteKey.
+                    LoadType.APPEND -&gt; {
+                        val remoteKey =
+                            database.withTransaction { remoteKeyDao.remoteKeyByQuery(query) }
 
-                    remoteKey.nextKey
+                        // We must explicitly check if the page key is `null` when appending,
+                        // since `null` is only valid for initial load. If we receive `null`
+                        // for APPEND, that means we have reached the end of pagination and
+                        // there are no more items to load.
+                        if (remoteKey.nextKey == null) {
+                            return MediatorResult.Success(endOfPaginationReached = true)
+                        }
+
+                        remoteKey.nextKey
+                    }
                 }
-            }
 
             // Suspending network load via Retrofit. This doesn't need to be wrapped in a
             // withContext(Dispatcher.IO) { ... } block since Retrofit's Coroutine CallAdapter
@@ -352,7 +358,7 @@ class ExampleRemoteMediator(
             <td><code>abstract&nbsp;suspend <a href="/reference/kotlin/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;)</code></div>
-              <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:</p>
+              <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:      * Stream initialization if <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code></p>
             </td>
           </tr>
         </tbody>
@@ -395,15 +401,7 @@ class ExampleRemoteMediator(
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html">RemoteMediator.InitializeAction</a></code></td>
                 <td>
-                  <p><code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html">InitializeAction</a></code> used to control whether <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> with load type <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> will be immediately dispatched when the first <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is submitted:</p>
-                  <ul>
-                    <li>
-                      <p><code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code> to immediately dispatch <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>, to update paginated content when the stream is initialized. Note: This also prevents <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> from triggering <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> or <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">APPEND</a></code> until <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> succeeds.</p>
-                    </li>
-                    <li>
-                      <p><code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html#SKIP_INITIAL_REFRESH">SKIP_INITIAL_REFRESH</a></code> to wait for a refresh request from the UI before dispatching <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>.</p>
-                    </li>
-                  </ul>
+                  <p><code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html">InitializeAction</a></code> used to control whether <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> with load type <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> will be immediately dispatched when the first <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is submitted:      * <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code> to immediately dispatch <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type        <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>, to update paginated content when the stream is initialized. Note: This also        prevents <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> from triggering <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> or <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">APPEND</a></code> until <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>        succeeds.      * SKIP_INITIAL_REFRESH to wait for a refresh request from the UI before dispatching        <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> asynchronously with load type <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code>.</p>
                 </td>
               </tr>
             </tbody>
@@ -417,11 +415,8 @@ class ExampleRemoteMediator(
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a></pre>
-        <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:</p>
+        <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:      * Stream initialization if <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code></p>
         <ul>
-          <li>
-            <p>Stream initialization if <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code></p>
-          </li>
           <li>
             <p><code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> signal driven from UI</p>
           </li>
@@ -447,26 +442,7 @@ class ExampleRemoteMediator(
               <tr>
                 <td><code>loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a></code></td>
                 <td>
-                  <p><code><a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a></code> of the condition which triggered this callback.</p>
-                  <ul>
-                    <li>
-                      <p><code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> indicates the end of pagination in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> direction was reached. This occurs when <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returns a <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">LoadResult.Page</a></code> with <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#prevKey()">LoadResult.Page.prevKey</a></code> == <code>null</code>.</p>
-                    </li>
-                    <li>
-                      <p><code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">APPEND</a></code> indicates the end of pagination in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">APPEND</a></code> direction was reached. This occurs when <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returns a <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">LoadResult.Page</a></code> with <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#nextKey()">LoadResult.Page.nextKey</a></code> == <code>null</code>.</p>
-                    </li>
-                    <li>
-                      <p><code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> indicates this method was triggered due to a requested refresh. Generally, this means that a request to load remote data and <b>replace</b> all local data was made. This can happen when:</p>
-                    </li>
-                    <ul>
-                      <li>
-                        <p>Stream initialization if <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code></p>
-                      </li>
-                      <li>
-                        <p>An explicit call to refresh driven by the UI</p>
-                      </li>
-                    </ul>
-                  </ul>
+                  <p><code><a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a></code> of the condition which triggered this callback.      * <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> indicates the end of pagination in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">PREPEND</a></code> direction was reached. This        occurs when <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returns a <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">LoadResult.Page</a></code> with        <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#prevKey()">LoadResult.Page.prevKey</a></code> == <code>null</code>.      * <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">APPEND</a></code> indicates the end of pagination in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">APPEND</a></code> direction was reached. This        occurs when <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returns a <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">LoadResult.Page</a></code> with        <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#nextKey()">LoadResult.Page.nextKey</a></code> == <code>null</code>.      * <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">REFRESH</a></code> indicates this method was triggered due to a requested refresh. Generally,        this means that a request to load remote data and <b>replace</b> all local data was made.        This can happen when:          * Stream initialization if <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#initialize()">initialize</a></code> returns <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.InitializeAction.html#LAUNCH_INITIAL_REFRESH">LAUNCH_INITIAL_REFRESH</a></code>          * An explicit call to refresh driven by the UI</p>
                 </td>
               </tr>
               <tr>

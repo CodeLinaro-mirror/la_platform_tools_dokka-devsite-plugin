@@ -178,16 +178,17 @@ pagingDataStream.map { pagingData -&gt;
                     val (before, after) = it!!
                     if (after != null &amp;&amp; before?.first() != after.first()) {
                         // separator - after is first item that starts with its first letter
-                        after.first().toUpperCase().toString()
+                        after.first().uppercaseChar().toString()
                     } else {
-                        // no separator - either end of list, or first letters of before/after are the same
+                        // no separator - either end of list, or first letters of before/after
+                        // are the same
                         null
                     }
                 },
-                executor
+                executor,
             )
         },
-        executor
+        executor,
     )
 }</pre>
         <pre class="prettyprint lang-kotlin">
@@ -221,20 +222,22 @@ pagingDataStream.map { pagingData -&gt;
                 Futures.submit(
                     Callable&lt;UiModel&gt; {
                         val (before, after) = it!!
-                        if (after != null &amp;&amp;
-                            before?.item?.label?.first() != after.item.label.first()
+                        if (
+                            after != null &amp;&amp;
+                                before?.item?.label?.first() != after.item.label.first()
                         ) {
                             // separator - after is first item that starts with its first letter
-                            SeparatorUiModel(after.item.label.first().toUpperCase())
+                            SeparatorUiModel(after.item.label.first().uppercaseChar())
                         } else {
-                            // no separator - either end of list, or first letters of before/after are the same
+                            // no separator - either end of list, or first letters of
+                            // before/after are the same
                             null
                         }
                     },
-                    executor
+                    executor,
                 )
             },
-            executor
+            executor,
         )
 }</pre>
         <div class="devsite-table-wrapper">

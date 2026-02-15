@@ -55,10 +55,8 @@ import androidx.paging.rxjava2.RxPagingSource
  * Sample RxPagingSource which loads `Item`s from network requests via Retrofit to a backend
  * service, which uses String tokens to load pages (each response has a next/previous token).
  */
-class MyPagingSource(
-    val myBackend: RxBackendService,
-    val searchTerm: String
-) : RxPagingSource&lt;String, Item&gt;() {
+class MyPagingSource(val myBackend: RxBackendService, val searchTerm: String) :
+    RxPagingSource&lt;String, Item&gt;() {
     override fun loadSingle(params: LoadParams&lt;String&gt;): Single&lt;LoadResult&lt;String, Item&gt;&gt; {
         return myBackend
             // Single-based network load
@@ -68,7 +66,7 @@ class MyPagingSource(
                 LoadResult.Page(
                     data = result.items,
                     prevKey = result.prev,
-                    nextKey = result.next
+                    nextKey = result.next,
                 )
             }
             .onErrorReturn { e -&gt;

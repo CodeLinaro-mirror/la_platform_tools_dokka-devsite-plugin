@@ -53,25 +53,22 @@ import androidx.paging.PagingState
 
 class MyListenableFuturePagingSource(
     val myBackend: GuavaBackendService,
-    val searchTerm: String
+    val searchTerm: String,
 ) : ListenableFuturePagingSource&lt;String, Item&gt;() {
     override fun loadFuture(
         params: LoadParams&lt;String&gt;
     ): ListenableFuture&lt;LoadResult&lt;String, Item&gt;&gt; {
         return myBackend
-            .searchUsers(
-                searchTerm = searchTerm,
-                pageKey = params.key
-            )
+            .searchUsers(searchTerm = searchTerm, pageKey = params.key)
             .transform&lt;LoadResult&lt;String, Item&gt;&gt;(
                 { response -&gt;
                     LoadResult.Page(
                         data = response!!.items,
                         prevKey = response.prev,
-                        nextKey = response.next
+                        nextKey = response.next,
                     )
                 },
-                networkExecutor
+                networkExecutor,
             )
             // Retrofit calls that return the body type throw either IOException for
             // network failures, or HttpException for any non-2xx HTTP status codes.
@@ -80,12 +77,12 @@ class MyListenableFuturePagingSource(
             .catching(
                 IOException::class.java,
                 { t: IOException? -&gt; LoadResult.Error(t!!) },
-                networkExecutor
+                networkExecutor,
             )
             .catching(
                 HttpException::class.java,
                 { t: HttpException? -&gt; LoadResult.Error(t!!) },
-                networkExecutor
+                networkExecutor,
             )
     }
 

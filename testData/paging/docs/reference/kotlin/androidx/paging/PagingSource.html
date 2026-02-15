@@ -23,7 +23,7 @@
         <h1>PagingSource</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/paging/PagingSource.kt+class:androidx.paging.PagingSource&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:commonMain/androidx/paging/PagingSource.kt+class:androidx.paging.PagingSource&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
 
@@ -90,9 +90,7 @@ import androidx.paging.PagingState
  *
  * Note that the key type is Int, since we're using page number to load a page.
  */
-class MyPagingSource(
-    val myBackend: MyBackendService
-) : PagingSource&lt;Int, Item&gt;() {
+class MyPagingSource(val myBackend: MyBackendService) : PagingSource&lt;Int, Item&gt;() {
     override suspend fun load(params: LoadParams&lt;Int&gt;): LoadResult&lt;Int, Item&gt; {
 
         // Retrofit calls that return the body type throw either IOException for network
@@ -115,11 +113,7 @@ class MyPagingSource(
             // This API defines that it's out of data when a page returns empty. When out of
             // data, we return `null` to signify no more pages should be loaded
             val nextKey = if (response.items.isNotEmpty()) pageNumber + 1 else null
-            LoadResult.Page(
-                data = response.items,
-                prevKey = prevKey,
-                nextKey = nextKey
-            )
+            LoadResult.Page(data = response.items, prevKey = prevKey, nextKey = nextKey)
         } catch (e: IOException) {
             LoadResult.Error(e)
         } catch (e: HttpException) {
@@ -144,9 +138,7 @@ import androidx.paging.PagingState
  *
  * Loads Items from network requests via Retrofit to a backend service.
  */
-class MyPagingSource(
-    val myBackend: MyBackendService
-) : PagingSource&lt;String, Item&gt;() {
+class MyPagingSource(val myBackend: MyBackendService) : PagingSource&lt;String, Item&gt;() {
     override suspend fun load(params: LoadParams&lt;String&gt;): LoadResult&lt;String, Item&gt; {
         // Retrofit calls that return the body type throw either IOException for network
         // failures, or HttpException for any non-2xx HTTP status codes. This code reports all
@@ -159,7 +151,7 @@ class MyPagingSource(
             LoadResult.Page(
                 data = response.items,
                 prevKey = response.prev,
-                nextKey = response.next
+                nextKey = response.next,
             )
         } catch (e: IOException) {
             LoadResult.Error(e)

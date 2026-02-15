@@ -10,8 +10,8 @@
       <meta itemprop="path" content="androidx.paging">
       <meta itemprop="property" content="empty()">
       <meta itemprop="property" content="empty(androidx.paging.LoadStates,androidx.paging.LoadStates)">
-      <meta itemprop="property" content="from(kotlin.collections.List)">
-      <meta itemprop="property" content="from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates)">
+      <meta itemprop="property" content="from(kotlin.collections.List,kotlin.Int,kotlin.Int)">
+      <meta itemprop="property" content="from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates,kotlin.Int,kotlin.Int)">
       <meta itemprop="property" content="(androidx.paging.PagingData).filterAsync(com.google.common.util.concurrent.AsyncFunction,java.util.concurrent.Executor)">
       <meta itemprop="property" content="(androidx.paging.PagingData).flatMapAsync(com.google.common.util.concurrent.AsyncFunction,java.util.concurrent.Executor)">
       <meta itemprop="property" content="(androidx.paging.PagingData).insertSeparatorsAsync(com.google.common.util.concurrent.AsyncFunction,java.util.concurrent.Executor)">
@@ -41,7 +41,7 @@
         <h1>PagingData</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/paging/PagingData.kt+class:androidx.paging.PagingData&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:commonMain/androidx/paging/PagingData.kt+class:androidx.paging.PagingData&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
 
@@ -71,7 +71,7 @@
             <td><code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</code></td>
             <td>
               <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#empty()">empty</a>()</code></div>
-              <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays an empty list of items without dispatching any load state updates when submitted to a presenter.</p>
+              <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays an empty list of items when submitted to a presenter.</p>
             </td>
           </tr>
           <tr>
@@ -84,14 +84,14 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</code></td>
             <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#from(kotlin.collections.List)">from</a>(data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;)</code></div>
-              <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays a static list of items without dispatching any load state updates when submitted to a presenter.</p>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#from(kotlin.collections.List,kotlin.Int,kotlin.Int)">from</a>(data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,&nbsp;placeholdersBefore:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;placeholdersAfter:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays a static list of items when submitted to a presenter.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</code></td>
             <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates)">from</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;mediatorLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>?<br>)</code></div>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates,kotlin.Int,kotlin.Int)">from</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;mediatorLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholdersBefore:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholdersAfter:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
               <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays a static list of items when submitted to a presenter.</p>
             </td>
           </tr>
@@ -276,7 +276,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#empty()">empty</a>():&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
-        <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays an empty list of items without dispatching any load state updates when submitted to a presenter. E.g., androidx.paging.AsyncPagingDataAdapter.</p>
+        <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays an empty list of items when submitted to a presenter. E.g., androidx.paging.AsyncPagingDataAdapter and dispatches <code><a href="/reference/kotlin/androidx/paging/LoadState.NotLoading.html">LoadState.NotLoading</a></code> on all LoadStates to the presenter.</p>
       </div>
       <div class="api-item"><a name="empty(androidx.paging.LoadStates, androidx.paging.LoadStates)"></a><a name="empty-androidx.paging.LoadStates-androidx.paging.LoadStates-"></a><a name="empty"></a>
         <div class="api-name-block">
@@ -314,14 +314,14 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="from-kotlin.collections.List-"></a><a name="from"></a>
+      <div class="api-item"><a name="from(kotlin.collections.List, kotlin.Int, kotlin.Int)"></a><a name="from-kotlin.collections.List-kotlin.Int-kotlin.Int-"></a><a name="from"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="from(kotlin.collections.List)">from</h3>
+            <h3 id="from(kotlin.collections.List,kotlin.Int,kotlin.Int)">from</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#from(kotlin.collections.List)">from</a>(data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
-        <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays a static list of items without dispatching any load state updates when submitted to a presenter. E.g., androidx.paging.AsyncPagingDataAdapter.</p>
+        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#from(kotlin.collections.List,kotlin.Int,kotlin.Int)">from</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholdersBefore:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholdersAfter:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
+        <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays a static list of items when submitted to a presenter. E.g., androidx.paging.AsyncPagingDataAdapter and dispatches <code><a href="/reference/kotlin/androidx/paging/LoadState.NotLoading.html">LoadState.NotLoading</a></code> on all LoadStates to the presenter.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -337,20 +337,32 @@
               <tr>
                 <td><code>data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;</code></td>
                 <td>
-                  <p>Static list of <code><a href="/reference/kotlin/androidx/paging/PagingData.Companion.html#from(kotlin.collections.List)">T</a></code> to display.</p>
+                  <p>Static list of <code><a href="/reference/kotlin/androidx/paging/PagingData.Companion.html#from(kotlin.collections.List,kotlin.Int,kotlin.Int)">T</a></code> to display.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>placeholdersBefore:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+                <td>
+                  <p>The count of placeholders before the list of <code><a href="/reference/kotlin/androidx/paging/PagingData.Companion.html#from(kotlin.collections.List,kotlin.Int,kotlin.Int)">data</a></code>. This can be used to display placeholders along with the static list of data. Note that these placeholders are no-op, meaning scrolls to these placeholders do not trigger loads. to these placeholders does not trigger loads.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>placeholdersAfter:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+                <td>
+                  <p>The count of placeholders after the list of <code><a href="/reference/kotlin/androidx/paging/PagingData.Companion.html#from(kotlin.collections.List,kotlin.Int,kotlin.Int)">data</a></code>. This can be used to display placeholders along with the static list of data. Note that these placeholders are no-op, meaning scrolls to these placeholders do not trigger loads.</p>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="from(kotlin.collections.List, androidx.paging.LoadStates, androidx.paging.LoadStates)"></a><a name="from-kotlin.collections.List-androidx.paging.LoadStates-androidx.paging.LoadStates-"></a><a name="from"></a>
+      <div class="api-item"><a name="from(kotlin.collections.List, androidx.paging.LoadStates, androidx.paging.LoadStates, kotlin.Int, kotlin.Int)"></a><a name="from-kotlin.collections.List-androidx.paging.LoadStates-androidx.paging.LoadStates-kotlin.Int-kotlin.Int-"></a><a name="from"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates)">from</h3>
+            <h3 id="from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates,kotlin.Int,kotlin.Int)">from</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates)">from</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;mediatorLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
+        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html#from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates,kotlin.Int,kotlin.Int)">from</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;mediatorLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholdersBefore:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholdersAfter:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
         <p>Create a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> that immediately displays a static list of items when submitted to a presenter. E.g., androidx.paging.AsyncPagingDataAdapter.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -367,7 +379,7 @@
               <tr>
                 <td><code>data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;</code></td>
                 <td>
-                  <p>Static list of <code><a href="/reference/kotlin/androidx/paging/PagingData.Companion.html#from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates)">T</a></code> to display.</p>
+                  <p>Static list of <code><a href="/reference/kotlin/androidx/paging/PagingData.Companion.html#from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates,kotlin.Int,kotlin.Int)">T</a></code> to display.</p>
                 </td>
               </tr>
               <tr>
@@ -380,6 +392,18 @@
                 <td><code>mediatorLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>? = null</code></td>
                 <td>
                   <p><code><a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a></code> of <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> to pass forward to a presenter. E.g., androidx.paging.AsyncPagingDataAdapter.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>placeholdersBefore:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+                <td>
+                  <p>The count of placeholders before the list of <code><a href="/reference/kotlin/androidx/paging/PagingData.Companion.html#from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates,kotlin.Int,kotlin.Int)">data</a></code>. This can be used to display placeholders along with the static list of data. Note that these placeholders are no-op, meaning scrolls to these placeholders do not trigger loads. to these placeholders does not trigger loads.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>placeholdersAfter:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+                <td>
+                  <p>The count of placeholders after the list of <code><a href="/reference/kotlin/androidx/paging/PagingData.Companion.html#from(kotlin.collections.List,androidx.paging.LoadStates,androidx.paging.LoadStates,kotlin.Int,kotlin.Int)">data</a></code>. This can be used to display placeholders along with the static list of data. Note that these placeholders are no-op, meaning scrolls to these placeholders do not trigger loads.</p>
                 </td>
               </tr>
             </tbody>
@@ -494,16 +518,17 @@ pagingDataStream.map { pagingData -&gt;
                     val (before, after) = it!!
                     if (after != null &amp;&amp; before?.first() != after.first()) {
                         // separator - after is first item that starts with its first letter
-                        after.first().toUpperCase().toString()
+                        after.first().uppercaseChar().toString()
                     } else {
-                        // no separator - either end of list, or first letters of before/after are the same
+                        // no separator - either end of list, or first letters of before/after
+                        // are the same
                         null
                     }
                 },
-                executor
+                executor,
             )
         },
-        executor
+        executor,
     )
 }</pre>
         <pre class="prettyprint lang-kotlin">
@@ -537,20 +562,22 @@ pagingDataStream.map { pagingData -&gt;
                 Futures.submit(
                     Callable&lt;UiModel&gt; {
                         val (before, after) = it!!
-                        if (after != null &amp;&amp;
-                            before?.item?.label?.first() != after.item.label.first()
+                        if (
+                            after != null &amp;&amp;
+                                before?.item?.label?.first() != after.item.label.first()
                         ) {
                             // separator - after is first item that starts with its first letter
-                            SeparatorUiModel(after.item.label.first().toUpperCase())
+                            SeparatorUiModel(after.item.label.first().uppercaseChar())
                         } else {
-                            // no separator - either end of list, or first letters of before/after are the same
+                            // no separator - either end of list, or first letters of
+                            // before/after are the same
                             null
                         }
                     },
-                    executor
+                    executor,
                 )
             },
-            executor
+            executor,
         )
 }</pre>
         <div class="devsite-table-wrapper">
@@ -699,7 +726,7 @@ pagingDataStream.map { pagingData -&gt;
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingData.html#(androidx.paging.PagingData).insertFooterItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">insertFooterItem</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = FULLY_COMPLETE,<br>&nbsp;&nbsp;&nbsp;&nbsp;item:&nbsp;T<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
         <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing each original element, with the passed footer <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertFooterItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> added to the end of the list.</p>
-        <p>The footer <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertFooterItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> is added to a loaded page which marks the end of the data stream in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> direction, either by returning null in <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#nextKey()">PagingSource.LoadResult.Page.nextKey</a></code>. It will be removed if the last page in the list is dropped, which can happen in the case of loaded pages exceeding <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html#maxSize()">PagedList.Config.maxSize</a></code>.</p>
+        <p>The footer <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertFooterItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> is added to a loaded page which marks the end of the data stream in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> direction, either by returning null in <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#nextKey()">PagingSource.LoadResult.Page.nextKey</a></code>. It will be removed if the last page in the list is dropped, which can happen in the case of loaded pages exceeding <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">PagingConfig.maxSize</a></code>.</p>
         <p>Note: This operation is not idempotent, calling it multiple times will continually add more footers to the end of the list, which can be useful if multiple footer items are required.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -756,7 +783,7 @@ pagingDataStream.map { pagingData -&gt;
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingData.html#(androidx.paging.PagingData).insertHeaderItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">insertHeaderItem</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = FULLY_COMPLETE,<br>&nbsp;&nbsp;&nbsp;&nbsp;item:&nbsp;T<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
         <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing each original element, with the passed header <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertHeaderItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> added to the start of the list.</p>
-        <p>The header <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertHeaderItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> is added to a loaded page which marks the end of the data stream in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> direction by returning null in <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#prevKey()">PagingSource.LoadResult.Page.prevKey</a></code>. It will be removed if the first page in the list is dropped, which can happen in the case of loaded pages exceeding <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html#maxSize()">PagedList.Config.maxSize</a></code>.</p>
+        <p>The header <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertHeaderItem(androidx.paging.TerminalSeparatorType,kotlin.Any)">item</a></code> is added to a loaded page which marks the end of the data stream in the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> direction by returning null in <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#prevKey()">PagingSource.LoadResult.Page.prevKey</a></code>. It will be removed if the first page in the list is dropped, which can happen in the case of loaded pages exceeding <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">PagingConfig.maxSize</a></code>.</p>
         <p>Note: This operation is not idempotent, calling it multiple times will continually add more headers to the start of the list, which can be useful if multiple header items are required.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -831,7 +858,7 @@ pagingDataStream.map { pagingData -&gt;
     pagingData.insertSeparators { before: String?, after: String? -&gt;
         if (after != null &amp;&amp; before?.first() != after.first()) {
             // separator - after is first item that starts with its first letter
-            after.first().toUpperCase().toString()
+            after.first().uppercaseChar().toString()
         } else {
             // no separator - either end of list, or first letters of before/after are the same
             null
@@ -864,9 +891,10 @@ pagingDataStream.map { pagingData -&gt;
         .insertSeparators&lt;ItemUiModel, UiModel&gt; { before: ItemUiModel?, after: ItemUiModel? -&gt;
             if (after != null &amp;&amp; before?.item?.label?.first() != after.item.label.first()) {
                 // separator - after is first item that starts with its first letter
-                SeparatorUiModel(after.item.label.first().toUpperCase())
+                SeparatorUiModel(after.item.label.first().uppercaseChar())
             } else {
-                // no separator - either end of list, or first letters of before/after are the same
+                // no separator - either end of list, or first letters of before/after are the
+                // same
                 null
             }
         }
@@ -905,7 +933,7 @@ pagingDataStream.map { pagingData -&gt;
             <h3 id="(androidx.paging.PagingData).insertSeparators(androidx.paging.TerminalSeparatorType,java.util.concurrent.Executor,kotlin.Function2)">insertSeparators</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;T&nbsp;:&nbsp;R&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingData.html#(androidx.paging.PagingData).insertSeparators(androidx.paging.TerminalSeparatorType,java.util.concurrent.Executor,kotlin.Function2)">insertSeparators</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = FULLY_COMPLETE,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;generator:&nbsp;(T?, T?) <span style="white-space: nowrap;">-&gt;</span> R?<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</pre>
+        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;T&nbsp;:&nbsp;R&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingData.html#(androidx.paging.PagingData).insertSeparators(androidx.paging.TerminalSeparatorType,java.util.concurrent.Executor,kotlin.Function2)">insertSeparators</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = TerminalSeparatorType.FULLY_COMPLETE,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;generator:&nbsp;(T?, T?) <span style="white-space: nowrap;">-&gt;</span> R?<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</pre>
         <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing each original element, with an optional separator generated by <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertSeparators(androidx.paging.TerminalSeparatorType,java.util.concurrent.Executor,kotlin.Function2)">generator</a></code>, given the elements before and after (or null, in boundary conditions).</p>
         <p>Note that this transform is applied asynchronously, as pages are loaded. Potential separators between pages are only computed once both pages are loaded.</p>
         <p><b>Kotlin callers should instead use the suspending extension function variant of insertSeparators</b></p>
@@ -923,7 +951,7 @@ pagingDataStream.map { pagingData -&gt;
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = FULLY_COMPLETE</code></td>
+                <td><code>terminalSeparatorType:&nbsp;<a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a> = TerminalSeparatorType.FULLY_COMPLETE</code></td>
                 <td>
                   <p><code><a href="/reference/kotlin/androidx/paging/TerminalSeparatorType.html">TerminalSeparatorType</a></code> used to configure when the header and footer are added.</p>
                 </td>
@@ -1044,14 +1072,16 @@ pagingDataStream.map { pagingData -&gt;
     // map outer stream, so we can perform transformations on each paging generation
     pagingData.insertSeparatorsAsync { before: String?, after: String? -&gt;
         Maybe.fromCallable&lt;String&gt; {
-            if (after != null &amp;&amp; before?.first() != after.first()) {
-                // separator - after is first item that starts with its first letter
-                after.first().toUpperCase().toString()
-            } else {
-                // no separator - either end of list, or first letters of before/after are the same
-                null
+                if (after != null &amp;&amp; before?.first() != after.first()) {
+                    // separator - after is first item that starts with its first letter
+                    after.first().uppercaseChar().toString()
+                } else {
+                    // no separator - either end of list, or first letters of before/after are
+                    // the same
+                    null
+                }
             }
-        }.subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.computation())
     }
 }</pre>
         <pre class="prettyprint lang-kotlin">
@@ -1081,14 +1111,19 @@ pagingDataStream.map { pagingData -&gt;
         }
         .insertSeparatorsAsync { before: ItemUiModel?, after: ItemUiModel? -&gt;
             Maybe.fromCallable&lt;UiModel&gt; {
-                if (after != null &amp;&amp; before?.item?.label?.first() != after.item.label.first()) {
-                    // separator - after is first item that starts with its first letter
-                    SeparatorUiModel(after.item.label.first().toUpperCase())
-                } else {
-                    // no separator - either end of list, or first letters of before/after are the same
-                    null
+                    if (
+                        after != null &amp;&amp;
+                            before?.item?.label?.first() != after.item.label.first()
+                    ) {
+                        // separator - after is first item that starts with its first letter
+                        SeparatorUiModel(after.item.label.first().uppercaseChar())
+                    } else {
+                        // no separator - either end of list, or first letters of before/after
+                        // are the same
+                        null
+                    }
                 }
-            }.subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.computation())
         }
 }</pre>
       </div>
@@ -1119,14 +1154,16 @@ pagingDataStream.map { pagingData -&gt;
     // map outer stream, so we can perform transformations on each paging generation
     pagingData.insertSeparatorsAsync { before: String?, after: String? -&gt;
         Maybe.fromCallable&lt;String&gt; {
-            if (after != null &amp;&amp; before?.first() != after.first()) {
-                // separator - after is first item that starts with its first letter
-                after.first().toUpperCase().toString()
-            } else {
-                // no separator - either end of list, or first letters of before/after are the same
-                null
+                if (after != null &amp;&amp; before?.first() != after.first()) {
+                    // separator - after is first item that starts with its first letter
+                    after.first().uppercaseChar().toString()
+                } else {
+                    // no separator - either end of list, or first letters of before/after are
+                    // the same
+                    null
+                }
             }
-        }.subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.computation())
     }
 }</pre>
         <pre class="prettyprint lang-kotlin">
@@ -1156,14 +1193,19 @@ pagingDataStream.map { pagingData -&gt;
         }
         .insertSeparatorsAsync { before: ItemUiModel?, after: ItemUiModel? -&gt;
             Maybe.fromCallable&lt;UiModel&gt; {
-                if (after != null &amp;&amp; before?.item?.label?.first() != after.item.label.first()) {
-                    // separator - after is first item that starts with its first letter
-                    SeparatorUiModel(after.item.label.first().toUpperCase())
-                } else {
-                    // no separator - either end of list, or first letters of before/after are the same
-                    null
+                    if (
+                        after != null &amp;&amp;
+                            before?.item?.label?.first() != after.item.label.first()
+                    ) {
+                        // separator - after is first item that starts with its first letter
+                        SeparatorUiModel(after.item.label.first().uppercaseChar())
+                    } else {
+                        // no separator - either end of list, or first letters of before/after
+                        // are the same
+                        null
+                    }
                 }
-            }.subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.computation())
         }
 }</pre>
       </div>

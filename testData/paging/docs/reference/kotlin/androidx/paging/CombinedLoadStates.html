@@ -12,6 +12,8 @@
       <meta itemprop="property" content="hashCode()">
       <meta itemprop="property" content="toString()">
       <meta itemprop="property" content="append()">
+      <meta itemprop="property" content="hasError()">
+      <meta itemprop="property" content="isIdle()">
       <meta itemprop="property" content="mediator()">
       <meta itemprop="property" content="prepend()">
       <meta itemprop="property" content="refresh()">
@@ -23,7 +25,7 @@
         <h1>CombinedLoadStates</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/paging/CombinedLoadStates.kt+class:androidx.paging.CombinedLoadStates&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:commonMain/androidx/paging/CombinedLoadStates.kt+class:androidx.paging.CombinedLoadStates&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
 
@@ -110,6 +112,20 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#hasError()">hasError</a></code></div>
+              <p>Returns true if either <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">source</a></code> or <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">mediator</a></code> has a <code><a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a></code> that is in <code><a href="/reference/kotlin/androidx/paging/LoadState.Error.html">LoadState.Error</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#isIdle()">isIdle</a></code></div>
+              <p>Returns true when <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">source</a></code> and <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">mediator</a></code> is in <code><a href="/reference/kotlin/androidx/paging/LoadState.NotLoading.html">NotLoading</a></code> for all <code><a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a></code></p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a>?</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#mediator()">mediator</a></code></div>
@@ -189,6 +205,24 @@
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#append()">append</a>:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a></pre>
         <p>Convenience for combined behavior of <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">APPEND</a></code> <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a></code>, which generally defers to <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">mediator</a></code> if it exists, but if previously was <code><a href="/reference/kotlin/androidx/paging/LoadState.Loading.html">LoadState.Loading</a></code>, awaits for both <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">source</a></code> and <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">mediator</a></code> to become <code><a href="/reference/kotlin/androidx/paging/LoadState.NotLoading.html">LoadState.NotLoading</a></code> to ensure the remote load was applied.</p>
         <p>For use cases that require reacting to <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a></code> of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">source</a></code> and <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">mediator</a></code> specifically, e.g., showing cached data when network loads via <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">mediator</a></code> fail, <code><a href="/reference/kotlin/androidx/paging/LoadStates.html">LoadStates</a></code> exposed via <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">source</a></code> and <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">mediator</a></code> should be used directly.</p>
+      </div>
+      <div class="api-item"><a name="getHasError()"></a><a name="setHasError()"></a><a name="getHasError--"></a><a name="setHasError--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="hasError()">hasError</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#hasError()">hasError</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Returns true if either <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">source</a></code> or <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">mediator</a></code> has a <code><a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a></code> that is in <code><a href="/reference/kotlin/androidx/paging/LoadState.Error.html">LoadState.Error</a></code></p>
+      </div>
+      <div class="api-item"><a name="getIsIdle()"></a><a name="setIsIdle()"></a><a name="getIsIdle--"></a><a name="setIsIdle--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="isIdle()">isIdle</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#isIdle()">isIdle</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Returns true when <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">source</a></code> and <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html#(androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadState,androidx.paging.LoadStates,androidx.paging.LoadStates)">mediator</a></code> is in <code><a href="/reference/kotlin/androidx/paging/LoadState.NotLoading.html">NotLoading</a></code> for all <code><a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a></code></p>
       </div>
       <div class="api-item"><a name="getMediator()"></a><a name="setMediator()"></a><a name="getMediator--"></a><a name="setMediator--"></a>
         <div class="api-name-block">

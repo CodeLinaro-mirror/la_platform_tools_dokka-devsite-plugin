@@ -18,15 +18,23 @@ package androidx.paging.samples.java;
 
 import android.annotation.SuppressLint;
 
-import androidx.annotation.Nullable;
 import androidx.paging.PagingData;
 import androidx.paging.PagingDataTransforms;
 
-import java.util.concurrent.Executor;
-
 import io.reactivex.Flowable;
+
 import kotlin.NotImplementedError;
 
+import org.jspecify.annotations.Nullable;
+
+import java.util.concurrent.Executor;
+
+/**
+ * NOTE - MANUALLY COPIED SAMPLE
+ *
+ * Since @sample from kdoc doesn't support Java, this code must manually kept in sync with
+ * the `PagingDataTransforms.insertSeparators` method
+ */
 @SuppressWarnings({"unused", "WeakerAccess"})
 class InsertSeparatorsJavaSample {
 
@@ -41,7 +49,6 @@ class InsertSeparatorsJavaSample {
     @SuppressLint("CheckResult")
     @SuppressWarnings({"unused", "ResultOfMethodCallIgnored", "RxReturnValueIgnored"})
     public void insertSeparatorsSample() {
-        //BEGIN_INCLUDE(insertSeparators)
         /*
          * Create letter separators in an alphabetically sorted list.
          *
@@ -67,6 +74,5 @@ class InsertSeparatorsJavaSample {
                                 return null;
                             }
                         }));
-        //END_INCLUDE(insertSeparators)
     }
 }

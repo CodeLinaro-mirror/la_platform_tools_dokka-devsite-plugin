@@ -23,7 +23,7 @@ dackkaTest {
     hasSourceSamples = true
 }
 
-val pagingVersion = "3.2.0"
+val pagingVersion = "3.4.0"
 dependencies {
     testArtifact("androidx.paging:paging-common:$pagingVersion")
     testArtifact("androidx.paging:paging-common-ktx:$pagingVersion")

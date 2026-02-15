@@ -77,15 +77,16 @@
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 
-val USER_COMPARATOR = object : DiffUtil.ItemCallback&lt;User&gt;() {
-    override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
-        // User ID serves as unique ID
-        oldItem.userId == newItem.userId
+val USER_COMPARATOR =
+    object : DiffUtil.ItemCallback&lt;User&gt;() {
+        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
+            // User ID serves as unique ID
+            oldItem.userId == newItem.userId
 
-    override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
-        // Compare full contents (note: Java users should call .equals())
-        oldItem == newItem
-}
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
+            // Compare full contents (note: Java users should call .equals())
+            oldItem == newItem
+    }
 
 class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATOR) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -580,7 +581,7 @@ adapter.addLoadStateListener {
         <p>An update is triggered from one of the following:</p>
         <ul>
           <li>
-            <p><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in      the loaded data</p>
+            <p><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in the loaded data</p>
           </li>
           <li>
             <p>A <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is inserted</p>
@@ -677,7 +678,7 @@ adapter.addLoadStateListener {
         <p>An update is triggered from one of the following:</p>
         <ul>
           <li>
-            <p><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in      the loaded data</p>
+            <p><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in the loaded data</p>
           </li>
           <li>
             <p>A <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is inserted</p>
@@ -775,9 +776,7 @@ class MyActivity : AppCompatActivity() {
             binding.swipeRefreshLayout.isRefreshing = loadStates.refresh is LoadState.Loading
         }
 
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            pagingAdapter.refresh()
-        }
+        binding.swipeRefreshLayout.setOnRefreshListener { pagingAdapter.refresh() }
     }
 }</pre>
         <div class="devsite-table-wrapper">
@@ -1016,12 +1015,11 @@ class MyFlowActivity : AppCompatActivity() {
         val viewModel by viewModels&lt;UserListViewModel&gt;()
 
         lifecycleScope.launch {
-            viewModel.pagingFlow
-                .collectLatest { pagingData -&gt;
-                    // submitData suspends until loading this generation of data stops
-                    // so be sure to use collectLatest {} when presenting a Flow&lt;PagingData&gt;
-                    pagingAdapter.submitData(pagingData)
-                }
+            viewModel.pagingFlow.collectLatest { pagingData -&gt;
+                // submitData suspends until loading this generation of data stops
+                // so be sure to use collectLatest {} when presenting a Flow&lt;PagingData&gt;
+                pagingAdapter.submitData(pagingData)
+            }
         }
     }
 }</pre>
@@ -1084,9 +1082,7 @@ class MyRxJava2Activity : AppCompatActivity() {
 
         viewModel.pagingFlowable
             .autoDispose(this) // Using AutoDispose to handle subscription lifecycle
-            .subscribe { pagingData -&gt;
-                pagingAdapter.submitData(lifecycle, pagingData)
-            }
+            .subscribe { pagingData -&gt; pagingAdapter.submitData(lifecycle, pagingData) }
     }
 }</pre>
         <div class="devsite-table-wrapper">
