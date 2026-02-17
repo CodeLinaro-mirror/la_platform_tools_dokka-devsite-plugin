@@ -20,7 +20,6 @@ plugins {
 }
 
 dackkaTest {
-    hasSourceSamples = true
     createAndroidTarget = true
 }
 

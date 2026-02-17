@@ -19,10 +19,6 @@ plugins {
     `java-library`
 }
 
-dackkaTest {
-    hasSourceSamples = true
-}
-
 val pagingVersion = "3.4.0"
 dependencies {
     testArtifact("androidx.paging:paging-common:$pagingVersion")

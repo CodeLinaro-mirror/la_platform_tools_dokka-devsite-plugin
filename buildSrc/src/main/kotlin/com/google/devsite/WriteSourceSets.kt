@@ -23,6 +23,7 @@ import java.net.URI
 import java.util.zip.ZipInputStream
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
+import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFileProperty
@@ -38,7 +39,9 @@ import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.Sync
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.TaskProvider
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaSourceSetID
 import org.jetbrains.dokka.ExternalDocumentationLink
@@ -56,9 +59,13 @@ abstract class WriteSourceSetsTask : DefaultTask() {
      */
     @get:InputDirectory abstract val packageListDir: DirectoryProperty
 
-    /** A directory containing samples, if there are any. */
+    /** A directory containing checked in samples, if there are any. */
     @get:[InputDirectory Optional]
     abstract val sourceSamples: DirectoryProperty
+
+    /** Samples unzipped from prebuilts, if there are any. */
+    @get:[InputFiles Optional]
+    abstract val prebuiltSamples: ConfigurableFileCollection
 
     /** The file to write source sets as JSON. */
     @get:OutputFile abstract val sourceSetOutputFile: RegularFileProperty
@@ -113,11 +120,12 @@ abstract class WriteSourceSetsTask : DefaultTask() {
                         // source sets depend on commonMain).
                         samples =
                             if (sourceSet.dependentSourceSets.isEmpty()) {
-                                listOfNotNull(
-                                    sourceSamples.asFile.orNull
-                                        ?.takeIf { it.exists() }
-                                        ?.absolutePath
-                                )
+                                buildList {
+                                        sourceSamples.asFile.orNull?.let { add(it) }
+                                        addAll(prebuiltSamples.files)
+                                    }
+                                    .filter { it.exists() }
+                                    .map { it.absolutePath }
                             } else {
                                 emptyList()
                             }
@@ -218,6 +226,7 @@ abstract class WriteSourceSetsTask : DefaultTask() {
         fun setupTask(
             project: Project,
             sourceSets: Provider<List<SourceSet>>,
+            unzippedSamplesTask: TaskProvider<Sync>,
             hasSourceSamples: Property<Boolean>,
         ) {
             project.tasks.register("writeSourceSets", WriteSourceSetsTask::class.java) { task ->
@@ -234,6 +243,7 @@ abstract class WriteSourceSetsTask : DefaultTask() {
                         }
                     }
                 )
+                task.prebuiltSamples.from(project.files(unzippedSamplesTask))
                 task.explodedAarsDir.set(project.layout.buildDirectory.dir("explodedAars"))
             }
         }

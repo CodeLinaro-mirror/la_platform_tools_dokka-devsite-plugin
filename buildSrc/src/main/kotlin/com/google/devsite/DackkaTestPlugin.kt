@@ -28,6 +28,8 @@ import org.gradle.api.plugins.JavaLibraryPlugin
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.Sync
+import org.gradle.api.tasks.TaskProvider
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.listProperty
 import org.gradle.kotlin.dsl.named
@@ -59,25 +61,51 @@ class DackkaTestPlugin : Plugin<Project> {
 
         // Define the `testArtifact` and `testClasspath` dependency types eagerly to avoid errors
         // compiling the build files.
-        getArtifactConfiguration(project)
+        val artifactConfiguration = getArtifactConfiguration(project)
         getTestClasspathConfiguration(project)
 
         project.plugins.configureEach { plugin ->
             // Use the JavaLibraryPlugin or KotlinMultiplatformPluginWrapper to get source and
             // classpath info for the project.
-            val sourceSets =
+            val isKmp =
                 when (plugin) {
-                    is JavaLibraryPlugin ->
-                        singleSourceSet(project, dackkaTestExtension.hasSourceSamples)
-                    is KotlinMultiplatformPluginWrapper ->
-                        multiplatformSourceSets(
-                            project,
-                            dackkaTestExtension.hasSourceSamples,
-                            dackkaTestExtension.createAndroidTarget,
-                        )
+                    is JavaLibraryPlugin -> false
+                    is KotlinMultiplatformPluginWrapper -> true
                     else -> return@configureEach
                 }
-            WriteSourceSetsTask.setupTask(project, sourceSets, dackkaTestExtension.hasSourceSamples)
+
+            // Unzip the source jar and samples source jar for a prebuilts test (for KMP, the
+            // source jar will contain all source sets).
+            val (unzippedSourcesTask, unzippedSamplesTask) =
+                SourceRootConfiguration.configureUnzipSources(
+                    project,
+                    artifactConfiguration,
+                    isKmp = isKmp,
+                )
+
+            val sourceSets =
+                if (isKmp) {
+                    multiplatformSourceSets(
+                        project,
+                        artifactConfiguration,
+                        unzippedSourcesTask,
+                        dackkaTestExtension.hasSourceSamples,
+                        dackkaTestExtension.createAndroidTarget,
+                    )
+                } else {
+                    singleSourceSet(
+                        project,
+                        artifactConfiguration,
+                        unzippedSourcesTask,
+                        dackkaTestExtension.hasSourceSamples,
+                    )
+                }
+            WriteSourceSetsTask.setupTask(
+                project,
+                sourceSets,
+                unzippedSamplesTask,
+                dackkaTestExtension.hasSourceSamples,
+            )
         }
     }
 
@@ -87,6 +115,8 @@ class DackkaTestPlugin : Plugin<Project> {
      */
     fun singleSourceSet(
         project: Project,
+        artifactConfiguration: Configuration,
+        unzippedSourcesTask: TaskProvider<Sync>,
         hasSamples: Property<Boolean>,
     ): Provider<List<WriteSourceSetsTask.SourceSet>> {
         // For source tests, find the sources and classpath from the java extension.
@@ -101,10 +131,8 @@ class DackkaTestPlugin : Plugin<Project> {
             )
         val projectClasspath = projectSourceSet.compileClasspath
 
-        // For prebuilts test, unzip the source jars and find the classpath for the testArtifacts.
-        val artifactConfiguration = getArtifactConfiguration(project)
-        val unzippedSourcesTask =
-            SourceRootConfiguration.configureUnzipSources(project, artifactConfiguration)
+        // For prebuilts test, find the classpath for the testArtifacts (the prebuilt sources are
+        // from unzippedSourcesTask).
         val prebuiltsClasspath = createClasspathFromArtifacts(project, artifactConfiguration)
 
         // Combine the file collections for source and prebuilt test types in the source set.
@@ -127,18 +155,11 @@ class DackkaTestPlugin : Plugin<Project> {
      */
     fun multiplatformSourceSets(
         project: Project,
+        artifactConfiguration: Configuration,
+        unzippedSourcesTask: TaskProvider<Sync>,
         hasSamples: Property<Boolean>,
         createAndroidTarget: Property<Boolean>,
     ): Provider<List<WriteSourceSetsTask.SourceSet>> {
-        // Unzip the source jar for a prebuilts test, which contains all source sets.
-        val artifactConfiguration = getArtifactConfiguration(project)
-        val unzippedSourcesTask =
-            SourceRootConfiguration.configureUnzipSources(
-                project,
-                artifactConfiguration,
-                isKmp = true,
-            )
-
         // List all main compilations.
         val kmpExtension = project.extensions.getByType<KotlinMultiplatformExtension>()
         val allCompilations = project.objects.listProperty<KotlinCompilation<*>>()

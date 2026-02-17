@@ -24,6 +24,7 @@ import org.gradle.api.attributes.DocsType
 import org.gradle.api.attributes.LibraryElements
 import org.gradle.api.attributes.Usage
 import org.gradle.api.file.CopySpec
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.file.FileCollection
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
@@ -70,12 +71,15 @@ object SourceRootConfiguration {
         }
     }
 
-    /** Unzips the source jars for the prebuilts from [artifactConfiguration]. */
+    /**
+     * Unzips the source jars and samples source jars for the prebuilts from
+     * [artifactConfiguration].
+     */
     fun configureUnzipSources(
         project: Project,
         artifactConfiguration: Configuration,
         isKmp: Boolean = false,
-    ): TaskProvider<Sync> {
+    ): Pair<TaskProvider<Sync>, TaskProvider<Sync>> {
         val sourcesConfiguration =
             project.getOrCreateConfiguration("test-sources") { configuration ->
                 configuration.extendsFrom(artifactConfiguration)
@@ -104,30 +108,38 @@ object SourceRootConfiguration {
                 }
             }
 
-        // When unzipping the source jars, exclude the META-INF directory, which isn't needed for
-        // docs and will cause duplicate files between source jars.
-        val jars =
+        // This creates a provider which is a pair of lists of files trees. The first element in the
+        // pair is file trees for the source jars, the second is file trees for the samples jars.
+        val sourcesToSamples =
             sourcesConfiguration.incoming
                 .artifactView {}
                 .files
                 .elements
                 .map { fileLocations ->
                     // The sources configuration will include both source jars and samples source
-                    // jars, filter out the samples jars.
-                    val sources =
-                        fileLocations.filter { fileLocation ->
-                            !fileLocation.asFile.name.contains("samples")
+                    // jars, filter out the samples jars, split them into separate zip trees.
+                    val (samples, sources) =
+                        fileLocations.partition { fileLocation ->
+                            fileLocation.asFile.name.contains("samples")
                         }
                     sources.map { fileLocation ->
+                        // When unzipping the source jars, exclude the META-INF directory, which
+                        // isn't needed for docs and will cause duplicate files between source jars.
                         project.zipTree(fileLocation.asFile).matching { it.exclude("META-INF/") }
-                    }
+                    } to samples.map { fileLocation -> project.zipTree(fileLocation) }
                 }
 
         return project.tasks.register("unzipSources", Sync::class.java) { task ->
             task.into(project.layout.buildDirectory.dir("source"))
-            task.from(jars)
+            task.from(sourcesToSamples.map { it.first })
             task.rewriteSamplesTags()
-        }
+        } to
+            project.tasks.register("unzipSamplesSources", Sync::class.java) { task ->
+                task.into(project.layout.buildDirectory.dir("samples"))
+                task.from(sourcesToSamples.map { it.second })
+                // Different projects can bundle the same samples.
+                task.duplicatesStrategy = DuplicatesStrategy.INCLUDE
+            }
     }
 
     /**
