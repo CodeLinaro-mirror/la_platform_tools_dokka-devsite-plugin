@@ -42,6 +42,11 @@ class KmpTest : IntegrationTestBase() {
 
     @Test
     fun `Validate prod AndroidX compose prebuilts`() {
-        validate("compose", projectPath = "androidx", useAndroidxBaseSourceLink = true)
+        validate(
+            "compose",
+            projectPath = "androidx",
+            useAndroidxBaseSourceLink = true,
+            javaDocsDirectory = null,
+        )
     }
 }
