@@ -16,19 +16,17 @@
 
 package com.google.devsite.transformers
 
-import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.renderer.converters.allAnnotations
 import com.google.devsite.renderer.converters.companion
+import com.google.devsite.testing.createPluginsConfiguration
+import com.google.devsite.testing.defaultDevsiteConfiguration
 import com.google.devsite.testing.defaultPluginsConfiguration
 import kotlin.test.assertContentEquals
 import kotlin.test.assertTrue
-import org.jetbrains.dokka.DokkaConfiguration
-import org.jetbrains.dokka.PluginConfigurationImpl
 import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.Documentable
-import org.jetbrains.dokka.toCompactJsonString
 import org.junit.Test
 
 class PropagatedAnnotationsTransformerTest : BaseTransformerTest() {
@@ -126,33 +124,11 @@ class PropagatedAnnotationsTransformerTest : BaseTransformerTest() {
         // Create custom configuration with the annotations to propagate
         val customConfiguration =
             createDokkaConfiguration(
-                mutableListOf(
-                    PluginConfigurationImpl(
-                        fqPluginName = "com.google.devsite.DevsitePlugin",
-                        serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
-                        values =
-                            DevsiteConfiguration(
-                                    docRootPath = "reference",
-                                    projectPath = "androidx",
-                                    excludedPackages = null,
-                                    excludedPackagesForJava = null,
-                                    excludedPackagesForKotlin = null,
-                                    libraryMetadataFilename = null,
-                                    versionMetadataFilenames = null,
-                                    javaDocsPath = "",
-                                    kotlinDocsPath = "kotlin",
-                                    packagePrefixToRemoveInToc = null,
-                                    baseSourceLink = null,
-                                    basePropertySourceLink = null,
-                                    baseFunctionSourceLink = null,
-                                    annotationsNotToDisplay = null,
-                                    annotationsNotToDisplayJava = null,
-                                    annotationsNotToDisplayKotlin = null,
-                                    hidingAnnotations = emptyList(),
-                                    propagatingAnnotations =
-                                        listOf("com.sample.A", "com.sample.B", "com.sample.C"),
-                                )
-                                .toCompactJsonString(),
+                createPluginsConfiguration(
+                    defaultDevsiteConfiguration.copy(
+                        hidingAnnotations = emptyList(),
+                        propagatingAnnotations =
+                            listOf("com.sample.A", "com.sample.B", "com.sample.C"),
                     )
                 )
             )
