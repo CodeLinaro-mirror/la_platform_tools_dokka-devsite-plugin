@@ -18,6 +18,7 @@ package com.google.devsite
 
 import com.google.devsite.renderer.DocumentablesWrapper
 import com.google.devsite.renderer.MultiLanguageRenderer
+import com.google.devsite.transformers.ComposeTransformer
 import com.google.devsite.transformers.DocTagsForCheckedExceptionsTransformer
 import com.google.devsite.transformers.PropagatedAnnotationsTransformer
 import org.jetbrains.dokka.CoreExtensions
@@ -74,6 +75,17 @@ class DevsitePlugin : DokkaPlugin() {
         CoreExtensions.documentableTransformer providing
             {
                 PropagatedAnnotationsTransformer(getDevsiteConfiguration(it).propagatingAnnotations)
+            }
+    }
+
+    val composeTransformer by extending {
+        CoreExtensions.documentableTransformer providing
+            {
+                ComposeTransformer(getDevsiteConfiguration(it).applyComposeTransformer)
+            } order
+            {
+                after(docTagsForCheckedExceptions)
+                after(propagateAnnotations)
             }
     }
 

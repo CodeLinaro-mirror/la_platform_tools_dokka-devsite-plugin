@@ -1,0 +1,135 @@
+/*
+ * Copyright 2026 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.devsite.util
+
+import com.google.devsite.renderer.converters.allAnnotations
+import com.google.devsite.renderer.converters.functionSignatureComparator
+import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
+import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.links.TypeConstructor
+import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.properties.ExtraProperty
+
+/**
+ * An [ExtraProperty] for a [DPackage] containing lists of compose-specific [DFunctionGroup]s which
+ * are treated differently than other top-level functions.
+ *
+ * These special functions are [composables] (see [isComposable]) and modifiers (see [isModifier]).
+ */
+internal class ComposeProperties(
+    initialComposableList: List<DFunctionGroup>,
+    initialModifierList: List<DFunctionGroup>,
+) : ExtraProperty<DPackage> {
+    /**
+     * A list of the composables defined in the package (see [isComposable]).
+     *
+     * This list is sorted in name order.
+     */
+    val composables = initialComposableList.sortedBy { it.name }
+
+    /**
+     * A list of the modifiers defined in the package (see [isModifier]).
+     *
+     * This list is sorted in name order.
+     */
+    val modifiers = initialModifierList.sortedBy { it.name }
+
+    /** Key for finding this [ExtraProperty]. */
+    object PropertyKey : ExtraProperty.Key<DPackage, ComposeProperties>
+
+    /** Key identifying this [ExtraProperty]. */
+    override val key: ExtraProperty.Key<DPackage, *> = PropertyKey
+
+    companion object {
+        private val COMPOSABLE_DRI =
+            DRI(packageName = "androidx.compose.runtime", classNames = "Composable")
+        private val MODIFIER_TYPE_REFERENCE =
+            TypeConstructor("androidx.compose.ui.Modifier", params = emptyList())
+
+        /**
+         * Returns whether the [dFunction] is a composable function, which means it is top-level and
+         * annotated with `@Composable` (in any source set).
+         */
+        fun isComposable(dFunction: DFunction): Boolean {
+            return dFunction.isTopLevel() &&
+                dFunction.allAnnotations().any { it.dri == COMPOSABLE_DRI }
+        }
+
+        /**
+         * Returns whether the [dFunction] is a modifier function, which means it is top-level and
+         * an extension on `Modifier`.
+         */
+        fun isModifier(dFunction: DFunction): Boolean {
+            return dFunction.isTopLevel() &&
+                dFunction.receiver?.dri?.callable?.receiver == MODIFIER_TYPE_REFERENCE
+        }
+
+        /** Whether the function is top-level (not defined within a class). */
+        private fun DFunction.isTopLevel(): Boolean = dri.classNames == null
+    }
+
+    /** A group of top-level functions from the same package with the same name. */
+    class DFunctionGroup(initialFunctionList: List<DFunction>) {
+        /** The functions in this group, sorted by signature. */
+        val functions =
+            initialFunctionList.sortedWith(
+                // First group any extension functions by receiver
+                // type (non-extension functions will appear first).
+                compareBy<DFunction> { it.receiver?.type?.driOrNull?.toString() }
+                    // Then sort by signature.
+                    .then(functionSignatureComparator)
+            )
+
+        /** The name shared by all functions in this group. */
+        val name: String =
+            functions
+                .map { it.name }
+                .toSet()
+                .let { names ->
+                    names.singleOrNull()
+                        ?: error(
+                            "All functions in a DFunctionGroup must have the same name (found: $names)"
+                        )
+                }
+
+        /** The qualified package name which these functions are defined in. */
+        val packageName: String =
+            functions
+                .map { it.dri.packageName }
+                .toSet()
+                .let { packages ->
+                    packages.singleOrNull()
+                        ?: error(
+                            "All functions in a DFunctionGroup must have the same package (found: $packages)"
+                        )
+                }
+    }
+}
+
+/** Returns the list of composables in the package (empty if there are none). */
+internal fun DPackage.composables(): List<ComposeProperties.DFunctionGroup> {
+    return extra[ComposeProperties.PropertyKey]?.composables ?: emptyList()
+}
+
+/** Returns the list of modifiers in the package (empty if there are none). */
+internal fun DPackage.composeModifiers(): List<ComposeProperties.DFunctionGroup> {
+    return extra[ComposeProperties.PropertyKey]?.modifiers ?: emptyList()
+}
+
+/** Returns whether the package has any composables or modifiers. */
+fun DPackage.hasComposeProperties(): Boolean = extra[ComposeProperties.PropertyKey] != null

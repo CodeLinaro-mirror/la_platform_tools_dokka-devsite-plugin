@@ -97,6 +97,9 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  *   properties to accessors (annotations are not propagated from functions to parameters). For KMP,
  *   annotations are propagated from the common source set to all source sets. By default, this is
  *   the deprecation annotations.
+ * @param applyComposeTransformer Whether to apply
+ *   [com.google.devsite.transformers.ComposeTransformer] to add special handling for composable and
+ *   modifier functions. This feature is under development and should not be used outside of tests.
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -122,6 +125,7 @@ data class DevsiteConfiguration(
     val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
     val includeHiddenParentSymbols: Boolean = false,
     val propagatingAnnotations: List<String> = listOf("kotlin.Deprecated", "java.lang.Deprecated"),
+    val applyComposeTransformer: Boolean = false,
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {
