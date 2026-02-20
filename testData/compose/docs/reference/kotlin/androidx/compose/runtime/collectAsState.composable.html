@@ -1,0 +1,125 @@
+<html devsite="true">
+  <head>
+    <title>collectAsState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="collectAsState">
+      <meta itemprop="path" content="androidx.compose.runtime">
+      <meta itemprop="property" content="(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for StateFlow&lt;T&gt;).collectAsState(kotlin.coroutines.CoroutineContext)">
+      <meta itemprop="property" content="(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for Flow&lt;T&gt;).collectAsState(kotlin.Any,kotlin.coroutines.CoroutineContext)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>collectAsState</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; ERROR CLASS: Symbol not found for StateFlow&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for StateFlow&lt;T&gt;).collectAsState(kotlin.coroutines.CoroutineContext)">collectAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><br>)</code></div>
+              <p>Collects values from this StateFlow and represents its latest value via <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;R&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;R,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; ERROR CLASS: Symbol not found for Flow&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for Flow&lt;T&gt;).collectAsState(kotlin.Any,kotlin.coroutines.CoroutineContext)">collectAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initial:&nbsp;R,<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><br>)</code></div>
+              <p>Collects values from this Flow and represents its latest value via <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for StateFlow&lt;T&gt;-.collectAsState-kotlin.coroutines.CoroutineContext-"></a><a name="collectasstate"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for StateFlow&lt;T&gt;).collectAsState(kotlin.coroutines.CoroutineContext)">collectAsState</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; ERROR CLASS: Symbol not found for StateFlow&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for StateFlow&lt;T&gt;).collectAsState(kotlin.coroutines.CoroutineContext)">collectAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a> = EmptyCoroutineContext<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</pre>
+      <p>Collects values from this StateFlow and represents its latest value via <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>. The StateFlow.value is used as an initial value. Every time there would be new value posted into the StateFlow the returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> will be updated causing recomposition of every <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> usage.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.Text
+import androidx.compose.runtime.collectAsState
+
+val value: String by stateFlow.collectAsState()
+Text(&quot;Value is $value&quot;)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>context:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a> = EmptyCoroutineContext</code></td>
+              <td>
+                <p><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> to use for collecting.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for Flow&lt;T&gt;).collectAsState(kotlin.Any, kotlin.coroutines.CoroutineContext)"></a><a name="-&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for Flow&lt;T&gt;-.collectAsState-kotlin.Any-kotlin.coroutines.CoroutineContext-"></a><a name="collectasstate"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for Flow&lt;T&gt;).collectAsState(kotlin.Any,kotlin.coroutines.CoroutineContext)">collectAsState</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;R,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; ERROR CLASS: Symbol not found for Flow&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#(&lt;ERROR CLASS&gt; ERROR CLASS: Symbol not found for Flow&lt;T&gt;).collectAsState(kotlin.Any,kotlin.coroutines.CoroutineContext)">collectAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initial:&nbsp;R,<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a> = EmptyCoroutineContext<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;R&gt;</pre>
+      <p>Collects values from this Flow and represents its latest value via <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>. Every time there would be new value posted into the Flow the returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> will be updated causing recomposition of every <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> usage.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.Text
+import androidx.compose.runtime.collectAsState
+
+val value: String by flow.collectAsState(&quot;initial&quot;)
+Text(&quot;Value is $value&quot;)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>initial:&nbsp;R</code></td>
+              <td>
+                <p>the value of the state will have until the first flow value is emitted.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>context:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a> = EmptyCoroutineContext</code></td>
+              <td>
+                <p><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> to use for collecting.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

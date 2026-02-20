@@ -1,0 +1,70 @@
+<html devsite="true">
+  <head>
+    <title>rememberTransformableState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="rememberTransformableState">
+      <meta itemprop="path" content="androidx.compose.foundation.gestures">
+      <meta itemprop="property" content="rememberTransformableState(kotlin.Function3)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>rememberTransformableState</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#rememberTransformableState(kotlin.Function3)">rememberTransformableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onTransformation:&nbsp;(zoomChange:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>, panChange:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>, rotationChange:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Create and remember default implementation of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> interface that contains necessary information about the ongoing transformations and provides smooth transformation capabilities.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="rememberTransformableState-kotlin.Function3-"></a><a name="remembertransformablestate"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="rememberTransformableState(kotlin.Function3)">rememberTransformableState</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#rememberTransformableState(kotlin.Function3)">rememberTransformableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onTransformation:&nbsp;(zoomChange:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>, panChange:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>, rotationChange:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></pre>
+      <p>Create and remember default implementation of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> interface that contains necessary information about the ongoing transformations and provides smooth transformation capabilities.</p>
+      <p>This is the simplest way to set up a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).transformable(androidx.compose.foundation.gestures.TransformableState,kotlin.Boolean,kotlin.Boolean)">transformable</a></code> modifier. When constructing this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code>, you must provide a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#rememberTransformableState(kotlin.Function3)">onTransformation</a></code> lambda, which will be invoked whenever pan, zoom or rotation happens (by gesture input or any <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html#transform(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">TransformableState.transform</a></code> call) with the deltas from the previous event.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>onTransformation:&nbsp;(zoomChange:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>, panChange:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>, rotationChange:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>callback invoked when transformation occurs. The callback receives the change from the previous event. It's relative scale multiplier for zoom, <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> in pixels for pan and degrees for rotation. Callers should update their state in this lambda.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

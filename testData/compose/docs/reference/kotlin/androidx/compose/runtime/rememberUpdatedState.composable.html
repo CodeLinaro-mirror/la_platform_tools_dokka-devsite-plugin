@@ -1,0 +1,95 @@
+<html devsite="true">
+  <head>
+    <title>rememberUpdatedState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="rememberUpdatedState">
+      <meta itemprop="path" content="androidx.compose.runtime">
+      <meta itemprop="property" content="rememberUpdatedState(kotlin.Any)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>rememberUpdatedState</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">rememberUpdatedState</a>(newValue:&nbsp;T)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> a <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">mutableStateOf</a></code> and update its value to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">newValue</a></code> on each recomposition of the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">rememberUpdatedState</a></code> call.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="rememberUpdatedState-kotlin.Any-"></a><a name="rememberupdatedstate"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="rememberUpdatedState(kotlin.Any)">rememberUpdatedState</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">rememberUpdatedState</a>(newValue:&nbsp;T):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> a <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">mutableStateOf</a></code> and update its value to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">newValue</a></code> on each recomposition of the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">rememberUpdatedState</a></code> call.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">rememberUpdatedState</a></code> should be used when parameters or values computed during composition are referenced by a long-lived lambda or object expression. Recomposition will update the resulting <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> without recreating the long-lived lambda or object, allowing that object to persist without cancelling and resubscribing, or relaunching a long-lived operation that may be expensive or prohibitive to recreate and restart. This may be common when working with <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Function1)">DisposableEffect</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>, for example:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
+
+@Composable
+fun EventHandler(dispatcher: Dispatcher, onEvent: () -&gt; Unit) {
+    val currentOnEvent by rememberUpdatedState(onEvent)
+
+    // Event handlers are ordered and a new onEvent should not cause us to re-register,
+    // losing our position in the dispatcher.
+    DisposableEffect(dispatcher) {
+        val disposable = dispatcher.addListener {
+            // currentOnEvent will always refer to the latest onEvent function that
+            // the EventHandler was recomposed with
+            currentOnEvent()
+        }
+        onDispose {
+            disposable.dispose()
+        }
+    }
+}</pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>s often describe state machines that should not be reset and restarted if a parameter or event callback changes, but they should have the current value available when needed. For example:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
+
+@Composable
+fun NotificationHost(state: NotificationState, onTimeout: (Notification) -&gt; Unit) {
+    val currentOnTimeout by rememberUpdatedState(onTimeout)
+
+    state.currentNotification?.let { currentNotification -&gt;
+        LaunchedEffect(currentNotification) {
+            // We should not restart this delay if onTimeout changes, but we want to call
+            // the onTimeout we were last recomposed with when it completes.
+            delay(NotificationTimeout)
+            currentOnTimeout(currentNotification)
+        }
+    }
+
+    // ...
+}</pre>
+      <p>By using <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">rememberUpdatedState</a></code> a composable function can update these operations in progress.</p>
+    </div>
+  </body>
+</html>

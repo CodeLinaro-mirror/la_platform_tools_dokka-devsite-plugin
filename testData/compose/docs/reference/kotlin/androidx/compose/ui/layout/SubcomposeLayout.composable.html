@@ -1,0 +1,197 @@
+<html devsite="true">
+  <head>
+    <title>SubcomposeLayout</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="SubcomposeLayout">
+      <meta itemprop="path" content="androidx.compose.ui.layout">
+      <meta itemprop="property" content="SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">
+      <meta itemprop="property" content="SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState,androidx.compose.ui.Modifier,kotlin.Function2)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>SubcomposeLayout</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
+              <p>Analogue of <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> which allows to subcompose the actual content during the measuring stage for example to use the values calculated during the measurement as params for the composition of the children.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState,androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeLayoutState.html">SubcomposeLayoutState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
+              <p>Analogue of <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> which allows to subcompose the actual content during the measuring stage for example to use the values calculated during the measurement as params for the composition of the children.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="SubcomposeLayout(androidx.compose.ui.Modifier, kotlin.Function2)"></a><a name="SubcomposeLayout-androidx.compose.ui.Modifier-kotlin.Function2-"></a><a name="subcomposelayout"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Analogue of <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> which allows to subcompose the actual content during the measuring stage for example to use the values calculated during the measurement as params for the composition of the children.</p>
+      <p>Possible use cases:</p>
+      <ul>
+        <li>
+          <p>You need to know the constraints passed by the parent during the composition and can't solve your use case with just custom <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code>. See <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">androidx.compose.foundation.layout.BoxWithConstraints</a></code>.</p>
+        </li>
+        <li>
+          <p>You want to use the size of one child during the composition of the second child.</p>
+        </li>
+        <li>
+          <p>You want to compose your items lazily based on the available size. For example you have a list of 100 items and instead of composing all of them you only compose the ones which are currently visible(say 5 of them) and compose next items when the component is scrolled.</p>
+        </li>
+      </ul>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.unit.IntSize
+
+// enum class SlotsEnum { Main, Dependent }
+SubcomposeLayout { constraints -&gt;
+    val mainPlaceables = subcompose(SlotsEnum.Main, mainContent).map {
+        it.measure(constraints)
+    }
+    val maxSize = mainPlaceables.fold(IntSize.Zero) { currentMax, placeable -&gt;
+        IntSize(
+            width = maxOf(currentMax.width, placeable.width),
+            height = maxOf(currentMax.height, placeable.height)
+        )
+    }
+    layout(maxSize.width, maxSize.height) {
+        mainPlaceables.forEach { it.placeRelative(0, 0) }
+        subcompose(SlotsEnum.Dependent) {
+            dependentContent(maxSize)
+        }.forEach {
+            it.measure(constraints).placeRelative(0, 0)
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to apply for the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+              <td>
+                <p>Measure policy which provides ability to subcompose during the measuring.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState, androidx.compose.ui.Modifier, kotlin.Function2)"></a><a name="SubcomposeLayout-androidx.compose.ui.layout.SubcomposeLayoutState-androidx.compose.ui.Modifier-kotlin.Function2-"></a><a name="subcomposelayout"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState,androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState,androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeLayoutState.html">SubcomposeLayoutState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Analogue of <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> which allows to subcompose the actual content during the measuring stage for example to use the values calculated during the measurement as params for the composition of the children.</p>
+      <p>Possible use cases:</p>
+      <ul>
+        <li>
+          <p>You need to know the constraints passed by the parent during the composition and can't solve your use case with just custom <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code>. See <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">androidx.compose.foundation.layout.BoxWithConstraints</a></code>.</p>
+        </li>
+        <li>
+          <p>You want to use the size of one child during the composition of the second child.</p>
+        </li>
+        <li>
+          <p>You want to compose your items lazily based on the available size. For example you have a list of 100 items and instead of composing all of them you only compose the ones which are currently visible(say 5 of them) and compose next items when the component is scrolled.</p>
+        </li>
+      </ul>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.unit.IntSize
+
+// enum class SlotsEnum { Main, Dependent }
+SubcomposeLayout { constraints -&gt;
+    val mainPlaceables = subcompose(SlotsEnum.Main, mainContent).map {
+        it.measure(constraints)
+    }
+    val maxSize = mainPlaceables.fold(IntSize.Zero) { currentMax, placeable -&gt;
+        IntSize(
+            width = maxOf(currentMax.width, placeable.width),
+            height = maxOf(currentMax.height, placeable.height)
+        )
+    }
+    layout(maxSize.width, maxSize.height) {
+        mainPlaceables.forEach { it.placeRelative(0, 0) }
+        subcompose(SlotsEnum.Dependent) {
+            dependentContent(maxSize)
+        }.forEach {
+            it.measure(constraints).placeRelative(0, 0)
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>state:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeLayoutState.html">SubcomposeLayoutState</a></code></td>
+              <td>
+                <p>the state object to be used by the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to apply for the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+              <td>
+                <p>Measure policy which provides ability to subcompose during the measuring.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<html devsite="true">
+  <head>
+    <title>rememberCoroutineScope</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="rememberCoroutineScope">
+      <meta itemprop="path" content="androidx.compose.runtime">
+      <meta itemprop="property" content="rememberCoroutineScope(kotlin.Function0)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>rememberCoroutineScope</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code>inline ERROR CLASS: Symbol not found for CoroutineScope</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberCoroutineScope(kotlin.Function0)">rememberCoroutineScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;getContext:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><br>)</code></div>
+              <p>Return a CoroutineScope bound to this point in the composition using the optional <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> provided by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberCoroutineScope(kotlin.Function0)">getContext</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="rememberCoroutineScope-kotlin.Function0-"></a><a name="remembercoroutinescope"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="rememberCoroutineScope(kotlin.Function0)">rememberCoroutineScope</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberCoroutineScope(kotlin.Function0)">rememberCoroutineScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;getContext:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a> = { EmptyCoroutineContext }<br>):&nbsp;ERROR CLASS: Symbol not found for CoroutineScope</pre>
+      <p>Return a CoroutineScope bound to this point in the composition using the optional <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> provided by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberCoroutineScope(kotlin.Function0)">getContext</a></code>. <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberCoroutineScope(kotlin.Function0)">getContext</a></code> will only be called once and the same CoroutineScope instance will be returned across recompositions.</p>
+      <p>This scope will be CoroutineScope.cancel when this call leaves the composition. The <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberCoroutineScope(kotlin.Function0)">getContext</a></code> may not contain a Job as this scope is considered to be a child of the composition.</p>
+      <p>The default dispatcher of this scope if one is not provided by the context returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberCoroutineScope(kotlin.Function0)">getContext</a></code> will be the applying dispatcher of the composition's <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+      <p>Use this scope to launch jobs in response to callback events such as clicks or other user interaction where the response to that event needs to unfold over time and be cancelled if the composable managing that process leaves the composition. Jobs should never be launched into <b>any</b> coroutine scope as a side effect of composition itself. For scoped ongoing jobs initiated by composition, see <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>.</p>
+      <p>This function will not throw if preconditions are not met, as composable functions do not yet fully support exceptions. Instead the returned scope's CoroutineScope.coroutineContext will contain a failed Job with the associated exception and will not be capable of launching child jobs.</p>
+    </div>
+  </body>
+</html>

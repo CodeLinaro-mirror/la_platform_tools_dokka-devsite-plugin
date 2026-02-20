@@ -1,0 +1,146 @@
+<html devsite="true">
+  <head>
+    <title>BasicAlertDialog</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="BasicAlertDialog">
+      <meta itemprop="path" content="androidx.compose.material3">
+      <meta itemprop="property" content="BasicAlertDialog(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.window.DialogProperties,kotlin.Function0)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>BasicAlertDialog</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#BasicAlertDialog(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.window.DialogProperties,kotlin.Function0)">BasicAlertDialog</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onDismissRequest:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;properties:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/window/DialogProperties.html">DialogProperties</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p><a href=&quot;https://m3.material.io/components/dialogs/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Basic alert dialog dialog</a>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="BasicAlertDialog(kotlin.Function0, androidx.compose.ui.Modifier, androidx.compose.ui.window.DialogProperties, kotlin.Function0)"></a><a name="BasicAlertDialog-kotlin.Function0-androidx.compose.ui.Modifier-androidx.compose.ui.window.DialogProperties-kotlin.Function0-"></a><a name="basicalertdialog"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="BasicAlertDialog(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.window.DialogProperties,kotlin.Function0)">BasicAlertDialog</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#BasicAlertDialog(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.window.DialogProperties,kotlin.Function0)">BasicAlertDialog</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onDismissRequest:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;properties:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/window/DialogProperties.html">DialogProperties</a> = DialogProperties(),<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><a href=&quot;https://m3.material.io/components/dialogs/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Basic alert dialog dialog</a>.</p>
+      <p>Dialogs provide important prompts in a user flow. They can require an action, communicate information, or help users accomplish a task.</p>
+      <p><img alt="Basic dialog
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/basic-dialog.png"></p>
+      <p>This basic alert dialog expects an arbitrary content that is defined by the caller. Note that your content will need to define its own styling.</p>
+      <p>By default, the displayed dialog has the minimum height and width that the Material Design spec defines. If required, these constraints can be overwritten by providing a <code>width</code> or <code>height</code> <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code>s.</p>
+      <p>Basic alert dialog usage with custom content:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+val openDialog = remember { mutableStateOf(true) }
+
+if (openDialog.value) {
+    BasicAlertDialog(
+        onDismissRequest = {
+            // Dismiss the dialog when the user clicks outside the dialog or on the back
+            // button. If you want to disable that functionality, simply use an empty
+            // onDismissRequest.
+            openDialog.value = false
+        }
+    ) {
+        Surface(
+            modifier = Modifier.wrapContentWidth().wrapContentHeight(),
+            shape = MaterialTheme.shapes.large,
+            tonalElevation = AlertDialogDefaults.TonalElevation
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text =
+                        &quot;This area typically contains the supportive text &quot; +
+                            &quot;which presents the details regarding the Dialog's purpose.&quot;,
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                TextButton(
+                    onClick = { openDialog.value = false },
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Text(&quot;Confirm&quot;)
+                }
+            }
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>onDismissRequest:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>called when the user tries to dismiss the Dialog by clicking outside or pressing the back button. This is not called when the dismiss button is clicked.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this dialog's content.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>properties:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/window/DialogProperties.html">DialogProperties</a> = DialogProperties()</code></td>
+              <td>
+                <p>typically platform specific properties to further configure the dialog.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>the content of the dialog</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

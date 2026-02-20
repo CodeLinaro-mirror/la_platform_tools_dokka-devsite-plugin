@@ -1,0 +1,128 @@
+<html devsite="true">
+  <head>
+    <title>animateDpAsState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="animateDpAsState">
+      <meta itemprop="path" content="androidx.compose.animation.core">
+      <meta itemprop="property" content="animateDpAsState(androidx.compose.ui.unit.Dp,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>animateDpAsState</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateDpAsState(androidx.compose.ui.unit.Dp,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateDpAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedListener:&nbsp;((<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?<br>)</code></div>
+              <p>Fire-and-forget animation function for <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="animateDpAsState(androidx.compose.ui.unit.Dp, androidx.compose.animation.core.AnimationSpec, kotlin.String, kotlin.Function1)"></a><a name="animateDpAsState-androidx.compose.ui.unit.Dp-androidx.compose.animation.core.AnimationSpec-kotlin.String-kotlin.Function1-"></a><a name="animatedpasstate"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="animateDpAsState(androidx.compose.ui.unit.Dp,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateDpAsState</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateDpAsState(androidx.compose.ui.unit.Dp,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateDpAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>&gt; = dpDefaultSpring,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;DpAnimation&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedListener:&nbsp;((<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>&gt;</pre>
+      <p>Fire-and-forget animation function for <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>. This Composable function is overloaded for different parameter types such as <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code>, etc. When the provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateDpAsState(androidx.compose.ui.unit.Dp,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">targetValue</a></code> is changed, the animation will run automatically. If there is already an animation in-flight when <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateDpAsState(androidx.compose.ui.unit.Dp,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">targetValue</a></code> changes, the on-going animation will adjust course to animate towards the new target value.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateDpAsState(androidx.compose.ui.unit.Dp,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateDpAsState</a></code> returns a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object. The value of the state object will continuously be updated by the animation until the animation finishes.</p>
+      <p>Note, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateDpAsState(androidx.compose.ui.unit.Dp,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateDpAsState</a></code> cannot be canceled/stopped without removing this composable function from the tree. See <code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html">Animatable</a></code> for cancelable animations.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun HeightAnimation(collapsed: Boolean) {
+    // Animates a height of [Dp] type to different target values based on the [collapsed] flag.
+    val height: Dp by animateDpAsState(if (collapsed) 10.dp else 20.dp)
+    Box(Modifier.fillMaxWidth().requiredHeight(height).background(color = Color.Red))
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+              <td>
+                <p>Target value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>&gt; = dpDefaultSpring</code></td>
+              <td>
+                <p>The animation that will be used to change the value through time. Physics                     animation will be used by default.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;DpAnimation&quot;</code></td>
+              <td>
+                <p>An optional label to differentiate from other animations in Android Studio.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>finishedListener:&nbsp;((<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>An optional end listener to get notified when the animation is finished.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>&gt;</code></td>
+              <td>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object, the value of which is updated by animation.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

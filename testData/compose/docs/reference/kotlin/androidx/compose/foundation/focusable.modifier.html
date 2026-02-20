@@ -1,0 +1,113 @@
+<html devsite="true">
+  <head>
+    <title>focusable</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="focusable">
+      <meta itemprop="path" content="androidx.compose.foundation">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>focusable</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>?<br>)</code></div>
+              <p>Configure component to be focusable via focus system or accessibility &quot;focus&quot; event.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).focusable(kotlin.Boolean, androidx.compose.foundation.interaction.MutableInteractionSource)"></a><a name="-androidx.compose.ui.Modifier-.focusable-kotlin.Boolean-androidx.compose.foundation.interaction.MutableInteractionSource-"></a><a name="focusable"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Configure component to be focusable via focus system or accessibility &quot;focus&quot; event.</p>
+      <p>Add this modifier to the element to make it focusable within its bounds.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+
+// initialize focus reference to be able to request focus programmatically
+val focusRequester = remember { FocusRequester() }
+// MutableInteractionSource to track changes of the component's interactions (like &quot;focused&quot;)
+val interactionSource = remember { MutableInteractionSource() }
+
+// text below will change when we focus it via button click
+val isFocused = interactionSource.collectIsFocusedAsState().value
+val text = if (isFocused) {
+    &quot;Focused! tap anywhere to free the focus&quot;
+} else {
+    &quot;Bring focus to me by tapping the button below!&quot;
+}
+Column {
+    // this Text will change it's text parameter depending on the presence of a focus
+    Text(
+        text = text,
+        modifier = Modifier
+            // add focusRequester modifier before the focusable (or even in the parent)
+            .focusRequester(focusRequester)
+            .focusable(interactionSource = interactionSource)
+    )
+    Button(onClick = { focusRequester.requestFocus() }) {
+        Text(&quot;Bring focus to the text above&quot;)
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+              <td>
+                <p>Controls the enabled state. When <code>false</code>, element won't participate in the focus</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> that will be used to emit <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/FocusInteraction.Focus.html">FocusInteraction.Focus</a></code> when this element is being focused.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

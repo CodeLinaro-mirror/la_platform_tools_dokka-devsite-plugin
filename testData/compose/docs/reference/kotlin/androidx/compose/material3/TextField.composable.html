@@ -1,0 +1,596 @@
+<html devsite="true">
+  <head>
+    <title>TextField</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="TextField">
+      <meta itemprop="path" content="androidx.compose.material3">
+      <meta itemprop="property" content="TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">
+      <meta itemprop="property" content="TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>TextField</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">TextField</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onValueChange:&nbsp;(<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;readOnly:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;textStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html">TextStyle</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholder:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;leadingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;trailingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;suffix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;supportingText:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;isError:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;visualTransformation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyboardOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyboardActions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardActions.html">KeyboardActions</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;singleLine:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;minLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TextFieldColors.html">TextFieldColors</a><br>)</code></div>
+              <p><a href=&quot;https://m3.material.io/components/text-fields/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design filled text field</a>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">TextField</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onValueChange:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;readOnly:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;textStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html">TextStyle</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholder:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;leadingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;trailingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;suffix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;supportingText:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;isError:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;visualTransformation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyboardOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyboardActions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardActions.html">KeyboardActions</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;singleLine:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;minLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TextFieldColors.html">TextFieldColors</a><br>)</code></div>
+              <p><a href=&quot;https://m3.material.io/components/text-fields/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design filled text field</a>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="TextField(kotlin.String, kotlin.Function1, androidx.compose.ui.Modifier, kotlin.Boolean, kotlin.Boolean, androidx.compose.ui.text.TextStyle, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Boolean, androidx.compose.ui.text.input.VisualTransformation, androidx.compose.foundation.text.KeyboardOptions, androidx.compose.foundation.text.KeyboardActions, kotlin.Boolean, kotlin.Int, kotlin.Int, androidx.compose.foundation.interaction.MutableInteractionSource, androidx.compose.ui.graphics.Shape, androidx.compose.material3.TextFieldColors)"></a><a name="TextField-kotlin.String-kotlin.Function1-androidx.compose.ui.Modifier-kotlin.Boolean-kotlin.Boolean-androidx.compose.ui.text.TextStyle-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Boolean-androidx.compose.ui.text.input.VisualTransformation-androidx.compose.foundation.text.KeyboardOptions-androidx.compose.foundation.text.KeyboardActions-kotlin.Boolean-kotlin.Int-kotlin.Int-androidx.compose.foundation.interaction.MutableInteractionSource-androidx.compose.ui.graphics.Shape-androidx.compose.material3.TextFieldColors-"></a><a name="textfield"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">TextField</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">TextField</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onValueChange:&nbsp;(<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;readOnly:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;textStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html">TextStyle</a> = LocalTextStyle.current,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholder:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;leadingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;trailingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;suffix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;supportingText:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;isError:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;visualTransformation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a> = VisualTransformation.None,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyboardOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a> = KeyboardOptions.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyboardActions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardActions.html">KeyboardActions</a> = KeyboardActions.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;singleLine:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = if (singleLine) 1 else Int.MAX_VALUE,<br>&nbsp;&nbsp;&nbsp;&nbsp;minLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 1,<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a> = TextFieldDefaults.shape,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TextFieldColors.html">TextFieldColors</a> = TextFieldDefaults.colors()<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><a href=&quot;https://m3.material.io/components/text-fields/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design filled text field</a>.</p>
+      <p>Text fields allow users to enter text into a UI. They typically appear in forms and dialogs. Filled text fields have more visual emphasis than outlined text fields, making them stand out when surrounded by other content and components.</p>
+      <p><img alt="Filled text field
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/filled-text-field.png"></p>
+      <p>If you are looking for an outlined version, see <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#OutlinedTextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">OutlinedTextField</a></code>.</p>
+      <p>A simple single line text field looks like:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+
+var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
+
+TextField(
+    value = text,
+    onValueChange = { text = it },
+    label = { Text(&quot;Label&quot;) },
+    singleLine = true
+)</pre>
+      <p>You may provide a placeholder:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+
+var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
+
+TextField(
+    value = text,
+    onValueChange = { text = it },
+    label = { Text(&quot;Email&quot;) },
+    placeholder = { Text(&quot;example@gmail.com&quot;) }
+)</pre>
+      <p>You can also provide leading and trailing icons:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+
+var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
+
+TextField(
+    value = text,
+    onValueChange = { text = it },
+    label = { Text(&quot;Label&quot;) },
+    leadingIcon = { Icon(Icons.Filled.Favorite, contentDescription = &quot;Localized description&quot;) },
+    trailingIcon = { Icon(Icons.Filled.Info, contentDescription = &quot;Localized description&quot;) }
+)</pre>
+      <p>You can also provide a prefix or suffix to the text:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+
+var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
+
+TextField(
+    value = text,
+    onValueChange = { text = it },
+    singleLine = true,
+    label = { Text(&quot;Label&quot;) },
+    prefix = { Text(&quot;www.&quot;) },
+    suffix = { Text(&quot;.com&quot;) },
+    placeholder = { Text(&quot;google&quot;) },
+)</pre>
+      <p>To handle the error input state, use <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">isError</a></code> parameter:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.error
+import androidx.compose.ui.semantics.semantics
+
+val errorMessage = &quot;Text input too long&quot;
+var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
+var isError by rememberSaveable { mutableStateOf(false) }
+val charLimit = 10
+
+fun validate(text: String) {
+    isError = text.length &gt; charLimit
+}
+
+TextField(
+    value = text,
+    onValueChange = {
+        text = it
+        validate(text)
+    },
+    singleLine = true,
+    label = { Text(if (isError) &quot;Username*&quot; else &quot;Username&quot;) },
+    supportingText = {
+        Row {
+            Text(if (isError) errorMessage else &quot;&quot;, Modifier.clearAndSetSemantics {})
+            Spacer(Modifier.weight(1f))
+            Text(&quot;Limit: ${text.length}/$charLimit&quot;)
+        }
+    },
+    isError = isError,
+    keyboardActions = KeyboardActions { validate(text) },
+    modifier =
+        Modifier.semantics {
+            // Provide localized description of the error
+            if (isError) error(errorMessage)
+        }
+)</pre>
+      <p>Additionally, you may provide additional message at the bottom:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+
+var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
+
+TextField(
+    value = text,
+    onValueChange = { text = it },
+    label = { Text(&quot;Label&quot;) },
+    supportingText = {
+        Text(&quot;Supporting text that is long and perhaps goes onto another line.&quot;)
+    },
+)</pre>
+      <p>Password text field example:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+
+var password by rememberSaveable { mutableStateOf(&quot;&quot;) }
+var passwordHidden by rememberSaveable { mutableStateOf(true) }
+TextField(
+    value = password,
+    onValueChange = { password = it },
+    singleLine = true,
+    label = { Text(&quot;Enter password&quot;) },
+    visualTransformation =
+        if (passwordHidden) PasswordVisualTransformation() else VisualTransformation.None,
+    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+    trailingIcon = {
+        IconButton(onClick = { passwordHidden = !passwordHidden }) {
+            val visibilityIcon =
+                if (passwordHidden) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+            // Please provide localized description for accessibility services
+            val description = if (passwordHidden) &quot;Show password&quot; else &quot;Hide password&quot;
+            Icon(imageVector = visibilityIcon, contentDescription = description)
+        }
+    }
+)</pre>
+      <p>Hiding a software keyboard on IME action performed:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
+
+val keyboardController = LocalSoftwareKeyboardController.current
+var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
+TextField(
+    value = text,
+    onValueChange = { text = it },
+    label = { Text(&quot;Label&quot;) },
+    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+    keyboardActions =
+        KeyboardActions(
+            onDone = {
+                keyboardController?.hide()
+                // do something here
+            }
+        )
+)</pre>
+      <p>If apart from input text change you also want to observe the cursor location, selection range, or IME composition use the TextField overload with the <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a></code> parameter instead.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <p>the input text to be shown in the text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onValueChange:&nbsp;(<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>the callback that is triggered when the input service updates the text. An updated text comes as a parameter of the callback</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+              <td>
+                <p>controls the enabled state of this text field. When <code>false</code>, this component will not respond to user input, and it will appear visually disabled and disabled to accessibility services.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>readOnly:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>controls the editable state of the text field. When <code>true</code>, the text field cannot be modified. However, a user can focus it and copy text from it. Read-only text fields are usually used to display pre-filled forms that a user cannot edit.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>textStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html">TextStyle</a> = LocalTextStyle.current</code></td>
+              <td>
+                <p>the style to be applied to the input text. Defaults to <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#LocalTextStyle()">LocalTextStyle</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>label:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional label to be displayed inside the text field container. The default text style for internal <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Text(kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Function1,androidx.compose.ui.text.TextStyle)">Text</a></code> is <code><a href="/reference/kotlin/androidx/compose/material3/Typography.html#bodySmall()">Typography.bodySmall</a></code> when the text field is in focus and <code><a href="/reference/kotlin/androidx/compose/material3/Typography.html#bodyLarge()">Typography.bodyLarge</a></code> when the text field is not in focus</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>placeholder:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional placeholder to be displayed when the text field is in focus and the input text is empty. The default text style for internal <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Text(kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Function1,androidx.compose.ui.text.TextStyle)">Text</a></code> is <code><a href="/reference/kotlin/androidx/compose/material3/Typography.html#bodyLarge()">Typography.bodyLarge</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>leadingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional leading icon to be displayed at the beginning of the text field container</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>trailingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional trailing icon to be displayed at the end of the text field container</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>prefix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional prefix to be displayed before the input text in the text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>suffix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional suffix to be displayed after the input text in the text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>supportingText:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional supporting text to be displayed below the text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>isError:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>indicates if the text field's current value is in error. If set to true, the label, bottom indicator and trailing icon by default will be displayed in error color</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>visualTransformation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a> = VisualTransformation.None</code></td>
+              <td>
+                <p>transforms the visual representation of the input <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">value</a></code> For example, you can use <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PasswordVisualTransformation.html">PasswordVisualTransformation</a></code> to create a password text field. By default, no visual transformation is applied.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>keyboardOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a> = KeyboardOptions.Default</code></td>
+              <td>
+                <p>software keyboard options that contains configuration such as <code><a href="/reference/kotlin/androidx/compose/ui/text/input/KeyboardType.html">KeyboardType</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>keyboardActions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardActions.html">KeyboardActions</a> = KeyboardActions.Default</code></td>
+              <td>
+                <p>when the input service emits an IME action, the corresponding callback is called. Note that this IME action may be different from what you specified in <code><a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions.html#imeAction()">KeyboardOptions.imeAction</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>singleLine:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>when <code>true</code>, this text field becomes a single horizontally scrolling text field instead of wrapping onto multiple lines. The keyboard will be informed to not show the return key as the <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code>. Note that <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">maxLines</a></code> parameter will be ignored as the maxLines attribute will be automatically set to 1.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>maxLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = if (singleLine) 1 else Int.MAX_VALUE</code></td>
+              <td>
+                <p>the maximum height in terms of maximum number of visible lines. It is required that 1 <= <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">minLines</a></code><= <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">maxLines</a></code>. This parameter is ignored when <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">singleLine</a></code> is true.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>minLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 1</code></td>
+              <td>
+                <p>the minimum height in terms of minimum number of visible lines. It is required that 1 <= <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">minLines</a></code><= <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">maxLines</a></code>. This parameter is ignored when <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">singleLine</a></code> is true.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null</code></td>
+              <td>
+                <p>an optional hoisted <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> for observing and emitting <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s for this text field. You can use this to change the text field's appearance or preview the text field in different states. Note that if <code>null</code> is provided, interactions will still happen internally.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a> = TextFieldDefaults.shape</code></td>
+              <td>
+                <p>defines the shape of this text field's container</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TextFieldColors.html">TextFieldColors</a> = TextFieldDefaults.colors()</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/material3/TextFieldColors.html">TextFieldColors</a></code> that will be used to resolve the colors used for this text field in different states. See <code><a href="/reference/kotlin/androidx/compose/material3/TextFieldDefaults.html#colors()">TextFieldDefaults.colors</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="TextField(androidx.compose.ui.text.input.TextFieldValue, kotlin.Function1, androidx.compose.ui.Modifier, kotlin.Boolean, kotlin.Boolean, androidx.compose.ui.text.TextStyle, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Function0, kotlin.Boolean, androidx.compose.ui.text.input.VisualTransformation, androidx.compose.foundation.text.KeyboardOptions, androidx.compose.foundation.text.KeyboardActions, kotlin.Boolean, kotlin.Int, kotlin.Int, androidx.compose.foundation.interaction.MutableInteractionSource, androidx.compose.ui.graphics.Shape, androidx.compose.material3.TextFieldColors)"></a><a name="TextField-androidx.compose.ui.text.input.TextFieldValue-kotlin.Function1-androidx.compose.ui.Modifier-kotlin.Boolean-kotlin.Boolean-androidx.compose.ui.text.TextStyle-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Function0-kotlin.Boolean-androidx.compose.ui.text.input.VisualTransformation-androidx.compose.foundation.text.KeyboardOptions-androidx.compose.foundation.text.KeyboardActions-kotlin.Boolean-kotlin.Int-kotlin.Int-androidx.compose.foundation.interaction.MutableInteractionSource-androidx.compose.ui.graphics.Shape-androidx.compose.material3.TextFieldColors-"></a><a name="textfield"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">TextField</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">TextField</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onValueChange:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;readOnly:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;textStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html">TextStyle</a> = LocalTextStyle.current,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholder:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;leadingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;trailingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;suffix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;supportingText:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;isError:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;visualTransformation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a> = VisualTransformation.None,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyboardOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a> = KeyboardOptions.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyboardActions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardActions.html">KeyboardActions</a> = KeyboardActions.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;singleLine:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = if (singleLine) 1 else Int.MAX_VALUE,<br>&nbsp;&nbsp;&nbsp;&nbsp;minLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 1,<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a> = TextFieldDefaults.shape,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TextFieldColors.html">TextFieldColors</a> = TextFieldDefaults.colors()<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><a href=&quot;https://m3.material.io/components/text-fields/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design filled text field</a>.</p>
+      <p>Text fields allow users to enter text into a UI. They typically appear in forms and dialogs. Filled text fields have more visual emphasis than outlined text fields, making them stand out when surrounded by other content and components.</p>
+      <p><img alt="Filled text field
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/filled-text-field.png"></p>
+      <p>If you are looking for an outlined version, see <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#OutlinedTextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">OutlinedTextField</a></code>.</p>
+      <p>See example usage:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
+
+var text by
+    rememberSaveable(stateSaver = TextFieldValue.Saver) {
+        mutableStateOf(TextFieldValue(&quot;example&quot;, TextRange(0, 7)))
+    }
+
+TextField(value = text, onValueChange = { text = it }, label = { Text(&quot;Label&quot;) })</pre>
+      <p>This overload provides access to the input text, cursor position, selection range and IME composition. If you only want to observe an input text change, use the TextField overload with the <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code> parameter instead.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>value:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a></code></td>
+              <td>
+                <p>the input <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a></code> to be shown in the text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onValueChange:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>the callback that is triggered when the input service updates values in <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a></code>. An updated <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a></code> comes as a parameter of the callback</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+              <td>
+                <p>controls the enabled state of this text field. When <code>false</code>, this component will not respond to user input, and it will appear visually disabled and disabled to accessibility services.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>readOnly:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>controls the editable state of the text field. When <code>true</code>, the text field cannot be modified. However, a user can focus it and copy text from it. Read-only text fields are usually used to display pre-filled forms that a user cannot edit.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>textStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html">TextStyle</a> = LocalTextStyle.current</code></td>
+              <td>
+                <p>the style to be applied to the input text. Defaults to <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#LocalTextStyle()">LocalTextStyle</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>label:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional label to be displayed inside the text field container. The default text style for internal <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Text(kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Function1,androidx.compose.ui.text.TextStyle)">Text</a></code> is <code><a href="/reference/kotlin/androidx/compose/material3/Typography.html#bodySmall()">Typography.bodySmall</a></code> when the text field is in focus and <code><a href="/reference/kotlin/androidx/compose/material3/Typography.html#bodyLarge()">Typography.bodyLarge</a></code> when the text field is not in focus</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>placeholder:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional placeholder to be displayed when the text field is in focus and the input text is empty. The default text style for internal <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Text(kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Function1,androidx.compose.ui.text.TextStyle)">Text</a></code> is <code><a href="/reference/kotlin/androidx/compose/material3/Typography.html#bodyLarge()">Typography.bodyLarge</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>leadingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional leading icon to be displayed at the beginning of the text field container</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>trailingIcon:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional trailing icon to be displayed at the end of the text field container</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>prefix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional prefix to be displayed before the input text in the text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>suffix:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional suffix to be displayed after the input text in the text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>supportingText:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>the optional supporting text to be displayed below the text field</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>isError:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>indicates if the text field's current value is in error state. If set to true, the label, bottom indicator and trailing icon by default will be displayed in error color</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>visualTransformation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a> = VisualTransformation.None</code></td>
+              <td>
+                <p>transforms the visual representation of the input <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">value</a></code>. For example, you can use <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PasswordVisualTransformation.html">PasswordVisualTransformation</a></code> to create a password text field. By default, no visual transformation is applied.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>keyboardOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions.html">KeyboardOptions</a> = KeyboardOptions.Default</code></td>
+              <td>
+                <p>software keyboard options that contains configuration such as <code><a href="/reference/kotlin/androidx/compose/ui/text/input/KeyboardType.html">KeyboardType</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>keyboardActions:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardActions.html">KeyboardActions</a> = KeyboardActions.Default</code></td>
+              <td>
+                <p>when the input service emits an IME action, the corresponding callback is called. Note that this IME action may be different from what you specified in <code><a href="/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions.html#imeAction()">KeyboardOptions.imeAction</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>singleLine:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>when <code>true</code>, this text field becomes a single horizontally scrolling text field instead of wrapping onto multiple lines. The keyboard will be informed to not show the return key as the <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a></code>. Note that <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">maxLines</a></code> parameter will be ignored as the maxLines attribute will be automatically set to 1.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>maxLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = if (singleLine) 1 else Int.MAX_VALUE</code></td>
+              <td>
+                <p>the maximum height in terms of maximum number of visible lines. It is required that 1 <= <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">minLines</a></code><= <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">maxLines</a></code>. This parameter is ignored when <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">singleLine</a></code> is true.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>minLines:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 1</code></td>
+              <td>
+                <p>the minimum height in terms of minimum number of visible lines. It is required that 1 <= <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">minLines</a></code><= <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">maxLines</a></code>. This parameter is ignored when <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TextField(androidx.compose.ui.text.input.TextFieldValue,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.ui.text.input.VisualTransformation,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Shape,androidx.compose.material3.TextFieldColors)">singleLine</a></code> is true.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null</code></td>
+              <td>
+                <p>an optional hoisted <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> for observing and emitting <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s for this text field. You can use this to change the text field's appearance or preview the text field in different states. Note that if <code>null</code> is provided, interactions will still happen internally.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a> = TextFieldDefaults.shape</code></td>
+              <td>
+                <p>defines the shape of this text field's container</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TextFieldColors.html">TextFieldColors</a> = TextFieldDefaults.colors()</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/material3/TextFieldColors.html">TextFieldColors</a></code> that will be used to resolve the colors used for this text field in different states. See <code><a href="/reference/kotlin/androidx/compose/material3/TextFieldDefaults.html#colors()">TextFieldDefaults.colors</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

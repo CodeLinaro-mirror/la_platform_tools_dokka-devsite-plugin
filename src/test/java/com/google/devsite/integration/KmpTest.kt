@@ -47,6 +47,7 @@ class KmpTest : IntegrationTestBase() {
             projectPath = "androidx",
             useAndroidxBaseSourceLink = true,
             javaDocsDirectory = null,
+            applyComposeTransformer = true,
         )
     }
 }

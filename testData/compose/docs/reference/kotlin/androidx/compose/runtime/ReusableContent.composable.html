@@ -1,0 +1,75 @@
+<html devsite="true">
+  <head>
+    <title>ReusableContent</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="ReusableContent">
+      <meta itemprop="path" content="androidx.compose.runtime">
+      <meta itemprop="property" content="ReusableContent(kotlin.Any,kotlin.Function0)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>ReusableContent</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code>inline <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</a>(key:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>A utility function to mark a composition as supporting recycling.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="ReusableContent(kotlin.Any, kotlin.Function0)"></a><a name="ReusableContent-kotlin.Any-kotlin.Function0-"></a><a name="reusablecontent"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</a>(key:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>A utility function to mark a composition as supporting recycling. If the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">key</a></code> changes the composition is replaced by a new composition (as would happen for <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">key</a></code>) but reusable nodes that are emitted by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a></code> are reused.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>key:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+              <td>
+                <p>the value that is used to trigger recycling. If recomposed with a different value the composer creates a new composition but tries to reuse reusable nodes.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>the composable children that are recyclable.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

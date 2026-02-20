@@ -1,0 +1,108 @@
+<html devsite="true">
+  <head>
+    <title>animateColorAsState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="animateColorAsState">
+      <meta itemprop="path" content="androidx.compose.animation">
+      <meta itemprop="property" content="animateColorAsState(androidx.compose.ui.graphics.Color,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>animateColorAsState</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#animateColorAsState(androidx.compose.ui.graphics.Color,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateColorAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedListener:&nbsp;((<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?<br>)</code></div>
+              <p>Fire-and-forget animation function for <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="animateColorAsState(androidx.compose.ui.graphics.Color, androidx.compose.animation.core.AnimationSpec, kotlin.String, kotlin.Function1)"></a><a name="animateColorAsState-androidx.compose.ui.graphics.Color-androidx.compose.animation.core.AnimationSpec-kotlin.String-kotlin.Function1-"></a><a name="animatecolorasstate"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="animateColorAsState(androidx.compose.ui.graphics.Color,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateColorAsState</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/package-summary.html#animateColorAsState(androidx.compose.ui.graphics.Color,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateColorAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>&gt; = colorDefaultSpring,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;ColorAnimation&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedListener:&nbsp;((<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>&gt;</pre>
+      <p>Fire-and-forget animation function for <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code>. This Composable function is overloaded for different parameter types such as <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>, <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code>, <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code>, etc. When the provided <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#animateColorAsState(androidx.compose.ui.graphics.Color,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">targetValue</a></code> is changed, the animation will run automatically. If there is already an animation in-flight when <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#animateColorAsState(androidx.compose.ui.graphics.Color,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">targetValue</a></code> changes, the on-going animation will adjust course to animate towards the new target value.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#animateColorAsState(androidx.compose.ui.graphics.Color,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateColorAsState</a></code> returns a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object. The value of the state object will continuously be updated by the animation until the animation finishes.</p>
+      <p>Note, <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#animateColorAsState(androidx.compose.ui.graphics.Color,androidx.compose.animation.core.AnimationSpec,kotlin.String,kotlin.Function1)">animateColorAsState</a></code> cannot be canceled/stopped without removing this composable function from the tree. See <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#Animatable(androidx.compose.ui.graphics.Color)">Animatable</a></code> for cancelable animations.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+
+@Composable
+fun ColorAnimation(primary: Boolean) {
+    // Animates to primary or secondary color, depending on whether [primary] is true
+    // [animateState] returns the current animation value in a State&lt;Color&gt; in this example. We
+    // use the State&lt;Color&gt; object as a property delegate here.
+    val color: Color by animateColorAsState(
+        if (primary) MaterialTheme.colors.primary else MaterialTheme.colors.secondary
+    )
+    Box(modifier = Modifier.background(color))
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <p>Target value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>&gt; = colorDefaultSpring</code></td>
+              <td>
+                <p>The animation that will be used to change the value through time,                       <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> by default</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;ColorAnimation&quot;</code></td>
+              <td>
+                <p>An optional label to differentiate from other animations in Android Studio.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>finishedListener:&nbsp;((<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>An optional listener to get notified when the animation is finished.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

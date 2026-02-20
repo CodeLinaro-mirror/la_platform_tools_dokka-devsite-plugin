@@ -1,0 +1,423 @@
+<html devsite="true">
+  <head>
+    <title>PullToRefreshBox</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="PullToRefreshBox">
+      <meta itemprop="path" content="androidx.compose.material3.pulltorefresh">
+      <meta itemprop="property" content="PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>PullToRefreshBox</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;isRefreshing:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onRefresh:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;indicator:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a></code> is a container that expects a scrollable layout as content and adds gesture support for manually refreshing when the user swipes downward at the beginning of the content.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="PullToRefreshBox(kotlin.Boolean, kotlin.Function0, androidx.compose.ui.Modifier, androidx.compose.material3.pulltorefresh.PullToRefreshState, androidx.compose.ui.Alignment, kotlin.Function1, kotlin.Function1)"></a><a name="PullToRefreshBox-kotlin.Boolean-kotlin.Function0-androidx.compose.ui.Modifier-androidx.compose.material3.pulltorefresh.PullToRefreshState-androidx.compose.ui.Alignment-kotlin.Function1-kotlin.Function1-"></a><a name="pulltorefreshbox"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;isRefreshing:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onRefresh:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a> = rememberPullToRefreshState(),<br>&nbsp;&nbsp;&nbsp;&nbsp;contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.TopStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;indicator:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a> = {
+        Indicator(
+            modifier = Modifier.align(Alignment.TopCenter),
+            isRefreshing = isRefreshing,
+            state = state
+        )
+    },<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshBox(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function1)">PullToRefreshBox</a></code> is a container that expects a scrollable layout as content and adds gesture support for manually refreshing when the user swipes downward at the beginning of the content. By default, it uses <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshDefaults.html#Indicator(androidx.compose.material3.pulltorefresh.PullToRefreshState,kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp)">PullToRefreshDefaults.Indicator</a></code> as the refresh indicator.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshState
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+
+var itemCount by remember { mutableIntStateOf(15) }
+var isRefreshing by remember { mutableStateOf(false) }
+val state = rememberPullToRefreshState()
+val coroutineScope = rememberCoroutineScope()
+val onRefresh: () -&gt; Unit = {
+    isRefreshing = true
+    coroutineScope.launch {
+        delay(1500)
+        itemCount += 5
+        isRefreshing = false
+    }
+}
+
+Scaffold(
+    topBar = {
+        TopAppBar(
+            title = { Text(&quot;Title&quot;) },
+            // Provide an accessible alternative to trigger refresh.
+            actions = {
+                IconButton(onClick = onRefresh) {
+                    Icon(Icons.Filled.Refresh, &quot;Trigger Refresh&quot;)
+                }
+            }
+        )
+    }
+) {
+    PullToRefreshBox(
+        modifier = Modifier.padding(it),
+        state = state,
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh,
+    ) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            items(itemCount) { ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) }) }
+        }
+    }
+}</pre>
+      <p>View models can be used as source as truth as shown in</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+
+val viewModel = remember {
+    object : ViewModel() {
+        private val refreshRequests = Channel&lt;Unit&gt;(1)
+        var isRefreshing by mutableStateOf(false)
+            private set
+
+        var itemCount by mutableStateOf(15)
+            private set
+
+        init {
+            viewModelScope.launch {
+                for (r in refreshRequests) {
+                    isRefreshing = true
+                    try {
+                        itemCount += 5
+                        delay(1000) // simulate doing real work
+                    } finally {
+                        isRefreshing = false
+                    }
+                }
+            }
+        }
+
+        fun refresh() {
+            refreshRequests.trySend(Unit)
+        }
+    }
+}
+
+Scaffold(
+    topBar = {
+        TopAppBar(
+            title = { Text(&quot;Title&quot;) },
+            // Provide an accessible alternative to trigger refresh.
+            actions = {
+                IconButton(
+                    enabled = !viewModel.isRefreshing,
+                    onClick = { viewModel.refresh() }
+                ) {
+                    Icon(Icons.Filled.Refresh, &quot;Trigger Refresh&quot;)
+                }
+            }
+        )
+    }
+) {
+    PullToRefreshBox(
+        modifier = Modifier.padding(it),
+        isRefreshing = viewModel.isRefreshing,
+        onRefresh = { viewModel.refresh() }
+    ) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            if (!viewModel.isRefreshing) {
+                items(viewModel.itemCount) {
+                    ListItem({ Text(text = &quot;Item ${viewModel.itemCount - it}&quot;) })
+                }
+            }
+        }
+    }
+}</pre>
+      <p>A custom state implementation can be initialized like this</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+
+var itemCount by remember { mutableIntStateOf(15) }
+var isRefreshing by remember { mutableStateOf(false) }
+val coroutineScope = rememberCoroutineScope()
+val onRefresh: () -&gt; Unit = {
+    isRefreshing = true
+    coroutineScope.launch {
+        // fetch something
+        delay(1500)
+        itemCount += 5
+        isRefreshing = false
+    }
+}
+
+val state = remember {
+    object : PullToRefreshState {
+        private val anim = Animatable(0f, Float.VectorConverter)
+
+        override val distanceFraction
+            get() = anim.value
+
+        override suspend fun animateToThreshold() {
+            anim.animateTo(1f, spring(dampingRatio = Spring.DampingRatioHighBouncy))
+        }
+
+        override suspend fun animateToHidden() {
+            anim.animateTo(0f)
+        }
+
+        override suspend fun snapTo(targetValue: Float) {
+            anim.snapTo(targetValue)
+        }
+    }
+}
+
+Scaffold(
+    topBar = {
+        TopAppBar(
+            title = { Text(&quot;TopAppBar&quot;) },
+            // Provide an accessible alternative to trigger refresh.
+            actions = {
+                IconButton(onClick = onRefresh) {
+                    Icon(Icons.Filled.Refresh, &quot;Trigger Refresh&quot;)
+                }
+            }
+        )
+    }
+) {
+    PullToRefreshBox(
+        modifier = Modifier.padding(it),
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh,
+        state = state
+    ) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            if (!isRefreshing) {
+                items(itemCount) { ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) }) }
+            }
+        }
+    }
+}</pre>
+      <p>Scaling behavior can be implemented like this</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
+import androidx.compose.material3.pulltorefresh.PullToRefreshState
+import androidx.compose.material3.pulltorefresh.pullToRefresh
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
+
+var itemCount by remember { mutableStateOf(15) }
+var isRefreshing by remember { mutableStateOf(false) }
+val state = rememberPullToRefreshState()
+val coroutineScope = rememberCoroutineScope()
+val onRefresh: () -&gt; Unit = {
+    isRefreshing = true
+    coroutineScope.launch {
+        // fetch something
+        delay(1500)
+        itemCount += 5
+        isRefreshing = false
+    }
+}
+
+val scaleFraction = {
+    if (isRefreshing) 1f
+    else LinearOutSlowInEasing.transform(state.distanceFraction).coerceIn(0f, 1f)
+}
+
+Scaffold(
+    modifier =
+        Modifier.pullToRefresh(
+            state = state,
+            isRefreshing = isRefreshing,
+            onRefresh = onRefresh
+        ),
+    topBar = {
+        TopAppBar(
+            title = { Text(&quot;TopAppBar&quot;) },
+            // Provide an accessible alternative to trigger refresh.
+            actions = {
+                IconButton(onClick = onRefresh) {
+                    Icon(Icons.Filled.Refresh, &quot;Trigger Refresh&quot;)
+                }
+            }
+        )
+    }
+) {
+    Box(Modifier.padding(it)) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            if (!isRefreshing) {
+                items(itemCount) { ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) }) }
+            }
+        }
+        Box(
+            Modifier.align(Alignment.TopCenter).graphicsLayer {
+                scaleX = scaleFraction()
+                scaleY = scaleFraction()
+            }
+        ) {
+            PullToRefreshDefaults.Indicator(state = state, isRefreshing = isRefreshing)
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>isRefreshing:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <p>whether a refresh is occurring</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onRefresh:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>callback invoked when the user gesture crosses the threshold, thereby requesting a refresh.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this container</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>state:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a> = rememberPullToRefreshState()</code></td>
+              <td>
+                <p>the state that keeps track of distance pulled</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.TopStart</code></td>
+              <td>
+                <p>The default alignment inside the Box.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>indicator:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a> = {
+        Indicator(
+            modifier = Modifier.align(Alignment.TopCenter),
+            isRefreshing = isRefreshing,
+            state = state
+        )
+    }</code></td>
+              <td>
+                <p>the indicator that will be drawn on top of the content when the user begins a pull or a refresh is occurring</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>the content of the pull refresh container, typically a scrollable layout such as <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or a layout using Modifier.verticalScroll</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

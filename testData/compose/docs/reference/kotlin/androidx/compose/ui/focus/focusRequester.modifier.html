@@ -1,0 +1,75 @@
+<html devsite="true">
+  <head>
+    <title>focusRequester</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="focusRequester">
+      <meta itemprop="path" content="androidx.compose.ui.focus">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>focusRequester</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a>(focusRequester:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>)</code></div>
+              <p>Add this modifier to a component to request changes to focus.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.focusRequester-androidx.compose.ui.focus.FocusRequester-"></a><a name="focusrequester"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a>(focusRequester:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Add this modifier to a component to request changes to focus.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.unit.dp
+
+val focusRequester = remember { FocusRequester() }
+var color by remember { mutableStateOf(Black) }
+Box(
+    Modifier
+        .clickable { focusRequester.requestFocus() }
+        .border(2.dp, color)
+        // The focusRequester should be added BEFORE the focusable.
+        .focusRequester(focusRequester)
+        // The onFocusChanged should be added BEFORE the focusable that is being observed.
+        .onFocusChanged { color = if (it.isFocused) Green else Black }
+        .focusable()
+)</pre>
+    </div>
+  </body>
+</html>

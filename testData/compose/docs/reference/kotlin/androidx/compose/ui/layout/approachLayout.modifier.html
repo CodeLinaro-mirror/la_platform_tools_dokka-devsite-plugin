@@ -1,0 +1,157 @@
+<html devsite="true">
+  <head>
+    <title>approachLayout</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="approachLayout">
+      <meta itemprop="path" content="androidx.compose.ui.layout">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>approachLayout</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">approachLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;isMeasurementApproachInProgress:&nbsp;(lookaheadSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isPlacementApproachInProgress:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a>.(lookaheadCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;approachMeasure:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a>.(measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>, constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
+              <p>Creates an approach layout intended to help gradually approach the destination layout calculated in the lookahead pass.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1, kotlin.Function2, kotlin.Function3)"></a><a name="-androidx.compose.ui.Modifier-.approachLayout-kotlin.Function1-kotlin.Function2-kotlin.Function3-"></a><a name="approachlayout"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">approachLayout</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">approachLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;isMeasurementApproachInProgress:&nbsp;(lookaheadSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isPlacementApproachInProgress:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a>.(lookaheadCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = defaultPlacementApproachInProgress,<br>&nbsp;&nbsp;&nbsp;&nbsp;approachMeasure:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a>.(measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>, constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Creates an approach layout intended to help gradually approach the destination layout calculated in the lookahead pass. This can be particularly helpful when the destination layout is anticipated to change drastically and would consequently result in visual disruptions.</p>
+      <p>In order to create a smooth approach, an interpolation (often through animations) can be used in <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">approachMeasure</a></code> to interpolate the measurement or placement from a previously recorded size and/or position to the destination/target size and/or position. The destination size is available in <code><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a></code> as <code><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachIntrinsicMeasureScope.html#lookaheadSize()">ApproachMeasureScope.lookaheadSize</a></code>. And the target position can also be acquired in <code><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachMeasureScope.html">ApproachMeasureScope</a></code> during placement by using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset,kotlin.Boolean)">LookaheadScope.localLookaheadPositionOf</a></code> with the layout's <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html#coordinates()">Placeable.PlacementScope.coordinates</a></code>. The sample code below illustrates how that can be achieved.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isMeasurementApproachInProgress</a></code> signals whether the measurement is in progress of approaching destination size. It will be queried after the destination has been determined by the lookahead pass, before <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">approachMeasure</a></code> is invoked. The lookahead size is provided to <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isMeasurementApproachInProgress</a></code> for convenience in deciding whether the destination size has been reached.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isMeasurementApproachInProgress</a></code> indicates whether the position is currently approaching destination defined by the lookahead, hence it's a signal to the system for whether additional approach placements are necessary. <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isPlacementApproachInProgress</a></code> will be invoked after the destination position has been determined by lookahead pass, and before the placement phase in <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">approachMeasure</a></code>.</p>
+      <p>Once both <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isMeasurementApproachInProgress</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isPlacementApproachInProgress</a></code> return false, the system may skip approach pass until additional approach passes are necessary as indicated by <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isMeasurementApproachInProgress</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isPlacementApproachInProgress</a></code>.</p>
+      <p><b>IMPORTANT</b>: It is important to be accurate in <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isPlacementApproachInProgress</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).approachLayout(kotlin.Function1,kotlin.Function2,kotlin.Function3)">isMeasurementApproachInProgress</a></code>. A prolonged indication of incomplete approach will prevent the system from potentially skipping approach pass when possible.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.DeferredTargetAnimation
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.approachLayout
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.round
+
+// Creates a custom modifier that animates the constraints and measures child with the
+// animated constraints. This modifier is built on top of `Modifier.approachLayout` to approach
+// th destination size determined by the lookahead pass. A resize animation will be kicked off
+// whenever the lookahead size changes, to animate children from current size to destination
+// size. Fixed constraints created based on the animation value will be used to measure
+// child, so the child layout gradually changes its animated constraints until the approach
+// completes.
+fun Modifier.animateConstraints(
+    sizeAnimation: DeferredTargetAnimation&lt;IntSize, AnimationVector2D&gt;,
+    coroutineScope: CoroutineScope
+) = this.approachLayout(
+    isMeasurementApproachInProgress = { lookaheadSize -&gt;
+        // Update the target of the size animation.
+        sizeAnimation.updateTarget(lookaheadSize, coroutineScope)
+        // Return true if the size animation has pending target change or hasn't finished
+        // running.
+        !sizeAnimation.isIdle
+    }
+) { measurable, _ -&gt;
+    // In the measurement approach, the goal is to gradually reach the destination size
+    // (i.e. lookahead size). To achieve that, we use an animation to track the current
+    // size, and animate to the destination size whenever it changes. Once the animation
+    // finishes, the approach is complete.
+
+    // First, update the target of the animation, and read the current animated size.
+    val (width, height) = sizeAnimation.updateTarget(lookaheadSize, coroutineScope)
+    // Then create fixed size constraints using the animated size
+    val animatedConstraints = Constraints.fixed(width, height)
+    // Measure child with animated constraints.
+    val placeable = measurable.measure(animatedConstraints)
+    layout(placeable.width, placeable.height) {
+        placeable.place(0, 0)
+    }
+}
+
+var fullWidth by remember { mutableStateOf(false) }
+
+// Creates a size animation with a target unknown at the time of instantiation.
+val sizeAnimation = remember { DeferredTargetAnimation(IntSize.VectorConverter) }
+val coroutineScope = rememberCoroutineScope()
+Row(
+    (if (fullWidth) Modifier.fillMaxWidth() else Modifier.width(100.dp))
+        .height(200.dp)
+        // Use the custom modifier created above to animate the constraints passed
+        // to the child, and therefore resize children in an animation.
+        .animateConstraints(sizeAnimation, coroutineScope)
+        .clickable { fullWidth = !fullWidth }) {
+    Box(
+        Modifier
+            .weight(1f)
+            .fillMaxHeight()
+            .background(Color(0xffff6f69)),
+    )
+    Box(
+        Modifier
+            .weight(2f)
+            .fillMaxHeight()
+            .background(Color(0xffffcc5c))
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ApproachLayoutModifierNode.html">ApproachLayoutModifierNode</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

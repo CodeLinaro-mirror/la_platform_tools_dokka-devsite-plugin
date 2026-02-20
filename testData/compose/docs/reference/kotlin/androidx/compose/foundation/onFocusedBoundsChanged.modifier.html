@@ -1,0 +1,50 @@
+<html devsite="true">
+  <head>
+    <title>onFocusedBoundsChanged</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="onFocusedBoundsChanged">
+      <meta itemprop="path" content="androidx.compose.foundation">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>onFocusedBoundsChanged</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onFocusedBoundsChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onPositioned:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>?) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Calls <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onPositioned</a></code> whenever the bounds of the currently-focused area changes.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.onFocusedBoundsChanged-kotlin.Function1-"></a><a name="onfocusedboundschanged"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onFocusedBoundsChanged</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onFocusedBoundsChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onPositioned:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>?) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Calls <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onPositioned</a></code> whenever the bounds of the currently-focused area changes. If a child of this node has focus, <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onPositioned</a></code> will be called immediately with a non-null <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> that can be queried for the focused bounds, and again every time the focused child changes or is repositioned. When a child loses focus, <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onPositioned</a></code> will be passed <code>null</code>.</p>
+      <p>When an event occurs, it is bubbled up from the focusable node, so the nearest parent gets the event first, and then its parent, etc.</p>
+      <p>Note that there may be some cases where the focused bounds change but the callback is <em>not</em> invoked, but the last <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> will always return the most up-to-date bounds.</p>
+    </div>
+  </body>
+</html>

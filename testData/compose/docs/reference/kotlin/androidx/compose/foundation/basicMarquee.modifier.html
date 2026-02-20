@@ -1,0 +1,201 @@
+<html devsite="true">
+  <head>
+    <title>basicMarquee</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="basicMarquee">
+      <meta itemprop="path" content="androidx.compose.foundation">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>basicMarquee</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">basicMarquee</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;iterations:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationMode:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html">MarqueeAnimationMode</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;repeatDelayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDelayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;spacing:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocity:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a><br>)</code></div>
+              <p>Applies an animated marquee effect to the modified content if it's too wide to fit in the available space.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int, androidx.compose.foundation.MarqueeAnimationMode, kotlin.Int, kotlin.Int, androidx.compose.foundation.MarqueeSpacing, androidx.compose.ui.unit.Dp)"></a><a name="-androidx.compose.ui.Modifier-.basicMarquee-kotlin.Int-androidx.compose.foundation.MarqueeAnimationMode-kotlin.Int-kotlin.Int-androidx.compose.foundation.MarqueeSpacing-androidx.compose.ui.unit.Dp-"></a><a name="basicmarquee"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">basicMarquee</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">basicMarquee</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;iterations:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = Iterations,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationMode:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html">MarqueeAnimationMode</a> = Immediately,<br>&nbsp;&nbsp;&nbsp;&nbsp;repeatDelayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = RepeatDelayMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDelayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = if (animationMode == Immediately) repeatDelayMillis else 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;spacing:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a> = Spacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocity:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = Velocity<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Applies an animated marquee effect to the modified content if it's too wide to fit in the available space. This modifier has no effect if the content fits in the max constraints. The content will be measured with unbounded width.</p>
+      <p>When the animation is running, it will restart from the initial state any time:</p>
+      <ul>
+        <li>
+          <p>any of the parameters to this modifier change, or</p>
+        </li>
+        <li>
+          <p>the content or container size change.</p>
+        </li>
+      </ul>
+      <p>The animation only affects the drawing of the content, not its position. The offset returned by the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of anything inside the marquee is undefined relative to anything outside the marquee, and may not match its drawn position on screen. This modifier also does not currently support content that accepts position-based input such as pointer events.</p>
+      <p>To only animate when the composable is focused, specify <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">animationMode</a></code> and make the composable focusable. This modifier does not add any visual effects aside from scrolling, but you can add your own by placing modifiers before this one.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+// Marquee only animates when the content doesn't fit in the max width.
+Column(Modifier.width(30.dp)) {
+    Text(&quot;hello world&quot;, Modifier.basicMarquee())
+}</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.MarqueeSpacing
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
+
+val edgeWidth = 32.dp
+fun ContentDrawScope.drawFadedEdge(leftEdge: Boolean) {
+    val edgeWidthPx = edgeWidth.toPx()
+    drawRect(
+        topLeft = Offset(if (leftEdge) 0f else size.width - edgeWidthPx, 0f),
+        size = Size(edgeWidthPx, size.height),
+        brush = Brush.horizontalGradient(
+            colors = listOf(Color.Transparent, Color.Black),
+            startX = if (leftEdge) 0f else size.width,
+            endX = if (leftEdge) edgeWidthPx else size.width - edgeWidthPx
+        ),
+        blendMode = BlendMode.DstIn
+    )
+}
+
+Text(
+    &quot;the quick brown fox jumped over the lazy dogs&quot;,
+    Modifier
+        .widthIn(max = edgeWidth * 4)
+        // Rendering to an offscreen buffer is required to get the faded edges' alpha to be
+        // applied only to the text, and not whatever is drawn below this composable (e.g. the
+        // window).
+        .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+        .drawWithContent {
+            drawContent()
+            drawFadedEdge(leftEdge = true)
+            drawFadedEdge(leftEdge = false)
+        }
+        .basicMarquee(
+            // Animate forever.
+            iterations = Int.MAX_VALUE,
+            spacing = MarqueeSpacing(0.dp)
+        )
+        .padding(start = edgeWidth)
+)</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.MarqueeAnimationMode
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.unit.dp
+
+val focusRequester = remember { FocusRequester() }
+
+// Marquee only animates when the content doesn't fit in the max width.
+Column(Modifier.width(30.dp)) {
+    Text(&quot;hello world&quot;, Modifier
+        .clickable { focusRequester.requestFocus() }
+        .basicMarquee(animationMode = MarqueeAnimationMode.WhileFocused)
+        .focusRequester(focusRequester)
+        .focusable()
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>iterations:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = Iterations</code></td>
+              <td>
+                <p>The number of times to repeat the animation. <code>Int.MAX_VALUE</code> will repeat forever, and 0 will disable animation.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>animationMode:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html">MarqueeAnimationMode</a> = Immediately</code></td>
+              <td>
+                <p>Whether the marquee should start animating <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html#Immediately()">Immediately</a></code> or only <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html#WhileFocused()">WhileFocused</a></code>. In <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html#WhileFocused()">WhileFocused</a></code> mode, the modified node or the content must be made <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</a></code>. Note that the <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">initialDelayMillis</a></code> is part of the animation, so this parameter determines when that initial delay starts counting down, not when the content starts to actually scroll.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>repeatDelayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = RepeatDelayMillis</code></td>
+              <td>
+                <p>The duration to wait before starting each subsequent iteration, in millis.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>initialDelayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = if (animationMode == Immediately) repeatDelayMillis else 0</code></td>
+              <td>
+                <p>The duration to wait before starting the first iteration of the animation, in millis. By default, there will be no initial delay if <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">animationMode</a></code> is <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html#WhileFocused()">WhileFocused</a></code>, otherwise the initial delay will be <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">repeatDelayMillis</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>spacing:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a> = Spacing</code></td>
+              <td>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a></code> that specifies how much space to leave at the end of the content before showing the beginning again.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>velocity:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = Velocity</code></td>
+              <td>
+                <p>The speed of the animation in dps / second.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

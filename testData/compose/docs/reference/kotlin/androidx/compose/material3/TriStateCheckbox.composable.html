@@ -1,0 +1,207 @@
+<html devsite="true">
+  <head>
+    <title>TriStateCheckbox</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="TriStateCheckbox">
+      <meta itemprop="path" content="androidx.compose.material3">
+      <meta itemprop="property" content="TriStateCheckbox(androidx.compose.ui.state.ToggleableState,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>TriStateCheckbox</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TriStateCheckbox(androidx.compose.ui.state.ToggleableState,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">TriStateCheckbox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/state/ToggleableState.html">ToggleableState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onClick:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>?<br>)</code></div>
+              <p><a href=&quot;https://m3.material.io/components/checkbox/guidelines&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design checkbox</a> parent.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="TriStateCheckbox(androidx.compose.ui.state.ToggleableState, kotlin.Function0, androidx.compose.ui.Modifier, kotlin.Boolean, androidx.compose.material3.CheckboxColors, androidx.compose.foundation.interaction.MutableInteractionSource)"></a><a name="TriStateCheckbox-androidx.compose.ui.state.ToggleableState-kotlin.Function0-androidx.compose.ui.Modifier-kotlin.Boolean-androidx.compose.material3.CheckboxColors-androidx.compose.foundation.interaction.MutableInteractionSource-"></a><a name="tristatecheckbox"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="TriStateCheckbox(androidx.compose.ui.state.ToggleableState,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">TriStateCheckbox</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TriStateCheckbox(androidx.compose.ui.state.ToggleableState,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">TriStateCheckbox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/state/ToggleableState.html">ToggleableState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onClick:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a> = CheckboxDefaults.colors(),<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><a href=&quot;https://m3.material.io/components/checkbox/guidelines&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design checkbox</a> parent.</p>
+      <p>Checkboxes can have a parent-child relationship with other checkboxes. When the parent checkbox is checked, all child checkboxes are checked. If a parent checkbox is unchecked, all child checkboxes are unchecked. If some, but not all, child checkboxes are checked, the parent checkbox becomes an indeterminate checkbox.</p>
+      <p><img alt="Checkbox
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/indeterminate-checkbox.png"></p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.selection.triStateToggleable
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Text
+import androidx.compose.material3.TriStateCheckbox
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.unit.dp
+
+Column {
+    // define dependent checkboxes states
+    val (state, onStateChange) = remember { mutableStateOf(true) }
+    val (state2, onStateChange2) = remember { mutableStateOf(true) }
+
+    // TriStateCheckbox state reflects state of dependent checkboxes
+    val parentState =
+        remember(state, state2) {
+            if (state &amp;&amp; state2) ToggleableState.On
+            else if (!state &amp;&amp; !state2) ToggleableState.Off else ToggleableState.Indeterminate
+        }
+    // click on TriStateCheckbox can set state for dependent checkboxes
+    val onParentClick = {
+        val s = parentState != ToggleableState.On
+        onStateChange(s)
+        onStateChange2(s)
+    }
+
+    // The sample below composes just basic checkboxes which are not fully accessible on their
+    // own. See the CheckboxWithTextSample as a way to ensure your checkboxes are fully
+    // accessible.
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier =
+            Modifier.triStateToggleable(
+                state = parentState,
+                onClick = onParentClick,
+                role = Role.Checkbox
+            )
+    ) {
+        TriStateCheckbox(
+            state = parentState,
+            onClick = null,
+        )
+        Text(&quot;Receive Emails&quot;)
+    }
+    Spacer(Modifier.size(25.dp))
+    Column(Modifier.padding(24.dp, 0.dp, 0.dp, 0.dp)) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier =
+                Modifier.toggleable(
+                    value = state,
+                    onValueChange = onStateChange,
+                    role = Role.Checkbox
+                )
+        ) {
+            Checkbox(state, null)
+            Text(&quot;Daily&quot;)
+        }
+        Spacer(Modifier.size(25.dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier =
+                Modifier.toggleable(
+                    value = state2,
+                    onValueChange = onStateChange2,
+                    role = Role.Checkbox
+                )
+        ) {
+            Checkbox(state2, null)
+            Text(&quot;Weekly&quot;)
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>state:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/state/ToggleableState.html">ToggleableState</a></code></td>
+              <td>
+                <p>whether this checkbox is checked, unchecked, or in an indeterminate state</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onClick:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?</code></td>
+              <td>
+                <p>called when this checkbox is clicked. If <code>null</code>, then this checkbox will not be interactable, unless something else handles its input events and updates its <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TriStateCheckbox(androidx.compose.ui.state.ToggleableState,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">state</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this checkbox</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+              <td>
+                <p>controls the enabled state of this checkbox. When <code>false</code>, this component will not respond to user input, and it will appear visually disabled and disabled to accessibility services.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a> = CheckboxDefaults.colors()</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a></code> that will be used to resolve the colors used for this checkbox in different states. See <code><a href="/reference/kotlin/androidx/compose/material3/CheckboxDefaults.html#colors()">CheckboxDefaults.colors</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null</code></td>
+              <td>
+                <p>an optional hoisted <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> for observing and emitting <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s for this checkbox. You can use this to change the checkbox's appearance or preview the checkbox in different states. Note that if <code>null</code> is provided, interactions will still happen internally.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Checkbox(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">Checkbox</a></code></td>
+              <td>
+                <p>if you want a simple component that represents Boolean state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

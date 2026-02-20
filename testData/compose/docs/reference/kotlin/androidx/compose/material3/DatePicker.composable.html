@@ -1,0 +1,227 @@
+<html devsite="true">
+  <head>
+    <title>DatePicker</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="DatePicker">
+      <meta itemprop="path" content="androidx.compose.material3">
+      <meta itemprop="property" content="DatePicker(androidx.compose.material3.DatePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.DatePickerFormatter,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.DatePickerColors)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>DatePicker</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#DatePicker(androidx.compose.material3.DatePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.DatePickerFormatter,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.DatePickerColors)">DatePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DatePickerState.html">DatePickerState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;dateFormatter:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DatePickerFormatter.html">DatePickerFormatter</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;headline:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;showModeToggle:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DatePickerColors.html">DatePickerColors</a><br>)</code></div>
+              <p><a href=&quot;https://m3.material.io/components/date-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design date picker</a>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="DatePicker(androidx.compose.material3.DatePickerState, androidx.compose.ui.Modifier, androidx.compose.material3.DatePickerFormatter, kotlin.Function0, kotlin.Function0, kotlin.Boolean, androidx.compose.material3.DatePickerColors)"></a><a name="DatePicker-androidx.compose.material3.DatePickerState-androidx.compose.ui.Modifier-androidx.compose.material3.DatePickerFormatter-kotlin.Function0-kotlin.Function0-kotlin.Boolean-androidx.compose.material3.DatePickerColors-"></a><a name="datepicker"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="DatePicker(androidx.compose.material3.DatePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.DatePickerFormatter,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.DatePickerColors)">DatePicker</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#DatePicker(androidx.compose.material3.DatePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.DatePickerFormatter,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.DatePickerColors)">DatePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DatePickerState.html">DatePickerState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;dateFormatter:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DatePickerFormatter.html">DatePickerFormatter</a> = remember { DatePickerDefaults.dateFormatter() },<br>&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = {
+        DatePickerDefaults.DatePickerTitle(
+            displayMode = state.displayMode,
+            modifier = Modifier.padding(DatePickerTitlePadding)
+        )
+    },<br>&nbsp;&nbsp;&nbsp;&nbsp;headline:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = {
+        DatePickerDefaults.DatePickerHeadline(
+            selectedDateMillis = state.selectedDateMillis,
+            displayMode = state.displayMode,
+            dateFormatter = dateFormatter,
+            modifier = Modifier.padding(DatePickerHeadlinePadding)
+        )
+    },<br>&nbsp;&nbsp;&nbsp;&nbsp;showModeToggle:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DatePickerColors.html">DatePickerColors</a> = DatePickerDefaults.colors()<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><a href=&quot;https://m3.material.io/components/date-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design date picker</a>.</p>
+      <p>Date pickers let people select a date and preferably should be embedded into Dialogs. See DatePickerDialog.</p>
+      <p>By default, a date picker lets you pick a date via a calendar UI. However, it also allows switching into a date input mode for a manual entry of dates using the numbers on a keyboard.</p>
+      <p><img alt="Date picker
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/date-picker.png"></p>
+      <p>A simple DatePicker looks like:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    // Pre-select a date for January 4, 2020
+    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = 1578096000000)
+    DatePicker(state = datePickerState, modifier = Modifier.padding(16.dp))
+
+    Text(
+        &quot;Selected date timestamp: ${datePickerState.selectedDateMillis ?: &quot;no selection&quot;}&quot;,
+        modifier = Modifier.align(Alignment.CenterHorizontally)
+    )
+}</pre>
+      <p>A DatePicker with an initial UI of a date input mode looks like:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DisplayMode
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    val state = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
+    DatePicker(state = state, modifier = Modifier.padding(16.dp))
+
+    Text(
+        &quot;Entered date timestamp: ${state.selectedDateMillis ?: &quot;no input&quot;}&quot;,
+        modifier = Modifier.align(Alignment.CenterHorizontally)
+    )
+}</pre>
+      <p>A DatePicker with a provided <code><a href="/reference/kotlin/androidx/compose/material3/SelectableDates.html">SelectableDates</a></code> that blocks certain days from being selected looks like:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.SelectableDates
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+val datePickerState =
+    rememberDatePickerState(
+        selectableDates =
+            object : SelectableDates {
+                // Blocks Sunday and Saturday from being selected.
+                override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                    return if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {
+                        val dayOfWeek =
+                            Instant.ofEpochMilli(utcTimeMillis)
+                                .atZone(ZoneId.of(&quot;UTC&quot;))
+                                .toLocalDate()
+                                .dayOfWeek
+                        dayOfWeek != DayOfWeek.SUNDAY &amp;&amp; dayOfWeek != DayOfWeek.SATURDAY
+                    } else {
+                        val calendar = Calendar.getInstance(TimeZone.getTimeZone(&quot;UTC&quot;))
+                        calendar.timeInMillis = utcTimeMillis
+                        calendar[Calendar.DAY_OF_WEEK] != Calendar.SUNDAY &amp;&amp;
+                            calendar[Calendar.DAY_OF_WEEK] != Calendar.SATURDAY
+                    }
+                }
+
+                // Allow selecting dates from year 2023 forward.
+                override fun isSelectableYear(year: Int): Boolean {
+                    return year &gt; 2022
+                }
+            }
+    )
+
+Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    DatePicker(state = datePickerState)
+    Text(
+        &quot;Selected date timestamp: ${datePickerState.selectedDateMillis ?: &quot;no selection&quot;}&quot;,
+        modifier = Modifier.align(Alignment.CenterHorizontally)
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>state:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DatePickerState.html">DatePickerState</a></code></td>
+              <td>
+                <p>state of the date picker. See <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#rememberDatePickerState(kotlin.Long,kotlin.Long,kotlin.ranges.IntRange,androidx.compose.material3.DisplayMode,androidx.compose.material3.SelectableDates)">rememberDatePickerState</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this date picker</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>dateFormatter:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DatePickerFormatter.html">DatePickerFormatter</a> = remember { DatePickerDefaults.dateFormatter() }</code></td>
+              <td>
+                <p>a <code><a href="/reference/kotlin/androidx/compose/material3/DatePickerFormatter.html">DatePickerFormatter</a></code> that provides formatting skeletons for dates display</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>title:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = {
+        DatePickerDefaults.DatePickerTitle(
+            displayMode = state.displayMode,
+            modifier = Modifier.padding(DatePickerTitlePadding)
+        )
+    }</code></td>
+              <td>
+                <p>the title to be displayed in the date picker</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>headline:&nbsp;(@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = {
+        DatePickerDefaults.DatePickerHeadline(
+            selectedDateMillis = state.selectedDateMillis,
+            displayMode = state.displayMode,
+            dateFormatter = dateFormatter,
+            modifier = Modifier.padding(DatePickerHeadlinePadding)
+        )
+    }</code></td>
+              <td>
+                <p>the headline to be displayed in the date picker</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>showModeToggle:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+              <td>
+                <p>indicates if this DatePicker should show a mode toggle action that transforms it into a date input</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DatePickerColors.html">DatePickerColors</a> = DatePickerDefaults.colors()</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/material3/DatePickerColors.html">DatePickerColors</a></code> that will be used to resolve the colors used for this date picker in different states. See <code><a href="/reference/kotlin/androidx/compose/material3/DatePickerDefaults.html#colors()">DatePickerDefaults.colors</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

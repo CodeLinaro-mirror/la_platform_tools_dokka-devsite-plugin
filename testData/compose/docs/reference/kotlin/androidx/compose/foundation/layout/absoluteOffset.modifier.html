@@ -1,0 +1,146 @@
+<html devsite="true">
+  <head>
+    <title>absoluteOffset</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="absoluteOffset">
+      <meta itemprop="path" content="androidx.compose.foundation.layout">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).absoluteOffset(kotlin.Function1)">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>absoluteOffset</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(kotlin.Function1)">absoluteOffset</a>(offset:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>)</code></div>
+              <p>Offset the content by <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(kotlin.Function1)">offset</a></code> px.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">absoluteOffset</a>(x:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,&nbsp;y:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>)</code></div>
+              <p>Offset the content by (<code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">x</a></code> dp, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">y</a></code> dp).</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.absoluteOffset-kotlin.Function1-"></a><a name="absoluteoffset"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).absoluteOffset(kotlin.Function1)">absoluteOffset</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(kotlin.Function1)">absoluteOffset</a>(offset:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Offset the content by <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(kotlin.Function1)">offset</a></code> px. The offsets can be positive as well as non-positive. Applying an offset only changes the position of the content, without interfering with its size measurement.</p>
+      <p>This modifier is designed to be used for offsets that change, possibly due to user interactions. It avoids recomposition when the offset is changing, and also adds a graphics layer that prevents unnecessary redrawing of the context when the offset is changing.</p>
+      <p>This modifier will not consider layout direction when calculating the position of the content: a positive horizontal offset will always move the content to the right. For a modifier that considers layout direction when applying the offset, see <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(kotlin.Function1)">offset</a></code>.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.offset
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+
+// This text will be offset in steps of 10.dp from the top left of the available space.
+var offset by remember { mutableStateOf(0) }
+Text(
+    &quot;Layout offset modifier sample&quot;,
+    Modifier
+        .clickable { offset += 10 }
+        .absoluteOffset { IntOffset(offset, offset) }
+)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(kotlin.Function1)">absoluteOffset</a></code></td>
+              <td>
+                <p>Example usage:</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp, androidx.compose.ui.unit.Dp)"></a><a name="-androidx.compose.ui.Modifier-.absoluteOffset-androidx.compose.ui.unit.Dp-androidx.compose.ui.unit.Dp-"></a><a name="absoluteoffset"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">absoluteOffset</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">absoluteOffset</a>(x:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = 0.dp,&nbsp;y:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = 0.dp):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Offset the content by (<code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">x</a></code> dp, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">y</a></code> dp). The offsets can be positive as well as non-positive. Applying an offset only changes the position of the content, without interfering with its size measurement.</p>
+      <p>This modifier will not consider layout direction when calculating the position of the content: a positive <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).absoluteOffset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">x</a></code> offset will always move the content to the right. For a modifier that considers the layout direction when applying the offset, see <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).offset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">offset</a></code>.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+// This text will be offset (10.dp, 20.dp) from the center of the available space.
+Text(
+    &quot;Layout offset modifier sample&quot;,
+    Modifier.fillMaxSize()
+        .wrapContentSize(Alignment.Center)
+        .absoluteOffset(10.dp, 20.dp)
+)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).offset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">offset</a></code></td>
+              <td>
+                <p>Example usage:</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

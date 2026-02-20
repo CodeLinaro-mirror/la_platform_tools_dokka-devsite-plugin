@@ -1,0 +1,66 @@
+<html devsite="true">
+  <head>
+    <title>DisableSelection</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="DisableSelection">
+      <meta itemprop="path" content="androidx.compose.foundation.text.selection">
+      <meta itemprop="property" content="DisableSelection(kotlin.Function0)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>DisableSelection</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/text/selection/package-summary.html#DisableSelection(kotlin.Function0)">DisableSelection</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Disables text selection for its direct or indirect children.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="DisableSelection-kotlin.Function0-"></a><a name="disableselection"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="DisableSelection(kotlin.Function0)">DisableSelection</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/selection/package-summary.html#DisableSelection(kotlin.Function0)">DisableSelection</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Disables text selection for its direct or indirect children. To use this, simply add this to wrap one or more text composables.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.Text
+
+SelectionContainer {
+    Column {
+        Text(&quot;Text 1&quot;)
+
+        DisableSelection {
+            Text(&quot;Text 2&quot;)
+            Text(&quot;טקסט 3&quot;)
+        }
+
+        Text(&quot;Text 3&quot;)
+    }
+}</pre>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<html devsite="true">
+  <head>
+    <title>createChildTransition</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="createChildTransition">
+      <meta itemprop="path" content="androidx.compose.animation.core">
+      <meta itemprop="property" content="(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>createChildTransition</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code>inline <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalTransitionApi.html">ExperimentalTransitionApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;S&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">createChildTransition</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;transformToChildState:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (parentState) <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">createChildTransition</a></code> creates a child Transition based on the mapping between parent state to child state provided in <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">transformToChildState</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String, kotlin.Function1)"></a><a name="-androidx.compose.animation.core.Transition-.createChildTransition-kotlin.String-kotlin.Function1-"></a><a name="createchildtransition"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">createChildTransition</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/core/ExperimentalTransitionApi.html">ExperimentalTransitionApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;S&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">createChildTransition</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;ChildTransition&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;transformToChildState:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (parentState) <span style="white-space: nowrap;">-&gt;</span> T<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">createChildTransition</a></code> creates a child Transition based on the mapping between parent state to child state provided in <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">transformToChildState</a></code>. This serves the following purposes:</p>
+      <ol>
+        <li>
+          <p>Hoist the child transition state into parent transition. Therefore the parent Transition will be aware of whether there's any on-going animation due to the same target state change. This will further allow sequential animation to be set up when all animations have finished.</p>
+        </li>
+        <li>
+          <p>Separation of concerns. The child transition can respresent a much more simplified state transition when, for example, mapping from an enum parent state to a Boolean visible state for passing further down the compose tree. The child composables hence can be designed around handling a more simple and a more relevant state change.</p>
+        </li>
+      </ol>
+      <p><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).createChildTransition(kotlin.String,kotlin.Function1)">label</a></code> is used to differentiate from other animations in the same transition in Android Studio.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.ExperimentalTransitionApi
+import androidx.compose.animation.core.Transition
+import androidx.compose.animation.core.animateDp
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.createChildTransition
+import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+
+// enum class DialerState { DialerMinimized, NumberPad }
+@OptIn(ExperimentalTransitionApi::class)
+@Composable
+fun DialerButton(visibilityTransition: Transition&lt;Boolean&gt;, modifier: Modifier) {
+    val scale by visibilityTransition.animateFloat { visible -&gt;
+        if (visible) 1f else 2f
+    }
+    Box(
+        modifier
+            .scale(scale)
+            .background(Color.Black)) {
+        // Content goes here
+    }
+}
+
+@Composable
+fun NumberPad(visibilityTransition: Transition&lt;Boolean&gt;) {
+    // Create animations using the provided Transition for visibility change here...
+}
+
+@OptIn(ExperimentalTransitionApi::class)
+@Composable
+fun childTransitionSample() {
+    var dialerState by remember { mutableStateOf(DialerState.NumberPad) }
+    Box(Modifier.fillMaxSize()) {
+        val parentTransition = updateTransition(dialerState)
+
+        // Animate to different corner radius based on target state
+        val cornerRadius by parentTransition.animateDp {
+            if (it == DialerState.NumberPad) 0.dp else 20.dp
+        }
+
+        Box(
+            Modifier
+                .align(Alignment.BottomCenter)
+                .widthIn(50.dp)
+                .heightIn(50.dp)
+                .clip(RoundedCornerShape(cornerRadius))
+        ) {
+            NumberPad(
+                // Creates a child transition that derives its target state from the parent
+                // transition, and the mapping from parent state to child state.
+                // This will allow:
+                // 1) Parent transition to account for additional animations in the child
+                // Transitions before it considers itself finished. This is useful when you
+                // have a subsequent action after all animations triggered by a state change
+                // have finished.
+                // 2) Separation of concerns. This allows the child composable (i.e.
+                // NumberPad) to only care about its own visibility, rather than knowing about
+                // DialerState.
+                visibilityTransition = parentTransition.createChildTransition {
+                    // This is the lambda that defines how the parent target state maps to
+                    // child target state.
+                    it == DialerState.NumberPad
+                }
+                // Note: If it's not important for the animations within the child composable to
+                // be observable, it's perfectly valid to not hoist the animations through
+                // a Transition object and instead use animate*AsState.
+            )
+            DialerButton(
+                visibilityTransition = parentTransition.createChildTransition {
+                    it == DialerState.DialerMinimized
+                },
+                modifier = Modifier.matchParentSize()
+            )
+        }
+    }
+}</pre>
+    </div>
+  </body>
+</html>

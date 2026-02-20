@@ -1,0 +1,397 @@
+<html devsite="true">
+  <head>
+    <title>updateTransition</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="updateTransition">
+      <meta itemprop="path" content="androidx.compose.animation.core">
+      <meta itemprop="property" content="updateTransition(kotlin.Any,kotlin.String)">
+      <meta itemprop="property" content="updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>updateTransition</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a>(targetState:&nbsp;T,&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?)</code></div>
+              <p>This sets up a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>, and updates it with the target provided by <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">targetState</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">updateTransition</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionState:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?<br>)</code></div>
+              <p><strong>This function is deprecated.</strong> Use rememberTransition() instead</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="updateTransition(kotlin.Any, kotlin.String)"></a><a name="updateTransition-kotlin.Any-kotlin.String-"></a><a name="updatetransition"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="updateTransition(kotlin.Any,kotlin.String)">updateTransition</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a>(targetState:&nbsp;T,&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>? = null):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</pre>
+      <p>This sets up a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>, and updates it with the target provided by <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">targetState</a></code>. When <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">targetState</a></code> changes, <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> will run all of its child animations towards their target values specified for the new <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">targetState</a></code>. Child animations can be dynamically added using <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateFloat(kotlin.Function1,kotlin.String,kotlin.Function1)">Transition.animateFloat</a></code>,  androidx.compose.animation.animateColor, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateValue(androidx.compose.animation.core.TwoWayConverter,kotlin.Function1,kotlin.String,kotlin.Function1)">Transition.animateValue</a></code>, etc.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">label</a></code> is used to differentiate different transitions in Android Studio.</p>
+      <p><b>Note</b>: There is another <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a></code> overload that accepts a <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code>. The difference between the two is that the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> variant: 1) supports a different initial state than target state (This would allow a transition to start as soon as it enters composition.) 2) can be recreated to intentionally trigger a re-start of the transition.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.Transition
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.dp
+
+// enum class ComponentState { Pressed, Released }
+var useRed by remember { mutableStateOf(false) }
+var toState by remember { mutableStateOf(ComponentState.Released) }
+val modifier = Modifier.pointerInput(Unit) {
+    detectTapGestures(
+        onPress = {
+            toState = ComponentState.Pressed
+            tryAwaitRelease()
+            toState = ComponentState.Released
+        }
+    )
+}
+
+// Defines a transition of `ComponentState`, and updates the transition when the provided
+// [targetState] changes. The transition will run all of the child animations towards the new
+// [targetState] in response to the [targetState] change.
+val transition: Transition&lt;ComponentState&gt; = updateTransition(targetState = toState)
+// Defines a float animation as a child animation the transition. The current animation value
+// can be read from the returned State&lt;Float&gt;.
+val scale: Float by transition.animateFloat(
+    // Defines a transition spec that uses the same low-stiffness spring for *all*
+    // transitions of this float, no matter what the target is.
+    transitionSpec = { spring(stiffness = 50f) }
+) { state -&gt;
+    // This code block declares a mapping from state to value.
+    if (state == ComponentState.Pressed) 3f else 1f
+}
+
+// Defines a color animation as a child animation of the transition.
+val color: Color by transition.animateColor(
+    transitionSpec = {
+        when {
+            ComponentState.Pressed isTransitioningTo ComponentState.Released -&gt;
+                // Uses spring for the transition going from pressed to released
+                spring(stiffness = 50f)
+            else -&gt;
+                // Uses tween for all the other transitions. (In this case there is
+                // only one other transition. i.e. released -&gt; pressed.)
+                tween(durationMillis = 500)
+        }
+    }
+) { state -&gt;
+    when (state) {
+        // Similar to the float animation, we need to declare the target values
+        // for each state. In this code block we can access theme colors.
+        ComponentState.Pressed -&gt; MaterialTheme.colors.primary
+        // We can also have the target value depend on other mutableStates,
+        // such as `useRed` here. Whenever the target value changes, transition
+        // will automatically animate to the new value even if it has already
+        // arrived at its target state.
+        ComponentState.Released -&gt; if (useRed) Color.Red else MaterialTheme.colors.secondary
+    }
+}
+Column {
+    Button(
+        modifier = Modifier
+            .padding(10.dp)
+            .align(Alignment.CenterHorizontally),
+        onClick = { useRed = !useRed }
+    ) {
+        Text(&quot;Change Color&quot;)
+    }
+    Box(
+        modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+            .size((100 * scale).dp)
+            .background(color)
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</code></td>
+              <td>
+                <p>a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> object, to which animations can be added.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateFloat(kotlin.Function1,kotlin.String,kotlin.Function1)">animateFloat</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateValue(androidx.compose.animation.core.TwoWayConverter,kotlin.Function1,kotlin.String,kotlin.Function1)">animateValue</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="updateTransition(androidx.compose.animation.core.MutableTransitionState, kotlin.String)"></a><a name="updateTransition-androidx.compose.animation.core.MutableTransitionState-kotlin.String-"></a><a name="updatetransition"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">updateTransition</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">updateTransition</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionState:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;T&gt;</pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use rememberTransition() instead</aside>
+      <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> and puts it in the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> of the provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">transitionState</a></code>. Whenever the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> of the <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">transitionState</a></code> changes, the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> will animate to the new target state.</p>
+      <p><b>Remember</b>: The provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">transitionState</a></code> needs to be <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>ed.</p>
+      <p>Compared to the <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#rememberTransition(androidx.compose.animation.core.TransitionState,kotlin.String)">rememberTransition</a></code> variant that takes a targetState, this function supports a different initial state than the first targetState. Here is an example:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.Transition
+import androidx.compose.animation.core.animateDp
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberTransition
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
+
+// This composable enters the composition with a custom enter transition. This is achieved by
+// defining a different initialState than the first target state using `MutableTransitionState`
+@Composable
+fun PoppingInCard() {
+    // Creates a transition state with an initial state where visible = false
+    val visibleState = remember { MutableTransitionState(false) }
+    // Sets the target state of the transition state to true. As it's different than the initial
+    // state, a transition from not visible to visible will be triggered.
+    visibleState.targetState = true
+
+    // Creates a transition with the transition state created above.
+    val transition = rememberTransition(visibleState)
+    // Adds a scale animation to the transition to scale the card up when transitioning in.
+    val scale by transition.animateFloat(
+        // Uses a custom spring for the transition.
+        transitionSpec = { spring(dampingRatio = Spring.DampingRatioMediumBouncy) }
+    ) { visible -&gt;
+        if (visible) 1f else 0.8f
+    }
+    // Adds an elevation animation that animates the dp value of the animation.
+    val elevation by transition.animateDp(
+        // Uses a tween animation
+        transitionSpec = {
+            // Uses different animations for when animating from visible to not visible, and
+            // the other way around
+            if (false isTransitioningTo true) {
+                tween(1000)
+            } else {
+                spring()
+            }
+        }
+    ) { visible -&gt;
+        if (visible) 10.dp else 0.dp
+    }
+
+    Card(
+        Modifier
+            .graphicsLayer(scaleX = scale, scaleY = scale)
+            .size(200.dp, 100.dp)
+            .fillMaxWidth(),
+        elevation = elevation
+    ) {}
+}</pre>
+      <p>In most cases, it is recommended to reuse the same <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">transitionState</a></code> that is <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>ed, such that <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> preserves continuity when <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is changed. However, in some rare cases it is more critical to immediately <em>snap</em> to a state change (e.g. in response to a user interaction). This can be achieved by creating a new <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(androidx.compose.animation.core.MutableTransitionState,kotlin.String)">transitionState</a></code>:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.Transition
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.keyframes
+import androidx.compose.animation.core.rememberTransition
+import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+
+// enum class LikedStates { Initial, Liked, Disappeared }
+@Composable
+fun doubleTapToLike() {
+    // Creates a transition state that starts in [Disappeared] State
+    var transitionState by remember {
+        mutableStateOf(MutableTransitionState(LikedStates.Disappeared))
+    }
+
+    Box(
+        Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        // This creates a new `MutableTransitionState` object. When a new
+                        // `MutableTransitionState` object gets passed to `updateTransition`, a
+                        // new transition will be created. All existing values, velocities will
+                        // be lost as a result. Hence, in most cases, this is not recommended.
+                        // The exception is when it's more important to respond immediately to
+                        // user interaction than preserving continuity.
+                        transitionState = MutableTransitionState(LikedStates.Initial)
+                    }
+                )
+            }
+    ) {
+        // This ensures sequential states: Initial -&gt; Liked -&gt; Disappeared
+        if (transitionState.currentState == LikedStates.Initial) {
+            transitionState.targetState = LikedStates.Liked
+        } else if (transitionState.currentState == LikedStates.Liked) {
+            // currentState will be updated to targetState when the transition is finished, so
+            // it can be used as a signal to start the next transition.
+            transitionState.targetState = LikedStates.Disappeared
+        }
+
+        // Creates a transition using the TransitionState object that gets recreated at each
+        // double tap.
+        val transition = rememberTransition(transitionState)
+        // Creates an alpha animation, as a part of the transition.
+        val alpha by transition.animateFloat(
+            transitionSpec = {
+                when {
+                    // Uses different animation specs for transitioning from/to different states
+                    LikedStates.Initial isTransitioningTo LikedStates.Liked -&gt;
+                        keyframes {
+                            durationMillis = 500
+                            0f at 0 // optional
+                            0.5f at 100
+                            1f at 225 // optional
+                        }
+                    LikedStates.Liked isTransitioningTo LikedStates.Disappeared -&gt;
+                        tween(durationMillis = 200)
+                    else -&gt; snap()
+                }
+            }
+        ) {
+            if (it == LikedStates.Liked) 1f else 0f
+        }
+
+        // Creates a scale animation, as a part of the transition
+        val scale by transition.animateFloat(
+            transitionSpec = {
+                when {
+                    // Uses different animation specs for transitioning from/to different states
+                    LikedStates.Initial isTransitioningTo LikedStates.Liked -&gt;
+                        spring(dampingRatio = Spring.DampingRatioHighBouncy)
+                    LikedStates.Liked isTransitioningTo LikedStates.Disappeared -&gt;
+                        tween(200)
+                    else -&gt; snap()
+                }
+            }
+        ) {
+            when (it) {
+                LikedStates.Initial -&gt; 0f
+                LikedStates.Liked -&gt; 4f
+                LikedStates.Disappeared -&gt; 2f
+            }
+        }
+
+        Icon(
+            Icons.Filled.Favorite,
+            &quot;Like&quot;,
+            Modifier
+                .align(Alignment.Center)
+                .graphicsLayer(
+                    alpha = alpha,
+                    scaleX = scale,
+                    scaleY = scale
+                ),
+            tint = Color.Red
+        )
+    }
+}</pre>
+    </div>
+  </body>
+</html>

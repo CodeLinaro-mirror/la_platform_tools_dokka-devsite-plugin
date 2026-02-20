@@ -1,0 +1,95 @@
+<html devsite="true">
+  <head>
+    <title>pointerHoverIcon</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="pointerHoverIcon">
+      <meta itemprop="path" content="androidx.compose.ui.input.pointer">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon,kotlin.Boolean)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>pointerHoverIcon</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon,kotlin.Boolean)">pointerHoverIcon</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;icon:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerIcon.html">PointerIcon</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;overrideDescendants:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              <p>Modifier that lets a developer define a pointer icon to display when the cursor is hovered over the element.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon, kotlin.Boolean)"></a><a name="-androidx.compose.ui.Modifier-.pointerHoverIcon-androidx.compose.ui.input.pointer.PointerIcon-kotlin.Boolean-"></a><a name="pointerhovericon"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon,kotlin.Boolean)">pointerHoverIcon</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon,kotlin.Boolean)">pointerHoverIcon</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;icon:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerIcon.html">PointerIcon</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;overrideDescendants:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Modifier that lets a developer define a pointer icon to display when the cursor is hovered over the element. When <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerHoverIcon(androidx.compose.ui.input.pointer.PointerIcon,kotlin.Boolean)">overrideDescendants</a></code> is set to true, descendants cannot override the pointer icon using this modifier.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
+
+Column(Modifier.pointerHoverIcon(PointerIcon.Crosshair)) {
+    SelectionContainer {
+        Column {
+            Text(&quot;Selectable text&quot;)
+            Text(
+                modifier = Modifier.pointerHoverIcon(PointerIcon.Hand, true),
+                text = &quot;Selectable text with hand&quot;
+            )
+        }
+    }
+    Text(&quot;Just text with global pointerIcon&quot;)
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>icon:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerIcon.html">PointerIcon</a></code></td>
+              <td>
+                <p>The icon to set</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>overrideDescendants:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>when false (by default) descendants are able to set their own pointer icon. If true, no descendants under this parent are eligible to change the icon (it will be set to the this the parent's icon).</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

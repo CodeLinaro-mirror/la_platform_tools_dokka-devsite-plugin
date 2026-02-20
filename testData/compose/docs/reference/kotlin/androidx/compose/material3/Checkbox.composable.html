@@ -1,0 +1,170 @@
+<html devsite="true">
+  <head>
+    <title>Checkbox</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="Checkbox">
+      <meta itemprop="path" content="androidx.compose.material3">
+      <meta itemprop="property" content="Checkbox(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>Checkbox</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Checkbox(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">Checkbox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;checked:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onCheckedChange:&nbsp;((<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>?<br>)</code></div>
+              <p><a href=&quot;https://m3.material.io/components/checkbox/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design checkbox</a>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="Checkbox(kotlin.Boolean, kotlin.Function1, androidx.compose.ui.Modifier, kotlin.Boolean, androidx.compose.material3.CheckboxColors, androidx.compose.foundation.interaction.MutableInteractionSource)"></a><a name="Checkbox-kotlin.Boolean-kotlin.Function1-androidx.compose.ui.Modifier-kotlin.Boolean-androidx.compose.material3.CheckboxColors-androidx.compose.foundation.interaction.MutableInteractionSource-"></a><a name="checkbox"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="Checkbox(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">Checkbox</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Checkbox(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">Checkbox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;checked:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onCheckedChange:&nbsp;((<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a> = CheckboxDefaults.colors(),<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><a href=&quot;https://m3.material.io/components/checkbox/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design checkbox</a>.</p>
+      <p>Checkboxes allow users to select one or more items from a set. Checkboxes can turn an option on or off.</p>
+      <p><img alt="Checkbox
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/checkbox.png"></p>
+      <p>Simple Checkbox sample:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Checkbox
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+val checkedState = remember { mutableStateOf(true) }
+Checkbox(checked = checkedState.value, onCheckedChange = { checkedState.value = it })</pre>
+      <p>Combined Checkbox with Text sample:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
+
+val (checkedState, onStateChange) = remember { mutableStateOf(true) }
+Row(
+    Modifier.fillMaxWidth()
+        .height(56.dp)
+        .toggleable(
+            value = checkedState,
+            onValueChange = { onStateChange(!checkedState) },
+            role = Role.Checkbox
+        )
+        .padding(horizontal = 16.dp),
+    verticalAlignment = Alignment.CenterVertically
+) {
+    Checkbox(
+        checked = checkedState,
+        onCheckedChange = null // null recommended for accessibility with screenreaders
+    )
+    Text(
+        text = &quot;Option selection&quot;,
+        style = MaterialTheme.typography.bodyLarge,
+        modifier = Modifier.padding(start = 16.dp)
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>checked:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <p>whether this checkbox is checked or unchecked</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onCheckedChange:&nbsp;((<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?</code></td>
+              <td>
+                <p>called when this checkbox is clicked. If <code>null</code>, then this checkbox will not be interactable, unless something else handles its input events and updates its state.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this checkbox</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+              <td>
+                <p>controls the enabled state of this checkbox. When <code>false</code>, this component will not respond to user input, and it will appear visually disabled and disabled to accessibility services.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a> = CheckboxDefaults.colors()</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a></code> that will be used to resolve the colors used for this checkbox in different states. See <code><a href="/reference/kotlin/androidx/compose/material3/CheckboxDefaults.html#colors()">CheckboxDefaults.colors</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null</code></td>
+              <td>
+                <p>an optional hoisted <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> for observing and emitting <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s for this checkbox. You can use this to change the checkbox's appearance or preview the checkbox in different states. Note that if <code>null</code> is provided, interactions will still happen internally.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TriStateCheckbox(androidx.compose.ui.state.ToggleableState,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">TriStateCheckbox</a></code></td>
+              <td>
+                <p>if you require support for an indeterminate state.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

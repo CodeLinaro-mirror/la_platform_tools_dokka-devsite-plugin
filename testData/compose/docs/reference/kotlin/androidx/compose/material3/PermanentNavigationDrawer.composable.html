@@ -1,0 +1,173 @@
+<html devsite="true">
+  <head>
+    <title>PermanentNavigationDrawer</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="PermanentNavigationDrawer">
+      <meta itemprop="path" content="androidx.compose.material3">
+      <meta itemprop="property" content="PermanentNavigationDrawer(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Function0)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>PermanentNavigationDrawer</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#PermanentNavigationDrawer(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Function0)">PermanentNavigationDrawer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;drawerContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p><a href=&quot;https://m3.material.io/components/navigation-drawer/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design navigation permanent drawer</a>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="PermanentNavigationDrawer(kotlin.Function0, androidx.compose.ui.Modifier, kotlin.Function0)"></a><a name="PermanentNavigationDrawer-kotlin.Function0-androidx.compose.ui.Modifier-kotlin.Function0-"></a><a name="permanentnavigationdrawer"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="PermanentNavigationDrawer(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Function0)">PermanentNavigationDrawer</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#PermanentNavigationDrawer(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Function0)">PermanentNavigationDrawer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;drawerContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><a href=&quot;https://m3.material.io/components/navigation-drawer/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design navigation permanent drawer</a>.</p>
+      <p>Navigation drawers provide ergonomic access to destinations in an app. They’re often next to app content and affect the screen’s layout grid.</p>
+      <p><img alt="Navigation drawer
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/navigation-drawer.png"></p>
+      <p>The permanent navigation drawer is always visible and usually used for frequently switching destinations. On mobile screens, use <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#ModalNavigationDrawer(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.DrawerState,kotlin.Boolean,androidx.compose.ui.graphics.Color,kotlin.Function0)">ModalNavigationDrawer</a></code> instead.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Bookmarks
+import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.Dashboard
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Group
+import androidx.compose.material.icons.filled.Headphones
+import androidx.compose.material.icons.filled.Image
+import androidx.compose.material.icons.filled.JoinFull
+import androidx.compose.material.icons.filled.Keyboard
+import androidx.compose.material.icons.filled.Laptop
+import androidx.compose.material.icons.filled.Map
+import androidx.compose.material.icons.filled.Navigation
+import androidx.compose.material.icons.filled.Outbox
+import androidx.compose.material.icons.filled.PushPin
+import androidx.compose.material.icons.filled.QrCode
+import androidx.compose.material.icons.filled.Radio
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.PermanentDrawerSheet
+import androidx.compose.material3.PermanentNavigationDrawer
+import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+// icons to mimic drawer destinations
+val items =
+    listOf(
+        Icons.Default.AccountCircle,
+        Icons.Default.Bookmarks,
+        Icons.Default.CalendarMonth,
+        Icons.Default.Dashboard,
+        Icons.Default.Email,
+        Icons.Default.Favorite,
+        Icons.Default.Group,
+        Icons.Default.Headphones,
+        Icons.Default.Image,
+        Icons.Default.JoinFull,
+        Icons.Default.Keyboard,
+        Icons.Default.Laptop,
+        Icons.Default.Map,
+        Icons.Default.Navigation,
+        Icons.Default.Outbox,
+        Icons.Default.PushPin,
+        Icons.Default.QrCode,
+        Icons.Default.Radio,
+    )
+val selectedItem = remember { mutableStateOf(items[0]) }
+PermanentNavigationDrawer(
+    drawerContent = {
+        PermanentDrawerSheet(Modifier.width(240.dp)) {
+            Column(Modifier.verticalScroll(rememberScrollState())) {
+                Spacer(Modifier.height(12.dp))
+                items.forEach { item -&gt;
+                    NavigationDrawerItem(
+                        icon = { Icon(item, contentDescription = null) },
+                        label = { Text(item.name.substringAfterLast(&quot;.&quot;)) },
+                        selected = item == selectedItem.value,
+                        onClick = { selectedItem.value = item },
+                        modifier = Modifier.padding(horizontal = 12.dp)
+                    )
+                }
+            }
+        }
+    },
+    content = {
+        Column(
+            modifier = Modifier.fillMaxSize().padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = &quot;Application content&quot;)
+        }
+    }
+)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>drawerContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>content inside this drawer</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this drawer</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>content of the rest of the UI</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

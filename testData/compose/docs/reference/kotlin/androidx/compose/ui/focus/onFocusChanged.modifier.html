@@ -1,0 +1,69 @@
+<html devsite="true">
+  <head>
+    <title>onFocusChanged</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="onFocusChanged">
+      <meta itemprop="path" content="androidx.compose.ui.focus">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>onFocusChanged</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a>(onFocusChanged:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Add this modifier to a component to observe focus state events.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.onFocusChanged-kotlin.Function1-"></a><a name="onfocuschanged"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a>(onFocusChanged:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Add this modifier to a component to observe focus state events. <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> is invoked when the focus state changes. The <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifier listens to the state of the first <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusTarget()">focusTarget</a></code> following this modifier.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.border
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.unit.dp
+
+var color by remember { mutableStateOf(Black) }
+Box(
+    Modifier
+        .border(2.dp, color)
+        // The onFocusChanged should be added BEFORE the focusable that is being observed.
+        .onFocusChanged { color = if (it.isFocused) Green else Black }
+        .focusable()
+)</pre>
+      <p>Note: If you want to be notified every time the internal focus state is written to (even if it hasn't changed), use <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusEvent(kotlin.Function1)">onFocusEvent</a></code> instead.</p>
+    </div>
+  </body>
+</html>

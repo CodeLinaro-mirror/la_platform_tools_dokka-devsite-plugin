@@ -63,6 +63,7 @@ abstract class IntegrationTestBase :
         hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
         includeHiddenParentSymbols: Boolean = false,
         validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
+        applyComposeTransformer: Boolean = false,
     ): DokkaConfigurationImpl {
         val baseSourceLink =
             if (useAndroidxBaseSourceLink) {
@@ -116,6 +117,7 @@ abstract class IntegrationTestBase :
                                     hidingAnnotations = hidingAnnotations,
                                     includeHiddenParentSymbols = includeHiddenParentSymbols,
                                     validNullabilityAnnotations = validNullabilityAnnotations,
+                                    applyComposeTransformer = applyComposeTransformer,
                                 )
                                 .toCompactJsonString(),
                     )
@@ -142,6 +144,7 @@ abstract class IntegrationTestBase :
         includeHiddenParentSymbols: Boolean = false,
         versionMetadata: Boolean = false,
         useAndroidxBaseSourceLink: Boolean = false,
+        applyComposeTransformer: Boolean = false,
     ) {
         val outputBaseDir = "testData/$path/docs"
         val loggingDir = "testData/$path/logs"
@@ -179,6 +182,7 @@ abstract class IntegrationTestBase :
                 versionMetadataFilesnames = versionMetadataFiles,
                 hidingAnnotations = hidingAnnotations,
                 includeHiddenParentSymbols = includeHiddenParentSymbols,
+                applyComposeTransformer = applyComposeTransformer,
             )
 
         // Find the common source root for the project. If there are multiple source sets (or a

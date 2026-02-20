@@ -1,0 +1,81 @@
+<html devsite="true">
+  <head>
+    <title>pointerInteropFilter</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="pointerInteropFilter">
+      <meta itemprop="path" content="androidx.compose.ui.input.pointer">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent,kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>pointerInteropFilter</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent,kotlin.Function1)">pointerInteropFilter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;requestDisallowInterceptTouchEvent:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/RequestDisallowInterceptTouchEvent.html">RequestDisallowInterceptTouchEvent</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTouchEvent:&nbsp;(<a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              <p>A special PointerInputModifier that provides access to the underlying <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code>s originally dispatched to Compose.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent, kotlin.Function1)"></a><a name="-androidx.compose.ui.Modifier-.pointerInteropFilter-androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent-kotlin.Function1-"></a><a name="pointerinteropfilter"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent,kotlin.Function1)">pointerInteropFilter</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent,kotlin.Function1)">pointerInteropFilter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;requestDisallowInterceptTouchEvent:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/RequestDisallowInterceptTouchEvent.html">RequestDisallowInterceptTouchEvent</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTouchEvent:&nbsp;(<a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>A special PointerInputModifier that provides access to the underlying <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code>s originally dispatched to Compose. Prefer <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInput(kotlin.coroutines.SuspendFunction1)">pointerInput</a></code> and use this only for interoperation with existing code that consumes <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code>s.</p>
+      <p>While the main intent of this Modifier is to allow arbitrary code to access the original <code><a href="https://developer.android.com/reference/android/view/MotionEvent.html">MotionEvent</a></code> dispatched to Compose, for completeness, analogs are provided to allow arbitrary code to interact with the system as if it were an Android View.</p>
+      <p>This includes 2 APIs,</p>
+      <ol>
+        <li>
+          <p><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent,kotlin.Function1)">onTouchEvent</a></code> has a Boolean return type which is akin to the return type of <code><a href="https://developer.android.com/reference/android/view/View.html#onTouchEvent(android.view.MotionEvent)">View.onTouchEvent</a></code>. If the provided <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent,kotlin.Function1)">onTouchEvent</a></code> returns true, it will continue to receive the event stream (unless the event stream has been intercepted) and if it returns false, it will not.</p>
+        </li>
+        <li>
+          <p><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInteropFilter(androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent,kotlin.Function1)">requestDisallowInterceptTouchEvent</a></code> is a lambda that you can optionally provide so that you can later call it (yes, in this case, you call the lambda that you provided) which is akin to calling <code><a href="https://developer.android.com/reference/android/view/ViewParent.html#requestDisallowInterceptTouchEvent(kotlin.Boolean)">ViewParent.requestDisallowInterceptTouchEvent</a></code>. When this is called, any associated ancestors in the tree that abide by the contract will act accordingly and will not intercept the even stream.</p>
+        </li>
+      </ol>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/view/View.html#onTouchEvent(android.view.MotionEvent)">onTouchEvent</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/view/ViewParent.html#requestDisallowInterceptTouchEvent(kotlin.Boolean)">requestDisallowInterceptTouchEvent</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

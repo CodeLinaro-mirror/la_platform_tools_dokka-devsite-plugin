@@ -1,0 +1,72 @@
+<html devsite="true">
+  <head>
+    <title>wrapContentHeight</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="wrapContentHeight">
+      <meta itemprop="path" content="androidx.compose.foundation.layout">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical,kotlin.Boolean)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>wrapContentHeight</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical,kotlin.Boolean)">wrapContentHeight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;align:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.Vertical.html">Alignment.Vertical</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;unbounded:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              <p>Allow the content to measure at its desired height without regard for the incoming measurement <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minimum height constraint</a></code>, and, if <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical,kotlin.Boolean)">unbounded</a></code> is true, also without regard for the incoming measurement <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maximum height constraint</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical, kotlin.Boolean)"></a><a name="-androidx.compose.ui.Modifier-.wrapContentHeight-androidx.compose.ui.Alignment.Vertical-kotlin.Boolean-"></a><a name="wrapcontentheight"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical,kotlin.Boolean)">wrapContentHeight</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical,kotlin.Boolean)">wrapContentHeight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;align:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.Vertical.html">Alignment.Vertical</a> = Alignment.CenterVertically,<br>&nbsp;&nbsp;&nbsp;&nbsp;unbounded:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Allow the content to measure at its desired height without regard for the incoming measurement <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minimum height constraint</a></code>, and, if <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical,kotlin.Boolean)">unbounded</a></code> is true, also without regard for the incoming measurement <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maximum height constraint</a></code>. If the content's measured size is smaller than the minimum height constraint, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical,kotlin.Boolean)">align</a></code> it within that minimum height space. If the content's measured size is larger than the maximum height constraint (only possible when <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical,kotlin.Boolean)">unbounded</a></code> is true), <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).wrapContentHeight(androidx.compose.ui.Alignment.Vertical,kotlin.Boolean)">align</a></code> over the maximum height space.</p>
+      <p>Example usage:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+
+// Here the result will be a 50.dp x 20.dp blue box centered vertically in a 50.dp x 50.dp
+// space. Because of the size modifier, if wrapContentHeight did not exist,
+// the blue rectangle would actually be 50.dp x 50.dp to satisfy the size set by the modifier.
+// However, because we provide wrapContentHeight, the blue rectangle is specified to be wrap
+// content in height - if the desired height is smaller than 50.dp, it will be centered
+// vertically in this space. Therefore the 50.dp x 20.dp is centered vertically in the space.
+Box(
+    Modifier.size(50.dp)
+        .wrapContentHeight(Alignment.CenterVertically)
+        .height(20.dp)
+        .background(Color.Blue)
+)</pre>
+    </div>
+  </body>
+</html>

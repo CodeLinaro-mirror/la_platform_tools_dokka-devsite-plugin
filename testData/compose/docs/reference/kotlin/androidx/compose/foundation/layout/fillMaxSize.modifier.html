@@ -1,0 +1,102 @@
+<html devsite="true">
+  <head>
+    <title>fillMaxSize</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="fillMaxSize">
+      <meta itemprop="path" content="androidx.compose.foundation.layout">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).fillMaxSize(kotlin.Float)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>fillMaxSize</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).fillMaxSize(kotlin.Float)">fillMaxSize</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Have the content fill (possibly only partially) the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">Constraints.maxWidth</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">Constraints.maxHeight</a></code> of the incoming measurement constraints, by setting the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minWidth()">minimum width</a></code> and the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maximum width</a></code> to be equal to the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maximum width</a></code> multiplied by <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).fillMaxSize(kotlin.Float)">fraction</a></code>, as well as the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minimum height</a></code> and the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">maximum height</a></code> to be equal to the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maximum height</a></code> multiplied by <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).fillMaxSize(kotlin.Float)">fraction</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.fillMaxSize-kotlin.Float-"></a><a name="fillmaxsize"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).fillMaxSize(kotlin.Float)">fillMaxSize</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).fillMaxSize(kotlin.Float)">fillMaxSize</a>(@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 1.0f):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Have the content fill (possibly only partially) the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">Constraints.maxWidth</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">Constraints.maxHeight</a></code> of the incoming measurement constraints, by setting the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minWidth()">minimum width</a></code> and the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maximum width</a></code> to be equal to the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maximum width</a></code> multiplied by <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).fillMaxSize(kotlin.Float)">fraction</a></code>, as well as the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minimum height</a></code> and the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">maximum height</a></code> to be equal to the <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maximum height</a></code> multiplied by <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).fillMaxSize(kotlin.Float)">fraction</a></code>. Note that, by default, the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).fillMaxSize(kotlin.Float)">fraction</a></code> is 1, so the modifier will make the content fill the whole available space. If the incoming maximum width or height is <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Constraints.Infinity</a></code> this modifier will have no effect in that dimension.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+
+Box(Modifier.fillMaxSize().background(Color.Red), contentAlignment = Alignment.Center) {
+    Box(Modifier.size(100.dp).background(color = Color.Magenta))
+}</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+
+Box(Modifier.requiredSize(100.dp).background(Color.Red), contentAlignment = Alignment.Center) {
+    // The inner Box will be (50.dp x 50.dp).
+    Box(
+        Modifier.requiredWidth(30.dp)
+            .fillMaxSize(0.5f)
+            .background(color = Color.Magenta)
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>@<a href="/reference/kotlin/[JVM root]/&lt;error&gt;.html">&lt;error&gt;</a> fraction:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 1.0f</code></td>
+              <td>
+                <p>The fraction of the maximum size to use, between <code>0</code> and <code>1</code>, inclusive.</p>
+                <p>Example usage:</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<html devsite="true">
+  <head>
+    <title>InterceptPlatformTextInput</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="InterceptPlatformTextInput">
+      <meta itemprop="path" content="androidx.compose.ui.platform">
+      <meta itemprop="property" content="InterceptPlatformTextInput(androidx.compose.ui.platform.PlatformTextInputInterceptor,kotlin.Function0)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>InterceptPlatformTextInput</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/ui/platform/package-summary.html#InterceptPlatformTextInput(androidx.compose.ui.platform.PlatformTextInputInterceptor,kotlin.Function0)">InterceptPlatformTextInput</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interceptor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputInterceptor.html">PlatformTextInputInterceptor</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Intercept all calls to <code><a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputSession.html#startInputMethod(androidx.compose.ui.platform.PlatformTextInputMethodRequest)">PlatformTextInputSession.startInputMethod</a></code> from below where this composition local is provided with the given <code><a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputInterceptor.html">PlatformTextInputInterceptor</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="InterceptPlatformTextInput(androidx.compose.ui.platform.PlatformTextInputInterceptor, kotlin.Function0)"></a><a name="InterceptPlatformTextInput-androidx.compose.ui.platform.PlatformTextInputInterceptor-kotlin.Function0-"></a><a name="interceptplatformtextinput"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="InterceptPlatformTextInput(androidx.compose.ui.platform.PlatformTextInputInterceptor,kotlin.Function0)">InterceptPlatformTextInput</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/package-summary.html#InterceptPlatformTextInput(androidx.compose.ui.platform.PlatformTextInputInterceptor,kotlin.Function0)">InterceptPlatformTextInput</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interceptor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputInterceptor.html">PlatformTextInputInterceptor</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Intercept all calls to <code><a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputSession.html#startInputMethod(androidx.compose.ui.platform.PlatformTextInputMethodRequest)">PlatformTextInputSession.startInputMethod</a></code> from below where this composition local is provided with the given <code><a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputInterceptor.html">PlatformTextInputInterceptor</a></code>.</p>
+      <p>If a different interceptor instance is passed between compositions while a text input session is active, the upstream session will be torn down and restarted with the new interceptor. The downstream session (i.e. the call to <code><a href="/reference/kotlin/androidx/compose/ui/platform/PlatformTextInputSession.html#startInputMethod(androidx.compose.ui.platform.PlatformTextInputMethodRequest)">PlatformTextInputSession.startInputMethod</a></code>) will <em>not</em> be cancelled and the request will be re-used to pass to the new interceptor.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.InterceptPlatformTextInput
+import androidx.compose.ui.platform.PlatformTextInputMethodRequest
+
+var text by remember { mutableStateOf(&quot;&quot;) }
+
+InterceptPlatformTextInput(
+    interceptor = { request, nextHandler -&gt;
+        // Create a new request to wrap the incoming one with some custom logic.
+        val modifiedRequest = object : PlatformTextInputMethodRequest {
+            override fun createInputConnection(outAttributes: EditorInfo): InputConnection {
+                val inputConnection = request.createInputConnection(outAttributes)
+                // After the original request finishes initializing the EditorInfo we can
+                // customize it. If we needed to we could also wrap the InputConnection before
+                // returning it.
+                updateEditorInfo(outAttributes)
+                return inputConnection
+            }
+
+            fun updateEditorInfo(outAttributes: EditorInfo) {
+                // Your code here, e.g. set some custom properties.
+            }
+        }
+
+        // Send our wrapping request to the next handler, which could be the system or another
+        // interceptor up the tree.
+        nextHandler.startInputMethod(modifiedRequest)
+    }
+) {
+    BasicTextField(
+        value = text,
+        onValueChange = { text = it }
+    )
+}</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.InterceptPlatformTextInput
+
+/**
+ * A function that disables the soft keyboard for any text field within its content.
+ *
+ * The keyboard is re-enabled by removing this modifier or passing `disable = false`.
+ */
+@Composable
+fun DisableSoftKeyboard(disable: Boolean = true, content: @Composable () -&gt; Unit) {
+    InterceptPlatformTextInput(
+        interceptor = { request, nextHandler -&gt;
+            // If this flag is changed while an input session is active, a new lambda instance
+            // that captures the new value will be passed to InterceptPlatformTextInput, which
+            // will automatically cancel the session upstream and restart it with this new
+            // interceptor.
+            if (!disable) {
+                // Forward the request to the system.
+                nextHandler.startInputMethod(request)
+            } else {
+                // This function has to return Nothing, and since we don't have any work to do
+                // in this case, we just suspend until cancelled.
+                awaitCancellation()
+            }
+        },
+        content = content
+    )
+}</pre>
+    </div>
+  </body>
+</html>

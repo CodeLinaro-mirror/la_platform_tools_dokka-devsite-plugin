@@ -1,0 +1,222 @@
+<html devsite="true">
+  <head>
+    <title>TimePicker</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="TimePicker">
+      <meta itemprop="path" content="androidx.compose.material3">
+      <meta itemprop="property" content="TimePicker(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors,androidx.compose.material3.TimePickerLayoutType)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>TimePicker</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TimePicker(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors,androidx.compose.material3.TimePickerLayoutType)">TimePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html">TimePickerState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerColors.html">TimePickerColors</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;layoutType:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerLayoutType.html">TimePickerLayoutType</a><br>)</code></div>
+              <p><a href=&quot;https://m3.material.io/components/time-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design time picker</a>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="TimePicker(androidx.compose.material3.TimePickerState, androidx.compose.ui.Modifier, androidx.compose.material3.TimePickerColors, androidx.compose.material3.TimePickerLayoutType)"></a><a name="TimePicker-androidx.compose.material3.TimePickerState-androidx.compose.ui.Modifier-androidx.compose.material3.TimePickerColors-androidx.compose.material3.TimePickerLayoutType-"></a><a name="timepicker"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="TimePicker(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors,androidx.compose.material3.TimePickerLayoutType)">TimePicker</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TimePicker(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors,androidx.compose.material3.TimePickerLayoutType)">TimePicker</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html">TimePickerState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerColors.html">TimePickerColors</a> = TimePickerDefaults.colors(),<br>&nbsp;&nbsp;&nbsp;&nbsp;layoutType:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerLayoutType.html">TimePickerLayoutType</a> = TimePickerDefaults.layoutType()<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><a href=&quot;https://m3.material.io/components/time-pickers/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Design time picker</a>.</p>
+      <p>Time pickers help users select and set a specific time.</p>
+      <p>Shows a picker that allows the user to select time. Subscribe to updates through <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html">TimePickerState</a></code></p>
+      <p><img alt="Time picker
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/time-picker.png"></p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.Button
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TimePicker
+import androidx.compose.material3.rememberTimePickerState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.Dialog
+
+var showTimePicker by remember { mutableStateOf(false) }
+val state = rememberTimePickerState()
+val formatter = remember { SimpleDateFormat(&quot;hh:mm a&quot;, Locale.getDefault()) }
+val snackState = remember { SnackbarHostState() }
+val snackScope = rememberCoroutineScope()
+
+Box(propagateMinConstraints = false) {
+    Button(modifier = Modifier.align(Alignment.Center), onClick = { showTimePicker = true }) {
+        Text(&quot;Set Time&quot;)
+    }
+    SnackbarHost(hostState = snackState)
+}
+
+if (showTimePicker) {
+    TimePickerDialog(
+        onCancel = { showTimePicker = false },
+        onConfirm = {
+            val cal = Calendar.getInstance()
+            cal.set(Calendar.HOUR_OF_DAY, state.hour)
+            cal.set(Calendar.MINUTE, state.minute)
+            cal.isLenient = false
+            snackScope.launch {
+                snackState.showSnackbar(&quot;Entered time: ${formatter.format(cal.time)}&quot;)
+            }
+            showTimePicker = false
+        },
+    ) {
+        TimePicker(state = state)
+    }
+}</pre>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Keyboard
+import androidx.compose.material.icons.outlined.Schedule
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TimeInput
+import androidx.compose.material3.TimePicker
+import androidx.compose.material3.rememberTimePickerState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.window.Dialog
+
+var showTimePicker by remember { mutableStateOf(false) }
+val state = rememberTimePickerState()
+val formatter = remember { SimpleDateFormat(&quot;hh:mm a&quot;, Locale.getDefault()) }
+val snackState = remember { SnackbarHostState() }
+val showingPicker = remember { mutableStateOf(true) }
+val snackScope = rememberCoroutineScope()
+val configuration = LocalConfiguration.current
+
+Box(propagateMinConstraints = false) {
+    Button(modifier = Modifier.align(Alignment.Center), onClick = { showTimePicker = true }) {
+        Text(&quot;Set Time&quot;)
+    }
+    SnackbarHost(hostState = snackState)
+}
+
+if (showTimePicker) {
+    TimePickerDialog(
+        title =
+            if (showingPicker.value) {
+                &quot;Select Time &quot;
+            } else {
+                &quot;Enter Time&quot;
+            },
+        onCancel = { showTimePicker = false },
+        onConfirm = {
+            val cal = Calendar.getInstance()
+            cal.set(Calendar.HOUR_OF_DAY, state.hour)
+            cal.set(Calendar.MINUTE, state.minute)
+            cal.isLenient = false
+            snackScope.launch {
+                snackState.showSnackbar(&quot;Entered time: ${formatter.format(cal.time)}&quot;)
+            }
+            showTimePicker = false
+        },
+        toggle = {
+            if (configuration.screenHeightDp &gt; 400) {
+                IconButton(onClick = { showingPicker.value = !showingPicker.value }) {
+                    val icon =
+                        if (showingPicker.value) {
+                            Icons.Outlined.Keyboard
+                        } else {
+                            Icons.Outlined.Schedule
+                        }
+                    Icon(
+                        icon,
+                        contentDescription =
+                            if (showingPicker.value) {
+                                &quot;Switch to Text Input&quot;
+                            } else {
+                                &quot;Switch to Touch Input&quot;
+                            }
+                    )
+                }
+            }
+        }
+    ) {
+        if (showingPicker.value &amp;&amp; configuration.screenHeightDp &gt; 400) {
+            TimePicker(state = state)
+        } else {
+            TimeInput(state = state)
+        }
+    }
+}</pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TimePicker(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors,androidx.compose.material3.TimePickerLayoutType)">state</a></code> state for this timepicker, allows to subscribe to changes to <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#hour()">TimePickerState.hour</a></code> and <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#minute()">TimePickerState.minute</a></code>, and set the initial time for this picker.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>state:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html">TimePickerState</a></code></td>
+              <td>
+                <p>state for this time input, allows to subscribe to changes to <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#hour()">TimePickerState.hour</a></code> and <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#minute()">TimePickerState.minute</a></code>, and set the initial time for this input.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this time input</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>colors:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerColors.html">TimePickerColors</a> = TimePickerDefaults.colors()</code></td>
+              <td>
+                <p>colors <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerColors.html">TimePickerColors</a></code> that will be used to resolve the colors used for this time picker in different states. See <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerDefaults.html#colors()">TimePickerDefaults.colors</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>layoutType:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerLayoutType.html">TimePickerLayoutType</a> = TimePickerDefaults.layoutType()</code></td>
+              <td>
+                <p>, the different <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerLayoutType.html">TimePickerLayoutType</a></code> supported by this time picker, it will change the position and sizing of different components of the timepicker.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

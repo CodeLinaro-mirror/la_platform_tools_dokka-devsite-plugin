@@ -1,0 +1,184 @@
+<html devsite="true">
+  <head>
+    <title>dragAndDropSource</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="dragAndDropSource">
+      <meta itemprop="path" content="androidx.compose.foundation.draganddrop">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.coroutines.SuspendFunction1)">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.Function1,kotlin.coroutines.SuspendFunction1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>dragAndDropSource</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/package-summary.html#(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.coroutines.SuspendFunction1)">dragAndDropSource</a>(block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>A Modifier that allows an element it is applied to to be treated like a source for drag and drop operations.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/package-summary.html#(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.Function1,kotlin.coroutines.SuspendFunction1)">dragAndDropSource</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;drawDragDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>A Modifier that allows an element it is applied to to be treated like a source for drag and drop operations.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.dragAndDropSource-kotlin.coroutines.SuspendFunction1-"></a><a name="draganddropsource"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.coroutines.SuspendFunction1)">dragAndDropSource</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/package-summary.html#(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.coroutines.SuspendFunction1)">dragAndDropSource</a>(block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>A Modifier that allows an element it is applied to to be treated like a source for drag and drop operations. It displays the element dragged as a drag shadow.</p>
+      <p>Learn how to use <code><a href="/reference/kotlin/androidx/compose/foundation/draganddrop/package-summary.html#(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.coroutines.SuspendFunction1)">Modifier.dragAndDropSource</a></code>:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.draganddrop.dragAndDropSource
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draganddrop.DragAndDropTransferData
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+
+val label = remember { &quot;Drag me&quot; }
+Box(
+    modifier = modifier
+        .dragAndDropSource {
+            detectTapGestures(
+                onLongPress = {
+                    startTransfer(
+                        DragAndDropTransferData(
+                            clipData = ClipData.newPlainText(label, label),
+                            flags = View.DRAG_FLAG_GLOBAL,
+                        )
+                    )
+                }
+            )
+        }
+        .border(
+            border = BorderStroke(
+                width = 4.dp,
+                brush = Brush.linearGradient(listOf(Color.Magenta, Color.Magenta))
+            ),
+            shape = RoundedCornerShape(16.dp)
+        )
+        .padding(24.dp),
+) {
+    Text(
+        modifier = Modifier.align(Alignment.Center),
+        text = label
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>A lambda with a <code><a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a></code> as a receiver which provides a <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a></code> to detect the drag gesture, after which a drag and drop gesture can be started with <code><a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html#startTransfer(androidx.compose.ui.draganddrop.DragAndDropTransferData)">DragAndDropSourceScope.startTransfer</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.Function1, kotlin.coroutines.SuspendFunction1)"></a><a name="-androidx.compose.ui.Modifier-.dragAndDropSource-kotlin.Function1-kotlin.coroutines.SuspendFunction1-"></a><a name="draganddropsource"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.Function1,kotlin.coroutines.SuspendFunction1)">dragAndDropSource</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/package-summary.html#(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.Function1,kotlin.coroutines.SuspendFunction1)">dragAndDropSource</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;drawDragDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>A Modifier that allows an element it is applied to to be treated like a source for drag and drop operations.</p>
+      <p>Learn how to use <code><a href="/reference/kotlin/androidx/compose/foundation/draganddrop/package-summary.html#(androidx.compose.ui.Modifier).dragAndDropSource(kotlin.Function1,kotlin.coroutines.SuspendFunction1)">Modifier.dragAndDropSource</a></code> while providing a custom drag shadow:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.draganddrop.dragAndDropSource
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+Box(
+    modifier = Modifier
+        .size(56.dp)
+        .background(color = color)
+        .dragAndDropSource(
+            drawDragDecoration = {
+                drawRect(color)
+            },
+        ) {
+            detectTapGestures(
+                onLongPress = { startTransfer(color.toDragAndDropTransfer()) }
+            )
+        }
+)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>drawDragDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>provides the visual representation of the item dragged during the drag and drop gesture.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>A lambda with a <code><a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html">DragAndDropSourceScope</a></code> as a receiver which provides a <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a></code> to detect the drag gesture, after which a drag and drop gesture can be started with <code><a href="/reference/kotlin/androidx/compose/foundation/draganddrop/DragAndDropSourceScope.html#startTransfer(androidx.compose.ui.draganddrop.DragAndDropTransferData)">DragAndDropSourceScope.startTransfer</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

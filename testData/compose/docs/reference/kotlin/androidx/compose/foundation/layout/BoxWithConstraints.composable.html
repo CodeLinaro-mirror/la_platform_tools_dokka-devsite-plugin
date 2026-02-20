@@ -1,0 +1,109 @@
+<html devsite="true">
+  <head>
+    <title>BoxWithConstraints</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="BoxWithConstraints">
+      <meta itemprop="path" content="androidx.compose.foundation.layout">
+      <meta itemprop="property" content="BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>BoxWithConstraints</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;propagateMinConstraints:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxWithConstraintsScope.html">BoxWithConstraintsScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>A composable that defines its own content according to the available space, based on the incoming constraints or the current <code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="BoxWithConstraints(androidx.compose.ui.Modifier, androidx.compose.ui.Alignment, kotlin.Boolean, kotlin.Function1)"></a><a name="BoxWithConstraints-androidx.compose.ui.Modifier-androidx.compose.ui.Alignment-kotlin.Boolean-kotlin.Function1-"></a><a name="boxwithconstraints"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.TopStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;propagateMinConstraints:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxWithConstraintsScope.html">BoxWithConstraintsScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>A composable that defines its own content according to the available space, based on the incoming constraints or the current <code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code>. Example usage:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+
+BoxWithConstraints {
+    val rectangleHeight = 100.dp
+    if (maxHeight &lt; rectangleHeight * 2) {
+        Box(Modifier.size(50.dp, rectangleHeight).background(Color.Blue))
+    } else {
+        Column {
+            Box(Modifier.size(50.dp, rectangleHeight).background(Color.Blue))
+            Box(Modifier.size(50.dp, rectangleHeight).background(Color.Gray))
+        }
+    }
+}</pre>
+      <p>The composable will compose the given children, and will position the resulting layout elements in a parent layout which behaves similar to a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">Box</a></code>. The layout will size itself to fit the content, subject to the incoming constraints. When children are smaller than the parent, by default they will be positioned inside the layout according to the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">contentAlignment</a></code>. For individually specifying the alignments of the children layouts, use the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html#(androidx.compose.ui.Modifier).align(androidx.compose.ui.Alignment)">BoxScope.align</a></code> modifier. By default, the content will be measured without the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">Box</a></code>'s incoming min constraints, unless <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">propagateMinConstraints</a></code> is <code>true</code>. As an example, setting <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">propagateMinConstraints</a></code> to <code>true</code> can be useful when the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a></code> has content on which modifiers cannot be specified directly and setting a min size on the content of the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a></code> is needed. If <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">propagateMinConstraints</a></code> is set to <code>true</code>, the min size set on the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a></code> will also be applied to the content, whereas otherwise the min size will only apply to the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a></code>. When the content has more than one layout child the layout children will be stacked one on top of the other (positioned as explained above) in the composition order.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>Modifier to be applied to the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.TopStart</code></td>
+              <td>
+                <p>The default alignment inside the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>propagateMinConstraints:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>Whether the incoming min constraints should be passed to content.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxWithConstraintsScope.html">BoxWithConstraintsScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>The content of the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

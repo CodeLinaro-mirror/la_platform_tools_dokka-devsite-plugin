@@ -1,0 +1,124 @@
+<html devsite="true">
+  <head>
+    <title>consumeWindowInsets</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="consumeWindowInsets">
+      <meta itemprop="path" content="androidx.compose.foundation.layout">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>consumeWindowInsets</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>)</code></div>
+              <p>Consume insets that haven't been consumed yet by other insets Modifiers similar to <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> without adding any padding.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumeWindowInsets</a>(paddingValues:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a>)</code></div>
+              <p>Consume <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> as insets as if the padding was added irrespective of insets.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.consumeWindowInsets-androidx.compose.foundation.layout.WindowInsets-"></a><a name="consumewindowinsets"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Consume insets that haven't been consumed yet by other insets Modifiers similar to <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> without adding any padding.</p>
+      <p>This can be useful when content offsets are provided by <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues()">WindowInsets.asPaddingValues</a></code>. This should be used further down the hierarchy than the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> is used so that the values aren't consumed before the padding is added.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
+
+class SampleActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        super.onCreate(savedInstanceState)
+        setContent {
+            Box(Modifier.padding(WindowInsets.navigationBars.asPaddingValues())) {
+                Box(Modifier.consumeWindowInsets(WindowInsets.navigationBars)) {
+                    // app content
+                }
+            }
+        }
+    }
+}</pre>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.consumeWindowInsets-androidx.compose.foundation.layout.PaddingValues-"></a><a name="consumewindowinsets"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumeWindowInsets</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumeWindowInsets</a>(paddingValues:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Consume <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> as insets as if the padding was added irrespective of insets. Layouts further down the hierarchy that use <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code>, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).safeContentPadding()">safeContentPadding</a></code>, and other insets padding Modifiers won't pad for the values that <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> provides. This can be useful when content offsets are provided by layout rather than <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> modifiers.</p>
+      <p>This method consumes all of <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> in addition to whatever has been consumed by other <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> modifiers by ancestors. <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumeWindowInsets</a></code> accepting a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> argument ensures that its insets are consumed and doesn't consume more if they have already been consumed by ancestors.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
+
+class SampleActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        super.onCreate(savedInstanceState)
+        setContent {
+            with(LocalDensity.current) {
+                val paddingValues = PaddingValues(horizontal = 20.dp)
+                Box(
+                    Modifier
+                        .padding(paddingValues)
+                        .consumeWindowInsets(paddingValues)
+                ) {
+                    // app content
+                }
+            }
+        }
+    }
+}</pre>
+    </div>
+  </body>
+</html>

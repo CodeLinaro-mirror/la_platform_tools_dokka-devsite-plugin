@@ -1,0 +1,131 @@
+<html devsite="true">
+  <head>
+    <title>verticalScroll</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="verticalScroll">
+      <meta itemprop="path" content="androidx.compose.foundation">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>verticalScroll</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">verticalScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;flingBehavior:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html">FlingBehavior</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;reverseScrolling:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              <p>Modify element to allow to scroll vertically when height of the content is bigger than max constraints allow.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState, kotlin.Boolean, androidx.compose.foundation.gestures.FlingBehavior, kotlin.Boolean)"></a><a name="-androidx.compose.ui.Modifier-.verticalScroll-androidx.compose.foundation.ScrollState-kotlin.Boolean-androidx.compose.foundation.gestures.FlingBehavior-kotlin.Boolean-"></a><a name="verticalscroll"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">verticalScroll</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">verticalScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;flingBehavior:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html">FlingBehavior</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;reverseScrolling:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Modify element to allow to scroll vertically when height of the content is bigger than max constraints allow.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.unit.dp
+
+val scrollState = rememberScrollState()
+val gradient = Brush.verticalGradient(
+    listOf(Color.Red, Color.Blue, Color.Green), 0.0f, 10000.0f, TileMode.Repeated
+)
+Box(
+    Modifier
+        .verticalScroll(scrollState)
+        .fillMaxWidth()
+        .requiredHeight(10000.dp)
+        .background(brush = gradient)
+)</pre>
+      <p>In order to use this modifier, you need to create and own <code><a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a></code></p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a></code></td>
+              <td>
+                <p>state of the scroll</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>enabled:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+              <td>
+                <p>whether or not scrolling via touch input is enabled</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>flingBehavior:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html">FlingBehavior</a>? = null</code></td>
+              <td>
+                <p>logic describing fling behavior when drag has finished with velocity. If <code>null</code>, default from <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableDefaults.html#flingBehavior()">ScrollableDefaults.flingBehavior</a></code> will be used.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>reverseScrolling:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>reverse the direction of scrolling, when <code>true</code>, 0 <code><a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html#value()">ScrollState.value</a></code> will mean bottom, when <code>false</code>, 0 <code><a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html#value()">ScrollState.value</a></code> will mean top</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#rememberScrollState(kotlin.Int)">rememberScrollState</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

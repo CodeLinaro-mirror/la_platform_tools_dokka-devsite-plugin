@@ -1,0 +1,124 @@
+<html devsite="true">
+  <head>
+    <title>BadgedBox</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="BadgedBox">
+      <meta itemprop="path" content="androidx.compose.material3">
+      <meta itemprop="property" content="BadgedBox(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>BadgedBox</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#BadgedBox(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">BadgedBox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;badge:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Material Design badge box.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="BadgedBox(kotlin.Function1, androidx.compose.ui.Modifier, kotlin.Function1)"></a><a name="BadgedBox-kotlin.Function1-androidx.compose.ui.Modifier-kotlin.Function1-"></a><a name="badgedbox"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="BadgedBox(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">BadgedBox</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#BadgedBox(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">BadgedBox</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;badge:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Material Design badge box.</p>
+      <p>A badge represents dynamic information such as a number of pending requests in a navigation bar.</p>
+      <p>Badges can be icon only or contain short text.</p>
+      <p><img alt="Badge
+image" src="https://developer.android.com/images/reference/androidx/compose/material3/badge.png"></p>
+      <p>A common use case is to display a badge with navigation bar items. For more information, see <a href="https://m3.material.io/components/navigation-bar/overview">Navigation Bar</a></p>
+      <p>A simple icon with badge example looks like:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+
+NavigationBar {
+    NavigationBarItem(
+        icon = {
+            BadgedBox(
+                badge = {
+                    Badge {
+                        val badgeNumber = &quot;8&quot;
+                        Text(
+                            badgeNumber,
+                            modifier =
+                                Modifier.semantics {
+                                    contentDescription = &quot;$badgeNumber new notifications&quot;
+                                }
+                        )
+                    }
+                }
+            ) {
+                Icon(Icons.Filled.Star, contentDescription = &quot;Favorite&quot;)
+            }
+        },
+        selected = false,
+        onClick = {}
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>badge:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>the badge to be displayed - typically a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Badge(androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,kotlin.Function1)">Badge</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this BadgedBox</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>the anchor to which this badge will be positioned</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

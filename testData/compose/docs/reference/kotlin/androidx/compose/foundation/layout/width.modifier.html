@@ -1,0 +1,154 @@
+<html devsite="true">
+  <head>
+    <title>width</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="width">
+      <meta itemprop="path" content="androidx.compose.foundation.layout">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).width(androidx.compose.foundation.layout.IntrinsicSize)">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).width(androidx.compose.ui.unit.Dp)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>width</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).width(androidx.compose.foundation.layout.IntrinsicSize)">width</a>(intrinsicSize:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/IntrinsicSize.html">IntrinsicSize</a>)</code></div>
+              <p>Declare the preferred width of the content to be the same as the min or max intrinsic width of the content.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).width(androidx.compose.ui.unit.Dp)">width</a>(width:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>)</code></div>
+              <p>Declare the preferred width of the content to be exactly <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).width(androidx.compose.ui.unit.Dp)">width</a></code>dp.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.width-androidx.compose.foundation.layout.IntrinsicSize-"></a><a name="width"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).width(androidx.compose.foundation.layout.IntrinsicSize)">width</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).width(androidx.compose.foundation.layout.IntrinsicSize)">width</a>(intrinsicSize:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/IntrinsicSize.html">IntrinsicSize</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Declare the preferred width of the content to be the same as the min or max intrinsic width of the content. The incoming measurement <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> may override this value, forcing the content to be either smaller or larger.</p>
+      <p>See <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).height(androidx.compose.foundation.layout.IntrinsicSize)">height</a></code> for options of sizing to intrinsic height. Also see <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).width(androidx.compose.foundation.layout.IntrinsicSize)">width</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).widthIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">widthIn</a></code> for other options to set the preferred width.</p>
+      <p>Example usage for min intrinsic:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+
+// Builds a layout containing three Box having the same width as the widest one.
+//
+// Here width min intrinsic is adding a width premeasurement pass for the
+// Column, whose minimum intrinsic width will correspond to the preferred width of the largest
+// Box. Then width min intrinsic will measure the Column with tight width, the
+// same as the premeasured minimum intrinsic width, which due to fillMaxWidth will force
+// the Box's to use the same width.
+Box {
+    Column(Modifier.width(IntrinsicSize.Min).fillMaxHeight()) {
+        Box(
+            modifier = Modifier.fillMaxWidth()
+                .size(20.dp, 10.dp)
+                .background(Color.Gray)
+        )
+        Box(
+            modifier = Modifier.fillMaxWidth()
+                .size(30.dp, 10.dp)
+                .background(Color.Blue)
+        )
+        Box(
+            modifier = Modifier.fillMaxWidth()
+                .size(10.dp, 10.dp)
+                .background(Color.Magenta)
+        )
+    }
+}</pre>
+      <p>Example usage for max intrinsic:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+
+// Builds a layout containing three Text boxes having the same width as the widest one.
+//
+// Here width max intrinsic is adding a width premeasurement pass for the Column,
+// whose maximum intrinsic width will correspond to the preferred width of the largest
+// Box. Then width max intrinsic will measure the Column with tight width, the
+// same as the premeasured maximum intrinsic width, which due to fillMaxWidth modifiers will
+// force the Boxs to use the same width.
+
+Box {
+    Column(Modifier.width(IntrinsicSize.Max).fillMaxHeight()) {
+        Box(Modifier.fillMaxWidth().background(Color.Gray)) {
+            Text(&quot;Short text&quot;)
+        }
+        Box(Modifier.fillMaxWidth().background(Color.Blue)) {
+            Text(&quot;Extremely long text giving the width of its siblings&quot;)
+        }
+        Box(Modifier.fillMaxWidth().background(Color.Magenta)) {
+            Text(&quot;Medium length text&quot;)
+        }
+    }
+}</pre>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.width-androidx.compose.ui.unit.Dp-"></a><a name="width"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).width(androidx.compose.ui.unit.Dp)">width</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).width(androidx.compose.ui.unit.Dp)">width</a>(width:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Declare the preferred width of the content to be exactly <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).width(androidx.compose.ui.unit.Dp)">width</a></code>dp. The incoming measurement <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> may override this value, forcing the content to be either smaller or larger.</p>
+      <p>For a modifier that sets the width of the content regardless of the incoming constraints see <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).requiredWidth(androidx.compose.foundation.layout.IntrinsicSize)">Modifier.requiredWidth</a></code>. See <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).height(androidx.compose.foundation.layout.IntrinsicSize)">height</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).size(androidx.compose.ui.unit.Dp)">size</a></code> to set other preferred dimensions. See <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).widthIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">widthIn</a></code>, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).heightIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">heightIn</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).sizeIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">sizeIn</a></code> to set a preferred size range.</p>
+      <p>Example usage:</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+
+Box {
+    Box(Modifier.width(100.dp).aspectRatio(1f).background(Color.Magenta))
+}</pre>
+    </div>
+  </body>
+</html>

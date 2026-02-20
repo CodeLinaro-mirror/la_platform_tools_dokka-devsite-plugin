@@ -1,0 +1,132 @@
+<html devsite="true">
+  <head>
+    <title>MultiChoiceSegmentedButtonRow</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="MultiChoiceSegmentedButtonRow">
+      <meta itemprop="path" content="androidx.compose.material3">
+      <meta itemprop="property" content="MultiChoiceSegmentedButtonRow(androidx.compose.ui.Modifier,androidx.compose.ui.unit.Dp,kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>MultiChoiceSegmentedButtonRow</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#MultiChoiceSegmentedButtonRow(androidx.compose.ui.Modifier,androidx.compose.ui.unit.Dp,kotlin.Function1)">MultiChoiceSegmentedButtonRow</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/material3/MultiChoiceSegmentedButtonRowScope.html">MultiChoiceSegmentedButtonRowScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p><a href=&quot;https://m3.material.io/components/segmented-buttons/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Segmented Button</a>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="MultiChoiceSegmentedButtonRow(androidx.compose.ui.Modifier, androidx.compose.ui.unit.Dp, kotlin.Function1)"></a><a name="MultiChoiceSegmentedButtonRow-androidx.compose.ui.Modifier-androidx.compose.ui.unit.Dp-kotlin.Function1-"></a><a name="multichoicesegmentedbuttonrow"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="MultiChoiceSegmentedButtonRow(androidx.compose.ui.Modifier,androidx.compose.ui.unit.Dp,kotlin.Function1)">MultiChoiceSegmentedButtonRow</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/package-summary.html#MultiChoiceSegmentedButtonRow(androidx.compose.ui.Modifier,androidx.compose.ui.unit.Dp,kotlin.Function1)">MultiChoiceSegmentedButtonRow</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = SegmentedButtonDefaults.BorderWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/material3/MultiChoiceSegmentedButtonRowScope.html">MultiChoiceSegmentedButtonRowScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><a href=&quot;https://m3.material.io/components/segmented-buttons/overview&quot; class=&quot;external&quot; target=&quot;_blank&quot;>Material Segmented Button</a>.</p>
+      <p>A Layout to correctly position, size, and add semantics to <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.MultiChoiceSegmentedButtonRowScope).SegmentedButton(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.SegmentedButtonColors,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0,kotlin.Function0)">SegmentedButton</a></code>s in a Row. It handles overlapping items so that strokes of the item are correctly on top of each other.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#MultiChoiceSegmentedButtonRow(androidx.compose.ui.Modifier,androidx.compose.ui.unit.Dp,kotlin.Function1)">MultiChoiceSegmentedButtonRow</a></code> is used when the selection allows multiple value, for correct semantics.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.TrendingUp
+import androidx.compose.material.icons.filled.BookmarkBorder
+import androidx.compose.material.icons.filled.StarBorder
+import androidx.compose.material3.MultiChoiceSegmentedButtonRow
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+
+val checkedList = remember { mutableStateListOf&lt;Int&gt;() }
+val options = listOf(&quot;Favorites&quot;, &quot;Trending&quot;, &quot;Saved&quot;)
+val icons =
+    listOf(
+        Icons.Filled.StarBorder,
+        Icons.AutoMirrored.Filled.TrendingUp,
+        Icons.Filled.BookmarkBorder
+    )
+MultiChoiceSegmentedButtonRow {
+    options.forEachIndexed { index, label -&gt;
+        SegmentedButton(
+            shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
+            icon = {
+                SegmentedButtonDefaults.Icon(active = index in checkedList) {
+                    Icon(
+                        imageVector = icons[index],
+                        contentDescription = null,
+                        modifier = Modifier.size(SegmentedButtonDefaults.IconSize)
+                    )
+                }
+            },
+            onCheckedChange = {
+                if (index in checkedList) {
+                    checkedList.remove(index)
+                } else {
+                    checkedList.add(index)
+                }
+            },
+            checked = index in checkedList
+        ) {
+            Text(label)
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this row</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = SegmentedButtonDefaults.BorderWidth</code></td>
+              <td>
+                <p>the dimension of the overlap between buttons. Should be equal to the stroke width used on the items.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/material3/MultiChoiceSegmentedButtonRowScope.html">MultiChoiceSegmentedButtonRowScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>the content of this Segmented Button Row, typically a sequence of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.MultiChoiceSegmentedButtonRowScope).SegmentedButton(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.SegmentedButtonColors,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0,kotlin.Function0)">SegmentedButton</a></code>s</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

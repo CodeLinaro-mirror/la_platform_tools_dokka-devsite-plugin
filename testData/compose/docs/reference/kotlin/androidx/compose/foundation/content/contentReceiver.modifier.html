@@ -1,0 +1,175 @@
+<html devsite="true">
+  <head>
+    <title>contentReceiver</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="contentReceiver">
+      <meta itemprop="path" content="androidx.compose.foundation.content">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).contentReceiver(androidx.compose.foundation.content.ReceiveContentListener)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>contentReceiver</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/content/package-summary.html#(androidx.compose.ui.Modifier).contentReceiver(androidx.compose.foundation.content.ReceiveContentListener)">contentReceiver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;receiveContentListener:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/content/ReceiveContentListener.html">ReceiveContentListener</a><br>)</code></div>
+              <p>Configures the current node and any children nodes as a Content Receiver.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.contentReceiver-androidx.compose.foundation.content.ReceiveContentListener-"></a><a name="contentreceiver"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).contentReceiver(androidx.compose.foundation.content.ReceiveContentListener)">contentReceiver</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/content/package-summary.html#(androidx.compose.ui.Modifier).contentReceiver(androidx.compose.foundation.content.ReceiveContentListener)">contentReceiver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;receiveContentListener:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/content/ReceiveContentListener.html">ReceiveContentListener</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Configures the current node and any children nodes as a Content Receiver.</p>
+      <p>Content in this context refers to a <code><a href="/reference/kotlin/androidx/compose/foundation/content/TransferableContent.html">TransferableContent</a></code> that could be received from another app through Drag-and-Drop, Copy/Paste, or from the Software Keyboard.</p>
+      <p>There is no pre-filtering for the received content by media type, e.g. software Keyboard would assume that the app can handle any content that's sent to it. Therefore, it's crucial to check the received content's type and other related information before reading and processing it. Please refer to <code><a href="/reference/kotlin/androidx/compose/foundation/content/package-summary.html#(androidx.compose.foundation.content.TransferableContent).hasMediaType(androidx.compose.foundation.content.MediaType)">TransferableContent.hasMediaType</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/content/TransferableContent.html#clipMetadata()">TransferableContent.clipMetadata</a></code> to learn more about how to do proper checks on the received item.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.content.MediaType
+import androidx.compose.foundation.content.ReceiveContentListener
+import androidx.compose.foundation.content.TransferableContent
+import androidx.compose.foundation.content.consume
+import androidx.compose.foundation.content.contentReceiver
+import androidx.compose.foundation.content.hasMediaType
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+
+val state = rememberTextFieldState()
+var images by remember { mutableStateOf&lt;List&lt;ImageBitmap&gt;&gt;(emptyList()) }
+var dragging by remember { mutableStateOf(false) }
+var hovering by remember { mutableStateOf(false) }
+Column {
+    Row {
+        images.forEach {
+            Image(bitmap = it, contentDescription = null)
+        }
+    }
+    BasicTextField(
+        state = state,
+        modifier = Modifier
+            .background(
+                when {
+                    dragging -&gt; Color.Red
+                    hovering -&gt; Color.Green
+                    else -&gt; MaterialTheme.colors.background
+                }
+            )
+            .contentReceiver(
+                receiveContentListener = object : ReceiveContentListener {
+                    override fun onDragStart() {
+                        dragging = true
+                    }
+
+                    override fun onDragEnd() {
+                        hovering = false
+                        dragging = false
+                    }
+
+                    override fun onDragEnter() {
+                        hovering = true
+                    }
+
+                    override fun onDragExit() {
+                        hovering = false
+                    }
+
+                    override fun onReceive(
+                        transferableContent: TransferableContent
+                    ): TransferableContent? {
+                        if (!transferableContent.hasMediaType(MediaType.Image)) {
+                            return transferableContent
+                        }
+                        val newImages = mutableListOf&lt;ImageBitmap&gt;()
+                        return transferableContent
+                            .consume { item -&gt;
+                                // only consume this item if we can read an imageBitmap
+                                item
+                                    .readImageBitmap()
+                                    ?.let { newImages += it; true } ?: false
+                            }
+                            .also {
+                                images = newImages
+                            }
+                    }
+                }
+            )
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>receiveContentListener:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/content/ReceiveContentListener.html">ReceiveContentListener</a></code></td>
+              <td>
+                <p>Listener to respond to the receive event. This interface also includes a set of callbacks for certain Drag-and-Drop state changes. Please checkout <code><a href="/reference/kotlin/androidx/compose/foundation/content/ReceiveContentListener.html">ReceiveContentListener</a></code> docs for an explanation of each callback.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/content/TransferableContent.html">TransferableContent</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/content/package-summary.html#(androidx.compose.foundation.content.TransferableContent).hasMediaType(androidx.compose.foundation.content.MediaType)">hasMediaType</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

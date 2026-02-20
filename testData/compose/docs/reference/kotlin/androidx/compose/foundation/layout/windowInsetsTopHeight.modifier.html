@@ -1,0 +1,81 @@
+<html devsite="true">
+  <head>
+    <title>windowInsetsTopHeight</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="windowInsetsTopHeight">
+      <meta itemprop="path" content="androidx.compose.foundation.layout">
+      <meta itemprop="property" content="(androidx.compose.ui.Modifier).windowInsetsTopHeight(androidx.compose.foundation.layout.WindowInsets)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>windowInsetsTopHeight</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsTopHeight(androidx.compose.foundation.layout.WindowInsets)">windowInsetsTopHeight</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>)</code></div>
+              <p>Sets the height to that of <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsTopHeight(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> at the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">top</a></code> of the screen.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.windowInsetsTopHeight-androidx.compose.foundation.layout.WindowInsets-"></a><a name="windowinsetstopheight"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="(androidx.compose.ui.Modifier).windowInsetsTopHeight(androidx.compose.foundation.layout.WindowInsets)">windowInsetsTopHeight</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsTopHeight(androidx.compose.foundation.layout.WindowInsets)">windowInsetsTopHeight</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Sets the height to that of <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsTopHeight(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> at the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">top</a></code> of the screen.</p>
+      <p>When used, the android.view.WindowInsets will respect the consumed insets from <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code>, but won't consume any insets.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsTopHeight
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
+
+class SampleActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        super.onCreate(savedInstanceState)
+        setContent {
+            Box(Modifier.fillMaxSize()) {
+                // Background for status bar at the top
+                Box(Modifier.windowInsetsTopHeight(WindowInsets.statusBars)
+                    .fillMaxWidth()
+                    .align(Alignment.TopCenter)
+                    .background(Color.Red)
+                )
+                // app content
+            }
+        }
+    }
+}</pre>
+    </div>
+  </body>
+</html>

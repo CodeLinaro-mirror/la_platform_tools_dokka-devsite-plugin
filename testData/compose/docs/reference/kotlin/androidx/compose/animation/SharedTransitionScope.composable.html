@@ -1,0 +1,70 @@
+<html devsite="true">
+  <head>
+    <title>SharedTransitionScope</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="SharedTransitionScope">
+      <meta itemprop="path" content="androidx.compose.animation">
+      <meta itemprop="property" content="SharedTransitionScope(kotlin.Function2)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>SharedTransitionScope</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalSharedTransitionApi.html">ExperimentalSharedTransitionApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">SharedTransitionScope</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">SharedTransitionScope</a></code> creates a <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">SharedTransitionScope</a></code> for the child layouts in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">content</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="SharedTransitionScope-kotlin.Function2-"></a><a name="sharedtransitionscope"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="SharedTransitionScope(kotlin.Function2)">SharedTransitionScope</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalSharedTransitionApi.html">ExperimentalSharedTransitionApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">SharedTransitionScope</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">SharedTransitionScope</a></code> creates a <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">SharedTransitionScope</a></code> for the child layouts in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">content</a></code>. Any child (direct or indirect) of the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionLayout(androidx.compose.ui.Modifier,kotlin.Function1)">SharedTransitionLayout</a></code> can use the receiver scope <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">SharedTransitionScope</a></code> to create shared element or shared bounds transitions. <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">SharedTransitionScope</a></code> will not creates a new Layout.</p>
+      <p><b>IMPORTANT</b>: It is important to set the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> provided to the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">content</a></code> on the first and top-most child, as the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> both obtains the root coordinates and creates an overlay. If the first child layout in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionScope(kotlin.Function2)">content</a></code> isn't the child with the highest zIndex, consider using <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#SharedTransitionLayout(androidx.compose.ui.Modifier,kotlin.Function1)">SharedTransitionLayout</a></code> instead.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>The children composable to be laid out.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+<html devsite="true">
+  <head>
+    <title>animateValueAsState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="animateValueAsState">
+      <meta itemprop="path" content="androidx.compose.animation.core">
+      <meta itemprop="property" content="animateValueAsState(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.String,kotlin.Function1)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>animateValueAsState</h1>
+      </div>
+    </div>
+    <h2>Functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateValueAsState(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.String,kotlin.Function1)">animateValueAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;visibilityThreshold:&nbsp;T?,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedListener:&nbsp;((T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?<br>)</code></div>
+              <p>Fire-and-forget animation function for any value.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Functions</h2>
+    <div class="api-item"><a name="animateValueAsState(kotlin.Any, androidx.compose.animation.core.TwoWayConverter, androidx.compose.animation.core.AnimationSpec, kotlin.Any, kotlin.String, kotlin.Function1)"></a><a name="animateValueAsState-kotlin.Any-androidx.compose.animation.core.TwoWayConverter-androidx.compose.animation.core.AnimationSpec-kotlin.Any-kotlin.String-kotlin.Function1-"></a><a name="animatevalueasstate"></a>
+      <div class="api-name-block">
+        <div>
+          <h3 id="animateValueAsState(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.String,kotlin.Function1)">animateValueAsState</h3>
+        </div>
+      </div>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateValueAsState(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.String,kotlin.Function1)">animateValueAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;T&gt; = remember { spring() },<br>&nbsp;&nbsp;&nbsp;&nbsp;visibilityThreshold:&nbsp;T? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;ValueAnimation&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedListener:&nbsp;((T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</pre>
+      <p>Fire-and-forget animation function for any value. This Composable function is overloaded for different parameter types such as <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code>, etc. When the provided <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateValueAsState(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.String,kotlin.Function1)">targetValue</a></code> is changed, the animation will run automatically. If there is already an animation in-flight when <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateValueAsState(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.String,kotlin.Function1)">targetValue</a></code> changes, the on-going animation will adjust course to animate towards the new target value.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateValueAsState(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.String,kotlin.Function1)">animateValueAsState</a></code> returns a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object. The value of the state object will continuously be updated by the animation until the animation finishes.</p>
+      <p>Note, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#animateValueAsState(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.String,kotlin.Function1)">animateValueAsState</a></code> cannot be canceled/stopped without removing this composable function from the tree. See <code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html">Animatable</a></code> for cancelable animations.</p>
+      <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.TwoWayConverter
+import androidx.compose.animation.core.animateValueAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun ArbitraryValueTypeAnimation(enabled: Boolean) {
+    // Sets up the different animation target values based on the [enabled] flag.
+    val mySize = remember(enabled) {
+        if (enabled) {
+            MySize(500.dp, 500.dp)
+        } else {
+            MySize(100.dp, 100.dp)
+        }
+    }
+
+    // Animates a custom type value to the given target value, using a [TwoWayConverter]. The
+    // converter tells the animation system how to convert the custom type from and to
+    // [AnimationVector], so that it can be animated.
+    val animSize: MySize by animateValueAsState(
+        mySize,
+        TwoWayConverter&lt;MySize, AnimationVector2D&gt;(
+            convertToVector = { AnimationVector2D(it.width.value, it.height.value) },
+            convertFromVector = { MySize(it.v1.dp, it.v2.dp) }
+        )
+    )
+    Box(Modifier.size(animSize.width, animSize.height).background(color = Color.Red))
+}</pre>
+      <pre class="prettyprint">data class MySize(val width: Dp, val height: Dp)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>targetValue:&nbsp;T</code></td>
+              <td>
+                <p>Target value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;T&gt; = remember { spring() }</code></td>
+              <td>
+                <p>The animation that will be used to change the value through time. Physics                     animation will be used by default.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>visibilityThreshold:&nbsp;T? = null</code></td>
+              <td>
+                <p>An optional threshold to define when the animation value can be                             considered close enough to the targetValue to end the animation.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a> = &quot;ValueAnimation&quot;</code></td>
+              <td>
+                <p>An optional label to differentiate from other animations in Android Studio.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>finishedListener:&nbsp;((T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>An optional end listener to get notified when the animation is finished.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</code></td>
+              <td>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object, the value of which is updated by animation.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
