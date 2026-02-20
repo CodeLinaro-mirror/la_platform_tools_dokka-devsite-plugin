@@ -19,46 +19,24 @@ package com.google.devsite.transformers
 import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.renderer.converters.allAnnotations
 import com.google.devsite.renderer.converters.companion
-import com.google.devsite.testing.ConverterTestBase
 import com.google.devsite.testing.defaultPluginsConfiguration
 import kotlin.test.assertContentEquals
 import kotlin.test.assertTrue
 import org.jetbrains.dokka.DokkaConfiguration
-import org.jetbrains.dokka.DokkaConfigurationImpl
 import org.jetbrains.dokka.PluginConfigurationImpl
-import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.Documentable
-import org.jetbrains.dokka.testApi.logger.TestLogger
 import org.jetbrains.dokka.toCompactJsonString
-import org.jetbrains.dokka.utilities.DokkaConsoleLogger
-import org.jetbrains.dokka.utilities.LoggingLevel
 import org.junit.Test
 
-class PropagatedAnnotationsTransformerTest :
-    BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
-    private val configuration = createConfiguration(defaultPluginsConfiguration)
-
-    private fun createConfiguration(
-        plugins: MutableList<PluginConfigurationImpl>
-    ): DokkaConfigurationImpl {
-        return dokkaConfiguration {
-            sourceSets {
-                sourceSet {
-                    sourceRoots = listOf("src")
-                    analysisPlatform = "jvm"
-                    classpath += jvmStdlibPath!!
-                }
-            }
-            pluginsConfigurations = plugins
-        }
-    }
+class PropagatedAnnotationsTransformerTest : BaseTransformerTest() {
+    override val defaultConfiguration = createDokkaConfiguration(defaultPluginsConfiguration)
 
     @Test
     fun `test propagation from class to members`() {
-        testInline(
+        testTransformer(
             """
             /src/com/sample/Foo.kt
             package com.sample
@@ -70,50 +48,40 @@ class PropagatedAnnotationsTransformerTest :
                 inner class Bar
             }
             """
-                .trimIndent(),
-            configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
-        ) {
-            documentablesTransformationStage = { mod ->
-                val fooClass = mod.packages.single().classlikes.single() as DClass
-                assertTrue(fooClass.isDeprecated())
-                assertTrue(fooClass.constructors.single().isDeprecated())
-                assertTrue(fooClass.functions.single().isDeprecated())
-                assertTrue(fooClass.properties.single().isDeprecated())
-                assertTrue(fooClass.companion()!!.isDeprecated())
-                assertTrue(
-                    (fooClass.classlikes.single { it.name == "Bar" } as DClass).isDeprecated()
-                )
-            }
+                .trimIndent()
+        ) { mod ->
+            val fooClass = mod.packages.single().classlikes.single() as DClass
+            assertTrue(fooClass.isDeprecated())
+            assertTrue(fooClass.constructors.single().isDeprecated())
+            assertTrue(fooClass.functions.single().isDeprecated())
+            assertTrue(fooClass.properties.single().isDeprecated())
+            assertTrue(fooClass.companion()!!.isDeprecated())
+            assertTrue((fooClass.classlikes.single { it.name == "Bar" } as DClass).isDeprecated())
         }
     }
 
     @Test
     fun `test propagation from properties to accessors`() {
-        testInline(
+        testTransformer(
             """
             /src/com/sample/Foo.kt
             package com.sample
             @Deprecated
             var v = 0
             """
-                .trimIndent(),
-            configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
-        ) {
-            documentablesTransformationStage = { mod ->
-                val pkg = mod.packages.single()
-                val topLevelProperty = pkg.properties.single()
-                assertTrue(topLevelProperty.isDeprecated())
-                assertTrue(topLevelProperty.getter!!.isDeprecated())
-                assertTrue(topLevelProperty.setter!!.isDeprecated())
-            }
+                .trimIndent()
+        ) { mod ->
+            val pkg = mod.packages.single()
+            val topLevelProperty = pkg.properties.single()
+            assertTrue(topLevelProperty.isDeprecated())
+            assertTrue(topLevelProperty.getter!!.isDeprecated())
+            assertTrue(topLevelProperty.setter!!.isDeprecated())
         }
     }
 
     @Test
     fun `test propagation from enum to entries`() {
-        testInline(
+        testTransformer(
             """
             /src/com/sample/Foo.kt
             package com.sample
@@ -122,21 +90,17 @@ class PropagatedAnnotationsTransformerTest :
                 ONE
             }
             """
-                .trimIndent(),
-            configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
-        ) {
-            documentablesTransformationStage = { mod ->
-                val fooEnum = mod.packages.single().classlikes.single() as DEnum
-                assertTrue(fooEnum.isDeprecated())
-                assertTrue(fooEnum.entries.single().isDeprecated())
-            }
+                .trimIndent()
+        ) { mod ->
+            val fooEnum = mod.packages.single().classlikes.single() as DEnum
+            assertTrue(fooEnum.isDeprecated())
+            assertTrue(fooEnum.entries.single().isDeprecated())
         }
     }
 
     @Test
     fun `test propagation from package to members`() {
-        testInline(
+        testTransformer(
             """
             /src/com/sample/package-info.java
             @Deprecated
@@ -147,17 +111,13 @@ class PropagatedAnnotationsTransformerTest :
             val v = 0
             fun foo() = Unit
             """
-                .trimIndent(),
-            configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
-        ) {
-            documentablesTransformationStage = { mod ->
-                val pkg = mod.packages.single()
-                assertTrue(pkg.isDeprecated())
-                assertTrue((pkg.classlikes.single() as DClass).isDeprecated())
-                assertTrue(pkg.properties.single().isDeprecated())
-                assertTrue(pkg.functions.single().isDeprecated())
-            }
+                .trimIndent()
+        ) { mod ->
+            val pkg = mod.packages.single()
+            assertTrue(pkg.isDeprecated())
+            assertTrue((pkg.classlikes.single() as DClass).isDeprecated())
+            assertTrue(pkg.properties.single().isDeprecated())
+            assertTrue(pkg.functions.single().isDeprecated())
         }
     }
 
@@ -165,7 +125,7 @@ class PropagatedAnnotationsTransformerTest :
     fun `test multiple annotations propagated`() {
         // Create custom configuration with the annotations to propagate
         val customConfiguration =
-            createConfiguration(
+            createDokkaConfiguration(
                 mutableListOf(
                     PluginConfigurationImpl(
                         fqPluginName = "com.google.devsite.DevsitePlugin",
@@ -196,7 +156,7 @@ class PropagatedAnnotationsTransformerTest :
                     )
                 )
             )
-        testInline(
+        testTransformer(
             """
             /src/com/sample/Foo.kt
             package com.sample
@@ -215,28 +175,25 @@ class PropagatedAnnotationsTransformerTest :
             """
                 .trimIndent(),
             customConfiguration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
-        ) {
-            documentablesTransformationStage = { mod ->
-                fun checkAnnotations(d: Documentable, expected: List<String>) {
-                    assertContentEquals(
-                        expected.sorted(),
-                        d.allAnnotations().map { it.dri.classNames!! }.sorted(),
-                    )
-                }
-                val fooClass = mod.packages.single().classlikes.single { it.name == "Foo" }
-                checkAnnotations(fooClass, listOf("A"))
-                checkAnnotations(fooClass.functions.single(), listOf("A"))
-                val barClass = fooClass.classlikes.single()
-                checkAnnotations(barClass, listOf("A", "B", "C"))
-                checkAnnotations(barClass.functions.single(), listOf("A", "B", "C"))
+        ) { mod ->
+            fun checkAnnotations(d: Documentable, expected: List<String>) {
+                assertContentEquals(
+                    expected.sorted(),
+                    d.allAnnotations().map { it.dri.classNames!! }.sorted(),
+                )
             }
+            val fooClass = mod.packages.single().classlikes.single { it.name == "Foo" }
+            checkAnnotations(fooClass, listOf("A"))
+            checkAnnotations(fooClass.functions.single(), listOf("A"))
+            val barClass = fooClass.classlikes.single()
+            checkAnnotations(barClass, listOf("A", "B", "C"))
+            checkAnnotations(barClass.functions.single(), listOf("A", "B", "C"))
         }
     }
 
     @Test
     fun `test recursive propagation`() {
-        testInline(
+        testTransformer(
             """
             /src/com/sample/Foo.kt
             package com.sample
@@ -248,28 +205,24 @@ class PropagatedAnnotationsTransformerTest :
                 }
             }
             """
-                .trimIndent(),
-            configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
-        ) {
-            documentablesTransformationStage = { mod ->
-                val fooClass = mod.packages.single().classlikes.single() as DClass
-                assertTrue(fooClass.isDeprecated())
-                val property = fooClass.properties.single()
-                assertTrue(property.isDeprecated())
-                assertTrue(property.getter!!.isDeprecated())
-                assertTrue(property.setter!!.isDeprecated())
+                .trimIndent()
+        ) { mod ->
+            val fooClass = mod.packages.single().classlikes.single() as DClass
+            assertTrue(fooClass.isDeprecated())
+            val property = fooClass.properties.single()
+            assertTrue(property.isDeprecated())
+            assertTrue(property.getter!!.isDeprecated())
+            assertTrue(property.setter!!.isDeprecated())
 
-                val companionObject = fooClass.companion()!!
-                assertTrue(companionObject.isDeprecated())
-                assertTrue(companionObject.functions.single().isDeprecated())
-            }
+            val companionObject = fooClass.companion()!!
+            assertTrue(companionObject.isDeprecated())
+            assertTrue(companionObject.functions.single().isDeprecated())
         }
     }
 
     @Test
     fun `test propagation when there are file level annotations`() {
-        testInline(
+        testTransformer(
             """
             /src/com/sample/Foo.kt
             @file:Suppress("SomeIssue")
@@ -282,21 +235,15 @@ class PropagatedAnnotationsTransformerTest :
                 inner class Bar
             }
             """
-                .trimIndent(),
-            configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
-        ) {
-            documentablesTransformationStage = { mod ->
-                val fooClass = mod.packages.single().classlikes.single() as DClass
-                assertTrue(fooClass.isDeprecated())
-                assertTrue(fooClass.constructors.single().isDeprecated())
-                assertTrue(fooClass.functions.single().isDeprecated())
-                assertTrue(fooClass.properties.single().isDeprecated())
-                assertTrue(fooClass.companion()!!.isDeprecated())
-                assertTrue(
-                    (fooClass.classlikes.single { it.name == "Bar" } as DClass).isDeprecated()
-                )
-            }
+                .trimIndent()
+        ) { mod ->
+            val fooClass = mod.packages.single().classlikes.single() as DClass
+            assertTrue(fooClass.isDeprecated())
+            assertTrue(fooClass.constructors.single().isDeprecated())
+            assertTrue(fooClass.functions.single().isDeprecated())
+            assertTrue(fooClass.properties.single().isDeprecated())
+            assertTrue(fooClass.companion()!!.isDeprecated())
+            assertTrue((fooClass.classlikes.single { it.name == "Bar" } as DClass).isDeprecated())
         }
     }
 }
