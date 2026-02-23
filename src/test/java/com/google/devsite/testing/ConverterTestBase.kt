@@ -31,6 +31,7 @@ import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
 import com.google.devsite.renderer.converters.EnumValueDocumentableConverter
 import com.google.devsite.renderer.converters.FunctionDocumentableConverter
+import com.google.devsite.renderer.converters.FunctionGroupConverter
 import com.google.devsite.renderer.converters.MetadataConverter
 import com.google.devsite.renderer.converters.ModifierHints
 import com.google.devsite.renderer.converters.NonKmpClasslikeConverter
@@ -49,6 +50,7 @@ import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.util.ClassVersionMetadata
+import com.google.devsite.util.ComposeTestUtils
 import com.google.devsite.util.LibraryMetadata
 import java.io.File
 import java.net.URL
@@ -59,6 +61,7 @@ import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaGenerator
 import org.jetbrains.dokka.ExternalDocumentationLink
+import org.jetbrains.dokka.PluginConfigurationImpl
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.Annotations
@@ -80,8 +83,10 @@ import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
 import org.junit.Before
 
-internal abstract class ConverterTestBase(private val displayLanguage: Language = Language.JAVA) :
-    BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
+internal abstract class ConverterTestBase(
+    private val displayLanguage: Language = Language.JAVA,
+    pluginsConfiguration: MutableList<PluginConfigurationImpl> = defaultPluginsConfiguration,
+) : BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
     @Before
     fun setUp() {
         isRunningInDackkasTests = true
@@ -98,6 +103,11 @@ internal abstract class ConverterTestBase(private val displayLanguage: Language 
 
     protected fun String.renderJava(imports: List<String> = emptyList()) =
         testJavaWithRootPageNode(trimMargin(), imports)
+
+    /** Generates a module from [source], providing compose stubs to the parser. */
+    protected fun renderCompose(source: String): DModule {
+        return testWithRootPageNode(listOf(ComposeTestUtils.testFiles(source)))
+    }
 
     protected fun DModule.classlike(name: String? = null) =
         name?.let { explicitClasslike(it) }
@@ -235,7 +245,7 @@ internal abstract class ConverterTestBase(private val displayLanguage: Language 
             }
         }
         offlineMode = true
-        pluginsConfigurations = defaultPluginsConfiguration
+        pluginsConfigurations = pluginsConfiguration
     }
     private val dokkaGenerator =
         DokkaGenerator(configuration, DokkaConsoleLogger(LoggingLevel.WARN))
@@ -365,6 +375,9 @@ internal abstract class ConverterTestBase(private val displayLanguage: Language 
         }
         val rootDocumentableConverter by lazy {
             RootDocumentableConverter(testClass.displayLanguage, provider, holder, javadocConverter)
+        }
+        val functionGroupConverter by lazy {
+            FunctionGroupConverter(functionConverter, provider, holder)
         }
 
         fun NonKmpClasslikeConverter(classlike: DClasslike): NonKmpClasslikeConverter =

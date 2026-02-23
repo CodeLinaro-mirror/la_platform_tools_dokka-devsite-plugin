@@ -21,6 +21,7 @@ import com.google.devsite.testing.createPluginsConfiguration
 import com.google.devsite.testing.defaultDevsiteConfiguration
 import com.google.devsite.testing.defaultPluginsConfiguration
 import com.google.devsite.util.ComposeProperties
+import com.google.devsite.util.ComposeTestUtils
 import com.google.devsite.util.composables
 import com.google.devsite.util.composeModifiers
 import com.google.devsite.util.hasComposeProperties
@@ -37,18 +38,6 @@ class ComposeTransformerTest : BaseTransformerTest() {
             )
         )
 
-    private val composeStubs =
-        """
-        /src/androidx/compose/runtime/Composable.kt
-        package androidx.compose.runtime
-        annotation class Composable
-
-        /src/androidx/compose/ui/Modifier.kt
-        package androidx.compose.ui
-        class Modifier
-        """
-            .trimIndent()
-
     /**
      * Helper to run compose tests. Supplies definitions of Composable and Modifier. The [test] will
      * run on the non-compose package in the generated module.
@@ -58,18 +47,8 @@ class ComposeTransformerTest : BaseTransformerTest() {
         configuration: DokkaConfigurationImpl = defaultConfiguration,
         test: (DPackage) -> Unit,
     ) {
-        val testFileHeader =
-            """
-            /src/com/example/Foo.kt
-            package com.example
-            import androidx.compose.ui.Modifier
-            import androidx.compose.runtime.Composable
-            """
-                .trimIndent()
-        val testFile = testFileHeader + "\n$source"
-        val completeSource = composeStubs + "\n\n" + testFile
-        testTransformer(completeSource, configuration) { dModule ->
-            val dPackage = dModule.packages.single { it.name == "com.example" }
+        testTransformer(ComposeTestUtils.testFiles(source), configuration) { dModule ->
+            val dPackage = ComposeTestUtils.testPackage(dModule)
             test(dPackage)
         }
     }
