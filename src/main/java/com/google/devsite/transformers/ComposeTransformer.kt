@@ -17,6 +17,8 @@
 package com.google.devsite.transformers
 
 import com.google.devsite.util.ComposeProperties
+import com.google.devsite.util.ComposeProperties.Companion.COMPOSABLE_TYPE
+import com.google.devsite.util.ComposeProperties.Companion.MODIFIER_TYPE
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.plugability.DokkaContext
@@ -55,11 +57,11 @@ class ComposeTransformer(val enabled: Boolean) : DocumentableTransformer {
         // Create a DFunctionGroup for each group of same-named functions.
         val composables =
             composableGroups.map { (_, composableFunctions) ->
-                ComposeProperties.DFunctionGroup(composableFunctions)
+                ComposeProperties.DFunctionGroup(composableFunctions, COMPOSABLE_TYPE)
             }
         val modifiers =
             modifierGroups.map { (_, modifierFunctions) ->
-                ComposeProperties.DFunctionGroup(modifierFunctions)
+                ComposeProperties.DFunctionGroup(modifierFunctions, MODIFIER_TYPE)
             }
 
         // If there are any composables or modifiers, attach them to the DPackage.

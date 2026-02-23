@@ -20,6 +20,8 @@ import com.google.devsite.renderer.converters.allAnnotations
 import com.google.devsite.renderer.converters.functionSignatureComparator
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.links.DRIExtraContainer
+import org.jetbrains.dokka.links.DRIExtraProperty
 import org.jetbrains.dokka.links.TypeConstructor
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
@@ -61,6 +63,12 @@ internal class ComposeProperties(
         private val MODIFIER_TYPE_REFERENCE =
             TypeConstructor("androidx.compose.ui.Modifier", params = emptyList())
 
+        /** The [DFunctionGroup.type] property for a composable. */
+        const val COMPOSABLE_TYPE = "composable"
+
+        /** The [DFunctionGroup.type] property for a modifier. */
+        const val MODIFIER_TYPE = "modifier"
+
         /**
          * Returns whether the [dFunction] is a composable function, which means it is top-level and
          * annotated with `@Composable` (in any source set).
@@ -84,7 +92,7 @@ internal class ComposeProperties(
     }
 
     /** A group of top-level functions from the same package with the same name. */
-    class DFunctionGroup(initialFunctionList: List<DFunction>) {
+    class DFunctionGroup(initialFunctionList: List<DFunction>, val type: String) {
         /** The functions in this group, sorted by signature. */
         val functions =
             initialFunctionList.sortedWith(
@@ -118,6 +126,24 @@ internal class ComposeProperties(
                             "All functions in a DFunctionGroup must have the same package (found: $packages)"
                         )
                 }
+
+        /**
+         * An identifier for the function group. [FunctionGroupDriExtra] is used to mark it as
+         * standing for a function group.
+         */
+        val dri =
+            DRI(
+                packageName = packageName,
+                classNames = "$name.$type",
+                extra = FunctionGroupDriExtra.extraContainer,
+            )
+    }
+
+    /** A [DRIExtraProperty] which labels the [DRI] as representing a function group. */
+    object FunctionGroupDriExtra : DRIExtraProperty<FunctionGroupDriExtra>() {
+        /** The encoded [DRI.extra] to use for a function group DRI. */
+        val extraContainer =
+            DRIExtraContainer().also { it[FunctionGroupDriExtra] = FunctionGroupDriExtra }.encode()
     }
 }
 

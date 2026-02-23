@@ -26,6 +26,7 @@ import com.google.devsite.util.composables
 import com.google.devsite.util.composeModifiers
 import com.google.devsite.util.hasComposeProperties
 import org.jetbrains.dokka.DokkaConfigurationImpl
+import org.jetbrains.dokka.links.DRIExtraContainer
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
 import org.junit.Test
@@ -81,9 +82,16 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(dPackage.functions).hasSize(1)
 
             val composable = dPackage.composables().single()
+            assertThat(composable.type).isEqualTo(ComposeProperties.COMPOSABLE_TYPE)
             assertThat(composable.name).isEqualTo("TestComposable")
             assertThat(composable.packageName).isEqualTo("com.example")
             assertThat(composable.functions).hasSize(1)
+
+            val dri = composable.dri
+            assertThat(dri.packageName).isEqualTo("com.example")
+            assertThat(dri.classNames).isEqualTo("TestComposable.composable")
+            assertThat(DRIExtraContainer(dri.extra)[ComposeProperties.FunctionGroupDriExtra])
+                .isNotNull()
 
             assertThat(ComposeProperties.isComposable(composable.functions.single())).isTrue()
             assertThat(ComposeProperties.isModifier(composable.functions.single())).isFalse()
@@ -103,9 +111,16 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(dPackage.functions).hasSize(1)
 
             val modifier = dPackage.composeModifiers().single()
+            assertThat(modifier.type).isEqualTo(ComposeProperties.MODIFIER_TYPE)
             assertThat(modifier.name).isEqualTo("TestModifier")
             assertThat(modifier.packageName).isEqualTo("com.example")
             assertThat(modifier.functions).hasSize(1)
+
+            val dri = modifier.dri
+            assertThat(dri.packageName).isEqualTo("com.example")
+            assertThat(dri.classNames).isEqualTo("TestModifier.modifier")
+            assertThat(DRIExtraContainer(dri.extra)[ComposeProperties.FunctionGroupDriExtra])
+                .isNotNull()
 
             assertThat(ComposeProperties.isModifier(modifier.functions.single())).isTrue()
             assertThat(ComposeProperties.isComposable(modifier.functions.single())).isFalse()
