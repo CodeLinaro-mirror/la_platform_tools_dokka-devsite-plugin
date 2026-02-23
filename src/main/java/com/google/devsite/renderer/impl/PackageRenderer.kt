@@ -24,6 +24,7 @@ import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
 import com.google.devsite.renderer.converters.EnumValueDocumentableConverter
 import com.google.devsite.renderer.converters.FunctionDocumentableConverter
+import com.google.devsite.renderer.converters.FunctionGroupConverter
 import com.google.devsite.renderer.converters.KmpClasslikeConverter
 import com.google.devsite.renderer.converters.KmpPackageConverter
 import com.google.devsite.renderer.converters.MetadataConverter
@@ -37,6 +38,7 @@ import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.impl.paths.DIR_INDEX_NAME
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_NAME
+import com.google.devsite.util.ComposeProperties
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.Platform.jvm
@@ -57,6 +59,7 @@ internal class PackageRenderer(
     private val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,
     private val metadataConverter: MetadataConverter,
+    private val functionGroupConverter: FunctionGroupConverter,
 ) {
     /** Writes the home page. Is a redirect page with no content. */
     suspend fun writeIndex(dPackage: DPackage) {
@@ -161,6 +164,17 @@ internal class PackageRenderer(
             classlike,
             "",
         )
+    }
+
+    /**
+     * Writes a page for the [functionGroup] to a path based on the [org.jetbrains.dokka.links.DRI]
+     * of the group.
+     */
+    suspend fun writeFunctionGroup(functionGroup: ComposeProperties.DFunctionGroup) {
+        val page = functionGroupConverter.devsitePage(functionGroup)
+        val html = createHTML().html { page.render(this) }
+        val url = pathProvider.forReference(functionGroup.dri).url
+        outputWriter.write(url, html, "")
     }
 
     // Note: this cannot distinguish java-only, android-only, and non-KMP libraries.

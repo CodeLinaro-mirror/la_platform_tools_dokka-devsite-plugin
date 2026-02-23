@@ -20,6 +20,9 @@ import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
+import com.google.devsite.util.composables
+import com.google.devsite.util.composeModifiers
+import com.google.devsite.util.hasComposeProperties
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.dokka.model.DPackage
@@ -52,6 +55,21 @@ internal class DevsiteRenderer(
 
         for (clazz in docsHolder.classlikesToDisplayFor(dPackage)) {
             launch { packageRenderer.writeClasslike(dPackage, clazz) }
+        }
+
+        // If there are compose function groups, create pages for them for kotlin display.
+        if (docsHolder.displayLanguage == Language.KOTLIN) {
+            for (modifier in dPackage.composeModifiers()) {
+                launch { packageRenderer.writeFunctionGroup(modifier) }
+            }
+            for (composable in dPackage.composables()) {
+                launch { packageRenderer.writeFunctionGroup(composable) }
+            }
+        } else if (dPackage.hasComposeProperties()) {
+            // Compose is only intended to be used from kotlin.
+            docsHolder.logger.warn(
+                "Package ${dPackage.name} is a compose package but is included in java docs"
+            )
         }
     }
 }
