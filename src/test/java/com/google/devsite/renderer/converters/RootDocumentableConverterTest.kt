@@ -26,6 +26,8 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.testing.ConverterTestBase
+import com.google.devsite.testing.createPluginsConfiguration
+import com.google.devsite.testing.defaultDevsiteConfiguration
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.junit.Test
@@ -34,7 +36,10 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class RootDocumentableConverterTest(displayLanguage: Language) :
-    ConverterTestBase(displayLanguage) {
+    ConverterTestBase(
+        displayLanguage,
+        createPluginsConfiguration(defaultDevsiteConfiguration.copy(applyComposeTransformer = true)),
+    ) {
     @Test
     fun `Class index creates components with correct page title`() {
         val page =
@@ -494,6 +499,33 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
             assertThat(tocPackage.data.objects).isEmpty()
             assertThat(tocPackage.data.classes.map { it.name })
                 .containsExactly("Foo", "Bar", "Bar.Baz")
+        }
+    }
+
+    @Test
+    fun `Toc includes composables and modifiers`() {
+        kotlinOnly {
+            val toc =
+                renderCompose(
+                        """
+                        @Composable fun TestComposable() = Unit
+                        fun Modifier.TestModifier() = Unit
+                        """
+                            .trimIndent()
+                    )
+                    .toc()
+            // Skip the compose packages which are generated based on the stubs from `renderCompose`
+            val tocPackage = toc.items(3).last()
+
+            val composable = tocPackage.data.composables.item()
+            assertThat(composable.name).isEqualTo("TestComposable")
+            assertThat(composable.url)
+                .isEqualTo("/reference/kotlin/com/example/TestComposable.composable.html")
+
+            val modifier = tocPackage.data.modifiers.item()
+            assertThat(modifier.name).isEqualTo("TestModifier")
+            assertThat(modifier.url)
+                .isEqualTo("/reference/kotlin/com/example/TestModifier.modifier.html")
         }
     }
 

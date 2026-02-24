@@ -53,6 +53,8 @@ class DefaultTocPackageTest {
                     enums = listOf(Type("Enum", "link")),
                     exceptions = listOf(Type("Exception", "link")),
                     annotations = listOf(Type("Annotation", "link")),
+                    composables = listOf(Type("Composable", "link")),
+                    modifiers = listOf(Type("Modifier", "link")),
                 )
             )
 
@@ -93,6 +95,18 @@ class DefaultTocPackageTest {
 
     section:
     - title: "Annotation"
+      path: "link"
+
+  - title: "Composables"
+
+    section:
+    - title: "Composable"
+      path: "link"
+
+  - title: "Modifiers"
+
+    section:
+    - title: "Modifier"
       path: "link"
             """
                     .trim()

@@ -31,6 +31,9 @@ import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.util.ComposeProperties
+import com.google.devsite.util.composables
+import com.google.devsite.util.composeModifiers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
@@ -157,6 +160,8 @@ internal class RootDocumentableConverter(
         val enums = docsHolder.enumsFor(dPackage).map(::typeForToc)
         val exceptions = docsHolder.exceptionsFor(dPackage).map(::typeForToc)
         val annotations = docsHolder.annotationsFor(dPackage).map(::typeForToc)
+        val composables = dPackage.composables().map(::typeForToc)
+        val modifiers = dPackage.composeModifiers().map(::typeForToc)
 
         // Update the string to trim to end with a `.` if it doesn't already.
         val prefixToTrim = (packagePrefixToRemove?.removeSuffix(".")?.plus(".")) ?: ""
@@ -174,6 +179,8 @@ internal class RootDocumentableConverter(
                 exceptions = exceptions,
                 annotations = annotations,
                 objects = if (displayLanguage == Language.KOTLIN) objects else emptyList(),
+                composables = composables,
+                modifiers = modifiers,
             ) // Typealiases do not appear in the toc because they do not get their own pages
         )
     }
@@ -181,5 +188,10 @@ internal class RootDocumentableConverter(
     private fun typeForToc(classlike: DClasslike): TocPackage.Type {
         val url = pathProvider.forReference(classlike.dri).url
         return TocPackage.Type(classlike.name(), url)
+    }
+
+    private fun typeForToc(functionGroup: ComposeProperties.DFunctionGroup): TocPackage.Type {
+        val url = pathProvider.forReference(functionGroup.dri).url
+        return TocPackage.Type(functionGroup.name, url)
     }
 }

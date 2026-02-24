@@ -33,6 +33,8 @@ internal data class DefaultTocPackage(override val data: TocPackage.Params) : To
                         "Exceptions" to data.exceptions,
                         "Annotations" to data.annotations,
                         "Objects" to data.objects,
+                        "Composables" to data.composables,
+                        "Modifiers" to data.modifiers,
                     )
                     .filter { (_, contents) -> contents.isNotEmpty() }
             if (content.isEmpty()) return@run
