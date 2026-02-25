@@ -18,6 +18,7 @@ package com.google.devsite.util
 
 import com.google.devsite.renderer.converters.allAnnotations
 import com.google.devsite.renderer.converters.functionSignatureComparator
+import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.DRIExtraContainer
@@ -25,6 +26,9 @@ import org.jetbrains.dokka.links.DRIExtraProperty
 import org.jetbrains.dokka.links.TypeConstructor
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.SourceSetDependent
+import org.jetbrains.dokka.model.doc.DocumentationNode
 import org.jetbrains.dokka.model.properties.ExtraProperty
 
 /**
@@ -92,7 +96,7 @@ internal class ComposeProperties(
     }
 
     /** A group of top-level functions from the same package with the same name. */
-    class DFunctionGroup(initialFunctionList: List<DFunction>, val type: String) {
+    class DFunctionGroup(initialFunctionList: List<DFunction>, val type: String) : Documentable() {
         /** The functions in this group, sorted by signature. */
         val functions =
             initialFunctionList.sortedWith(
@@ -104,7 +108,7 @@ internal class ComposeProperties(
             )
 
         /** The name shared by all functions in this group. */
-        val name: String =
+        override val name: String =
             functions
                 .map { it.name }
                 .toSet()
@@ -131,12 +135,40 @@ internal class ComposeProperties(
          * An identifier for the function group. [FunctionGroupDriExtra] is used to mark it as
          * standing for a function group.
          */
-        val dri =
+        override val dri =
             DRI(
                 packageName = packageName,
                 classNames = "$name.$type",
                 extra = FunctionGroupDriExtra.extraContainer,
             )
+
+        override val children: List<Documentable>
+            get() = functions
+
+        /**
+         * The documentation for the first function in the group. This should be used to create
+         * summary text, which only uses the first sentence of the documentation, which is typically
+         * similar between the functions in a group.
+         */
+        override val documentation: SourceSetDependent<DocumentationNode>
+            get() = functions.first().documentation
+
+        /**
+         * Source sets which this function group exists in: an aggregation of source sets for each
+         * function of the group.
+         */
+        override val sourceSets by lazy { functions.flatMap { it.sourceSets }.toSet() }
+
+        /**
+         * [Documentable.expectPresentInSet] is the source set which contains the `expect`
+         * declaration for the documentable, if one exists.
+         *
+         * If all [functions] in the group are expect/actuals and the expects are all in the same
+         * source set, returns that source set. Otherwise, returns null.
+         */
+        override val expectPresentInSet: DokkaConfiguration.DokkaSourceSet? by lazy {
+            functions.map { it.expectPresentInSet }.toSet().singleOrNull()
+        }
     }
 
     /** A [DRIExtraProperty] which labels the [DRI] as representing a function group. */

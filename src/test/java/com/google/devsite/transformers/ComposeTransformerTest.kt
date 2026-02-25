@@ -26,6 +26,7 @@ import com.google.devsite.util.composables
 import com.google.devsite.util.composeModifiers
 import com.google.devsite.util.hasComposeProperties
 import org.jetbrains.dokka.DokkaConfigurationImpl
+import org.jetbrains.dokka.DokkaSourceSetID
 import org.jetbrains.dokka.links.DRIExtraContainer
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
@@ -86,6 +87,7 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(composable.name).isEqualTo("TestComposable")
             assertThat(composable.packageName).isEqualTo("com.example")
             assertThat(composable.functions).hasSize(1)
+            assertThat(composable.children).isEqualTo(composable.functions)
 
             val dri = composable.dri
             assertThat(dri.packageName).isEqualTo("com.example")
@@ -115,6 +117,7 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(modifier.name).isEqualTo("TestModifier")
             assertThat(modifier.packageName).isEqualTo("com.example")
             assertThat(modifier.functions).hasSize(1)
+            assertThat(modifier.children).isEqualTo(modifier.functions)
 
             val dri = modifier.dri
             assertThat(dri.packageName).isEqualTo("com.example")
@@ -144,6 +147,7 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(composable.name).isEqualTo("TestComposable")
             assertThat(composable.packageName).isEqualTo("com.example")
             assertThat(composable.functions).hasSize(1)
+            assertThat(composable.children).isEqualTo(composable.functions)
             assertThat(ComposeProperties.isComposable(composable.functions.single())).isTrue()
             assertThat(ComposeProperties.isModifier(composable.functions.single())).isFalse()
 
@@ -151,6 +155,7 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(modifier.name).isEqualTo("TestModifier")
             assertThat(modifier.packageName).isEqualTo("com.example")
             assertThat(modifier.functions).hasSize(1)
+            assertThat(modifier.children).isEqualTo(modifier.functions)
             assertThat(ComposeProperties.isModifier(modifier.functions.single())).isTrue()
             assertThat(ComposeProperties.isComposable(modifier.functions.single())).isFalse()
         }
@@ -184,6 +189,7 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(composable.name).isEqualTo("TestComposable")
             assertThat(composable.packageName).isEqualTo("com.example")
             assertThat(composable.functions).hasSize(7)
+            assertThat(composable.children).isEqualTo(composable.functions)
 
             // Ordering: by receiver (no receiver first), then number of parameters, then parameter
             // type strings.
@@ -253,6 +259,177 @@ class ComposeTransformerTest : BaseTransformerTest() {
                 assertThat(ComposeProperties.isComposable(dFunction)).isFalse()
                 assertThat(ComposeProperties.isModifier(dFunction)).isFalse()
             }
+        }
+    }
+
+    @Test
+    fun `Test documentation of function group`() {
+        testComposeTransformer(
+            """
+            /** Documentation for second composable. */
+            @Composable fun TestComposable(i: Int) = Unit
+            /** Documentation for first composable. */
+            @Composable fun TestComposable() = Unit
+            /** Documentation for third composable. */
+            @Composable fun Int.TestComposable() = Unit
+            """
+        ) { dPackage ->
+            val composable = dPackage.composables().single()
+            // Don't test the exact structure of the Documentation object, just verify that it
+            // contains the correct text somewhere in it.
+            val documentationAsString = composable.documentation.toString()
+            assertThat(documentationAsString).contains("Documentation for first composable.")
+            assertThat(documentationAsString).doesNotContain("Documentation for second composable.")
+            assertThat(documentationAsString).doesNotContain("Documentation for third composable.")
+        }
+    }
+
+    @Test
+    fun `Test source sets for non-KMP function group`() {
+        testComposeTransformer(
+            """
+            @Composable fun TestComposable(i: Int) = Unit
+            @Composable fun TestComposable() = Unit
+            @Composable fun Int.TestComposable() = Unit
+            """
+        ) { dPackage ->
+            val composable = dPackage.composables().single()
+            assertThat(composable.sourceSets).hasSize(1)
+            assertThat(composable.sourceSets.single().analysisPlatform.name).isEqualTo("jvm")
+            assertThat(composable.expectPresentInSet).isNull()
+        }
+    }
+
+    @Test
+    fun `Test KMP function groups`() {
+        val configuration = dokkaConfiguration {
+            sourceSets {
+                sourceSet {
+                    name = "commonMain"
+                    displayName = "commonMain"
+                    sourceRoots = listOf("src/main")
+                    analysisPlatform = "common"
+                }
+                sourceSet {
+                    name = "jvmMain"
+                    displayName = "jvmMain"
+                    sourceRoots = listOf("src/jvmMain")
+                    analysisPlatform = "jvm"
+                    dependentSourceSets = setOf(DokkaSourceSetID("root", "commonMain"))
+                }
+                sourceSet {
+                    name = "nativeMain"
+                    displayName = "nativeMain"
+                    sourceRoots = listOf("src/nativeMain")
+                    analysisPlatform = "native"
+                    dependentSourceSets = setOf(DokkaSourceSetID("root", "commonMain"))
+                }
+            }
+            pluginsConfigurations =
+                createPluginsConfiguration(
+                    defaultDevsiteConfiguration.copy(applyComposeTransformer = true)
+                )
+        }
+
+        // This is appended to a stub created through ComposeTestUtils, so the package declaration
+        // and imports don't need to be repeated here.
+        val commonSource =
+            """
+            expect fun Modifier.WithExpects()
+            expect fun Modifier.WithExpects(i: Int)
+
+            expect fun Modifier.WithExpectAndNonExpect()
+
+            fun Modifier.NoExpects() = Unit
+            """
+                .trimIndent()
+        val jvmSource =
+            """
+            /src/jvmMain/com/example/Foo_jvm.kt
+            package com.example
+            import androidx.compose.ui.Modifier
+
+            actual fun Modifier.WithExpects() = Unit
+            actual fun Modifier.WithExpects(i: Int) = Unit
+
+            actual fun Modifier.WithExpectAndNonExpect() = Unit
+
+            fun Modifier.NoExpects(i: Int) = Unit
+
+            fun Modifier.JvmOnly() = Unit
+
+            fun Modifier.JvmAndNative() = Unit
+            """
+                .trimIndent()
+        val nativeSource =
+            """
+            /src/nativeMain/com/example/Foo_native.kt
+            package com.example
+            import androidx.compose.ui.Modifier
+
+            actual fun Modifier.WithExpects() = Unit
+            actual fun Modifier.WithExpects(i: Int) = Unit
+
+            actual fun Modifier.WithExpectAndNonExpect() = Unit
+            // Non expect/actual version
+            fun Modifier.WithExpectAndNonExpect(i: Int) = Unit
+
+            fun Modifier.NoExpects(s: String) = Unit
+
+            fun Modifier.NativeOnly() = Unit
+            fun Modifier.NativeOnly(i: Int) = Unit
+
+            fun Modifier.JvmAndNative(i: Int) = Unit
+            """
+                .trimIndent()
+
+        testComposeTransformer(
+            commonSource + "\n\n" + jvmSource + "\n\n" + nativeSource,
+            configuration = configuration,
+        ) { dPackage ->
+            // All functions in the group are expect/actuals
+            val withExpects = dPackage.composeModifiers().single { it.name == "WithExpects" }
+            // Each `actual` is part of the same `DFunction` as the corresponding `expect`
+            assertThat(withExpects.functions).hasSize(2)
+            assertThat(withExpects.sourceSets.map { it.displayName })
+                .containsExactly("commonMain", "jvmMain", "nativeMain")
+            assertThat(withExpects.expectPresentInSet).isNotNull()
+            assertThat(withExpects.expectPresentInSet!!.displayName).isEqualTo("commonMain")
+
+            // There are both expect/actuals and non-expect/actuals in the group
+            val withExpectAndNonExpect =
+                dPackage.composeModifiers().single { it.name == "WithExpectAndNonExpect" }
+            // Each `actual` is part of the same `DFunction` as the corresponding `expect`, there is
+            // one non-expect/actual in nativeMain
+            assertThat(withExpectAndNonExpect.functions).hasSize(2)
+            assertThat(withExpectAndNonExpect.sourceSets.map { it.displayName })
+                .containsExactly("commonMain", "jvmMain", "nativeMain")
+            // Not all functions in the group have an expect
+            assertThat(withExpectAndNonExpect.expectPresentInSet).isNull()
+
+            val noExpects = dPackage.composeModifiers().single { it.name == "NoExpects" }
+            assertThat(noExpects.functions).hasSize(3)
+            assertThat(noExpects.sourceSets.map { it.displayName })
+                .containsExactly("commonMain", "jvmMain", "nativeMain")
+            assertThat(noExpects.expectPresentInSet).isNull()
+
+            val jvmOnly = dPackage.composeModifiers().single { it.name == "JvmOnly" }
+            assertThat(jvmOnly.functions).hasSize(1)
+            assertThat(jvmOnly.sourceSets.map { it.displayName }).containsExactly("jvmMain")
+            assertThat(jvmOnly.expectPresentInSet).isNull()
+
+            val nativeOnly = dPackage.composeModifiers().single { it.name == "NativeOnly" }
+            assertThat(nativeOnly.functions).hasSize(2)
+            assertThat(nativeOnly.sourceSets.map { it.displayName }).containsExactly("nativeMain")
+            assertThat(nativeOnly.expectPresentInSet).isNull()
+
+            val jvmAndNative = dPackage.composeModifiers().single { it.name == "JvmAndNative" }
+            assertThat(jvmAndNative.functions).hasSize(2)
+            assertThat(jvmAndNative.sourceSets.map { it.displayName })
+                .containsExactly("jvmMain", "nativeMain")
+            assertThat(jvmAndNative.expectPresentInSet).isNull()
+
+            assertThat(dPackage.composeModifiers()).hasSize(6)
         }
     }
 
