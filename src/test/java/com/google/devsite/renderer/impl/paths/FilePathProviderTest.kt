@@ -20,6 +20,8 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.testing.ConverterTestBase
+import com.google.devsite.util.ComposeProperties
+import com.google.devsite.util.isForFunctionGroup
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
@@ -437,6 +439,21 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
 
         assertThat(name).isEqualTo("SuspendFunction2")
         assertThat(url).isEqualTo("")
+    }
+
+    @Test
+    fun `Correct link is created for function group`() {
+        val composableDri =
+            DRI(
+                packageName = "androidx.example",
+                classNames = "TestComposable.composable",
+                extra = ComposeProperties.FunctionGroupDriExtra.extraContainer,
+            )
+        assertThat(composableDri.isForFunctionGroup()).isTrue()
+
+        val (name, url) = pathProvider(externalProvider).forReference(composableDri)
+        assertThat(name).isEqualTo("TestComposable")
+        assertThat(url.urlSuffix()).isEqualTo("TestComposable.composable.html")
     }
 
     private fun classGraph(module: DModule): ClassGraph = runBlocking {

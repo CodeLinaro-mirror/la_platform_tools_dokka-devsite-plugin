@@ -191,3 +191,10 @@ internal fun DPackage.composeModifiers(): List<ComposeProperties.DFunctionGroup>
 
 /** Returns whether the package has any composables or modifiers. */
 fun DPackage.hasComposeProperties(): Boolean = extra[ComposeProperties.PropertyKey] != null
+
+/**
+ * Returns whether the DRI is for a [ComposeProperties.DFunctionGroup], that is, is has a
+ * [ComposeProperties.FunctionGroupDriExtra].
+ */
+fun DRI.isForFunctionGroup(): Boolean =
+    DRIExtraContainer(extra)[ComposeProperties.FunctionGroupDriExtra] != null

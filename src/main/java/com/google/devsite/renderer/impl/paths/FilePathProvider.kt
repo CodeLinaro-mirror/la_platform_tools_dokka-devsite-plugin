@@ -24,6 +24,7 @@ import com.google.devsite.renderer.converters.anchor
 import com.google.devsite.renderer.converters.companion
 import com.google.devsite.renderer.converters.isHoistedFromCompanion
 import com.google.devsite.renderer.impl.DocumentablesGraph
+import com.google.devsite.util.isForFunctionGroup
 import java.nio.file.Paths
 import kotlin.io.path.pathString
 import org.jetbrains.dokka.links.DRI
@@ -121,6 +122,13 @@ internal interface FilePathProvider {
             } else {
                 className to forType(packageName, className)
             }
+
+        // When linking to a function group, the name from the DRI will include the type of the
+        // group (composable, modifier). This is needed for the url, but can be cut off from the
+        // display name in the link.
+        if (dri.isForFunctionGroup()) {
+            return ReferencePath(typeName.substringBeforeLast('.'), typeUrl)
+        }
 
         // if we have an enum value instead of an inner class, we need a link to the enum class
         // (Foo) without the value (Foo.ENUM) and append the enum value as a hash.

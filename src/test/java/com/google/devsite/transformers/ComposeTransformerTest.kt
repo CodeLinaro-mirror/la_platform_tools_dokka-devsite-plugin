@@ -25,6 +25,7 @@ import com.google.devsite.util.ComposeTestUtils
 import com.google.devsite.util.composables
 import com.google.devsite.util.composeModifiers
 import com.google.devsite.util.hasComposeProperties
+import com.google.devsite.util.isForFunctionGroup
 import org.jetbrains.dokka.DokkaConfigurationImpl
 import org.jetbrains.dokka.DokkaSourceSetID
 import org.jetbrains.dokka.links.DRIExtraContainer
@@ -94,6 +95,7 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(dri.classNames).isEqualTo("TestComposable.composable")
             assertThat(DRIExtraContainer(dri.extra)[ComposeProperties.FunctionGroupDriExtra])
                 .isNotNull()
+            assertThat(dri.isForFunctionGroup()).isTrue()
 
             assertThat(ComposeProperties.isComposable(composable.functions.single())).isTrue()
             assertThat(ComposeProperties.isModifier(composable.functions.single())).isFalse()
