@@ -22,7 +22,10 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.testing.ConverterTestBase
+import com.google.devsite.testing.createPluginsConfiguration
+import com.google.devsite.testing.defaultDevsiteConfiguration
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,7 +33,10 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class PackageDocumentableConverterTest(displayLanguage: Language) :
-    ConverterTestBase(displayLanguage) {
+    ConverterTestBase(
+        displayLanguage,
+        createPluginsConfiguration(defaultDevsiteConfiguration.copy(applyComposeTransformer = true)),
+    ) {
     @Test
     fun `Package summary creates components with correct page title`() {
         val page =
@@ -462,6 +468,116 @@ internal class PackageDocumentableConverterTest(displayLanguage: Language) :
 
         val pkgB = module.packagePage("test.pkgB")
         assertThat(pkgB.data.title).isEqualTo("test.pkgB")
+    }
+
+    @Test
+    fun `Composables are included in package summary`() {
+        kotlinOnly {
+            val packageSummary =
+                renderCompose(
+                        """
+                        /** TestComposableA documentation */
+                        @Composable fun TestComposableA() = Unit
+                        /** TestComposableB documentation */
+                        @Composable fun TestComposableB() = Unit
+                        """
+                            .trimIndent()
+                    )
+                    .packagePage("com.example")
+                    .data
+                    .content
+                    .data
+            val items = packageSummary.composables.items(2)
+
+            val composableA = items.first().data
+            val composableATitle = composableA.title.data
+            assertThat(composableATitle.name).isEqualTo("TestComposableA")
+            assertThat(composableATitle.url)
+                .isEqualTo("/reference/kotlin/com/example/TestComposableA.composable.html")
+            val composableADescription = composableA.description
+            assertThat(composableADescription.data.summary).isTrue()
+            assertThat(composableADescription.text()).isEqualTo("TestComposableA documentation")
+
+            val composableB = items.last().data
+            val composableBTitle = composableB.title.data
+            assertThat(composableBTitle.name).isEqualTo("TestComposableB")
+            assertThat(composableBTitle.url)
+                .isEqualTo("/reference/kotlin/com/example/TestComposableB.composable.html")
+            val composableBDescription = composableB.description
+            assertThat(composableBDescription.data.summary).isTrue()
+            assertThat(composableBDescription.text()).isEqualTo("TestComposableB documentation")
+        }
+    }
+
+    @Test
+    fun `Modifier is included in package summary`() {
+        kotlinOnly {
+            val packageSummary =
+                renderCompose(
+                        """
+                        /** TestModifierA documentation */
+                        fun Modifier.TestModifierA() = Unit
+                        /** TestModifierB documentation */
+                        fun Modifier.TestModifierB() = Unit
+                        """
+                            .trimIndent()
+                    )
+                    .packagePage("com.example")
+                    .data
+                    .content
+                    .data
+            val items = packageSummary.modifiers.items(2)
+
+            val modifierA = items.first().data
+            val modifierATitle = modifierA.title.data
+            assertThat(modifierATitle.name).isEqualTo("TestModifierA")
+            assertThat(modifierATitle.url)
+                .isEqualTo("/reference/kotlin/com/example/TestModifierA.modifier.html")
+            val modifierADescription = modifierA.description
+            assertThat(modifierADescription.data.summary).isTrue()
+            assertThat(modifierADescription.text()).isEqualTo("TestModifierA documentation")
+
+            val modifierB = items.last().data
+            val modifierBTitle = modifierB.title.data
+            assertThat(modifierBTitle.name).isEqualTo("TestModifierB")
+            assertThat(modifierBTitle.url)
+                .isEqualTo("/reference/kotlin/com/example/TestModifierB.modifier.html")
+            val modifierBDescription = modifierB.description
+            assertThat(modifierBDescription.data.summary).isTrue()
+            assertThat(modifierBDescription.text()).isEqualTo("TestModifierB documentation")
+        }
+    }
+
+    @Test
+    fun `Correct documentation is chosen for function group with multiple elements`() {
+        kotlinOnly {
+            val packageSummary =
+                renderCompose(
+                        """
+                        /** Second function documentation */
+                        @Composable fun TestComposable(i: Int) = Unit
+                        /** First function documentation */
+                        @Composable fun TestComposable() = Unit
+                        /** Third function documentation */
+                        @Composable fun Int.TestComposable() = Unit
+                        """
+                            .trimIndent()
+                    )
+                    .packagePage("com.example")
+                    .data
+                    .content
+                    .data
+
+            val composable = packageSummary.composables.item().data
+            val composableTitle = composable.title.data
+            assertThat(composableTitle.name).isEqualTo("TestComposable")
+            assertThat(composableTitle.url)
+                .isEqualTo("/reference/kotlin/com/example/TestComposable.composable.html")
+
+            val composableDescription = composable.description
+            assertThat(composableDescription.data.summary).isTrue()
+            assertThat(composableDescription.text()).isEqualTo("First function documentation")
+        }
     }
 
     companion object {

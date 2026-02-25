@@ -43,6 +43,8 @@ internal interface PackageSummary : ContextFreeComponent {
         val exceptions: LinkDescriptionSummaryList,
         val annotations: LinkDescriptionSummaryList,
         val typeAliases: WithDescriptionList<DefaultUnlink>,
+        val composables: LinkDescriptionSummaryList,
+        val modifiers: LinkDescriptionSummaryList,
         val topLevelConstantsSummary: PropertySummaryList,
         val topLevelPropertiesSummary: PropertySummaryList,
         val topLevelFunctionsSummary: FunctionSummaryList,

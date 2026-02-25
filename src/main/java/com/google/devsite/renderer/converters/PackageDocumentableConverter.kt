@@ -40,6 +40,8 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.renderer.not
+import com.google.devsite.util.composables
+import com.google.devsite.util.composeModifiers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
@@ -97,6 +99,9 @@ internal abstract class PackageDocumentableConverter(
             docsToSummary(typeAliasList) as WithDescriptionList<DefaultUnlink>
         }
 
+        val composables = async { docsToSummary(dPackage.composables()) }
+        val modifiers = async { docsToSummary(dPackage.composeModifiers()) }
+
         val topLevelConstantsSummary = async { propertiesToSummary(topLevelConstants()) }
         val topLevelPropertiesSummary = async { propertiesToSummary(topLevelProperties()) }
         val topLevelFunctionsSummary = async { functionsToSummary(topLevelFunctions()) }
@@ -146,6 +151,8 @@ internal abstract class PackageDocumentableConverter(
                             exceptions = exceptions.await(),
                             annotations = annotations.await(),
                             typeAliases = typeAliases.await(),
+                            composables = composables.await(),
+                            modifiers = modifiers.await(),
                             topLevelConstantsSummary = topLevelConstantsSummary.await(),
                             topLevelPropertiesSummary = topLevelPropertiesSummary.await(),
                             topLevelFunctionsSummary = topLevelFunctionsSummary.await(),

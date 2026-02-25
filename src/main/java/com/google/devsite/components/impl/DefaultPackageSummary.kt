@@ -50,6 +50,8 @@ internal data class DefaultPackageSummary(override val data: PackageSummary.Para
                     renderSummary(data.objects, "Objects")
                     renderSummary(data.annotations, "Annotations")
                     renderSummary(data.enums, "Enums")
+                    renderSummary(data.composables, "Composables")
+                    renderSummary(data.modifiers, "Modifiers")
                 }
             }
 

@@ -418,6 +418,72 @@ class DefaultPackageSummaryTest {
     }
 
     @Test
+    fun `Package summary with composables renders correctly`() {
+        val component =
+            createPackageSummary(displayLanguage = Language.KOTLIN, composables = NoopSummaryList())
+        val output = createHTML().div { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+<div>
+  <h2>Composables</h2>
+  <div>noop</div>
+</div>
+            """
+                    .trim()
+            )
+    }
+
+    @Test
+    fun `Package summary with modifiers renders correctly`() {
+        val component =
+            createPackageSummary(displayLanguage = Language.KOTLIN, modifiers = NoopSummaryList())
+        val output = createHTML().div { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+<div>
+  <h2>Modifiers</h2>
+  <div>noop</div>
+</div>
+            """
+                    .trim()
+            )
+    }
+
+    @Test
+    fun `Package summary with classes and compose function groups renders correctly`() {
+        val component =
+            createPackageSummary(
+                displayLanguage = Language.KOTLIN,
+                classes = NoopSummaryList(),
+                composables = NoopSummaryList(),
+                modifiers = NoopSummaryList(),
+            )
+        val output = createHTML().div { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+<div>
+  <h2>Classes</h2>
+  <div>noop</div>
+  <h2>Composables</h2>
+  <div>noop</div>
+  <h2>Modifiers</h2>
+  <div>noop</div>
+</div>
+            """
+                    .trim()
+            )
+    }
+
+    @Test
     fun `Package summary with all Kotlin bits renders correctly`() {
         val component =
             createPackageSummary(
@@ -432,6 +498,8 @@ class DefaultPackageSummaryTest {
                 topLevelFunctions = listOf(NoopSymbolDetailF),
                 extensionProperties = listOf(NoopSymbolDetailP),
                 extensionFunctions = listOf(NoopSymbolDetailF),
+                composables = NoopSummaryList(),
+                modifiers = NoopSummaryList(),
             )
 
         val output = createHTML().div { component.render(this) }.trim()
@@ -441,6 +509,10 @@ class DefaultPackageSummaryTest {
             .isEqualTo(
                 """
 <div>
+  <h2>Composables</h2>
+  <div>noop</div>
+  <h2>Modifiers</h2>
+  <div>noop</div>
   <h2>Constants summary</h2>
   <div>noop</div>
   <h2>Top-level functions summary</h2>
@@ -477,6 +549,8 @@ class DefaultPackageSummaryTest {
         exceptions: LinkDescriptionSummaryList = NoopSummaryList(show = false),
         annotations: LinkDescriptionSummaryList = NoopSummaryList(show = false),
         typeAliases: WithDescriptionList<DefaultUnlink> = NoopSummaryList(show = false),
+        composables: LinkDescriptionSummaryList = NoopSummaryList(show = false),
+        modifiers: LinkDescriptionSummaryList = NoopSummaryList(show = false),
         topLevelConstantsSummary: PropertySummaryList = NoopSummaryList(show = false),
         topLevelPropertiesSummary: PropertySummaryList = NoopSummaryList(show = false),
         topLevelFunctionsSummary: FunctionSummaryList = NoopSummaryList(show = false),
@@ -500,6 +574,8 @@ class DefaultPackageSummaryTest {
                 exceptions = exceptions,
                 annotations = annotations,
                 typeAliases = typeAliases,
+                composables = composables,
+                modifiers = modifiers,
                 topLevelConstantsSummary = topLevelConstantsSummary,
                 topLevelPropertiesSummary = topLevelPropertiesSummary,
                 topLevelFunctionsSummary = topLevelFunctionsSummary,
