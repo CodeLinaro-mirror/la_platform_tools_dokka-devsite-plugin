@@ -277,6 +277,12 @@ internal abstract class ConverterTestBase(
     protected class ConverterHolder(
         val testClass: ConverterTestBase,
         val module: DModule,
+        /**
+         * If provided, the package name to use for [nonKmpPackageConverter]. If no package name is
+         * provided, there is assumed to be only one package in the [module] and that package is
+         * used.
+         */
+        packageName: String? = null,
         baseClassSourceLink: String? = null,
         baseFunctionSourceLink: String? = null,
         basePropertySourceLink: String? = null,
@@ -362,9 +368,17 @@ internal abstract class ConverterTestBase(
             )
         }
         val nonKmpPackageConverter by lazy {
+            // If a specific package was requested, use that one, otherwise assume there is only one
+            // package in the module and use it.
+            val dPackage =
+                if (packageName != null) {
+                    module.packages.single { it.name == packageName }
+                } else {
+                    module.packages.single()
+                }
             NonKmpPackageConverter(
                 testClass.displayLanguage,
-                module.packages.single(),
+                dPackage,
                 provider,
                 holder,
                 functionConverter,
@@ -475,11 +489,17 @@ internal abstract class ConverterTestBase(
         }
     }
 
-    protected fun DModule.packagePage(): DevsitePage<PackageSummary> = runBlocking {
-        ConverterHolder(this@ConverterTestBase, this@packagePage)
-            .nonKmpPackageConverter
-            .summaryPage()
-    }
+    /**
+     * Returns a package summary page. If [name] is non-null, returns the summary for the package
+     * with that name. If [name] is null, returns the summary for the single package in the module,
+     * erroring if there is more than one possibility.
+     */
+    protected fun DModule.packagePage(name: String? = null): DevsitePage<PackageSummary> =
+        runBlocking {
+            ConverterHolder(this@ConverterTestBase, this@packagePage, packageName = name)
+                .nonKmpPackageConverter
+                .summaryPage()
+        }
 
     private fun DModule.functionConverter() =
         ConverterHolder(this@ConverterTestBase, this).functionConverter

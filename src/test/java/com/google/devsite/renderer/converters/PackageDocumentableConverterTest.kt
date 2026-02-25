@@ -442,6 +442,28 @@ internal class PackageDocumentableConverterTest(displayLanguage: Language) :
         }
     }
 
+    @Test
+    fun `Multiple packages can be used in one test`() {
+        val module =
+            """
+            /src/main/test/pkgA/A.kt
+            package test.pkgA
+            class A
+
+            /src/main/test/pkgB/B.kt
+            package test.pkgB
+            class B
+            """
+                .trimIndent()
+                .render()
+
+        val pkgA = module.packagePage("test.pkgA")
+        assertThat(pkgA.data.title).isEqualTo("test.pkgA")
+
+        val pkgB = module.packagePage("test.pkgB")
+        assertThat(pkgB.data.title).isEqualTo("test.pkgB")
+    }
+
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
