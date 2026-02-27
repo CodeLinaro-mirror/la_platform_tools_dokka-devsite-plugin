@@ -2021,7 +2021,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             outputStreamCaptor
                 .toString()
                 .split("\n")
-                .filterNot { it.startsWith("WARN: Couldn't resolve link for") }
+                .filterNot { it.startsWith("WARN: Couldn't resolve link:") }
                 .joinToString("\n")
         assertThat(filteredOutput).doesNotContain("WARN")
         System.setOut(standardOut)
