@@ -42,6 +42,7 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.renderer.not
 import com.google.devsite.util.composables
 import com.google.devsite.util.composeModifiers
+import com.google.devsite.util.isInDFunctionGroup
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
@@ -284,7 +285,10 @@ internal abstract class PackageDocumentableConverter(
             .sortedWith(simpleDocumentableComparator)
 
     private fun topLevelFunctions() =
-        dPackage.functions.filter { it.receiver == null }.sortedWith(functionSignatureComparator)
+        // Exclude functions which are in compose function groups, as they have their own pages.
+        dPackage.functions
+            .filter { it.receiver == null && !it.isInDFunctionGroup() }
+            .sortedWith(functionSignatureComparator)
 
     private fun extensionProperties() =
         dPackage.properties
@@ -292,5 +296,8 @@ internal abstract class PackageDocumentableConverter(
             .sortedWith(simpleDocumentableComparator)
 
     private fun extensionFunctions() =
-        dPackage.functions.filterNot { it.receiver == null }.sortedWith(functionSignatureComparator)
+        // Exclude functions which are in compose function groups, as they have their own pages.
+        dPackage.functions
+            .filterNot { it.receiver == null || it.isInDFunctionGroup() }
+            .sortedWith(functionSignatureComparator)
 }

@@ -198,3 +198,8 @@ fun DPackage.hasComposeProperties(): Boolean = extra[ComposeProperties.PropertyK
  */
 fun DRI.isForFunctionGroup(): Boolean =
     DRIExtraContainer(extra)[ComposeProperties.FunctionGroupDriExtra] != null
+
+/** Returns whether the function is part of a composable or modifier function group. */
+fun DFunction.isInDFunctionGroup(): Boolean {
+    return ComposeProperties.isComposable(this) || ComposeProperties.isModifier(this)
+}

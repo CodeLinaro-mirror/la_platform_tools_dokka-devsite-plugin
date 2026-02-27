@@ -580,6 +580,41 @@ internal class PackageDocumentableConverterTest(displayLanguage: Language) :
         }
     }
 
+    @Test
+    fun `Composables and modifiers are not included in function lists`() {
+        kotlinOnly {
+            val packageSummary =
+                renderCompose(
+                        """
+                        @Composable fun TestComposable() = Unit
+                        @Composable fun Int.TestComposable() = Unit
+
+                        fun Modifier.TestModifier() = Unit
+
+                        fun regularTopLevelFunction() = Unit
+                        fun Int.regularExtensionFunction() = Unit
+                        """
+                            .trimIndent()
+                    )
+                    .packagePage("com.example")
+                    .data
+                    .content
+                    .data
+
+            val composable = packageSummary.composables.item()
+            assertThat(composable.name()).isEqualTo("TestComposable")
+
+            val modifier = packageSummary.modifiers.item()
+            assertThat(modifier.name()).isEqualTo("TestModifier")
+
+            val topLevelFunction = packageSummary.topLevelFunctions.item().data
+            assertThat(topLevelFunction.name).isEqualTo("regularTopLevelFunction")
+
+            val extensionFunction = packageSummary.extensionFunctions.item().data
+            assertThat(extensionFunction.name).isEqualTo("regularExtensionFunction")
+        }
+    }
+
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
