@@ -35,7 +35,18 @@ import org.junit.runners.Parameterized
 internal class FilePathProviderTest(private val displayLanguage: Language) :
     ConverterTestBase(displayLanguage) {
 
+    /** A path provider without a documentables graph. */
     private val pathProvider = pathProvider(externalLocationProvider = externalProvider)
+
+    /** Creates a path provider with a documentables graph based on the [dModule]. */
+    private fun pathProviderForModule(
+        dModule: DModule,
+        externalLocationProvider: ExternalDokkaLocationProvider? = null,
+    ) =
+        pathProvider(
+            externalLocationProvider = externalLocationProvider,
+            classGraph = classGraph(dModule),
+        )
 
     @Test
     fun `Root package has correct link`() {
@@ -165,7 +176,6 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
             """
                 .trimIndent()
                 .render()
-        val classGraph = classGraph(module)
         val dri =
             DRI(
                 packageName = "androidx.example",
@@ -175,7 +185,7 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
                         "{\"key\":\"org.jetbrains.dokka.links.EnumEntryDRIExtra\"}}",
             )
 
-        val (name, url) = pathProvider(classGraph = classGraph).forReference(dri)
+        val (name, url) = pathProviderForModule(module).forReference(dri)
 
         assertThat(name).isEqualTo("Outer.Inner.FOO")
         assertPath(url, "androidx/example/Outer.Inner.html#FOO")
@@ -237,12 +247,8 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
             """
                 .trimIndent()
                 .render()
-        val classGraph = classGraph(module)
         val dri = DRI(packageName = "androidx.example", classNames = "Foo", callable = null)
-        val actual =
-            pathProvider(externalLocationProvider = null, classGraph = classGraph)
-                .findInDocumentablesGraph(dri)
-                ?.name
+        val actual = pathProviderForModule(module).findInDocumentablesGraph(dri)?.name
         val expected = "Foo"
         assertThat(actual).isEqualTo(expected)
     }
@@ -257,12 +263,8 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
             """
                 .trimIndent()
                 .render()
-        val classGraph = classGraph(module)
         val dri = DRI(packageName = "androidx.example", classNames = "Outer.Inner", callable = null)
-        val actual =
-            pathProvider(externalLocationProvider = null, classGraph = classGraph)
-                .findInDocumentablesGraph(dri)
-                ?.name
+        val actual = pathProviderForModule(module).findInDocumentablesGraph(dri)?.name
         val expected = "Inner"
         assertThat(actual).isEqualTo(expected)
     }
@@ -275,12 +277,8 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
             """
                 .trimIndent()
                 .render()
-        val classGraph = classGraph(module)
         val dri = DRI(packageName = "androidx.example", classNames = "A.B.C.D", callable = null)
-        val actual =
-            pathProvider(externalLocationProvider = null, classGraph = classGraph)
-                .findInDocumentablesGraph(dri)
-                ?.name
+        val actual = pathProviderForModule(module).findInDocumentablesGraph(dri)?.name
         val expected = "D"
         assertThat(actual).isEqualTo(expected)
     }
@@ -314,7 +312,6 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
             """
                 .trimIndent()
                 .render()
-        val classGraph = classGraph(module)
         for (name in listOf("FooClass", "FooAnnotation", "FooInterface", "FooEnum")) {
             val dri =
                 DRI(
@@ -323,9 +320,7 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
                     callable =
                         Callable(name = "hoistedVal", params = emptyList(), isProperty = true),
                 )
-            val reference =
-                pathProvider(externalLocationProvider = null, classGraph = classGraph)
-                    .forReference(dri)
+            val reference = pathProviderForModule(module).forReference(dri)
             assertThat(reference.name).isEqualTo("hoistedVal")
             assertThat(reference.url.urlSuffix()).isEqualTo("$name.html#hoistedVal()")
         }
@@ -344,15 +339,13 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
         """
                 .trimIndent()
                 .render()
-        val classGraph = classGraph(module)
         val dri =
             DRI(
                 packageName = "androidx.example",
                 classNames = "Foo.Companion",
                 callable = Callable(name = funName, params = emptyList()),
             )
-        val reference =
-            pathProvider(externalLocationProvider = null, classGraph = classGraph).forReference(dri)
+        val reference = pathProviderForModule(module).forReference(dri)
         assertThat(reference.name).isEqualTo(funName)
         // All functions are hoisted in Kotlin
         val expected =
@@ -375,15 +368,13 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
             """
                 .trimIndent()
                 .render()
-        val classGraph = classGraph(module)
         val dri =
             DRI(
                 packageName = "androidx.example",
                 classNames = "Foo.FooCompanion",
                 callable = Callable(name = "hoistedFun", params = emptyList()),
             )
-        val reference =
-            pathProvider(externalLocationProvider = null, classGraph = classGraph).forReference(dri)
+        val reference = pathProviderForModule(module).forReference(dri)
         assertThat(reference.name).isEqualTo("hoistedFun")
         assertThat(reference.url.urlSuffix()).isEqualTo("Foo.html#hoistedFun()")
     }
@@ -401,15 +392,13 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
         """
                 .trimIndent()
                 .render()
-        val classGraph = classGraph(module)
         val dri =
             DRI(
                 packageName = "androidx.example",
                 classNames = "Foo.FooCompanion",
                 callable = Callable(name = "nonHoistedVal", params = emptyList(), isProperty = true),
             )
-        val reference =
-            pathProvider(externalLocationProvider = null, classGraph = classGraph).forReference(dri)
+        val reference = pathProviderForModule(module).forReference(dri)
         assertThat(reference.name).isEqualTo(propertyName)
         // All properties are hoisted in Kotlin
         val expected =
