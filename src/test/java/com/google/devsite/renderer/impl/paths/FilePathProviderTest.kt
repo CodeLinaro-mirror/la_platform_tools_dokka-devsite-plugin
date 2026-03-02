@@ -482,6 +482,29 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
         assertThat(url.urlSuffix()).isEqualTo("TestComposable.composable.html")
     }
 
+    @Test
+    fun `Correct link is created for function of a function group`() {
+        kotlinOnly {
+            val module =
+                renderCompose(
+                    """
+                    @Composable fun TestComposable() = Unit
+                    """
+                        .trimIndent()
+                )
+            val dri =
+                DRI(
+                    packageName = "com.example",
+                    classNames = null,
+                    callable = Callable("TestComposable", params = emptyList()),
+                )
+
+            val (name, url) = pathProviderForModule(module).forReference(dri)
+            assertThat(name).isEqualTo("TestComposable")
+            assertThat(url.urlSuffix()).isEqualTo("TestComposable.composable.html#TestComposable()")
+        }
+    }
+
     private fun classGraph(module: DModule): ClassGraph = runBlocking {
         ConverterHolder(this@FilePathProviderTest, module).classGraph
     }

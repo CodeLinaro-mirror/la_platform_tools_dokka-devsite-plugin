@@ -24,6 +24,7 @@ import com.google.devsite.renderer.converters.anchor
 import com.google.devsite.renderer.converters.companion
 import com.google.devsite.renderer.converters.isHoistedFromCompanion
 import com.google.devsite.renderer.impl.DocumentablesGraph
+import com.google.devsite.util.ComposeProperties
 import com.google.devsite.util.isForFunctionGroup
 import java.nio.file.Paths
 import kotlin.io.path.pathString
@@ -31,6 +32,7 @@ import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnumEntry
+import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.Documentable
 
 private val NON_DOCUMENTABLE_PREFIXES =
@@ -128,6 +130,19 @@ internal interface FilePathProvider {
         // display name in the link.
         if (dri.isForFunctionGroup()) {
             return ReferencePath(typeName.substringBeforeLast('.'), typeUrl)
+        }
+
+        // For top-level functions which are included on function group pages instead of on the
+        // package summary page, link to the correct page.
+        if (symbol != null) {
+            when (documentable) {
+                is DFunction -> {
+                    ComposeProperties.driForFunctionGroup(documentable)?.let {
+                        val functionGroupLink = forReference(it).url
+                        return ReferencePath(symbol.name, "$functionGroupLink#${symbol.anchor()}")
+                    }
+                }
+            }
         }
 
         // if we have an enum value instead of an inner class, we need a link to the enum class

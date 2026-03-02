@@ -93,6 +93,24 @@ internal class ComposeProperties(
 
         /** Whether the function is top-level (not defined within a class). */
         private fun DFunction.isTopLevel(): Boolean = dri.classNames == null
+
+        /**
+         * If the [dFunction] is part of a function group (see [isComposable] and [isModifier]),
+         * returns the [DRI] of that function group. Otherwise, returns null.
+         */
+        fun driForFunctionGroup(dFunction: DFunction): DRI? {
+            val type =
+                when {
+                    isComposable(dFunction) -> COMPOSABLE_TYPE
+                    isModifier(dFunction) -> MODIFIER_TYPE
+                    else -> return null
+                }
+            return DRI(
+                packageName = dFunction.dri.packageName,
+                classNames = "${dFunction.name}.$type",
+                extra = FunctionGroupDriExtra.extraContainer,
+            )
+        }
     }
 
     /** A group of top-level functions from the same package with the same name. */

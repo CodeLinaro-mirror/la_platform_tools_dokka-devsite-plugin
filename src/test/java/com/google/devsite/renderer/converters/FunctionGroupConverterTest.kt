@@ -65,8 +65,8 @@ internal class FunctionGroupConverterTest :
         assertThat((detail.data.metadata.single() as DescriptionComponent).text())
             .isEqualTo(functionDoc)
 
-        // TODO(b/485902244): this should link to the function group page, not the package summary
-        val expectedUrl = "/reference/kotlin/com/example/package-summary.html#TestComposable()"
+        val expectedUrl =
+            "/reference/kotlin/com/example/TestComposable.composable.html#TestComposable()"
         assertThat(summary.data.description.data.signature.url()).isEqualTo(expectedUrl)
         assertThat(detail.data.signature.url()).isEqualTo(expectedUrl)
     }
@@ -96,9 +96,8 @@ internal class FunctionGroupConverterTest :
         assertThat((detail.data.metadata.single() as DescriptionComponent).text())
             .isEqualTo(functionDoc)
 
-        // TODO(b/485902244): this should link to the function group page, not the package summary
         val expectedUrl =
-            "/reference/kotlin/com/example/package-summary.html#(androidx.compose.ui.Modifier).TestModifier()"
+            "/reference/kotlin/com/example/TestModifier.modifier.html#(androidx.compose.ui.Modifier).TestModifier()"
         assertThat(summary.data.description.data.signature.url()).isEqualTo(expectedUrl)
         assertThat(detail.data.signature.url()).isEqualTo(expectedUrl)
     }
