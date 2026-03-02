@@ -855,7 +855,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a>.<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">materialize</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>)</code></div>
-                <p>Materialize any instance-specific <code><a href="/reference/kotlin/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.Function1,kotlin.Function1)">composed modifiers</a></code> for applying to a raw tree node.</p>
+                <p>Materialize any instance-specific <code><a href="/reference/kotlin/androidx/compose/ui/composed.modifier.html#(androidx.compose.ui.Modifier).composed(kotlin.Function1,kotlin.Function1)">composed modifiers</a></code> for applying to a raw tree node.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -1975,7 +1975,7 @@
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">joinKey</a>(left:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;right:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></pre>
           <p>A Compose compiler plugin API. DO NOT call directly.</p>
-          <p>Produce an object that will compare equal an iff <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">left</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">right</a></code> compare equal to some <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">left</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">right</a></code> of a previous call to <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">joinKey</a></code>. This is used by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> to handle multiple parameters. Since the previous composition stored <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">left</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">right</a></code> in a &quot;join key&quot; object this call is used to return the previous value without an allocation instead of blindly creating a new value that will be immediately discarded.</p>
+          <p>Produce an object that will compare equal an iff <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">left</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">right</a></code> compare equal to some <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">left</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">right</a></code> of a previous call to <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">joinKey</a></code>. This is used by <code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code> to handle multiple parameters. Since the previous composition stored <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">left</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#joinKey(kotlin.Any,kotlin.Any)">right</a></code> in a &quot;join key&quot; object this call is used to return the previous value without an allocation instead of blindly creating a new value that will be immediately discarded.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -2037,7 +2037,7 @@
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#recordSideEffect(kotlin.Function0)">recordSideEffect</a>(effect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>A Compose internal function. DO NOT call directly.</p>
-          <p>Record a function to call when changes to the corresponding tree are applied to the <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#applier()">applier</a></code>. This is used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#SideEffect(kotlin.Function0)">SideEffect</a></code>.</p>
+          <p>Record a function to call when changes to the corresponding tree are applied to the <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#applier()">applier</a></code>. This is used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/SideEffect.composable.html#SideEffect(kotlin.Function0)">SideEffect</a></code>.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -2086,7 +2086,7 @@
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#rememberedValue()">rememberedValue</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?</pre>
           <p>A Compose compiler plugin API. DO NOT call directly.</p>
-          <p>Remember a value into the composition state. This is a primitive method used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>.</p>
+          <p>Remember a value into the composition state. This is a primitive method used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Function0)">remember</a></code>.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -2259,7 +2259,7 @@
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#startDefaults()">startDefaults</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>A Compose compiler plugin API. DO NOT call directly.</p>
           <p>Called to start the group that calculates the default parameters of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function.</p>
-          <p>This method is called near the beginning of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function with default parameters and surrounds the remembered values or <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> calls necessary to produce the default parameters. For example, for <code>model: Model = remember { DefaultModel() }</code> the call to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> is called inside a <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#startDefaults()">startDefaults</a></code> group.</p>
+          <p>This method is called near the beginning of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function with default parameters and surrounds the remembered values or <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> calls necessary to produce the default parameters. For example, for <code>model: Model = remember { DefaultModel() }</code> the call to <code><a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Function0)">remember</a></code> is called inside a <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#startDefaults()">startDefaults</a></code> group.</p>
         </div>
         <div class="api-item"><a name="startMovableGroup(kotlin.Int, kotlin.Any)"></a><a name="startMovableGroup-kotlin.Int-kotlin.Any-"></a><a name="startmovablegroup"></a>
           <div class="api-name-block">
@@ -2273,8 +2273,8 @@
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#startMovableGroup(kotlin.Int,kotlin.Any)">startMovableGroup</a>(key:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;dataKey:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>A Compose compiler plugin API. DO NOT call directly.</p>
-          <p>Start a movable group. A movable group is one that can be moved based on the value of <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#startMovableGroup(kotlin.Int,kotlin.Any)">dataKey</a></code> which is typically supplied by the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> pseudo compiler function.</p>
-          <p>A movable group implements the semantics of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> which allows the state and nodes generated by a loop to move with the composition implied by the key passed to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>.</p>
+          <p>Start a movable group. A movable group is one that can be moved based on the value of <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#startMovableGroup(kotlin.Int,kotlin.Any)">dataKey</a></code> which is typically supplied by the <code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code> pseudo compiler function.</p>
+          <p>A movable group implements the semantics of <code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code> which allows the state and nodes generated by a loop to move with the composition implied by the key passed to <code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code>.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -2296,7 +2296,7 @@
                 <tr>
                   <td><code>dataKey:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?</code></td>
                   <td>
-                    <p>an additional object that is used as a second part of the key. This key produced from the <code>keys</code> parameter supplied to the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> pseudo compiler function.</p>
+                    <p>an additional object that is used as a second part of the key. This key produced from the <code>keys</code> parameter supplied to the <code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code> pseudo compiler function.</p>
                   </td>
                 </tr>
               </tbody>
@@ -2329,7 +2329,7 @@
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#startProvider(androidx.compose.runtime.ProvidedValue)">startProvider</a>(value:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;*&gt;):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>A Compose internal function. DO NOT call directly.</p>
-          <p>Provide the given value for the associated <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key. This is the primitive function used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>.</p>
+          <p>Provide the given value for the associated <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key. This is the primitive function used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocalProvider.composable.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -2364,7 +2364,7 @@
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#startProviders(kotlin.Array)">startProviders</a>(values:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;*&gt;&gt;):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>A Compose internal function. DO NOT call directly.</p>
-          <p>Provide the given values for the associated <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> keys. This is the primitive function used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>.</p>
+          <p>Provide the given values for the associated <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> keys. This is the primitive function used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocalProvider.composable.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -2568,7 +2568,7 @@
                 <tr>
                   <td><code>dataKey:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?</code></td>
                   <td>
-                    <p>A key provided by the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</a></code> composable function that is used to determine if the composition shifts into a reusing state for this group.</p>
+                    <p>A key provided by the <code><a href="/reference/kotlin/androidx/compose/runtime/ReusableContent.composable.html#ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</a></code> composable function that is used to determine if the composition shifts into a reusing state for this group.</p>
                   </td>
                 </tr>
               </tbody>
@@ -2650,7 +2650,7 @@
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#applyCoroutineContext()">applyCoroutineContext</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></pre>
           <p>A Compose internal function. DO NOT call directly.</p>
-          <p>The coroutine context for the composition. This is used, for example, to implement <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>. This context is managed by the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+          <p>The coroutine context for the composition. This is used, for example, to implement <code><a href="/reference/kotlin/androidx/compose/runtime/LaunchedEffect.composable.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>. This context is managed by the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
         </div>
         <div class="api-item"><a name="getComposition()"></a><a name="setComposition()"></a><a name="getComposition--"></a><a name="setComposition--"></a>
           <div class="api-name-block">
@@ -2692,7 +2692,7 @@
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#compoundKeyHash()">compoundKeyHash</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>A Compose internal property. DO NOT call directly. Use <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#currentCompositeKeyHash()">currentCompositeKeyHash</a></code> instead.</p>
           <p>This a hash value used to coordinate map externally stored state to the composition. For example, this is used by saved instance state to preserve state across activity lifetime boundaries.</p>
-          <p>This value is not likely to be unique but is not guaranteed unique. There are known cases, such as for loops without a <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, where the runtime does not have enough information to make the compound key hash unique.</p>
+          <p>This value is not likely to be unique but is not guaranteed unique. There are known cases, such as for loops without a <code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, where the runtime does not have enough information to make the compound key hash unique.</p>
         </div>
         <div class="api-item"><a name="getCurrentCompositionLocalMap()"></a><a name="setCurrentCompositionLocalMap()"></a><a name="getCurrentCompositionLocalMap--"></a><a name="setCurrentCompositionLocalMap--"></a>
           <div class="api-name-block">
@@ -2819,7 +2819,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a>.<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">materialize</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-          <p>Materialize any instance-specific <code><a href="/reference/kotlin/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.Function1,kotlin.Function1)">composed modifiers</a></code> for applying to a raw tree node. Call right before setting the returned modifier on an emitted node. You almost certainly do not need to call this function directly.</p>
+          <p>Materialize any instance-specific <code><a href="/reference/kotlin/androidx/compose/ui/composed.modifier.html#(androidx.compose.ui.Modifier).composed(kotlin.Function1,kotlin.Function1)">composed modifiers</a></code> for applying to a raw tree node. Call right before setting the returned modifier on an emitted node. You almost certainly do not need to call this function directly.</p>
         </div>
         <div class="api-item"><a name="(androidx.compose.runtime.Composer).cache(kotlin.Boolean, kotlin.Function0)"></a><a name="-androidx.compose.runtime.Composer-.cache-kotlin.Boolean-kotlin.Function0-"></a><a name="cache"></a>
           <div class="api-name-block">
@@ -2833,7 +2833,7 @@
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a>.<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">cache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;invalid:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>):&nbsp;T</pre>
           <p>A Compose compiler plugin API. DO NOT call directly.</p>
-          <p>Cache, that is remember, a value in the composition data of a composition. This is used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> and used by the compiler plugin to generate more efficient calls to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> when it determines these optimizations are safe.</p>
+          <p>Cache, that is remember, a value in the composition data of a composition. This is used to implement <code><a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Function0)">remember</a></code> and used by the compiler plugin to generate more efficient calls to <code><a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Function0)">remember</a></code> when it determines these optimizations are safe.</p>
         </div>
       </div>
     </devsite-filter >

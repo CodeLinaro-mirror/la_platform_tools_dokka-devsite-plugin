@@ -59,7 +59,7 @@
     <hr>
     <p><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s provide a means of inter-modifier communication. When a modifier provides a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>, it is available to modifiers on the right of the providing modifier for the current layout node. The provided <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s are also available to layout nodes that are children of the current layout node.</p>
     <p>One must create a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> instance, which can be referenced by consumers statically. <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> instances themselves hold no data, and can be thought of as a type-safe identifier for the data being passed to other modifiers to the right of the providing modifier or down the tree. <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> factory functions take a single parameter: a factory to create a default value in cases where a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> is used without a Provider. If this is a situation you would rather not handle, you can throw an error in this factory.</p>
-    <p>To add a value that can be accessed by other modifiers, create an instance of a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code> and add it to the tree by using a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</a></code>. Now other modifiers can access the provided value by using a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</a></code>.</p>
+    <p>To add a value that can be accessed by other modifiers, create an instance of a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code> and add it to the tree by using a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/modifierLocalProvider.modifier.html#(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</a></code>. Now other modifiers can access the provided value by using a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/modifierLocalConsumer.modifier.html#(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</a></code>.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -81,11 +81,11 @@
             <td></td>
           </tr>
           <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</a></code></td>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/modifierLocalProvider.modifier.html#(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</a></code></td>
             <td></td>
           </tr>
           <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</a></code></td>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/modifierLocalConsumer.modifier.html#(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</a></code></td>
             <td></td>
           </tr>
         </tbody>

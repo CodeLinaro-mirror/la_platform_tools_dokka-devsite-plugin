@@ -27,8 +27,8 @@
           <tr>
             <td><code>inline T</code></td>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a>(vararg&nbsp;keys:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;block:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
-              <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> is a utility composable that is used to &quot;group&quot; or &quot;key&quot; a block of execution inside of a composition.</p>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a>(vararg&nbsp;keys:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;block:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code> is a utility composable that is used to &quot;group&quot; or &quot;key&quot; a block of execution inside of a composition.</p>
             </td>
           </tr>
         </tbody>
@@ -41,9 +41,9 @@
           <h3 id="key(kotlin.Array,kotlin.Function0)">key</h3>
         </div>
       </div>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a>(vararg&nbsp;keys:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;block:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
-      <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> is a utility composable that is used to &quot;group&quot; or &quot;key&quot; a block of execution inside of a composition. This is sometimes needed for correctness inside of control-flow that may cause a given composable invocation to execute more than once during composition.</p>
-      <p>The value for a key <em>does not need to be globally unique</em>, and needs only be unique amongst the invocations of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> <em>at that point</em> in composition.</p>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a>(vararg&nbsp;keys:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;block:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code> is a utility composable that is used to &quot;group&quot; or &quot;key&quot; a block of execution inside of a composition. This is sometimes needed for correctness inside of control-flow that may cause a given composable invocation to execute more than once during composition.</p>
+      <p>The value for a key <em>does not need to be globally unique</em>, and needs only be unique amongst the invocations of <code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code> <em>at that point</em> in composition.</p>
       <p>For instance, consider the following example:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.key
@@ -55,7 +55,7 @@ for (user in users) {
 for (user in users.filter { isAdmin }) {
     key(user.id) { Friend(friend = user) }
 }</pre>
-      <p>Even though there are users with the same id composed in both the top and the bottom loop, because they are different calls to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, there is no need to create compound keys.</p>
+      <p>Even though there are users with the same id composed in both the top and the bottom loop, because they are different calls to <code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, there is no need to create compound keys.</p>
       <p>The key must be unique for each element in the collection, however, or children and local state might be reused in unintended ways.</p>
       <p>For instance, consider the following example:</p>
       <pre class="prettyprint lang-kotlin">

@@ -98,7 +98,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusProperties.html">FocusProperties</a></code></td>
               <td>
-                <p>Properties that are applied to <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusTarget()">focusTarget</a></code> that is the first child of the <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a></code> that sets these properties.</p>
+                <p>Properties that are applied to <code><a href="/reference/kotlin/androidx/compose/ui/focus/focusTarget.modifier.html#(androidx.compose.ui.Modifier).focusTarget()">focusTarget</a></code> that is the first child of the <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a></code> that sets these properties.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -184,7 +184,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
               <td>
-                <p>The <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> is used in conjunction with <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">Modifier.focusRequester</a></code> to send requests to change focus.</p>
+                <p>The <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> is used in conjunction with <code><a href="/reference/kotlin/androidx/compose/ui/focus/focusRequester.modifier.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">Modifier.focusRequester</a></code> to send requests to change focus.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -255,7 +255,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/focusProperties.modifier.html">focusProperties</a></code></td>
               <td>
-                <p>This modifier allows you to specify properties that are accessible to <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusTarget()">focusTarget</a></code>s further down the modifier chain or on child layout nodes.</p>
+                <p>This modifier allows you to specify properties that are accessible to <code><a href="/reference/kotlin/androidx/compose/ui/focus/focusTarget.modifier.html#(androidx.compose.ui.Modifier).focusTarget()">focusTarget</a></code>s further down the modifier chain or on child layout nodes.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -434,7 +434,7 @@
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequesterModifierNode.html">FocusRequesterModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.focus.FocusRequesterModifierNode).captureFocus()">captureFocus</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p>Deny requests to clear focus.</p>
-      <p>Use this function to send a request to capture focus. If a component captures focus, it will send a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object to its associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers where <a href="">FocusState.isCaptured</a> == true.</p>
+      <p>Use this function to send a request to capture focus. If a component captures focus, it will send a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object to its associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/onFocusChanged.modifier.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers where <a href="">FocusState.isCaptured</a> == true.</p>
       <p>When a component is in a Captured state, all focus requests from other components are declined.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
@@ -480,7 +480,7 @@ TextField(
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
-                <p>true if the focus was successfully captured by one of the <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusTarget()">focus</a></code> modifiers associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>. False otherwise.</p>
+                <p>true if the focus was successfully captured by one of the <code><a href="/reference/kotlin/androidx/compose/ui/focus/focusTarget.modifier.html#(androidx.compose.ui.Modifier).focusTarget()">focus</a></code> modifiers associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>. False otherwise.</p>
               </td>
             </tr>
           </tbody>
@@ -498,7 +498,7 @@ TextField(
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequesterModifierNode.html">FocusRequesterModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.focus.FocusRequesterModifierNode).freeFocus()">freeFocus</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-      <p>Use this function to send a request to free focus when one of the components associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> is in a Captured state. If a component frees focus, it will send a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object to its associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers where <a href="">FocusState.isCaptured</a> == false.</p>
+      <p>Use this function to send a request to free focus when one of the components associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> is in a Captured state. If a component frees focus, it will send a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object to its associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/onFocusChanged.modifier.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers where <a href="">FocusState.isCaptured</a> == false.</p>
       <p>When a component is in a Captured state, all focus requests from other components are declined. .</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
@@ -544,7 +544,7 @@ TextField(
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
-                <p>true if the captured focus was successfully released. i.e. At the end of this operation, one of the components associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code> freed focus.</p>
+                <p>true if the captured focus was successfully released. i.e. At the end of this operation, one of the components associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/focusRequester.modifier.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code> freed focus.</p>
               </td>
             </tr>
           </tbody>
@@ -574,7 +574,7 @@ TextField(
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequesterModifierNode.html">FocusRequesterModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.focus.FocusRequesterModifierNode).requestFocus()">requestFocus</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-      <p>Use this function to request focus. If the system grants focus to a component associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>, its <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers will receive a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object where <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html#isFocused()">FocusState.isFocused</a></code> is true.</p>
+      <p>Use this function to request focus. If the system grants focus to a component associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>, its <code><a href="/reference/kotlin/androidx/compose/ui/focus/onFocusChanged.modifier.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers will receive a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object where <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html#isFocused()">FocusState.isFocused</a></code> is true.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -630,7 +630,7 @@ Box(
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
-                <p>true if we successfully restored focus to one of the children of the <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusTarget()">focusTarget</a></code> associated with this node.</p>
+                <p>true if we successfully restored focus to one of the children of the <code><a href="/reference/kotlin/androidx/compose/ui/focus/focusTarget.modifier.html#(androidx.compose.ui.Modifier).focusTarget()">focusTarget</a></code> associated with this node.</p>
               </td>
             </tr>
           </tbody>

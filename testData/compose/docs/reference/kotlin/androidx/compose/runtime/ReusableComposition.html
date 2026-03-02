@@ -38,7 +38,7 @@
     </devsite-filter >
     <hr>
     <p>A <code><a href="/reference/kotlin/androidx/compose/runtime/ReusableComposition.html">ReusableComposition</a></code> is a <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></code> that can be reused for different composable content.</p>
-    <p>This interface is used by components that have to synchronize lifecycle of parent and child compositions and efficiently reuse the nodes emitted by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a></code>.</p>
+    <p>This interface is used by components that have to synchronize lifecycle of parent and child compositions and efficiently reuse the nodes emitted by <code><a href="/reference/kotlin/androidx/compose/runtime/ReusableComposeNode.composable.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a></code>.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">
@@ -203,7 +203,7 @@
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ReusableComposition.html#setContentWithReuse(kotlin.Function0)">setContentWithReuse</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Update the composition with the content described by the <code><a href="/reference/kotlin/androidx/compose/runtime/ReusableComposition.html#setContentWithReuse(kotlin.Function0)">content</a></code> composable. After this has been called the changes to produce the initial composition has been calculated and applied to the composition.</p>
-          <p>This method forces this composition into &quot;reusing&quot; state before setting content. In reusing state, all remembered content is discarded, and nodes emitted by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a></code> are re-used for the new content. The nodes are only reused if the group structure containing the node matches new content.</p>
+          <p>This method forces this composition into &quot;reusing&quot; state before setting content. In reusing state, all remembered content is discarded, and nodes emitted by <code><a href="/reference/kotlin/androidx/compose/runtime/ReusableComposeNode.composable.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a></code> are re-used for the new content. The nodes are only reused if the group structure containing the node matches new content.</p>
           <p>Will throw an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if the composition has been disposed.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
