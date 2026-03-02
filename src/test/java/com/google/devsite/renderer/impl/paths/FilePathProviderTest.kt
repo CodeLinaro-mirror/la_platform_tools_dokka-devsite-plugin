@@ -46,6 +46,7 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
         pathProvider(
             externalLocationProvider = externalLocationProvider,
             classGraph = classGraph(dModule),
+            packages = dModule.packages,
         )
 
     @Test
@@ -281,6 +282,42 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
         val actual = pathProviderForModule(module).findInDocumentablesGraph(dri)?.name
         val expected = "D"
         assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun `findInDocumentablesGraph finds top level functions by DRI`() {
+        val module =
+            """
+            fun topLevelFun() = Unit
+            """
+                .trimIndent()
+                .render()
+        val dri =
+            DRI(
+                packageName = "androidx.example",
+                classNames = null,
+                callable = Callable(name = "topLevelFun", params = emptyList()),
+            )
+        val foundDocumentable = pathProviderForModule(module).findInDocumentablesGraph(dri)
+        assertThat(foundDocumentable?.name).isEqualTo("topLevelFun")
+    }
+
+    @Test
+    fun `findInDocumentablesGraph finds top level properties by DRI`() {
+        val module =
+            """
+            val topLevelVal = 0
+            """
+                .trimIndent()
+                .render()
+        val dri =
+            DRI(
+                packageName = "androidx.example",
+                classNames = null,
+                callable = Callable(name = "topLevelVal", params = emptyList(), isProperty = true),
+            )
+        val foundDocumentable = pathProviderForModule(module).findInDocumentablesGraph(dri)
+        assertThat(foundDocumentable?.name).isEqualTo("topLevelVal")
     }
 
     @Test

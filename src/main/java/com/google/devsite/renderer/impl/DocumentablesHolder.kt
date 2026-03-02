@@ -243,7 +243,8 @@ internal class DocumentablesHolder(
                     context.configuration.sourceSets,
                 )
             }
-        documentablesGraph = scope.async { computeDocumentablesGraph(classGraph.await()) }
+        documentablesGraph =
+            scope.async { computeDocumentablesGraph(classGraph.await(), packages.await()) }
 
         @OptIn(InternalDokkaApi::class)
         nestedClasslikesJob =

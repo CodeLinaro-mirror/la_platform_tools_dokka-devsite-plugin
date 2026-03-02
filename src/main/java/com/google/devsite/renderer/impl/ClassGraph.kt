@@ -24,6 +24,7 @@ import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.analysis.kotlin.documentable.ExternalDocumentableProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.JavaClassKindTypes
@@ -83,7 +84,10 @@ internal fun computeClassGraph(
 }
 
 /** Generates a map that allows looking up each Documentable by its DRI */
-internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGraph {
+internal fun computeDocumentablesGraph(
+    classGraph: ClassGraph,
+    packages: List<DPackage>,
+): DocumentablesGraph {
     // helper function for adding a Documentable to a graph
     fun addToDocumentablesGraph(graph: MutableMap<DRI, Documentable>, documentable: Documentable) {
         if (!graph.containsKey(documentable.dri)) {
@@ -102,6 +106,16 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
     val result = mutableMapOf<DRI, Documentable>()
     for (documentable in classGraph.values) {
         addToDocumentablesGraph(result, documentable.self)
+    }
+    // Add top-level functions and properties to the graph, which will not have been included from
+    // the classes.
+    for (dPackage in packages) {
+        for (dFunction in dPackage.functions) {
+            addToDocumentablesGraph(result, dFunction)
+        }
+        for (dProperty in dPackage.properties) {
+            addToDocumentablesGraph(result, dProperty)
+        }
     }
     return result
 }

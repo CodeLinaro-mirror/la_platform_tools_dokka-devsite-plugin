@@ -68,6 +68,7 @@ import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.pages.ModulePageNode
@@ -174,8 +175,9 @@ internal abstract class ConverterTestBase(
     protected fun pathProvider(
         externalLocationProvider: ExternalDokkaLocationProvider? = null,
         classGraph: ClassGraph = emptyMap(),
+        packages: List<DPackage> = emptyList(),
     ): FilePathProvider {
-        val documentablesGraph = computeDocumentablesGraph(classGraph)
+        val documentablesGraph = computeDocumentablesGraph(classGraph, packages)
         return when (displayLanguage) {
             Language.JAVA ->
                 DevsiteFilePathProvider(
@@ -315,6 +317,7 @@ internal abstract class ConverterTestBase(
             testClass.pathProvider(
                 externalLocationProvider = testClass.externalProvider,
                 classGraph = classGraph,
+                packages = module.packages,
             )
         }
         val metadataConverter by lazy { MetadataConverter(holder) }
