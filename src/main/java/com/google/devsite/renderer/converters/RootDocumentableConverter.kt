@@ -97,9 +97,7 @@ internal class RootDocumentableConverter(
                             .filter {
                                 it.name != "[root]"
                             } // this synthetic package has broken self-links
-                            .map {
-                                javadocConverter.summaryForDocumentable(it, showAnnotations = false)
-                            }
+                            .map { javadocConverter.summaryForDocumentable(it) }
                 )
             )
 
@@ -187,9 +185,7 @@ internal class RootDocumentableConverter(
                     items =
                         functionGroups
                             .sortedBy { it.name }
-                            .map {
-                                javadocConverter.summaryForDocumentable(it, showAnnotations = false)
-                            }
+                            .map { javadocConverter.summaryForDocumentable(it) }
                 )
             )
         return DefaultDevsitePage(
