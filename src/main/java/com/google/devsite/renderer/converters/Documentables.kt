@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.capitalize
 import com.google.devsite.className
+import com.google.devsite.components.symbols.Platform
 import com.google.devsite.not
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
@@ -29,6 +30,7 @@ import kotlin.reflect.jvm.internal.impl.name.ClassId
 import kotlin.reflect.jvm.internal.impl.name.FqName
 import kotlin.reflect.jvm.jvmName
 import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.Platform.jvm
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
@@ -46,6 +48,7 @@ import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DObject
+import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
@@ -674,6 +677,16 @@ internal fun List<DFunction>.names() = map { it.name }
 @JvmName("internalAndThusKotlinOnly") internal fun List<DParameter>.names() = map { it.name }
 
 @JvmName("internalAndThusKotlinOnlyAlso") internal fun List<DProperty>.names() = map { it.name }
+
+/**
+ * Whether the [DPackage] is multiplatform, which is true when it is in more than one source set or
+ * the one source set is not JVM.
+ */
+internal fun DPackage.isKMP() = sourceSets.size > 1 || sourceSets.single().analysisPlatform != jvm
+
+/** Lists the platforms that the [DPackage] exists for. */
+internal fun DPackage.getPlatforms() =
+    sourceSets.map { Platform.from(it.analysisPlatform) }.toSet().sorted()
 
 /**
  * Attempts to get the `expect` source set for a Documentable, or wherever else a sourceset-agnostic

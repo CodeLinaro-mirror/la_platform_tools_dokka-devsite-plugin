@@ -18,7 +18,6 @@ package com.google.devsite.renderer.impl
 
 import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.components.pages.RedirectPage
-import com.google.devsite.components.symbols.Platform
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
@@ -32,6 +31,8 @@ import com.google.devsite.renderer.converters.NonKmpClasslikeConverter
 import com.google.devsite.renderer.converters.NonKmpPackageConverter
 import com.google.devsite.renderer.converters.ParameterDocumentableConverter
 import com.google.devsite.renderer.converters.PropertyDocumentableConverter
+import com.google.devsite.renderer.converters.getPlatforms
+import com.google.devsite.renderer.converters.isKMP
 import com.google.devsite.renderer.converters.isSynthetic
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.packageName
@@ -41,7 +42,6 @@ import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_NAME
 import com.google.devsite.util.ComposeProperties
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
-import org.jetbrains.dokka.Platform.jvm
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DPackage
@@ -179,10 +179,4 @@ internal class PackageRenderer(
 
     // Note: this cannot distinguish java-only, android-only, and non-KMP libraries.
     private fun DPackage.isKotlinAndKMP() = displayLanguage == Language.KOTLIN && isKMP()
-
-    private fun DPackage.isKMP() =
-        sourceSets.size > 1 || sourceSets.single().analysisPlatform != jvm
 }
-
-private fun DPackage.getPlatforms() =
-    sourceSets.map { Platform.from(it.analysisPlatform) }.toSet().sorted()
