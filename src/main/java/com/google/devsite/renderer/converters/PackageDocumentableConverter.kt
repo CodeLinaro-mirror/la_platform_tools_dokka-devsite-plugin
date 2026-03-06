@@ -42,6 +42,7 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.renderer.not
 import com.google.devsite.util.composables
 import com.google.devsite.util.composeModifiers
+import com.google.devsite.util.hasComposeProperties
 import com.google.devsite.util.isInDFunctionGroup
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -103,17 +104,29 @@ internal abstract class PackageDocumentableConverter(
         val composables = async { docsToSummary(dPackage.composables()) }
         val modifiers = async { docsToSummary(dPackage.composeModifiers()) }
 
+        // Composables and modifiers should be filtered out only when the compose transformer has
+        // been applied.
+        val filterComposeFunctions = dPackage.hasComposeProperties()
+
         val topLevelConstantsSummary = async { propertiesToSummary(topLevelConstants()) }
         val topLevelPropertiesSummary = async { propertiesToSummary(topLevelProperties()) }
-        val topLevelFunctionsSummary = async { functionsToSummary(topLevelFunctions()) }
+        val topLevelFunctionsSummary = async {
+            functionsToSummary(topLevelFunctions(filterComposeFunctions))
+        }
         val extensionPropertiesSummary = async { propertiesToSummary(extensionProperties()) }
-        val extensionFunctionsSummary = async { functionsToSummary(extensionFunctions()) }
+        val extensionFunctionsSummary = async {
+            functionsToSummary(extensionFunctions(filterComposeFunctions))
+        }
 
         val topLevelConstants = async { propertiesToDetail(topLevelConstants()) }
         val topLevelProperties = async { propertiesToDetail(topLevelProperties()) }
-        val topLevelFunctions = async { functionsToDetail(topLevelFunctions()) }
+        val topLevelFunctions = async {
+            functionsToDetail(topLevelFunctions(filterComposeFunctions))
+        }
         val extensionProperties = async { propertiesToDetail(extensionProperties()) }
-        val extensionFunctions = async { functionsToDetail(extensionFunctions()) }
+        val extensionFunctions = async {
+            functionsToDetail(extensionFunctions(filterComposeFunctions))
+        }
 
         val isKotlinOnlyNonJVMPackage =
             this@PackageDocumentableConverter is KmpPackageConverter &&
@@ -284,10 +297,10 @@ internal abstract class PackageDocumentableConverter(
             .filter { it.receiver == null }
             .sortedWith(simpleDocumentableComparator)
 
-    private fun topLevelFunctions() =
+    private fun topLevelFunctions(filterComposeFunctions: Boolean) =
         // Exclude functions which are in compose function groups, as they have their own pages.
         dPackage.functions
-            .filter { it.receiver == null && !it.isInDFunctionGroup() }
+            .filter { it.receiver == null && !(filterComposeFunctions && it.isInDFunctionGroup()) }
             .sortedWith(functionSignatureComparator)
 
     private fun extensionProperties() =
@@ -295,9 +308,11 @@ internal abstract class PackageDocumentableConverter(
             .filterNot { it.receiver == null }
             .sortedWith(simpleDocumentableComparator)
 
-    private fun extensionFunctions() =
+    private fun extensionFunctions(filterComposeFunctions: Boolean) =
         // Exclude functions which are in compose function groups, as they have their own pages.
         dPackage.functions
-            .filterNot { it.receiver == null || it.isInDFunctionGroup() }
+            .filterNot {
+                it.receiver == null || (filterComposeFunctions && it.isInDFunctionGroup())
+            }
             .sortedWith(functionSignatureComparator)
 }

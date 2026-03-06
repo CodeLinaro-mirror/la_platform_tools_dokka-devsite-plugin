@@ -25,6 +25,7 @@ import com.google.devsite.renderer.converters.companion
 import com.google.devsite.renderer.converters.isHoistedFromCompanion
 import com.google.devsite.renderer.impl.DocumentablesGraph
 import com.google.devsite.util.ComposeProperties
+import com.google.devsite.util.hasComposeProperties
 import com.google.devsite.util.isForFunctionGroup
 import java.nio.file.Paths
 import kotlin.io.path.pathString
@@ -33,6 +34,7 @@ import org.jetbrains.dokka.links.parent
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
 
 private val NON_DOCUMENTABLE_PREFIXES =
@@ -138,8 +140,17 @@ internal interface FilePathProvider {
             when (documentable) {
                 is DFunction -> {
                     ComposeProperties.driForFunctionGroup(documentable)?.let {
-                        val functionGroupLink = forReference(it).url
-                        return ReferencePath(symbol.name, "$functionGroupLink#${symbol.anchor()}")
+                        // Link to function group pages only when the compose transformer is applied
+                        val hasComposeProperties =
+                            (findInDocumentablesGraph(dri.parent) as? DPackage)
+                                ?.hasComposeProperties() ?: false
+                        if (hasComposeProperties) {
+                            val functionGroupLink = forReference(it).url
+                            return ReferencePath(
+                                symbol.name,
+                                "$functionGroupLink#${symbol.anchor()}",
+                            )
+                        }
                     }
                 }
             }
