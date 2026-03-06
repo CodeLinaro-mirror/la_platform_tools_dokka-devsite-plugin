@@ -32,6 +32,7 @@ import com.google.devsite.util.ComposeProperties
 import com.google.devsite.util.ComposeTestUtils
 import com.google.devsite.util.composables
 import com.google.devsite.util.composeModifiers
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.junit.Test
 
@@ -141,7 +142,7 @@ internal class FunctionGroupConverterTest :
             )
         val modifier = ComposeTestUtils.testPackage(dModule).composeModifiers().single()
         val converter = ConverterHolder(this@FunctionGroupConverterTest, dModule)
-        val pageData = converter.functionGroupConverter.devsitePage(modifier).data
+        val pageData = runBlocking { converter.functionGroupConverter.devsitePage(modifier).data }
 
         assertThat(pageData.title).isEqualTo("TestModifier")
         assertThat(pageData.displayLanguage).isEqualTo(Language.KOTLIN)
@@ -184,7 +185,7 @@ internal class FunctionGroupConverterTest :
         functionGroup: ComposeProperties.DFunctionGroup
     ): FunctionGroupPage {
         val converter = ConverterHolder(this@FunctionGroupConverterTest, this@functionGroupPage)
-        return converter.functionGroupConverter.page(functionGroup)
+        return runBlocking { converter.functionGroupConverter.page(functionGroup) }
     }
 
     companion object {

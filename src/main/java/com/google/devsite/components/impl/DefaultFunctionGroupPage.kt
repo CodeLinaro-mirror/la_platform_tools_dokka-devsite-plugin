@@ -26,6 +26,9 @@ internal data class DefaultFunctionGroupPage(override val data: FunctionGroupPag
     FunctionGroupPage {
     override fun render(into: FlowContent) =
         into.run {
+            // Optional  KMP header
+            data.header?.render(into)
+
             // Summary table section
             h2 { +"Functions summary" }
             data.summary.render(this)

@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.FunctionSummaryList
 import com.google.devsite.components.impl.DefaultDevsitePage
+import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
 import com.google.devsite.components.impl.DefaultFunctionGroupPage
 import com.google.devsite.components.impl.DefaultReferenceObject
 import com.google.devsite.components.impl.DefaultSummaryList
@@ -28,6 +29,7 @@ import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.util.ComposeProperties
+import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
 
@@ -38,7 +40,20 @@ internal class FunctionGroupConverter(
     val holder: DocumentablesHolder,
 ) {
     /** Creates a [FunctionGroupPage] for the [functionGroup]. */
-    fun page(functionGroup: ComposeProperties.DFunctionGroup): FunctionGroupPage {
+    suspend fun page(functionGroup: ComposeProperties.DFunctionGroup): FunctionGroupPage {
+        // Determine if this function group is in a KMP package, and if it is, create a platform
+        // selection header for the page.
+        val dPackage =
+            holder.documentablesGraph()[DRI(functionGroup.packageName)] as? DPackage
+                ?: error("Package not found for $functionGroup")
+        val isKmp = dPackage.isKMP()
+        val header =
+            if (isKmp) {
+                DefaultDevsitePlatformSelector(dPackage.getPlatforms())
+            } else {
+                null
+            }
+
         val summaries =
             functionGroup.functions.mapNotNull { function ->
                 val hints =
@@ -51,8 +66,11 @@ internal class FunctionGroupConverter(
                         injectStatic = function.isJavaStaticMethod(),
                         inCompanion = false,
                     )
-                // TODO(b/486934395): handle KMP function groups
-                functionConverter.summary(function, hints)
+                if (isKmp) {
+                    functionConverter.summaryKmp(function, hints)
+                } else {
+                    functionConverter.summary(function, hints)
+                }
             }
         val summaryList: FunctionSummaryList =
             DefaultSummaryList(SummaryList.Params(items = summaries))
@@ -69,17 +87,20 @@ internal class FunctionGroupConverter(
                         injectStatic = function.isJavaStaticMethod(),
                         inCompanion = false,
                     )
-                // TODO(b/486934395): handle KMP function groups
-                functionConverter.detail(function, hints)
+                if (isKmp) {
+                    functionConverter.detailKmp(function, hints)
+                } else {
+                    functionConverter.detail(function, hints)
+                }
             }
 
         return DefaultFunctionGroupPage(
-            FunctionGroupPage.Params(summary = summaryList, detail = details)
+            FunctionGroupPage.Params(header = header, summary = summaryList, detail = details)
         )
     }
 
     /** Creates a [FunctionGroupPage] from the [functionGroup] and wraps it in a [DevsitePage]. */
-    fun devsitePage(
+    suspend fun devsitePage(
         functionGroup: ComposeProperties.DFunctionGroup
     ): DevsitePage<FunctionGroupPage> {
         return DefaultDevsitePage(

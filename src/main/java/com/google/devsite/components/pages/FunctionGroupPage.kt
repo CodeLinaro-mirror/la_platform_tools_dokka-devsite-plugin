@@ -18,6 +18,7 @@ package com.google.devsite.components.pages
 
 import com.google.devsite.FunctionSummaryList
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
 
@@ -26,6 +27,7 @@ internal interface FunctionGroupPage : ContextFreeComponent {
     val data: Params
 
     data class Params(
+        val header: DefaultDevsitePlatformSelector?,
         val summary: FunctionSummaryList,
         val detail: List<SymbolDetail<FunctionSignature>>,
     )

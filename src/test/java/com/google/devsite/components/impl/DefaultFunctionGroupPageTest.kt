@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.FunctionGroupPage
+import com.google.devsite.components.symbols.Platform
 import com.google.devsite.components.testing.NoopSummaryList
 import com.google.devsite.components.testing.NoopSymbolDetailF
 import kotlinx.html.div
@@ -30,6 +31,7 @@ class DefaultFunctionGroupPageTest {
         val component =
             DefaultFunctionGroupPage(
                 FunctionGroupPage.Params(
+                    header = null,
                     summary = NoopSummaryList(),
                     detail = listOf(NoopSymbolDetailF, NoopSymbolDetailF),
                 )
@@ -42,6 +44,36 @@ class DefaultFunctionGroupPageTest {
             .isEqualTo(
                 """
                 <div>
+                  <h2>Functions summary</h2>
+                  <div>noop</div>
+                  <h2>Functions</h2>
+                  <div>noop</div>
+                  <div>noop</div>
+                </div>
+                """
+                    .trimIndent()
+            )
+    }
+
+    @Test
+    fun `Test function group page with KMP header`() {
+        val component =
+            DefaultFunctionGroupPage(
+                FunctionGroupPage.Params(
+                    header = DefaultDevsitePlatformSelector(listOf(Platform.COMMON)),
+                    summary = NoopSummaryList(),
+                    detail = listOf(NoopSymbolDetailF, NoopSymbolDetailF),
+                )
+            )
+
+        val output = createHTML().div { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+                <div>
+                  <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option></select></devsite-select >
                   <h2>Functions summary</h2>
                   <div>noop</div>
                   <h2>Functions</h2>
