@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.pages.FunctionGroupIndex
 import com.google.devsite.components.pages.PackageIndex
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.renderer.Language
@@ -574,6 +575,68 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
         kotlinOnly { assertThat(classes).isEmpty() }
     }
 
+    @Test
+    fun `Composable index page is not created if there are no composables`() {
+        val composables =
+            renderCompose(
+                    """
+                    fun Modifier.TestModifier() = Unit
+                    """
+                        .trimIndent()
+                )
+                .indexPageForComposables()
+        assertThat(composables).isNull()
+    }
+
+    @Test
+    fun `Modifier index page is not created if there are no modifiers`() {
+        val modifiers =
+            renderCompose(
+                    """
+                    @Composable fun TestComposable() = Unit
+                    """
+                        .trimIndent()
+                )
+                .indexPageForModifiers()
+        assertThat(modifiers).isNull()
+    }
+
+    @Test
+    fun `Composable index page`() {
+        val composables =
+            renderCompose(
+                    """
+                    @Composable fun TestComposable() = Unit
+                    """
+                        .trimIndent()
+                )
+                .indexPageForComposables()
+
+        assertThat(composables).isNotNull()
+        assertThat(composables!!.data.title).isEqualTo("Composable Index")
+
+        val testComposable = composables.data.content.data.functionGroups.item()
+        assertThat(testComposable.data.title.data.name).isEqualTo("TestComposable")
+    }
+
+    @Test
+    fun `Modifier index page`() {
+        val modifiers =
+            renderCompose(
+                    """
+                    fun Modifier.TestModifier() = Unit
+                    """
+                        .trimIndent()
+                )
+                .indexPageForModifiers()
+
+        assertThat(modifiers).isNotNull()
+        assertThat(modifiers!!.data.title).isEqualTo("Modifier Index")
+
+        val testModifier = modifiers.data.content.data.functionGroups.item()
+        assertThat(testModifier.data.title.data.name).isEqualTo("TestModifier")
+    }
+
     private fun DModule.rootConverter() =
         ConverterHolder(this@RootDocumentableConverterTest, this).rootDocumentableConverter
 
@@ -583,6 +646,14 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
 
     private fun DModule.indexPageForPackages(): DevsitePage<PackageIndex> {
         return runBlocking { rootConverter().packagesIndexPage() }
+    }
+
+    private fun DModule.indexPageForComposables(): DevsitePage<FunctionGroupIndex>? {
+        return runBlocking { rootConverter().composablesIndexPage() }
+    }
+
+    private fun DModule.indexPageForModifiers(): DevsitePage<FunctionGroupIndex>? {
+        return runBlocking { rootConverter().modifiersIndexPage() }
     }
 
     private fun DModule.toc(packagePrefixToRemove: String? = null): TableOfContents {

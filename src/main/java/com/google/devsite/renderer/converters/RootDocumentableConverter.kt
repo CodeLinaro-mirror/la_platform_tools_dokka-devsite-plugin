@@ -18,12 +18,14 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.impl.DefaultClassIndex
 import com.google.devsite.components.impl.DefaultDevsitePage
+import com.google.devsite.components.impl.DefaultFunctionGroupIndex
 import com.google.devsite.components.impl.DefaultPackageIndex
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableOfContents
 import com.google.devsite.components.impl.DefaultTocPackage
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.pages.FunctionGroupIndex
 import com.google.devsite.components.pages.PackageIndex
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.TocPackage
@@ -132,6 +134,55 @@ internal class RootDocumentableConverter(
                 classesUrl = pathProvider.classes,
                 packagesUrl = pathProvider.packages,
                 packages = packageComponents,
+            )
+        )
+    }
+
+    /** Returns the index for the composables across all packages, or null if there are none. */
+    suspend fun composablesIndexPage(): DevsitePage<FunctionGroupIndex>? {
+        return functionGroupIndexPage(
+            docsHolder.packages().flatMap { it.composables() },
+            "Composable",
+        )
+    }
+
+    /** Returns the index for the modifiers across all packages, or null if there are none. */
+    suspend fun modifiersIndexPage(): DevsitePage<FunctionGroupIndex>? {
+        return functionGroupIndexPage(
+            docsHolder.packages().flatMap { it.composeModifiers() },
+            "Modifier",
+        )
+    }
+
+    /**
+     * Creates the index for the [functionGroups], with [name] describing the type of function
+     * groups. If [functionGroups] is empty, returns null.
+     */
+    private fun functionGroupIndexPage(
+        functionGroups: List<ComposeProperties.DFunctionGroup>,
+        name: String,
+    ): DevsitePage<FunctionGroupIndex>? {
+        if (functionGroups.isEmpty()) return null
+        val summaryList =
+            DefaultSummaryList(
+                SummaryList.Params(
+                    items =
+                        functionGroups
+                            .sortedBy { it.name }
+                            .map {
+                                javadocConverter.summaryForDocumentable(it, showAnnotations = false)
+                            }
+                )
+            )
+        return DefaultDevsitePage(
+            DevsitePage.Params(
+                displayLanguage = displayLanguage,
+                pathForSwitcher = null,
+                bookPath = pathProvider.book,
+                title = "$name Index",
+                content = DefaultFunctionGroupIndex(FunctionGroupIndex.Params(summaryList)),
+                metadataComponent = null,
+                includedHeadTagPath = pathProvider.includedHeadTagsPath,
             )
         )
     }

@@ -69,6 +69,20 @@ internal class MetadataRenderer(
         outputWriter.write(pathProvider.classes, classIndex, "")
     }
 
+    /** Writes the composable index page, if there are any composables. */
+    suspend fun writeComposables() {
+        val page = converter.composablesIndexPage() ?: return
+        val composableIndex = createHTML().html { page.render(this) }
+        outputWriter.write(pathProvider.composables, composableIndex, "")
+    }
+
+    /** Writes the modifier index page, if there are any modifiers. */
+    suspend fun writeModifiers() {
+        val page = converter.modifiersIndexPage() ?: return
+        val modifierIndex = createHTML().html { page.render(this) }
+        outputWriter.write(pathProvider.modifiers, modifierIndex, "")
+    }
+
     /** Writes the ToC for devsite consumption. */
     suspend fun writeToc(packagePrefixToRemove: String?) {
         val toc = buildString { converter.tocPage(packagePrefixToRemove).render(this) }

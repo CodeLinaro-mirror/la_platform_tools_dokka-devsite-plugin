@@ -58,6 +58,12 @@ internal interface FilePathProvider {
     /** The HTML list of classes for human consumption. */
     val classes: String
 
+    /** The path for the index of composables aggregated from all packages. */
+    val composables: String
+
+    /** The path for the index of modifiers aggregated from all packages. */
+    val modifiers: String
+
     /** The global index file that encompasses all packages. */
     val rootIndex: String
 

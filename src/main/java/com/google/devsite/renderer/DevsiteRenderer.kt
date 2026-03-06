@@ -46,6 +46,8 @@ internal class DevsiteRenderer(
         launch { rootFileRenderer.writeRootIndex() }
         launch { rootFileRenderer.writePackages() }
         launch { rootFileRenderer.writeClasses() }
+        launch { rootFileRenderer.writeComposables() }
+        launch { rootFileRenderer.writeModifiers() }
         launch { rootFileRenderer.writeToc(devsiteConfiguration.packagePrefixToRemoveInToc) }
     }
 

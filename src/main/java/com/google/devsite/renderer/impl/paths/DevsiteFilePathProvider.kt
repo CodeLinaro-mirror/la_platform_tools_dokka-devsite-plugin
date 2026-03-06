@@ -41,6 +41,10 @@ internal open class DevsiteFilePathProvider(
 
     override val classes = joinPaths(rootPath, projectPath, CLASS_INDEX_FILE)
 
+    override val composables: String = joinPaths(rootPath, projectPath, COMPOSABLE_INDEX_FILE)
+
+    override val modifiers: String = joinPaths(rootPath, projectPath, MODIFIER_INDEX_FILE)
+
     override val rootIndex = joinPaths(rootPath, projectPath, DIR_INDEX_FILE)
 
     override val toc = joinPaths(rootPath, projectPath, TOC_FILE)
