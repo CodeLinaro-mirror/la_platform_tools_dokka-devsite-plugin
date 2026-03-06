@@ -130,6 +130,11 @@ class BasicTest : IntegrationTestBase() {
     }
 
     @Test
+    fun `Validate composables without restructuring`() {
+        validate("composable", javaDocsDirectory = null)
+    }
+
+    @Test
     fun `Validate that Java and Kotlin paths cannot have the same value`() {
         assertThrows(IllegalStateException::class.java) {
             validate("simple", javaDocsDirectory = null, kotlinDocsDirectory = null)
