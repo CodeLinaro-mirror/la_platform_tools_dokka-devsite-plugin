@@ -637,6 +637,37 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
         assertThat(testModifier.data.title.data.name).isEqualTo("TestModifier")
     }
 
+    @Test
+    fun `Toc does not include composable and modifier index pages if they do not exist`() {
+        val toc =
+            renderCompose(
+                    """
+                    class Foo
+                    """
+                        .trimIndent()
+                )
+                .toc()
+
+        assertThat(toc.data.composablesUrl).isNull()
+        assertThat(toc.data.modifiersUrl).isNull()
+    }
+
+    @Test
+    fun `Toc includes composable and modifier index pages`() {
+        val toc =
+            renderCompose(
+                    """
+                    @Composable fun TestComposable() = Unit
+                    fun Modifier.TestModifier() = Unit
+                    """
+                        .trimIndent()
+                )
+                .toc()
+
+        assertPath(toc.data.composablesUrl!!, "androidx/composables.html")
+        assertPath(toc.data.modifiersUrl!!, "androidx/modifiers.html")
+    }
+
     private fun DModule.rootConverter() =
         ConverterHolder(this@RootDocumentableConverterTest, this).rootDocumentableConverter
 

@@ -129,10 +129,28 @@ internal class RootDocumentableConverter(
                 }
                 .awaitAll()
 
+        // Include composables page only if it will be created.
+        val composablesUrl =
+            if (docsHolder.packages().any { it.composables().isNotEmpty() }) {
+                pathProvider.composables
+            } else {
+                null
+            }
+
+        // Include modifiers page only if it will be created.
+        val modifiersUrl =
+            if (docsHolder.packages().any { it.composeModifiers().isNotEmpty() }) {
+                pathProvider.modifiers
+            } else {
+                null
+            }
+
         return DefaultTableOfContents(
             TableOfContents.Params(
                 classesUrl = pathProvider.classes,
                 packagesUrl = pathProvider.packages,
+                composablesUrl = composablesUrl,
+                modifiersUrl = modifiersUrl,
                 packages = packageComponents,
             )
         )

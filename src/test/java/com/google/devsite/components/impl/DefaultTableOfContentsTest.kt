@@ -29,6 +29,8 @@ class DefaultTableOfContentsTest {
                 Params(
                     classesUrl = "classes.html",
                     packagesUrl = "packages.html",
+                    composablesUrl = null,
+                    modifiersUrl = null,
                     packages = listOf(NoopTocPackage, NoopTocPackage),
                 )
             )
@@ -44,6 +46,117 @@ toc:
 
 - title: "Package Index"
   path: "packages.html"
+
+noop
+
+noop
+            """
+                    .trim()
+            )
+    }
+
+    @Test
+    fun `Toc renders correctly with composables`() {
+        val component =
+            DefaultTableOfContents(
+                Params(
+                    classesUrl = "classes.html",
+                    packagesUrl = "packages.html",
+                    composablesUrl = "composables.html",
+                    modifiersUrl = null,
+                    packages = listOf(NoopTocPackage, NoopTocPackage),
+                )
+            )
+
+        val output = buildString { component.render(this) }.trim()
+
+        assertThat(output)
+            .isEqualTo(
+                """
+toc:
+- title: "Class Index"
+  path: "classes.html"
+
+- title: "Package Index"
+  path: "packages.html"
+
+- title: "Composable Index"
+  path: "composables.html"
+
+noop
+
+noop
+            """
+                    .trim()
+            )
+    }
+
+    @Test
+    fun `Toc renders correctly with modifiers`() {
+        val component =
+            DefaultTableOfContents(
+                Params(
+                    classesUrl = "classes.html",
+                    packagesUrl = "packages.html",
+                    composablesUrl = null,
+                    modifiersUrl = "modifiers.html",
+                    packages = listOf(NoopTocPackage, NoopTocPackage),
+                )
+            )
+
+        val output = buildString { component.render(this) }.trim()
+
+        assertThat(output)
+            .isEqualTo(
+                """
+toc:
+- title: "Class Index"
+  path: "classes.html"
+
+- title: "Package Index"
+  path: "packages.html"
+
+- title: "Modifier Index"
+  path: "modifiers.html"
+
+noop
+
+noop
+            """
+                    .trim()
+            )
+    }
+
+    @Test
+    fun `Toc renders correctly with composables and modifiers`() {
+        val component =
+            DefaultTableOfContents(
+                Params(
+                    classesUrl = "classes.html",
+                    packagesUrl = "packages.html",
+                    composablesUrl = "composables.html",
+                    modifiersUrl = "modifiers.html",
+                    packages = listOf(NoopTocPackage, NoopTocPackage),
+                )
+            )
+
+        val output = buildString { component.render(this) }.trim()
+
+        assertThat(output)
+            .isEqualTo(
+                """
+toc:
+- title: "Class Index"
+  path: "classes.html"
+
+- title: "Package Index"
+  path: "packages.html"
+
+- title: "Composable Index"
+  path: "composables.html"
+
+- title: "Modifier Index"
+  path: "modifiers.html"
 
 noop
 

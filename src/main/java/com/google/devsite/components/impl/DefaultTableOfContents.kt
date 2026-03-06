@@ -31,6 +31,17 @@ internal data class DefaultTableOfContents(override val data: TableOfContents.Pa
             appendLine("- title: \"Package Index\"")
             appendLine("  path: \"${data.packagesUrl}\"")
 
+            if (data.composablesUrl != null) {
+                appendLine()
+                appendLine("- title: \"Composable Index\"")
+                appendLine("  path: \"${data.composablesUrl}\"")
+            }
+            if (data.modifiersUrl != null) {
+                appendLine()
+                appendLine("- title: \"Modifier Index\"")
+                appendLine("  path: \"${data.modifiersUrl}\"")
+            }
+
             for (packageSection in data.packages) {
                 appendLine()
                 packageSection.render(this)

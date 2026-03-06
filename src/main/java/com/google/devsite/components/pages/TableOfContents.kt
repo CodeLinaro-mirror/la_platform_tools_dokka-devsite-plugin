@@ -26,6 +26,8 @@ internal interface TableOfContents : TextComponent {
     data class Params(
         val classesUrl: String,
         val packagesUrl: String,
+        val composablesUrl: String?,
+        val modifiersUrl: String?,
         val packages: List<TocPackage>,
     )
 }
