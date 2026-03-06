@@ -107,9 +107,10 @@ internal fun computeDocumentablesGraph(
     for (documentable in classGraph.values) {
         addToDocumentablesGraph(result, documentable.self)
     }
-    // Add top-level functions and properties to the graph, which will not have been included from
-    // the classes.
+    // Add packages as well as top-level functions and properties to the graph, which will not have
+    // been included from the classes.
     for (dPackage in packages) {
+        result[dPackage.dri] = dPackage
         for (dFunction in dPackage.functions) {
             addToDocumentablesGraph(result, dFunction)
         }

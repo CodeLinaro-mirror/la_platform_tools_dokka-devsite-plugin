@@ -321,6 +321,19 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
     }
 
     @Test
+    fun `findInDocumentablesGraph finds packages by DRI`() {
+        val module =
+            """
+            class Foo
+            """
+                .trimIndent()
+                .render()
+        val dri = DRI(packageName = "androidx.example", classNames = null)
+        val foundDocumentable = pathProviderForModule(module).findInDocumentablesGraph(dri)
+        assertThat(foundDocumentable?.name).isEqualTo("androidx.example")
+    }
+
+    @Test
     fun `Reference to hoisted companion value goes to the containing classlike page`() {
         // Check for all kinds of [DClasslike]s that implement [WithCompanion]
         val module =
