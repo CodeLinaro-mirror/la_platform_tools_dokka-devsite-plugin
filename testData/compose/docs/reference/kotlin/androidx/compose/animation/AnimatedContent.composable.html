@@ -17,36 +17,50 @@
         <h1>AnimatedContent</h1>
       </div>
     </div>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
     <h2>Functions summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.String,kotlin.Function1,kotlin.Function2)">AnimatedContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetState:&nbsp;S,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentTransitionScope.html">AnimatedContentTransitionScope</a>&lt;S&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentKey:&nbsp;(targetState) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html">AnimatedContentScope</a>.(targetState) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.String,kotlin.Function1,kotlin.Function2)">AnimatedContent</a></code> is a container that automatically animates its content when <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.String,kotlin.Function1,kotlin.Function2)">targetState</a></code> changes.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;S&gt;.<a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#(androidx.compose.animation.core.Transition).AnimatedContent(androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function2)">AnimatedContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentTransitionScope.html">AnimatedContentTransitionScope</a>&lt;S&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentKey:&nbsp;(targetState) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html">AnimatedContentScope</a>.(targetState) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#(androidx.compose.animation.core.Transition).AnimatedContent(androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function2)">AnimatedContent</a></code> is a container that automatically animates its content when <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html#targetState()">Transition.targetState</a></code> changes.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.String,kotlin.Function1,kotlin.Function2)">AnimatedContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetState:&nbsp;S,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentTransitionScope.html">AnimatedContentTransitionScope</a>&lt;S&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentKey:&nbsp;(targetState) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html">AnimatedContentScope</a>.(targetState) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.String,kotlin.Function1,kotlin.Function2)">AnimatedContent</a></code> is a container that automatically animates its content when <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.String,kotlin.Function1,kotlin.Function2)">targetState</a></code> changes.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;S&gt;.<a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#(androidx.compose.animation.core.Transition).AnimatedContent(androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function2)">AnimatedContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentTransitionScope.html">AnimatedContentTransitionScope</a>&lt;S&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentAlignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentKey:&nbsp;(targetState) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html">AnimatedContentScope</a>.(targetState) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#(androidx.compose.animation.core.Transition).AnimatedContent(androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function2)">AnimatedContent</a></code> is a container that automatically animates its content when <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html#targetState()">Transition.targetState</a></code> changes.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <h2>Functions</h2>
     <div class="api-item"><a name="AnimatedContent(kotlin.Any, androidx.compose.ui.Modifier, kotlin.Function1, androidx.compose.ui.Alignment, kotlin.String, kotlin.Function1, kotlin.Function2)"></a><a name="AnimatedContent-kotlin.Any-androidx.compose.ui.Modifier-kotlin.Function1-androidx.compose.ui.Alignment-kotlin.String-kotlin.Function1-kotlin.Function2-"></a><a name="animatedcontent"></a>
       <div class="api-name-block">
         <div>
           <h3 id="AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.String,kotlin.Function1,kotlin.Function2)">AnimatedContent</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.String,kotlin.Function1,kotlin.Function2)">AnimatedContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;targetState:&nbsp;S,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentTransitionScope.html">AnimatedContentTransitionScope</a>&lt;S&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a> = {
@@ -212,6 +226,10 @@ Column(Modifier.padding(20.dp), horizontalAlignment = Alignment.CenterHorizontal
       <div class="api-name-block">
         <div>
           <h3 id="(androidx.compose.animation.core.Transition).AnimatedContent(androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function2)">AnimatedContent</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a>&lt;S&gt;.<a href="/reference/kotlin/androidx/compose/animation/AnimatedContent.composable.html#(androidx.compose.animation.core.Transition).AnimatedContent(androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function1,kotlin.Function2)">AnimatedContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;transitionSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentTransitionScope.html">AnimatedContentTransitionScope</a>&lt;S&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a> = {

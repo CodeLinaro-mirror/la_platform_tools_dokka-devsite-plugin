@@ -20,57 +20,80 @@
         <h1>remember</h1>
       </div>
     </div>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
     <h2>Functions summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <tbody class="list">
-          <tr>
-            <td><code>inline T</code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Function0)">remember</a>(crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
-              <p>Remember the value produced by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">calculation</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>inline T</code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
-              <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">key1</a></code> compares equal (<code>==</code>) to the value it had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>inline T</code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Array,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;vararg&nbsp;keys:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
-              <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">calculation</a></code> if all values of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">keys</a></code> are equal (<code>==</code>) to the values they had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">calculation</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>inline T</code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;key2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
-              <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key1</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key2</a></code> are equal (<code>==</code>) to the values they had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>inline T</code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;key2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;key3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
-              <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key1</a></code>, <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key2</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key3</a></code> are equal (<code>==</code>) to values they had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code>inline T</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Function0)">remember</a>(crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+                <p>Remember the value produced by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">calculation</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline T</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
+                <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">key1</a></code> compares equal (<code>==</code>) to the value it had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline T</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Array,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;vararg&nbsp;keys:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
+                <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">calculation</a></code> if all values of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">keys</a></code> are equal (<code>==</code>) to the values they had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">calculation</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline T</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;key2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
+                <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key1</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key2</a></code> are equal (<code>==</code>) to the values they had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline T</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;key2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;key3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
+                <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key1</a></code>, <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key2</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key3</a></code> are equal (<code>==</code>) to values they had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <h2>Functions</h2>
     <div class="api-item"><a name="remember-kotlin.Function0-"></a><a name="remember"></a>
       <div class="api-name-block">
         <div>
           <h3 id="remember(kotlin.Function0)">remember</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Function0)">remember</a>(crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
@@ -81,6 +104,10 @@
         <div>
           <h3 id="remember(kotlin.Any,kotlin.Function0)">remember</h3>
         </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>):&nbsp;T</pre>
       <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">key1</a></code> compares equal (<code>==</code>) to the value it had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
@@ -89,6 +116,10 @@
       <div class="api-name-block">
         <div>
           <h3 id="remember(kotlin.Array,kotlin.Function0)">remember</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Array,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;vararg&nbsp;keys:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>):&nbsp;T</pre>
@@ -99,6 +130,10 @@
         <div>
           <h3 id="remember(kotlin.Any,kotlin.Any,kotlin.Function0)">remember</h3>
         </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
+        </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;key2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>):&nbsp;T</pre>
       <p>Remember the value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key1</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key2</a></code> are equal (<code>==</code>) to the values they had in the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
@@ -107,6 +142,10 @@
       <div class="api-name-block">
         <div>
           <h3 id="remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">remember</h3>
+        </div>
+        <div class="api-name-platform-and-metadata">
+          <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+            <!--platform-Common/All--></div>
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/remember.composable.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;key2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;key3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;calculation:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T<br>):&nbsp;T</pre>
