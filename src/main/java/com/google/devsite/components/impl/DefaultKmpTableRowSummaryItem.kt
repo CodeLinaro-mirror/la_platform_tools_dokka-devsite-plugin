@@ -19,20 +19,20 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.table.KmpTableRowSummaryItem
 import kotlinx.html.TR
-import kotlinx.html.code
 import kotlinx.html.td
 
 /** Default implementation of the two-pane layout item for symbol tables. */
 internal data class DefaultKmpTableRowSummaryItem<
     T : ContextFreeComponent?,
     V : ContextFreeComponent,
->(override val data: KmpTableRowSummaryItem.Params<T, V>) : KmpTableRowSummaryItem<T, V> {
-    override fun render(into: TR) =
-        into.run {
-            data.title?.let { title -> td { code { title.render(this) } } }
-            td { data.description.render(this) }
-            td { data.platforms.render(this) }
-        }
+>(override val data: KmpTableRowSummaryItem.Params<T, V>) :
+    KmpTableRowSummaryItem<T, V>, DefaultTableRowSummaryItem<T, V>(data) {
+    override fun render(into: TR) {
+        // Render the part of the row that is the same as the non-KMP version
+        super.render(into)
+        // Add the platforms to the table.
+        into.run { td { data.platforms.render(this) } }
+    }
 
     override fun toString() = (data.title?.let { "$it: " } ?: "") + data.description.toString()
 }
