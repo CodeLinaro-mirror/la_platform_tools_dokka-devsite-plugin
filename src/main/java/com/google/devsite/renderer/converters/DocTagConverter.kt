@@ -43,6 +43,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.strictSingleOrNull
+import com.google.devsite.util.ComposeProperties
 import java.io.File
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
@@ -981,10 +982,18 @@ internal class DocTagConverter(
                 // typealiases have no pages
                 DefaultUnlink(Link.Params(documentable.name, ""))
             } else pathProvider.linkForReference(documentable.dri)
+        val anchors =
+            when (documentable) {
+                is ComposeProperties.DFunctionGroup ->
+                    documentable.functions.mapNotNull { it.dri.callable?.anchor() }.toSet()
+                else -> setOf()
+            }
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = link,
-                description = summaryDescription(documentable, documentable.deprecationAnnotation()),
+                description =
+                    summaryDescription(documentable, documentable.deprecationAnnotation()),
+                anchors = anchors,
             )
         )
     }
@@ -1005,11 +1014,18 @@ internal class DocTagConverter(
     private fun summaryForDocumentableKmp(
         documentable: Documentable
     ): TableRowSummaryItem<Link, DescriptionComponent> {
+        val anchors =
+            when (documentable) {
+                is ComposeProperties.DFunctionGroup ->
+                    documentable.functions.mapNotNull { it.dri.callable?.anchor() }.toSet()
+                else -> setOf()
+            }
         return DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
                 title = pathProvider.linkForReference(documentable.dri),
                 description = summaryDescription(documentable),
                 platforms = DefaultPlatformComponent(documentable.sourceSets),
+                anchors = anchors,
             )
         )
     }

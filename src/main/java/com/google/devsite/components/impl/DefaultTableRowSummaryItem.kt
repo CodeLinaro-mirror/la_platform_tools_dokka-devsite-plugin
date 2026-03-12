@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.table.TableRowSummaryItem
 import kotlinx.html.TR
+import kotlinx.html.a
 import kotlinx.html.code
 import kotlinx.html.td
 
@@ -28,7 +29,14 @@ internal open class DefaultTableRowSummaryItem<T : ContextFreeComponent?, V : Co
 ) : TableRowSummaryItem<T, V> {
     override fun render(into: TR) =
         into.run {
-            data.title?.let { title -> td { code { title.render(this) } } }
+            data.title?.let { title ->
+                td {
+                    for (anchor in data.anchors) {
+                        a { attributes["name"] = anchor }
+                    }
+                    code { title.render(this) }
+                }
+            }
             td { data.description.render(this) }
         }
 

@@ -34,6 +34,7 @@ internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFre
     open class Params<T : ContextFreeComponent?, V : ContextFreeComponent>(
         open val title: T,
         override val description: V,
+        open val anchors: Set<String> = emptySet(),
     ) : SummaryItem.Params {
         // Due to not being at the bottom of a class hierarchy, this Params can't be a data class
         override fun equals(other: Any?): Boolean {
@@ -41,6 +42,7 @@ internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFre
             if (other !is Params<*, *>) return false
             if (title != other.title) return false
             if (description != other.description) return false
+            if (anchors != other.anchors) return false
             return true
         }
 
