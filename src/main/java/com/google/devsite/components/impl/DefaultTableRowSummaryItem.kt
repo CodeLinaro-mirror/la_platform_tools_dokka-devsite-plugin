@@ -19,18 +19,34 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.table.TableRowSummaryItem
 import kotlinx.html.TR
+import kotlinx.html.a
 import kotlinx.html.code
 import kotlinx.html.td
 
 /** Default implementation of the two-pane layout item for symbol tables. */
-internal data class DefaultTableRowSummaryItem<T : ContextFreeComponent?, V : ContextFreeComponent>(
+internal open class DefaultTableRowSummaryItem<T : ContextFreeComponent?, V : ContextFreeComponent>(
     override val data: TableRowSummaryItem.Params<T, V>
 ) : TableRowSummaryItem<T, V> {
     override fun render(into: TR) =
         into.run {
-            data.title?.let { title -> td { code { title.render(this) } } }
+            data.title?.let { title ->
+                td {
+                    for (anchor in data.anchors) {
+                        a { attributes["name"] = anchor }
+                    }
+                    code { title.render(this) }
+                }
+            }
             td { data.description.render(this) }
         }
 
     override fun toString() = (data.title?.let { "$it: " } ?: "") + data.description.toString()
+
+    override fun equals(other: Any?): Boolean {
+        return (other as? DefaultTableRowSummaryItem<*, *>)?.data == data
+    }
+
+    override fun hashCode(): Int {
+        return data.hashCode()
+    }
 }

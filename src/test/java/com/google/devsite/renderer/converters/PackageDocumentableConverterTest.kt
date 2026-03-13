@@ -497,6 +497,7 @@ internal class PackageDocumentableConverterTest(displayLanguage: Language) :
             val composableADescription = composableA.description
             assertThat(composableADescription.data.summary).isTrue()
             assertThat(composableADescription.text()).isEqualTo("TestComposableA documentation")
+            assertThat(composableA.anchors).containsExactly("TestComposableA()")
 
             val composableB = items.last().data
             val composableBTitle = composableB.title.data
@@ -506,6 +507,7 @@ internal class PackageDocumentableConverterTest(displayLanguage: Language) :
             val composableBDescription = composableB.description
             assertThat(composableBDescription.data.summary).isTrue()
             assertThat(composableBDescription.text()).isEqualTo("TestComposableB documentation")
+            assertThat(composableB.anchors).containsExactly("TestComposableB()")
         }
     }
 
@@ -536,6 +538,8 @@ internal class PackageDocumentableConverterTest(displayLanguage: Language) :
             val modifierADescription = modifierA.description
             assertThat(modifierADescription.data.summary).isTrue()
             assertThat(modifierADescription.text()).isEqualTo("TestModifierA documentation")
+            assertThat(modifierA.anchors)
+                .containsExactly("(androidx.compose.ui.Modifier).TestModifierA()")
 
             val modifierB = items.last().data
             val modifierBTitle = modifierB.title.data
@@ -545,6 +549,8 @@ internal class PackageDocumentableConverterTest(displayLanguage: Language) :
             val modifierBDescription = modifierB.description
             assertThat(modifierBDescription.data.summary).isTrue()
             assertThat(modifierBDescription.text()).isEqualTo("TestModifierB documentation")
+            assertThat(modifierB.anchors)
+                .containsExactly("(androidx.compose.ui.Modifier).TestModifierB()")
         }
     }
 

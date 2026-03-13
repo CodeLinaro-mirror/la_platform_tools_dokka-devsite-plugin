@@ -64,4 +64,29 @@ class DefaultTableRowSummaryItemTest {
                     .trim()
             )
     }
+
+    @Test
+    fun `Item with anchors renders correctly`() {
+        val component =
+            DefaultTableRowSummaryItem(
+                Params(
+                    title = PlainTextOutput("Title"),
+                    description = PlainTextOutput("Description"),
+                    anchors = setOf("#anchor1", "#anchor2"),
+                )
+            )
+        val row = createHTML().tr { component.render(this) }.trim()
+
+        // language=html
+        assertThat(row)
+            .isEqualTo(
+                """
+                <tr>
+                  <td><a name="#anchor1"></a><a name="#anchor2"></a><code>Title</code></td>
+                  <td>Description</td>
+                </tr>
+                """
+                    .trimIndent()
+            )
+    }
 }

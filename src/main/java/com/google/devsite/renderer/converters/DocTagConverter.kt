@@ -22,7 +22,6 @@ import com.google.devsite.className
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
-import com.google.devsite.components.impl.DefaultAnnotatedLink
 import com.google.devsite.components.impl.DefaultDescriptionComponent
 import com.google.devsite.components.impl.DefaultKmpTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultLink
@@ -34,7 +33,6 @@ import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultUnlink
 import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
-import com.google.devsite.components.symbols.AnnotatedLink
 import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.table.KmpTableRowSummaryItem
@@ -45,6 +43,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.strictSingleOrNull
+import com.google.devsite.util.ComposeProperties
 import java.io.File
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
@@ -960,17 +959,15 @@ internal class DocTagConverter(
     }
 
     internal fun docsToSummaryDefault(documentables: List<Documentable>) =
-        docsToSummary(documentables, false)
+        docsToSummary(documentables)
 
     /**
      * Converts a generic List<Documentable> to a SummaryList. Does nothing clever; only converts
      * Documentables to links (by default with annotations)
      */
-    private fun docsToSummary(documentables: List<Documentable>, showAnnotations: Boolean) =
+    private fun docsToSummary(documentables: List<Documentable>) =
         DefaultSummaryList(
-            SummaryList.Params(
-                items = documentables.map { summaryForDocumentable(it, showAnnotations) }
-            )
+            SummaryList.Params(items = documentables.map { summaryForDocumentable(it) })
         )
 
     /**
@@ -978,33 +975,25 @@ internal class DocTagConverter(
      * is used for mini-signatures, e.g. nested types list, subclasses list, package summary
      */
     internal fun summaryForDocumentable(
-        documentable: Documentable,
-        showAnnotations: Boolean = false,
+        documentable: Documentable
     ): TableRowSummaryItem<Link, DescriptionComponent> {
         val link =
             if (documentable is DTypeAlias) {
                 // typealiases have no pages
                 DefaultUnlink(Link.Params(documentable.name, ""))
             } else pathProvider.linkForReference(documentable.dri)
-        val maybeAnnotatedLink =
-            if (showAnnotations) {
-                DefaultAnnotatedLink(
-                    AnnotatedLink.Params(
-                        annotations =
-                            annotationConverter.annotationComponents(
-                                documentable.annotations(documentable.getExpectOrCommonSourceSet()),
-                                nullability = Nullability.DONT_CARE, // Not useful for these cases
-                            ),
-                        link = link,
-                    )
-                )
-            } else {
-                link
+        val anchors =
+            when (documentable) {
+                is ComposeProperties.DFunctionGroup ->
+                    documentable.functions.mapNotNull { it.dri.callable?.anchor() }.toSet()
+                else -> setOf()
             }
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
-                title = maybeAnnotatedLink,
-                description = summaryDescription(documentable, documentable.deprecationAnnotation()),
+                title = link,
+                description =
+                    summaryDescription(documentable, documentable.deprecationAnnotation()),
+                anchors = anchors,
             )
         )
     }
@@ -1025,11 +1014,18 @@ internal class DocTagConverter(
     private fun summaryForDocumentableKmp(
         documentable: Documentable
     ): TableRowSummaryItem<Link, DescriptionComponent> {
+        val anchors =
+            when (documentable) {
+                is ComposeProperties.DFunctionGroup ->
+                    documentable.functions.mapNotNull { it.dri.callable?.anchor() }.toSet()
+                else -> setOf()
+            }
         return DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
                 title = pathProvider.linkForReference(documentable.dri),
                 description = summaryDescription(documentable),
                 platforms = DefaultPlatformComponent(documentable.sourceSets),
+                anchors = anchors,
             )
         )
     }
