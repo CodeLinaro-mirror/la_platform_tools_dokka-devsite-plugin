@@ -42,4 +42,9 @@ internal class NoopLambdaTypeProjectionComponent(
         }
 
     override fun length() = receiver.length + params.length() + type.length + "() -> ".length
+
+    override fun simpleTypeString(): String {
+        val receiverString = receiver?.let { "$it." } ?: ""
+        return receiverString + "(" + params.joinToString(", ") + ") ->" + type
+    }
 }

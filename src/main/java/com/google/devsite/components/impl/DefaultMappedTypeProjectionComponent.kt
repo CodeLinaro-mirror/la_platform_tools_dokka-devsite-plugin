@@ -28,4 +28,8 @@ internal data class DefaultMappedTypeProjectionComponent(
             data.type +
             data.generics.joinMaybePrefix(prefix = "<", postfix = ">") +
             data.nullability.renderAsKotlinSuffix()
+
+    override fun simpleTypeString(): String {
+        return data.type.data.name
+    }
 }

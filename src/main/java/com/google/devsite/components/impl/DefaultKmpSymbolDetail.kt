@@ -54,6 +54,8 @@ internal data class DefaultKmpSymbolDetail<T : SymbolSignature>(
                         ) {
                             +data.extFunctionClass
                             +"."
+                        } else if (data.displayLanguage == Language.KOTLIN) {
+                            +data.signature.simpleReceiverTypeString()
                         }
                         +data.name
                     }

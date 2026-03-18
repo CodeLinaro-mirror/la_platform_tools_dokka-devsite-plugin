@@ -27,4 +27,12 @@ internal interface SymbolSignature : ContextFreeComponent {
         val name: Link
         val receiver: ParameterComponent?
     }
+
+    /**
+     * A string representing the receiver type (with unqualified class names and without
+     * annotations), or an empty string if there is no receiver.
+     */
+    fun simpleReceiverTypeString(): String {
+        return data.receiver?.let { it.data.type.simpleTypeString() + "." } ?: ""
+    }
 }

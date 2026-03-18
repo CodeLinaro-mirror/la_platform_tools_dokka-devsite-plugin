@@ -19,9 +19,17 @@ package com.google.devsite.components.testing
 import com.google.devsite.components.symbols.FunctionSignature
 import kotlinx.html.FlowContent
 
-internal class NoopFunctionSignature(private val text: String) : FunctionSignature {
+internal class NoopFunctionSignature(
+    private val text: String,
+    private val receiverText: String? = null,
+) : FunctionSignature {
     override val data: FunctionSignature.Params
         get() = throw NotImplementedError()
 
     override fun render(into: FlowContent) = into.run { +text }
+
+    override fun simpleReceiverTypeString(): String {
+        // Override because [data] is not implemented, and the default implementation relies on it
+        return receiverText?.let { "$it." } ?: ""
+    }
 }

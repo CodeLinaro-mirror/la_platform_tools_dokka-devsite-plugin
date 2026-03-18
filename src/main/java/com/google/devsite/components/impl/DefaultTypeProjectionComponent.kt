@@ -41,4 +41,8 @@ internal data class DefaultTypeProjectionComponent(
             data.generics.joinMaybePrefix(prefix = " <", postfix = ">") +
             // Do this regardless of displayLanguage, we don't care, it only appears in debugging
             data.nullability.renderAsKotlinSuffix()
+
+    override fun simpleTypeString(): String {
+        return data.type.data.name
+    }
 }

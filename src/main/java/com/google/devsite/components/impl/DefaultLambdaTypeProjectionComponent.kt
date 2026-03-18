@@ -62,4 +62,14 @@ internal data class DefaultLambdaTypeProjectionComponent(
 
         return if (data.nullability.nullable) "($result)?" else result
     }
+
+    override fun simpleTypeString(): String {
+        // Represent a lambda type with kotlin syntax of receiver.(parameters) -> return
+        val receiver = data.receiver?.let { it.data.type.data.name + "." } ?: ""
+        return receiver +
+            "(" +
+            data.lambdaParams.joinToString(", ") { it.data.type.simpleTypeString() } +
+            ") -> " +
+            data.returnType.simpleTypeString()
+    }
 }

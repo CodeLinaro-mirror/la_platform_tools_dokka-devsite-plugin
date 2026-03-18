@@ -501,4 +501,40 @@ class DefaultSymbolDetailTest {
                     .trim()
             )
     }
+
+    @Test
+    fun `Function with receiver`() {
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("Unit"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("String.foo()", receiverText = "String"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.KOTLIN,
+                )
+            )
+
+        val output = createHTML().div { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+                <div>
+                  <div class="api-item">
+                    <div class="api-name-block">
+                      <div>
+                        <h3>String.foo</h3>
+                      </div>
+                    </div>
+                    <pre class="api-signature no-pretty-print">fun&nbsp;String.foo():&nbsp;Unit</pre>
+                  </div>
+                </div>
+                """
+                    .trimIndent()
+            )
+    }
 }

@@ -26,4 +26,8 @@ internal class NoopTypeProjectionComponent(private val text: String) : TypeProje
     override fun render(into: FlowContent) = into.run { +text }
 
     override fun length() = text.length
+
+    override fun simpleTypeString(): String {
+        return text
+    }
 }

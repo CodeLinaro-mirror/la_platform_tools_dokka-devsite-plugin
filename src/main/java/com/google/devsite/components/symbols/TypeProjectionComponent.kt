@@ -75,4 +75,10 @@ internal interface TypeProjectionComponent : SymbolBase {
 
     val annotations: List<AnnotationComponent>
         get() = data.annotationComponents
+
+    /**
+     * A basic string representation of the type, with unqualified class names and without
+     * annotations.
+     */
+    fun simpleTypeString(): String
 }
