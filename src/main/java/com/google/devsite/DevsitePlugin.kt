@@ -81,7 +81,7 @@ class DevsitePlugin : DokkaPlugin() {
     val composeTransformer by extending {
         CoreExtensions.documentableTransformer providing
             {
-                ComposeTransformer(getDevsiteConfiguration(it).applyComposeTransformer)
+                ComposeTransformer()
             } order
             {
                 after(docTagsForCheckedExceptions)

@@ -27,16 +27,10 @@ import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
 /**
  * A transformer which finds composable and modifier functions in a [DPackage] and puts them in a
  * [ComposeProperties] extra.
- *
- * Only transforms the packages if [enabled] is true.
  */
-class ComposeTransformer(val enabled: Boolean) : DocumentableTransformer {
+class ComposeTransformer() : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule {
-        return if (enabled) {
-            original.copy(packages = original.packages.map { it.transform() })
-        } else {
-            original
-        }
+        return original.copy(packages = original.packages.map { it.transform() })
     }
 
     /**

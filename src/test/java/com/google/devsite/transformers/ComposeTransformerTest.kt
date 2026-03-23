@@ -19,7 +19,6 @@ package com.google.devsite.transformers
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.testing.createPluginsConfiguration
 import com.google.devsite.testing.defaultDevsiteConfiguration
-import com.google.devsite.testing.defaultPluginsConfiguration
 import com.google.devsite.util.ComposeProperties
 import com.google.devsite.util.ComposeTestUtils
 import com.google.devsite.util.composables
@@ -35,11 +34,7 @@ import org.junit.Test
 
 class ComposeTransformerTest : BaseTransformerTest() {
     override val defaultConfiguration =
-        createDokkaConfiguration(
-            createPluginsConfiguration(
-                defaultDevsiteConfiguration.copy(applyComposeTransformer = true)
-            )
-        )
+        createDokkaConfiguration(createPluginsConfiguration(defaultDevsiteConfiguration))
 
     /**
      * Helper to run compose tests. Supplies definitions of Composable and Modifier. The [test] will
@@ -327,10 +322,7 @@ class ComposeTransformerTest : BaseTransformerTest() {
                     dependentSourceSets = setOf(DokkaSourceSetID("root", "commonMain"))
                 }
             }
-            pluginsConfigurations =
-                createPluginsConfiguration(
-                    defaultDevsiteConfiguration.copy(applyComposeTransformer = true)
-                )
+            pluginsConfigurations = createPluginsConfiguration(defaultDevsiteConfiguration)
         }
 
         // This is appended to a stub created through ComposeTestUtils, so the package declaration
@@ -432,24 +424,6 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(jvmAndNative.expectPresentInSet).isNull()
 
             assertThat(dPackage.composeModifiers()).hasSize(6)
-        }
-    }
-
-    @Test
-    fun `Test transformer does not apply when disabled`() {
-        testComposeTransformer(
-            """
-            @Composable fun TestComposable() = Unit
-            fun Modifier.TestModifier() = Unit
-            fun nonComposeFunction() = Unit
-            """
-                .trimIndent(),
-            configuration = createDokkaConfiguration(defaultPluginsConfiguration),
-        ) { dPackage ->
-            assertThat(dPackage.hasComposeProperties()).isFalse()
-            assertThat(dPackage.composables()).isEmpty()
-            assertThat(dPackage.composeModifiers()).isEmpty()
-            assertThat(dPackage.functions).hasSize(3)
         }
     }
 }

@@ -24,8 +24,6 @@ import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.testing.ConverterTestBase
-import com.google.devsite.testing.createPluginsConfiguration
-import com.google.devsite.testing.defaultDevsiteConfiguration
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,10 +31,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class PackageDocumentableConverterTest(displayLanguage: Language) :
-    ConverterTestBase(
-        displayLanguage,
-        createPluginsConfiguration(defaultDevsiteConfiguration.copy(applyComposeTransformer = true)),
-    ) {
+    ConverterTestBase(displayLanguage) {
     @Test
     fun `Package summary creates components with correct page title`() {
         val page =

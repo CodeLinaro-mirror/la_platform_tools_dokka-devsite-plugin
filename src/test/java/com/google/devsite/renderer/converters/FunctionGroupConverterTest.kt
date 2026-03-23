@@ -26,8 +26,6 @@ import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.testing.ConverterTestBase
-import com.google.devsite.testing.createPluginsConfiguration
-import com.google.devsite.testing.defaultDevsiteConfiguration
 import com.google.devsite.util.ComposeProperties
 import com.google.devsite.util.ComposeTestUtils
 import com.google.devsite.util.composables
@@ -36,11 +34,7 @@ import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.junit.Test
 
-internal class FunctionGroupConverterTest :
-    ConverterTestBase(
-        Language.KOTLIN,
-        createPluginsConfiguration(defaultDevsiteConfiguration.copy(applyComposeTransformer = true)),
-    ) {
+internal class FunctionGroupConverterTest : ConverterTestBase(Language.KOTLIN) {
     @Test
     fun `Test single function composable page`() {
         val functionDoc = "A test composable."

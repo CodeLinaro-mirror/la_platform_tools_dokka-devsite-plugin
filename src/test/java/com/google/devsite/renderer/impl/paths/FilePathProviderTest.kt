@@ -20,8 +20,6 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.testing.ConverterTestBase
-import com.google.devsite.testing.createPluginsConfiguration
-import com.google.devsite.testing.defaultDevsiteConfiguration
 import com.google.devsite.util.ComposeProperties
 import com.google.devsite.util.isForFunctionGroup
 import kotlinx.coroutines.runBlocking
@@ -35,10 +33,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class FilePathProviderTest(private val displayLanguage: Language) :
-    ConverterTestBase(
-        displayLanguage,
-        createPluginsConfiguration(defaultDevsiteConfiguration.copy(applyComposeTransformer = true)),
-    ) {
+    ConverterTestBase(displayLanguage) {
 
     /** A path provider without a documentables graph. */
     private val pathProvider = pathProvider(externalLocationProvider = externalProvider)
