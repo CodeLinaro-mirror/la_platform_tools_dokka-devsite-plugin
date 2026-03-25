@@ -180,6 +180,8 @@ internal class MultiLanguageRenderer(
         val documentablesGraph = holder.documentablesGraph()
 
         val internalPackages = holder.packages().map { it.packageName }.toSet()
+        val unlinkedExternalPackages =
+            devsiteConfiguration.unlinkedExternalPackages?.toSet() ?: emptySet()
 
         val filePaths =
             DevsiteFilePathProvider(
@@ -191,6 +193,8 @@ internal class MultiLanguageRenderer(
                 locationProvider,
                 documentablesGraph,
                 internalPackages,
+                unlinkedExternalPackages,
+                context.logger,
             )
 
         val metadataConverter = MetadataConverter(holder)

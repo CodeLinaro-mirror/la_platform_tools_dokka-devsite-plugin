@@ -19,6 +19,7 @@ package com.google.devsite.renderer.impl.paths
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.symbols.TypeProjectionComponent
+import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.anchor
 import com.google.devsite.renderer.converters.companion
@@ -36,6 +37,7 @@ import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.utilities.DokkaLogger
 
 private val NON_DOCUMENTABLE_PREFIXES =
     listOf("kotlin.jvm.functions", "kotlin.coroutines.SuspendFunction")
@@ -90,6 +92,14 @@ internal interface FilePathProvider {
      */
     val internalPackages: Set<String>
 
+    /**
+     * Set of external packages for which it is known that there are no public reference docs, so
+     * they can't be linked to.
+     */
+    val unlinkedExternalPackages: Set<String>
+
+    val logger: DokkaLogger?
+
     /** @return the path of a class-like type */
     fun forType(packageName: String, name: String): String
 
@@ -129,8 +139,19 @@ internal interface FilePathProvider {
                 val text = symbol?.name ?: className ?: packageName
                 return ReferencePath(text, it)
             }
-            // The location of the external reference is not known. Construct the complete name for
-            // the reference, since it won't be included in the URL.
+            // The location of the external reference is not known.
+            if (
+                packageName.isNotEmpty() &&
+                    !unlinkedExternalPackages.contains(packageName) &&
+                    // TODO (b/569950872): warn for hidden references
+                    !hasBeenHidden(dri) &&
+                    // Only warn once per package (add returns false if it is already in the set)
+                    missingPackageLists.add(packageName)
+            ) {
+                logger?.warn(
+                    "Missing package-list for $packageName (go/dackka#missing-package-list)"
+                )
+            }
             val qualifiedName =
                 if (packageName.isEmpty()) {
                     className
@@ -239,6 +260,9 @@ internal interface FilePathProvider {
     }
 
     val ANY: TypeProjectionComponent
+
+    /** Thread-safe set of packages which have been found for which no package-list was provided. */
+    val missingPackageLists: MutableSet<String>
 
     companion object {
         fun joinPaths(pathComponent: String, vararg pathComponents: String): String =

@@ -45,6 +45,7 @@ val defaultDevsiteConfiguration =
         validNullabilityAnnotations =
             defaultValidNullabilityAnnotations +
                 listOf("androidx.example.NonNull", "androidx.example.Nullable"),
+        unlinkedExternalPackages = emptyList(),
     )
 
 /**

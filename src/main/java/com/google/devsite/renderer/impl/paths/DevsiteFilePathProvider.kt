@@ -22,6 +22,8 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Nullability
 import com.google.devsite.renderer.impl.DocumentablesGraph
 import com.google.devsite.renderer.impl.paths.FilePathProvider.Companion.joinPaths
+import java.util.Collections
+import org.jetbrains.dokka.utilities.DokkaLogger
 
 /** Directory structure tailored for devsite tenants. */
 internal open class DevsiteFilePathProvider(
@@ -33,6 +35,8 @@ internal open class DevsiteFilePathProvider(
     override val locationProvider: ExternalDokkaLocationProvider? = null,
     override val documentablesGraph: DocumentablesGraph,
     override val internalPackages: Set<String>,
+    override val unlinkedExternalPackages: Set<String>,
+    override val logger: DokkaLogger?,
 ) : FilePathProvider {
     final override val rootPath = joinPaths("/", docRootPath, languagePath)
 
@@ -56,6 +60,9 @@ internal open class DevsiteFilePathProvider(
         val packageAsPath = packageName.replace(".", "/")
         return joinPaths(rootPath, packageAsPath, "$name.html")
     }
+
+    override val missingPackageLists: MutableSet<String> =
+        Collections.synchronizedSet(mutableSetOf())
 
     // Set value of ANY based on the language
     override val ANY: TypeProjectionComponent =

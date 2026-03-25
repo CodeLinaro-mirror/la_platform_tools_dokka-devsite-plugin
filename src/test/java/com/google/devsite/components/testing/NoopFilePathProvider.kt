@@ -29,4 +29,6 @@ internal class NoopFilePathProvider :
         locationProvider = null,
         documentablesGraph = emptyMap(),
         internalPackages = emptySet(),
+        unlinkedExternalPackages = emptySet(),
+        logger = null,
     )

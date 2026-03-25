@@ -116,6 +116,7 @@ abstract class IntegrationTestBase :
                                     hidingAnnotations = hidingAnnotations,
                                     includeHiddenParentSymbols = includeHiddenParentSymbols,
                                     validNullabilityAnnotations = validNullabilityAnnotations,
+                                    unlinkedExternalPackages = emptyList(),
                                 )
                                 .toCompactJsonString(),
                     )

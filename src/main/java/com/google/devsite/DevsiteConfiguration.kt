@@ -102,6 +102,8 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  *   the deprecation annotations.
  * @param traceFile Filepath to write a trace to. The generated trace only includes execution time
  *   for the dackka plugin, not for base dokka code.
+ * @param unlinkedExternalPackages Set of packages which are referenced by the documented code but
+ *   for which no public reference docs exist, so they cannot be linked to.
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -128,6 +130,7 @@ data class DevsiteConfiguration(
     val includeHiddenParentSymbols: Boolean = false,
     val propagatingAnnotations: List<String> = listOf("kotlin.Deprecated", "java.lang.Deprecated"),
     val traceFile: String? = null,
+    val unlinkedExternalPackages: List<String>? = null,
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {

@@ -218,6 +218,9 @@ internal abstract class ConverterTestBase(
                     documentablesGraph = documentablesGraph,
                     includedHeadTagsPath = "_shared/_reference-head-tags.html",
                     internalPackages = packageNames,
+                    // Skip warnings for generated nullability annotations
+                    unlinkedExternalPackages = setOf("androidx.annotation"),
+                    logger = logger,
                 )
             Language.KOTLIN ->
                 DevsiteFilePathProvider(
@@ -229,6 +232,8 @@ internal abstract class ConverterTestBase(
                     documentablesGraph = documentablesGraph,
                     includedHeadTagsPath = "_shared/_reference-head-tags.html",
                     internalPackages = packageNames,
+                    unlinkedExternalPackages = emptySet(),
+                    logger = logger,
                 )
         }
     }
