@@ -68,22 +68,17 @@ include(":testData:topLevelFunctions")
 
 include(":testData:visibleForTesting")
 
-pluginManagement { repositories { maven("../../prebuilts/androidx/external") } }
+pluginManagement { repositories { maven("../../prebuilts/dokka-devsite-plugin") } }
 
 buildscript {
-    repositories { maven("../../prebuilts/androidx/external") }
+    repositories { maven("../../prebuilts/dokka-devsite-plugin") }
     dependencies {
         classpath("com.gradle:develocity-gradle-plugin:4.3")
         classpath("com.gradle:common-custom-user-data-gradle-plugin:2.4.0")
     }
 }
 
-dependencyResolutionManagement {
-    repositories {
-        maven("../../prebuilts/androidx/external")
-        maven("../../prebuilts/androidx/internal")
-    }
-}
+dependencyResolutionManagement { repositories { maven("../../prebuilts/dokka-devsite-plugin") } }
 
 apply(plugin = "com.gradle.develocity")
 

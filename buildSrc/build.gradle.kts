@@ -20,7 +20,7 @@ plugins {
     alias(libs.plugins.ktfmt)
 }
 
-repositories { maven("../../../prebuilts/androidx/external") }
+repositories { maven("../../../prebuilts/dokka-devsite-plugin") }
 
 dependencies {
     implementation(gradleApi())

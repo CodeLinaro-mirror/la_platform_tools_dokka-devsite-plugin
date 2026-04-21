@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-pluginManagement { repositories { maven("../../prebuilts/androidx/external") } }
+pluginManagement { repositories { maven("../../prebuilts/dokka-devsite-plugin") } }
 
 dependencyResolutionManagement {
     versionCatalogs { create("libs") { from(files("../gradle/libs.versions.toml")) } }
