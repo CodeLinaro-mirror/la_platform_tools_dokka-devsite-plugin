@@ -1683,6 +1683,43 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
     }
 
     @Test
+    fun `Throws tag split across multiple lines`() {
+        val documentation =
+            """
+            |/**
+            | * @throws
+            | *   IllegalArgumentException for a bad argument
+            | * @throws IllegalStateException for a bad state
+            | */
+            |fun foo() = Unit
+            """
+                .render()
+                .documentation()
+
+        val throwsItems =
+            (documentation.first { (it as? DocsSummaryList)?.title() == "Throws" }
+                    as DocsSummaryList)
+                .items(2)
+
+        val illegalArgument = throwsItems[0].data
+        val illegalArgumentLink = illegalArgument.title.data.type.data.type
+        // TODO(b/502835268): the newline breaks the throws parsing
+        assertThat(illegalArgumentLink.data.name).isEqualTo("")
+        assertThat(illegalArgumentLink.data.url).isEqualTo("")
+        assertThat(illegalArgument.description.text())
+            .isEqualTo("IllegalArgumentException for a bad argument")
+
+        val illegalState = throwsItems[1].data
+        val illegalStateLink = illegalState.title.data.type.data.type
+        assertThat(illegalStateLink.data.name).isEqualTo("IllegalStateException")
+        assertThat(illegalStateLink.data.url)
+            .isEqualTo(
+                "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html"
+            )
+        assertThat(illegalState.description.text()).isEqualTo("for a bad state")
+    }
+
+    @Test
     fun `Full Java documentation has checked exceptions`() {
         val documentation =
             """
