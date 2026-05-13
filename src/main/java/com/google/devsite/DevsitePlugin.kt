@@ -118,12 +118,25 @@ class DevsitePlugin : DokkaPlugin() {
             dokkaBase.jvmMappedMethodsFilter
     }
 
+    /** Dackka configuration values. Should be accessed through [getDevsiteConfiguration]. */
+    private lateinit var devsiteConfiguration: DevsiteConfiguration
+
+    /** Returns [devsiteConfiguration], initializing it based on the [dokkaContext] if needed. */
+    private fun getDevsiteConfiguration(dokkaContext: DokkaContext): DevsiteConfiguration {
+        // Only load the [DevsiteConfiguration] through [loadDevsiteConfiguration] once, because
+        // otherwise the JSON would be reparsed each time.
+        if (!::devsiteConfiguration.isInitialized) {
+            devsiteConfiguration = loadDevsiteConfiguration(dokkaContext)
+        }
+        return devsiteConfiguration
+    }
+
     private object NoopTransformer : PreMergeDocumentableTransformer {
         override fun invoke(modules: List<DModule>): List<DModule> = modules
     }
 }
 
-internal fun getDevsiteConfiguration(dokkaContext: DokkaContext): DevsiteConfiguration {
+internal fun loadDevsiteConfiguration(dokkaContext: DokkaContext): DevsiteConfiguration {
     return checkNotNull(configuration<DevsitePlugin, DevsiteConfiguration>(dokkaContext)) {
         "Missing Dackka plugin configuration. See go/dackka#generating-docs for more detail."
     }

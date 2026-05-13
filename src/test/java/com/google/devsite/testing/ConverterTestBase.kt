@@ -24,8 +24,8 @@ import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.getDevsiteConfiguration
 import com.google.devsite.joinMaybePrefix
+import com.google.devsite.loadDevsiteConfiguration
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
@@ -326,7 +326,7 @@ internal abstract class ConverterTestBase(
                 testClass.displayLanguage,
                 provider,
                 hiddenAnnotations,
-                getDevsiteConfiguration(testClass.context).validNullabilityAnnotations,
+                loadDevsiteConfiguration(testClass.context).validNullabilityAnnotations,
             )
         }
         val paramConverter by lazy {
