@@ -16,9 +16,11 @@
 
 package com.google.devsite.transformers
 
+import androidx.tracing.Tracer
 import com.google.devsite.util.ComposeProperties
 import com.google.devsite.util.ComposeProperties.Companion.COMPOSABLE_TYPE
 import com.google.devsite.util.ComposeProperties.Companion.MODIFIER_TYPE
+import com.google.devsite.util.trace
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.plugability.DokkaContext
@@ -28,9 +30,11 @@ import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
  * A transformer which finds composable and modifier functions in a [DPackage] and puts them in a
  * [ComposeProperties] extra.
  */
-class ComposeTransformer() : DocumentableTransformer {
+class ComposeTransformer(private val tracer: Tracer) : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule {
-        return original.copy(packages = original.packages.map { it.transform() })
+        return tracer.trace("ComposeTransformer") {
+            original.copy(packages = original.packages.map { it.transform() })
+        }
     }
 
     /**

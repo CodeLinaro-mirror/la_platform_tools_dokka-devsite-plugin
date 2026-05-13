@@ -1,5 +1,7 @@
 package com.google.devsite.transformers
 
+import androidx.tracing.Tracer
+import com.google.devsite.util.trace
 import org.jetbrains.dokka.analysis.kotlin.markdown.MARKDOWN_ELEMENT_FILE_NAME
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.CheckedExceptions
@@ -18,14 +20,16 @@ import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
 
 /** Adds documentation tags representing checked exceptions from java. */
-class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
+class DocTagsForCheckedExceptionsTransformer(private val tracer: Tracer) : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule =
-        original.copy(
-            packages =
-                original.packages.map { p ->
-                    p.copy(classlikes = p.classlikes.map(::transformClasslike))
-                }
-        )
+        tracer.trace("DocTagsForCheckedExceptionsTransformer") {
+            original.copy(
+                packages =
+                    original.packages.map { p ->
+                        p.copy(classlikes = p.classlikes.map(::transformClasslike))
+                    }
+            )
+        }
 
     private fun transformClasslike(classlike: DClasslike): DClasslike =
         when (classlike) {

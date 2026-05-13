@@ -16,7 +16,10 @@
 
 package com.google.devsite
 
+import androidx.tracing.Tracer
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.google.devsite.renderer.Language
+import com.google.devsite.util.Tracing
 import org.jetbrains.dokka.plugability.ConfigurableBlock
 
 /**
@@ -97,6 +100,8 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  *   properties to accessors (annotations are not propagated from functions to parameters). For KMP,
  *   annotations are propagated from the common source set to all source sets. By default, this is
  *   the deprecation annotations.
+ * @param traceFile Filepath to write a trace to. The generated trace only includes execution time
+ *   for the dackka plugin, not for base dokka code.
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -122,6 +127,7 @@ data class DevsiteConfiguration(
     val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
     val includeHiddenParentSymbols: Boolean = false,
     val propagatingAnnotations: List<String> = listOf("kotlin.Deprecated", "java.lang.Deprecated"),
+    val traceFile: String? = null,
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {
@@ -136,6 +142,15 @@ data class DevsiteConfiguration(
             )
         }
     }
+
+    /** The driver to use for tracing. Needs to be closed after the final usage. */
+    @JsonIgnore // Do not include in serialization
+    val traceDriver = Tracing.createTraceDriver(traceFile)
+
+    /** Accessor for the [Tracer] of [traceDriver]. */
+    @get:JsonIgnore // Do not include in serialization
+    val tracer: Tracer
+        get() = traceDriver.tracer
 
     // Parse provided excluded package lists to regex sets
     private val computedExcludedPackagesForBoth: Set<Regex> by lazy {

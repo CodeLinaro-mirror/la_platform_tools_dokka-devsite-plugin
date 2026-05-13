@@ -16,6 +16,7 @@
 
 package com.google.devsite
 
+import androidx.tracing.Tracer
 import com.google.devsite.renderer.converters.allAnnotations
 import com.google.devsite.renderer.converters.asString
 import com.google.devsite.renderer.converters.deprecatedDri
@@ -23,6 +24,7 @@ import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.fullName
 import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import com.google.devsite.renderer.converters.isFromJava
+import com.google.devsite.util.trace
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.transformers.documentables.SuppressedByConditionDocumentableFilterTransformer
 import org.jetbrains.dokka.links.DRI
@@ -72,45 +74,58 @@ import org.jetbrains.dokka.transformers.documentation.PreMergeDocumentableTransf
 class PreMergeHiddenDocumentableFilter(
     dokkaContext: DokkaContext,
     private val hidingAnnotations: List<String>,
+    private val tracer: Tracer,
 ) : SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
     override fun shouldBeSuppressed(d: Documentable): Boolean {
-        // Upstream bug 2603 means private-backing-public-getter shows up as a public field.
-        // This is a real problem if the public getter is `@hide`, because it means something is
-        // newly exposed that shouldn't be. Filter for that case specifically.
-        if (d is DProperty && d.isFromJava() && d.getter?.let { shouldBeSuppressed(it) } == true) {
+        return tracer.trace(
+            "PreMergeHiddenDocumentableFilter.shouldBeSuppressed",
+            "documentable" to d.dri.toString(),
+        ) {
+            // Upstream bug 2603 means private-backing-public-getter shows up as a public field.
+            // This is a real problem if the public getter is `@hide`, because it means something is
+            // newly exposed that shouldn't be. Filter for that case specifically.
+            if (
+                d is DProperty && d.isFromJava() && d.getter?.let { shouldBeSuppressed(it) } == true
+            ) {
+                addToHiddenSet(d)
+                return@trace true
+            }
+            if (!d.isHidden(hidingAnnotations)) return@trace false
+            if (d is DPackage) {
+                d.dri.packageName?.let { hiddenPackages.add(it) }
+            }
             addToHiddenSet(d)
-            return true
+            return@trace true
         }
-        if (!d.isHidden(hidingAnnotations)) return false
-        if (d is DPackage) {
-            d.dri.packageName?.let { hiddenPackages.add(it) }
-        }
-        addToHiddenSet(d)
-        return true
     }
 }
 
 /** Post-merge transformer: filter packages based on [packageShouldBeHidden] */
-class PostMergePackageDocumentableFilter : DocumentableTransformer {
+class PostMergePackageDocumentableFilter(private val tracer: Tracer) : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule {
-        val filteredPackages =
-            original.packages.filter {
-                val hide = packageShouldBeHidden(it.packageName)
-                if (hide) addToHiddenSet(it)
-                !hide
-            }
-        return original.copy(packages = filteredPackages)
+        return tracer.trace("PostMergePackageDocumentableFilter") {
+            val filteredPackages =
+                original.packages.filter {
+                    val hide = packageShouldBeHidden(it.packageName)
+                    if (hide) addToHiddenSet(it)
+                    !hide
+                }
+            original.copy(packages = filteredPackages)
+        }
     }
 }
 
-class PreMergePrivateAnnotationRecorder : PreMergeDocumentableTransformer {
+class PreMergePrivateAnnotationRecorder(private val tracer: Tracer) :
+    PreMergeDocumentableTransformer {
     /**
      * Does not modify the modules, but adds all annotations with visibilities not in the configured
      * documented visibilities to the hidden set.
      */
     override fun invoke(modules: List<DModule>): List<DModule> {
-        modules.forEach { module ->
-            module.packages.forEach { dPackage -> checkAllClasslikes(dPackage.classlikes) }
+        tracer.trace("PreMergePrivateAnnotationRecorder") {
+            modules.forEach { module ->
+                module.packages.forEach { dPackage -> checkAllClasslikes(dPackage.classlikes) }
+            }
         }
         return modules
     }

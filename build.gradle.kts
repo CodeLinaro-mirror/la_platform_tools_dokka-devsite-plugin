@@ -59,6 +59,9 @@ dependencies {
     testImplementation(libs.dokka.test.api)
 
     implementation(libs.dokka.cli) // Used in CLI integration test
+
+    implementation(libs.tracing)
+    implementation(libs.tracing.wire)
 }
 
 val shadowJar =
@@ -76,7 +79,10 @@ javaComponent.withVariantsFromConfiguration(configurations["shadowRuntimeElement
 tasks.withType<JavaCompile>().configureEach { options.release.set(11) }
 
 tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions { jvmTarget.set(JvmTarget.JVM_11) }
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
+        freeCompilerArgs.add("-Xcontext-parameters")
+    }
 }
 
 val testTask =

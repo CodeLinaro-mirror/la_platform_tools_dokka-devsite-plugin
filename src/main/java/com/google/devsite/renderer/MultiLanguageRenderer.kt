@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer
 
+import androidx.tracing.Tracer
 import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.components.impl.DefaultVersionMetadataComponent
 import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
@@ -36,6 +37,7 @@ import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.JsonLibraryMetadata
 import com.google.devsite.util.JsonVersionMetadata
 import com.google.devsite.util.LibraryMetadata
+import com.google.devsite.util.traceCoroutine
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -58,12 +60,18 @@ internal class MultiLanguageRenderer(
 ) : Renderer {
 
     override fun render(root: RootPageNode) {
-        val module = (root as ModulePageNode).documentables.single() as DModule
-        val locationProvider =
-            DefaultExternalDokkaLocationProvider(
-                dokkaLocationProvider = DokkaLocationProvider(root, context)
+        context(devsiteConfiguration.tracer) {
+            render(
+                (root as ModulePageNode).documentables.single() as DModule,
+                DefaultExternalDokkaLocationProvider(
+                    dokkaLocationProvider = DokkaLocationProvider(root, context)
+                ),
             )
+        }
+    }
 
+    context(tracer: Tracer)
+    private fun render(module: DModule, locationProvider: DefaultExternalDokkaLocationProvider) {
         runBlocking(Dispatchers.Default) {
             val libraryMetadataArray =
                 JsonLibraryMetadata.getMetadataFromFile(
@@ -129,28 +137,33 @@ internal class MultiLanguageRenderer(
                     throw except
                 }
             launch(cleanupAndThrow(jHolder)) {
-                renderLanguage(
-                    Language.JAVA,
-                    devsiteConfiguration.javaDocsPath,
-                    jHolder,
-                    locationProvider,
-                    devsiteConfiguration.includedHeadTagsPathJava,
-                )
-                cleanupIfInitialized(jHolder)
+                tracer.traceCoroutine("renderLanguage", "language" to "java") {
+                    renderLanguage(
+                        Language.JAVA,
+                        devsiteConfiguration.javaDocsPath,
+                        jHolder,
+                        locationProvider,
+                        devsiteConfiguration.includedHeadTagsPathJava,
+                    )
+                    cleanupIfInitialized(jHolder)
+                }
             }
             launch(cleanupAndThrow(kHolder)) {
-                renderLanguage(
-                    Language.KOTLIN,
-                    devsiteConfiguration.kotlinDocsPath,
-                    kHolder,
-                    locationProvider,
-                    devsiteConfiguration.includedHeadTagsPathKotlin,
-                )
-                cleanupIfInitialized(kHolder)
+                tracer.traceCoroutine("renderLanguage", "language" to "kotlin") {
+                    renderLanguage(
+                        Language.KOTLIN,
+                        devsiteConfiguration.kotlinDocsPath,
+                        kHolder,
+                        locationProvider,
+                        devsiteConfiguration.includedHeadTagsPathKotlin,
+                    )
+                    cleanupIfInitialized(kHolder)
+                }
             }
         }
     }
 
+    context(tracer: Tracer)
     private suspend fun renderLanguage(
         language: Language,
         languageDocsPath: String?,
@@ -213,25 +226,27 @@ internal class MultiLanguageRenderer(
             )
         val functionGroupConverter = FunctionGroupConverter(functionConverter, filePaths, holder)
 
-        DevsiteRenderer(
-                MetadataRenderer(outputWriter, filePaths, language, holder, javadocConverter),
-                PackageRenderer(
-                    outputWriter,
-                    filePaths,
-                    language,
+        tracer.traceCoroutine("DevsiteRenderer.render") {
+            DevsiteRenderer(
+                    MetadataRenderer(outputWriter, filePaths, language, holder, javadocConverter),
+                    PackageRenderer(
+                        outputWriter,
+                        filePaths,
+                        language,
+                        holder,
+                        functionConverter,
+                        propertyConverter,
+                        enumConverter,
+                        javadocConverter,
+                        paramConverter,
+                        annotationConverter,
+                        metadataConverter,
+                        functionGroupConverter,
+                    ),
                     holder,
-                    functionConverter,
-                    propertyConverter,
-                    enumConverter,
-                    javadocConverter,
-                    paramConverter,
-                    annotationConverter,
-                    metadataConverter,
-                    functionGroupConverter,
-                ),
-                holder,
-                devsiteConfiguration,
-            )
-            .render()
+                    devsiteConfiguration,
+                )
+                .render()
+        }
     }
 }

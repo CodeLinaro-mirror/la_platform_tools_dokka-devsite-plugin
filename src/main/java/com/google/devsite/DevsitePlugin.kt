@@ -31,6 +31,7 @@ import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
 import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 import org.jetbrains.dokka.plugability.configuration
 import org.jetbrains.dokka.plugability.querySingle
+import org.jetbrains.dokka.renderers.PostAction
 import org.jetbrains.dokka.transformers.documentation.PreMergeDocumentableTransformer
 
 class DevsitePlugin : DokkaPlugin() {
@@ -68,20 +69,27 @@ class DevsitePlugin : DokkaPlugin() {
     }
 
     val docTagsForCheckedExceptions by extending {
-        CoreExtensions.documentableTransformer with DocTagsForCheckedExceptionsTransformer()
+        CoreExtensions.documentableTransformer providing
+            {
+                DocTagsForCheckedExceptionsTransformer(getDevsiteConfiguration(it).tracer)
+            }
     }
 
     val propagateAnnotations by extending {
         CoreExtensions.documentableTransformer providing
             {
-                PropagatedAnnotationsTransformer(getDevsiteConfiguration(it).propagatingAnnotations)
+                val devsiteConfiguration = getDevsiteConfiguration(it)
+                PropagatedAnnotationsTransformer(
+                    devsiteConfiguration.propagatingAnnotations,
+                    devsiteConfiguration.tracer,
+                )
             }
     }
 
     val composeTransformer by extending {
         CoreExtensions.documentableTransformer providing
             {
-                ComposeTransformer()
+                ComposeTransformer(getDevsiteConfiguration(it).tracer)
             } order
             {
                 after(docTagsForCheckedExceptions)
@@ -90,8 +98,10 @@ class DevsitePlugin : DokkaPlugin() {
     }
 
     val privateAnnotationFilter by extending {
-        dokkaBase.preMergeDocumentableTransformer with
-            PreMergePrivateAnnotationRecorder() order
+        dokkaBase.preMergeDocumentableTransformer providing
+            {
+                PreMergePrivateAnnotationRecorder(getDevsiteConfiguration(it).tracer)
+            } order
             {
                 before(dokkaBase.documentableVisibilityFilter)
             }
@@ -100,7 +110,12 @@ class DevsitePlugin : DokkaPlugin() {
     val preMergeHiddenFilter by extending {
         dokkaBase.preMergeDocumentableTransformer providing
             {
-                PreMergeHiddenDocumentableFilter(it, getDevsiteConfiguration(it).hidingAnnotations)
+                val devsiteConfiguration = getDevsiteConfiguration(it)
+                PreMergeHiddenDocumentableFilter(
+                    it,
+                    devsiteConfiguration.hidingAnnotations,
+                    devsiteConfiguration.tracer,
+                )
             } order
             {
                 before(dokkaBase.emptyPackagesFilter)
@@ -108,7 +123,10 @@ class DevsitePlugin : DokkaPlugin() {
     }
 
     val hiddenPackageFilter by extending {
-        CoreExtensions.documentableTransformer with PostMergePackageDocumentableFilter()
+        CoreExtensions.documentableTransformer providing
+            {
+                PostMergePackageDocumentableFilter(getDevsiteConfiguration(it).tracer)
+            }
     }
     // Override the upstream filtering out of methods inherited from mapped types
     // https://github.com/Kotlin/dokka/issues/3542
@@ -116,6 +134,14 @@ class DevsitePlugin : DokkaPlugin() {
         dokkaBase.preMergeDocumentableTransformer with
             NoopTransformer override
             dokkaBase.jvmMappedMethodsFilter
+    }
+
+    // Cleans up the trace driver after all rendering is complete.
+    val closeTraceDriver by extending {
+        CoreExtensions.postActions providing
+            {
+                PostAction { getDevsiteConfiguration(it).traceDriver.close() }
+            }
     }
 
     /** Dackka configuration values. Should be accessed through [getDevsiteConfiguration]. */

@@ -16,13 +16,16 @@
 
 package com.google.devsite.renderer
 
+import androidx.tracing.Tracer
 import com.google.devsite.DevsiteConfiguration
+import com.google.devsite.renderer.converters.fullName
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import com.google.devsite.util.composables
 import com.google.devsite.util.composeModifiers
 import com.google.devsite.util.hasComposeProperties
+import com.google.devsite.util.traceCoroutine
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.dokka.model.DPackage
@@ -33,11 +36,14 @@ internal class DevsiteRenderer(
     private val docsHolder: DocumentablesHolder,
     private val devsiteConfiguration: DevsiteConfiguration,
 ) {
+    context(tracer: Tracer)
     suspend fun render() {
-        writeRootMetadata()
+        tracer.traceCoroutine("writeRootMetadata") { writeRootMetadata() }
 
         for (dPackage in docsHolder.packages()) {
-            writePackage(dPackage)
+            tracer.traceCoroutine("writePackage", "package" to dPackage.packageName) {
+                writePackage(dPackage)
+            }
         }
     }
 
@@ -51,21 +57,40 @@ internal class DevsiteRenderer(
         launch { rootFileRenderer.writeToc(devsiteConfiguration.packagePrefixToRemoveInToc) }
     }
 
+    context(tracer: Tracer)
     private suspend fun writePackage(dPackage: DPackage) = coroutineScope {
         launch { packageRenderer.writeIndex(dPackage) }
         launch { packageRenderer.writePackageSummary(dPackage) }
 
         for (clazz in docsHolder.classlikesToDisplayFor(dPackage)) {
-            launch { packageRenderer.writeClasslike(dPackage, clazz) }
+            launch {
+                tracer.traceCoroutine("writeClasslike", "class" to clazz.dri.fullName) {
+                    packageRenderer.writeClasslike(dPackage, clazz)
+                }
+            }
         }
 
         // If there are compose function groups, create pages for them for kotlin display.
         if (docsHolder.displayLanguage == Language.KOTLIN) {
             for (modifier in dPackage.composeModifiers()) {
-                launch { packageRenderer.writeFunctionGroup(modifier) }
+                launch {
+                    tracer.traceCoroutine(
+                        "writeFunctionGroup",
+                        "functionGroup" to modifier.dri.fullName,
+                    ) {
+                        packageRenderer.writeFunctionGroup(modifier)
+                    }
+                }
             }
             for (composable in dPackage.composables()) {
-                launch { packageRenderer.writeFunctionGroup(composable) }
+                launch {
+                    tracer.traceCoroutine(
+                        "writeFunctionGroup",
+                        "functionGroup" to composable.dri.fullName,
+                    ) {
+                        packageRenderer.writeFunctionGroup(composable)
+                    }
+                }
             }
         } else if (dPackage.hasComposeProperties()) {
             // Compose is only intended to be used from kotlin.

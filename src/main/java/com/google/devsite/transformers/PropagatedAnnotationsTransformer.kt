@@ -16,11 +16,13 @@
 
 package com.google.devsite.transformers
 
+import androidx.tracing.Tracer
 import com.google.devsite.renderer.converters.addAnnotations
 import com.google.devsite.renderer.converters.annotations
 import com.google.devsite.renderer.converters.companion
 import com.google.devsite.renderer.converters.fullName
 import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
+import com.google.devsite.util.trace
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
@@ -41,12 +43,16 @@ import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
 
 /** Propagates annotations from elements to their members. */
-class PropagatedAnnotationsTransformer(private val propagatingAnnotations: List<String>) :
-    DocumentableTransformer {
+class PropagatedAnnotationsTransformer(
+    private val propagatingAnnotations: List<String>,
+    private val tracer: Tracer,
+) : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule {
         if (propagatingAnnotations.isEmpty()) return original
 
-        return original.copy(packages = original.packages.map { transform(it) })
+        return tracer.trace("PropagatedAnnotationsTransformer") {
+            original.copy(packages = original.packages.map { transform(it) })
+        }
     }
 
     private fun transform(original: DPackage): DPackage {
