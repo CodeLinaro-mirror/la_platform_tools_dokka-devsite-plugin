@@ -24,7 +24,7 @@ defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktCheck", "publish", "
 
 group = "com.google.devsite"
 
-version = "1.9.0" // This is appended to archiveBaseName in the ShadowJar task.
+version = "1.10.0" // This is appended to archiveBaseName in the ShadowJar task.
 
 plugins {
     kotlin("jvm")
