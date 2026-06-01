@@ -16,6 +16,7 @@
 
 package com.google.devsite.util
 
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.allAnnotations
 import com.google.devsite.renderer.converters.functionSignatureComparator
 import org.jetbrains.dokka.DokkaConfiguration
@@ -197,14 +198,30 @@ internal class ComposeProperties(
     }
 }
 
-/** Returns the list of composables in the package (empty if there are none). */
-internal fun DPackage.composables(): List<ComposeProperties.DFunctionGroup> {
-    return extra[ComposeProperties.PropertyKey]?.composables ?: emptyList()
+/**
+ * Returns the list of composables in the package (empty if there are none, or if [displayLanguage]
+ * is [Language.JAVA] because these functions are not intended to be used by Java clients).
+ */
+internal fun DPackage.composables(
+    displayLanguage: Language
+): List<ComposeProperties.DFunctionGroup> {
+    return when (displayLanguage) {
+        Language.KOTLIN -> extra[ComposeProperties.PropertyKey]?.composables ?: emptyList()
+        Language.JAVA -> emptyList()
+    }
 }
 
-/** Returns the list of modifiers in the package (empty if there are none). */
-internal fun DPackage.composeModifiers(): List<ComposeProperties.DFunctionGroup> {
-    return extra[ComposeProperties.PropertyKey]?.modifiers ?: emptyList()
+/**
+ * Returns the list of modifiers in the package (empty if there are none, or if [displayLanguage] is
+ * [Language.JAVA] because these functions are not intended to be used by Java clients).
+ */
+internal fun DPackage.composeModifiers(
+    displayLanguage: Language
+): List<ComposeProperties.DFunctionGroup> {
+    return when (displayLanguage) {
+        Language.KOTLIN -> extra[ComposeProperties.PropertyKey]?.modifiers ?: emptyList()
+        Language.JAVA -> emptyList()
+    }
 }
 
 /** Returns whether the package has any composables or modifiers. */

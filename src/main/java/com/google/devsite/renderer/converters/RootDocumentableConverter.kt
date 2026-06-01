@@ -129,7 +129,7 @@ internal class RootDocumentableConverter(
 
         // Include composables page only if it will be created.
         val composablesUrl =
-            if (docsHolder.packages().any { it.composables().isNotEmpty() }) {
+            if (docsHolder.packages().any { it.composables(displayLanguage).isNotEmpty() }) {
                 pathProvider.composables
             } else {
                 null
@@ -137,7 +137,7 @@ internal class RootDocumentableConverter(
 
         // Include modifiers page only if it will be created.
         val modifiersUrl =
-            if (docsHolder.packages().any { it.composeModifiers().isNotEmpty() }) {
+            if (docsHolder.packages().any { it.composeModifiers(displayLanguage).isNotEmpty() }) {
                 pathProvider.modifiers
             } else {
                 null
@@ -157,7 +157,7 @@ internal class RootDocumentableConverter(
     /** Returns the index for the composables across all packages, or null if there are none. */
     suspend fun composablesIndexPage(): DevsitePage<FunctionGroupIndex>? {
         return functionGroupIndexPage(
-            docsHolder.packages().flatMap { it.composables() },
+            docsHolder.packages().flatMap { it.composables(displayLanguage) },
             "Composable",
         )
     }
@@ -165,7 +165,7 @@ internal class RootDocumentableConverter(
     /** Returns the index for the modifiers across all packages, or null if there are none. */
     suspend fun modifiersIndexPage(): DevsitePage<FunctionGroupIndex>? {
         return functionGroupIndexPage(
-            docsHolder.packages().flatMap { it.composeModifiers() },
+            docsHolder.packages().flatMap { it.composeModifiers(displayLanguage) },
             "Modifier",
         )
     }
@@ -225,8 +225,8 @@ internal class RootDocumentableConverter(
         val enums = docsHolder.enumsFor(dPackage).map(::typeForToc)
         val exceptions = docsHolder.exceptionsFor(dPackage).map(::typeForToc)
         val annotations = docsHolder.annotationsFor(dPackage).map(::typeForToc)
-        val composables = dPackage.composables().map(::typeForToc)
-        val modifiers = dPackage.composeModifiers().map(::typeForToc)
+        val composables = dPackage.composables(displayLanguage).map(::typeForToc)
+        val modifiers = dPackage.composeModifiers(displayLanguage).map(::typeForToc)
 
         // Update the string to trim to end with a `.` if it doesn't already.
         val prefixToTrim = (packagePrefixToRemove?.removeSuffix(".")?.plus(".")) ?: ""

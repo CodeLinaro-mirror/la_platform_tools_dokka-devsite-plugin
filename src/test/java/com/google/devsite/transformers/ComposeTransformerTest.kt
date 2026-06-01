@@ -17,6 +17,7 @@
 package com.google.devsite.transformers
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.renderer.Language
 import com.google.devsite.testing.createPluginsConfiguration
 import com.google.devsite.testing.defaultDevsiteConfiguration
 import com.google.devsite.util.ComposeProperties
@@ -424,6 +425,18 @@ class ComposeTransformerTest : BaseTransformerTest() {
             assertThat(jvmAndNative.expectPresentInSet).isNull()
 
             assertThat(dPackage.composeModifiers()).hasSize(6)
+        }
+    }
+
+    companion object {
+        /** Returns all composables for the package. */
+        internal fun DPackage.composables(): List<ComposeProperties.DFunctionGroup> {
+            return composables(Language.KOTLIN)
+        }
+
+        /** Returns all modifiers for the package. */
+        internal fun DPackage.composeModifiers(): List<ComposeProperties.DFunctionGroup> {
+            return composeModifiers(Language.KOTLIN)
         }
     }
 }

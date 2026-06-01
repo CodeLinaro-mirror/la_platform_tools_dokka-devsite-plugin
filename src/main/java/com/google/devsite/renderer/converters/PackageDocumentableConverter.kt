@@ -101,8 +101,8 @@ internal abstract class PackageDocumentableConverter(
             docsToSummary(typeAliasList) as WithDescriptionList<DefaultUnlink>
         }
 
-        val composables = async { docsToSummary(dPackage.composables()) }
-        val modifiers = async { docsToSummary(dPackage.composeModifiers()) }
+        val composables = async { docsToSummary(dPackage.composables(displayLanguage)) }
+        val modifiers = async { docsToSummary(dPackage.composeModifiers(displayLanguage)) }
 
         // Composables and modifiers should be filtered out only when the compose transformer has
         // been applied.

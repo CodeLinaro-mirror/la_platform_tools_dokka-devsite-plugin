@@ -499,20 +499,19 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
     }
 
     @Test
-    fun `Toc includes composables and modifiers`() {
+    fun `Toc includes composables and modifiers for Kotlin only`() {
+        val toc =
+            renderCompose(
+                    """
+                    @Composable fun TestComposable() = Unit
+                    fun Modifier.TestModifier() = Unit
+                    """
+                        .trimIndent()
+                )
+                .toc()
+        // Skip the compose packages which are generated based on the stubs from `renderCompose`
+        val tocPackage = toc.items(3).last()
         kotlinOnly {
-            val toc =
-                renderCompose(
-                        """
-                        @Composable fun TestComposable() = Unit
-                        fun Modifier.TestModifier() = Unit
-                        """
-                            .trimIndent()
-                    )
-                    .toc()
-            // Skip the compose packages which are generated based on the stubs from `renderCompose`
-            val tocPackage = toc.items(3).last()
-
             val composable = tocPackage.data.composables.item()
             assertThat(composable.name).isEqualTo("TestComposable")
             assertThat(composable.url)
@@ -522,6 +521,10 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
             assertThat(modifier.name).isEqualTo("TestModifier")
             assertThat(modifier.url)
                 .isEqualTo("/reference/kotlin/com/example/TestModifier.modifier.html")
+        }
+        javaOnly {
+            assertThat(tocPackage.data.composables).isEmpty()
+            assertThat(tocPackage.data.modifiers).isEmpty()
         }
     }
 
@@ -607,11 +610,14 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
                 )
                 .indexPageForComposables()
 
-        assertThat(composables).isNotNull()
-        assertThat(composables!!.data.title).isEqualTo("Composable Index")
+        kotlinOnly {
+            assertThat(composables).isNotNull()
+            assertThat(composables!!.data.title).isEqualTo("Composable Index")
 
-        val testComposable = composables.data.content.data.functionGroups.item()
-        assertThat(testComposable.data.title.data.name).isEqualTo("TestComposable")
+            val testComposable = composables.data.content.data.functionGroups.item()
+            assertThat(testComposable.data.title.data.name).isEqualTo("TestComposable")
+        }
+        javaOnly { assertThat(composables).isNull() }
     }
 
     @Test
@@ -625,11 +631,14 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
                 )
                 .indexPageForModifiers()
 
-        assertThat(modifiers).isNotNull()
-        assertThat(modifiers!!.data.title).isEqualTo("Modifier Index")
+        kotlinOnly {
+            assertThat(modifiers).isNotNull()
+            assertThat(modifiers!!.data.title).isEqualTo("Modifier Index")
 
-        val testModifier = modifiers.data.content.data.functionGroups.item()
-        assertThat(testModifier.data.title.data.name).isEqualTo("TestModifier")
+            val testModifier = modifiers.data.content.data.functionGroups.item()
+            assertThat(testModifier.data.title.data.name).isEqualTo("TestModifier")
+        }
+        javaOnly { assertThat(modifiers).isNull() }
     }
 
     @Test
@@ -648,7 +657,7 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
     }
 
     @Test
-    fun `Toc includes composable and modifier index pages`() {
+    fun `Toc includes composable and modifier index pages for Kotlin docs`() {
         val toc =
             renderCompose(
                     """
@@ -659,8 +668,14 @@ internal class RootDocumentableConverterTest(displayLanguage: Language) :
                 )
                 .toc()
 
-        assertPath(toc.data.composablesUrl!!, "androidx/composables.html")
-        assertPath(toc.data.modifiersUrl!!, "androidx/modifiers.html")
+        kotlinOnly {
+            assertPath(toc.data.composablesUrl!!, "androidx/composables.html")
+            assertPath(toc.data.modifiersUrl!!, "androidx/modifiers.html")
+        }
+        javaOnly {
+            assertThat(toc.data.modifiersUrl).isNull()
+            assertThat(toc.data.modifiersUrl).isNull()
+        }
     }
 
     private fun DModule.rootConverter() =

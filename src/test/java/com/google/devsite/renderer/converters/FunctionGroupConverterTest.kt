@@ -134,7 +134,8 @@ internal class FunctionGroupConverterTest : ConverterTestBase(Language.KOTLIN) {
                 """
                     .trimIndent()
             )
-        val modifier = ComposeTestUtils.testPackage(dModule).composeModifiers().single()
+        val modifier =
+            ComposeTestUtils.testPackage(dModule).composeModifiers(Language.KOTLIN).single()
         val converter = ConverterHolder(this@FunctionGroupConverterTest, dModule)
         val pageData = runBlocking { converter.functionGroupConverter.devsitePage(modifier).data }
 
@@ -161,7 +162,10 @@ internal class FunctionGroupConverterTest : ConverterTestBase(Language.KOTLIN) {
      * Creates the [FunctionGroupPage] for the composable [name] in the test package of the module.
      */
     private fun DModule.composablePage(name: String = "TestComposable"): FunctionGroupPage {
-        val composable = ComposeTestUtils.testPackage(this).composables().single { it.name == name }
+        val composable =
+            ComposeTestUtils.testPackage(this).composables(Language.KOTLIN).single {
+                it.name == name
+            }
         return functionGroupPage(composable)
     }
 
@@ -170,7 +174,9 @@ internal class FunctionGroupConverterTest : ConverterTestBase(Language.KOTLIN) {
      */
     private fun DModule.modifierPage(name: String = "TestModifier"): FunctionGroupPage {
         val modifier =
-            ComposeTestUtils.testPackage(this).composeModifiers().single { it.name == name }
+            ComposeTestUtils.testPackage(this).composeModifiers(Language.KOTLIN).single {
+                it.name == name
+            }
         return functionGroupPage(modifier)
     }
 

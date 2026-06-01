@@ -72,7 +72,7 @@ internal class DevsiteRenderer(
 
         // If there are compose function groups, create pages for them for kotlin display.
         if (docsHolder.displayLanguage == Language.KOTLIN) {
-            for (modifier in dPackage.composeModifiers()) {
+            for (modifier in dPackage.composeModifiers(docsHolder.displayLanguage)) {
                 launch {
                     tracer.traceCoroutine(
                         "writeFunctionGroup",
@@ -82,7 +82,7 @@ internal class DevsiteRenderer(
                     }
                 }
             }
-            for (composable in dPackage.composables()) {
+            for (composable in dPackage.composables(docsHolder.displayLanguage)) {
                 launch {
                     tracer.traceCoroutine(
                         "writeFunctionGroup",
