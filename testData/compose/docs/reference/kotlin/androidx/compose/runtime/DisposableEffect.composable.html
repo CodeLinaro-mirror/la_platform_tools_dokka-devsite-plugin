@@ -20,6 +20,8 @@
         <h1>DisposableEffect</h1>
       </div>
     </div>
+
+{% verbatim %}
     <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
     <h2>Functions summary</h2>
     <div class="devsite-table-wrapper">
@@ -325,5 +327,7 @@ fun UserProfile(userRepository: UserRepository, userRequest: UserDataRequest) {
       <p>A <code><a href="/reference/kotlin/androidx/compose/runtime/DisposableEffect.composable.html#DisposableEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function1)">DisposableEffect</a></code> <b>must</b> include an <code><a href="/reference/kotlin/androidx/compose/runtime/DisposableEffectScope.html#onDispose(kotlin.Function0)">onDispose</a></code> clause as the final statement in its <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function1)">effect</a></code> block. If your operation does not require disposal it might be a <code><a href="/reference/kotlin/androidx/compose/runtime/SideEffect.composable.html#SideEffect(kotlin.Function0)">SideEffect</a></code> instead, or a <code><a href="/reference/kotlin/androidx/compose/runtime/LaunchedEffect.composable.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code> if it launches a coroutine that should be managed by the composition.</p>
       <p>There is guaranteed to be one call to <code><a href="/reference/kotlin/androidx/compose/runtime/DisposableEffectScope.html#onDispose(kotlin.Function0)">dispose</a></code> for every call to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function1)">effect</a></code>. Both <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function1)">effect</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/DisposableEffectScope.html#onDispose(kotlin.Function0)">dispose</a></code> will always be run on the composition's apply dispatcher and appliers are never run concurrent with themselves, one another, applying changes to the composition tree, or running <code><a href="/reference/kotlin/androidx/compose/runtime/RememberObserver.html">RememberObserver</a></code> event callbacks.</p>
     </div>
+
+{% endverbatim %}
   </body>
 </html>

@@ -22,6 +22,8 @@
 {% setvar page_path %}androidx/lifecycle/package-summary.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_java_switcher2.md" %}
+
+{% verbatim %}
     <p>
       <pre>public final class <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html">LiveDataReactiveStreams</a></pre>
     </p>
@@ -101,5 +103,7 @@
         <p>On subscription to the publisher, the observer will attach to the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>. Once <code><a href="/reference/org/reactivestreams/Subscription.html#request(kotlin.Long)">Subscription.request</a></code> is called on the subscription object, an observer will be connected to the data stream. Calling <code>request(Long.MAX_VALUE)</code> is equivalent to creating an unbounded stream with no backpressure. If request with a finite count reaches 0, the observer will buffer the latest item and emit it to the subscriber when data is again requested. Any other items emitted during the time there was no backpressure requested will be dropped.</p>
       </div>
     </div>
+
+{% endverbatim %}
   </body>
 </html>

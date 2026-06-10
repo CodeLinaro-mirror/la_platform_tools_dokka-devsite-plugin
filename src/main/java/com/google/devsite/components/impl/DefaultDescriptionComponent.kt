@@ -149,14 +149,14 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
                 if (data.summary) {
                     // Displays the deprecation message in a table cell (e.g. class summary table)
                     p {
-                        strong { +data.deprecation }
+                        strong { +data.deprecation.stripTemplate() }
                         if (data.components.firstOrNull() is Text) +" "
                         renderTags(data.components, State())
                     }
                 } else {
                     // Displays the deprecation message in notice box with "caution" styling
                     aside("caution") {
-                        strong { +data.deprecation }
+                        strong { +data.deprecation.stripTemplate() }
                         br()
                         renderTags(data.components, State())
                     }
@@ -246,6 +246,13 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
         return matches
     }
 
+    /**
+     * Prevent doc-comment text from being interpreted by the devsite template engine. Breaks all
+     * three Django lexer-token openers: {% tag, {{ var, {# comment.
+     */
+    private fun String.stripTemplate() =
+        replace("{%", "{ %").replace("{{", "{ {").replace("{#", "{ #")
+
     private fun FlowContent.renderTags(tags: List<DocTag>, state: State) {
         for (tag in tags) {
             if (state.terminate) {
@@ -259,36 +266,39 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
                         // Remove the MathJax tag. The HTML doesn't need to be injected here because
                         // it
                         // will be injected for the detail component.
-                        val text = tag.body.removeMathJax()
+                        val text = tag.body.removeMathJax().stripTemplate()
                         // If there is a sentence-end, break on the first
                         val matches = text.matchPeriodSpaceNonLowercase()
                         if (matches.isNotEmpty()) {
                             +(text.subSequence(0, matches.minOrNull()!! + 1).toString())
                             state.terminate = true
                         } else if (tag.breaksAtEndOfTag(tags)) { // If this tag is a full sentence
-                            +text.trimEnd()
+                            +text.trimEnd().stripTemplate()
                             state.terminate = true
                         } else if (isHtml) {
-                            consumer.onTagContentUnsafe { raw(text.handleDocRoot()) }
+                            consumer.onTagContentUnsafe {
+                                raw(text.handleDocRoot().stripTemplate())
+                            }
                         } else {
-                            +text
+                            +text.stripTemplate()
                         }
                     } else {
+                        val text = tag.body.stripTemplate()
                         if (tag.children.isEmpty()) {
                             if (isHtml) {
-                                consumer.onTagContentUnsafe { raw(tag.body.handleDocRoot()) }
+                                consumer.onTagContentUnsafe { raw(text.handleDocRoot()) }
                             } else if (tag.body.contains(mathJaxDocTag)) {
                                 // Remove the MathJax doc tag and inject HTML to enable MathJax.
                                 consumer.onTagContentUnsafe { raw(mathJaxHtml) }
-                                +tag.body.removeMathJax()
+                                +text.removeMathJax()
                             } else {
-                                +tag.body
+                                +text
                             }
                         } else {
                             if (link == null) {
                                 renderTags(tag.children, state)
                             } else {
-                                a(link) { +tag.body }
+                                a(link) { +text }
                             }
                         }
                     }
@@ -336,13 +346,16 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
                 }
                 is DocumentationLink ->
                     code {
-                        val url = data.pathProvider!!.forReference(tag.dri).url
+                        val url = data.pathProvider!!.forReference(tag.dri).url.stripTemplate()
                         // TODO: improve enforcement/warning for broken links in description
                         // b/192556649
                         a(url) { renderTags(tag.children, state) }
                     }
                 is Img ->
-                    img(src = tag.params.getValue("href"), alt = tag.params["alt"]) {
+                    img(
+                        src = tag.params.getValue("href").stripTemplate(),
+                        alt = tag.params["alt"]?.stripTemplate(),
+                    ) {
                         renderTags(tag.children, state)
                     }
                 is BlockQuote -> blockQuote { renderTags(tag.children, state) }
@@ -495,13 +508,13 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
                     if (isHeader) {
                         // KotlinX.HTML seems broken here: we can't render paragraphs or divs
                         // TODO(b/164125463): Figure out how to add other elements
-                        th { +(tag.children.single() as Text).body }
+                        th { +(tag.children.single() as Text).body.stripTemplate() }
                     } else {
                         td { renderTags(tag.children, state) }
                     }
                 // <th> is being converted to Text class
                 // TODO(b/193096057): determine root cause
-                is Text -> th { +tag.body }
+                is Text -> th { +tag.body.stripTemplate() }
                 else ->
                     error(
                         "Invalid tag inside of TableRow: ${tag.javaClass.simpleName}. " +

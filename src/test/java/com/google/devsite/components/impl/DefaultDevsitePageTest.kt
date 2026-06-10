@@ -65,7 +65,11 @@ class DefaultDevsitePageTest {
 {% setvar page_path %}page.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_java_switcher2.md" %}
+
+{% verbatim %}
     <div>noop</div>
+
+{% endverbatim %}
   </body>
 </html>
             """
@@ -110,7 +114,11 @@ class DefaultDevsitePageTest {
 {% setvar page_path %}page.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_kotlin_switcher2.md" %}
+
+{% verbatim %}
     <div>noop</div>
+
+{% endverbatim %}
   </body>
 </html>
             """
@@ -183,7 +191,11 @@ class DefaultDevsitePageTest {
 {% setvar page_path %}page.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_kotlin_switcher2.md" %}
+
+{% verbatim %}
     <div>noop</div>
+
+{% endverbatim %}
   </body>
 </html>
             """
@@ -241,7 +253,11 @@ class DefaultDevsitePageTest {
 {% setvar page_path %}page.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_kotlin_switcher2.md" %}
+
+{% verbatim %}
     <div>noop</div>
+
+{% endverbatim %}
   </body>
 </html>
             """
@@ -285,7 +301,11 @@ class DefaultDevsitePageTest {
 {% setvar page_path %}page.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_java_switcher2.md" %}
+
+{% verbatim %}
     <div>noop</div>
+
+{% endverbatim %}
   </body>
 </html>
             """
@@ -330,7 +350,11 @@ class DefaultDevsitePageTest {
 {% setvar page_path %}page.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_java_switcher2.md" %}
+
+{% verbatim %}
     <div>noop</div>
+
+{% endverbatim %}
   </body>
 </html>
             """
@@ -382,7 +406,11 @@ class DefaultDevsitePageTest {
 {% setvar page_path %}page.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_java_switcher2.md" %}
+
+{% verbatim %}
     <div>noop</div>
+
+{% endverbatim %}
   </body>
 </html>
             """

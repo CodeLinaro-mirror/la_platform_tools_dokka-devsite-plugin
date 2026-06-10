@@ -20,6 +20,8 @@
         <h1>LaunchedEffect</h1>
       </div>
     </div>
+
+{% verbatim %}
     <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
     <h2>Functions summary</h2>
     <div class="devsite-table-wrapper">
@@ -157,5 +159,7 @@
       <p>When <code><a href="/reference/kotlin/androidx/compose/runtime/LaunchedEffect.composable.html#LaunchedEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code> enters the composition it will launch <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">block</a></code> into the composition's <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code>. The coroutine will be Job.cancel and <b>re-launched</b> when <code><a href="/reference/kotlin/androidx/compose/runtime/LaunchedEffect.composable.html#LaunchedEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code> is recomposed with a different <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">key1</a></code>, <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">key2</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">key3</a></code>. The coroutine will be Job.cancel when the <code><a href="/reference/kotlin/androidx/compose/runtime/LaunchedEffect.composable.html#LaunchedEffect(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code> leaves the composition.</p>
       <p>This function should <b>not</b> be used to (re-)launch ongoing tasks in response to callback events by way of storing callback data in <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code> passed to <code><a href="/reference/kotlin/androidx/compose/runtime/key.composable.html#key(kotlin.Array,kotlin.Function0)">key</a></code>. Instead, see <code><a href="/reference/kotlin/androidx/compose/runtime/rememberCoroutineScope.composable.html#rememberCoroutineScope(kotlin.Function0)">rememberCoroutineScope</a></code> to obtain a CoroutineScope that may be used to launch ongoing jobs scoped to the composition in response to event callbacks.</p>
     </div>
+
+{% endverbatim %}
   </body>
 </html>

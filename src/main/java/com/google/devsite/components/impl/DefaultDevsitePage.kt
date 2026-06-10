@@ -69,7 +69,11 @@ internal data class DefaultDevsitePage<T : ContextFreeComponent>(
                     }
                 }
 
+                // Doc-comment text is untrusted; prevent it from being interpreted by the
+                // devsite template engine. {% endverbatim %} is stripped at the text sink below.
+                unsafe { +"\n{% verbatim %}\n" }
                 data.content.render(this)
+                unsafe { +"\n{% endverbatim %}\n" }
             }
         }
 

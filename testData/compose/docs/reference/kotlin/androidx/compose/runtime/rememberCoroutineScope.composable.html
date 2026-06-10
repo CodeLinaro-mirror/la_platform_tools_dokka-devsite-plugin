@@ -16,6 +16,8 @@
         <h1>rememberCoroutineScope</h1>
       </div>
     </div>
+
+{% verbatim %}
     <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
     <h2>Functions summary</h2>
     <div class="devsite-table-wrapper">
@@ -59,5 +61,7 @@
       <p>Use this scope to launch jobs in response to callback events such as clicks or other user interaction where the response to that event needs to unfold over time and be cancelled if the composable managing that process leaves the composition. Jobs should never be launched into <b>any</b> coroutine scope as a side effect of composition itself. For scoped ongoing jobs initiated by composition, see <code><a href="/reference/kotlin/androidx/compose/runtime/LaunchedEffect.composable.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>.</p>
       <p>This function will not throw if preconditions are not met, as composable functions do not yet fully support exceptions. Instead the returned scope's CoroutineScope.coroutineContext will contain a failed Job with the associated exception and will not be capable of launching child jobs.</p>
     </div>
+
+{% endverbatim %}
   </body>
 </html>

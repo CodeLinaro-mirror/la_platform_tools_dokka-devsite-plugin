@@ -77,6 +77,34 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     }
 
     @Test
+    fun `Template literals are removed from deprecation stanza`() {
+        val component =
+            """
+            |/** Hello world! */
+            |class Foo
+        """
+                .render()
+                .description(
+                    deprecation = "This class is deprecated {{ template }} {% include _bad.html %}."
+                )
+
+        val output = createHTML().body { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+<body>
+  <aside class="caution"><strong>This class is deprecated { { template }} { % include _bad.html %}.</strong><br>
+    <p>Hello world!</p>
+  </aside>
+</body>
+            """
+                    .trim()
+            )
+    }
+
+    @Test
     fun `Summary trims documentation on period`() {
         val component =
             """
@@ -98,6 +126,32 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
                 """
 <body>
   <p>1 2 3.</p>
+</body>
+            """
+                    .trim()
+            )
+    }
+
+    @Test
+    fun `Summary escapes template literals`() {
+        val component =
+            """
+            |/** Hello world {% include _file.html %} */
+            |class Foo
+        """
+                .render()
+                .description()
+
+        val output = createHTML().body { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                // there is now a space between the { and % at the beginning, this causes the
+                // template to get rendered literally rather than actually pulling any content
+                """
+<body>
+  <p>Hello world { % include _file.html %}</p>
 </body>
             """
                     .trim()
@@ -299,6 +353,36 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             .isEqualTo(
                 "<body>\n" +
                     "  <p><strong>This class is deprecated.</strong>\n" +
+                    "    <p>Hello world!</p>\n" +
+                    "  </p>\n" +
+                    "   </body>".trim()
+            )
+    }
+
+    @Test
+    fun `Template literals are removed from deprecation summary`() {
+        val component =
+            """
+            |/**
+            | * Hello world!
+            | */
+            |class Foo
+        """
+                .render()
+                .description(
+                    summary = true,
+                    deprecation = "This class is deprecated {{ template }} {% include _bad.html %}.",
+                )
+
+        val output = createHTML().body { component.render(this) }.trim()
+        // TODO(b/171570474) Work around for EOL space introduced by Dokka and is required to make
+        // the
+        // test pass but, stripped by the IDE
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                "<body>\n" +
+                    "  <p><strong>This class is deprecated { { template }} { % include _bad.html %}.</strong>\n" +
                     "    <p>Hello world!</p>\n" +
                     "  </p>\n" +
                     "   </body>".trim()

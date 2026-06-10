@@ -36,6 +36,8 @@
 {% setvar page_path %}androidx/paging/AsyncPagingDataDiffer.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_kotlin_switcher2.md" %}
+
+{% verbatim %}
     <p>
       <pre>class <a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html">AsyncPagingDataDiffer</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt;</pre>
     </p>
@@ -758,5 +760,7 @@ lifecycleScope.launch {
         <p>Note: This is a <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-shared-flow/index.html">SharedFlow</a></code> configured to replay 0 items with a buffer of size 64. If a collector lags behind page updates, it may trigger multiple times for each intermediate update that was presented while your collector was still working. To avoid this behavior, you can <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/index.html">conflate</a></code> this <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> so that you only receive the latest update, which is useful in cases where you are simply updating UI and don't care about tracking the exact number of page updates.</p>
       </div>
     </div>
+
+{% endverbatim %}
   </body>
 </html>
