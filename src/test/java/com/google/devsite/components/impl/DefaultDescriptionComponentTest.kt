@@ -646,6 +646,64 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             )
     }
 
+    @Test
+    fun `Demonstrate that markdown shouldn't render into heading from Javadoc`() {
+        val component =
+            """
+            |/**
+            | * <h2>h2 tag</h2>
+            | * <h3>h3 tag</h3>
+            | * ### markdown header
+            | */
+            |public class Foo {}
+        """
+                .render(java = true)
+                .description()
+
+        val output = createHTML().body { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+<body>
+  <h2>h2 tag</h2>
+  <h3>h3 tag</h3>
+ ### markdown header</body>
+            """
+                    .trim()
+            )
+    }
+
+    @Test
+    fun `Demonstrate that markdown should render into heading from Kdoc`() {
+        val component =
+            """
+            |/**
+            | * <h2>h2 tag</h2>
+            | * <h3>h3 tag</h3>
+            | * ### markdown header
+            | */
+            |class Foo
+        """
+                .render()
+                .description()
+
+        val output = createHTML().body { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+<body>
+  <p><h2>h2 tag</h2> <h3>h3 tag</h3></p>
+  <h3>markdown header</h3>
+</body>
+            """
+                    .trim()
+            )
+    }
+
     // TODO fix handling @link inside dt, dd b/217937742
     @Test
     fun `Description list renders correctly in kotlin`() {
