@@ -1117,6 +1117,32 @@ internal class MetadataConverterTest(private val displayLanguage: Language) :
             )
     }
 
+    @Test
+    fun `No source link generated for resource classes`() {
+        val module =
+            testWithRootPageNode(
+                listOf(
+                    """
+                    /src/main/java/androidx/example/R.java
+                    package androidx.example;
+                    public final class R {
+                      public static final class attr {
+                        /** Public attribute */
+                        public static int publicAttribute = 0;
+                      }
+                    }
+                    """
+                )
+            )
+        val rClass = module.classlike("R")!!
+        val rClassMetadata = module.metadata(rClass)
+        assertThat(rClassMetadata.data.sourceLink).isNull()
+
+        val attrClass = rClass.classlikes.single()
+        val attrClassMetadata = module.metadata(attrClass)
+        assertThat(attrClassMetadata.data.sourceLink).isNull()
+    }
+
     private fun DModule.metadataForClasslike(
         name: String = "Foo",
         baseClassSourceLink: String? = null,

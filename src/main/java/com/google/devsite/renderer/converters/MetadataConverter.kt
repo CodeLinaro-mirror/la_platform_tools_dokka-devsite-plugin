@@ -261,6 +261,9 @@ internal class MetadataConverter(private val docsHolder: DocumentablesHolder) {
     private fun <T> T.createLinkToSource(baseLink: String?, name: String): String?
         where T : Documentable, T : WithSources {
         baseLink ?: return null
+        // Do not generate source links for resource classes because the R.java file is not in
+        // source, and there isn't enough information to link to the source XML files.
+        if (name == "R" || name.startsWith("R.")) return null
         val paths = getSourceFilePaths() ?: return null
         // Reduce the list of paths to a single path by taking the common prefix of all of them.
         val path = paths.reduce { currPrefix, nextPath -> currPrefix.commonPrefixWith(nextPath) }
