@@ -1135,11 +1135,19 @@ internal class MetadataConverterTest(private val displayLanguage: Language) :
                 )
             )
         val rClass = module.classlike("R")!!
-        val rClassMetadata = module.metadata(rClass)
+        val rClassMetadata =
+            module.metadata(
+                rClass,
+                baseClassSourceLink = "https://cs.android.com/search?q=file:%s+class:%s",
+            )
         assertThat(rClassMetadata.data.sourceLink).isNull()
 
         val attrClass = rClass.classlikes.single()
-        val attrClassMetadata = module.metadata(attrClass)
+        val attrClassMetadata =
+            module.metadata(
+                attrClass,
+                baseClassSourceLink = "https://cs.android.com/search?q=file:%s+class:%s",
+            )
         assertThat(attrClassMetadata.data.sourceLink).isNull()
     }
 

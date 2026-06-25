@@ -60,7 +60,11 @@ internal class MetadataConverter(private val docsHolder: DocumentablesHolder) {
     fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent {
         val libraryMetadata = classlike.findMatchingLibraryMetadata()
         val sourceUrl =
-            classlike.createLinkToSource(docsHolder.baseClassSourceLink, classlike.dri.fullName)
+            classlike.createLinkToSource(
+                docsHolder.baseClassSourceLink,
+                classlike.dri.fullName,
+                classlike.dri.classNames,
+            )
         val versionMetadata =
             classlike.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
@@ -258,12 +262,15 @@ internal class MetadataConverter(private val docsHolder: DocumentablesHolder) {
      *
      * Returns null if [baseLink] is null or the documentable has no source entries.
      */
-    private fun <T> T.createLinkToSource(baseLink: String?, name: String): String?
-        where T : Documentable, T : WithSources {
+    private fun <T> T.createLinkToSource(
+        baseLink: String?,
+        name: String,
+        classNames: String? = null,
+    ): String? where T : Documentable, T : WithSources {
         baseLink ?: return null
         // Do not generate source links for resource classes because the R.java file is not in
         // source, and there isn't enough information to link to the source XML files.
-        if (name == "R" || name.startsWith("R.")) return null
+        if (classNames == "R" || classNames?.startsWith("R.") == true) return null
         val paths = getSourceFilePaths() ?: return null
         // Reduce the list of paths to a single path by taking the common prefix of all of them.
         val path = paths.reduce { currPrefix, nextPath -> currPrefix.commonPrefixWith(nextPath) }
