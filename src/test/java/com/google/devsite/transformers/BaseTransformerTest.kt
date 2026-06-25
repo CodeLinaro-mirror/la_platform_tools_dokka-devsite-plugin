@@ -45,6 +45,9 @@ abstract class BaseTransformerTest :
                     sourceRoots = listOf("src")
                     analysisPlatform = "jvm"
                     classpath += jvmStdlibPath!!
+                    // This defaults to false in the source set builder DSL, even though it defaults
+                    // to true normally.
+                    skipEmptyPackages = true
                 }
             }
             pluginsConfigurations = pluginsConfiguration

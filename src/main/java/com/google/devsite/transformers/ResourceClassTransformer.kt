@@ -22,14 +22,15 @@ import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.plugability.DokkaContext
-import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
+import org.jetbrains.dokka.transformers.documentation.PreMergeDocumentableTransformer
 
 /** Filters empty R resource classes. */
-class ResourceClassTransformer(private val tracer: Tracer) : DocumentableTransformer {
-    override fun invoke(original: DModule, context: DokkaContext): DModule {
+class ResourceClassTransformer(private val tracer: Tracer) : PreMergeDocumentableTransformer {
+    override fun invoke(modules: List<DModule>): List<DModule> {
         return tracer.trace("ResourceClassTransformer") {
-            original.copy(packages = original.packages.map { transform(it) })
+            modules.map { module ->
+                module.copy(packages = module.packages.map { pkg -> transform(pkg) })
+            }
         }
     }
 

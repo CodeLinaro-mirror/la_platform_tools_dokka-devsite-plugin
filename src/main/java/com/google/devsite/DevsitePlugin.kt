@@ -99,9 +99,13 @@ class DevsitePlugin : DokkaPlugin() {
     }
 
     val resourceClassTransformer by extending {
-        CoreExtensions.documentableTransformer providing
+        dokkaBase.preMergeDocumentableTransformer providing
             {
                 ResourceClassTransformer(getDevsiteConfiguration(it).tracer)
+            } order
+            {
+                // If an R class is removed and a package becomes empty, it should be filtered out.
+                before(dokkaBase.emptyPackagesFilter)
             }
     }
 

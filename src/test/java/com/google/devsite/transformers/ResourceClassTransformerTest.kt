@@ -45,16 +45,37 @@ class ResourceClassTransformerTest : BaseTransformerTest() {
     }
 
     @Test
+    fun `Empty R class in otherwise empty package causes package to be filtered`() {
+        testTransformer(
+            """
+            /src/com/sample/R.java
+            package com.sample;
+            public final class R {}
+
+            /src/com/other/Other.java
+            package com.other;
+            public class Other {}
+            """
+        ) { dModule ->
+            assertThat(dModule.packages.map { it.name }).containsExactly("com.other")
+        }
+    }
+
+    @Test
     fun `Empty R class is filtered`() {
         testTransformer(
             """
             /src/com/sample/R.java
             package com.sample;
             public final class R {}
+
+            /src/com/sample/Other.java
+            package com.sample;
+            public final class Other {}
             """
         ) { dModule ->
             val topLevelClasses = dModule.packages.single().classlikes
-            assertThat(topLevelClasses).isEmpty()
+            assertThat(topLevelClasses.map { it.name }).containsExactly("Other")
         }
     }
 
@@ -67,10 +88,15 @@ class ResourceClassTransformerTest : BaseTransformerTest() {
             public final class R {
               public static final class id {}
             }
+
+            /src/com/sample/Other.java
+            package com.sample;
+            public final class Other {}
+            }
             """
         ) { dModule ->
             val topLevelClasses = dModule.packages.single().classlikes
-            assertThat(topLevelClasses).isEmpty()
+            assertThat(topLevelClasses.map { it.name }).containsExactly("Other")
         }
     }
 

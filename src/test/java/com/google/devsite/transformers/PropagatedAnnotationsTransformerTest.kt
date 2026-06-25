@@ -98,6 +98,8 @@ class PropagatedAnnotationsTransformerTest : BaseTransformerTest() {
 
     @Test
     fun `test propagation from package to members`() {
+        // b/527882146: there needs to be a java class in the package for this to work, otherwise
+        // the java package is filtered out as empty before the java and kotlin packages are merged
         testTransformer(
             """
             /src/com/sample/package-info.java
@@ -108,12 +110,16 @@ class PropagatedAnnotationsTransformerTest : BaseTransformerTest() {
             class Foo
             val v = 0
             fun foo() = Unit
+            /src/com/sample/Bar.java
+            package com.sample
+            public class Bar
             """
                 .trimIndent()
         ) { mod ->
             val pkg = mod.packages.single()
             assertTrue(pkg.isDeprecated())
-            assertTrue((pkg.classlikes.single() as DClass).isDeprecated())
+            assertTrue((pkg.classlikes[0] as DClass).isDeprecated())
+            assertTrue((pkg.classlikes[1] as DClass).isDeprecated())
             assertTrue(pkg.properties.single().isDeprecated())
             assertTrue(pkg.functions.single().isDeprecated())
         }
