@@ -179,7 +179,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code></td>
             <td>
-              <p>A <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that will perform dispatch during a <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#(android.view.Choreographer,android.os.Handler)">handler</a></code> callback or <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#(android.view.Choreographer,android.os.Handler)">choreographer</a></code>'s animation frame stage, whichever comes first.</p>
+              <p>A <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that will perform dispatch during a <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#handler()">handler</a></code> callback or <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></code>'s animation frame stage, whichever comes first.</p>
             </td>
           </tr>
           <tr>
@@ -410,6 +410,12 @@
             <td><code><a href="/reference/kotlin/androidx/compose/ui/autofill/Autofill.html">Autofill</a></code></td>
             <td>
               <p>Autofill API.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/AutofillIdCompat.html">AutofillIdCompat</a></code></td>
+            <td>
+              <p>Helper for accessing features in <code><a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -1133,6 +1139,12 @@
             <td></td>
           </tr>
           <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html">ContentCaptureSessionCompat</a></code></td>
+            <td>
+              <p>Helper for accessing features in <code><a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a></code></td>
             <td>
               <p>Receiver scope for drawing content into a layout, where the content can be drawn between other canvas operations.</p>
@@ -1360,7 +1372,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/DeviceFontFamilyName.html">DeviceFontFamilyName</a></code></td>
             <td>
-              <p>An Android system installed font family name as used by <code><a href="https://developer.android.com/reference/android/graphics/Typeface.html#create(kotlin.String, kotlin.Int)">Typeface.create</a></code>.</p>
+              <p>An Android system installed font family name as used by <code><a href="https://developer.android.com/reference/android/graphics/Typeface.html#create(java.lang.String, int)">Typeface.create</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -2195,7 +2207,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridCells.Adaptive.html">GridCells.Adaptive</a></code></td>
             <td>
-              <p>Defines a grid with as many rows or columns as possible on the condition that every cell has at least <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridCells.Adaptive.html#(androidx.compose.ui.unit.Dp)">minSize</a></code> space and all extra space distributed evenly.</p>
+              <p>Defines a grid with as many rows or columns as possible on the condition that every cell has at least <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridCells.Adaptive.html#minSize()">minSize</a></code> space and all extra space distributed evenly.</p>
             </td>
           </tr>
           <tr>
@@ -2207,7 +2219,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridCells.FixedSize.html">GridCells.FixedSize</a></code></td>
             <td>
-              <p>Defines a grid with as many rows or columns as possible on the condition that every cell takes exactly <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridCells.FixedSize.html#(androidx.compose.ui.unit.Dp)">size</a></code> space.</p>
+              <p>Defines a grid with as many rows or columns as possible on the condition that every cell takes exactly <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/GridCells.FixedSize.html#size()">size</a></code> space.</p>
             </td>
           </tr>
           <tr>
@@ -2742,7 +2754,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code></td>
             <td>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> creates a keyframe based <code><a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> using the Monotone cubic Hermite spline to interpolate between the values in <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html#(androidx.compose.animation.core.KeyframesWithSplineSpec.KeyframesWithSplineSpecConfig)">config</a></code>.</p>
+              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html">KeyframesWithSplineSpec</a></code> creates a keyframe based <code><a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> using the Monotone cubic Hermite spline to interpolate between the values in <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesWithSplineSpec.html#config()">config</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -3047,13 +3059,13 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Clickable.html">LinkAnnotation.Clickable</a></code></td>
             <td>
-              <p>An annotation that contains a clickable marked with <code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Clickable.html#(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">tag</a></code>.</p>
+              <p>An annotation that contains a clickable marked with <code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Clickable.html#tag()">tag</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Url.html">LinkAnnotation.Url</a></code></td>
             <td>
-              <p>An annotation that contains a <code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Url.html#(kotlin.String,androidx.compose.ui.text.TextLinkStyles,androidx.compose.ui.text.LinkInteractionListener)">url</a></code> string.</p>
+              <p>An annotation that contains a <code><a href="/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Url.html#url()">url</a></code> string.</p>
             </td>
           </tr>
           <tr>
@@ -3338,7 +3350,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/test/MouseButton.html">MouseButton</a></code></td>
             <td>
-              <p>Representation of a mouse button with its associated <code><a href="/reference/kotlin/androidx/compose/ui/test/MouseButton.html#(kotlin.Int)">ID</a></code> for the current platform.</p>
+              <p>Representation of a mouse button with its associated <code><a href="/reference/kotlin/androidx/compose/ui/test/MouseButton.html#buttonId()">ID</a></code> for the current platform.</p>
             </td>
           </tr>
           <tr>
@@ -4371,7 +4383,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/material3/ProgressIndicatorDefaults.html">ProgressIndicatorDefaults</a></code></td>
             <td>
-              <p>Contains the default values used for <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#LinearProgressIndicator(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.StrokeCap)">LinearProgressIndicator</a></code> and <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#CircularProgressIndicator(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.StrokeCap)">CircularProgressIndicator</a></code>.</p>
+              <p>Contains the default values used for <code><a href="/reference/kotlin/androidx/compose/material3/LinearProgressIndicator.composable.html#LinearProgressIndicator(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.StrokeCap,androidx.compose.ui.unit.Dp,kotlin.Function1)">LinearProgressIndicator</a></code> and <code><a href="/reference/kotlin/androidx/compose/material3/CircularProgressIndicator.composable.html#CircularProgressIndicator(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.StrokeCap,androidx.compose.ui.unit.Dp)">CircularProgressIndicator</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -4542,7 +4554,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/RequestDisallowInterceptTouchEvent.html">RequestDisallowInterceptTouchEvent</a></code></td>
             <td>
-              <p>Function that can be passed to <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/RequestDisallowInterceptTouchEvent.html#pointerInteropFilter()">pointerInteropFilter</a></code> and then later invoked which provides an analog to <code><a href="https://developer.android.com/reference/android/view/ViewParent.html#requestDisallowInterceptTouchEvent(kotlin.Boolean)">ViewParent.requestDisallowInterceptTouchEvent</a></code>.</p>
+              <p>Function that can be passed to <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/RequestDisallowInterceptTouchEvent.html#pointerInteropFilter()">pointerInteropFilter</a></code> and then later invoked which provides an analog to <code><a href="https://developer.android.com/reference/android/view/ViewParent.html#requestDisallowInterceptTouchEvent(boolean)">ViewParent.requestDisallowInterceptTouchEvent</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -4949,7 +4961,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.SharedContentState.html">SharedTransitionScope.SharedContentState</a></code></td>
             <td>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.SharedContentState.html">SharedContentState</a></code> is designed to allow access of the properties of <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code>/<code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedElement(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedElement</a></code>, such as whether a match of the same <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.SharedContentState.html#(kotlin.Any)">key</a></code> has been found in the <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a></code>, its <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.SharedContentState.html#clipPathInOverlay()">clipPathInOverlay</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.SharedContentState.html#parentSharedContentState()">parentSharedContentState</a></code> if there is a parent <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code> in the layout tree.</p>
+              <p><code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.SharedContentState.html">SharedContentState</a></code> is designed to allow access of the properties of <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code>/<code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedElement(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedElement</a></code>, such as whether a match of the same <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.SharedContentState.html#key()">key</a></code> has been found in the <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html">SharedTransitionScope</a></code>, its <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.SharedContentState.html#clipPathInOverlay()">clipPathInOverlay</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.SharedContentState.html#parentSharedContentState()">parentSharedContentState</a></code> if there is a parent <code><a href="/reference/kotlin/androidx/compose/animation/SharedTransitionScope.html#(androidx.compose.ui.Modifier).sharedBounds(androidx.compose.animation.SharedTransitionScope.SharedContentState,androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.BoundsTransform,androidx.compose.animation.SharedTransitionScope.ResizeMode,androidx.compose.animation.SharedTransitionScope.PlaceHolderSize,kotlin.Boolean,kotlin.Float,androidx.compose.animation.SharedTransitionScope.OverlayClip)">sharedBounds</a></code> in the layout tree.</p>
             </td>
           </tr>
           <tr>
@@ -5225,7 +5237,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/StaggeredGridCells.Adaptive.html">StaggeredGridCells.Adaptive</a></code></td>
             <td>
-              <p>Defines a grid with as many rows or columns as possible on the condition that every cell has at least <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/StaggeredGridCells.Adaptive.html#(androidx.compose.ui.unit.Dp)">minSize</a></code> space and all extra space distributed evenly.</p>
+              <p>Defines a grid with as many rows or columns as possible on the condition that every cell has at least <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/StaggeredGridCells.Adaptive.html#minSize()">minSize</a></code> space and all extra space distributed evenly.</p>
             </td>
           </tr>
           <tr>
@@ -5237,7 +5249,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/StaggeredGridCells.FixedSize.html">StaggeredGridCells.FixedSize</a></code></td>
             <td>
-              <p>Defines a grid with as many rows or columns as possible on the condition that every cell takes exactly <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/StaggeredGridCells.FixedSize.html#(androidx.compose.ui.unit.Dp)">size</a></code> space.</p>
+              <p>Defines a grid with as many rows or columns as possible on the condition that every cell takes exactly <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/StaggeredGridCells.FixedSize.html#size()">size</a></code> space.</p>
             </td>
           </tr>
           <tr>
@@ -5546,7 +5558,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.MultiLine.html">TextFieldLineLimits.MultiLine</a></code></td>
             <td>
-              <p>The text field will be at least <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.MultiLine.html#(kotlin.Int,kotlin.Int)">minHeightInLines</a></code> tall, if the text overflows it will wrap, and if the text ends up being more than one line the field will grow until it is <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.MultiLine.html#(kotlin.Int,kotlin.Int)">maxHeightInLines</a></code> tall and then start scrolling vertically.</p>
+              <p>The text field will be at least <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.MultiLine.html#minHeightInLines()">minHeightInLines</a></code> tall, if the text overflows it will wrap, and if the text ends up being more than one line the field will grow until it is <code><a href="/reference/kotlin/androidx/compose/foundation/text/input/TextFieldLineLimits.MultiLine.html#maxHeightInLines()">maxHeightInLines</a></code> tall and then start scrolling vertically.</p>
             </td>
           </tr>
           <tr>
@@ -6202,6 +6214,12 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html">ViewCompatShims</a></code></td>
+            <td>
+              <p>Helper for accessing features in <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code></td>
             <td>
               <p>A strategy for managing the underlying Composition of Compose UI <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>s such as <code><a href="/reference/kotlin/androidx/compose/ui/platform/ComposeView.html">ComposeView</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a></code>.</p>
@@ -6222,13 +6240,13 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html">ViewCompositionStrategy.DisposeOnLifecycleDestroyed</a></code></td>
             <td>
-              <p><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition when <code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#(androidx.lifecycle.Lifecycle)">lifecycle</a></code> is <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>.</p>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition when <code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#lifecycle()">lifecycle</a></code> is <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed.html">ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed</a></code></td>
             <td>
-              <p><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition when the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#findViewTreeLifecycleOwner(android.view.View)">findViewTreeLifecycleOwner</a></code> of the next window the view is attached to is <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>.</p>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition when the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(android.view.View).findViewTreeLifecycleOwner()">findViewTreeLifecycleOwner</a></code> of the next window the view is attached to is <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -6247,6 +6265,12 @@
             <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewRootForTest.html">ViewRootForTest</a></code></td>
             <td>
               <p>The marker interface to be implemented by the <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> backing the composition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewStructureCompat.html">ViewStructureCompat</a></code></td>
+            <td>
+              <p>Helper for accessing features in <code><a href="https://developer.android.com/reference/android/view/ViewStructure.html">ViewStructure</a></code>.</p>
             </td>
           </tr>
           <tr>

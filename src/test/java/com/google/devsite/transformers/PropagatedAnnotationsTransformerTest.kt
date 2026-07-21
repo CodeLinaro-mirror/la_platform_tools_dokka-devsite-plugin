@@ -27,6 +27,7 @@ import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.Documentable
+import org.junit.Ignore
 import org.junit.Test
 
 class PropagatedAnnotationsTransformerTest : BaseTransformerTest() {
@@ -96,6 +97,7 @@ class PropagatedAnnotationsTransformerTest : BaseTransformerTest() {
         }
     }
 
+    @Ignore("https://github.com/Kotlin/dokka/issues/4558 -- the package annotation is dropped")
     @Test
     fun `test propagation from package to members`() {
         // b/527882146: there needs to be a java class in the package for this to work, otherwise

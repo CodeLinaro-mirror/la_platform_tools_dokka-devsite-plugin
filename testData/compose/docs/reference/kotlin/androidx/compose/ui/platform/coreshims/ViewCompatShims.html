@@ -1,0 +1,335 @@
+<html devsite="true">
+  <head>
+    <title>ViewCompatShims</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="ViewCompatShims">
+      <meta itemprop="path" content="androidx.compose.ui.platform.coreshims">
+      <meta itemprop="property" content="getAutofillId(android.view.View)">
+      <meta itemprop="property" content="getContentCaptureSession(android.view.View)">
+      <meta itemprop="property" content="setImportantForContentCapture(android.view.View,int)">
+      <meta itemprop="property" content="IMPORTANT_FOR_CONTENT_CAPTURE_AUTO()">
+      <meta itemprop="property" content="IMPORTANT_FOR_CONTENT_CAPTURE_NO()">
+      <meta itemprop="property" content="IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS()">
+      <meta itemprop="property" content="IMPORTANT_FOR_CONTENT_CAPTURE_YES()">
+      <meta itemprop="property" content="IMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS()">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>ViewCompatShims</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/platform/coreshims/ViewCompatShims.java+class:androidx.compose.ui.platform.coreshims.ViewCompatShims&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/platform/coreshims/ViewCompatShims.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+
+{% verbatim %}
+    <p>
+      <pre>class <a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html">ViewCompatShims</a></pre>
+    </p>
+    <hr>
+    <p>Helper for accessing features in <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Constants</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>const <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_AUTO()">IMPORTANT_FOR_CONTENT_CAPTURE_AUTO</a> = 0</code></div>
+              <p>Automatically determine whether a view is important for content capture.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>const <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_NO()">IMPORTANT_FOR_CONTENT_CAPTURE_NO</a> = 2</code></div>
+              <p>The view is not important for content capture, but its children (if any) will be traversed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>const <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS()">IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS</a> = 8</code></div>
+              <p>The view is not important for content capture, and its children (if any) will not be traversed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>const <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_YES()">IMPORTANT_FOR_CONTENT_CAPTURE_YES</a> = 1</code></div>
+              <p>The view is important for content capture, and its children (if any) will be traversed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>const <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS()">IMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS</a> = 4</code></div>
+              <p>The view is important for content capture, but its children (if any) will not be traversed.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>java-static <a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/AutofillIdCompat.html">AutofillIdCompat</a>!</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#getAutofillId(android.view.View)">getAutofillId</a>(v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!)</code></div>
+              <p>Gets the unique, logical identifier of this view in the activity, for autofill purposes.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>java-static <a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html">ContentCaptureSessionCompat</a>!</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#getContentCaptureSession(android.view.View)">getContentCaptureSession</a>(v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!)</code></div>
+              <p>Gets the session used to notify content capture events.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>java-static <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#setImportantForContentCapture(android.view.View,int)">setImportantForContentCapture</a>(v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!,&nbsp;mode:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Sets the mode for determining whether this view is considered important for content capture.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Constants</h2>
+      <div class="api-item"><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_AUTO()"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_AUTO()"></a><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_AUTO--"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_AUTO--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="IMPORTANT_FOR_CONTENT_CAPTURE_AUTO()">IMPORTANT_FOR_CONTENT_CAPTURE_AUTO</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_AUTO()">IMPORTANT_FOR_CONTENT_CAPTURE_AUTO</a> = 0:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Automatically determine whether a view is important for content capture.</p>
+      </div>
+      <div class="api-item"><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_NO()"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_NO()"></a><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_NO--"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_NO--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="IMPORTANT_FOR_CONTENT_CAPTURE_NO()">IMPORTANT_FOR_CONTENT_CAPTURE_NO</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_NO()">IMPORTANT_FOR_CONTENT_CAPTURE_NO</a> = 2:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The view is not important for content capture, but its children (if any) will be traversed.</p>
+      </div>
+      <div class="api-item"><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS()"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS()"></a><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS--"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS()">IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS()">IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS</a> = 8:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The view is not important for content capture, and its children (if any) will not be traversed.</p>
+      </div>
+      <div class="api-item"><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_YES()"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_YES()"></a><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_YES--"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_YES--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="IMPORTANT_FOR_CONTENT_CAPTURE_YES()">IMPORTANT_FOR_CONTENT_CAPTURE_YES</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_YES()">IMPORTANT_FOR_CONTENT_CAPTURE_YES</a> = 1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The view is important for content capture, and its children (if any) will be traversed.</p>
+      </div>
+      <div class="api-item"><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS()"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS()"></a><a name="getIMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS--"></a><a name="setIMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="IMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS()">IMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS()">IMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS</a> = 4:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The view is important for content capture, but its children (if any) will not be traversed.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="getAutofillId-android.view.View-"></a><a name="getautofillid"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getAutofillId(android.view.View)">getAutofillId</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">java-static&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#getAutofillId(android.view.View)">getAutofillId</a>(v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/AutofillIdCompat.html">AutofillIdCompat</a>!</pre>
+        <p>Gets the unique, logical identifier of this view in the activity, for autofill purposes. </p>
+        <p>The autofill id is created on demand, unless it is explicitly set by setAutofillId. </p>
+        <p>See setAutofillId for more info. Compatibility behavior: </p>
+        <ul>
+          <li>SDK 26 and above, this method matches platform behavior. </li>
+          <li>SDK 25 and below, this method always return null. </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!</code></td>
+                <td>
+                  <p>The View against which to invoke the method.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/AutofillIdCompat.html">AutofillIdCompat</a>!</code></td>
+                <td>
+                  <p>The View's autofill id.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getContentCaptureSession-android.view.View-"></a><a name="getcontentcapturesession"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getContentCaptureSession(android.view.View)">getContentCaptureSession</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">java-static&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#getContentCaptureSession(android.view.View)">getContentCaptureSession</a>(v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html">ContentCaptureSessionCompat</a>!</pre>
+        <p>Gets the session used to notify content capture events. Compatibility behavior: </p>
+        <ul>
+          <li>SDK 29 and above, this method matches platform behavior. </li>
+          <li>SDK 28 and below, this method always return null. </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!</code></td>
+                <td>
+                  <p>The View against which to invoke the method.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html">ContentCaptureSessionCompat</a>!</code></td>
+                <td>
+                  <p>session explicitly set by setContentCaptureSession, inherited by ancestors, default session or <code>null</code> if content capture is disabled for this view.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="setImportantForContentCapture(android.view.View, int)"></a><a name="setImportantForContentCapture-android.view.View-int-"></a><a name="setimportantforcontentcapture"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setImportantForContentCapture(android.view.View,int)">setImportantForContentCapture</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">java-static&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#setImportantForContentCapture(android.view.View,int)">setImportantForContentCapture</a>(v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!,&nbsp;mode:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Sets the mode for determining whether this view is considered important for content capture. </p>
+        <p>The platform determines the importance for autofill automatically but you can use this method to customize the behavior. Typically, a view that provides text should be marked as <code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_YES()">IMPORTANT_FOR_CONTENT_CAPTURE_YES</a></code>. Compatibility behavior: </p>
+        <ul>
+          <li>SDK 30 and above, this method matches platform behavior. </li>
+          <li>SDK 29 and below, this method does nothing. </li>
+        </ul>
+        <p>ref android.R.styleable#View_importantForContentCapture</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!</code></td>
+                <td>
+                  <p>The View against which to invoke the method.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>mode:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_AUTO()">IMPORTANT_FOR_CONTENT_CAPTURE_AUTO</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_YES()">IMPORTANT_FOR_CONTENT_CAPTURE_YES</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_NO()">IMPORTANT_FOR_CONTENT_CAPTURE_NO</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS()">IMPORTANT_FOR_CONTENT_CAPTURE_YES_EXCLUDE_DESCENDANTS</a></code>, or <code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewCompatShims.html#IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS()">IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+{% endverbatim %}
+  </body>
+</html>

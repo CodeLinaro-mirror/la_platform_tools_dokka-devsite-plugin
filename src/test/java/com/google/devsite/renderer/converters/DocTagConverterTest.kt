@@ -2041,6 +2041,13 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             |            this.arrayType = arrayType
             |        }
             | }
+            |
+            | // Additional definitions to prevent warnings for unresolved classes
+            | class NavigatorProvider
+            | annotation class IdRes
+            | annotation class NavDestinationDsl
+            | open class Parcelable
+            | class NavType<T>
         """
                 .render()
         val converterHolder = ConverterHolder(this@DocTagConverterTest, module)

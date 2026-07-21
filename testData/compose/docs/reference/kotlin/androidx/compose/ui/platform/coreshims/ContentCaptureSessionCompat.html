@@ -1,0 +1,446 @@
+<html devsite="true">
+  <head>
+    <title>ContentCaptureSessionCompat</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="ContentCaptureSessionCompat">
+      <meta itemprop="path" content="androidx.compose.ui.platform.coreshims">
+      <meta itemprop="property" content="newAutofillId(long)">
+      <meta itemprop="property" content="newVirtualViewStructure(android.view.autofill.AutofillId,long)">
+      <meta itemprop="property" content="notifyViewTextChanged(android.view.autofill.AutofillId,java.lang.CharSequence)">
+      <meta itemprop="property" content="notifyViewsAppeared(java.util.List&lt;android.view.ViewStructure&gt;)">
+      <meta itemprop="property" content="notifyViewsDisappeared(long[])">
+      <meta itemprop="property" content="toContentCaptureSession()">
+      <meta itemprop="property" content="toContentCaptureSessionCompat(android.view.contentcapture.ContentCaptureSession,android.view.View)">
+      <meta itemprop="language" content="KOTLIN">
+    </div>
+    <div id="header-block">
+      <div>
+        <h1>ContentCaptureSessionCompat</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.java+class:androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+
+{% setvar page_path %}androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+
+{% verbatim %}
+    <p>
+      <pre>class <a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html">ContentCaptureSessionCompat</a></pre>
+    </p>
+    <hr>
+    <p>Helper for accessing features in <code><a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a>!</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#newAutofillId(long)">newAutofillId</a>(virtualChildId:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+              <p>Creates a new <code><a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a></code> for a virtual child, so it can be used to uniquely identify the children in the session.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewStructureCompat.html">ViewStructureCompat</a>!</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#newVirtualViewStructure(android.view.autofill.AutofillId,long)">newVirtualViewStructure</a>(parentId:&nbsp;<a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a>!,&nbsp;virtualId:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+              <p>Creates a <code><a href="https://developer.android.com/reference/android/view/ViewStructure.html">ViewStructure</a></code> for a &quot;virtual&quot; view, so it can be passed to <code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#notifyViewsAppeared(java.util.List&lt;android.view.ViewStructure&gt;)">notifyViewsAppeared</a></code> by the view managing the virtual view hierarchy.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#notifyViewTextChanged(android.view.autofill.AutofillId,java.lang.CharSequence)">notifyViewTextChanged</a>(id:&nbsp;<a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a>!,&nbsp;text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a>!)</code></div>
+              <p>Notifies the Intelligence Service that the value of a text node has been changed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#notifyViewsAppeared(java.util.List&lt;android.view.ViewStructure&gt;)">notifyViewsAppeared</a>(appearedNodes:&nbsp;(<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">Mutable</a>)<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://developer.android.com/reference/android/view/ViewStructure.html">ViewStructure</a>!&gt;!)</code></div>
+              <p>Notifies the Content Capture Service that a list of nodes has appeared in the view structure.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#notifyViewsDisappeared(long[])">notifyViewsDisappeared</a>(virtualIds:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long-array/index.html">LongArray</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>&gt;!)</code></div>
+              <p>Notifies the Content Capture Service that many nodes has been removed from a virtual view structure.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a>!</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#toContentCaptureSession()">toContentCaptureSession</a>()</code></div>
+              <p>Provides the <code><a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a></code> represented by this object.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>java-static <a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html">ContentCaptureSessionCompat</a>!</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#toContentCaptureSessionCompat(android.view.contentcapture.ContentCaptureSession,android.view.View)">toContentCaptureSessionCompat</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;contentCaptureSession:&nbsp;<a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a>!,<br>&nbsp;&nbsp;&nbsp;&nbsp;host:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!<br>)</code></div>
+              <p>Provides a backward-compatible wrapper for <code><a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="newAutofillId-long-"></a><a name="newautofillid"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="newAutofillId(long)">newAutofillId</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#newAutofillId(long)">newAutofillId</a>(virtualChildId:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>):&nbsp;<a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a>!</pre>
+        <p>Creates a new <code><a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a></code> for a virtual child, so it can be used to uniquely identify the children in the session. Compatibility behavior: </p>
+        <ul>
+          <li>SDK 29 and above, this method matches platform behavior. </li>
+          <li>SDK 28 and below, this method returns null. </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>virtualChildId:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code></td>
+                <td>
+                  <p>id of the virtual child, relative to the parent.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a>!</code></td>
+                <td>
+                  <p><code><a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a></code> for the virtual child</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="newVirtualViewStructure(android.view.autofill.AutofillId, long)"></a><a name="newVirtualViewStructure-android.view.autofill.AutofillId-long-"></a><a name="newvirtualviewstructure"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="newVirtualViewStructure(android.view.autofill.AutofillId,long)">newVirtualViewStructure</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#newVirtualViewStructure(android.view.autofill.AutofillId,long)">newVirtualViewStructure</a>(parentId:&nbsp;<a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a>!,&nbsp;virtualId:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewStructureCompat.html">ViewStructureCompat</a>!</pre>
+        <p>Creates a <code><a href="https://developer.android.com/reference/android/view/ViewStructure.html">ViewStructure</a></code> for a &quot;virtual&quot; view, so it can be passed to <code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#notifyViewsAppeared(java.util.List&lt;android.view.ViewStructure&gt;)">notifyViewsAppeared</a></code> by the view managing the virtual view hierarchy. Compatibility behavior: </p>
+        <ul>
+          <li>SDK 29 and above, this method matches platform behavior. </li>
+          <li>SDK 28 and below, this method returns null. </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>parentId:&nbsp;<a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a>!</code></td>
+                <td>
+                  <p>id of the virtual view parent (it can be obtained by calling <code><a href="https://developer.android.com/reference/android/view/ViewStructure.html#getAutofillId()">getAutofillId</a></code> on the parent).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>virtualId:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code></td>
+                <td>
+                  <p>id of the virtual child, relative to the parent.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ViewStructureCompat.html">ViewStructureCompat</a>!</code></td>
+                <td>
+                  <p>a new <code><a href="https://developer.android.com/reference/android/view/ViewStructure.html">ViewStructure</a></code> that can be used for Content Capture purposes.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="notifyViewTextChanged(android.view.autofill.AutofillId, java.lang.CharSequence)"></a><a name="notifyViewTextChanged-android.view.autofill.AutofillId-java.lang.CharSequence-"></a><a name="notifyviewtextchanged"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="notifyViewTextChanged(android.view.autofill.AutofillId,java.lang.CharSequence)">notifyViewTextChanged</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#notifyViewTextChanged(android.view.autofill.AutofillId,java.lang.CharSequence)">notifyViewTextChanged</a>(id:&nbsp;<a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a>!,&nbsp;text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a>!):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Notifies the Intelligence Service that the value of a text node has been changed. Compatibility behavior: </p>
+        <ul>
+          <li>SDK 29 and above, this method matches platform behavior. </li>
+          <li>SDK 28 and below, this method does nothing. </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>id:&nbsp;<a href="https://developer.android.com/reference/android/view/autofill/AutofillId.html">AutofillId</a>!</code></td>
+                <td>
+                  <p>of the node.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>text:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a>!</code></td>
+                <td>
+                  <p>new text.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="notifyViewsAppeared-java.util.List&lt;android.view.ViewStructure&gt;-"></a><a name="notifyviewsappeared"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="notifyViewsAppeared(java.util.List&lt;android.view.ViewStructure&gt;)">notifyViewsAppeared</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#notifyViewsAppeared(java.util.List&lt;android.view.ViewStructure&gt;)">notifyViewsAppeared</a>(appearedNodes:&nbsp;(<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">Mutable</a>)<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://developer.android.com/reference/android/view/ViewStructure.html">ViewStructure</a>!&gt;!):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Notifies the Content Capture Service that a list of nodes has appeared in the view structure. </p>
+        <p>Typically called manually by views that handle their own virtual view hierarchy. Compatibility behavior: </p>
+        <ul>
+          <li>SDK 34 and above, this method matches platform behavior. </li>
+          <li>SDK 29 through 33, this method is a best-effort to match platform behavior, by wrapping the virtual children with a pair of special view appeared events. </li>
+          <li>SDK 28 and below, this method does nothing.</li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>appearedNodes:&nbsp;(<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">Mutable</a>)<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://developer.android.com/reference/android/view/ViewStructure.html">ViewStructure</a>!&gt;!</code></td>
+                <td>
+                  <p>nodes that have appeared. Each element represents a view node that has been added to the view structure. The order of the elements is important, which should be preserved as the attached order of when the node is attached to the virtual view hierarchy.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="notifyViewsDisappeared-long[]-"></a><a name="notifyviewsdisappeared"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="notifyViewsDisappeared(long[])">notifyViewsDisappeared</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#notifyViewsDisappeared(long[])">notifyViewsDisappeared</a>(virtualIds:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long-array/index.html">LongArray</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>&gt;!):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Notifies the Content Capture Service that many nodes has been removed from a virtual view structure. </p>
+        <p>Should only be called by views that handle their own virtual view hierarchy. Compatibility behavior: </p>
+        <ul>
+          <li>SDK 34 and above, this method matches platform behavior. </li>
+          <li>SDK 29 through 33, this method is a best-effort to match platform behavior, by wrapping the virtual children with a pair of special view appeared events. </li>
+          <li>SDK 28 and below, this method does nothing. </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>virtualIds:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long-array/index.html">LongArray</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>&gt;!</code></td>
+                <td>
+                  <p>ids of the virtual children.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="toContentCaptureSession--"></a><a name="tocontentcapturesession"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="toContentCaptureSession()">toContentCaptureSession</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#toContentCaptureSession()">toContentCaptureSession</a>():&nbsp;<a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a>!</pre>
+        <p>Provides the <code><a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a></code> represented by this object. </p>
+        <p> This method is not supported on devices running SDK <29 since the platform class will not be available.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a>!</code></td>
+                <td>
+                  <p>platform class object</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#toContentCaptureSessionCompat(android.view.contentcapture.ContentCaptureSession,android.view.View)">toContentCaptureSessionCompat</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="toContentCaptureSessionCompat(android.view.contentcapture.ContentCaptureSession, android.view.View)"></a><a name="toContentCaptureSessionCompat-android.view.contentcapture.ContentCaptureSession-android.view.View-"></a><a name="tocontentcapturesessioncompat"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="toContentCaptureSessionCompat(android.view.contentcapture.ContentCaptureSession,android.view.View)">toContentCaptureSessionCompat</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">java-static&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html#toContentCaptureSessionCompat(android.view.contentcapture.ContentCaptureSession,android.view.View)">toContentCaptureSessionCompat</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;contentCaptureSession:&nbsp;<a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a>!,<br>&nbsp;&nbsp;&nbsp;&nbsp;host:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html">ContentCaptureSessionCompat</a>!</pre>
+        <p>Provides a backward-compatible wrapper for <code><a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a></code>. </p>
+        <p> This method is not supported on devices running SDK <29 since the platform class will not be available.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>contentCaptureSession:&nbsp;<a href="https://developer.android.com/reference/android/view/contentcapture/ContentCaptureSession.html">ContentCaptureSession</a>!</code></td>
+                <td>
+                  <p>platform class to wrap</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>host:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>!</code></td>
+                <td>
+                  <p>view hosting the session.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/coreshims/ContentCaptureSessionCompat.html">ContentCaptureSessionCompat</a>!</code></td>
+                <td>
+                  <p>wrapped class</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+{% endverbatim %}
+  </body>
+</html>

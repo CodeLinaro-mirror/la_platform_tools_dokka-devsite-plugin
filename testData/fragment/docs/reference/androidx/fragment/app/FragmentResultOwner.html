@@ -11,7 +11,7 @@
       <meta itemprop="property" content="clearFragmentResult(java.lang.String)">
       <meta itemprop="property" content="clearFragmentResultListener(java.lang.String)">
       <meta itemprop="property" content="setFragmentResult(java.lang.String,android.os.Bundle)">
-      <meta itemprop="property" content="setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">
+      <meta itemprop="property" content="setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -95,7 +95,7 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a>&nbsp;listener<br>)</code></div>
+              <div><code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> LifecycleOwner&nbsp;lifecycleOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a>&nbsp;listener<br>)</code></div>
               <p>Sets the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey.</p>
             </td>
           </tr>
@@ -151,7 +151,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey)</pre>
-        <p>Clears the stored <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for the given requestKey. This clears any <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code>.</p>
+        <p>Clears the stored <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for the given requestKey. This clears any <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -186,7 +186,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;result)</pre>
-        <p>Sets the given result for the requestKey. This result will be delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that is called given to <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> with the same requestKey. If no <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with the same key is set or the Lifecycle associated with the listener is not at least <code><a href="/reference/androidx/lifecycle/Lifecycle.State.STARTED.html">STARTED</a></code>, the result is stored until one becomes available, or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a></code> is called with the same requestKey.</p>
+        <p>Sets the given result for the requestKey. This result will be delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that is called given to <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> with the same requestKey. If no <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with the same key is set or the Lifecycle associated with the listener is not at least STARTED, the result is stored until one becomes available, or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a></code> is called with the same requestKey.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -215,19 +215,14 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="setFragmentResultListener(java.lang.String, androidx.lifecycle.LifecycleOwner, androidx.fragment.app.FragmentResultListener)"></a><a name="setFragmentResultListener-java.lang.String-androidx.lifecycle.LifecycleOwner-androidx.fragment.app.FragmentResultListener-"></a><a name="setfragmentresultlistener"></a>
+      <div class="api-item"><a name="setFragmentResultListener(java.lang.String, LifecycleOwner, androidx.fragment.app.FragmentResultListener)"></a><a name="setFragmentResultListener-java.lang.String-LifecycleOwner-androidx.fragment.app.FragmentResultListener-"></a><a name="setfragmentresultlistener"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</h3>
-          </div>
-          <div id="metadata-info-block">
-            <div id="version-metadata">
-              <div id="added-in">Added in 1.3.0</div>
-            </div>
+            <h3 id="setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a>&nbsp;listener<br>)</pre>
-        <p>Sets the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey. Once the given <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> is at least in the <code><a href="/reference/androidx/lifecycle/Lifecycle.State.STARTED.html">STARTED</a></code> state, any results set by <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> using the same requestKey will be delivered to the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html#onFragmentResult(java.lang.String,android.os.Bundle)">callback</a></code>. The callback will remain active until the LifecycleOwner reaches the <code><a href="/reference/androidx/lifecycle/Lifecycle.State.DESTROYED.html">DESTROYED</a></code> state or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a></code> is called with the same requestKey.</p>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> LifecycleOwner&nbsp;lifecycleOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a>&nbsp;listener<br>)</pre>
+        <p>Sets the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey. Once the given LifecycleOwner is at least in the STARTED state, any results set by <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> using the same requestKey will be delivered to the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html#onFragmentResult(java.lang.String,android.os.Bundle)">callback</a></code>. The callback will remain active until the LifecycleOwner reaches the DESTROYED state or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a></code> is called with the same requestKey.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -247,7 +242,7 @@
                 </td>
               </tr>
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner</code></td>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> LifecycleOwner&nbsp;lifecycleOwner</code></td>
                 <td>
                   <p>lifecycleOwner for handling the result</p>
                 </td>

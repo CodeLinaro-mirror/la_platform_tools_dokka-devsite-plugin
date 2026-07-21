@@ -519,9 +519,27 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
                     } else {
                         td { renderTags(tag.children, state) }
                     }
-                // <th> is being converted to Text class
-                // TODO(b/193096057): determine root cause
-                is Text -> th { +tag.body.stripTemplate() }
+                is Th ->
+                    th {
+                        // TODO(b/164125463): kotlinx.html `th` doesn't support flow content
+                        for (childTag in tag.children) {
+                            when (childTag) {
+                                is Text -> +childTag.body.stripTemplate()
+                                is DocumentationLink -> renderDocumentationLink(childTag, state)
+                                else -> {
+                                    // Handling can be added for other types of tags if they are
+                                    // found later (only Text and Documentation link are present in
+                                    // `th` in AndroidX sources now).
+                                    data.docsHolder
+                                        ?.logger
+                                        ?.warn(
+                                            "Unsupported tag inside of TableHeader: ${tag.javaClass.simpleName}. " +
+                                                "Context: ${tags.text()}. File a bug on dackka."
+                                        )
+                                }
+                            }
+                        }
+                    }
                 else ->
                     error(
                         "Invalid tag inside of TableRow: ${tag.javaClass.simpleName}. " +

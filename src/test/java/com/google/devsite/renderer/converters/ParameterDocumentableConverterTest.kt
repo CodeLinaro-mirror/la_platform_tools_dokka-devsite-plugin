@@ -1422,10 +1422,7 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
                 .returnType()
 
         assertThat(paramString.data.type.data.name).isEqualTo("String")
-        assertThat(paramUnresolved.data.type.data.name)
-            .isEqualTo(
-                "@R|androidx/example/Squark|()  ERROR CLASS: Symbol not found for Unresolved?"
-            )
+        assertThat(paramUnresolved.data.type.data.name).isEqualTo("Unresolved")
 
         for (param in listOf(paramString)) { // TODO: listOf(paramString, paramUnresolved)
             assertThat(param.annotations.size).isEqualTo(1)

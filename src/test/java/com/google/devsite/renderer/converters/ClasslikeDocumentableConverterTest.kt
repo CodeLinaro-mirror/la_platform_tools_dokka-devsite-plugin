@@ -642,7 +642,8 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         val signatureK = pageExternalK.data.content.data.description.data.primarySignature
         val signatureJ = pageExternalJ.data.content.data.description.data.primarySignature
         assertThat(signatureK.data.implements.map { it.data.name }).isEqualTo(listOf("Lazy"))
-        assertThat(signatureJ.data.implements.map { it.data.name }).isEqualTo(listOf("Lazy"))
+        // kotlin.Lazy is unresolved due to https://github.com/Kotlin/dokka/issues/4516
+        assertThat(signatureJ.data.implements.map { it.data.name }).isEmpty()
     }
 
     // This test also validates that only direct superclasses / interfaces are included because

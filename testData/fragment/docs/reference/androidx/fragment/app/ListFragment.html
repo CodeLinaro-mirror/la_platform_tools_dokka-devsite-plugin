@@ -218,7 +218,7 @@
                     <tr>
                       <td><code>abstract <a href="/reference/androidx/activity/result/ActivityResultLauncher.html">ActivityResultLauncher</a>&lt;I&gt;</code></td>
                       <td>
-                        <div><code>&lt;I,&nbsp;O&gt; <a href="/reference/androidx/activity/result/ActivityResultCaller.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a>&lt;I,&nbsp;O&gt;&nbsp;p,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/activity/result/ActivityResultCallback.html">ActivityResultCallback</a>&lt;O&gt;&nbsp;p1<br>)</code></div>
+                        <div><code>&lt;I,&nbsp;O&gt; <a href="/reference/androidx/activity/result/ActivityResultCaller.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;ActivityResultContract&lt;I, O&gt;&nbsp;p,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/activity/result/ActivityResultCallback.html">ActivityResultCallback</a>&lt;O&gt;&nbsp;p1<br>)</code></div>
                       </td>
                     </tr>
                   </tbody>
@@ -318,14 +318,14 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code></td>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> CreationExtras</code></td>
                       <td>
                         <div><code>@<a href="/reference/androidx/annotation/CallSuper.html">CallSuper</a><br><a href="/reference/androidx/fragment/app/Fragment.html#getDefaultViewModelCreationExtras()">getDefaultViewModelCreationExtras</a>()</code></div>
-                        <p>The <code><a href="/reference/androidx/fragment/app/Fragment.html#getArguments()">Fragment's arguments</a></code> when this is first called will be used as the defaults to any <code><a href="/reference/androidx/lifecycle/SavedStateHandle.html">androidx.lifecycle.SavedStateHandle</a></code> passed to a view model created using this extra.</p>
+                        <p>The <code><a href="/reference/androidx/fragment/app/Fragment.html#getArguments()">Fragment's arguments</a></code> when this is first called will be used as the defaults to any androidx.lifecycle.SavedStateHandle passed to a view model created using this extra.</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code></td>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Factory</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#getDefaultViewModelProviderFactory()">getDefaultViewModelProviderFactory</a>()</code></div>
                       </td>
@@ -375,7 +375,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code></td>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Lifecycle</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#getLifecycle()">getLifecycle</a>()</code></div>
                         <p> Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
@@ -386,7 +386,7 @@
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#getLoaderManager()">getLoaderManager</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>Use <code><a href="/reference/androidx/loader/app/LoaderManager.html#getInstance(T)">LoaderManager.getInstance(this)</a></code>.</p>
+                          <p>Use LoaderManager.getInstance(this).</p>
                         </p>
                       </td>
                     </tr>
@@ -435,7 +435,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/savedstate/SavedStateRegistry.html">SavedStateRegistry</a></code></td>
+                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> SavedStateRegistry</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#getSavedStateRegistry()">getSavedStateRegistry</a>()</code></div>
                       </td>
@@ -465,7 +465,7 @@
                       <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
                       <td>
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#getString(int,java.lang.Object...)">getString</a>(@<a href="/reference/androidx/annotation/StringRes.html">StringRes</a> int&nbsp;resId,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Object[]&nbsp;formatArgs)</code></div>
-                        <p>Return a localized formatted string from the application's package's default string table, substituting the format arguments as defined in <code><a href="https://developer.android.com/reference/java/util/Formatter.html">java.util.Formatter</a></code> and format.</p>
+                        <p>Return a localized formatted string from the application's package's default string table, substituting the format arguments as defined in <code><a href="https://developer.android.com/reference/java/util/Formatter.html">java.util.Formatter</a></code> and <code><a href="https://developer.android.com/reference/java/lang/String.html#format(java.lang.String, java.lang.Object...)">format</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
@@ -480,7 +480,7 @@
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#getTargetFragment()">getTargetFragment</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>Instead of using a target fragment to pass results, use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> to deliver results to <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> instances registered by other fragments via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code>.</p>
+                          <p>Instead of using a target fragment to pass results, use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> to deliver results to <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> instances registered by other fragments via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code>.</p>
                         </p>
                       </td>
                     </tr>
@@ -489,7 +489,7 @@
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#getTargetRequestCode()">getTargetRequestCode</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>When using the target fragment replacement of <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> and <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code>, consider using <code><a href="/reference/androidx/fragment/app/Fragment.html#setArguments(android.os.Bundle)">setArguments</a></code> to pass a <code>requestKey</code> if you need to support dynamic request keys.</p>
+                          <p>When using the target fragment replacement of <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> and <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code>, consider using <code><a href="/reference/androidx/fragment/app/Fragment.html#setArguments(android.os.Bundle)">setArguments</a></code> to pass a <code>requestKey</code> if you need to support dynamic request keys.</p>
                         </p>
                       </td>
                     </tr>
@@ -505,7 +505,7 @@
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#getUserVisibleHint()">getUserVisibleHint</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>Use <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setMaxLifecycle(androidx.fragment.app.Fragment,androidx.lifecycle.Lifecycle.State)">setMaxLifecycle</a></code> instead.</p>
+                          <p>Use <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setMaxLifecycle(androidx.fragment.app.Fragment,Lifecycle.State)">setMaxLifecycle</a></code> instead.</p>
                         </p>
                       </td>
                     </tr>
@@ -517,24 +517,24 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></td>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> LifecycleOwner</code></td>
                       <td>
                         <div><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/androidx/fragment/app/Fragment.html#getViewLifecycleOwner()">getViewLifecycleOwner</a>()</code></div>
-                        <p>Get a <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> that represents the <code><a href="/reference/androidx/fragment/app/Fragment.html#getView()">Fragment's View</a></code> lifecycle.</p>
+                        <p>Get a LifecycleOwner that represents the <code><a href="/reference/androidx/fragment/app/Fragment.html#getView()">Fragment's View</a></code> lifecycle.</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;<a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&gt;</code></td>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;LifecycleOwner&gt;</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#getViewLifecycleOwnerLiveData()">getViewLifecycleOwnerLiveData</a>()</code></div>
                         <p>Retrieve a <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> which allows you to observe the <code><a href="/reference/androidx/fragment/app/Fragment.html#getViewLifecycleOwner()">lifecycle of the Fragment's View</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/ViewModelStore.html">ViewModelStore</a></code></td>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ViewModelStore</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#getViewModelStore()">getViewModelStore</a>()</code></div>
-                        <p>Returns the <code><a href="/reference/androidx/lifecycle/ViewModelStore.html">ViewModelStore</a></code> associated with this Fragment </p>
+                        <p>Returns the ViewModelStore associated with this Fragment </p>
                       </td>
                     </tr>
                     <tr>
@@ -632,7 +632,7 @@
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#onActivityResult(int,int,android.content.Intent)">onActivityResult</a></del></span>(int&nbsp;requestCode,&nbsp;int&nbsp;resultCode,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a>&nbsp;data)</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
+                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an ActivityResultContract and the prebuilt contracts for common intents available in androidx.activity.result.contract.ActivityResultContracts, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
                         </p>
                       </td>
                     </tr>
@@ -830,7 +830,7 @@
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#onRequestPermissionsResult(int,java.lang.String[],int[])">onRequestPermissionsResult</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;permissions,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]&nbsp;grantResults<br>)</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
+                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an ActivityResultContract and the prebuilt contracts for common intents available in androidx.activity.result.contract.ActivityResultContracts, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
                         </p>
                       </td>
                     </tr>
@@ -886,14 +886,14 @@
                     <tr>
                       <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/ActivityResultLauncher.html">ActivityResultLauncher</a>&lt;I&gt;</code></td>
                       <td>
-                        <div><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>&lt;I,&nbsp;O&gt; <a href="/reference/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a>&lt;I,&nbsp;O&gt;&nbsp;contract,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/ActivityResultCallback.html">ActivityResultCallback</a>&lt;O&gt;&nbsp;callback<br>)</code></div>
+                        <div><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>&lt;I,&nbsp;O&gt; <a href="/reference/androidx/fragment/app/Fragment.html#registerForActivityResult(ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ActivityResultContract&lt;I, O&gt;&nbsp;contract,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/ActivityResultCallback.html">ActivityResultCallback</a>&lt;O&gt;&nbsp;callback<br>)</code></div>
                         <p> If the host of this fragment is an <code><a href="/reference/androidx/activity/result/ActivityResultRegistryOwner.html">ActivityResultRegistryOwner</a></code> the <code><a href="/reference/androidx/activity/result/ActivityResultRegistry.html">ActivityResultRegistry</a></code> of the host will be used.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/ActivityResultLauncher.html">ActivityResultLauncher</a>&lt;I&gt;</code></td>
                       <td>
-                        <div><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>&lt;I,&nbsp;O&gt; <a href="/reference/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultRegistry,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a>&lt;I,&nbsp;O&gt;&nbsp;contract,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/ActivityResultRegistry.html">ActivityResultRegistry</a>&nbsp;registry,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/ActivityResultCallback.html">ActivityResultCallback</a>&lt;O&gt;&nbsp;callback<br>)</code></div>
+                        <div><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>&lt;I,&nbsp;O&gt; <a href="/reference/androidx/fragment/app/Fragment.html#registerForActivityResult(ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultRegistry,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ActivityResultContract&lt;I, O&gt;&nbsp;contract,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/ActivityResultRegistry.html">ActivityResultRegistry</a>&nbsp;registry,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/activity/result/ActivityResultCallback.html">ActivityResultCallback</a>&lt;O&gt;&nbsp;callback<br>)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -908,7 +908,7 @@
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#requestPermissions(java.lang.String[],int)">requestPermissions</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;permissions,&nbsp;int&nbsp;requestCode)</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
+                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an ActivityResultContract and the prebuilt contracts for common intents available in androidx.activity.result.contract.ActivityResultContracts, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
                         </p>
                       </td>
                     </tr>
@@ -1017,7 +1017,7 @@
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#setHasOptionsMenu(boolean)">setHasOptionsMenu</a></del></span>(boolean&nbsp;hasMenu)</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>This method is no longer needed when using a <code><a href="/reference/androidx/core/view/MenuProvider.html">MenuProvider</a></code> to provide a <code><a href="https://developer.android.com/reference/android/view/Menu.html">Menu</a></code> to your activity, which replaces <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater)">onCreateOptionsMenu</a></code> as the recommended way to provide a consistent, optionally <code><a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>-aware, and modular way to handle menu creation and item selection.</p>
+                          <p>This method is no longer needed when using a <code><a href="/reference/androidx/core/view/MenuProvider.html">MenuProvider</a></code> to provide a <code><a href="https://developer.android.com/reference/android/view/Menu.html">Menu</a></code> to your activity, which replaces <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater)">onCreateOptionsMenu</a></code> as the recommended way to provide a consistent, optionally Lifecycle-aware, and modular way to handle menu creation and item selection.</p>
                         </p>
                       </td>
                     </tr>
@@ -1077,7 +1077,7 @@
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#setTargetFragment(androidx.fragment.app.Fragment,int)">setTargetFragment</a></del></span>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment,&nbsp;int&nbsp;requestCode)</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>Instead of using a target fragment to pass results, the fragment requesting a result should use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> to register a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with a <code>
+                          <p>Instead of using a target fragment to pass results, the fragment requesting a result should use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> to register a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with a <code>
 requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Fragment.html#getParentFragmentManager()">parent fragment manager</a></code>.</p>
                         </p>
                       </td>
@@ -1087,7 +1087,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">setUserVisibleHint</a></del></span>(boolean&nbsp;isVisibleToUser)</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>If you are manually calling this method, use <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setMaxLifecycle(androidx.fragment.app.Fragment,androidx.lifecycle.Lifecycle.State)">setMaxLifecycle</a></code> instead.</p>
+                          <p>If you are manually calling this method, use <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setMaxLifecycle(androidx.fragment.app.Fragment,Lifecycle.State)">setMaxLifecycle</a></code> instead.</p>
                         </p>
                       </td>
                     </tr>
@@ -1102,14 +1102,14 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
                       <td><code>void</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#startActivity(android.content.Intent)">startActivity</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a>&nbsp;intent)</code></div>
-                        <p>Call startActivity from the fragment's containing Activity.</p>
+                        <p>Call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent)">startActivity</a></code> from the fragment's containing Activity.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#startActivity(android.content.Intent,android.os.Bundle)">startActivity</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a>&nbsp;intent,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;options)</code></div>
-                        <p>Call startActivity from the fragment's containing Activity.</p>
+                        <p>Call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent, android.os.Bundle)">startActivity</a></code> from the fragment's containing Activity.</p>
                       </td>
                     </tr>
                     <tr>
@@ -1117,7 +1117,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#startActivityForResult(android.content.Intent,int)">startActivityForResult</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a>&nbsp;intent,&nbsp;int&nbsp;requestCode)</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
+                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an ActivityResultContract and the prebuilt contracts for common intents available in androidx.activity.result.contract.ActivityResultContracts, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
                         </p>
                       </td>
                     </tr>
@@ -1126,7 +1126,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#startActivityForResult(android.content.Intent,int,android.os.Bundle)">startActivityForResult</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a>&nbsp;intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;options<br>)</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
+                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an ActivityResultContract and the prebuilt contracts for common intents available in androidx.activity.result.contract.ActivityResultContracts, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
                         </p>
                       </td>
                     </tr>
@@ -1135,7 +1135,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
                       <td>
                         <div><code><span><del><a href="/reference/androidx/fragment/app/Fragment.html#startIntentSenderForResult(android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">startIntentSenderForResult</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/IntentSender.html">IntentSender</a>&nbsp;intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a>&nbsp;fillInIntent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;flagsMask,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;flagsValues,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;extraFlags,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;options<br>)</code></div>
                         <p><strong>This method is deprecated.</strong>
-                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
+                          <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an ActivityResultContract and the prebuilt contracts for common intents available in androidx.activity.result.contract.ActivityResultContracts, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment.</p>
                         </p>
                       </td>
                     </tr>
@@ -1165,72 +1165,6 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
 </devsite-expandable>            </td>
           </tr>
           <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/lifecycle/HasDefaultViewModelProviderFactory.html">androidx.lifecycle.HasDefaultViewModelProviderFactory</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/lifecycle/HasDefaultViewModelProviderFactory.html#getDefaultViewModelCreationExtras()">getDefaultViewModelCreationExtras</a>()</code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>abstract <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/lifecycle/HasDefaultViewModelProviderFactory.html#getDefaultViewModelProviderFactory()">getDefaultViewModelProviderFactory</a>()</code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
-          </tr>
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/lifecycle/LifecycleOwner.html">androidx.lifecycle.LifecycleOwner</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>abstract <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/lifecycle/LifecycleOwner.html#getLifecycle()">getLifecycle</a>()</code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
-          </tr>
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html">androidx.savedstate.SavedStateRegistryOwner</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>abstract <a href="/reference/androidx/savedstate/SavedStateRegistry.html">SavedStateRegistry</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html#getSavedStateRegistry()">getSavedStateRegistry</a>()</code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
-          </tr>
-          <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/android/view/View.OnCreateContextMenuListener.html">android.view.View.OnCreateContextMenuListener</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
@@ -1243,26 +1177,6 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
                       <td><code>abstract void</code></td>
                       <td>
                         <div><code><a href="https://developer.android.com/reference/android/view/View.OnCreateContextMenuListener.html#onCreateContextMenu(android.view.ContextMenu, android.view.View, android.view.ContextMenu.ContextMenuInfo)">onCreateContextMenu</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/android/view/ContextMenu.html">ContextMenu</a>&nbsp;p,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;p1,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/android/view/ContextMenu.ContextMenuInfo.html">ContextMenu.ContextMenuInfo</a>&nbsp;p2<br>)</code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
-          </tr>
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html">androidx.lifecycle.ViewModelStoreOwner</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>abstract <a href="/reference/androidx/lifecycle/ViewModelStore.html">ViewModelStore</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html#getViewModelStore()">getViewModelStore</a>()</code></div>
                       </td>
                     </tr>
                   </tbody>

@@ -1433,7 +1433,7 @@ public void onCreate() {
                   <table>
                     <tbody>
                       <tr>
-                        <th>Table header with and text</th>
+                        <th>Table header with <code><a href="https://developer.android.com/reference/java/lang/String.html">link</a></code> and text</th>
                       </tr>
                       <tr>
                         <td>Table data</td>

@@ -40,7 +40,7 @@
       <pre>class <a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt;</pre>
     </p>
     <hr>
-    <p>Snapshot state of Paging system including the loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code>, the last accessed <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">anchorPosition</a></code>, and the <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">config</a></code> used.</p>
+    <p>Snapshot state of Paging system including the loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code>, the last accessed <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code>, and the <code><a href="/reference/kotlin/androidx/paging/PagingState.html#config()">config</a></code> used.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -78,21 +78,21 @@
             <td><code>Value?</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">closestItemAroundPosition</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;anchorPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;predicate:&nbsp;(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
-              <p>Coerces <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">anchorPosition</a></code> to closest loaded value in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code> that matches <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">predicate</a></code>.</p>
+              <p>Coerces <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">anchorPosition</a></code> to closest loaded value in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code> that matches <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">predicate</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>Value?</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">closestItemToPosition</a>(anchorPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
-              <p>Coerces <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">anchorPosition</a></code> to closest loaded value in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code>.</p>
+              <p>Coerces <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">anchorPosition</a></code> to closest loaded value in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key,&nbsp;Value&gt;?</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestPageToPosition(kotlin.Int)">closestPageToPosition</a>(anchorPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
-              <p>Coerces an index in the list, including placeholders, to closest loaded page in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code>.</p>
+              <p>Coerces an index in the list, including placeholders, to closest loaded page in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -190,7 +190,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">closestItemAroundPosition</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;anchorPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;predicate:&nbsp;(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><br>):&nbsp;Value?</pre>
-        <p>Coerces <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">anchorPosition</a></code> to closest loaded value in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code> that matches <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">predicate</a></code>.</p>
+        <p>Coerces <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">anchorPosition</a></code> to closest loaded value in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code> that matches <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">predicate</a></code>.</p>
         <p>This function can be called with <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">anchorPosition</a></code> to fetch the loaded item that is closest to the last accessed index in the list.</p>
         <p>This function searches for the matching predicate amongst items that are positioned both before and after the <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">anchorPosition</a></code> with this order of priority:</p>
         <ol>
@@ -245,7 +245,7 @@
               <tr>
                 <td><code>Value?</code></td>
                 <td>
-                  <p>The closest loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html">Value</a></code> in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code> to the provided <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">anchorPosition</a></code> that matches the <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">predicate</a></code>. <code>null</code> if all loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code> are empty or if none of the loaded values match <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">predicate</a></code></p>
+                  <p>The closest loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html">Value</a></code> in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code> to the provided <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">anchorPosition</a></code> that matches the <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">predicate</a></code>. <code>null</code> if all loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code> are empty or if none of the loaded values match <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemAroundPosition(kotlin.Int,kotlin.Function1)">predicate</a></code></p>
                 </td>
               </tr>
             </tbody>
@@ -259,7 +259,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">closestItemToPosition</a>(anchorPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;Value?</pre>
-        <p>Coerces <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">anchorPosition</a></code> to closest loaded value in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code>.</p>
+        <p>Coerces <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">anchorPosition</a></code> to closest loaded value in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code>.</p>
         <p>This function can be called with <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">anchorPosition</a></code> to fetch the loaded item that is closest to the last accessed index in the list.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -297,7 +297,7 @@
               <tr>
                 <td><code>Value?</code></td>
                 <td>
-                  <p>The closest loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html">Value</a></code> in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code> to the provided <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">anchorPosition</a></code>. <code>null</code> if all loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code> are empty.</p>
+                  <p>The closest loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html">Value</a></code> in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code> to the provided <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">anchorPosition</a></code>. <code>null</code> if all loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code> are empty.</p>
                 </td>
               </tr>
             </tbody>
@@ -311,7 +311,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#closestPageToPosition(kotlin.Int)">closestPageToPosition</a>(anchorPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key,&nbsp;Value&gt;?</pre>
-        <p>Coerces an index in the list, including placeholders, to closest loaded page in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code>.</p>
+        <p>Coerces an index in the list, including placeholders, to closest loaded page in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code>.</p>
         <p>This function can be called with <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestPageToPosition(kotlin.Int)">anchorPosition</a></code> to fetch the loaded page that is closest to the last accessed index in the list.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -349,7 +349,7 @@
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key,&nbsp;Value&gt;?</code></td>
                 <td>
-                  <p>The closest loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html">Value</a></code> in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code> to the provided <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestPageToPosition(kotlin.Int)">anchorPosition</a></code>. <code>null</code> if all loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html#(kotlin.collections.List,kotlin.Int,androidx.paging.PagingConfig,kotlin.Int)">pages</a></code> are empty.</p>
+                  <p>The closest loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html">Value</a></code> in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code> to the provided <code><a href="/reference/kotlin/androidx/paging/PagingState.html#closestPageToPosition(kotlin.Int)">anchorPosition</a></code>. <code>null</code> if all loaded <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code> are empty.</p>
                 </td>
               </tr>
             </tbody>

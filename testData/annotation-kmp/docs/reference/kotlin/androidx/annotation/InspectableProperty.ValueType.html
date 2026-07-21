@@ -227,7 +227,7 @@
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/InspectableProperty.ValueType.html#INT_ENUM">InspectableProperty.ValueType.INT_ENUM</a>:&nbsp;<a href="/reference/kotlin/androidx/annotation/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a></pre>
         <aside class="caution"><strong>This enum value is deprecated.</strong><br>Replaced by the {@code androidx.resourceinpsection} package.</aside>
         <p>Value packs an enumeration.</p>
-        <p>This is inferred if <code><a href="/reference/kotlin/androidx/annotation/InspectableProperty.html#(kotlin.String,kotlin.Int,kotlin.Boolean,androidx.annotation.InspectableProperty.ValueType,kotlin.Array,kotlin.Array)">enumMapping</a></code> is specified.</p>
+        <p>This is inferred if <code><a href="/reference/kotlin/androidx/annotation/InspectableProperty.html#enumMapping()">enumMapping</a></code> is specified.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -257,7 +257,7 @@
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/InspectableProperty.ValueType.html#INT_FLAG">InspectableProperty.ValueType.INT_FLAG</a>:&nbsp;<a href="/reference/kotlin/androidx/annotation/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a></pre>
         <aside class="caution"><strong>This enum value is deprecated.</strong><br>Replaced by the {@code androidx.resourceinpsection} package.</aside>
         <p>Value packs flags, of which many may be enabled at once.</p>
-        <p>This is inferred if <code><a href="/reference/kotlin/androidx/annotation/InspectableProperty.html#(kotlin.String,kotlin.Int,kotlin.Boolean,androidx.annotation.InspectableProperty.ValueType,kotlin.Array,kotlin.Array)">flagMapping</a></code> is specified.</p>
+        <p>This is inferred if <code><a href="/reference/kotlin/androidx/annotation/InspectableProperty.html#flagMapping()">flagMapping</a></code> is specified.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -353,6 +353,7 @@
           <aside class="caution"><strong>This function is deprecated.</strong><br>Replaced by the {@code androidx.resourceinpsection} package.</aside>
           <p>Returns an array containing the constants of this enum type, in the order they're declared.</p>
           <p>This method may be used to iterate over the constants.</p>
+          <p>The function returns a new instance of the array on every call. The array could be mutated, so working with it may also require defensive copying. Consider using <code>entries</code> property as a more efficient alternative returning an immutable list of enum entries.</p>
         </div>
       </div>
     </devsite-filter >
@@ -372,8 +373,7 @@
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/InspectableProperty.ValueType.html#entries()">entries</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.enums/-enum-entries/index.html">EnumEntries</a>&lt;<a href="/reference/kotlin/androidx/annotation/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a>&gt;</pre>
           <aside class="caution"><strong>This property is deprecated.</strong><br>Replaced by the {@code androidx.resourceinpsection} package.</aside>
-          <p>Returns a representation of an immutable list of all enum entries, in the order they're declared.</p>
-          <p>This method may be used to iterate over the enum entries.</p>
+          <p>Returns an immutable <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.enums/-enum-entries/index.html">kotlin.enums.EnumEntries</a></code> list containing the constants of this enum type, in the order they're declared.</p>
         </div>
       </div>
     </devsite-filter >

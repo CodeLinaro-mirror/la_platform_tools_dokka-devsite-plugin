@@ -118,8 +118,10 @@ internal fun Documentable.allAnnotations() =
 // TODO(KMP per-sourceset variance of deprecation status b/262711247)
 internal fun Documentable.deprecationAnnotation() = allAnnotations().deprecationAnnotation()
 
-internal fun List<Annotation>.deprecationAnnotation() =
-    toSet().filter { it.isDeprecated() }.strictSingleOrNull()
+internal fun List<Annotation>.deprecationAnnotation(): Annotations.Annotation? {
+    val annos = toSet().filter { it.isDeprecated() }
+    return annos.firstOrNull()
+}
 
 /**
  * All existing WithSources are WithExtraProperties, and fileLevelAnnotations require sources.

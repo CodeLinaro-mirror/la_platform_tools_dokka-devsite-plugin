@@ -62,7 +62,9 @@ enum class Platform {
                 DokkaPlatform.js -> JS
                 DokkaPlatform.native -> NATIVE
                 DokkaPlatform.common -> COMMON
-                DokkaPlatform.wasm -> WASM
+                DokkaPlatform.wasm,
+                DokkaPlatform.wasmJs,
+                DokkaPlatform.wasmWasi -> WASM
             }
         }
     }

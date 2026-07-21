@@ -54,7 +54,7 @@
             <td><code>static&nbsp;final int</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingConfig.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code></div>
-              <p>When <code><a href="/reference/androidx/paging/PagingConfig.html#(kotlin.Int,kotlin.Int,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Int)">maxSize</a></code> is set to <code><a href="/reference/androidx/paging/PagingConfig.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code>, the maximum number of items loaded is unbounded, and pages will never be dropped.</p>
+              <p>When <code><a href="/reference/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is set to <code><a href="/reference/androidx/paging/PagingConfig.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code>, the maximum number of items loaded is unbounded, and pages will never be dropped.</p>
             </td>
           </tr>
         </tbody>
@@ -80,7 +80,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>final int</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) int</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingConfig.html#initialLoadSize()">initialLoadSize</a></code></div>
               <p>Defines requested load size for initial load from <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>, typically larger than <code><a href="/reference/androidx/paging/PagingConfig.html#(kotlin.Int,kotlin.Int,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Int)">pageSize</a></code>, so on first load data there's a large enough range of content loaded to cover small scrolls.</p>
@@ -94,7 +94,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>final int</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;2) int</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code></div>
               <p>Defines the maximum number of items that may be loaded into <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> before pages should be dropped.</p>
@@ -108,7 +108,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>final int</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code></div>
               <p>Prefetch distance which defines how far from the edge of loaded content an access must be to trigger further loading.</p>
@@ -146,7 +146,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagingConfig.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></pre>
-        <p>When <code><a href="/reference/androidx/paging/PagingConfig.html#(kotlin.Int,kotlin.Int,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Int)">maxSize</a></code> is set to <code><a href="/reference/androidx/paging/PagingConfig.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code>, the maximum number of items loaded is unbounded, and pages will never be dropped.</p>
+        <p>When <code><a href="/reference/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is set to <code><a href="/reference/androidx/paging/PagingConfig.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code>, the maximum number of items loaded is unbounded, and pages will never be dropped.</p>
       </div>
     </div>
     <div class="list">
@@ -175,7 +175,7 @@
             <h3 id="initialLoadSize()">initialLoadSize</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagingConfig.html#initialLoadSize()">initialLoadSize</a></pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) int&nbsp;<a href="/reference/androidx/paging/PagingConfig.html#initialLoadSize()">initialLoadSize</a></pre>
         <p>Defines requested load size for initial load from <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>, typically larger than <code><a href="/reference/androidx/paging/PagingConfig.html#(kotlin.Int,kotlin.Int,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Int)">pageSize</a></code>, so on first load data there's a large enough range of content loaded to cover small scrolls.</p>
         <p>Note: <code><a href="/reference/androidx/paging/PagingConfig.html#(kotlin.Int,kotlin.Int,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Int)">initialLoadSize</a></code> is used to inform <code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#loadSize()">PagingSource.LoadParams.loadSize</a></code>, but is not enforced. A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> may completely ignore this value and still return a valid initial <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code>.</p>
       </div>
@@ -219,7 +219,7 @@
             <h3 id="maxSize()">maxSize</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;2) int&nbsp;<a href="/reference/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></pre>
         <p>Defines the maximum number of items that may be loaded into <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> before pages should be dropped.</p>
         <p>If set to <code><a href="/reference/androidx/paging/PagingConfig.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code>, pages will never be dropped.</p>
         <p>This can be used to cap the number of items kept in memory by dropping pages. This value is typically many pages so old pages are cached in case the user scrolls back.</p>
@@ -272,7 +272,7 @@
             <h3 id="prefetchDistance()">prefetchDistance</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;<a href="/reference/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></pre>
         <p>Prefetch distance which defines how far from the edge of loaded content an access must be to trigger further loading. Typically should be set several times the number of visible items onscreen.</p>
         <p>E.g., If this value is set to 50, a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> will attempt to load 50 items in advance of data that's already been accessed.</p>
         <p>A value of 0 indicates that no list items will be loaded until they are specifically requested. This is generally not recommended, so that users don't observe a placeholder item (with placeholders) or end of list (without) while scrolling.</p>

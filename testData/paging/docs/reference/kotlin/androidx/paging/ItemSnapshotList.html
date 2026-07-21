@@ -121,14 +121,14 @@
             </td>
           </tr>
           <tr>
-            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td><code>@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#placeholdersAfter()">placeholdersAfter</a></code></div>
               <p>Number of placeholders after the presented <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code>, 0 if <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
             </td>
           </tr>
           <tr>
-            <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td><code>@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#placeholdersBefore()">placeholdersBefore</a></code></div>
               <p>Number of placeholders before the presented <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code>, 0 if <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
@@ -280,13 +280,19 @@
                       </td>
                     </tr>
                     <tr>
+                      <td><code>open <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;T?&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/spliterator.html">spliterator</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
                       <td><code>open <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;T?&gt;</code></td>
                       <td>
                         <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/stream.html">stream</a>()</code></div>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;</code></td>
+                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;</code></td>
                       <td>
                         <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/to-array.html">toArray</a>(generator:&nbsp;<a href="https://developer.android.com/reference/java/util/function/IntFunction.html">IntFunction</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;&gt;)</code></div>
                       </td>
@@ -309,12 +315,6 @@
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
                         <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/for-each.html">forEach</a>(action:&nbsp;<a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;T?&gt;)</code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;T?&gt;</code></td>
-                      <td>
-                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/spliterator.html">spliterator</a>()</code></div>
                       </td>
                     </tr>
                   </tbody>
@@ -378,7 +378,7 @@
         </div>
         <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#get(kotlin.Int)">get</a>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;T?</pre>
         <p>Returns the item at <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#get(kotlin.Int)">index</a></code>, where <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#get(kotlin.Int)">index</a></code> includes the position of placeholders. If <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#get(kotlin.Int)">index</a></code> points to the position of a placeholder, <code>null</code> is returned.</p>
-        <p>To get the size using an index excluding placeholders, use <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/size.html">List.size</a></code> on <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code> directly.</p>
+        <p>To get the size using an index excluding placeholders, use <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/size.html">List.size</a></code> on <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#items()">items</a></code> directly.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -419,7 +419,7 @@
             <h3 id="placeholdersAfter()">placeholdersAfter</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#placeholdersAfter()">placeholdersAfter</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#placeholdersAfter()">placeholdersAfter</a>:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
         <p>Number of placeholders after the presented <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code>, 0 if <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
       </div>
       <div class="api-item"><a name="getPlaceholdersBefore()"></a><a name="setPlaceholdersBefore()"></a><a name="getPlaceholdersBefore--"></a><a name="setPlaceholdersBefore--"></a>
@@ -428,7 +428,7 @@
             <h3 id="placeholdersBefore()">placeholdersBefore</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#placeholdersBefore()">placeholdersBefore</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#placeholdersBefore()">placeholdersBefore</a>:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
         <p>Number of placeholders before the presented <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code>, 0 if <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
       </div>
       <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
@@ -439,7 +439,7 @@
         </div>
         <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#size()">size</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
         <p>Size of <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> including placeholders.</p>
-        <p>To get the size excluding placeholders, use <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/size.html">List.size</a></code> on <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code> directly.</p>
+        <p>To get the size excluding placeholders, use <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/size.html">List.size</a></code> on <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#items()">items</a></code> directly.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -453,7 +453,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)"></a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html#items()">items</a></code></td>
                 <td></td>
               </tr>
             </tbody>

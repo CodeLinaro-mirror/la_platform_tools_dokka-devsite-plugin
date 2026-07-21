@@ -60,7 +60,7 @@
     </div>
     <hr>
     <p>Adapter for displaying a RecyclerView item based on <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code>, such as a loading spinner, or a retry error button.</p>
-    <p>By default will use one shared <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemViewType(kotlin.Int)">view type</a></code> for all items.</p>
+    <p>By default will use one shared <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemViewType(int)">view type</a></code> for all items.</p>
     <p>By default, both <code><a href="/reference/androidx/paging/LoadState.Loading.html">LoadState.Loading</a></code> and <code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> are presented as adapter items, other states are not. To configure this, override <code><a href="/reference/androidx/paging/LoadStateAdapter.html#displayLoadStateAsItem(androidx.paging.LoadState)">displayLoadStateAsItem</a></code>.</p>
     <p>To present this Adapter as a header and or footer alongside your <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>, see <code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">PagingDataAdapter.withLoadStateHeaderAndFooter</a></code>, or use <code><a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> directly to concatenate Adapters.</p>
     <pre class="prettyprint lang-kotlin">
@@ -276,25 +276,25 @@ class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#bindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">bindViewHolder</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder,&nbsp;int&nbsp;position)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#bindViewHolder(VH,int)">bindViewHolder</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder,&nbsp;int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#createViewHolder(android.view.ViewGroup,kotlin.Int)">createViewHolder</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;parent,&nbsp;int&nbsp;viewType)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#createViewHolder(android.view.ViewGroup,int)">createViewHolder</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;parent,&nbsp;int&nbsp;viewType)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#findRelativeAdapterPositionIn(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">findRelativeAdapterPositionIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;&nbsp;adapter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&nbsp;viewHolder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;localPosition<br>)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#findRelativeAdapterPositionIn(androidx.recyclerview.widget.RecyclerView.Adapter&lt;? extends androidx.recyclerview.widget.RecyclerView.ViewHolder&gt;,androidx.recyclerview.widget.RecyclerView.ViewHolder,int)">findRelativeAdapterPositionIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;&nbsp;adapter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&nbsp;viewHolder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;localPosition<br>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>long</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemId(kotlin.Int)">getItemId</a>(int&nbsp;position)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemId(int)">getItemId</a>(int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -318,55 +318,55 @@ class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int)">notifyItemChanged</a>(int&nbsp;position)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(int)">notifyItemChanged</a>(int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int,kotlin.Any)">notifyItemChanged</a>(int&nbsp;position,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(int,java.lang.Object)">notifyItemChanged</a>(int&nbsp;position,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemInserted(kotlin.Int)">notifyItemInserted</a>(int&nbsp;position)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemInserted(int)">notifyItemInserted</a>(int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemMoved(kotlin.Int,kotlin.Int)">notifyItemMoved</a>(int&nbsp;fromPosition,&nbsp;int&nbsp;toPosition)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemMoved(int,int)">notifyItemMoved</a>(int&nbsp;fromPosition,&nbsp;int&nbsp;toPosition)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int)">notifyItemRangeChanged</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(int,int)">notifyItemRangeChanged</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int,kotlin.Any)">notifyItemRangeChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;positionStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;itemCount,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload<br>)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(int,int,java.lang.Object)">notifyItemRangeChanged</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted(int,int)">notifyItemRangeInserted</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeRemoved(kotlin.Int,kotlin.Int)">notifyItemRangeRemoved</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeRemoved(int,int)">notifyItemRangeRemoved</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRemoved(kotlin.Int)">notifyItemRemoved</a>(int&nbsp;position)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRemoved(int)">notifyItemRemoved</a>(int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -378,7 +378,7 @@ class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int,kotlin.collections.MutableList)">onBindViewHolder</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;payloads<br>)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder(VH,int,java.util.List&lt;java.lang.Object&gt;)">onBindViewHolder</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;payloads<br>)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -390,25 +390,25 @@ class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onFailedToRecycleView(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onFailedToRecycleView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onFailedToRecycleView(VH)">onFailedToRecycleView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewAttachedToWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewAttachedToWindow</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewAttachedToWindow(VH)">onViewAttachedToWindow</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewDetachedFromWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewDetachedFromWindow</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewDetachedFromWindow(VH)">onViewDetachedFromWindow</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewRecycled(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewRecycled</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewRecycled(VH)">onViewRecycled</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -420,7 +420,7 @@ class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#setHasStableIds(kotlin.Boolean)">setHasStableIds</a>(boolean&nbsp;hasStableIds)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#setHasStableIds(boolean)">setHasStableIds</a>(boolean&nbsp;hasStableIds)</code></div>
                       </td>
                     </tr>
                     <tr>

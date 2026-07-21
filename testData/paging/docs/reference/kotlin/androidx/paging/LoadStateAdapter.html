@@ -57,7 +57,7 @@
     </div>
     <hr>
     <p>Adapter for displaying a RecyclerView item based on <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a></code>, such as a loading spinner, or a retry error button.</p>
-    <p>By default will use one shared <code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemViewType(kotlin.Int)">view type</a></code> for all items.</p>
+    <p>By default will use one shared <code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemViewType(int)">view type</a></code> for all items.</p>
     <p>By default, both <code><a href="/reference/kotlin/androidx/paging/LoadState.Loading.html">LoadState.Loading</a></code> and <code><a href="/reference/kotlin/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> are presented as adapter items, other states are not. To configure this, override <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html#displayLoadStateAsItem(androidx.paging.LoadState)">displayLoadStateAsItem</a></code>.</p>
     <p>To present this Adapter as a header and or footer alongside your <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>, see <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">PagingDataAdapter.withLoadStateHeaderAndFooter</a></code>, or use <code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> directly to concatenate Adapters.</p>
     <pre class="prettyprint lang-kotlin">
@@ -269,25 +269,25 @@ class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#bindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">bindViewHolder</a>(holder:&nbsp;VH,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#bindViewHolder(VH,int)">bindViewHolder</a>(holder:&nbsp;VH,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>VH</code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#createViewHolder(android.view.ViewGroup,kotlin.Int)">createViewHolder</a>(parent:&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>,&nbsp;viewType:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#createViewHolder(android.view.ViewGroup,int)">createViewHolder</a>(parent:&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>,&nbsp;viewType:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#findRelativeAdapterPositionIn(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">findRelativeAdapterPositionIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;adapter:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;viewHolder:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;localPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#findRelativeAdapterPositionIn(androidx.recyclerview.widget.RecyclerView.Adapter&lt;? extends androidx.recyclerview.widget.RecyclerView.ViewHolder&gt;,androidx.recyclerview.widget.RecyclerView.ViewHolder,int)">findRelativeAdapterPositionIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;adapter:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;viewHolder:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;localPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code></td>
+                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemId(kotlin.Int)">getItemId</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemId(int)">getItemId</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -311,59 +311,59 @@ class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int)">notifyItemChanged</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(int)">notifyItemChanged</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int,kotlin.Any)">notifyItemChanged</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;payload:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(int,java.lang.Object)">notifyItemChanged</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;payload:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemInserted(kotlin.Int)">notifyItemInserted</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemInserted(int)">notifyItemInserted</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemMoved(kotlin.Int,kotlin.Int)">notifyItemMoved</a>(fromPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;toPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemMoved(int,int)">notifyItemMoved</a>(fromPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;toPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int)">notifyItemRangeChanged</a>(positionStart:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;itemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(int,int)">notifyItemRangeChanged</a>(positionStart:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;itemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int,kotlin.Any)">notifyItemRangeChanged</a>(positionStart:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;itemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;payload:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(int,int,java.lang.Object)">notifyItemRangeChanged</a>(positionStart:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;itemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;payload:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted</a>(positionStart:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;itemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted(int,int)">notifyItemRangeInserted</a>(positionStart:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;itemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeRemoved(kotlin.Int,kotlin.Int)">notifyItemRangeRemoved</a>(positionStart:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;itemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeRemoved(int,int)">notifyItemRangeRemoved</a>(positionStart:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;itemCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRemoved(kotlin.Int)">notifyItemRemoved</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRemoved(int)">notifyItemRemoved</a>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
                         <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onAttachedToRecyclerView(androidx.recyclerview.widget.RecyclerView)">onAttachedToRecyclerView</a>(recyclerView:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>)</code></div>
                       </td>
@@ -371,11 +371,11 @@ class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int,kotlin.collections.MutableList)">onBindViewHolder</a>(holder:&nbsp;VH,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;payloads:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt;)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder(VH,int,java.util.List&lt;java.lang.Object&gt;)">onBindViewHolder</a>(holder:&nbsp;VH,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;payloads:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt;)</code></div>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
                         <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onDetachedFromRecyclerView(androidx.recyclerview.widget.RecyclerView)">onDetachedFromRecyclerView</a>(recyclerView:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>)</code></div>
                       </td>
@@ -383,41 +383,41 @@ class MyLoadStateAdapter(private val retry: () -&gt; Unit) :
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onFailedToRecycleView(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onFailedToRecycleView</a>(holder:&nbsp;VH)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onFailedToRecycleView(VH)">onFailedToRecycleView</a>(holder:&nbsp;VH)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewAttachedToWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewAttachedToWindow</a>(holder:&nbsp;VH)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewAttachedToWindow(VH)">onViewAttachedToWindow</a>(holder:&nbsp;VH)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewDetachedFromWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewDetachedFromWindow</a>(holder:&nbsp;VH)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewDetachedFromWindow(VH)">onViewDetachedFromWindow</a>(holder:&nbsp;VH)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewRecycled(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewRecycled</a>(holder:&nbsp;VH)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewRecycled(VH)">onViewRecycled</a>(holder:&nbsp;VH)</code></div>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
                         <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#registerAdapterDataObserver(androidx.recyclerview.widget.RecyclerView.AdapterDataObserver)">registerAdapterDataObserver</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#setHasStableIds(kotlin.Boolean)">setHasStableIds</a>(hasStableIds:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#setHasStableIds(boolean)">setHasStableIds</a>(hasStableIds:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
                         <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#unregisterAdapterDataObserver(androidx.recyclerview.widget.RecyclerView.AdapterDataObserver)">unregisterAdapterDataObserver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;observer:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a><br>)</code></div>
                       </td>

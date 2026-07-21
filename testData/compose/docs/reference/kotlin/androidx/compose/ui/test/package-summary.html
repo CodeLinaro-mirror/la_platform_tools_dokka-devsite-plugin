@@ -449,7 +449,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/test/MouseButton.html">MouseButton</a></code></td>
               <td>
-                <p>Representation of a mouse button with its associated <code><a href="/reference/kotlin/androidx/compose/ui/test/MouseButton.html#(kotlin.Int)">ID</a></code> for the current platform.</p>
+                <p>Representation of a mouse button with its associated <code><a href="/reference/kotlin/androidx/compose/ui/test/MouseButton.html#buttonId()">ID</a></code> for the current platform.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -4841,7 +4841,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">animateTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;durationMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = DefaultMouseGestureDurationMillis<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Move the mouse from the <code><a href="/reference/kotlin/androidx/compose/ui/test/MouseInjectionScope.html#currentPosition()">current position</a></code> to the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>, sending a stream of move events to get an animated path of <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">durationMillis</a></code> milliseconds. <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">Move</a></code> the mouse to the desired start position if you want to start from a different position. The <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+      <p>Move the mouse from the <code><a href="/reference/kotlin/androidx/compose/ui/test/MouseInjectionScope.html#currentPosition()">current position</a></code> to the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>, sending a stream of move events to get an animated path of <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">durationMillis</a></code> milliseconds. <code><a href="/reference/kotlin/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">Move</a></code> the mouse to the desired start position if you want to start from a different position. The <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
       <p>Example of moving the mouse along a line:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.test.animateTo
@@ -6108,7 +6108,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">click</a>(position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Performs a click gesture (aka a tap) on the associated node.</p>
-      <p>The click is done at the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code>, or in the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> if the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code> is omitted. The <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+      <p>The click is done at the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code>, or in the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> if the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code> is omitted. The <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <colgroup>
@@ -6124,7 +6124,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
             <tr>
               <td><code>position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
               <td>
-                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> of the node will be used.</p>
+                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> of the node will be used.</p>
               </td>
             </tr>
           </tbody>
@@ -6158,7 +6158,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
             <tr>
               <td><code>position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
               <td>
-                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
+                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
               </td>
             </tr>
             <tr>
@@ -6198,7 +6198,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
             <tr>
               <td><code>position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
               <td>
-                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
+                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
               </td>
             </tr>
             <tr>
@@ -6264,7 +6264,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">doubleClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center,<br>&nbsp;&nbsp;&nbsp;&nbsp;delayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = viewConfiguration.defaultDoubleTapDelayMillis<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Performs a double click gesture (aka a double tap) on the associated node.</p>
-      <p>The double click is done at the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> or in the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> if the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is omitted. By default, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> between the first and the second click is half way in between the minimum and maximum required delay for a double click. The <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+      <p>The double click is done at the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> or in the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> if the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is omitted. By default, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> between the first and the second click is half way in between the minimum and maximum required delay for a double click. The <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <colgroup>
@@ -6280,7 +6280,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
             <tr>
               <td><code>position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
               <td>
-                <p>The position of the double click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> position will be used.</p>
+                <p>The position of the double click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> position will be used.</p>
               </td>
             </tr>
             <tr>
@@ -6712,7 +6712,7 @@ composeTestRule.waitUntil { interaction.isNotDisplayed() }</pre>
             <tr>
               <td><code>position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
               <td>
-                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
+                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
               </td>
             </tr>
             <tr>
@@ -6778,7 +6778,7 @@ composeTestRule.waitUntil { interaction.isNotDisplayed() }</pre>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">longClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center,<br>&nbsp;&nbsp;&nbsp;&nbsp;durationMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = viewConfiguration.longPressTimeoutMillis + 100<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Performs a long click gesture (aka a long press) on the associated node.</p>
-      <p>The long click is done at the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>, or in the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> if the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is omitted. By default, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">durationMillis</a></code> of the press is 100ms longer than the minimum required duration for a long press. The <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+      <p>The long click is done at the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>, or in the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> if the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is omitted. By default, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">durationMillis</a></code> of the press is 100ms longer than the minimum required duration for a long press. The <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <colgroup>
@@ -6794,7 +6794,7 @@ composeTestRule.waitUntil { interaction.isNotDisplayed() }</pre>
             <tr>
               <td><code>position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
               <td>
-                <p>The position of the long click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> of the node will be used.</p>
+                <p>The position of the long click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> of the node will be used.</p>
               </td>
             </tr>
             <tr>
@@ -9314,7 +9314,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;).performTouchInput {
             <tr>
               <td><code>position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
               <td>
-                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
+                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
               </td>
             </tr>
           </tbody>
@@ -9632,13 +9632,13 @@ composeTestRule.onNodeWithTag(&quot;horizontalScrollable&quot;)
             <tr>
               <td><code>startY:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = top</code></td>
               <td>
-                <p>The y-coordinate of the start of the swipe. Must be less than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).top()">top</a></code> of the node.</p>
+                <p>The y-coordinate of the start of the swipe. Must be less than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#top()">top</a></code> of the node.</p>
               </td>
             </tr>
             <tr>
               <td><code>endY:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = bottom</code></td>
               <td>
-                <p>The y-coordinate of the end of the swipe. Must be greater than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).bottom()">bottom</a></code> of the node.</p>
+                <p>The y-coordinate of the end of the swipe. Must be greater than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottom()">bottom</a></code> of the node.</p>
               </td>
             </tr>
             <tr>
@@ -9739,13 +9739,13 @@ composeTestRule.onNodeWithTag(&quot;horizontalScrollable&quot;)
             <tr>
               <td><code>startX:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = right</code></td>
               <td>
-                <p>The x-coordinate of the start of the swipe. Must be greater than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).right()">right</a></code> of the node.</p>
+                <p>The x-coordinate of the start of the swipe. Must be greater than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#right()">right</a></code> of the node.</p>
               </td>
             </tr>
             <tr>
               <td><code>endX:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = left</code></td>
               <td>
-                <p>The x-coordinate of the end of the swipe. Must be less than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).left()">left</a></code> of the node.</p>
+                <p>The x-coordinate of the end of the swipe. Must be less than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#left()">left</a></code> of the node.</p>
               </td>
             </tr>
             <tr>
@@ -9846,13 +9846,13 @@ composeTestRule.onNodeWithTag(&quot;horizontalScrollable&quot;)
             <tr>
               <td><code>startX:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = left</code></td>
               <td>
-                <p>The x-coordinate of the start of the swipe. Must be less than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).left()">left</a></code> of the node.</p>
+                <p>The x-coordinate of the start of the swipe. Must be less than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#left()">left</a></code> of the node.</p>
               </td>
             </tr>
             <tr>
               <td><code>endX:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = right</code></td>
               <td>
-                <p>The x-coordinate of the end of the swipe. Must be greater than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).right()">right</a></code> of the node.</p>
+                <p>The x-coordinate of the end of the swipe. Must be greater than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#right()">right</a></code> of the node.</p>
               </td>
             </tr>
             <tr>
@@ -9953,13 +9953,13 @@ composeTestRule.onNodeWithTag(&quot;horizontalScrollable&quot;)
             <tr>
               <td><code>startY:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = bottom</code></td>
               <td>
-                <p>The y-coordinate of the start of the swipe. Must be greater than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).bottom()">bottom</a></code> of the node.</p>
+                <p>The y-coordinate of the start of the swipe. Must be greater than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottom()">bottom</a></code> of the node.</p>
               </td>
             </tr>
             <tr>
               <td><code>endY:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = top</code></td>
               <td>
-                <p>The y-coordinate of the end of the swipe. Must be less than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).top()">top</a></code> of the node.</p>
+                <p>The y-coordinate of the end of the swipe. Must be less than or equal to the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code>. By default the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#top()">top</a></code> of the node.</p>
               </td>
             </tr>
             <tr>
@@ -10155,7 +10155,7 @@ DeviceConfigurationOverride(
             <tr>
               <td><code>position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
               <td>
-                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
+                <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code> of the node will be used. If <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">unspecified</a></code>, clicks on the current mouse position.</p>
               </td>
             </tr>
             <tr>

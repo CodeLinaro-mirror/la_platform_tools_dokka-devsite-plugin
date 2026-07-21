@@ -44,7 +44,7 @@
       <meta itemprop="property" content="saveFragmentInstanceState(androidx.fragment.app.Fragment)">
       <meta itemprop="property" content="setFragmentFactory(androidx.fragment.app.FragmentFactory)">
       <meta itemprop="property" content="setFragmentResult(java.lang.String,android.os.Bundle)">
-      <meta itemprop="property" content="setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">
+      <meta itemprop="property" content="setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">
       <meta itemprop="property" content="setStrictModePolicy(androidx.fragment.app.strictmode.FragmentStrictMode.Policy)">
       <meta itemprop="property" content="toString()">
       <meta itemprop="property" content="unregisterFragmentLifecycleCallbacks(androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks)">
@@ -419,7 +419,7 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;requestKey:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lifecycleOwner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;listener:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a><br>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;requestKey:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lifecycleOwner:&nbsp;LifecycleOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;listener:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a><br>)</code></div>
               <p>Sets the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey.</p>
             </td>
           </tr>
@@ -543,7 +543,7 @@
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#beginTransaction()">beginTransaction</a>():&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></pre>
         <p>Start a series of edit operations on the Fragments associated with this FragmentManager. </p>
-        <p>Note: A fragment transaction can only be created/committed prior to an activity saving its state. If you try to commit a transaction after FragmentActivity.onSaveInstanceState() (and prior to a following <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onStart()">FragmentActivity.onStart</a></code> or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onResume()">FragmentActivity.onResume()</a></code>, you will get an error. This is because the framework takes care of saving your current fragments in the state, and if changes are made after the state is saved then they will be lost.</p>
+        <p>Note: A fragment transaction can only be created/committed prior to an activity saving its state. If you try to commit a transaction after <code><a href="/reference/kotlin/androidx/activity/ComponentActivity.html#onSaveInstanceState(android.os.Bundle)">FragmentActivity.onSaveInstanceState()</a></code> (and prior to a following <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onStart()">FragmentActivity.onStart</a></code> or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onResume()">FragmentActivity.onResume()</a></code>, you will get an error. This is because the framework takes care of saving your current fragments in the state, and if changes are made after the state is saved then they will be lost.</p>
       </div>
       <div class="api-item"><a name="clearBackStack-java.lang.String-"></a><a name="clearbackstack"></a>
         <div class="api-name-block">
@@ -628,7 +628,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a>(requestKey:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Clears the stored <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for the given requestKey. This clears any <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that was previously set via <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code>.</p>
+        <p>Clears the stored <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for the given requestKey. This clears any <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that was previously set via <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -1746,7 +1746,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a>(requestKey:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,&nbsp;result:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Sets the given result for the requestKey. This result will be delivered to a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that is called given to <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> with the same requestKey. If no <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with the same key is set or the Lifecycle associated with the listener is not at least <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.STARTED.html">STARTED</a></code>, the result is stored until one becomes available, or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a></code> is called with the same requestKey.</p>
+        <p>Sets the given result for the requestKey. This result will be delivered to a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that is called given to <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> with the same requestKey. If no <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with the same key is set or the Lifecycle associated with the listener is not at least STARTED, the result is stored until one becomes available, or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a></code> is called with the same requestKey.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -1775,19 +1775,14 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="setFragmentResultListener(java.lang.String, androidx.lifecycle.LifecycleOwner, androidx.fragment.app.FragmentResultListener)"></a><a name="setFragmentResultListener-java.lang.String-androidx.lifecycle.LifecycleOwner-androidx.fragment.app.FragmentResultListener-"></a><a name="setfragmentresultlistener"></a>
+      <div class="api-item"><a name="setFragmentResultListener(java.lang.String, LifecycleOwner, androidx.fragment.app.FragmentResultListener)"></a><a name="setFragmentResultListener-java.lang.String-LifecycleOwner-androidx.fragment.app.FragmentResultListener-"></a><a name="setfragmentresultlistener"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</h3>
-          </div>
-          <div id="metadata-info-block">
-            <div id="version-metadata">
-              <div id="added-in">Added in 1.7.0-alpha02</div>
-            </div>
+            <h3 id="setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;requestKey:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lifecycleOwner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;listener:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Sets the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey. Once the given <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> is at least in the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.STARTED.html">STARTED</a></code> state, any results set by <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> using the same requestKey will be delivered to the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html#onFragmentResult(java.lang.String,android.os.Bundle)">callback</a></code>. The callback will remain active until the LifecycleOwner reaches the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.DESTROYED.html">DESTROYED</a></code> state or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a></code> is called with the same requestKey.</p>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;requestKey:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lifecycleOwner:&nbsp;LifecycleOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;listener:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Sets the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey. Once the given LifecycleOwner is at least in the STARTED state, any results set by <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> using the same requestKey will be delivered to the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html#onFragmentResult(java.lang.String,android.os.Bundle)">callback</a></code>. The callback will remain active until the LifecycleOwner reaches the DESTROYED state or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a></code> is called with the same requestKey.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -1807,7 +1802,7 @@
                 </td>
               </tr>
               <tr>
-                <td><code>lifecycleOwner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></td>
+                <td><code>lifecycleOwner:&nbsp;LifecycleOwner</code></td>
                 <td>
                   <p>lifecycleOwner for handling the result</p>
                 </td>
