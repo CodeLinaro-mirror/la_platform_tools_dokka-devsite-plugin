@@ -20,6 +20,7 @@ import com.google.devsite.components.DescriptionComponent
 import kotlinx.html.DIV
 import kotlinx.html.DL
 import kotlinx.html.FlowContent
+import kotlinx.html.FlowOrPhrasingContent
 import kotlinx.html.OL
 import kotlinx.html.TABLE
 import kotlinx.html.TBODY
@@ -344,13 +345,7 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
                         renderTags(tag.children, state)
                     }
                 }
-                is DocumentationLink ->
-                    code {
-                        val url = data.pathProvider!!.forReference(tag.dri).url.stripTemplate()
-                        // TODO: improve enforcement/warning for broken links in description
-                        // b/192556649
-                        a(url) { renderTags(tag.children, state) }
-                    }
+                is DocumentationLink -> renderDocumentationLink(tag, state)
                 is Img ->
                     img(
                         src = tag.params.getValue("href").stripTemplate(),
@@ -429,6 +424,18 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
 
     private fun String.removeMathJax(): String {
         return replace(mathJaxDocTag, "")
+    }
+
+    private fun FlowOrPhrasingContent.renderDocumentationLink(
+        tag: DocumentationLink,
+        state: State,
+    ) {
+        code {
+            val url = data.pathProvider!!.forReference(tag.dri).url.stripTemplate()
+            // TODO: improve enforcement/warning for broken links in description
+            // b/192556649
+            a(url) { renderTags(tag.children, state) }
+        }
     }
 
     // TODO: remove improper handling of dt b/217941159
