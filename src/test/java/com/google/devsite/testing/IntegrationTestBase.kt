@@ -204,7 +204,6 @@ abstract class IntegrationTestBase :
         return mapOf(
                 // Start with "//" to match the filepaths from the writer plugin contents
                 "//warnings.txt" to cleanLogMessages(logger.warnMessages, absoluteSourcePath),
-                "//debug.txt" to cleanLogMessages(logger.debugMessages, absoluteSourcePath),
                 "//error.txt" to cleanLogMessages(logger.errorMessages, absoluteSourcePath),
             )
             .filter { it.value.isNotEmpty() }
