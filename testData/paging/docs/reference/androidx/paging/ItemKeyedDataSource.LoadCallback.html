@@ -51,7 +51,9 @@
       </div>
 </devsite-expandable>    </div>
     <hr>
-    <aside class="caution"><strong>This class is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+      <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+    </aside>
     <p>Callback for ItemKeyedDataSource <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> to return data.</p>
     <p>A callback can be called only once, and will throw if called again.</p>
     <p>It is always valid for a DataSource loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
@@ -129,7 +131,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;&lt;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html#LoadCallback()">LoadCallback</a></del></span>()</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -162,7 +166,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Called to pass loaded data from a DataSource.</p>
         <p>Call this method from your ItemKeyedDataSource's <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
         <p>Call this from <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to initialize without counting available data, or supporting placeholders.</p>

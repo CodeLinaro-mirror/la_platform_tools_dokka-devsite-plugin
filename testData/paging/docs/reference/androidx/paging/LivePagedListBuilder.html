@@ -181,7 +181,19 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/LivePagedListBuilder.html#LivePagedListBuilder(androidx.paging.DataSource.Factory,androidx.paging.PagedList.Config)">LivePagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;dataSourceFactory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a>&nbsp;config<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData, use this instead:
+          <pre class="prettyprint">Pager(
+                PagingConfig(
+                    config.pageSize,
+                    config.prefetchDistance,
+                    config.enablePlaceholders,
+                    config.initialLoadSizeHint,
+                    config.maxSize
+                ),
+                initialLoadKey,
+                dataSourceFactory.asPagingSourceFactory(Dispatchers.IO)
+            ).liveData</pre>
+        </aside>
         <p>Creates a <code><a href="/reference/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code> with required parameters.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -218,7 +230,13 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/LivePagedListBuilder.html#LivePagedListBuilder(androidx.paging.DataSource.Factory,kotlin.Int)">LivePagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;dataSourceFactory,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;pageSize<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData, use this instead:
+          <pre class="prettyprint">Pager(
+                PagingConfig(pageSize),
+                initialLoadKey,
+                dataSourceFactory.asPagingSourceFactory(Dispatchers.IO)
+            ).liveData</pre>
+        </aside>
         <p>Creates a <code><a href="/reference/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code> with required parameters.</p>
         <p>This method is a convenience for:</p>
         <pre class="prettyprint">LivePagedListBuilder(dataSourceFactory,<br>        new PagedList.Config.Builder().setPageSize(pageSize).build())</pre>
@@ -257,7 +275,19 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/LivePagedListBuilder.html#LivePagedListBuilder(kotlin.Function0,androidx.paging.PagedList.Config)">LivePagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingSource.html">PagingSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;pagingSourceFactory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a>&nbsp;config<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData, use this instead:
+          <pre class="prettyprint">Pager(
+                PagingConfig(
+                    config.pageSize,
+                    config.prefetchDistance,
+                    config.enablePlaceholders,
+                    config.initialLoadSizeHint,
+                    config.maxSize
+                ),
+                initialLoadKey,
+                this
+            ).liveData</pre>
+        </aside>
         <p>Creates a <code><a href="/reference/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code> with required parameters.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -296,7 +326,13 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/LivePagedListBuilder.html#LivePagedListBuilder(kotlin.Function0,kotlin.Int)">LivePagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingSource.html">PagingSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;pagingSourceFactory,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;pageSize<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData, use this instead:
+          <pre class="prettyprint">Pager(
+                PagingConfig(pageSize),
+                initialLoadKey,
+                this
+            ).liveData</pre>
+        </aside>
         <p>Creates a <code><a href="/reference/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code> with required parameters.</p>
         <p>This method is a convenience for:</p>
         <pre class="prettyprint">LivePagedListBuilder(pagingSourceFactory,<br>        new PagedList.Config.Builder().setPageSize(pageSize).build())</pre>

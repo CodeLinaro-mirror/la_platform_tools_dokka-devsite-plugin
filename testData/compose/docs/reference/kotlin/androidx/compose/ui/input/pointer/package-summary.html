@@ -873,7 +873,9 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputChange).anyChangeConsumed()">anyChangeConsumed</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Partial consumption has been deprecated. Use isConsumed instead</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Partial consumption has been deprecated. Use isConsumed instead, use this instead:
+        <pre class="prettyprint">isConsumed</pre>
+      </aside>
       <p>True if any aspect of this <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> has been consumed.</p>
     </div>
     <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.changedToDown--"></a><a name="changedtodown"></a>
@@ -939,7 +941,9 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputChange).consumeAllChanges()">consumeAllChanges</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Use consume() instead</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use consume() instead, use this instead:
+        <pre class="prettyprint">consume()</pre>
+      </aside>
       <p>Consumes all changes associated with the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></p>
     </div>
     <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.consumeDownChange--"></a><a name="consumedownchange"></a>
@@ -953,7 +957,9 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputChange).consumeDownChange()">consumeDownChange</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Partial consumption has been deprecated. Use consume() instead.</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Partial consumption has been deprecated. Use consume() instead, use this instead:
+        <pre class="prettyprint">if (pressed != previousPressed) consume()</pre>
+      </aside>
       <p>Consume the up or down change of this <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> if there is an up or down change to consume.</p>
     </div>
     <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.consumePositionChange--"></a><a name="consumepositionchange"></a>
@@ -967,7 +973,9 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputChange).consumePositionChange()">consumePositionChange</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Partial consumption has been deprecated. Use consume() instead.</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Partial consumption has been deprecated. Use consume() instead, use this instead:
+        <pre class="prettyprint">if (positionChange() != Offset.Zero) consume()</pre>
+      </aside>
       <p>Consume position change if there is any</p>
     </div>
     <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerButtons-.indexOfFirstPressed--"></a><a name="indexoffirstpressed"></a>
@@ -1009,7 +1017,9 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputChange).isOutOfBounds(androidx.compose.ui.unit.IntSize)">isOutOfBounds</a></del></span>(size:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Use isOutOfBounds() that supports minimum touch target</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use isOutOfBounds() that supports minimum touch target, use this instead:
+        <pre class="prettyprint">this.isOutOfBounds(size, extendedTouchPadding)</pre>
+      </aside>
       <p>Returns <code>true</code> if the pointer has moved outside of the region of <code>(0, 0, size.width, size.height)</code> or <code>false</code> if the current pointer is up or it is inside the given bounds.</p>
     </div>
     <div class="api-item"><a name="(androidx.compose.ui.input.pointer.PointerInputChange).isOutOfBounds(androidx.compose.ui.unit.IntSize, androidx.compose.ui.geometry.Size)"></a><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.isOutOfBounds-androidx.compose.ui.unit.IntSize-androidx.compose.ui.geometry.Size-"></a><a name="isoutofbounds"></a>
@@ -1063,7 +1073,9 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChangeConsumed()">positionChangeConsumed</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Partial consumption has been deprecated. Use isConsumed instead</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Partial consumption has been deprecated. Use isConsumed instead, use this instead:
+        <pre class="prettyprint">isConsumed</pre>
+      </aside>
       <p>True if this <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>'s movement has been consumed.</p>
     </div>
     <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.positionChangeIgnoreConsumed--"></a><a name="positionchangeignoreconsumed"></a>

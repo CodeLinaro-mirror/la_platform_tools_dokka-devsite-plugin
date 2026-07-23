@@ -998,7 +998,9 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#(androidx.compose.ui.geometry.Rect).toAndroidRect()">toAndroidRect</a></del></span>():&nbsp;<a href="https://developer.android.com/reference/android/graphics/Rect.html">Rect</a></pre>
-          <aside class="caution"><strong>This function is deprecated.</strong><br>Converting Rect to android.graphics.Rect is lossy, and requires rounding. The behavior of toAndroidRect() truncates to an integral Rect, but you should choose the method of rounding most suitable for your use case.</aside>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>Converting Rect to android.graphics.Rect is lossy, and requires rounding. The behavior of toAndroidRect() truncates to an integral Rect, but you should choose the method of rounding most suitable for your use case, use this instead:
+            <pre class="prettyprint">android.graphics.Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())</pre>
+          </aside>
           <p>Creates a new instance of <code><a href="https://developer.android.com/reference/android/graphics/Rect.html">android.graphics.Rect</a></code> with the same bounds specified in the given <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></p>
         </div>
         <div class="api-item"><a name="-androidx.compose.ui.geometry.Rect-.toAndroidRectF--"></a><a name="toandroidrectf"></a>

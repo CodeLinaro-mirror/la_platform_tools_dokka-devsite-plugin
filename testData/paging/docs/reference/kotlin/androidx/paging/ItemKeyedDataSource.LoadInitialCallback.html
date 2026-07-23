@@ -47,7 +47,9 @@
       </table>
     </div>
     <hr>
-    <aside class="caution"><strong>This class is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+      <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+    </aside>
     <p>Callback for <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to return data and, optionally, position/count information.</p>
     <p>A callback can be called only once, and will throw if called again.</p>
     <p>If you can compute the number of items in the data set before and after the loaded range, call the three parameter <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a></code> to pass that information. You can skip passing this information by calling the single parameter <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a></code>, either if it's difficult to compute, or if <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#placeholdersEnabled()">LoadInitialParams.placeholdersEnabled</a></code> is <code>false</code>, so the positioning information will be ignored.</p>
@@ -158,7 +160,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">&lt;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#LoadInitialCallback()">LoadInitialCallback</a></del></span>()</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -191,7 +195,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a></del></span>(data:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;totalCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Called to pass initial load state from a DataSource.</p>
         <p>Call this method from your DataSource's <code>loadInitial</code> function to return data, and inform how many placeholders should be shown before and after. If counting is cheap to compute (for example, if a network load returns the information regardless), it's recommended to pass data back through this method.</p>
         <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>

@@ -175,7 +175,9 @@ Column {
             stiffness = Spring.StiffnessMediumLow,
             visibilityThreshold = IntOffset.VisibilityThreshold
         )<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-          <aside class="caution"><strong>This function is deprecated.</strong><br>Use Modifier.animateItem() instead</aside>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>Use Modifier.animateItem() instead, use this instead:
+            <pre class="prettyprint">Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null, placementSpec = animationSpec)</pre>
+          </aside>
           <p>This modifier animates the item placement within the grid.</p>
           <p>When you scroll backward staggered grids could move already visible items in order to correct the accumulated errors in previous item size estimations. This modifier can animate such moves.</p>
           <p>Aside from that when you provide a key via <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridScope.html#item(kotlin.Any,kotlin.Any,androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan,kotlin.Function1)">LazyStaggeredGridScope.item</a></code> / <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridScope.html#items(kotlin.Int,kotlin.Function1,kotlin.Function1,kotlin.Function1,kotlin.Function2)">LazyStaggeredGridScope.items</a></code> this modifier will enable item reordering animations.</p>

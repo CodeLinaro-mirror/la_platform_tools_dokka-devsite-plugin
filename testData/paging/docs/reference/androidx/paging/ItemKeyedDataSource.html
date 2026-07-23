@@ -54,7 +54,9 @@
       </table>
     </div>
     <hr>
-    <aside class="caution"><strong>This class is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+      <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+    </aside>
     <p>Incremental data loader for paging keyed content, where loaded content uses previously loaded items as input to future loads.</p>
     <p>Implement a DataSource using ItemKeyedDataSource if you need to use data from item <code>N - 1</code> to load item <code>N</code>. This is common, for example, in uniquely sorted database queries where attributes of the item such just before the next query define how to execute it.</p>
     <p>The <code>InMemoryByItemRepository</code> in the <a href="https://github.com/googlesamples/android-architecture-components/blob/master/PagingWithNetworkSample/README.md">PagingWithNetworkSample</a> shows how to implement a network ItemKeyedDataSource using <a href="https://square.github.io/retrofit/">Retrofit</a>, while handling swipe-to-refresh, network errors, and retry.</p>
@@ -279,7 +281,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.html#ItemKeyedDataSource()">ItemKeyedDataSource</a></del></span>()</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -318,7 +322,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key&nbsp;<span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.html#getKey(kotlin.Any)">getKey</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&nbsp;item)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Return a key associated with the given item.</p>
         <p>If your ItemKeyedDataSource is loading from a source that is sorted and loaded by a unique integer ID, you would return <code>item.getID()</code> here. This key can then be passed to <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> or <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> to load additional items adjacent to the item passed to this function.</p>
         <p>If your key is more complex, such as when you're sorting by name, then resolving collisions with integer ID, you'll need to return both. In such a case you would use a wrapper class, such as <code>Pair&lt;String, Integer&gt;</code> or, in Kotlin, <code>data class Key(val name: String, val id: Int)</code></p>
@@ -372,7 +378,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams,androidx.paging.ItemKeyedDataSource.LoadCallback)">loadAfter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html">ItemKeyedDataSource.LoadParams</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key&gt;&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html">ItemKeyedDataSource.LoadCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;callback<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Load list data after the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
         <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
         <p>Data may be passed synchronously during the loadAfter method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
@@ -412,7 +420,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams,androidx.paging.ItemKeyedDataSource.LoadCallback)">loadBefore</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html">ItemKeyedDataSource.LoadParams</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key&gt;&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html">ItemKeyedDataSource.LoadCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;callback<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Load list data before the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
         <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
         <p><b>Note:</b> Data returned will be prepended just before the key passed, so if you vary size, ensure that the last item is adjacent to the passed key.</p>
@@ -453,7 +463,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams,androidx.paging.ItemKeyedDataSource.LoadInitialCallback)">loadInitial</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html">ItemKeyedDataSource.LoadInitialParams</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key&gt;&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html">ItemKeyedDataSource.LoadInitialCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;callback<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Load initial data.</p>
         <p>This method is called first to initialize a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> with data. If it's possible to count the items that can be loaded by the DataSource, it's recommended to pass the loaded data to the callback via the three-parameter <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">LoadInitialCallback.onResult</a></code>. This enables PagedLists presenting data from this source to display placeholders to represent unloaded items.</p>
         <p><code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedInitialKey()">LoadInitialParams.requestedInitialKey</a></code> and <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedLoadSize()">LoadInitialParams.requestedLoadSize</a></code> are hints, not requirements, so they may be altered or ignored. Note that ignoring the <code>requestedInitialKey</code> can prevent subsequent PagedList/DataSource pairs from initializing at the same location. If your DataSource never invalidates (for example, loading from the network without the network ever signalling that old data must be reloaded), it's fine to ignore the <code>initialLoadKey</code> and always start from the beginning of the data set.</p>
@@ -492,7 +504,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ToValue&gt;&nbsp;&lt;ToValue&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(androidx.arch.core.util.Function)">map</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/arch/core/util/Function.html">Function</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ToValue&gt;&nbsp;function<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>Same as <code><a href="/reference/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
         <div class="devsite-table-wrapper">
@@ -578,7 +592,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ToValue&gt;&nbsp;&lt;ToValue&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ToValue&gt;&nbsp;function<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>An overload of <code><a href="/reference/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
         <p>Same as <code><a href="/reference/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
@@ -661,7 +677,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ToValue&gt;&nbsp;&lt;ToValue&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/arch/core/util/Function.html">Function</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ToValue&gt;&gt;&nbsp;function<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>Same as <code><a href="/reference/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
         <div class="devsite-table-wrapper">
@@ -747,7 +765,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ToValue&gt;&nbsp;&lt;ToValue&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ToValue&gt;&gt;&nbsp;function<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>An overload of <code><a href="/reference/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
         <p>Same as <code><a href="/reference/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
