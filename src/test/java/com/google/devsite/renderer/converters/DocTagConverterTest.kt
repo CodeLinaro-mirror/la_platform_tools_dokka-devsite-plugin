@@ -1624,11 +1624,28 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         """
                 .render()
 
-        val exception1 = assertFails { moduleJ1.throwsTable().item() }
+        moduleJ1.throwsTable().item()
+        assertThat(logs)
+            .contains(
+                "WARN: SRC_DIR/main/java/androidx/example/Test.java:16 Do not {@link the " +
+                    "exception type in `@throws if I try to linkify` in DFunction foo"
+            )
         outputStream.reset()
-        val exception2 = assertFails { moduleJ2.throwsTable().item() }
+        moduleJ2.throwsTable().item()
+        assertThat(logs)
+            .contains(
+                "WARN: SRC_DIR/main/java/androidx/example/Test.java:16 Do not use 'an' before the" +
+                    " exception type in `@throws IllegalStateException if my syntax is bad` in " +
+                    "DFunction foo"
+            )
         outputStream.reset()
-        val exception3 = assertFails { moduleK1.throwsTable().item() }
+        moduleK1.throwsTable().item()
+        assertThat(logs)
+            .containsExactly(
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Do not use 'an' " +
+                    "before the exception type in `@throws IllegalStateException if my syntax is " +
+                    "bad` in DFunction foo"
+            )
         outputStream.reset()
         val throwsBad4 = moduleJ3.throwsTable().item()
         assertThat(logs.single())
@@ -1641,28 +1658,6 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val throwsFine1 = moduleK2.throwsTable().item()
         assertThat(logs).isEmpty()
 
-        for (exception in listOf(exception1, exception2, exception3)) {
-            assertThat(exception.localizedMessage)
-                .contains(
-                    "Exception thrown while handling Throws tags " +
-                        "[Throws(root=CustomDocTag(children=[P(children=[Text(body="
-                )
-        }
-        assertThat(exception1.localizedMessage)
-            .contains(
-                "if I try to linkify, children=[], params={})], params={})], params={}, name=MARKDOWN" +
-                    "_FILE), name={@link IllegalStateException}, exceptionAddress=null)]."
-            )
-        assertThat(exception2.localizedMessage)
-            .contains(
-                "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
-                    "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)]."
-            )
-        assertThat(exception3.localizedMessage)
-            .contains(
-                "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
-                    "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)]."
-            )
         for (throws in listOf(throwsBad4, throwsBad5)) {
             assertThat(throws.name()).isEqualTo("")
             assertThat(throws.data.title.typeName()).isEqualTo("IOException")

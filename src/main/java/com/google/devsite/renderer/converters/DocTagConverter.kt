@@ -535,15 +535,14 @@ internal class DocTagConverter(
             }
 
         if (throws.name in listOf("a", "an")) {
-            throw RuntimeException(
-                "Do not use '${throws.name}' before the exception type in an @throws statement. " +
-                    "This is against jdoc spec. Your exception is not being linked and looks bad"
+            docsHolder.printWarningFor(
+                "Do not use '${throws.name}' before the exception type in `@throws ${throws.text()}`",
+                parent,
             )
         } else if ("{@link" in name) {
-            throw RuntimeException(
-                "Do not {@link the exception type in an @throws statement. @throws state" +
-                    "ments are automatically linked. Manually java-linking them is against jdoc s" +
-                    "pec, and breaks linking behavior causing them to actually *not* be linked."
+            docsHolder.printWarningFor(
+                "Do not {@link the exception type in `@throws ${throws.text()}`",
+                parent,
             )
         } else if (link.data.url.isEmpty()) {
             docsHolder.printWarningFor(
