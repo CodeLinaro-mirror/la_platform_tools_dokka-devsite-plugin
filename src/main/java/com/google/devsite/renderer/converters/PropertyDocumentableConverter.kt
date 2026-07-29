@@ -36,8 +36,11 @@ import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.model.Annotations
+import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DefaultValue
+import org.jetbrains.dokka.model.StringValue
 
 /** Converts documentable properties into property components. */
 internal class PropertyDocumentableConverter(
@@ -54,6 +57,8 @@ internal class PropertyDocumentableConverter(
         val jvmSourceSet = property.getAsJavaSourceSet() ?: return null
         val (typeAnnotations, nonTypeAnnotations) =
             property.annotations(jvmSourceSet).partition { it.belongsOnReturnType() }
+        val deprecationAnnotation =
+            nonTypeAnnotations.deprecationAnnotation() ?: property.withAccessorDeprecation()
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title =
@@ -76,7 +81,7 @@ internal class PropertyDocumentableConverter(
                             description =
                                 javadocConverter.summaryDescription(
                                     property,
-                                    nonTypeAnnotations.deprecationAnnotation(),
+                                    deprecationAnnotation,
                                 ),
                             annotationComponents =
                                 annotationConverter.annotationComponents(
@@ -100,6 +105,8 @@ internal class PropertyDocumentableConverter(
             property.annotations(property.getExpectOrCommonSourceSet()).partition {
                 it.belongsOnReturnType()
             }
+        val deprecationAnnotation =
+            nonTypeAnnotations.deprecationAnnotation() ?: property.withAccessorDeprecation()
         return DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
                 title =
@@ -126,7 +133,7 @@ internal class PropertyDocumentableConverter(
                             description =
                                 javadocConverter.summaryDescription(
                                     property,
-                                    nonTypeAnnotations.deprecationAnnotation(),
+                                    deprecationAnnotation,
                                 ),
                             annotationComponents =
                                 annotationConverter.annotationComponents(
@@ -146,6 +153,8 @@ internal class PropertyDocumentableConverter(
         val jvmSourceSet = property.getAsJavaSourceSet() ?: return null
         val (typeAnnotations, nonTypeAnnotations) =
             property.annotations(jvmSourceSet).partition { it.belongsOnReturnType() }
+        val deprecationAnnotation =
+            nonTypeAnnotations.deprecationAnnotation() ?: property.withAccessorDeprecation()
         val returnType =
             paramConverter.componentForProjection(
                 projection = property.type,
@@ -173,7 +182,7 @@ internal class PropertyDocumentableConverter(
                         documentable = property,
                         returnType = returnType,
                         paramNames = listOf("receiver"),
-                        deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation(),
+                        deprecationAnnotation = deprecationAnnotation,
                     ),
                 displayLanguage = displayLanguage,
                 modifiers = property.modifiers(jvmSourceSet).modifiersFor(hints),
@@ -194,6 +203,8 @@ internal class PropertyDocumentableConverter(
             property.annotations(property.getExpectOrCommonSourceSet()).partition {
                 it.belongsOnReturnType()
             }
+        val deprecationAnnotation =
+            nonTypeAnnotations.deprecationAnnotation() ?: property.withAccessorDeprecation()
         val returnType =
             paramConverter.componentForProjection(
                 property.type,
@@ -221,7 +232,7 @@ internal class PropertyDocumentableConverter(
                         documentable = property,
                         returnType = returnType,
                         paramNames = listOf("receiver"),
-                        deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation(),
+                        deprecationAnnotation = deprecationAnnotation,
                     ),
                 displayLanguage = displayLanguage,
                 // TODO(KMP, b/254493209)
@@ -290,5 +301,45 @@ internal class PropertyDocumentableConverter(
             getterCallable.anchor(open = "-", close = "-"),
             setterCallable.anchor(open = "-", close = "-"),
         )
+    }
+
+    /**
+     * Propagates the deprecation annotation from accessors if not present on the property itself.
+     */
+    private fun DProperty.withAccessorDeprecation(): Annotation? {
+        val getterDeprecation = this.getter?.deprecationAnnotation()
+        val setterDeprecation = this.setter?.deprecationAnnotation()
+        val hasBoth = this.getter != null && this.setter != null
+
+        return if (hasBoth && getterDeprecation != null && setterDeprecation == null) {
+            getterDeprecation.copy(
+                scope = Annotations.AnnotationScope.GETTER,
+                params =
+                    getterDeprecation.params.ifEmpty {
+                        mapOf("message" to StringValue("Deprecated"))
+                    },
+            )
+        } else if (hasBoth && setterDeprecation != null && getterDeprecation == null) {
+            setterDeprecation.copy(
+                scope = Annotations.AnnotationScope.SETTER,
+                params =
+                    setterDeprecation.params.ifEmpty {
+                        mapOf("message" to StringValue("Deprecated"))
+                    },
+            )
+        } else {
+            getterDeprecation?.copy(
+                params =
+                    getterDeprecation.params.ifEmpty {
+                        mapOf("message" to StringValue("Deprecated"))
+                    }
+            )
+                ?: setterDeprecation?.copy(
+                    params =
+                        setterDeprecation.params.ifEmpty {
+                            mapOf("message" to StringValue("Deprecated"))
+                        }
+                )
+        }
     }
 }
