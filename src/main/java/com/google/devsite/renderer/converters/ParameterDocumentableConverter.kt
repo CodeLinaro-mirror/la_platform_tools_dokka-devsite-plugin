@@ -110,6 +110,7 @@ internal class ParameterDocumentableConverter(
                                 sourceSet = parent.getExpectOrCommonSourceSet(),
                                 propagatedAnnotations = propagatedAnnotations,
                                 propagatedNullability = nullability,
+                                context = param,
                             ),
                         displayLanguage = Language.JAVA,
                         modifiers =
@@ -126,6 +127,7 @@ internal class ParameterDocumentableConverter(
                                 ),
                         annotationComponents =
                             annotationConverter.annotationComponents(
+                                documentable = param,
                                 annotations = retainedAnnotations,
                                 nullability =
                                     Nullability.DONT_CARE, // Propagate Nullability, don't retain
@@ -180,6 +182,7 @@ internal class ParameterDocumentableConverter(
                 isJavaSource = isFromJava,
                 sourceSet = parent.getExpectOrCommonSourceSet(),
                 propagatedAnnotations = annotations.filter { it.belongsOnReturnType() },
+                context = param,
             )
 
         val paramName =
@@ -198,6 +201,7 @@ internal class ParameterDocumentableConverter(
                 defaultValue = defaultValue,
                 annotationComponents =
                     annotationConverter.annotationComponents(
+                        documentable = param,
                         annotations = annotations.filter { !it.belongsOnReturnType() },
                         nullability = Nullability.DONT_CARE, // as-Kotlin doesn't nullable-annotate
                     ),
@@ -226,6 +230,7 @@ internal class ParameterDocumentableConverter(
                                         param.sourceSetIndependentAnnotations(),
                                     )
                                 },
+                            context = param,
                         )
                     },
                 pathProvider = pathProvider,
@@ -238,6 +243,7 @@ internal class ParameterDocumentableConverter(
         projection: Projection,
         isFromJava: Boolean,
         sourceSet: DokkaConfiguration.DokkaSourceSet,
+        context: Documentable,
         isSummary: Boolean = false,
     ): ParameterComponent {
         val primaryType =
@@ -253,6 +259,7 @@ internal class ParameterDocumentableConverter(
                         .toSet(),
                 propagatedAnnotations =
                     projection.annotations(sourceSet).filter { it.belongsOnReturnType() },
+                context = context,
             )
 
         val name = (projection as? TypeConstructor)?.presentableName ?: ""
@@ -290,6 +297,7 @@ internal class ParameterDocumentableConverter(
                 defaultValue = defaultValue,
                 annotationComponents =
                     annotationConverter.annotationComponents(
+                        documentable = context,
                         annotations =
                             projection.annotations(sourceSet).filter { !it.belongsOnReturnType() },
                         nullability = projection.getNullability(displayLanguage, isFromJava),
@@ -309,6 +317,7 @@ internal class ParameterDocumentableConverter(
      * @param projection what is being converted to a TypeProjectionComponent
      * @param isJavaSource used to determine whether an unannotated projection is nullable
      * @param sourceSet the sourceSet this projection's container is associated with
+     * @param context the documentable this type is part of
      * @param propagatedAnnotations used in cases where e.g. annotations on a function should be
      *   propagated to the return type
      * @param removedAnnotations the annotations that were consumed in a wrapper of this projection,
@@ -321,6 +330,7 @@ internal class ParameterDocumentableConverter(
         projection: Projection,
         isJavaSource: Boolean,
         sourceSet: DokkaConfiguration.DokkaSourceSet,
+        context: Documentable,
         propagatedAnnotations: List<Annotation> = emptyList(),
         removedAnnotations: Set<Annotation> = emptySet(),
         isReturnType: Boolean = false,
@@ -329,7 +339,7 @@ internal class ParameterDocumentableConverter(
         // Lambda functions can't be generic types, but their parameters are crammed into the same
         // "projections" location where generic types are stored.
         // This must happen before the rewriting because PrimitiveJavaTypes can't have generics
-        var generics = projection.generics(isJavaSource, sourceSet)
+        var generics = projection.generics(isJavaSource, sourceSet, context)
         // This rewriting must happen before Variance is handled, or we won't know whether to unbox
         val proj =
             if (displayLanguage == Language.KOTLIN) {
@@ -349,6 +359,7 @@ internal class ParameterDocumentableConverter(
                 removedAnnotations = removedAnnotations,
                 isReturnType = false,
                 propagatedNullability = Nullability.KOTLIN_NULLABLE or propagatedNullability,
+                context = context,
             )
         }
         // isReturnType = should_convert_Unit_to_void, which is always false for `GenericOf<Unit>`.
@@ -361,6 +372,7 @@ internal class ParameterDocumentableConverter(
                 removedAnnotations = removedAnnotations,
                 isReturnType = false,
                 propagatedNullability = propagatedNullability,
+                context = context,
             )
         }
         if (proj is TypeAliased) {
@@ -372,6 +384,7 @@ internal class ParameterDocumentableConverter(
                 removedAnnotations = removedAnnotations,
                 isReturnType = isReturnType,
                 propagatedNullability = propagatedNullability,
+                context = context,
             )
         }
 
@@ -384,6 +397,7 @@ internal class ParameterDocumentableConverter(
 
         val annotationComponents =
             annotationConverter.annotationComponents(
+                documentable = context,
                 annotations = annotations,
                 nullability = nullability,
             )
@@ -407,6 +421,7 @@ internal class ParameterDocumentableConverter(
                             annotations = annotations,
                             nullability = nullability,
                             sourceSet = sourceSet,
+                            context = context,
                         )
                     isJavaSource &&
                         proj is GenericTypeConstructor &&
@@ -451,6 +466,7 @@ internal class ParameterDocumentableConverter(
         sourceSet: DokkaConfiguration.DokkaSourceSet,
         annotations: List<Annotation> = emptyList(),
         nullability: Nullability,
+        context: Documentable,
     ): TypeProjectionComponent {
         val returnType = proj.asTypeConstructor().projections.last()
         val lambdaModifiers: List<String> =
@@ -463,7 +479,14 @@ internal class ParameterDocumentableConverter(
         // Always ignore return type and receiver since they're handled elsewhere, not as params.
         val lambdaProjections = proj.asTypeConstructor().projections - returnType - proj.receiver()
         val lambdaParams =
-            lambdaProjections.map { componentForLambdaParameter(it!!, false, sourceSet) }
+            lambdaProjections.map {
+                componentForLambdaParameter(
+                    projection = it!!,
+                    isFromJava = false,
+                    sourceSet = sourceSet,
+                    context = context,
+                )
+            }
 
         return DefaultLambdaTypeProjectionComponent(
             LambdaTypeProjectionComponent.Params(
@@ -473,14 +496,24 @@ internal class ParameterDocumentableConverter(
                         false,
                         sourceSet,
                         propagatedNullability = proj.getNullability(displayLanguage),
+                        context = context,
                     ),
                 nullability = nullability,
                 displayLanguage = displayLanguage,
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
-                receiver = proj.receiver()?.let { componentForProjection(it, false, sourceSet) },
+                receiver =
+                    proj.receiver()?.let {
+                        componentForProjection(
+                            projection = it,
+                            isJavaSource = false,
+                            sourceSet = sourceSet,
+                            context = context,
+                        )
+                    },
                 annotationComponents =
                     annotationConverter.annotationComponents(
+                        documentable = context,
                         annotations = annotations,
                         // Don't inject space-consuming nullability annotations for type parameters
                         nullability =
@@ -497,13 +530,19 @@ internal class ParameterDocumentableConverter(
     fun Projection.generics(
         isJavaSource: Boolean,
         sourceSet: DokkaConfiguration.DokkaSourceSet,
+        context: Documentable,
     ): List<TypeProjectionComponent> =
         when (this) {
             is TypeConstructor ->
                 this.projections.map {
-                    componentForProjection(it, isJavaSource = isJavaSource, sourceSet)
+                    componentForProjection(
+                        projection = it,
+                        isJavaSource = isJavaSource,
+                        sourceSet = sourceSet,
+                        context = context,
+                    )
                 }
-            is Nullable -> this.inner.generics(isJavaSource, sourceSet)
+            is Nullable -> this.inner.generics(isJavaSource, sourceSet, context)
             is TypeParameter,
             is PrimitiveJavaType,
             is UnresolvedBound,
@@ -512,9 +551,9 @@ internal class ParameterDocumentableConverter(
             Void,
             Dynamic -> emptyList()
             // These three don't matter in the main use case because we recurse there later
-            is Variance<*> -> this.inner.generics(isJavaSource, sourceSet)
-            is TypeAliased -> this.inner.generics(isJavaSource, sourceSet)
-            is DefinitelyNonNullable -> this.inner.generics(isJavaSource, sourceSet)
+            is Variance<*> -> this.inner.generics(isJavaSource, sourceSet, context)
+            is TypeAliased -> this.inner.generics(isJavaSource, sourceSet, context)
+            is DefinitelyNonNullable -> this.inner.generics(isJavaSource, sourceSet, context)
         }
 
     /**

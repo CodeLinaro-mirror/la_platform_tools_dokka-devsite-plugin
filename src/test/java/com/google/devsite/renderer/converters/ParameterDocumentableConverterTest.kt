@@ -1648,6 +1648,7 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
                 isReturnType = true,
                 isJavaSource = functionComponent.isFromJava(),
                 sourceSet = getExpectOrCommonSourceSet(),
+                context = functionComponent,
             )
     }
 

@@ -71,6 +71,7 @@ internal class FunctionDocumentableConverter(
                                     isReturnType = true,
                                     isJavaSource = function.isFromJava(),
                                     sourceSet = jvmSourceSet,
+                                    context = function,
                                 ),
                             modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints),
                         )
@@ -86,6 +87,7 @@ internal class FunctionDocumentableConverter(
                                 ),
                             annotationComponents =
                                 annotationConverter.annotationComponents(
+                                    documentable = function,
                                     annotations = nonTypeAnnotations,
                                     // Propagates to return type instead
                                     nullability = Nullability.DONT_CARE,
@@ -120,6 +122,7 @@ internal class FunctionDocumentableConverter(
                                     isReturnType = true,
                                     isJavaSource = function.isFromJava(),
                                     sourceSet = function.getExpectOrCommonSourceSet(),
+                                    context = function,
                                 ),
                             // TODO(KMP, b/254493209)
                             modifiers =
@@ -139,6 +142,7 @@ internal class FunctionDocumentableConverter(
                                 ),
                             annotationComponents =
                                 annotationConverter.annotationComponents(
+                                    documentable = function,
                                     annotations = nonTypeAnnotations,
                                     // Propagates to return type instead
                                     nullability = Nullability.DONT_CARE,
@@ -164,6 +168,7 @@ internal class FunctionDocumentableConverter(
                         description = javadocConverter.summaryDescription(function),
                         annotationComponents =
                             annotationConverter.annotationComponents(
+                                documentable = function,
                                 annotations = function.annotations(jvmSourceSet),
                                 // Propagates to return type instead
                                 nullability = Nullability.DONT_CARE,
@@ -188,6 +193,7 @@ internal class FunctionDocumentableConverter(
                         // TODO(KMP member signatures b/254493209)
                         annotationComponents =
                             annotationConverter.annotationComponents(
+                                documentable = function,
                                 annotations =
                                     function.annotations(function.getExpectOrCommonSourceSet()),
                                 // Propagates to return type instead
@@ -237,6 +243,7 @@ internal class FunctionDocumentableConverter(
                         null
                     },
                 sourceSet = jvmSourceSet,
+                context = function,
             )
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
@@ -266,6 +273,7 @@ internal class FunctionDocumentableConverter(
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
                 annotationComponents =
                     annotationConverter.annotationComponents(
+                        documentable = function,
                         annotations = signatureAnnotations,
                         // Nullability is on the return type instead
                         nullability = Nullability.DONT_CARE,
@@ -299,6 +307,7 @@ internal class FunctionDocumentableConverter(
                         null
                     },
                 sourceSet = function.getExpectOrCommonSourceSet(),
+                context = function,
             )
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
@@ -330,6 +339,7 @@ internal class FunctionDocumentableConverter(
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
                 annotationComponents =
                     annotationConverter.annotationComponents(
+                        documentable = function,
                         annotations = signatureAnnotations,
                         // Nullability is on the return type instead
                         nullability = Nullability.DONT_CARE,

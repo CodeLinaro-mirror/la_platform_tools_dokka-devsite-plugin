@@ -846,6 +846,7 @@ internal abstract class ClasslikeDocumentableConverter(
                         },
                     annotationComponents =
                         annotationConverter.annotationComponents(
+                            documentable = classlike,
                             annotations = sourceSetDependentInput.annotations,
                             nullability = Nullability.DONT_CARE, // Classlike definitions aren't null
                         ),
@@ -882,7 +883,14 @@ internal abstract class ClasslikeDocumentableConverter(
                 )
             ),
             classlike.annotations(sourceSet),
-            typeAliasEquals?.let { paramConverter.componentForProjection(it, false, sourceSet) },
+            typeAliasEquals?.let {
+                paramConverter.componentForProjection(
+                    projection = it,
+                    isJavaSource = false,
+                    sourceSet = sourceSet,
+                    context = classlike,
+                )
+            },
         )
     }
 
