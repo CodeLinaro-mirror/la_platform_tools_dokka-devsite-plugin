@@ -1408,6 +1408,30 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
     }
 
     @Test
+    fun `See tag that cannot be parsed`() {
+        val documentation =
+            """
+            |/**
+            | * @see {@link Foo}
+            | */
+            |class Foo
+            """
+                .render()
+                .documentation()
+
+        val expectedWarning =
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Could not understand @see tag " +
+                "`{@link Foo}` in DClass Foo"
+        assertThat(logs).containsExactly(expectedWarning)
+
+        // Tag is parsed as an empty link
+        val see = (documentation.last() as LinkDescriptionSummaryList).single()
+        val link = see.data.title
+        assertThat(link.data.url).isEqualTo("")
+        assertThat(link.data.name).isEqualTo("")
+    }
+
+    @Test
     fun `Multiline doc from fragment, with formatting`() {
         val module =
             """
