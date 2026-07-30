@@ -406,18 +406,21 @@ internal class DocTagConverter(
                 )
         }
         val params =
-            tags.map { tag ->
+            tags.mapNotNull { tag ->
                 if (allOptions[tag.name()] == null) {
-                    throw RuntimeException(
+                    docsHolder.printWarningFor(
                         "Unable to find what is referred to by \"@param " +
                             "${tag.name()}\" in ${documentable.className} " +
-                            "${documentable.name}, with contents: ${tag.text()}"
+                            "${documentable.name}, with contents: ${tag.text()}",
+                        documentable,
+                    )
+                    null
+                } else {
+                    val title = allOptions[tag.name()]!!
+                    DefaultTableRowSummaryItem(
+                        TableRowSummaryItem.Params(title = title, description = description(tag))
                     )
                 }
-                val title = allOptions[tag.name()]!!
-                DefaultTableRowSummaryItem(
-                    TableRowSummaryItem.Params(title = title, description = description(tag))
-                )
             }
 
         return DefaultSummaryList(

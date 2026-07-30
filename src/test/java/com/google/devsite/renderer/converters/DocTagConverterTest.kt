@@ -599,9 +599,13 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             .isEqualTo("A vary bary name")
         // Upstream dokka does not propagate @property documentation on property parameters to the
         // constructor. We think this is what we want.
-        assertFails {
-            val constructorDoc = module.documentation({ this.constructor() })
-        }
+        module.documentation({ this.constructor() })
+        assertThat(logs)
+            .contains(
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:7 Unable to find what is " +
+                    "referred to by \"@param baz\" in DFunction Foo, with contents: Buzzbuzzbuzz in " +
+                    "DFunction Foo"
+            )
     }
 
     @Test
@@ -767,27 +771,19 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
 
     @Test
     fun `@param throws exception or prints warning for invalid parameter`() {
-        val exception = assertFails {
-            """
-            |/**
-            | * @param NOT_A_REAL_PARAM aaaaaa
-            | */
-            |fun foo()
-            """
-                .render()
-                .documentation()
-        }
-        assertThat(exception.localizedMessage)
-            .isEqualTo(
-                "Exception thrown while handling Param tags [Param(root=" +
-                    "CustomDocTag(children=[P(children=[Text(body=aaaaaa, children=[], params={})], " +
-                    "params={})], params={}, name=MARKDOWN_FILE), name=NOT_A_REAL_PARAM, " +
-                    "address=null)]."
-            )
-        assertThat(exception.cause!!.localizedMessage)
-            .isEqualTo(
-                "Unable to find what is referred to by \"@param NOT_A_REAL_PARAM\" in " +
-                    "DFunction foo, with contents: aaaaaa"
+        """
+        |/**
+        | * @param NOT_A_REAL_PARAM aaaaaa
+        | */
+        |fun foo()
+        """
+            .render()
+            .documentation()
+        assertThat(logs)
+            .contains(
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Unable to find what is referred" +
+                    " to by \"@param NOT_A_REAL_PARAM\" in DFunction foo, with contents: aaaaaa in " +
+                    "DFunction foo"
             )
         """
         |/**
