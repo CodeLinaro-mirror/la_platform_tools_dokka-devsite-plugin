@@ -44,6 +44,8 @@ import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.assertFails
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.body
@@ -70,6 +72,28 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 internal class DocTagConverterTest(private val displayLanguage: Language) :
     ConverterTestBase(displayLanguage) {
+    /** Tracks logged output for each test. Tests should use [logs] to access the output. */
+    lateinit var outputStream: ByteArrayOutputStream
+
+    /** The logged output for each test. */
+    val logs: List<String>
+        get() =
+            outputStream.toString().replace(tmpDirRegex, "SRC_DIR").trim().split("\n").filter {
+                it.isNotBlank()
+            }
+
+    @BeforeTest
+    fun captureLogs() {
+        // Set up each test to capture logs.
+        outputStream = ByteArrayOutputStream()
+        System.setOut(PrintStream(outputStream))
+    }
+
+    @AfterTest
+    fun endLogs() {
+        System.setOut(System.out)
+    }
+
     @Test
     fun `Empty description isn't documented`() {
         val description =
@@ -791,9 +815,6 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 "Unable to find what is referred to by \"@param NOT_A_REAL_PARAM\" in " +
                     "DFunction foo, with contents: aaaaaa"
             )
-        val standardOut = System.out
-        val outputStreamCaptor = ByteArrayOutputStream()
-        System.setOut(PrintStream(outputStreamCaptor))
         """
         |/**
         | * @param NOT_A_REAL_PARAM aaaaaa
@@ -802,13 +823,11 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         """
             .render()
             .documentation() // for type params and property params
-        // val expected = "src/main/kotlin/androidx/example/Test.kt:4 Unable to find reference " +
         val expected =
-            "Unable to find reference " + // b/327166311
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Unable to find reference " +
                 "@param NOT_A_REAL_PARAM in DClass Foo. Are you trying to refer to something not " +
-                "visible to users?\n"
-        assertThat(outputStreamCaptor.toString()).endsWith(expected)
-        System.setOut(standardOut)
+                "visible to users?"
+        assertThat(logs.last()).isEqualTo(expected)
         assertFails { // for @param in the wrong place
             """
             |/**
@@ -823,9 +842,6 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
 
     @Test
     fun `@property throws exception for invalid property`() {
-        val standardOut = System.out
-        val outputStreamCaptor = ByteArrayOutputStream()
-        System.setOut(PrintStream(outputStreamCaptor))
         """
         |/**
         | * @property NOT_A_REAL_PROPERTY aaaaaa
@@ -834,12 +850,10 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         """
             .render()
             .documentation()
-        // var expected = "src/main/kotlin/androidx/example/Test.kt:4*/ Unable to find reference " +
         var expected =
-            "Unable to find reference " + // b/327166311
-                "@property NOT_A_REAL_PROPERTY in DClass Foo\n"
-        assertThat(outputStreamCaptor.toString()).endsWith(expected)
-        System.setOut(PrintStream(outputStreamCaptor))
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 " +
+                "Unable to find reference @property NOT_A_REAL_PROPERTY in DClass Foo"
+        assertThat(logs).contains(expected)
         """
         |/**
         | * @property NO_PROPERTIES_HERE aaaaaa
@@ -848,11 +862,10 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         """
             .render()
             .documentation()
-        // expected = "src/main/kotlin/androidx/example/Test.kt:4*/ Unable to find reference " +
         expected =
-            "Unable to find reference " + // 327166311
-                "@property NO_PROPERTIES_HERE in DClass Foo"
-        assertThat(outputStreamCaptor.toString()).contains(expected)
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 " +
+                "Unable to find reference @property NO_PROPERTIES_HERE in DClass Foo"
+        assertThat(logs).contains(expected)
         assertFails {
             """
             |class Foo() {
@@ -884,7 +897,6 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .render()
                 .documentation() // @property must be on correct property
         }
-        System.setOut(standardOut)
     }
 
     @Test // REGRESSION: go/dokka-upstream-bug/2388
@@ -1566,9 +1578,6 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
 
     @Test
     fun `Bad throws tags generate warnings but not errors`() {
-        val standardOut = System.out
-        val outputStreamCaptor = ByteArrayOutputStream()
-        System.setOut(PrintStream(outputStreamCaptor))
         fun DModule.throwsTable() =
             documentation().first { (it as? DocsSummaryList)?.title() == "Throws" }
                 as DocsSummaryList
@@ -1622,21 +1631,21 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .render()
 
         val exception1 = assertFails { moduleJ1.throwsTable().item() }
-        outputStreamCaptor.reset()
+        outputStream.reset()
         val exception2 = assertFails { moduleJ2.throwsTable().item() }
-        outputStreamCaptor.reset()
+        outputStream.reset()
         val exception3 = assertFails { moduleK1.throwsTable().item() }
-        outputStreamCaptor.reset()
+        outputStream.reset()
         val throwsBad4 = moduleJ3.throwsTable().item()
-        assertThat(outputStreamCaptor.toString())
+        assertThat(logs.single())
             .contains("The general fix for these is to fully qualify the exception name")
-        outputStreamCaptor.reset()
+        outputStream.reset()
         val throwsBad5 = moduleK3.throwsTable().item()
-        assertThat(outputStreamCaptor.toString())
+        assertThat(logs.single())
             .contains("The general fix for these is to fully qualify the exception name")
-        outputStreamCaptor.reset()
+        outputStream.reset()
         val throwsFine1 = moduleK2.throwsTable().item()
-        assertThat(outputStreamCaptor.toString()).isEmpty()
+        assertThat(logs).isEmpty()
 
         for (exception in listOf(exception1, exception2, exception3)) {
             assertThat(exception.localizedMessage)
@@ -1678,8 +1687,6 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/" +
                     "-illegal-state-exception/index.html"
             )
-
-        System.setOut(standardOut)
     }
 
     @Test
@@ -1959,9 +1966,6 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
 
     @Test
     fun `Warning on missing @param documentation`() {
-        val standardOut = System.out
-        val outputStreamCaptor = ByteArrayOutputStream()
-        System.setOut(PrintStream(outputStreamCaptor))
         """
             |/**
             | * @param b
@@ -1972,12 +1976,10 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             .render()
             .documentation()
 
-        // val expected = "src/main/kotlin/androidx/example/Test.kt:5 Missing @param tag for " +
         val expected =
-            "Missing @param tag for " + // b/327166311
-                "parameter `a` in DFunction foo\n"
-        assertThat(outputStreamCaptor.toString()).endsWith(expected)
-        System.setOut(standardOut)
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:6 " +
+                "Missing @param tag for parameter `a` in DFunction foo"
+        assertThat(logs).contains(expected)
     }
 
     @Test
@@ -1997,9 +1999,6 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
 
     @Test
     fun `Verify that several real code samples don't give warnings`() {
-        val standardOut = System.out
-        val outputStreamCaptor = ByteArrayOutputStream()
-        System.setOut(PrintStream(outputStreamCaptor))
         val module =
             """
             |/**
@@ -2048,6 +2047,10 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             | annotation class NavDestinationDsl
             | open class Parcelable
             | class NavType<T>
+            | class DynamicGraphNavigator {
+            |     class DynamicNavGraph
+            | }
+            | class NavArgument
         """
                 .render()
         val converterHolder = ConverterHolder(this@DocTagConverterTest, module)
@@ -2061,14 +2064,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .NonKmpClasslikeConverter(module.explicitClasslike("ParcelableArrayType"))
                 .classlike()
         }
-        val filteredOutput =
-            outputStreamCaptor
-                .toString()
-                .split("\n")
-                .filterNot { it.startsWith("WARN: Couldn't resolve link:") }
-                .joinToString("\n")
-        assertThat(filteredOutput).doesNotContain("WARN")
-        System.setOut(standardOut)
+        assertThat(logs).isEmpty()
     }
 
     @Test
@@ -2323,5 +2319,8 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
+
+        /** Regex used to replace temporary directory paths in logs. */
+        private val tmpDirRegex = "/((var)|(tmp))/.*/src".toRegex()
     }
 }
