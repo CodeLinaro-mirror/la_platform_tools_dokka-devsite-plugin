@@ -38,7 +38,6 @@ import com.google.devsite.util.JsonLibraryMetadata
 import com.google.devsite.util.JsonVersionMetadata
 import com.google.devsite.util.LibraryMetadata
 import com.google.devsite.util.traceCoroutine
-import kotlin.system.exitProcess
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,21 +60,13 @@ internal class MultiLanguageRenderer(
 ) : Renderer {
 
     override fun render(root: RootPageNode) {
-        try {
-            context(devsiteConfiguration.tracer) {
-                render(
-                    (root as ModulePageNode).documentables.single() as DModule,
-                    DefaultExternalDokkaLocationProvider(
-                        dokkaLocationProvider = DokkaLocationProvider(root, context)
-                    ),
-                )
-            }
-        } catch (e: Exception) {
-            // Workaround for https://github.com/Kotlin/dokka/issues/4537 -- when there is an
-            // exception during rendering, dokka doesn't dispose of all analysis API resources,
-            // which prevents the process from exiting. This can be removed once the issue is fixed.
-            e.printStackTrace()
-            exitProcess(1)
+        context(devsiteConfiguration.tracer) {
+            render(
+                (root as ModulePageNode).documentables.single() as DModule,
+                DefaultExternalDokkaLocationProvider(
+                    dokkaLocationProvider = DokkaLocationProvider(root, context)
+                ),
+            )
         }
     }
 
