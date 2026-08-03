@@ -9,6 +9,7 @@
       <meta itemprop="name" content="ViewModelStoreOwner">
       <meta itemprop="path" content="androidx.lifecycle">
       <meta itemprop="property" content="getViewModelStore()">
+      <meta itemprop="property" content="(androidx.savedstate.SavedStateRegistryOwner).enableSavedStateHandles()">
       <meta itemprop="language" content="JAVA">
     </div>
     <div id="header-block">
@@ -73,6 +74,28 @@
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a>&nbsp;&amp;&nbsp;<a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html">ViewModelStoreOwner</a>&gt; <a href="/reference/androidx/lifecycle/SavedStateHandleSupport.html">SavedStateHandleSupport</a>.<a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html#(androidx.savedstate.SavedStateRegistryOwner).enableSavedStateHandles()">enableSavedStateHandles</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;receiver<br>)</code></div>
+              <p>Enables the support of <code><a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> in a component.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="getViewModelStore--"></a><a name="getviewmodelstore"></a>
@@ -83,6 +106,20 @@
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/ViewModelStore.html">ViewModelStore</a>&nbsp;<a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html#getViewModelStore()">getViewModelStore</a>()</pre>
         <p>The owned <code><a href="/reference/androidx/lifecycle/ViewModelStore.html">ViewModelStore</a></code></p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.savedstate.SavedStateRegistryOwner-.enableSavedStateHandles--"></a><a name="enablesavedstatehandles"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.savedstate.SavedStateRegistryOwner).enableSavedStateHandles()">SavedStateHandleSupport.enableSavedStateHandles</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>default&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a>&nbsp;&amp;&nbsp;<a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html">ViewModelStoreOwner</a>&gt; <a href="/reference/androidx/lifecycle/SavedStateHandleSupport.html">SavedStateHandleSupport</a>.<a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html#(androidx.savedstate.SavedStateRegistryOwner).enableSavedStateHandles()">enableSavedStateHandles</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;receiver<br>)</pre>
+        <p>Enables the support of <code><a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> in a component.</p>
+        <p>After this method, <code><a href="/reference/androidx/lifecycle/package-summary.html#createSavedStateHandle(androidx.savedstate.SavedStateRegistryOwner,androidx.lifecycle.ViewModelStoreOwner,kotlin.String,android.os.Bundle)">createSavedStateHandle</a></code> can be called on <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> containing this <code><a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a></code> / <code><a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html">ViewModelStoreOwner</a></code>.</p>
+        <p>Must be called while component is in <code>INITIALIZED</code> or <code>CREATED</code> state and before a <code><a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a></code> with <code><a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> is requested.</p>
       </div>
     </div>
 
