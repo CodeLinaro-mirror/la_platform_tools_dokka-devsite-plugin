@@ -880,8 +880,8 @@ internal class DocTagConverter(
                     is Text -> {
                         // A link might also have been parsed as separate text tags, one with
                         // "<a href=", the url, and ">"; one with the link name; and one with "</a>"
-                        val namePart = childTags[1] as? Text
-                        val urlPart = childTags[0] as? Text
+                        val namePart = childTags.getOrNull(1) as? Text
+                        val urlPart = childTags.getOrNull(0) as? Text
                         if (urlPart != null && namePart != null) {
                             namePart.body to urlPart.body.removePrefix("<a href=").removeSuffix(">")
                         } else {
@@ -889,7 +889,15 @@ internal class DocTagConverter(
                         }
                     }
                     else -> null // In any other case, we don't know how to parse the link
-                } ?: throw RuntimeException("Could not understand link: $this")
+                }
+                    ?: run {
+                        docsHolder.printWarningFor(
+                            baseMessage = "Could not understand @see tag `${text()}`",
+                            documentableWithError = parent,
+                        )
+                        // Create an empty link
+                        "" to ""
+                    }
 
             return DefaultLink(Link.Params(name = name, url = url, externalLink = true))
         }
