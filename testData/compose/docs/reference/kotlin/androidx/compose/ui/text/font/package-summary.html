@@ -1007,7 +1007,9 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/text/font/package-summary.html#Typeface(android.content.Context,androidx.compose.ui.text.font.FontFamily,kotlin.collections.List)">Typeface</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fontFamily:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;styles:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&gt;&gt;? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/Typeface.html">Typeface</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>This API is deprecated with the introduction of async fonts which cannot resolve in this context. To preload fonts, use FontFamily.Resolver.</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>This API is deprecated with the introduction of async fonts which cannot resolve in this context. To preload fonts, use FontFamily.Resolver, use this instead:
+        <pre class="prettyprint">FontFamily.Resolver.preload(fontFamily, Font.AndroidResourceLoader(context))</pre>
+      </aside>
       <p>Build an Android specific Typeface from FontFamily.</p>
       <p>You can pass <code><a href="/reference/kotlin/androidx/compose/ui/text/font/package-summary.html#Typeface(android.content.Context,androidx.compose.ui.text.font.FontFamily,kotlin.collections.List)">styles</a></code> for loading only specific styles.</p>
       <p>This function caches the internal native Typeface but always create the new Typeface object. Caller should cache if necessary.</p>
@@ -1157,7 +1159,9 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/text/font/package-summary.html#createFontFamilyResolver(androidx.compose.ui.text.font.Font.ResourceLoader,android.content.Context)">createFontFamilyResolver</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fontResourceLoader:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/Font.ResourceLoader.html">Font.ResourceLoader</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>This exists to bridge existing Font.ResourceLoader subclasses to be used as aFontFamily.ResourceLoader during upgrade.</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>This exists to bridge existing Font.ResourceLoader subclasses to be used as aFontFamily.ResourceLoader during upgrade, use this instead:
+        <pre class="prettyprint">createFontFamilyResolver()</pre>
+      </aside>
       <p>Bridge between subclasses of Font.ResourceLoader and the new FontFamily.Resolver API.</p>
       <p>To use add as a CompositionLocal replacing the default FontFamily.Resolver:</p>
       <pre class="prettyprint">LocalFontFamilyResolver provides createFontFamilyResolver(myFontResourceLoader, context)</pre>

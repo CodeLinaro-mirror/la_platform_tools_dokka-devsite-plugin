@@ -77,7 +77,9 @@
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/focus/focusOrder.modifier.html#(androidx.compose.ui.Modifier).focusOrder(kotlin.Function1)">focusOrder</a></del></span>(focusOrderReceiver:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusOrder.html">FocusOrder</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Use focusProperties() instead</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use focusProperties() instead, use this instead:
+        <pre class="prettyprint">this.focusProperties(focusOrderReceiver)</pre>
+      </aside>
       <p>Use this modifier to specify a custom focus traversal order.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
@@ -175,7 +177,9 @@ Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/focus/focusOrder.modifier.html#(androidx.compose.ui.Modifier).focusOrder(androidx.compose.ui.focus.FocusRequester)">focusOrder</a></del></span>(focusRequester:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Use focusRequester() instead</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use focusRequester() instead, use this instead:
+        <pre class="prettyprint">this.focusRequester(focusRequester)</pre>
+      </aside>
       <p>A modifier that lets you specify a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> for the current composable so that this <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusOrder(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code> can be used by another composable to specify a custom focus order.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
@@ -252,7 +256,9 @@ Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
         </div>
       </div>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/focus/focusOrder.modifier.html#(androidx.compose.ui.Modifier).focusOrder(androidx.compose.ui.focus.FocusRequester,kotlin.Function1)">focusOrder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;focusRequester:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;focusOrderReceiver:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusOrder.html">FocusOrder</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Use focusProperties() and focusRequester() instead</aside>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use focusProperties() and focusRequester() instead, use this instead:
+        <pre class="prettyprint">this.focusRequester(focusRequester).focusProperties(focusOrderReceiver)</pre>
+      </aside>
       <p>A modifier that lets you specify a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> for the current composable along with <code><a href="/reference/kotlin/androidx/compose/ui/focus/focusOrder.modifier.html#(androidx.compose.ui.Modifier).focusOrder(androidx.compose.ui.focus.FocusRequester,kotlin.Function1)">focusOrder</a></code>.</p>
     </div>
 

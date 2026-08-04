@@ -54,7 +54,9 @@
       </table>
     </div>
     <hr>
-    <aside class="caution"><strong>This class is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+      <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+    </aside>
     <p>Position-based data loader for a fixed-size, countable data set, supporting fixed-size loads at arbitrary page positions.</p>
     <p>Extend PositionalDataSource if you can load pages of a requested size at arbitrary positions, and provide a fixed item count. If your data source can't support loading arbitrary requested page sizes (e.g. when network page size constraints are only known at runtime), either use <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code> or <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code>, or pass the initial result with the two parameter <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">LoadInitialCallback.onResult</a></code>.</p>
     <p>Room can generate a Factory of PositionalDataSources for you:</p>
@@ -314,7 +316,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#computeInitialLoadPosition(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int)">computeInitialLoadPosition</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialParams.html">PositionalDataSource.LoadInitialParams</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;totalCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+        </aside>
         <p>Helper for computing an initial position in <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code> when total data set size can be computed ahead of loading.</p>
         <p>The value computed by this function will do bounds checking, page alignment, and positioning based on initial load size requested.</p>
         <p>Example usage in a <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></code> subclass:</p>
@@ -394,7 +398,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#computeInitialLoadSize(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int,kotlin.Int)">computeInitialLoadSize</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialParams.html">PositionalDataSource.LoadInitialParams</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadPosition:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;totalCount:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+        </aside>
         <p>Helper for computing an initial load size in <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code> when total data set size can be computed ahead of loading.</p>
         <p>This function takes the requested load size, and bounds checks it against the value returned by <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#computeInitialLoadPosition(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int)">computeInitialLoadPosition</a></code>.</p>
         <p>Example usage in a <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></code> subclass:</p>
@@ -483,7 +489,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#PositionalDataSource()">PositionalDataSource</a></del></span>()</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+        </aside>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -516,7 +524,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/WorkerThread.html">WorkerThread</a><br>abstract&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams,androidx.paging.PositionalDataSource.LoadInitialCallback)">loadInitial</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialParams.html">PositionalDataSource.LoadInitialParams</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html">PositionalDataSource.LoadInitialCallback</a>&lt;T&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+        </aside>
         <p>Load initial list data.</p>
         <p>This method is called to load the initial page(s) from the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
         <p>LoadResult list must be a multiple of pageSize to enable efficient tiling.</p>
@@ -555,7 +565,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/WorkerThread.html">WorkerThread</a><br>abstract&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadRange(androidx.paging.PositionalDataSource.LoadRangeParams,androidx.paging.PositionalDataSource.LoadRangeCallback)">loadRange</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadRangeParams.html">PositionalDataSource.LoadRangeParams</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadRangeCallback.html">PositionalDataSource.LoadRangeCallback</a>&lt;T&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+        </aside>
         <p>Called to load a range of data from the DataSource.</p>
         <p>This method is called to load additional pages from the DataSource after the <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html">LoadInitialCallback</a></code> passed to dispatchLoadInitial has initialized a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
         <p>Unlike <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code>, this method must return the number of items requested, at the position requested.</p>
@@ -594,7 +606,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map(androidx.arch.core.util.Function)">map</a></del></span>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;T,&nbsp;V&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;V&gt;</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
         <div class="devsite-table-wrapper">
@@ -674,7 +688,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map(kotlin.Function1)">map</a></del></span>(function:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> V):&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;V&gt;</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
         <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
@@ -751,7 +767,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></del></span>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;V&gt;&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;V&gt;</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
         <div class="devsite-table-wrapper">
@@ -831,7 +849,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></del></span>(function:&nbsp;(<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;V&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;V&gt;</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Int, T&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
         <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>

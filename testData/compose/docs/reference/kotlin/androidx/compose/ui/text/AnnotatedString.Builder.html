@@ -968,7 +968,9 @@ buildAnnotatedString {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#addUrlAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Int,kotlin.Int)">addUrlAnnotation</a></del></span>(urlAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>,&nbsp;start:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;end:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <aside class="caution"><strong>This function is deprecated.</strong><br>Use LinkAnnotation API for links instead</aside>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>Use LinkAnnotation API for links instead, use this instead:
+            <pre class="prettyprint">addLink(, start, end)</pre>
+          </aside>
           <p>Set a <code><a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code> for the given range. URLs may be treated specially by screen readers, including being identified while reading text with an audio icon or being summarized in a links menu.</p>
           <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.text.AnnotatedString
@@ -1632,7 +1634,9 @@ buildAnnotatedString {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pushUrlAnnotation(androidx.compose.ui.text.UrlAnnotation)">pushUrlAnnotation</a></del></span>(urlAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
-          <aside class="caution"><strong>This function is deprecated.</strong><br>Use LinkAnnotation API for links instead</aside>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>Use LinkAnnotation API for links instead, use this instead:
+            <pre class="prettyprint">pushLink(, start, end)</pre>
+          </aside>
           <p>Attach the given <code><a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code> to any appended text until a corresponding <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pop()">pop</a></code> is called.</p>
           <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.text.AnnotatedString
@@ -1828,7 +1832,9 @@ buildAnnotatedString {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">withAnnotation</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;urlAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
-          <aside class="caution"><strong>This function is deprecated.</strong><br>Use LinkAnnotation API for links instead</aside>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>Use LinkAnnotation API for links instead, use this instead:
+            <pre class="prettyprint">withLink(, block)</pre>
+          </aside>
           <p>Pushes an <code><a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Function1)">block</a></code> and then pops the annotation.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">

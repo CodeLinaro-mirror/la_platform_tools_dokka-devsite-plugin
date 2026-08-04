@@ -53,7 +53,9 @@
       </table>
     </div>
     <hr>
-    <aside class="caution"><strong>This class is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+      <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+    </aside>
     <p>Incremental data loader for page-keyed content, where requests return keys for next/previous pages.</p>
     <p>Implement a <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code> using <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code> if you need to use data from page <code>N - 1</code> to load page <code>N</code>. This is common, for example, in network APIs that include a next/previous link or key with each page load.</p>
     <p>The <code>InMemoryByPageRepository</code> in the <a href="https://github.com/googlesamples/android-architecture-components/blob/master/PagingWithNetworkSample/README.md">PagingWithNetworkSample</a> shows how to implement a network PageKeyedDataSource using <a href="https://square.github.io/retrofit/">Retrofit</a>, while handling swipe-to-refresh, network errors, and retry.</p>
@@ -296,7 +298,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#PageKeyedDataSource()">PageKeyedDataSource</a></del></span>()</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -335,7 +339,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadAfter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Append page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
         <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
         <p>Data may be passed synchronously during the load method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
@@ -375,7 +381,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadBefore</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Prepend page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
         <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
         <p>Data may be passed synchronously during the load method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
@@ -415,7 +423,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams,androidx.paging.PageKeyedDataSource.LoadInitialCallback)">loadInitial</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialParams.html">PageKeyedDataSource.LoadInitialParams</a>&lt;Key&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html">PageKeyedDataSource.LoadInitialCallback</a>&lt;Key,&nbsp;Value&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Load initial data.</p>
         <p>This method is called first to initialize a PagedList with data. If it's possible to count the items that can be loaded by the DataSource, it's recommended to pass the loaded data to the callback via the three-parameter <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">LoadInitialCallback.onResult</a></code>. This enables PagedLists presenting data from this source to display placeholders to represent unloaded items.</p>
         <p><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialParams.html#requestedLoadSize()">LoadInitialParams.requestedLoadSize</a></code> is a hint, not a requirement, so it may be may be altered or ignored.</p>
@@ -454,7 +464,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(androidx.arch.core.util.Function)">map</a></del></span>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;Value,&nbsp;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
         <div class="devsite-table-wrapper">
@@ -540,7 +552,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(kotlin.Function1)">map</a></del></span>(function:&nbsp;(Value) <span style="white-space: nowrap;">-&gt;</span> ToValue):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
         <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
@@ -623,7 +637,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></del></span>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
         <div class="devsite-table-wrapper">
@@ -709,7 +725,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></del></span>(function:&nbsp;(<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource, use this instead:
+          <pre class="prettyprint">PagingSource&lt;Key, Value&gt;</pre>
+        </aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
         <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
         <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>

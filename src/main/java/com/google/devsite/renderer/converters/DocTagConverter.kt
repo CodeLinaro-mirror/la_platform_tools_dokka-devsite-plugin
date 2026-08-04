@@ -77,6 +77,7 @@ import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.doc.A
 import org.jetbrains.dokka.model.doc.Author
+import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.model.doc.Deprecated
@@ -776,7 +777,8 @@ internal class DocTagConverter(
         summary: Boolean,
         deprecationAnnotation: Annotations.Annotation?,
     ): DescriptionComponent? {
-        val deprecation = findDeprecation(documentable, deprecationAnnotation) ?: return null
+        val deprecation =
+            findDeprecation(documentable, deprecationAnnotation, summary) ?: return null
         return description(deprecation.children, summary, documentable.deprecationText())
     }
 
@@ -786,6 +788,7 @@ internal class DocTagConverter(
     private fun findDeprecation(
         documentable: Documentable,
         deprecationAnnotation: Annotations.Annotation?,
+        summary: Boolean,
     ): Deprecated? {
         val javadocDeprecation = documentable.find<Deprecated>()
         if (javadocDeprecation != null) {
@@ -798,8 +801,25 @@ internal class DocTagConverter(
         // Dokka makes message="foo" show up as "\"foo\"" since you typically want to show quotes
         // when rendering an annotation. Remove those outer quotes.
         val message = annotationDeprecationMessage.removeSurrounding("\"")
+        val children = mutableListOf<DocTag>()
+        if (summary) {
+            children.add(Text(message))
+        } else {
+            val replaceWithAnnotation =
+                (deprecationAnnotation.params["replaceWith"]
+                        as? org.jetbrains.dokka.model.AnnotationValue)
+                    ?.annotation
+            val expression =
+                (replaceWithAnnotation?.params?.get("expression") as? StringValue)?.value
+            if (!expression.isNullOrBlank()) {
+                children.add(Text("${message.removeSuffix(".")}, use this instead:"))
+                children.add(CodeBlock(listOf(Text(expression))))
+            } else {
+                children.add(Text(message))
+            }
+        }
 
-        return Deprecated(P(children = listOf(Text(message))))
+        return Deprecated(Text(children = children))
     }
 
     private fun Documentable.deprecationText() =

@@ -177,7 +177,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             |/**
             | * class_description
             | */
-            |@Deprecated("Bye")
+            |@Deprecated("Bye.")
             |class Foo
         """
                 .render()
@@ -188,7 +188,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             """
             |/**
             | * class_description
-            | * @deprecated Bye
+            | * @deprecated Bye.
             | */
             |@Deprecated
             |public class Foo {}
@@ -199,16 +199,40 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
 
         for (summary in listOf(summaryK, summaryJ)) {
             assertThat(summary.data.summary).isTrue()
-            assertThat(summary.text()).isEqualTo("Bye")
+            assertThat(summary.text()).isEqualTo("Bye.")
             assertThat(summary.data.deprecation).isEqualTo("This class is deprecated.")
         }
 
         for (details in listOf(detailsK, detailsJ)) {
             val detail = (details.first() as DescriptionComponent)
             assertThat(detail.data.summary).isFalse()
-            assertThat(detail.text()).isEqualTo("Bye")
+            assertThat(detail.text()).isEqualTo("Bye.")
             assertThat(detail.data.deprecation).isEqualTo("This class is deprecated.")
         }
+    }
+
+    @Test
+    fun `Deprecated class with ReplaceWith`() {
+        val code =
+            """
+            |/**
+            | * class_description
+            | */
+            |@Deprecated("Bye is deprecated", replaceWith = ReplaceWith("Hello"))
+            |class Foo
+        """
+                .render()
+        val summary = code.description()
+        val details = code.documentation()
+
+        assertThat(summary.data.summary).isTrue()
+        assertThat(summary.text()).isEqualTo("Bye is deprecated")
+        assertThat(summary.data.deprecation).isEqualTo("This class is deprecated.")
+
+        val detail = (details.first() as DescriptionComponent)
+        assertThat(detail.data.summary).isFalse()
+        assertThat(detail.text()).isEqualTo("Bye is deprecated, use this instead: Hello")
+        assertThat(detail.data.deprecation).isEqualTo("This class is deprecated.")
     }
 
     /**

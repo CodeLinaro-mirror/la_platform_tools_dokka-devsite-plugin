@@ -61,7 +61,9 @@
       </table>
     </div>
     <hr>
-    <aside class="caution"><strong>This class is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+      <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+    </aside>
     <p><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a></code> base class for presenting paged data from <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code>s in a <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a></code>.</p>
     <p>This class is a convenience wrapper around <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html">AsyncPagedListDiffer</a></code> that implements common default behavior for item counting, and listening to PagedList update callbacks.</p>
     <p>While using a LiveData<PagedList> is an easy way to provide data to the adapter, it isn't required - you can use <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> when new lists are available.</p>
@@ -497,7 +499,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
       </div>
       <div class="api-item"><a name="PagedListAdapter-androidx.recyclerview.widget.DiffUtil.ItemCallback-"></a><a name="pagedlistadapter"></a>
         <div class="api-name-block">
@@ -506,7 +510,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Creates a <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> with default threading and <code><a href="/reference/androidx/recyclerview/widget/ListUpdateCallback.html">androidx.recyclerview.widget.ListUpdateCallback</a></code>.</p>
         <p>Convenience for <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>, which uses default threading behavior.</p>
         <div class="devsite-table-wrapper">
@@ -541,7 +547,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Add a <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
         <p>As new PagedLists are submitted and displayed, the listener will be notified to reflect current <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType.REFRESH</a></code>, <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code>, and <code><a href="/reference/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> states.</p>
         <div class="devsite-table-wrapper">
@@ -592,7 +600,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getCurrentList()">getCurrentList</a></del></span>()</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Returns the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> currently being displayed by the <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>.</p>
         <p>This is not necessarily the most recent list passed to <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code>, because a diff is computed asynchronously between the new list and the current list before updating the currentList value. May be null if no PagedList is being presented.</p>
         <div class="devsite-table-wrapper">
@@ -643,7 +653,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getItemCount()">getItemCount</a></del></span>()</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
       </div>
       <div class="api-item"><a name="getItemCount--"></a><a name="getitemcount"></a>
         <div class="api-name-block">
@@ -652,7 +664,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getItemCount()">getItemCount</a></del></span>()</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
       </div>
       <div class="api-item"><a name="getStateRestorationPolicy--"></a><a name="getstaterestorationpolicy"></a>
         <div class="api-name-block">
@@ -661,7 +675,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getStateRestorationPolicy()">getStateRestorationPolicy</a></del></span>()</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
       </div>
       <div class="api-item"><a name="onCurrentListChanged-androidx.paging.PagedList-"></a><a name="oncurrentlistchanged"></a>
         <div class="api-name-block">
@@ -670,7 +686,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>Use the two argument variant instead.</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use the two argument variant instead, use this instead:
+          <pre class="prettyprint">onCurrentListChanged(previousList, currentList)</pre>
+        </aside>
         <p>Called when the current PagedList is updated.</p>
         <p>This may be dispatched as part of <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted(int,int)">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
         <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
@@ -722,7 +740,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Called when the current PagedList is updated.</p>
         <p>This may be dispatched as part of <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted(int,int)">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
         <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
@@ -780,7 +800,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Remove a previously registered <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code> listener.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -830,7 +852,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a>&nbsp;strategy<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
       </div>
       <div class="api-item"><a name="submitList-androidx.paging.PagedList-"></a><a name="submitlist"></a>
         <div class="api-name-block">
@@ -839,7 +863,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Set the new list to be displayed.</p>
         <p>If a list is already being displayed, a diff will be computed on a background thread, which will dispatch Adapter.notifyItem events on the main thread.</p>
         <div class="devsite-table-wrapper">
@@ -871,7 +897,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList,&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Set the new list to be displayed.</p>
         <p>If a list is already being displayed, a diff will be computed on a background thread, which will dispatch Adapter.notifyItem events on the main thread.</p>
         <p>The commit callback can be used to know when the PagedList is committed, but note that it may not be executed. If PagedList B is submitted immediately after PagedList A, and is committed directly, the callback associated with PagedList A will not be run.</p>
@@ -910,7 +938,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;footer)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Create a <code><a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the start of the presented list.</p>
       </div>
       <div class="api-item"><a name="withLoadStateHeader-androidx.paging.LoadStateAdapter-"></a><a name="withloadstateheader"></a>
@@ -920,7 +950,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;header)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Create a <code><a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the end of the presented list.</p>
       </div>
       <div class="api-item"><a name="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter, androidx.paging.LoadStateAdapter)"></a><a name="withLoadStateHeaderAndFooter-androidx.paging.LoadStateAdapter-androidx.paging.LoadStateAdapter-"></a><a name="withloadstateheaderandfooter"></a>
@@ -930,7 +962,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;footer<br>)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
         <p>Create a <code><a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> and <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
       </div>
     </div>
@@ -943,7 +977,9 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">protected&nbsp;T&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getItem(kotlin.Int)">getItem</a></del></span>(int&nbsp;position)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
+          <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
+        </aside>
       </div>
     </div>
 
