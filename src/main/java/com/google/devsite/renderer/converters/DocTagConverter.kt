@@ -407,18 +407,21 @@ internal class DocTagConverter(
                 )
         }
         val params =
-            tags.map { tag ->
+            tags.mapNotNull { tag ->
                 if (allOptions[tag.name()] == null) {
-                    throw RuntimeException(
+                    docsHolder.printWarningFor(
                         "Unable to find what is referred to by \"@param " +
                             "${tag.name()}\" in ${documentable.className} " +
-                            "${documentable.name}, with contents: ${tag.text()}"
+                            "${documentable.name}, with contents: ${tag.text()}",
+                        documentable,
+                    )
+                    null
+                } else {
+                    val title = allOptions[tag.name()]!!
+                    DefaultTableRowSummaryItem(
+                        TableRowSummaryItem.Params(title = title, description = description(tag))
                     )
                 }
-                val title = allOptions[tag.name()]!!
-                DefaultTableRowSummaryItem(
-                    TableRowSummaryItem.Params(title = title, description = description(tag))
-                )
             }
 
         return DefaultSummaryList(
@@ -533,15 +536,14 @@ internal class DocTagConverter(
             }
 
         if (throws.name in listOf("a", "an")) {
-            throw RuntimeException(
-                "Do not use '${throws.name}' before the exception type in an @throws statement. " +
-                    "This is against jdoc spec. Your exception is not being linked and looks bad"
+            docsHolder.printWarningFor(
+                "Do not use '${throws.name}' before the exception type in `@throws ${throws.text()}`",
+                parent,
             )
         } else if ("{@link" in name) {
-            throw RuntimeException(
-                "Do not {@link the exception type in an @throws statement. @throws state" +
-                    "ments are automatically linked. Manually java-linking them is against jdoc s" +
-                    "pec, and breaks linking behavior causing them to actually *not* be linked."
+            docsHolder.printWarningFor(
+                "Do not {@link the exception type in `@throws ${throws.text()}`",
+                parent,
             )
         } else if (link.data.url.isEmpty()) {
             docsHolder.printWarningFor(

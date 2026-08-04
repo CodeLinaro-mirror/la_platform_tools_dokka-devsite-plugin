@@ -52,10 +52,14 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.ComposeTestUtils
 import com.google.devsite.util.LibraryMetadata
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.PrintStream
 import java.net.URL
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.DokkaConfiguration
@@ -91,6 +95,28 @@ internal abstract class ConverterTestBase(
     @Before
     fun setUp() {
         isRunningInDackkasTests = true
+    }
+
+    /** Tracks logged output for each test. Tests should use [logs] to access the output. */
+    lateinit var outputStream: ByteArrayOutputStream
+
+    /** The logged output for each test. */
+    val logs: List<String>
+        get() =
+            outputStream.toString().replace(tmpDirRegex, "SRC_DIR").trim().split("\n").filter {
+                it.isNotBlank()
+            }
+
+    @BeforeTest
+    fun captureLogs() {
+        // Set up each test to capture logs.
+        outputStream = ByteArrayOutputStream()
+        System.setOut(PrintStream(outputStream))
+    }
+
+    @AfterTest
+    fun endLogs() {
+        System.setOut(System.out)
     }
 
     protected fun List<String>.render(): DModule = testWithRootPageNode(this)
@@ -563,4 +589,9 @@ internal abstract class ConverterTestBase(
     }
 
     protected open lateinit var defaultHints: ModifierHints
+
+    companion object {
+        /** Regex used to replace temporary directory paths in logs. */
+        private val tmpDirRegex = "/((var)|(tmp))/.*/src".toRegex()
+    }
 }

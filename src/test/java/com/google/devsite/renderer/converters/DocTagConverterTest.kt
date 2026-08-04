@@ -42,10 +42,6 @@ import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
-import java.io.ByteArrayOutputStream
-import java.io.PrintStream
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.assertFails
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.body
@@ -72,28 +68,6 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 internal class DocTagConverterTest(private val displayLanguage: Language) :
     ConverterTestBase(displayLanguage) {
-    /** Tracks logged output for each test. Tests should use [logs] to access the output. */
-    lateinit var outputStream: ByteArrayOutputStream
-
-    /** The logged output for each test. */
-    val logs: List<String>
-        get() =
-            outputStream.toString().replace(tmpDirRegex, "SRC_DIR").trim().split("\n").filter {
-                it.isNotBlank()
-            }
-
-    @BeforeTest
-    fun captureLogs() {
-        // Set up each test to capture logs.
-        outputStream = ByteArrayOutputStream()
-        System.setOut(PrintStream(outputStream))
-    }
-
-    @AfterTest
-    fun endLogs() {
-        System.setOut(System.out)
-    }
-
     @Test
     fun `Empty description isn't documented`() {
         val description =
@@ -649,9 +623,13 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             .isEqualTo("A vary bary name")
         // Upstream dokka does not propagate @property documentation on property parameters to the
         // constructor. We think this is what we want.
-        assertFails {
-            val constructorDoc = module.documentation({ this.constructor() })
-        }
+        module.documentation({ this.constructor() })
+        assertThat(logs)
+            .contains(
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:7 Unable to find what is " +
+                    "referred to by \"@param baz\" in DFunction Foo, with contents: Buzzbuzzbuzz in " +
+                    "DFunction Foo"
+            )
     }
 
     @Test
@@ -817,27 +795,19 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
 
     @Test
     fun `@param throws exception or prints warning for invalid parameter`() {
-        val exception = assertFails {
-            """
-            |/**
-            | * @param NOT_A_REAL_PARAM aaaaaa
-            | */
-            |fun foo()
-            """
-                .render()
-                .documentation()
-        }
-        assertThat(exception.localizedMessage)
-            .isEqualTo(
-                "Exception thrown while handling Param tags [Param(root=" +
-                    "CustomDocTag(children=[P(children=[Text(body=aaaaaa, children=[], params={})], " +
-                    "params={})], params={}, name=MARKDOWN_FILE), name=NOT_A_REAL_PARAM, " +
-                    "address=null)]."
-            )
-        assertThat(exception.cause!!.localizedMessage)
-            .isEqualTo(
-                "Unable to find what is referred to by \"@param NOT_A_REAL_PARAM\" in " +
-                    "DFunction foo, with contents: aaaaaa"
+        """
+        |/**
+        | * @param NOT_A_REAL_PARAM aaaaaa
+        | */
+        |fun foo()
+        """
+            .render()
+            .documentation()
+        assertThat(logs)
+            .contains(
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Unable to find what is referred" +
+                    " to by \"@param NOT_A_REAL_PARAM\" in DFunction foo, with contents: aaaaaa in " +
+                    "DFunction foo"
             )
         """
         |/**
@@ -1678,11 +1648,28 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         """
                 .render()
 
-        val exception1 = assertFails { moduleJ1.throwsTable().item() }
+        moduleJ1.throwsTable().item()
+        assertThat(logs)
+            .contains(
+                "WARN: SRC_DIR/main/java/androidx/example/Test.java:16 Do not {@link the " +
+                    "exception type in `@throws if I try to linkify` in DFunction foo"
+            )
         outputStream.reset()
-        val exception2 = assertFails { moduleJ2.throwsTable().item() }
+        moduleJ2.throwsTable().item()
+        assertThat(logs)
+            .contains(
+                "WARN: SRC_DIR/main/java/androidx/example/Test.java:16 Do not use 'an' before the" +
+                    " exception type in `@throws IllegalStateException if my syntax is bad` in " +
+                    "DFunction foo"
+            )
         outputStream.reset()
-        val exception3 = assertFails { moduleK1.throwsTable().item() }
+        moduleK1.throwsTable().item()
+        assertThat(logs)
+            .containsExactly(
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Do not use 'an' " +
+                    "before the exception type in `@throws IllegalStateException if my syntax is " +
+                    "bad` in DFunction foo"
+            )
         outputStream.reset()
         val throwsBad4 = moduleJ3.throwsTable().item()
         assertThat(logs.single())
@@ -1695,28 +1682,6 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val throwsFine1 = moduleK2.throwsTable().item()
         assertThat(logs).isEmpty()
 
-        for (exception in listOf(exception1, exception2, exception3)) {
-            assertThat(exception.localizedMessage)
-                .contains(
-                    "Exception thrown while handling Throws tags " +
-                        "[Throws(root=CustomDocTag(children=[P(children=[Text(body="
-                )
-        }
-        assertThat(exception1.localizedMessage)
-            .contains(
-                "if I try to linkify, children=[], params={})], params={})], params={}, name=MARKDOWN" +
-                    "_FILE), name={@link IllegalStateException}, exceptionAddress=null)]."
-            )
-        assertThat(exception2.localizedMessage)
-            .contains(
-                "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
-                    "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)]."
-            )
-        assertThat(exception3.localizedMessage)
-            .contains(
-                "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
-                    "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)]."
-            )
         for (throws in listOf(throwsBad4, throwsBad5)) {
             assertThat(throws.name()).isEqualTo("")
             assertThat(throws.data.title.typeName()).isEqualTo("IOException")
@@ -2367,8 +2332,5 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
-
-        /** Regex used to replace temporary directory paths in logs. */
-        private val tmpDirRegex = "/((var)|(tmp))/.*/src".toRegex()
     }
 }

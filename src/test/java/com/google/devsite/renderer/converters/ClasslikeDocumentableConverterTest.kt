@@ -1442,19 +1442,18 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
     }
 
     @Test
-    fun `Failed resolution exception includes line number`() {
-        val message =
-            assertFails {
-                    """
-            |/** @param foo does not exist */
-            |class Foo<T: Number, U>() {}
-            """
-                        .render()
-                        .page()
-                }
-                .message
-        assertThat(message).contains("when handling DFunction Foo in DClass Foo")
-        // assertThat(message).contains("androidx/example/Test.kt:2") b/327166311
+    fun `Failed resolution warning includes line number`() {
+        """
+        |/** @param foo does not exist */
+        |class Foo<T: Number, U>() {}
+        """
+            .render()
+            .page()
+        val expectedWarning =
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:3 Unable to find what is " +
+                "referred to by \"@param foo\" in DFunction Foo, with contents: does not exist " +
+                "in DFunction Foo"
+        assertThat(logs).contains(expectedWarning)
     }
 
     @Test
