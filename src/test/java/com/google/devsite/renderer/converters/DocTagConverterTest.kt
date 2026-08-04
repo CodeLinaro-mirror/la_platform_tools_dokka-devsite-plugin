@@ -42,10 +42,6 @@ import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
-import java.io.ByteArrayOutputStream
-import java.io.PrintStream
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.assertFails
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.body
@@ -72,28 +68,6 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 internal class DocTagConverterTest(private val displayLanguage: Language) :
     ConverterTestBase(displayLanguage) {
-    /** Tracks logged output for each test. Tests should use [logs] to access the output. */
-    lateinit var outputStream: ByteArrayOutputStream
-
-    /** The logged output for each test. */
-    val logs: List<String>
-        get() =
-            outputStream.toString().replace(tmpDirRegex, "SRC_DIR").trim().split("\n").filter {
-                it.isNotBlank()
-            }
-
-    @BeforeTest
-    fun captureLogs() {
-        // Set up each test to capture logs.
-        outputStream = ByteArrayOutputStream()
-        System.setOut(PrintStream(outputStream))
-    }
-
-    @AfterTest
-    fun endLogs() {
-        System.setOut(System.out)
-    }
-
     @Test
     fun `Empty description isn't documented`() {
         val description =
@@ -2343,8 +2317,5 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(arrayOf(Language.JAVA), arrayOf(Language.KOTLIN))
-
-        /** Regex used to replace temporary directory paths in logs. */
-        private val tmpDirRegex = "/((var)|(tmp))/.*/src".toRegex()
     }
 }
