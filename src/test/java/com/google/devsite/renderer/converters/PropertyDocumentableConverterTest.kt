@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.TypeSummaryItem
+import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
@@ -432,6 +433,86 @@ internal class PropertyDocumentableConverterTest(displayLanguage: Language) :
             shouldBeAVal == SymbolDetail.SymbolKind.READ_ONLY_PROPERTY
         )
         for (shouldBeAVar in vars) assertThat(shouldBeAVar == SymbolDetail.SymbolKind.PROPERTY)
+    }
+
+    @Test
+    fun `Property deprecation propagates from accessors`() {
+        val moduleK =
+            """
+            |@get:Deprecated("msg")
+            |var getterDep: Int = 0
+            |
+            |@set:Deprecated("msg")
+            |var setterDep: Int = 0
+            |
+            |@get:Deprecated("msg")
+            |@set:Deprecated("msg")
+            |var bothDep: Int = 0
+            """
+                .render()
+
+        val moduleJ =
+            """
+            |private int getterDep = 0;
+            |@Deprecated public int getGetterDep() { return getterDep; }
+            |public void setGetterDep(int value) { getterDep = value; }
+            |
+            |private int setterDep = 0;
+            |public int getSetterDep() { return setterDep; }
+            |@Deprecated public void setSetterDep(int value) { setterDep = value; }
+            |
+            |private int bothDep = 0;
+            |@Deprecated public int getBothDep() { return bothDep; }
+            |@Deprecated public void setBothDep(int value) { bothDep = value; }
+            """
+                .render(java = true)
+
+        fun assertDeprecationNote(module: DModule, propertyName: String, expectedNote: String?) {
+            val descriptionComponent =
+                module
+                    .detail(propertyName)
+                    .data
+                    .metadata
+                    .filterIsInstance<DescriptionComponent>()
+                    .firstOrNull { it.data.deprecation != null }
+            assertThat(descriptionComponent).isNotNull()
+            assertThat(descriptionComponent!!.data.deprecation).contains(expectedNote)
+        }
+
+        kotlinOnly {
+            assertDeprecationNote(
+                moduleK,
+                "getterDep",
+                "The getter for this property is deprecated.",
+            )
+            assertDeprecationNote(
+                moduleK,
+                "setterDep",
+                "The setter for this property is deprecated.",
+            )
+            assertDeprecationNote(moduleK, "bothDep", "This property is deprecated.")
+
+            assertDeprecationNote(
+                moduleJ,
+                "getterDep",
+                "The getter for this property is deprecated.",
+            )
+            assertDeprecationNote(
+                moduleJ,
+                "setterDep",
+                "The setter for this property is deprecated.",
+            )
+            assertDeprecationNote(moduleJ, "bothDep", "This property is deprecated.")
+        }
+        javaOnly {
+            assertDeprecationNote(moduleK, "getterDep", "The getter for this field is deprecated.")
+            assertDeprecationNote(moduleK, "setterDep", "The setter for this field is deprecated.")
+            assertDeprecationNote(moduleK, "bothDep", "This field is deprecated.")
+
+            assertDeprecationNote(moduleJ, "getterDep", "The getter for this field is deprecated.")
+            assertDeprecationNote(moduleJ, "setterDep", "The setter for this field is deprecated.")
+            assertDeprecationNote(moduleJ, "bothDep", "This field is deprecated.")
+        }
     }
 
     private fun DModule.propertyConverter() =

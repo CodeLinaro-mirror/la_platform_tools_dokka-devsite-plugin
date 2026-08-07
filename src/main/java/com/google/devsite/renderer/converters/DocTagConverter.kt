@@ -781,7 +781,11 @@ internal class DocTagConverter(
     ): DescriptionComponent? {
         val deprecation =
             findDeprecation(documentable, deprecationAnnotation, summary) ?: return null
-        return description(deprecation.children, summary, documentable.deprecationText())
+        return description(
+            deprecation.children,
+            summary,
+            documentable.deprecationText(deprecationAnnotation),
+        )
     }
 
     /**
@@ -824,8 +828,25 @@ internal class DocTagConverter(
         return Deprecated(Text(children = children))
     }
 
-    private fun Documentable.deprecationText() =
-        "This ${this.stringForType(displayLanguage)} is deprecated."
+    private fun Documentable.deprecationText(
+        deprecationAnnotation: Annotations.Annotation?
+    ): String {
+        return if (this is DProperty) {
+            when (deprecationAnnotation?.scope) {
+                Annotations.AnnotationScope.GETTER -> {
+                    "The getter for this ${this.stringForType(displayLanguage)} is deprecated."
+                }
+                Annotations.AnnotationScope.SETTER -> {
+                    "The setter for this ${this.stringForType(displayLanguage)} is deprecated."
+                }
+                else -> {
+                    "This ${this.stringForType(displayLanguage)} is deprecated."
+                }
+            }
+        } else {
+            "This ${this.stringForType(displayLanguage)} is deprecated."
+        }
+    }
 
     /** Retrieves the doc tags of type [T]. */
     private inline fun <reified T> Documentable.find() =
