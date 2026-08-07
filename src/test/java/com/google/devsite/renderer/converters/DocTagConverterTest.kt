@@ -794,7 +794,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
     }
 
     @Test
-    fun `@param throws exception or prints warning for invalid parameter`() {
+    fun `@param warns for invalid parameter on a class`() {
         """
         |/**
         | * @param NOT_A_REAL_PARAM aaaaaa
@@ -809,6 +809,10 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                     " to by \"@param NOT_A_REAL_PARAM\" in DFunction foo, with contents: aaaaaa in " +
                     "DFunction foo"
             )
+    }
+
+    @Test
+    fun `@param warns for invalid parameter on a function`() {
         """
         |/**
         | * @param NOT_A_REAL_PARAM aaaaaa
@@ -822,20 +826,45 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 "@param NOT_A_REAL_PARAM in DClass Foo. Are you trying to refer to something not " +
                 "visible to users?"
         assertThat(logs.last()).isEqualTo(expected)
-        assertFails { // for @param in the wrong place
-            """
-            |/**
-            | * @param NOT_A_REAL_PARAM aaaaaa
-            | */
-            |val foo = "bbb"
-            """
-                .render()
-                .documentation()
-        }
     }
 
     @Test
-    fun `@property throws exception for invalid property`() {
+    fun `@param warns for invalid parameter on a property`() {
+        """
+        |/**
+        | * @param NOT_A_REAL_PARAM aaaaaa
+        | */
+        |val foo = "bbb"
+        """
+            .render()
+            .documentation({ property("foo")!! })
+        val expected =
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Unable to find reference " +
+                "@param NOT_A_REAL_PARAM in DProperty foo. Are you trying to refer to something " +
+                "not visible to users?"
+        assertThat(logs).contains(expected)
+    }
+
+    @Test
+    fun `@param warns for usage on typealias`() {
+        """
+        /**
+         * @param fakeParam description
+         */
+        typealias Foo = String
+        """
+            .render()
+            .documentation({
+                packages.single { it.name == "androidx.example" }.typealiases.single()
+            })
+        val expected =
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Can't apply @param to a " +
+                "DTypeAlias in DTypeAlias Foo"
+        assertThat(logs).contains(expected)
+    }
+
+    @Test
+    fun `@property warns for use on a non property constructor parameter`() {
         """
         |/**
         | * @property NOT_A_REAL_PROPERTY aaaaaa
@@ -844,10 +873,14 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         """
             .render()
             .documentation()
-        var expected =
+        val expected =
             "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 " +
                 "Unable to find reference @property NOT_A_REAL_PROPERTY in DClass Foo"
         assertThat(logs).contains(expected)
+    }
+
+    @Test
+    fun `@property warns for use on a non existent property on a class`() {
         """
         |/**
         | * @property NO_PROPERTIES_HERE aaaaaa
@@ -856,32 +889,48 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         """
             .render()
             .documentation()
-        expected =
+        val expected =
             "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 " +
                 "Unable to find reference @property NO_PROPERTIES_HERE in DClass Foo"
         assertThat(logs).contains(expected)
-        assertFails {
-            """
-            |class Foo() {
-            |   /**
-            |    * @property NO_PROPERTIES_HERE aaaaaa
-            |    */
-            |   fun doAThing()
-            |}
-            """
-                .render()
-                .documentation() // can't @property on a function
-        }
-        assertFails {
-            """
-            |/**
-            | * @property NO_PROPERTIES_HERE aaaaaa
-            | */
-            |fun doAThing()
-            """
-                .render()
-                .documentation() // can't @property on a function
-        }
+    }
+
+    @Test
+    fun `@property warns for use on a non existent property on a function in a class`() {
+        """
+        |class Foo() {
+        |   /**
+        |    * @property NO_PROPERTIES_HERE aaaaaa
+        |    */
+        |   fun doAThing()
+        |}
+        """
+            .render()
+            .documentation() // can't @property on a function
+        val expected =
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:6 " +
+                "Can't apply @property to a DFunction in DFunction doAThing"
+        assertThat(logs).contains(expected)
+    }
+
+    @Test
+    fun `@property warns for use on a non existent property on a top level function`() {
+        """
+        |/**
+        | * @property NO_PROPERTIES_HERE aaaaaa
+        | */
+        |fun doAThing()
+        """
+            .render()
+            .documentation() // can't @property on a function
+        val expected =
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Can't apply @property to a " +
+                "DFunction in DFunction doAThing"
+        assertThat(logs).contains(expected)
+    }
+
+    @Test
+    fun `@property fails when used on the wrong property`() {
         assertFails {
             """
             |/** @property a */

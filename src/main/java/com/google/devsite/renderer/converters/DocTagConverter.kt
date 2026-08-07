@@ -325,7 +325,12 @@ internal class DocTagConverter(
                     return forGenericsOrThis
                 }
                 is DFunction -> {}
-                else -> throw RuntimeException("Can't apply @param to a ${documentable.className}")
+                else -> {
+                    docsHolder.printWarningFor(
+                        "Can't apply @param to a ${documentable.className}",
+                        documentable,
+                    )
+                }
             }
         } else if (tags.first() is Property) {
             // A DClasslike with @property applying to property parameters may have Parameter tags
@@ -346,8 +351,13 @@ internal class DocTagConverter(
                 }
                 is DParameter,
                 is DProperty -> tags
-                else ->
-                    throw RuntimeException("Can't apply @property to a ${documentable.className}")
+                else -> {
+                    docsHolder.printWarningFor(
+                        "Can't apply @property to a ${documentable.className}",
+                        documentable,
+                    )
+                    emptyList()
+                }
             }
         }
         return tags
