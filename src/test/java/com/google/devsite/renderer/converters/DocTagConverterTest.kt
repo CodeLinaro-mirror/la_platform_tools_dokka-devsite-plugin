@@ -2045,7 +2045,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
     }
 
     @Test
-    fun `@sample annotation in kotlin fails if the target samples doesn't exist`() {
+    fun `@sample annotation in kotlin warns if the target samples doesn't exist`() {
         val documentation =
             """
             |/**
@@ -2056,7 +2056,11 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             |fun foo(a: String, b: String, c: String)
             """
                 .trimIndent()
-        assertFails { documentation.render().documentation() }
+        documentation.render().documentation()
+        val expected =
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:7 Could not resolve sample for " +
+                "foo.samples.fooSample in DFunction foo"
+        assertThat(logs).contains(expected)
     }
 
     @Test

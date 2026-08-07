@@ -619,7 +619,7 @@ internal class DocTagConverter(
         tags().forEach {
             when (it) {
                 is Sample -> {
-                    components.add(getSampleComponent(it.name))
+                    getSampleComponent(it.name)?.let { sample -> components.add(sample) }
                     components.addAll(it.children)
                 }
                 is Description,
@@ -690,14 +690,18 @@ internal class DocTagConverter(
     }
 
     /** Create a formatted code block for the sample identified by [name]. */
-    private fun getSampleComponent(name: String): Pre {
+    private fun Documentable.getSampleComponent(name: String): Pre? {
         // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
         // As such, we currently assume that all samples are in common
         val sample =
             docsHolder.sampleAnalysisEnvironment.value.resolveSample(
                 docsHolder.commonSourceSet,
                 name,
-            ) ?: throw RuntimeException("Unable to resolve sample $name")
+            )
+                ?: run {
+                    docsHolder.printWarningFor("Could not resolve sample for $name", this)
+                    return null
+                }
         val imports = processImports(sample)
 
         return Pre(
@@ -720,7 +724,7 @@ internal class DocTagConverter(
      * samples, which have been updated in a pre-processing step to be contained within `@author`
      * tags to work around a parsing issue(see b/427708573).
      */
-    private fun recursivelyConsiderPsAndTextsForSamples(
+    private fun Documentable.recursivelyConsiderPsAndTextsForSamples(
         root: DocTag,
         components: MutableList<DocTag>,
         samples: Set<File>,
@@ -745,7 +749,7 @@ internal class DocTagConverter(
                     // Find the sample name, and add any additional text as its own component.
                     val nameAndAdditionalText = root.body.substringAfter("@sample").trimStart()
                     val name = nameAndAdditionalText.substringBefore(" ").removeSuffix("()")
-                    components.add(getSampleComponent(name))
+                    getSampleComponent(name)?.let { sample -> components.add(sample) }
                     val additionalText =
                         nameAndAdditionalText.substringAfter(
                             delimiter = " ",
