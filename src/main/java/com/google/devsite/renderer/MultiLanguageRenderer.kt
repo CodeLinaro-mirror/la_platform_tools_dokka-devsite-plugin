@@ -37,6 +37,7 @@ import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.JsonLibraryMetadata
 import com.google.devsite.util.JsonVersionMetadata
 import com.google.devsite.util.LibraryMetadata
+import com.google.devsite.util.LockingExternalDocumentableProvider
 import com.google.devsite.util.traceCoroutine
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -93,6 +94,7 @@ internal class MultiLanguageRenderer(
                     )
             }
 
+            val externalDocumentableProvider = LockingExternalDocumentableProvider(analysisPlugin)
             val jHolder =
                 DocumentablesHolder(
                     displayLanguage = Language.JAVA,
@@ -108,6 +110,7 @@ internal class MultiLanguageRenderer(
                     annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayJava,
                     includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
                     analysisPlugin = analysisPlugin,
+                    externalDocumentableProvider = externalDocumentableProvider,
                 )
             val kHolder =
                 DocumentablesHolder(
@@ -124,6 +127,7 @@ internal class MultiLanguageRenderer(
                     annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayKotlin,
                     includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
                     analysisPlugin = analysisPlugin,
+                    externalDocumentableProvider = externalDocumentableProvider,
                 )
             fun cleanupIfInitialized(holder: DocumentablesHolder) {
                 if (holder.sampleAnalysisEnvironment.isInitialized()) {

@@ -34,6 +34,7 @@ import com.google.devsite.renderer.converters.simpleDocumentableComparator
 import com.google.devsite.renderer.converters.withJavaSynthetic
 import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.LibraryMetadata
+import com.google.devsite.util.LockingExternalDocumentableProvider
 import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
 import kotlinx.coroutines.CoroutineScope
@@ -106,6 +107,7 @@ internal class DocumentablesHolder(
     val annotationsNotToDisplay: Set<String> = emptySet(),
     val includeHiddenParentSymbols: Boolean = false,
     val analysisPlugin: KotlinAnalysisPlugin,
+    val externalDocumentableProvider: LockingExternalDocumentableProvider,
 ) {
     private val packages = scope.async { computePackages(module) }
 
@@ -152,8 +154,6 @@ internal class DocumentablesHolder(
     internal val commonSourceSet = module.getExpectOrCommonSourceSet()
 
     internal val logger = context.logger
-    private val externalDocumentableProvider =
-        analysisPlugin.querySingle { externalDocumentableProvider }
 
     init {
         scope.apply {

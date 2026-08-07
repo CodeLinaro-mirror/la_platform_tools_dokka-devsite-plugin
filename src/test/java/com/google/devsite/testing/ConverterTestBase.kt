@@ -52,6 +52,7 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.ComposeTestUtils
 import com.google.devsite.util.LibraryMetadata
+import com.google.devsite.util.LockingExternalDocumentableProvider
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.PrintStream
@@ -320,6 +321,8 @@ internal abstract class ConverterTestBase(
         excludedPackages: Map<Language, Set<Regex>> =
             mapOf(Language.JAVA to emptySet(), Language.KOTLIN to emptySet()),
     ) {
+        val analysisPlugin = testClass.devsitePlugin.analysisPlugin
+        val externalDocumentableProvider = LockingExternalDocumentableProvider(analysisPlugin)
         val holder by lazy {
             runBlocking {
                 DocumentablesHolder(
@@ -334,7 +337,8 @@ internal abstract class ConverterTestBase(
                     versionMetadataMap = versionMetadataMap,
                     fileMetadataMap = fileMetadataMap,
                     excludedPackages = excludedPackages,
-                    analysisPlugin = testClass.devsitePlugin.analysisPlugin,
+                    analysisPlugin = analysisPlugin,
+                    externalDocumentableProvider = externalDocumentableProvider,
                 )
             }
         }
