@@ -76,6 +76,7 @@ import org.jetbrains.dokka.links.parent
 import org.jetbrains.dokka.model.ActualTypealias
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.Bound
+import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DEnumEntry
@@ -145,10 +146,15 @@ internal abstract class ClasslikeDocumentableConverter(
             (classlike as? DEnum)?.entries.orEmpty().sortedWith(simpleDocumentableComparator)
 
         val allConstructors =
-            (classlike as? WithConstructors)
-                ?.constructors
-                .orEmpty()
-                .sortedWith(functionSignatureComparator)
+            // Annotation class constructors can be used from Kotlin but not Java.
+            if (displayLanguage == Language.JAVA && classlike is DAnnotation) {
+                emptyList()
+            } else {
+                (classlike as? WithConstructors)
+                    ?.constructors
+                    .orEmpty()
+                    .sortedWith(functionSignatureComparator)
+            }
         val enumValuesSummary = async { enumValuesToSummary(enumValuesTitle(), enumValues) }
         val nestedTypesSummary = async {
             nestedTypesToSummary(
