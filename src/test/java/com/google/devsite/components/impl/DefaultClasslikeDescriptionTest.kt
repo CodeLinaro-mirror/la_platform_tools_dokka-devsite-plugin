@@ -23,7 +23,7 @@ import com.google.devsite.components.symbols.Platform
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.testing.NoopClasslikeSignature
-import com.google.devsite.components.testing.NoopLink
+import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -37,7 +37,9 @@ class DefaultClasslikeDescriptionTest {
                     header = DefaultDevsitePlatformSelector(listOf(Platform.COMMON)),
                     hierarchy =
                         DefaultClassHierarchy(
-                            ClassHierarchy.Params(parents = listOf(NoopLink("some class")))
+                            ClassHierarchy.Params(
+                                parents = listOf(NoopTypeProjectionComponent("some class"))
+                            )
                         ),
                     primarySignature = NoopClasslikeSignature(),
                     relatedSymbols =

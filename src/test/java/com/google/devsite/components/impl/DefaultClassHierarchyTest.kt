@@ -18,7 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.table.ClassHierarchy.Params
-import com.google.devsite.components.testing.NoopLink
+import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -42,7 +42,7 @@ class DefaultClassHierarchyTest {
 
     @Test
     fun `Class hierarchy with one parent renders correctly`() {
-        val component = DefaultClassHierarchy(Params(listOf(NoopLink("a"))))
+        val component = DefaultClassHierarchy(Params(listOf(NoopTypeProjectionComponent("a"))))
 
         val output = createHTML().body { component.render(this) }.trim()
 
@@ -68,7 +68,10 @@ class DefaultClassHierarchyTest {
 
     @Test
     fun `Class hierarchy with two parents renders correctly`() {
-        val component = DefaultClassHierarchy(Params(listOf(NoopLink("a"), NoopLink("b"))))
+        val component =
+            DefaultClassHierarchy(
+                Params(listOf(NoopTypeProjectionComponent("a"), NoopTypeProjectionComponent("b")))
+            )
 
         val output = createHTML().body { component.render(this) }.trim()
 
@@ -100,7 +103,14 @@ class DefaultClassHierarchyTest {
     fun `Class hierarchy with many parents renders correctly`() {
         val component =
             DefaultClassHierarchy(
-                Params(listOf(NoopLink("a"), NoopLink("b"), NoopLink("c"), NoopLink("d")))
+                Params(
+                    listOf(
+                        NoopTypeProjectionComponent("a"),
+                        NoopTypeProjectionComponent("b"),
+                        NoopTypeProjectionComponent("c"),
+                        NoopTypeProjectionComponent("d"),
+                    )
+                )
             )
 
         val output = createHTML().body { component.render(this) }.trim()

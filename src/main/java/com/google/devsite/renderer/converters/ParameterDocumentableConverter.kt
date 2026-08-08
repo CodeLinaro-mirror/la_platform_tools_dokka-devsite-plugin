@@ -325,6 +325,8 @@ internal class ParameterDocumentableConverter(
      * @param isReturnType used to determine if Unit return types should be converted to void
      * @param propagatedNullability any nullability value that might be caused by things wrapping or
      *   containing this projection, such as misplaced nullability annotations or [Nullable]
+     * @param nameOverride used to override the rendered name of the type projection link (e.g. to
+     *   display fully qualified names in class hierarchies)
      */
     fun componentForProjection(
         projection: Projection,
@@ -335,6 +337,7 @@ internal class ParameterDocumentableConverter(
         removedAnnotations: Set<Annotation> = emptySet(),
         isReturnType: Boolean = false,
         propagatedNullability: Nullability? = null,
+        nameOverride: String? = null,
     ): TypeProjectionComponent {
         // Lambda functions can't be generic types, but their parameters are crammed into the same
         // "projections" location where generic types are stored.
@@ -360,6 +363,7 @@ internal class ParameterDocumentableConverter(
                 isReturnType = false,
                 propagatedNullability = Nullability.KOTLIN_NULLABLE or propagatedNullability,
                 context = context,
+                nameOverride = nameOverride,
             )
         }
         // isReturnType = should_convert_Unit_to_void, which is always false for `GenericOf<Unit>`.
@@ -373,6 +377,7 @@ internal class ParameterDocumentableConverter(
                 isReturnType = false,
                 propagatedNullability = propagatedNullability,
                 context = context,
+                nameOverride = nameOverride,
             )
         }
         if (proj is TypeAliased) {
@@ -385,6 +390,7 @@ internal class ParameterDocumentableConverter(
                 isReturnType = isReturnType,
                 propagatedNullability = propagatedNullability,
                 context = context,
+                nameOverride = nameOverride,
             )
         }
 
@@ -406,7 +412,7 @@ internal class ParameterDocumentableConverter(
             Language.JAVA ->
                 DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
-                        type = proj.toLink(),
+                        type = proj.toLink(nameOverride = nameOverride),
                         nullability = nullability,
                         displayLanguage = Language.JAVA,
                         generics = generics,
@@ -428,7 +434,7 @@ internal class ParameterDocumentableConverter(
                         proj.dri in mappedCollections ->
                         DefaultMappedTypeProjectionComponent(
                             MappedTypeProjectionComponent.Params(
-                                type = proj.toLink(),
+                                type = proj.toLink(nameOverride = nameOverride),
                                 alternativePrefix =
                                     DefaultLink(
                                         Link.Params(
@@ -449,7 +455,7 @@ internal class ParameterDocumentableConverter(
                     else ->
                         DefaultTypeProjectionComponent(
                             TypeProjectionComponent.Params(
-                                type = proj.toLink(),
+                                type = proj.toLink(nameOverride = nameOverride),
                                 nullability = nullability,
                                 displayLanguage = Language.KOTLIN,
                                 generics = generics,
@@ -620,9 +626,9 @@ internal class ParameterDocumentableConverter(
      *
      * @param suffix is used in the case where we need to add a `?` to a nullable type link
      */
-    private fun Projection.toLink(suffix: String = ""): Link =
+    private fun Projection.toLink(suffix: String = "", nameOverride: String? = null): Link =
         when (this) {
-            is TypeConstructor -> pathProvider.linkForReference(dri)
+            is TypeConstructor -> pathProvider.linkForReference(dri, name = nameOverride)
             is TypeParameter ->
                 DefaultLink(Link.Params(name = (presentableName ?: name) + suffix, url = ""))
             Star ->

@@ -37,6 +37,7 @@ import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultTableTitle
+import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.impl.emptyInheritedSymbolsList
 import com.google.devsite.components.impl.emptySummaryList
 import com.google.devsite.components.pages.Classlike
@@ -812,19 +813,33 @@ internal abstract class ClasslikeDocumentableConverter(
 
         return SIGNATURE_INSTANCES.getOrPut(sourceSetDependentInput to sourceSetIndepInput) {
             // TODO(KMP ClassGraph b/253454963. Move these into sourceSetDependentInput.)
+            val supertypesList =
+                (classlike as? WithSupertypes)?.supertypes?.get(sourceSet)?.map {
+                    it.typeConstructor
+                } ?: emptyList()
             val (extends, implements) =
                 when (sourceSetIndepInput.type) {
                     "class",
                     "interface",
                     "enum",
                     "object" ->
-                        (classGraph.getValue(sourceSetIndepInput.dri).directSuperClasses.map {
-                            pathProvider.linkForReference(it.dri)
-                        } to
-                            classGraph.getValue(sourceSetIndepInput.dri).directInterfaces.map {
-                                pathProvider.linkForReference(it.dri)
-                            })
-                    else -> emptyList<Link>() to emptyList()
+                        Pair(
+                            getSuperTypeComponents(
+                                superClasses =
+                                    classGraph.getValue(sourceSetIndepInput.dri).directSuperClasses,
+                                supertypesList = supertypesList,
+                                isFromJava = sourceSetIndepInput.isFromJava,
+                                sourceSet = sourceSet,
+                            ),
+                            getSuperTypeComponents(
+                                superClasses =
+                                    classGraph.getValue(sourceSetIndepInput.dri).directInterfaces,
+                                supertypesList = supertypesList,
+                                isFromJava = sourceSetIndepInput.isFromJava,
+                                sourceSet = sourceSet,
+                            ),
+                        )
+                    else -> Pair(emptyList(), emptyList())
                 }
             DefaultClasslikeSignature(
                 ClasslikeSignature.Params(
@@ -927,13 +942,39 @@ internal abstract class ClasslikeDocumentableConverter(
                 Language.KOTLIN -> DRI(packageName = "kotlin", classNames = "Any")
             }
         val classHierarchyRootLink =
-            pathProvider.linkForReference(classHierarchyRootDri, classHierarchyRootDri.fullName)
-        val thisLink = pathProvider.linkForReference(classlike.dri, classlike.dri.fullName)
+            DefaultTypeProjectionComponent(
+                TypeProjectionComponent.Params(
+                    type =
+                        pathProvider.linkForReference(
+                            classHierarchyRootDri,
+                            classHierarchyRootDri.fullName,
+                        ),
+                    nullability = Nullability.DONT_CARE,
+                    displayLanguage = displayLanguage,
+                )
+            )
+        val thisLink =
+            DefaultTypeProjectionComponent(
+                TypeProjectionComponent.Params(
+                    type = pathProvider.linkForReference(classlike.dri, classlike.dri.fullName),
+                    nullability = Nullability.DONT_CARE,
+                    displayLanguage = displayLanguage,
+                )
+            )
 
+        val supertypesList =
+            (classlike as? WithSupertypes)
+                ?.supertypes
+                ?.get(classlike.getExpectOrCommonSourceSet())
+                ?.map { it.typeConstructor } ?: emptyList()
         val parentLinks =
-            parents.map { classlike ->
-                pathProvider.linkForReference(classlike.dri, classlike.dri.fullName)
-            }
+            getSuperTypeComponents(
+                superClasses = parents,
+                supertypesList = supertypesList,
+                isFromJava = classlike.isFromJava(),
+                sourceSet = classlike.getExpectOrCommonSourceSet(),
+                nameOverride = true,
+            )
         val allLinks = listOf(classHierarchyRootLink) + parentLinks + listOf(thisLink)
         return DefaultClassHierarchy(ClassHierarchy.Params(allLinks))
     }
@@ -1193,6 +1234,44 @@ internal abstract class ClasslikeDocumentableConverter(
             throw RuntimeException(message, e)
         }
     }
+
+    private fun getSuperTypeComponents(
+        superClasses: List<DClasslike>,
+        supertypesList: List<org.jetbrains.dokka.model.TypeConstructor>,
+        isFromJava: Boolean,
+        sourceSet: DokkaSourceSet,
+        nameOverride: Boolean = false,
+    ): List<TypeProjectionComponent> =
+        superClasses.map { parentClass ->
+            // supertypesList.find { it.dri == parentClass.dri } evaluates to null when the
+            // ClassGraph
+            // and Dokka's raw AST supertypes diverge. This occurs because:
+            // 1. Implicit supertypes (like `kotlin.Any` or `java.lang.Object`) appear in the
+            // ClassGraph
+            //    but typically not in the raw source AST.
+            // 2. Java-to-Kotlin translation drifts in the compiler frontend (e.g. ClassGraph
+            // exposes
+            //    `kotlin.collections.List` while the raw AST keeps `java.util.List`).
+            // 3. KMP `expect`/`actual` supertypes can vary across source sets.
+            // 4. Unpopulated source sets or missing `WithSupertypes` implementations yield an empty
+            // list.
+            val proj =
+                supertypesList.find { it.dri == parentClass.dri }
+                    ?: GenericTypeConstructor(parentClass.dri, emptyList(), null)
+            errorContextInjector(classlike) {
+                paramConverter.componentForProjection(
+                    projection = proj,
+                    isJavaSource = isFromJava,
+                    sourceSet = sourceSet,
+                    context = classlike,
+                    propagatedNullability = Nullability.DONT_CARE,
+                    nameOverride =
+                        if (nameOverride) {
+                            parentClass.dri.fullName
+                        } else null,
+                )
+            }
+        }
 }
 
 /**

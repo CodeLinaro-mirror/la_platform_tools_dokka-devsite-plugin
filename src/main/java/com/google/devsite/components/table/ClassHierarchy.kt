@@ -17,11 +17,11 @@
 package com.google.devsite.components.table
 
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.Link
+import com.google.devsite.components.symbols.TypeProjectionComponent
 
 /** Represents the class inheritance hierarchy. */
 internal interface ClassHierarchy : ContextFreeComponent {
     val data: Params
 
-    data class Params(val parents: List<Link>)
+    data class Params(val parents: List<TypeProjectionComponent>)
 }

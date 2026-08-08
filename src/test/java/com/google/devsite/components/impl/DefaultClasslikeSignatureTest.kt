@@ -40,8 +40,8 @@ class DefaultClasslikeSignatureTest {
                     name = NoopLink("Foo"),
                     type = "class",
                     modifiers = Modifiers("public", "abstract"),
-                    extends = listOf(NoopLink("Anyclass")),
-                    implements = listOf(NoopLink("SomeInterface")),
+                    extends = listOf(NoopTypeProjectionComponent("Anyclass")),
+                    implements = listOf(NoopTypeProjectionComponent("SomeInterface")),
                     typeParameters =
                         listOf(
                             DefaultTypeParameterComponent(
@@ -79,8 +79,8 @@ class DefaultClasslikeSignatureTest {
                     name = NoopLink("Foo"),
                     type = "class",
                     modifiers = Modifiers("open"),
-                    extends = listOf(NoopLink("Anyclass")),
-                    implements = listOf(NoopLink("SomeInterface")),
+                    extends = listOf(NoopTypeProjectionComponent("Anyclass")),
+                    implements = listOf(NoopTypeProjectionComponent("SomeInterface")),
                     typeParameters =
                         listOf(
                             DefaultTypeParameterComponent(
@@ -119,7 +119,7 @@ class DefaultClasslikeSignatureTest {
                     type = "interface",
                     modifiers = EmptyModifiers,
                     extends = listOf(),
-                    implements = listOf(NoopLink("SomeInterface")),
+                    implements = listOf(NoopTypeProjectionComponent("SomeInterface")),
                     typeParameters = listOf(),
                     annotationComponents = emptyList(),
                 )

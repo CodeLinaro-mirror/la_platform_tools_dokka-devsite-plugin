@@ -528,10 +528,10 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         val classlike = page.data.content
         val parents = classlike.data.description.data.hierarchy.data.parents.items(3).toList()
 
-        javaOnly { assertThat(parents[0].data.name).isEqualTo("java.lang.Object") }
-        kotlinOnly { assertThat(parents[0].data.name).isEqualTo("kotlin.Any") }
-        assertThat(parents[1].data.name).isEqualTo("androidx.example.Parent")
-        assertThat(parents[2].data.name).isEqualTo("androidx.example.Foo")
+        javaOnly { assertThat(parents[0].data.type.data.name).isEqualTo("java.lang.Object") }
+        kotlinOnly { assertThat(parents[0].data.type.data.name).isEqualTo("kotlin.Any") }
+        assertThat(parents[1].data.type.data.name).isEqualTo("androidx.example.Parent")
+        assertThat(parents[2].data.type.data.name).isEqualTo("androidx.example.Foo")
     }
 
     @Test
@@ -549,12 +549,12 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         val classlike = page.data.content
         val parents = classlike.data.description.data.hierarchy.data.parents.items(5).toList()
 
-        javaOnly { assertThat(parents[0].data.name).isEqualTo("java.lang.Object") }
-        kotlinOnly { assertThat(parents[0].data.name).isEqualTo("kotlin.Any") }
-        assertThat(parents[1].data.name).isEqualTo("androidx.example.A")
-        assertThat(parents[2].data.name).isEqualTo("androidx.example.B")
-        assertThat(parents[3].data.name).isEqualTo("androidx.example.C")
-        assertThat(parents[4].data.name).isEqualTo("androidx.example.Foo")
+        javaOnly { assertThat(parents[0].data.type.data.name).isEqualTo("java.lang.Object") }
+        kotlinOnly { assertThat(parents[0].data.type.data.name).isEqualTo("kotlin.Any") }
+        assertThat(parents[1].data.type.data.name).isEqualTo("androidx.example.A")
+        assertThat(parents[2].data.type.data.name).isEqualTo("androidx.example.B")
+        assertThat(parents[3].data.type.data.name).isEqualTo("androidx.example.C")
+        assertThat(parents[4].data.type.data.name).isEqualTo("androidx.example.Foo")
     }
 
     @Test
@@ -580,8 +580,9 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
             val prefix = if (page == pageK) "" else "Test."
             val classSignature = page.data.content.data.description.data.primarySignature.data
             assertThat(classSignature.type).isEqualTo("class")
-            assertThat(classSignature.extends.single().data.name).isEqualTo("${prefix}B")
-            assertThat(classSignature.implements.single().data.name).isEqualTo("${prefix}A")
+            assertThat(classSignature.extends.single().data.type.data.name).isEqualTo("${prefix}B")
+            assertThat(classSignature.implements.single().data.type.data.name)
+                .isEqualTo("${prefix}A")
         }
     }
 
@@ -608,10 +609,11 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         for (page in listOf(pageJ, pageK)) {
             val classSignature = page.data.description.data.primarySignature.data
             assertThat(classSignature.type).isEqualTo("class")
-            assertThat(classSignature.extends.single().data.name).isEqualTo("List<String>")
+            assertThat(classSignature.extends.single().data.type.data.name)
+                .isEqualTo("List<String>")
             val hierarchy = page.data.description.data.hierarchy.data
             assertThat(hierarchy.parents.size).isEqualTo(2)
-            assertThat(hierarchy.parents.first().data.name).isEqualTo("List<String>")
+            assertThat(hierarchy.parents.first().data.type.data.name).isEqualTo("List<String>")
         }
     }
 
@@ -641,9 +643,10 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
                 .page(name = "JavaArgsLazy")
         val signatureK = pageExternalK.data.content.data.description.data.primarySignature
         val signatureJ = pageExternalJ.data.content.data.description.data.primarySignature
-        assertThat(signatureK.data.implements.map { it.data.name }).isEqualTo(listOf("Lazy"))
+        assertThat(signatureK.data.implements.map { it.data.type.data.name })
+            .isEqualTo(listOf("Lazy"))
         // kotlin.Lazy is unresolved due to https://github.com/Kotlin/dokka/issues/4516
-        assertThat(signatureJ.data.implements.map { it.data.name }).isEmpty()
+        assertThat(signatureJ.data.implements.map { it.data.type.data.name }).isEmpty()
     }
 
     // This test also validates that only direct superclasses / interfaces are included because
@@ -666,7 +669,7 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
                 .page(name = "MyList")
         val signatureJ = pageExternalJ.data.content.data.description.data.primarySignature
         for (signature in listOf(signatureJ, signatureK)) {
-            assertThat(signature.data.extends.map { it.data.name })
+            assertThat(signature.data.extends.map { it.data.type.data.name })
                 .isEqualTo(listOf("AbstractList"))
             assertThat(signature.data.implements).isEmpty()
         }
@@ -3222,8 +3225,8 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
 
         assertThat(signatureJ.data.extends).isEmpty()
         assertThat(signatureK.data.extends).isEmpty()
-        assertThat(signatureJ.data.implements.single().data.name).isEqualTo("Test.Foo")
-        assertThat(signatureK.data.implements.single().data.name).isEqualTo("Foo")
+        assertThat(signatureJ.data.implements.single().data.type.data.name).isEqualTo("Test.Foo")
+        assertThat(signatureK.data.implements.single().data.type.data.name).isEqualTo("Foo")
         // Now route to DefaultClassSignatureTest.`Interfaces extend other interfaces`()
     }
 
@@ -3517,7 +3520,7 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         val module = testWithRootPageNode(src.map { it.trimMargin() })
         val parent = module.page("Parent").data.content
         val child = module.page("Child").data.content
-        assertThat(child.data.description.data.hierarchy.data.parents.single().data.name)
+        assertThat(child.data.description.data.hierarchy.data.parents.single().data.type.data.name)
             .isEqualTo("Parent")
         val unboxedDirect = parent.propertySymbol("unboxed")!!.data.title.data.type
         val boxedDirect = parent.propertySymbol("boxed")!!.data.title.data.type
@@ -3814,6 +3817,58 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
 
         val packageExtProperties = packageSummary.data.extensionPropertiesSummary.data.items
         assertThat(packageExtProperties).hasSize(1)
+    }
+
+    @Test
+    fun `Class hierarchy and signature preserves complex nested generics in supertypes and interfaces`() {
+        val pageK =
+            """
+            |interface Repository<T>
+            |open class BaseService<K, V>
+            |
+            |class UserDataService : BaseService<String, Int>(), Repository<List<String>>
+            """
+                .render(java = false)
+                .page("UserDataService")
+                .data
+                .content
+
+        val pageJ =
+            """
+            |import java.util.List;
+            |
+            |public interface Repository<T> {}
+            |public class BaseService<K, V> {}
+            |
+            |public class UserDataService extends BaseService<String, Integer> implements Repository<List<String>> {}
+            """
+                .render(java = true)
+                .page("UserDataService")
+                .data
+                .content
+
+        for (page in listOf(pageK, pageJ)) {
+            val classSignature = page.data.description.data.primarySignature.data
+
+            val superclassProperty = classSignature.extends.single()
+            assertThat(superclassProperty.data.type.data.name).contains("BaseService")
+            assertThat(superclassProperty.data.generics[0].data.type.data.name).contains("String")
+            javaOnly {
+                assertThat(superclassProperty.data.generics[1].data.type.data.name)
+                    .contains("Integer")
+            }
+            kotlinOnly {
+                assertThat(superclassProperty.data.generics[1].data.type.data.name).contains("Int")
+            }
+
+            val interfaceProperty = classSignature.implements.single()
+            assertThat(interfaceProperty.data.type.data.name).contains("Repository")
+            assertThat(interfaceProperty.data.generics[0].data.type.data.name).contains("List")
+            // Note: In Kotlin, you can dive deeper into Repository<List<String>> to find the nested
+            // 'String'.
+            // However, this is not currently testable for Java source code because Dokka's Java PSI
+            // parser drops deeply nested generic bounds on supertypes, emitting them as raw types.
+        }
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage<Classlike> {
