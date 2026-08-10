@@ -390,7 +390,12 @@ internal class DocTagConverter(
             allOptions.putAll(
                 recursivelyGetLambdaParamNames(documentable.parameters.map { it.type }).map {
                     (it.presentableName ?: "") to
-                        paramConverter.componentForLambdaParameter(it, isFromJava, sourceSet)
+                        paramConverter.componentForLambdaParameter(
+                            projection = it,
+                            isFromJava = isFromJava,
+                            sourceSet = sourceSet,
+                            context = documentable,
+                        )
                 }
             )
         }

@@ -75,6 +75,7 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.PageNode
@@ -355,6 +356,7 @@ internal abstract class ConverterTestBase(
             AnnotationDocumentableConverter(
                 testClass.displayLanguage,
                 provider,
+                holder,
                 hiddenAnnotations,
                 loadDevsiteConfiguration(testClass.context).validNullabilityAnnotations,
             )
@@ -577,6 +579,7 @@ internal abstract class ConverterTestBase(
         annotations: List<Annotations.Annotation>,
         nullability: Nullability = Nullability.DONT_CARE,
         hiddenAnnotations: Set<String> = emptySet(),
+        documentable: Documentable? = null,
     ): List<AnnotationComponent> {
         val converterHolder =
             ConverterHolder(
@@ -584,7 +587,11 @@ internal abstract class ConverterTestBase(
                 module = this,
                 hiddenAnnotations = hiddenAnnotations,
             )
-        return converterHolder.annotationConverter.annotationComponents(annotations, nullability)
+        return converterHolder.annotationConverter.annotationComponents(
+            documentable ?: this,
+            annotations,
+            nullability,
+        )
     }
 
     /** In case you aren't explicit, our best guess at what you want docs for. */

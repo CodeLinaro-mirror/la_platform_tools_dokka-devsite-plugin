@@ -70,6 +70,7 @@ internal class PropertyDocumentableConverter(
                                     isJavaSource = property.isFromJava(),
                                     sourceSet = jvmSourceSet,
                                     propagatedAnnotations = typeAnnotations,
+                                    context = property,
                                 ),
                             modifiers = property.modifiers(jvmSourceSet).modifiersFor(hints),
                         )
@@ -85,6 +86,7 @@ internal class PropertyDocumentableConverter(
                                 ),
                             annotationComponents =
                                 annotationConverter.annotationComponents(
+                                    documentable = property,
                                     annotations = nonTypeAnnotations,
                                     // Propagates to return type instead
                                     nullability = Nullability.DONT_CARE,
@@ -114,10 +116,11 @@ internal class PropertyDocumentableConverter(
                         TypeSummary.Params(
                             type =
                                 paramConverter.componentForProjection(
-                                    property.type,
-                                    property.isFromJava(),
-                                    property.getExpectOrCommonSourceSet(),
-                                    typeAnnotations,
+                                    projection = property.type,
+                                    isJavaSource = property.isFromJava(),
+                                    sourceSet = property.getExpectOrCommonSourceSet(),
+                                    context = property,
+                                    propagatedAnnotations = typeAnnotations,
                                 ),
                             // TODO(KMP, b/254493209)
                             modifiers =
@@ -137,6 +140,7 @@ internal class PropertyDocumentableConverter(
                                 ),
                             annotationComponents =
                                 annotationConverter.annotationComponents(
+                                    documentable = property,
                                     annotations = nonTypeAnnotations,
                                     // Propagates to return type instead
                                     nullability = Nullability.DONT_CARE,
@@ -167,6 +171,7 @@ internal class PropertyDocumentableConverter(
                         isJavaSource = property.isFromJava(),
                         injectedAnnotations = typeAnnotations,
                     ),
+                context = property,
             )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
@@ -188,6 +193,7 @@ internal class PropertyDocumentableConverter(
                 modifiers = property.modifiers(jvmSourceSet).modifiersFor(hints),
                 annotationComponents =
                     annotationConverter.annotationComponents(
+                        documentable = property,
                         annotations = nonTypeAnnotations,
                         nullability = Nullability.DONT_CARE, // Propagates to return type instead
                     ),
@@ -207,10 +213,11 @@ internal class PropertyDocumentableConverter(
             nonTypeAnnotations.deprecationAnnotation() ?: property.withAccessorDeprecation()
         val returnType =
             paramConverter.componentForProjection(
-                property.type,
-                property.isFromJava(),
+                projection = property.type,
+                isJavaSource = property.isFromJava(),
                 sourceSet = property.getExpectOrCommonSourceSet(),
-                typeAnnotations,
+                context = property,
+                propagatedAnnotations = typeAnnotations,
                 propagatedNullability =
                     property.type.getNullability(
                         displayLanguage = displayLanguage,
@@ -240,6 +247,7 @@ internal class PropertyDocumentableConverter(
                     property.modifiers(property.getExpectOrCommonSourceSet()).modifiersFor(hints),
                 annotationComponents =
                     annotationConverter.annotationComponents(
+                        documentable = property,
                         annotations = nonTypeAnnotations,
                         nullability = Nullability.DONT_CARE, // Propagates to return type instead
                     ),

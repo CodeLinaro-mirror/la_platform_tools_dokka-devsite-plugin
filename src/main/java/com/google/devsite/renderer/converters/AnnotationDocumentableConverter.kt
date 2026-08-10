@@ -30,6 +30,7 @@ import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.defaultValidNullabilityAnnotations
 import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRIExtraContainer
 import org.jetbrains.dokka.links.EnumEntryDRIExtra
@@ -38,6 +39,7 @@ import org.jetbrains.dokka.model.AnnotationValue
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.ArrayValue
 import org.jetbrains.dokka.model.ClassValue
+import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.EnumValue
 import org.jetbrains.dokka.model.LiteralValue
 import org.jetbrains.dokka.model.StringValue
@@ -46,6 +48,7 @@ import org.jetbrains.dokka.model.StringValue
 internal class AnnotationDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
+    private val holder: DocumentablesHolder,
     private val annotationsNotToDisplay: Set<String>,
     // Default value is provided for testing purposes only. The only real instantiation provides it.
     private val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
@@ -56,6 +59,7 @@ internal class AnnotationDocumentableConverter(
      * @return the AnnotationComponents for the given annotations on the annotated element
      */
     fun annotationComponents(
+        documentable: Documentable,
         annotations: List<Annotations.Annotation>,
         nullability: Nullability,
     ): List<AnnotationComponent> {
@@ -63,11 +67,14 @@ internal class AnnotationDocumentableConverter(
         @Suppress("NAME_SHADOWING") val annotations = annotations.map { it.fixNullability() }
 
         val injectedAnnotations = mutableListOf<Annotations.Annotation>()
-        if (annotations.any { it.isBadNullability }) {
-            throw RuntimeException(
-                "Used a nullability annotation ${annotations.filter { it.isBadNullability }} not " +
-                    "in the list of validNullabilityAnnotations passed to dackka."
-            )
+        for (annotation in annotations) {
+            if (annotation.isBadNullability) {
+                holder.printWarningFor(
+                    "Used a nullability annotation ${annotation.dri.fullName} not " +
+                        "in the list of validNullabilityAnnotations passed to dackka",
+                    documentable,
+                )
+            }
         }
 
         // NOTE: we inject @NonNull, but not @Nullable, as that is usually not useful to Java devs

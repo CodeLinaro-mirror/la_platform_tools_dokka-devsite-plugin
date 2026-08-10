@@ -195,6 +195,7 @@ internal class MultiLanguageRenderer(
             AnnotationDocumentableConverter(
                 language,
                 filePaths,
+                holder,
                 holder.annotationsNotToDisplay,
                 devsiteConfiguration.validNullabilityAnnotations,
             )

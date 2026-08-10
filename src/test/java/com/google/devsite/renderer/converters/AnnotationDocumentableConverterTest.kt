@@ -594,12 +594,47 @@ internal class AnnotationDocumentableConverterTest(displayLanguage: Language) :
         assertThat(link.url).endsWith("/androidx/example/Foo.html")
     }
 
+    @Test
+    fun `Warning for invalid nullability annotation`() {
+        val module =
+            testWithRootPageNode(
+                listOf(
+                    """
+                    /src/main/kotlin/test/pkg/Nullable.kt
+                    package test.pkg
+                    annotation class Nullable
+                    """,
+                    """
+                    /src/main/java/test/pkg/Foo.java
+                    package test.pkg;
+                    public class Foo {
+                        @Nullable
+                        public void foo() {}
+                    }
+                    """,
+                )
+            )
+        val foo =
+            module.packages
+                .single { it.name == "test.pkg" }
+                .classlikes
+                .single { it.name == "Foo" }
+                .functions
+                .single()
+        module.annotationComponents(foo)
+        val expected =
+            "WARN: SRC_DIR/main/java/test/pkg/Foo.java:4 Used a nullability annotation " +
+                "test.pkg.Nullable not in the list of validNullabilityAnnotations passed to " +
+                "dackka in DFunction foo"
+        assertThat(logs).contains(expected)
+    }
+
     private fun DModule.annotationComponents(
         element: Documentable,
         nullability: Nullability = Nullability.DONT_CARE,
         hiddenAnnotations: Set<String> = emptySet(),
     ): List<AnnotationComponent> =
-        annotationComponents(element.allAnnotations(), nullability, hiddenAnnotations)
+        annotationComponents(element.allAnnotations(), nullability, hiddenAnnotations, element)
 
     private fun DModule.functionAnnotationComponents(
         name: String = "foo",

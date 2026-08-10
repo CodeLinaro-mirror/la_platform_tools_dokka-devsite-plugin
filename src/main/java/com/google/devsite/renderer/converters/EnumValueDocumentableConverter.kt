@@ -70,6 +70,7 @@ internal class EnumValueDocumentableConverter(
                 // define an enum value which is `null`, this isn't useful information
                 propagatedNullability = Nullability.DONT_CARE,
                 propagatedAnnotations = typeAnnotations,
+                context = enumValue,
             )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
@@ -93,6 +94,7 @@ internal class EnumValueDocumentableConverter(
                         .modifiersFor(hints),
                 annotationComponents =
                     annotationConverter.annotationComponents(
+                        documentable = enumValue,
                         annotations = nonTypeAnnotations,
                         nullability = Nullability.DONT_CARE, // See above
                     ),
