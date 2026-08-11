@@ -3779,6 +3779,43 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         assertThat(classlike.data.publicFunctionsSummary).isEmpty()
     }
 
+    @Test
+    fun `Generic extension functions and properties are mapped to their bounds`() {
+        val src =
+            """
+            |interface StateRecord
+            |fun <T: StateRecord> T.readable(): T = this
+            |val <T: StateRecord> T.someProperty: T get() = this
+        """
+        val module = src.render()
+
+        val classlike = module.page("StateRecord").data.content
+        val classlikeExtFunctions = classlike.data.extensionFunctionsSummary.data.items
+        kotlinOnly {
+            assertThat(classlikeExtFunctions).hasSize(1)
+            assertThat(classlikeExtFunctions.first().name()).isEqualTo("readable")
+        }
+        javaOnly {
+            assertThat(classlikeExtFunctions).hasSize(2)
+            val functionNames = classlikeExtFunctions.map { it.name() }
+            assertThat(functionNames).containsExactly("readable", "getSomeProperty")
+        }
+
+        val classLikeExtensionProperties = classlike.data.extensionPropertiesSummary.data.items
+        kotlinOnly {
+            assertThat(classLikeExtensionProperties).hasSize(1)
+            assertThat(classLikeExtensionProperties.first().name()).isEqualTo("someProperty")
+        }
+        javaOnly { assertThat(classLikeExtensionProperties).isEmpty() }
+
+        val packageSummary = module.packagePage().data.content
+        val packageExtFunctions = packageSummary.data.extensionFunctionsSummary.data.items
+        assertThat(packageExtFunctions).hasSize(1)
+
+        val packageExtProperties = packageSummary.data.extensionPropertiesSummary.data.items
+        assertThat(packageExtProperties).hasSize(1)
+    }
+
     private fun DModule.page(name: String = "Foo"): DevsitePage<Classlike> {
         val classlike = explicitClasslikes(name).single()
         return page { classlike }
