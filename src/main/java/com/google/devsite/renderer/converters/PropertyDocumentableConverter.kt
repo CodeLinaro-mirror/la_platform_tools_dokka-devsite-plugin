@@ -40,7 +40,6 @@ import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DefaultValue
-import org.jetbrains.dokka.model.StringValue
 
 /** Converts documentable properties into property components. */
 internal class PropertyDocumentableConverter(
@@ -312,34 +311,11 @@ internal class PropertyDocumentableConverter(
         val hasBoth = this.getter != null && this.setter != null
 
         return if (hasBoth && getterDeprecation != null && setterDeprecation == null) {
-            getterDeprecation.copy(
-                scope = Annotations.AnnotationScope.GETTER,
-                params =
-                    getterDeprecation.params.ifEmpty {
-                        mapOf("message" to StringValue("Deprecated"))
-                    },
-            )
+            getterDeprecation.copy(scope = Annotations.AnnotationScope.GETTER)
         } else if (hasBoth && setterDeprecation != null && getterDeprecation == null) {
-            setterDeprecation.copy(
-                scope = Annotations.AnnotationScope.SETTER,
-                params =
-                    setterDeprecation.params.ifEmpty {
-                        mapOf("message" to StringValue("Deprecated"))
-                    },
-            )
+            setterDeprecation.copy(scope = Annotations.AnnotationScope.SETTER)
         } else {
-            getterDeprecation?.copy(
-                params =
-                    getterDeprecation.params.ifEmpty {
-                        mapOf("message" to StringValue("Deprecated"))
-                    }
-            )
-                ?: setterDeprecation?.copy(
-                    params =
-                        setterDeprecation.params.ifEmpty {
-                            mapOf("message" to StringValue("Deprecated"))
-                        }
-                )
+            getterDeprecation ?: setterDeprecation
         }
     }
 }
