@@ -1536,6 +1536,20 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         assertThat(functionDesc.data.components.single().children.size).isEqualTo(7)
     }
 
+    @Test
+    fun `@Deprecated without @deprecated in javadoc`() {
+        val documentation =
+            """
+            | @Deprecated
+            |public void foo(){}
+        """
+                .render(java = true)
+        val doc = documentation.documentation()
+        val functionDesc = doc.first() as DescriptionComponent
+        assertThat(functionDesc.data.deprecation).isNotNull()
+        assertThat(functionDesc.text()).contains("Deprecated in Java")
+    }
+
     @Test // NOTE: render-to-text puts two spaces where the <pre> was. Is this correct?
     fun `Test code blocks with @literals and nesting`() {
         val documentation =
