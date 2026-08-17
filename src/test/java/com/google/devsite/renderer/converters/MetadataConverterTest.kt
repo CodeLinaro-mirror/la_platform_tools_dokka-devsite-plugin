@@ -1151,6 +1151,23 @@ internal class MetadataConverterTest(private val displayLanguage: Language) :
         assertThat(attrClassMetadata.data.sourceLink).isNull()
     }
 
+    @Test
+    fun `Property accessors inherit type parameters from extension property`() {
+        val module =
+            """
+            |val <K, V> K.myProperty: V get() = TODO()
+            """
+                .render()
+
+        val accessors = module.properties()!!.gettersAndSetters()
+        val getter = accessors.single()
+
+        assertThat(getter.name).isEqualTo("getMyProperty")
+        assertThat(getter.generics).hasSize(2)
+        assertThat(getter.generics[0].name).isEqualTo("K")
+        assertThat(getter.generics[1].name).isEqualTo("V")
+    }
+
     private fun DModule.metadataForClasslike(
         name: String = "Foo",
         baseClassSourceLink: String? = null,
