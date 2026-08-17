@@ -548,6 +548,11 @@ private fun updateAccessor(
     getter: Boolean,
 ): DFunction? {
     var updatedAccessor = originalAccessor ?: return null
+
+    if (property.generics.isNotEmpty()) {
+        updatedAccessor = updatedAccessor.copy(generics = property.generics)
+    }
+
     // Static properties should also have static accessors
     if (property.isStaticAnnotated()) {
         updatedAccessor = updatedAccessor.addJvmStatic()
