@@ -147,8 +147,6 @@ internal class DocumentablesHolder(
     private val classGraph: Deferred<ClassGraph>
     private val documentablesGraph: Deferred<DocumentablesGraph>
 
-    // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
-    // private val analysisMap: Deferred<Map<SourceSet, SampleAnalysisEnvironment>>
     @OptIn(DelicateDokkaApi::class)
     internal val sampleAnalysisEnvironment = lazy {
         analysisPlugin.querySingle { sampleAnalysisEnvironmentCreator }.create()

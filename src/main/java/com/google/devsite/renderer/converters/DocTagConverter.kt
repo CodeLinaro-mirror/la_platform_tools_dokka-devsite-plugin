@@ -108,9 +108,6 @@ internal class DocTagConverter(
     private val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,
 ) {
-    // We currently assume all sample are in the common sourceSet. TODO KMP samples b/181224204
-    // private val analysisMap = runBlocking { docsHolder.analysisMap() }
-
     /**
      * @param documentable the documentable we are getting the documentation of
      * @param deprecationAnnotation the @Deprecated annotation. Is a parameter because for e.g.
@@ -630,7 +627,7 @@ internal class DocTagConverter(
                             recursivelyConsiderPsAndTextsForSamples(
                                 child,
                                 components,
-                                // All samples are assumed to be in common (b/181224204)
+                                // All samples are assumed to be in common
                                 docsHolder.commonSourceSet.samples,
                             )
                         } catch (e: Exception) {
@@ -651,7 +648,7 @@ internal class DocTagConverter(
                             recursivelyConsiderPsAndTextsForSamples(
                                 childTag,
                                 components,
-                                // All samples are assumed to be in common (b/181224204)
+                                // All samples are assumed to be in common
                                 docsHolder.commonSourceSet.samples,
                             )
                         }
@@ -691,8 +688,7 @@ internal class DocTagConverter(
 
     /** Create a formatted code block for the sample identified by [name]. */
     private fun Documentable.getSampleComponent(name: String): Pre? {
-        // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
-        // As such, we currently assume that all samples are in common
+        // All samples are assumed to be in common
         val sample =
             docsHolder.sampleAnalysisEnvironment.value.resolveSample(
                 docsHolder.commonSourceSet,

@@ -58,6 +58,8 @@ include(":testData:restrictTo")
 
 include(":testData:sampleAnnotation")
 
+include(":testData:sampleKmp")
+
 include(":testData:simple")
 
 include(":testData:simple-kmp")

@@ -49,4 +49,9 @@ class KmpTest : IntegrationTestBase() {
             javaDocsDirectory = null,
         )
     }
+
+    @Test
+    fun `Validate KMP samples`() {
+        validate("sampleKmp")
+    }
 }
