@@ -159,7 +159,7 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
     }
 
     @Test
-    fun `Parameter understands * generics`() {
+    fun `Parameter understands star generics`() {
         val param =
             """
             |fun foo(a: List<*>)
@@ -200,7 +200,7 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
         }
     }
 
-    @Test // TODO: upstream has problems with generic java parameters?
+    @Test
     fun `Parameter understands variance generics`() {
         val paramK =
             """
@@ -210,12 +210,12 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
                 .param()
         val paramJ =
             """
-            |public void foo(Map<? super String, ? extends Double> a)
+            |public void foo(java.util.Map<? super String, ? extends Double> a) {}
         """
                 .render(java = true)
                 .param()
 
-        for (param in listOf(paramK)) { // TODO: listOf(paramK, paramJ)
+        for (param in listOf(paramK, paramJ)) {
             val paramType = param.data.type
             val generic = paramType.data.generics.items(2)
 
@@ -1469,16 +1469,32 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
         }
     }
 
-    @Test // TODO: implement. Handle generic Star/wrapping Covariance/Contravariance
+    @Test
     fun `Type projections are handled`() {
         val module =
             """
-            |fun foo(retrieveString: List<out String>, storeString: List<in String>, nope: List<*>)
-        """
+           |fun foo(retrieveString: List<out String>, storeString: List<in String>, nope: List<*>)
+           """
                 .render()
+
         val typeOut = module.param("retrieveString").data.type
+        assertThat(typeOut.name()).isEqualTo("List")
+        // TODO(b/166530498): Handle generic Covariance/Contravariance
+        assertThat(typeOut.data.generics.single().name()).isEqualTo("String")
+
         val typeIn = module.param("storeString").data.type
+        assertThat(typeIn.name()).isEqualTo("List")
+        // TODO(b/166530498): Handle generic Covariance/Contravariance
+        assertThat(typeIn.data.generics.single().name()).isEqualTo("String")
+
         val typeStar = module.param("nope").data.type
+        assertThat(typeStar.name()).isEqualTo("List")
+        val expectedName =
+            when (displayLanguage) {
+                Language.JAVA -> "?"
+                Language.KOTLIN -> "*"
+            }
+        assertThat(typeStar.data.generics.single().name()).isEqualTo(expectedName)
     }
 
     @Test

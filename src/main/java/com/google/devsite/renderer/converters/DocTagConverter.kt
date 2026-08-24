@@ -288,7 +288,7 @@ internal class DocTagConverter(
                             .orEmpty()
                     val otherNames =
                         (documentable.properties.map { it.name } + constructorParamNames)
-                    val (validTags, badTags) = otherAtParams.partition { it.name() in otherNames }
+                    val (_, badTags) = otherAtParams.partition { it.name() in otherNames }
                     badTags.forEach {
                         docsHolder.printWarningFor(
                             "Unable to find reference @",

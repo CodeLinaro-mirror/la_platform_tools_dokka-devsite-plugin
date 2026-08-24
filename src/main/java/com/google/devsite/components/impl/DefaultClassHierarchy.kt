@@ -29,7 +29,7 @@ import kotlinx.html.tr
 /** Default implementation of a class hierarchy. */
 internal data class DefaultClassHierarchy(override val data: ClassHierarchy.Params) :
     ClassHierarchy {
-    override fun render(into: FlowContent) =
+    override fun render(into: FlowContent) {
         into.run {
             if (data.parents.isEmpty()) return
 
@@ -58,6 +58,7 @@ internal data class DefaultClassHierarchy(override val data: ClassHierarchy.Para
                 }
             }
         }
+    }
 
     override fun toString() =
         data.parents.withIndex().reversed().joinToString { (level, parent) -> "$level: $parent" }

@@ -223,7 +223,7 @@ internal class PackageDocumentableConverterTest(displayLanguage: Language) :
                 .packagePage()
 
         val summary = page.data.content
-        val classes = summary.data.classes.items(0)
+        assertThat(summary.data.classes).isEmpty()
         val exceptions = summary.data.exceptions.items(2)
 
         assertThat(exceptions.first().link().name).isEqualTo("A")

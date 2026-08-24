@@ -515,10 +515,10 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val constructorDoc = module.documentation({ this.constructor() })
         assertThat(classDoc.size).isEqualTo(2)
         assertThat((classDoc[1] as DocsSummaryList).data.header.toString()).isEqualTo("Throws")
-        // TODO(b/398214231) thrown exception is not propagated. Unclear if this is correct; if so,
-        // there should be some way to document a primary constructor
-        // assertThat(constructorDoc.size).isEqualTo(2)
-        // assertThat((classDoc[1] as DocsSummaryList).data.header.toString()).isEqualTo("Throws")
+        // Thrown exception is not propagated, which is expected. If a primary constructor needs
+        // docs it should have a kdoc block before a `constructor` keyword.
+        // Trying to access the constructor doc text fails because it has no docs.
+        assertFails { (constructorDoc.single() as DescriptionComponent).text() }
     }
 
     @Test
@@ -1133,7 +1133,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         assertThat((seeAlsoTable.single().data.title as Link).data.name).isEqualTo("filter")
     }
 
-    @Test // https://github.com/Kotlin/dokka/issues/3658; b/342557694
+    @Test
     fun `Annotation in code block isn't eaten by parser, Test from androidx-media`() {
         val documentationJ =
             """
@@ -1171,9 +1171,9 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .trimIndent()
                 .render()
                 .documentation()
-        for (doc in listOf(/*documentationJ, */ documentationK)) {
-            assertThat(doc.toString()).contains("@OptIn")
-        }
+        assertThat(documentationK.toString()).contains("@OptIn")
+        // https://github.com/Kotlin/dokka/issues/3658; b/342557694
+        assertThat(documentationJ.toString()).doesNotContain("@OptIn")
     }
 
     @Test
@@ -1410,7 +1410,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .documentation()
         for (documentation in listOf(documentationJ, documentationK)) {
             val seeAlso = (documentation.last() as LinkDescriptionSummaryList).single()
-            val link = seeAlso.data.title as Link
+            val link = seeAlso.data.title
             assertThat(link.data.url).isEqualTo("https://google.com")
         }
     }
@@ -1443,7 +1443,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .documentation()
         for (documentation in listOf(documentationJ, documentationK)) {
             val seeAlso = (documentation.last() as LinkDescriptionSummaryList).single()
-            val link = seeAlso.data.title as Link
+            val link = seeAlso.data.title
             assertThat(link.data.url).isEqualTo("https://google.com")
             val description = seeAlso.data.description
             assertThat(description.text()).contains("Some additional text here.")

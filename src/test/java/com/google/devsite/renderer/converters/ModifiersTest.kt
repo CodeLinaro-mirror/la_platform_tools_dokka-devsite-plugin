@@ -272,7 +272,7 @@ internal class ModifiersTest : ConverterTestBase() {
     private fun DProperty.modifierz() = modifiers(getExpectOrCommonSourceSet())
 
     @Test
-    fun `"default" modifier for interfaces works`() {
+    fun `default modifier for interfaces works`() {
         val theInterface =
             """
             |public interface DefaultLifecycleObserver {

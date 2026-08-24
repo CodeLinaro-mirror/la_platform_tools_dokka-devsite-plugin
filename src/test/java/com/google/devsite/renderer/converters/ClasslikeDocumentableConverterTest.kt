@@ -688,9 +688,7 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
             |}
         """
                 .render()
-        assertFails {
-            val page = modulePrimary.page("BenchmarkState")
-        }
+        assertFails { modulePrimary.page("BenchmarkState") }
         // We can convert to equivalent secondary constructor and it works
         val moduleSecondary =
             """
@@ -856,12 +854,13 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         val barClassK = pagesK.page("bar").data.content
         val bazClassK = pagesK.page("baz").data.content
 
-        // overriding class docs is maybe something we want in kotlin, but is not jdoc spec
+        // inheriting class docs is not jdoc or kdoc spec
         val fooDescription = (fooClassK.descriptionDocs.first() as DescriptionComponent)
         val barDescription = (barClassK.descriptionDocs.first() as DescriptionComponent)
         val bazDescription = (bazClassK.descriptionDocs.first() as DescriptionComponent)
         assertThat(fooDescription.text()).isEqualTo("docs for foo")
-        // assertThat(barDescription.text()).isEqualTo("docs for foo")
+        // bar does not have top-level kdoc, so trying to access the text won't work
+        assertFails { barDescription.text() }
         assertThat(bazDescription.text()).isEqualTo("overriding docs for baz")
 
         kotlinOnly {
@@ -1322,7 +1321,6 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         // Maybe inherited accessors don't get merged into a property? Cause/stackTrace are
         // private fields upstream, as is `*final* String detailMessage`....
         val stackTraceAccessors = listOf("getStackTrace", "setStackTrace")
-        val printOverloads = listOf("printStackTrace", "printStackTrace")
         val expectedProps = listOf("cause", "stackTrace")
         val expectedFuns = sixFuns + missingInKotlin
         // dackka extracts getters and setters from properties to display separately as-Java
@@ -2116,7 +2114,6 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         val classPage = module.page("Foo").data.content
         val companionPage = module.page("Named").data.content
 
-        val nestedTypes = classPage.data.nestedTypesSummary
         val methods = classPage.data.publicFunctionsSummary
         val companionPageMethods = companionPage.data.publicFunctionsSummary
 
@@ -2276,8 +2273,6 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
             // Overridden vars
             val companionProperties = classPage.data.publicCompanionPropertiesSummary.items()
             val companionFunctions = classPage.data.publicCompanionFunctionsSummary.items()
-            val zippedProps = companionProperties.zip(companionPageFields)
-            val zippedFuns = companionFunctions.zip(companionPageMethods)
             assertThat(companionProperties.map { it.name() })
                 .isEqualTo(companionPageFields.map { it.name() })
             assertThat(companionFunctions.map { it.name() })
@@ -3007,8 +3002,7 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
                         as DescriptionComponent
                 assertThat(setterParamDocs.text()).isEqualTo("new state")
                 val setterParam = setter.data.signature.data.parameters.single().data
-                // TODO (b/268236485): the given name is ignored
-                // assertThat(setterParam.name).isEqualTo("state")
+                assertThat(setterParam.name).isEqualTo("state")
             }
         }
     }
@@ -3404,7 +3398,7 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         }
     }
 
-    @Test // Kotlin.enum.valueOf isn't in the descriptor tree, despite being callable: b/235992590
+    @Test
     fun `Enum valueOf return type is synthetic`() {
         val enumDModuleK =
             """
@@ -3416,22 +3410,29 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
             |public enum Foo { BAR, BAZ }
         """
                 .render(java = true)
-        for (enumDModule in listOf(enumDModuleJ)) { // TODO: listOf(enumDModuleK, enumDModuleJ)
+        for (enumDModule in listOf(enumDModuleK, enumDModuleJ)) {
             // Test upstream behavior: only one enumJ.valueOf exists on the enum & it returns a Foo
             val dFunctions = enumDModule.explicitClasslike("Foo").functions
             val valueOfDFunctions = dFunctions.filter { it.name == "valueOf" }
             assertThat(valueOfDFunctions.size).isEqualTo(1)
             val valueOfDFunctionReturnType = valueOfDFunctions.single().type
             assertThat(valueOfDFunctionReturnType is JavaObject).isFalse()
+            val expectedEnumClassName =
+                if (enumDModule == enumDModuleJ) {
+                    // Java source tests wrap the input in an outer `Test` class.
+                    "Test.Foo"
+                } else {
+                    "Foo"
+                }
             assertThat((valueOfDFunctionReturnType as GenericTypeConstructor).dri.classNames)
-                .isEqualTo("Test.Foo")
+                .isEqualTo(expectedEnumClassName)
 
             // Verify the final result in dackka is correct, and that valueOf is marked inherited.
             val enumClass = enumDModule.page("Foo").data.content
             val publicFuns = enumClass.data.publicFunctionsSummary
             val valueOfMethod = publicFuns.single { "valueOf" == it.name() }
             val valueOfReturnType = valueOfMethod.data.title.data.type
-            assertThat(valueOfReturnType.name()).isEqualTo("Test.Foo")
+            assertThat(valueOfReturnType.name()).isEqualTo(expectedEnumClassName)
         }
     }
 
@@ -3473,7 +3474,7 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
                     |): PagingData<T> = filter { predicate(it).await() }
                 """,
             )
-        val module = testWithRootPageNode(src)
+        testWithRootPageNode(src)
     }
 
     @Ignore // b/232944038; go/dokka-upstream-bug/2620

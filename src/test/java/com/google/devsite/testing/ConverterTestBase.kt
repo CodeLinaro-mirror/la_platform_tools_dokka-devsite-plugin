@@ -56,7 +56,7 @@ import com.google.devsite.util.LockingExternalDocumentableProvider
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.PrintStream
-import java.net.URL
+import java.net.URI
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.test.AfterTest
@@ -252,7 +252,7 @@ internal abstract class ConverterTestBase(
             )
             .map {
                 ExternalDocumentationLink(
-                    url = URL(it.value),
+                    url = URI.create(it.value).toURL(),
                     packageListUrl =
                         File("testData")
                             .toPath()

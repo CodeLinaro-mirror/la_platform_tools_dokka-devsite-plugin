@@ -795,7 +795,7 @@ internal class FunctionDocumentableConverterTest(displayLanguage: Language) :
         }
     }
 
-    @Test // This is broken upstream: b/203682189, go/dokka-upstream-bug/2561
+    @Test
     fun `Overall nullability of array types is handled properly in 4x Java and Kotlin`() {
         val moduleK =
             """
@@ -816,8 +816,8 @@ internal class FunctionDocumentableConverterTest(displayLanguage: Language) :
 
         val drab = moduleJ.function("rab")!!.parameters.single()
         val genericDrab = (drab.type as GenericTypeConstructor).projections.single()
-        // assertThat(genericDrab.annotations()).isNotEmpty() // This is a bug
-        // assertThat(genericDrab.annotations().single().dri.classNames).contains("NonNull")
+        // This is broken upstream: b/203682189, go/dokka-upstream-bug/2561
+        assertThat(genericDrab.sourceSetIndependentAnnotations()).isEmpty() // This is a bug
 
         for (module in listOf(moduleJ, moduleK)) {
             val rabSig = module.functionDetail("rab").data.signature
