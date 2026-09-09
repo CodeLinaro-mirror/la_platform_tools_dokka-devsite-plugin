@@ -182,11 +182,14 @@ private fun Documentable.hasRemovedJavadocTag(): Boolean =
     }
 
 fun hasBeenHidden(dri: DRI): Boolean {
-    return hiddenDocumentables.contains(dri)
+    return hiddenDocumentablesGraph.keys.contains(dri)
 }
 
 private fun addToHiddenSet(d: Documentable) {
-    (d.explodedChildren + d).forEach { hiddenDocumentables.add(it.dri) }
+    (d.explodedChildren + d).forEach {
+        // Capture the object so we can resolve its meta-annotations later
+        hiddenDocumentablesGraph[it.dri] = it
+    }
 }
 
 /**
@@ -198,5 +201,5 @@ private fun packageShouldBeHidden(name: String) =
     // subpackage of `packageA`
     hiddenPackages.any { it == name || name.startsWith("$it.") }
 
-private val hiddenDocumentables = mutableSetOf<DRI>()
 private val hiddenPackages = mutableSetOf<String>()
+val hiddenDocumentablesGraph = mutableMapOf<DRI, Documentable>()

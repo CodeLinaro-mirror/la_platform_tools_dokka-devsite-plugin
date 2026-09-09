@@ -158,6 +158,14 @@ private val KNOWN_TYPEBOUND_ANNOTATION_NAMES = listOf("Dimension", "Px", "Size")
 private val KNOWN_TYPEBOUND_ANNOTATION_SUFFIXES =
     listOf("Res", "Range", "Long", "Int", "Float", "Context")
 
+// List of androidx annotations used to specify a predefined set of values
+internal val KNOWN_DEF_ANNOTATIONS =
+    listOf(
+        DRI(packageName = "androidx.annotation", classNames = "IntDef"),
+        DRI(packageName = "androidx.annotation", classNames = "LongDef"),
+        DRI(packageName = "androidx.annotation", classNames = "StringDef"),
+    )
+
 private fun String.shouldBeTypebound() =
     finalWord() in KNOWN_TYPEBOUND_ANNOTATION_SUFFIXES || this in KNOWN_TYPEBOUND_ANNOTATION_NAMES
 

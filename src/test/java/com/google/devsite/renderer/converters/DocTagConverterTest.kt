@@ -23,6 +23,7 @@ import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
+import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
 import com.google.devsite.components.symbols.TypeParameterComponent
@@ -2345,6 +2346,211 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .singleOrNull()
         assertThat(childCode).isNotNull()
         assertThat(childCode!!.text()).isEqualTo("inherited code")
+    }
+
+    @Test
+    fun `AndroidX IntDef values are listed in description`() {
+        val annotation =
+            """
+            |/src/main/kotlin/androidx/annotation/IntDef.kt
+            |package androidx.annotation
+            |annotation class IntDef(vararg val value: Int, val flag: Boolean = false)
+            """
+                .trimIndent()
+        val documentationCode =
+            """
+            |/src/main/kotlin/com/example/Test.kt
+            |package androidx.annotation
+            |import androidx.annotation.IntDef
+            |@Retention(AnnotationRetention.SOURCE)
+            |@RestrictTo(LIBRARY_GROUP_PREFIX)
+            |@IntDef(1, 2)
+            |annotation class MyDef
+            |/**
+            | * Hello
+            | */
+            |@MyDef
+            |fun myFunction() {}
+        """
+
+        val documentation =
+            listOf(annotation, documentationCode)
+                .render()
+                .documentation(
+                    doc = { this.packages.single().functions.first { it.name == "myFunction" } }
+                )
+                .item() as DescriptionComponent
+
+        val rendered = documentation.render()
+        assertThat(rendered).contains("Value is one of the following:")
+        assertThat(rendered).contains("<li><code>1</code></li>")
+        assertThat(rendered).contains("<li><code>2</code></li>")
+    }
+
+    @Test
+    fun `AndroidX StringDef values are listed in description`() {
+        val annotation =
+            """
+            |/src/main/kotlin/androidx/annotation/StringDef.kt
+            |package androidx.annotation
+            |annotation class StringDef(vararg val value: String, val open: Boolean = false)
+            """
+                .trimIndent()
+        val documentationCode =
+            """
+            |/src/main/kotlin/com/example/Test.kt
+            |package androidx.annotation
+            |import androidx.annotation.StringDef
+            |class MyClass {
+            |    companion object {
+            |        const val VAL_A = "A"
+            |        const val VAL_B = "B"
+            |    }
+            |}
+            |@Retention(AnnotationRetention.SOURCE)
+            |@RestrictTo(LIBRARY_GROUP_PREFIX)
+            |@StringDef(MyClass.VAL_A, MyClass.VAL_B)
+            |annotation class MyDef
+            |/**
+            | * Hello
+            | */
+            |@MyDef
+            |fun myFunction() {}
+        """
+
+        val documentation =
+            listOf(annotation, documentationCode)
+                .render()
+                .documentation(
+                    doc = { this.packages.single().functions.first { it.name == "myFunction" } }
+                )
+                .item() as DescriptionComponent
+        val rendered = documentation.render()
+
+        assertThat(rendered).contains("Value is one of the following:")
+        assertThat(rendered).contains("<li><code>A</code></li>")
+        assertThat(rendered).contains("<li><code>B</code></li>")
+    }
+
+    @Test
+    fun `AndroidX IntDef flag values are listed in description`() {
+        val annotation =
+            """
+            |/src/main/kotlin/androidx/annotation/IntDef.kt
+            |package androidx.annotation
+            |annotation class IntDef(vararg val value: Int, val flag: Boolean = false)
+            """
+                .trimIndent()
+        val documentationCode =
+            """
+            |/src/main/kotlin/com/example/Test.kt
+            |package androidx.annotation
+            |import androidx.annotation.IntDef
+            |@Retention(AnnotationRetention.SOURCE)
+            |@RestrictTo(LIBRARY_GROUP_PREFIX)
+            |@IntDef(1, 2, flag = true)
+            |annotation class MyDef
+            |/**
+            | * Hello
+            | */
+            |@MyDef
+            |fun myFunction() {}
+        """
+
+        val documentation =
+            listOf(annotation, documentationCode)
+                .render()
+                .documentation(
+                    doc = { this.packages.single().functions.first { it.name == "myFunction" } }
+                )
+                .item() as DescriptionComponent
+        val rendered = documentation.render()
+        assertThat(rendered)
+            .contains("Value is either <code>0</code> or a combination of the following:")
+        assertThat(rendered).contains("<li><code>1</code></li>")
+        assertThat(rendered).contains("<li><code>2</code></li>")
+    }
+
+    @Test
+    fun `AndroidX LongDef values are listed in description`() {
+        val annotation =
+            """
+            |/src/main/kotlin/androidx/annotation/LongDef.kt
+            |package androidx.annotation
+            |annotation class LongDef(vararg val value: Long, val flag: Boolean = false)
+            """
+                .trimIndent()
+        val documentationCode =
+            """
+            |/src/main/kotlin/com/example/Test.kt
+            |package androidx.annotation
+            |import androidx.annotation.LongDef
+            |@Retention(AnnotationRetention.SOURCE)
+            |@RestrictTo(LIBRARY_GROUP_PREFIX)
+            |@LongDef(10000000000L, 20000000000L)
+            |annotation class MyDef
+            |/**
+            | * Hello
+            | */
+            |@MyDef
+            |fun myFunction() {}
+        """
+
+        val documentation =
+            listOf(annotation, documentationCode)
+                .render()
+                .documentation(
+                    doc = { this.packages.single().functions.first { it.name == "myFunction" } }
+                )
+                .item() as DescriptionComponent
+        val rendered = documentation.render()
+
+        assertThat(rendered).contains("Value is one of the following:")
+        assertThat(rendered).contains("<li><code>10000000000</code></li>")
+        assertThat(rendered).contains("<li><code>20000000000</code></li>")
+    }
+
+    @Test
+    fun `AndroidX IntDef on parameter adds description note`() {
+        val annotation =
+            """
+            |/src/main/kotlin/androidx/annotation/IntDef.kt
+            |package androidx.annotation
+            |@Target(AnnotationTarget.ANNOTATION_CLASS)
+            |annotation class IntDef(vararg val value: Int, val flag: Boolean = false)
+            """
+                .trimIndent()
+
+        val documentationCode =
+            """
+            |/src/main/kotlin/com/example/Test.kt
+            |package androidx.annotation
+            |@IntDef(1, 2)
+            |annotation class MyDef
+            |
+            |/**
+            | * @param p Param description.
+            | */
+            |fun myFunction(@MyDef p: Int): Int = p
+            """
+                .trimIndent()
+
+        val documentation =
+            listOf(annotation, documentationCode)
+                .render()
+                .documentation(
+                    doc = { this.packages.single().functions.first { it.name == "myFunction" } },
+                    paramNames = listOf("p"),
+                )
+
+        val paramSummary = documentation[1] as DocsSummaryList
+        val pItem = paramSummary.items(1).first()
+        val rendered = (pItem as DefaultTableRowSummaryItem).data.description.render()
+
+        assertThat(rendered).contains("Param description.")
+        assertThat(rendered).contains("Value is one of the following:")
+        assertThat(rendered).contains("<li><code>1</code></li>")
+        assertThat(rendered).contains("<li><code>2</code></li>")
     }
 
     private fun DModule.description(

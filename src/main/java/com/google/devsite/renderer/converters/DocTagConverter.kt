@@ -39,16 +39,21 @@ import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.components.table.TableTitle
+import com.google.devsite.hiddenDocumentablesGraph
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.strictSingleOrNull
 import com.google.devsite.util.ComposeProperties
 import java.io.File
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.model.AnnotationParameterValue
 import org.jetbrains.dokka.model.Annotations
+import org.jetbrains.dokka.model.ArrayValue
+import org.jetbrains.dokka.model.BooleanValue
 import org.jetbrains.dokka.model.Callable
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
@@ -78,12 +83,14 @@ import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.doc.A
 import org.jetbrains.dokka.model.doc.Author
 import org.jetbrains.dokka.model.doc.CodeBlock
+import org.jetbrains.dokka.model.doc.CodeInline
 import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.model.doc.Deprecated
 import org.jetbrains.dokka.model.doc.Description
 import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.DocumentationLink
+import org.jetbrains.dokka.model.doc.Li
 import org.jetbrains.dokka.model.doc.NamedTagWrapper
 import org.jetbrains.dokka.model.doc.P
 import org.jetbrains.dokka.model.doc.Param
@@ -98,6 +105,7 @@ import org.jetbrains.dokka.model.doc.Suppress
 import org.jetbrains.dokka.model.doc.TagWrapper
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.doc.Throws
+import org.jetbrains.dokka.model.doc.Ul
 import org.jetbrains.dokka.model.doc.Version
 
 /** Extracts the handwritten documentation from documentables into the correct components. */
@@ -370,57 +378,67 @@ internal class DocTagConverter(
         val tagged = tags.map { it.name() }.toSet()
 
         // @param can refer to parameters, lambda parameters, type parameters, or receivers.
-        val allOptions = mutableMapOf<String, ParameterComponent>()
+        val allParamDocumentables = mutableMapOf<String, Pair<ParameterComponent, Documentable>>()
         if (documentable is DFunction) {
-            allOptions.putAll(
-                documentable.parameters.mapNotNull {
-                    val name = it.name!!
-                    if (!tagged.contains(name)) {
-                        // Synthetic receiver params don't need @param documentation
-                        if (name == "receiver") return@mapNotNull null
-                        // This warning is primarily for blocking newly-added code
-                        if (documentable.isDeprecated()) return@mapNotNull null
-                        docsHolder.printWarningFor(
-                            "Missing @param tag for parameter `$name`",
-                            documentable,
-                        )
-                    }
-                    name to
+            documentable.parameters.mapNotNull {
+                val name = it.name!!
+                if (!tagged.contains(name)) {
+                    // Synthetic receiver params don't need @param documentation
+                    if (name == "receiver") return@mapNotNull null
+                    // This warning is primarily for blocking newly-added code
+                    if (documentable.isDeprecated()) return@mapNotNull null
+                    docsHolder.printWarningFor(
+                        "Missing @param tag for parameter `$name`",
+                        documentable,
+                    )
+                }
+                allParamDocumentables[name] =
+                    Pair(
                         paramConverter.componentForParameter(
                             param = it,
                             isSummary = false,
                             isFromJava = isFromJava,
                             parent = documentable,
-                        )
-                }
-            )
-            allOptions.putAll(
+                        ),
+                        it,
+                    )
+            }
+            allParamDocumentables.putAll(
                 recursivelyGetLambdaParamNames(documentable.parameters.map { it.type }).map {
                     (it.presentableName ?: "") to
-                        paramConverter.componentForLambdaParameter(
-                            projection = it,
-                            isFromJava = isFromJava,
-                            sourceSet = sourceSet,
-                            context = documentable,
+                        Pair(
+                            paramConverter.componentForLambdaParameter(
+                                projection = it,
+                                isFromJava = isFromJava,
+                                sourceSet = sourceSet,
+                                context = documentable,
+                            ),
+                            documentable,
                         )
                 }
             )
         }
-        allOptions.putAll(
-            dGenerics.map { it.name to paramConverter.componentForTypeParameter(it, isFromJava) }
-        )
+        dGenerics.forEach {
+            allParamDocumentables[it.name] =
+                Pair(paramConverter.componentForTypeParameter(it, isFromJava), it)
+        }
+
         if (documentable is Callable && documentable.receiver != null) {
-            allOptions[documentable.receiver!!.name ?: "receiver"] =
-                paramConverter.componentForParameter(
-                    param = documentable.receiver!!,
-                    isSummary = false,
-                    isFromJava = isFromJava,
-                    parent = documentable,
+            val recName = documentable.receiver!!.name ?: "receiver"
+            allParamDocumentables[recName] =
+                Pair(
+                    paramConverter.componentForParameter(
+                        param = documentable.receiver!!,
+                        isSummary = false,
+                        isFromJava = isFromJava,
+                        parent = documentable,
+                    ),
+                    documentable.receiver!!,
                 )
         }
         val params =
             tags.mapNotNull { tag ->
-                if (allOptions[tag.name()] == null) {
+                if (allParamDocumentables[tag.name()] == null) {
                     docsHolder.printWarningFor(
                         "Unable to find what is referred to by \"@param " +
                             "${tag.name()}\" in ${documentable.className} " +
@@ -429,9 +447,14 @@ internal class DocTagConverter(
                     )
                     null
                 } else {
-                    val title = allOptions[tag.name()]!!
+                    val title = allParamDocumentables[tag.name()]!!.first
+                    val paramDoc = allParamDocumentables[tag.name()]?.second
+                    val extraTags = paramDoc?.let { createDefNoteTags(it) }
+                    val desc =
+                        if (extraTags != null) description(tag.children + extraTags)
+                        else description(tag)
                     DefaultTableRowSummaryItem(
-                        TableRowSummaryItem.Params(title = title, description = description(tag))
+                        TableRowSummaryItem.Params(title = title, description = desc)
                     )
                 }
             }
@@ -663,8 +686,71 @@ internal class DocTagConverter(
                 is Since -> {} // These are handled elsewhere
             }
         }
+        if (!summary) {
+            val defNoteTags = createDefNoteTags(this)
+            if (defNoteTags != null) {
+                components.add(defNoteTags)
+            }
+        }
         if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent
         return description(components, summary, null)
+    }
+
+    /**
+     * Inspects the given [Documentable] to detect if any of its annotations are meta-annotated with
+     * `androidx.annotation.IntDef`, `androidx.annotation.LongDef` or
+     * `androidx.annotation.StringDef`.
+     *
+     * If a definition annotation is found, this queries the overarching Documentables graph to
+     * extract the defined constant values (or bitwise flags) and constructs a standardized HTML
+     * paragraph `<p>`. This mimics the legacy `doclava` behavior by automatically documenting the
+     * allowed enum-like values for developers (e.g., "Value is 1 or 2." or "Value is a combination
+     * of ...").
+     *
+     * @param documentable The function, property, or parameter being evaluated.
+     * @return A [DocTag] containing the formatted valid values string, or `null` if no valid
+     *   `IntDef`, `LongDef` or `StringDef` is present.
+     */
+    private fun createDefNoteTags(documentable: Documentable): DocTag? {
+        val annotations = documentable.allAnnotations()
+        var values: List<AnnotationParameterValue>? = null
+        var flag = false
+        val holderGraph = runBlocking { docsHolder.documentablesGraph() }
+
+        for (annotation in annotations) {
+            val dAnnotation =
+                (holderGraph[annotation.dri] ?: hiddenDocumentablesGraph[annotation.dri])
+                    as? org.jetbrains.dokka.model.DAnnotation ?: continue
+            val sourceSet = documentable.getExpectOrCommonSourceSet()
+            val metaAnnotations = dAnnotation.annotations(sourceSet)
+            val defAnnotation = metaAnnotations.find { KNOWN_DEF_ANNOTATIONS.contains(it.dri) }
+            if (defAnnotation != null) {
+                flag = (defAnnotation.params["flag"] as? BooleanValue)?.value == true
+                val valParam = defAnnotation.params["value"]
+                if (valParam is ArrayValue) {
+                    values = valParam.value
+                }
+                break
+            }
+        }
+        if (values.isNullOrEmpty()) return null
+        val valueTags = values.toSet().map { CodeInline(listOf(Text(it.asString()))) }
+        val tags = mutableListOf<DocTag>()
+        tags.add(Text("Value is "))
+        if (flag) {
+            tags.add(
+                Text(
+                    children = listOf(Text("either "), CodeInline(listOf(Text("0"))), Text(" or "))
+                )
+            )
+            if (valueTags.size > 1) {
+                tags.add(Text("a combination of the following:"))
+            }
+        } else {
+            tags.add(Text("one of the following:"))
+        }
+        tags.add(Ul(children = valueTags.map { Li(listOf(it)) }))
+        return P(tags)
     }
 
     /**
