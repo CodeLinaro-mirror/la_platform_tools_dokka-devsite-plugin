@@ -193,10 +193,18 @@ abstract class WriteSourceSetsTask : DefaultTask() {
     /** Returns the external link configuration for the package lists from [packageListDir]. */
     private fun getExternalLinks(): List<ExternalDocumentationLinkImpl> {
         return mapOf(
-                "coroutines" to "https://kotlinlang.org/api/kotlinx.coroutines",
                 "android" to "https://developer.android.com/reference",
-                "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
+                "coroutines" to "https://kotlinlang.org/api/kotlinx.coroutines",
+                "guava" to "https://guava.dev/releases/18.0/api/docs",
+                "javase8" to "https://docs.oracle.com/javase/8/docs/api/",
+                "jetbrains-annotations" to "https://javadoc.io/doc/org.jetbrains/annotations/latest/",
+                "junit" to "https://junit.org/junit4/javadoc/latest/",
                 "kotlin" to "https://kotlinlang.org/api/core/kotlin-stdlib/",
+                "robolectric" to "https://robolectric.org/javadoc/4.11",
+                "reactivestreams" to "https://www.reactive-streams.org/reactive-streams-1.0.4-javadoc/",
+                "reactivex" to "https://reactivex.io/RxJava/2.x/javadoc/",
+                "reactivex-rxjava3" to "http://reactivex.io/RxJava/3.x/javadoc/",
+                "truth" to "https://truth.dev/api/0.41/",
             )
             .map {
                 ExternalDocumentationLink(
