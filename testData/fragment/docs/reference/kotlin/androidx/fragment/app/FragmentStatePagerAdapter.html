@@ -40,7 +40,7 @@
 
 {% verbatim %}
     <p>
-      <pre>abstract class <a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a> : androidx.viewpager.widget.PagerAdapter</pre>
+      <pre>abstract class <a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a> : <a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html">PagerAdapter</a></pre>
     </p>
     <div class="devsite-table-wrapper">
       <table class="jd-inheritance-table">
@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
-            <td colspan="2">androidx.viewpager.widget.PagerAdapter</td>
+            <td colspan="2"><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html">androidx.viewpager.widget.PagerAdapter</a></td>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -64,10 +64,10 @@
     <aside class="caution"><strong>This class is deprecated.</strong><br>
       <p>Switch to androidx.viewpager2.widget.ViewPager2 and use androidx.viewpager2.adapter.FragmentStateAdapter instead.</p>
     </aside>
-    <p>Implementation of <code><a href="">PagerAdapter</a></code> that uses a <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code> to manage each page. This class also handles saving and restoring of fragment's state. </p>
+    <p>Implementation of <code><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html">PagerAdapter</a></code> that uses a <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code> to manage each page. This class also handles saving and restoring of fragment's state. </p>
     <p>This version of the pager is more useful when there are a large number of pages, working more like a list view. When pages are not visible to the user, their entire fragment may be destroyed, only keeping the saved state of that fragment. This allows the pager to hold on to much less memory associated with each visited page as compared to <code><a href="/reference/kotlin/androidx/fragment/app/FragmentPagerAdapter.html">FragmentPagerAdapter</a></code> at the cost of potentially more overhead when switching between pages. </p>
     <p>When using FragmentPagerAdapter the host ViewPager must have a valid ID set.</p>
-    <p>Subclasses only need to implement <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></code> and <code><a href="">getCount</a></code> to have a working adapter. </p>
+    <p>Subclasses only need to implement <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></code> and <code><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#getCount--">getCount</a></code> to have a working adapter. </p>
 Here is an example implementation of a pager containing fragments of lists:
     <pre class="prettyprint lang-java">
 public class FragmentStatePagerSupport extends FragmentActivity {
@@ -390,7 +390,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
         </thead>
         <tbody class="list">
           <tr>
-            <td><devsite-expandable><span class="expand-control">From androidx.viewpager.widget.PagerAdapter</span>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html">androidx.viewpager.widget.PagerAdapter</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -401,14 +401,14 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
                     <tr>
                       <td><code>const <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
                       <td>
-                        <div><code>androidx.viewpager.widget.PagerAdapter.POSITION_NONE = -2</code></div>
+                        <div><code><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#POSITION_NONE">POSITION_NONE</a> = -2</code></div>
                         <p><strong>This property is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>const <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
                       <td>
-                        <div><code>androidx.viewpager.widget.PagerAdapter.POSITION_UNCHANGED = -1</code></div>
+                        <div><code><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#POSITION_UNCHANGED">POSITION_UNCHANGED</a> = -1</code></div>
                         <p><strong>This property is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
@@ -429,7 +429,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
         </thead>
         <tbody class="list">
           <tr>
-            <td><devsite-expandable><span class="expand-control">From androidx.viewpager.widget.PagerAdapter</span>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html">androidx.viewpager.widget.PagerAdapter</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -440,49 +440,49 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
                     <tr>
                       <td><code>abstract <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
                       <td>
-                        <div><code><span><del>getCount</del></span>()</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#getCount--">getCount</a></del></span>()</code></div>
                         <p><strong>This function is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
                       <td>
-                        <div><code><span><del>getItemPosition</del></span>(object:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>!)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#getItemPosition-java.lang.Object-">getItemPosition</a></del></span>(object:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>!)</code></div>
                         <p><strong>This function is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a>!</code></td>
                       <td>
-                        <div><code><span><del>getPageTitle</del></span>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#getPageTitle-int-">getPageTitle</a></del></span>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                         <p><strong>This function is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code></td>
                       <td>
-                        <div><code><span><del>getPageWidth</del></span>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#getPageWidth-int-">getPageWidth</a></del></span>(position:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                         <p><strong>This function is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><span><del>notifyDataSetChanged</del></span>()</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#notifyDataSetChanged--">notifyDataSetChanged</a></del></span>()</code></div>
                         <p><strong>This function is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><span><del>registerDataSetObserver</del></span>(observer:&nbsp;<a href="https://developer.android.com/reference/android/database/DataSetObserver.html">DataSetObserver</a>!)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#registerDataSetObserver-android.database.DataSetObserver-">registerDataSetObserver</a></del></span>(observer:&nbsp;<a href="https://developer.android.com/reference/android/database/DataSetObserver.html">DataSetObserver</a>!)</code></div>
                         <p><strong>This function is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><span><del>unregisterDataSetObserver</del></span>(observer:&nbsp;<a href="https://developer.android.com/reference/android/database/DataSetObserver.html">DataSetObserver</a>!)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter.html#unregisterDataSetObserver-android.database.DataSetObserver-">unregisterDataSetObserver</a></del></span>(observer:&nbsp;<a href="https://developer.android.com/reference/android/database/DataSetObserver.html">DataSetObserver</a>!)</code></div>
                         <p><strong>This function is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>

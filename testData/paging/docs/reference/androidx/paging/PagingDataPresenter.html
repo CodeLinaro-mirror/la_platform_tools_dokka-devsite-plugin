@@ -60,7 +60,7 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingDataPresenter.html#PagingDataPresenter(kotlin.coroutines.CoroutineContext,androidx.paging.PagingData)">PagingDataPresenter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;mainContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;cachedPagingData<br>)</code></div>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingDataPresenter.html#PagingDataPresenter(kotlin.coroutines.CoroutineContext,androidx.paging.PagingData)">PagingDataPresenter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;mainContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;cachedPagingData<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -81,39 +81,39 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function1&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p>Add a <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</code></div>
               <p>Add a listener which triggers after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagingData<br>)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagingData)</code></div>
             </td>
           </tr>
           <tr>
             <td><code>final T</code></td>
             <td>
-              <div><code>@androidx.annotation.MainThread<br><a href="/reference/androidx/paging/PagingDataPresenter.html#get(kotlin.Int)">get</a>(@androidx.annotation.IntRange(from&nbsp;=&nbsp;0) int&nbsp;index)</code></div>
+              <div><code>@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/androidx/paging/PagingDataPresenter.html#get(kotlin.Int)">get</a>(@<a href="https://developer.android.com/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;index)</code></div>
               <p>Returns the presented item at the specified position, notifying Paging of the item access to trigger any loads necessary to fulfill <code><a href="/reference/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final @androidx.annotation.NonNull <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</code></td>
+            <td><code>final @<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#getLoadStateFlow()">getLoadStateFlow</a>()</code></div>
               <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final @androidx.annotation.NonNull <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+            <td><code>final @<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#getOnPagesUpdatedFlow()">getOnPagesUpdatedFlow</a>()</code></div>
               <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> that emits after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
@@ -128,14 +128,14 @@
           <tr>
             <td><code>final T</code></td>
             <td>
-              <div><code>@androidx.annotation.MainThread<br><a href="/reference/androidx/paging/PagingDataPresenter.html#peek(kotlin.Int)">peek</a>(@androidx.annotation.IntRange(from&nbsp;=&nbsp;0) int&nbsp;index)</code></div>
+              <div><code>@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/androidx/paging/PagingDataPresenter.html#peek(kotlin.Int)">peek</a>(@<a href="https://developer.android.com/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;index)</code></div>
               <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#presentPagingDataEvent(androidx.paging.PagingDataEvent)">presentPagingDataEvent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagingDataEvent.html">PagingDataEvent</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;event<br>)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#presentPagingDataEvent(androidx.paging.PagingDataEvent)">presentPagingDataEvent</a>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingDataEvent.html">PagingDataEvent</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;event)</code></div>
               <p>Handler for <code><a href="/reference/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code> emitted by <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
             </td>
           </tr>
@@ -149,14 +149,14 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function1&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p>Remove a previously registered <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener.</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</code></div>
               <p>Remove a previously registered listener for updates to presented pages.</p>
             </td>
           </tr>
@@ -168,7 +168,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>final @androidx.annotation.NonNull <a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
+            <td><code>final @<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingDataPresenter.html#snapshot()">snapshot</a>()</code></div>
               <p>Returns a new <code><a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> representing the currently presented items, including any placeholders if they are enabled.</p>
@@ -185,7 +185,7 @@
             <h3 id="PagingDataPresenter(kotlin.coroutines.CoroutineContext,androidx.paging.PagingData)">PagingDataPresenter</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingDataPresenter.html#PagingDataPresenter(kotlin.coroutines.CoroutineContext,androidx.paging.PagingData)">PagingDataPresenter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;mainContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;cachedPagingData<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingDataPresenter.html#PagingDataPresenter(kotlin.coroutines.CoroutineContext,androidx.paging.PagingData)">PagingDataPresenter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;mainContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;cachedPagingData<br>)</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -199,7 +199,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.NonNull <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;mainContext</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;mainContext</code></td>
                 <td>
                   <p>The coroutine context that core Paging operations will run on. Defaults to <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html">Dispatchers.Main</a></code>. Main operations executed within this context include but are not limited to:</p>
                   <ol>
@@ -219,7 +219,7 @@
                 </td>
               </tr>
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;cachedPagingData</code></td>
+                <td><code><a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;cachedPagingData</code></td>
                 <td>
                   <p>a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> that will initialize this PagingDataPresenter with any LoadStates or loaded data contained within it.</p>
                 </td>
@@ -237,7 +237,7 @@
             <h3 id="addLoadStateListener(kotlin.Function1)">addLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function1&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <p>Add a <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
         <p>As new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed, the listener will be notified to reflect the current <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code>.</p>
         <p>When a new listener is added, it will be immediately called with the current <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code>, unless this <code><a href="/reference/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code> has not been hooked up to a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> yet, and thus has no state to emit.</p>
@@ -268,7 +268,7 @@ adapter.addLoadStateListener {
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.NonNull Function1&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p><code><a href="/reference/androidx/paging/LoadStates.html">LoadStates</a></code> listener to receive updates.</p>
                 </td>
@@ -302,7 +302,7 @@ adapter.addLoadStateListener {
             <h3 id="addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</pre>
         <p>Add a listener which triggers after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
         <p>An update is triggered from one of the following:</p>
         <ul>
@@ -329,7 +329,7 @@ adapter.addLoadStateListener {
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.NonNull Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>called after pages presented are updated.</p>
                 </td>
@@ -363,7 +363,7 @@ adapter.addLoadStateListener {
             <h3 id="collectFrom(androidx.paging.PagingData)">collectFrom</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagingData<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagingData)</pre>
       </div>
       <div class="api-item"><a name="get-kotlin.Int-"></a><a name="get"></a>
         <div class="api-name-block">
@@ -371,7 +371,7 @@ adapter.addLoadStateListener {
             <h3 id="get(kotlin.Int)">get</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@androidx.annotation.MainThread<br>public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#get(kotlin.Int)">get</a>(@androidx.annotation.IntRange(from&nbsp;=&nbsp;0) int&nbsp;index)</pre>
+        <pre class="api-signature no-pretty-print">@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br>public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#get(kotlin.Int)">get</a>(@<a href="https://developer.android.com/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;index)</pre>
         <p>Returns the presented item at the specified position, notifying Paging of the item access to trigger any loads necessary to fulfill <code><a href="/reference/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -386,7 +386,7 @@ adapter.addLoadStateListener {
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.IntRange(from&nbsp;=&nbsp;0) int&nbsp;index</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;index</code></td>
                 <td>
                   <p>Index of the presented item to return, including placeholders.</p>
                 </td>
@@ -422,7 +422,7 @@ adapter.addLoadStateListener {
             <h3 id="getLoadStateFlow()">getLoadStateFlow</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#getLoadStateFlow()">getLoadStateFlow</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#getLoadStateFlow()">getLoadStateFlow</a>()</pre>
         <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
         <p>This flow is conflated. It buffers the last update to <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection, unless this <code><a href="/reference/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code> has not been hooked up to a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> yet, and thus has no state to emit.</p>
         <pre class="prettyprint lang-kotlin">
@@ -452,7 +452,7 @@ lifecycleScope.launch {
             <h3 id="getOnPagesUpdatedFlow()">getOnPagesUpdatedFlow</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#getOnPagesUpdatedFlow()">getOnPagesUpdatedFlow</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#getOnPagesUpdatedFlow()">getOnPagesUpdatedFlow</a>()</pre>
         <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> that emits after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
         <p>An update is triggered from one of the following:</p>
         <ul>
@@ -503,7 +503,7 @@ lifecycleScope.launch {
             <h3 id="peek(kotlin.Int)">peek</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@androidx.annotation.MainThread<br>public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#peek(kotlin.Int)">peek</a>(@androidx.annotation.IntRange(from&nbsp;=&nbsp;0) int&nbsp;index)</pre>
+        <pre class="api-signature no-pretty-print">@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br>public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#peek(kotlin.Int)">peek</a>(@<a href="https://developer.android.com/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;index)</pre>
         <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -518,7 +518,7 @@ lifecycleScope.launch {
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.IntRange(from&nbsp;=&nbsp;0) int&nbsp;index</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;index</code></td>
                 <td>
                   <p>Index of the presented item to return, including placeholders.</p>
                 </td>
@@ -554,7 +554,7 @@ lifecycleScope.launch {
             <h3 id="presentPagingDataEvent(androidx.paging.PagingDataEvent)">presentPagingDataEvent</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#presentPagingDataEvent(androidx.paging.PagingDataEvent)">presentPagingDataEvent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagingDataEvent.html">PagingDataEvent</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;event<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#presentPagingDataEvent(androidx.paging.PagingDataEvent)">presentPagingDataEvent</a>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingDataEvent.html">PagingDataEvent</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;event)</pre>
         <p>Handler for <code><a href="/reference/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code> emitted by <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
         <p>When a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is submitted to this PagingDataPresenter through <code><a href="/reference/androidx/paging/PagingDataPresenter.html#collectFrom(androidx.paging.PagingData)">collectFrom</a></code>, page loads, drops, or LoadStateUpdates will be emitted to presenters as <code><a href="/reference/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code> through this method.</p>
         <p>Presenter layers that communicate directly with <code><a href="/reference/androidx/paging/PagingDataPresenter.html">PagingDataPresenter</a></code> should override this method to handle the <code><a href="/reference/androidx/paging/PagingDataEvent.html">PagingDataEvent</a></code> accordingly. For example by diffing two <code><a href="/reference/androidx/paging/PagingDataEvent.Refresh.html">PagingDataEvent.Refresh</a></code> lists, or appending the inserted list of data from <code><a href="/reference/androidx/paging/PagingDataEvent.Prepend.html">PagingDataEvent.Prepend</a></code> or <code><a href="/reference/androidx/paging/PagingDataEvent.Append.html">PagingDataEvent.Append</a></code>.</p>
@@ -616,7 +616,7 @@ class MyActivity : AppCompatActivity() {
             <h3 id="removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function1&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <p>Remove a previously registered <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -631,7 +631,7 @@ class MyActivity : AppCompatActivity() {
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.NonNull Function1&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Previously registered listener.</p>
                 </td>
@@ -665,7 +665,7 @@ class MyActivity : AppCompatActivity() {
             <h3 id="removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</pre>
         <p>Remove a previously registered listener for updates to presented pages.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -680,7 +680,7 @@ class MyActivity : AppCompatActivity() {
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.NonNull Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Previously registered listener.</p>
                 </td>
@@ -733,7 +733,7 @@ class MyActivity : AppCompatActivity() {
             <h3 id="snapshot()">snapshot</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#snapshot()">snapshot</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataPresenter.html#snapshot()">snapshot</a>()</pre>
         <p>Returns a new <code><a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> representing the currently presented items, including any placeholders if they are enabled.</p>
       </div>
     </div>

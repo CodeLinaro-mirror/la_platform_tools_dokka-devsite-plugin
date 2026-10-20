@@ -40,7 +40,7 @@
 
 {% verbatim %}
     <p>
-      <pre>public abstract class <a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;androidx.recyclerview.widget.RecyclerView.ViewHolder&gt; extends androidx.recyclerview.widget.RecyclerView.Adapter&lt;@androidx.annotation.NonNull VH&gt;</pre>
+      <pre>public abstract class <a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; extends <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH&gt;</pre>
     </p>
     <div class="devsite-table-wrapper">
       <table class="jd-inheritance-table">
@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
-            <td colspan="2">androidx.recyclerview.widget.RecyclerView.Adapter&lt;@androidx.annotation.NonNull VH&gt;</td>
+            <td colspan="2"><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">androidx.recyclerview.widget.RecyclerView.Adapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH&gt;</td>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -64,7 +64,7 @@
     <aside class="caution"><strong>This class is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
       <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
     </aside>
-    <p><code><a href="">RecyclerView.Adapter</a></code> base class for presenting paged data from <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code>s in a <code><a href="">RecyclerView</a></code>.</p>
+    <p><code><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a></code> base class for presenting paged data from <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code>s in a <code><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a></code>.</p>
     <p>This class is a convenience wrapper around <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html">AsyncPagedListDiffer</a></code> that implements common default behavior for item counting, and listening to PagedList update callbacks.</p>
     <p>While using a LiveData<PagedList> is an easy way to provide data to the adapter, it isn't required - you can use <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> when new lists are available.</p>
     <p>PagedListAdapter listens to PagedList loading callbacks as pages are loaded, and uses DiffUtil on a background thread to compute fine grained updates as new PagedLists are received.</p>
@@ -91,7 +91,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>&lt;VH&nbsp;extends&nbsp;androidx.recyclerview.widget.RecyclerView.ViewHolder&gt;</code></td>
+            <td><code>&lt;VH&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;</code></td>
             <td>
               <p>A class that extends ViewHolder that will be used by the adapter.</p>
             </td>
@@ -114,13 +114,13 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;androidx.recyclerview.widget.RecyclerView.ViewHolder&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.AsyncDifferConfig&lt;@androidx.annotation.NonNull T&gt;&nbsp;config<br>)</code></div>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;androidx.recyclerview.widget.RecyclerView.ViewHolder&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.DiffUtil.ItemCallback&lt;@androidx.annotation.NonNull T&gt;&nbsp;diffCallback<br>)</code></div>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
@@ -142,12 +142,12 @@
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
           <tr>
-            <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
+            <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
             <td>
               <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getCurrentList()">getCurrentList</a></del></span>()</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
@@ -168,7 +168,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>final @androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy</code></td>
+            <td><code>final @<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a></code></td>
             <td>
               <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getStateRestorationPolicy()">getStateRestorationPolicy</a></del></span>()</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
@@ -177,63 +177,63 @@
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;currentList<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList)</code></div>
               <p><strong>This method is deprecated.</strong> Use the two argument variant instead.</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;previousList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;currentList<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy&nbsp;strategy<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a>&nbsp;strategy<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList,&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
           <tr>
-            <td><code>final @androidx.annotation.NonNull androidx.recyclerview.widget.ConcatAdapter</code></td>
+            <td><code>final @<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@androidx.annotation.NonNull ?&gt;&nbsp;footer<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;footer)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
           <tr>
-            <td><code>final @androidx.annotation.NonNull androidx.recyclerview.widget.ConcatAdapter</code></td>
+            <td><code>final @<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@androidx.annotation.NonNull ?&gt;&nbsp;header<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;header)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
           <tr>
-            <td><code>final @androidx.annotation.NonNull androidx.recyclerview.widget.ConcatAdapter</code></td>
+            <td><code>final @<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@androidx.annotation.NonNull ?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@androidx.annotation.NonNull ?&gt;&nbsp;footer<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;footer<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
             </td>
           </tr>
@@ -271,7 +271,7 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><devsite-expandable><span class="expand-control">From androidx.recyclerview.widget.RecyclerView.Adapter</span>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">androidx.recyclerview.widget.RecyclerView.Adapter</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -282,203 +282,203 @@
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>bindViewHolder</del></span>(@androidx.annotation.NonNull VH&nbsp;holder,&nbsp;int&nbsp;position)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#bindViewHolder-VH-int-">bindViewHolder</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder,&nbsp;int&nbsp;position)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>final @androidx.annotation.NonNull VH</code></td>
+                      <td><code>final @<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH</code></td>
                       <td>
-                        <div><code><span><del>createViewHolder</del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;parent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;viewType<br>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#createViewHolder-android.view.ViewGroup-int-">createViewHolder</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;parent,&nbsp;int&nbsp;viewType)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>int</code></td>
                       <td>
-                        <div><code><span><del>findRelativeAdapterPositionIn</del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.Adapter&lt;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder&gt;&nbsp;adapter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder&nbsp;viewHolder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;localPosition<br>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#findRelativeAdapterPositionIn-androidx.recyclerview.widget.RecyclerView.Adapter&amp;lt;? extends androidx.recyclerview.widget.RecyclerView.ViewHolder&amp;gt;-androidx.recyclerview.widget.RecyclerView.ViewHolder-int-">findRelativeAdapterPositionIn</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;&nbsp;adapter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&nbsp;viewHolder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;localPosition<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>long</code></td>
                       <td>
-                        <div><code><span><del>getItemId</del></span>(int&nbsp;position)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemId-int-">getItemId</a></del></span>(int&nbsp;position)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>int</code></td>
                       <td>
-                        <div><code><span><del>getItemViewType</del></span>(int&nbsp;position)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemViewType-int-">getItemViewType</a></del></span>(int&nbsp;position)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final boolean</code></td>
                       <td>
-                        <div><code><span><del>hasObservers</del></span>()</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#hasObservers--">hasObservers</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final boolean</code></td>
                       <td>
-                        <div><code><span><del>hasStableIds</del></span>()</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#hasStableIds--">hasStableIds</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyDataSetChanged</del></span>()</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyDataSetChanged--">notifyDataSetChanged</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyItemChanged</del></span>(int&nbsp;position)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged-int-">notifyItemChanged</a></del></span>(int&nbsp;position)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyItemChanged</del></span>(int&nbsp;position,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged-int-java.lang.Object-">notifyItemChanged</a></del></span>(int&nbsp;position,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyItemInserted</del></span>(int&nbsp;position)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemInserted-int-">notifyItemInserted</a></del></span>(int&nbsp;position)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyItemMoved</del></span>(int&nbsp;fromPosition,&nbsp;int&nbsp;toPosition)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemMoved-int-int-">notifyItemMoved</a></del></span>(int&nbsp;fromPosition,&nbsp;int&nbsp;toPosition)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyItemRangeChanged</del></span>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged-int-int-">notifyItemRangeChanged</a></del></span>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyItemRangeChanged</del></span>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged-int-int-java.lang.Object-">notifyItemRangeChanged</a></del></span>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyItemRangeInserted</del></span>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted-int-int-">notifyItemRangeInserted</a></del></span>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyItemRangeRemoved</del></span>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeRemoved-int-int-">notifyItemRangeRemoved</a></del></span>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><span><del>notifyItemRemoved</del></span>(int&nbsp;position)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRemoved-int-">notifyItemRemoved</a></del></span>(int&nbsp;position)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del>onAttachedToRecyclerView</del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView&nbsp;recyclerView<br>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onAttachedToRecyclerView-androidx.recyclerview.widget.RecyclerView-">onAttachedToRecyclerView</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>&nbsp;recyclerView)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>abstract void</code></td>
                       <td>
-                        <div><code><span><del>onBindViewHolder</del></span>(@androidx.annotation.NonNull VH&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder-VH-int-">onBindViewHolder</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del>onBindViewHolder</del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull VH&nbsp;holder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;payloads<br>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder-VH-int-java.util.List&amp;lt;java.lang.Object&amp;gt;-">onBindViewHolder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;payloads<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>abstract @androidx.annotation.NonNull VH</code></td>
+                      <td><code>abstract @<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH</code></td>
                       <td>
-                        <div><code><span><del>onCreateViewHolder</del></span>(@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onCreateViewHolder-android.view.ViewGroup-int-">onCreateViewHolder</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del>onDetachedFromRecyclerView</del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView&nbsp;recyclerView<br>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onDetachedFromRecyclerView-androidx.recyclerview.widget.RecyclerView-">onDetachedFromRecyclerView</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>&nbsp;recyclerView)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del>onFailedToRecycleView</del></span>(@androidx.annotation.NonNull VH&nbsp;holder)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onFailedToRecycleView-VH-">onFailedToRecycleView</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del>onViewAttachedToWindow</del></span>(@androidx.annotation.NonNull VH&nbsp;holder)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewAttachedToWindow-VH-">onViewAttachedToWindow</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del>onViewDetachedFromWindow</del></span>(@androidx.annotation.NonNull VH&nbsp;holder)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewDetachedFromWindow-VH-">onViewDetachedFromWindow</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del>onViewRecycled</del></span>(@androidx.annotation.NonNull VH&nbsp;holder)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewRecycled-VH-">onViewRecycled</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del>registerAdapterDataObserver</del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.AdapterDataObserver&nbsp;observer<br>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#registerAdapterDataObserver-androidx.recyclerview.widget.RecyclerView.AdapterDataObserver-">registerAdapterDataObserver</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a>&nbsp;observer<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del>setHasStableIds</del></span>(boolean&nbsp;hasStableIds)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#setHasStableIds-boolean-">setHasStableIds</a></del></span>(boolean&nbsp;hasStableIds)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del>unregisterAdapterDataObserver</del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.AdapterDataObserver&nbsp;observer<br>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#unregisterAdapterDataObserver-androidx.recyclerview.widget.RecyclerView.AdapterDataObserver-">unregisterAdapterDataObserver</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a>&nbsp;observer<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</p>
                       </td>
                     </tr>
@@ -498,7 +498,7 @@
             <h3 id="PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;androidx.recyclerview.widget.RecyclerView.ViewHolder&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.AsyncDifferConfig&lt;@androidx.annotation.NonNull T&gt;&nbsp;config<br>)</pre>
+        <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
@@ -509,11 +509,11 @@
             <h3 id="PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;androidx.recyclerview.widget.RecyclerView.ViewHolder&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.DiffUtil.ItemCallback&lt;@androidx.annotation.NonNull T&gt;&nbsp;diffCallback<br>)</pre>
+        <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <span><del><a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
-        <p>Creates a <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> with default threading and <code><a href="">androidx.recyclerview.widget.ListUpdateCallback</a></code>.</p>
+        <p>Creates a <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> with default threading and <code><a href="https://developer.android.com/reference/androidx/recyclerview/widget/ListUpdateCallback.html">androidx.recyclerview.widget.ListUpdateCallback</a></code>.</p>
         <p>Convenience for <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>, which uses default threading behavior.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -528,9 +528,9 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.NonNull androidx.recyclerview.widget.DiffUtil.ItemCallback&lt;@androidx.annotation.NonNull T&gt;&nbsp;diffCallback</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback</code></td>
                 <td>
-                  <p>The <code><a href="">DiffUtil.ItemCallback</a></code> instance to compare items in the list.</p>
+                  <p>The <code><a href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a></code> instance to compare items in the list.</p>
                 </td>
               </tr>
             </tbody>
@@ -546,7 +546,7 @@
             <h3 id="addLoadStateListener(kotlin.Function2)">addLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
@@ -565,7 +565,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Listener to receive <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code> updates.</p>
                 </td>
@@ -599,7 +599,7 @@
             <h3 id="getCurrentList()">getCurrentList</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getCurrentList()">getCurrentList</a></del></span>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getCurrentList()">getCurrentList</a></del></span>()</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
@@ -618,7 +618,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
                 <td>
                   <p>The list currently being displayed.</p>
                 </td>
@@ -674,7 +674,7 @@
             <h3 id="getStateRestorationPolicy()">getStateRestorationPolicy</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getStateRestorationPolicy()">getStateRestorationPolicy</a></del></span>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#getStateRestorationPolicy()">getStateRestorationPolicy</a></del></span>()</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
@@ -685,12 +685,12 @@
             <h3 id="onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;currentList<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Use the two argument variant instead, use this instead:
           <pre class="prettyprint">onCurrentListChanged(previousList, currentList)</pre>
         </aside>
         <p>Called when the current PagedList is updated.</p>
-        <p>This may be dispatched as part of <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
+        <p>This may be dispatched as part of <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted-int-int-">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
         <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -705,7 +705,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;currentList</code></td>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList</code></td>
                 <td>
                   <p>new PagedList being displayed, may be null.</p>
                 </td>
@@ -739,12 +739,12 @@
             <h3 id="onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;previousList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;currentList<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
         <p>Called when the current PagedList is updated.</p>
-        <p>This may be dispatched as part of <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
+        <p>This may be dispatched as part of <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted-int-int-">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
         <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -759,13 +759,13 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;previousList</code></td>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousList</code></td>
                 <td>
                   <p><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> that was previously displayed, may be null.</p>
                 </td>
               </tr>
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;currentList</code></td>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList</code></td>
                 <td>
                   <p>new <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> being displayed, may be null.</p>
                 </td>
@@ -799,7 +799,7 @@
             <h3 id="removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
@@ -817,7 +817,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Previously registered listener.</p>
                 </td>
@@ -851,7 +851,7 @@
             <h3 id="setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy&nbsp;strategy<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a>&nbsp;strategy<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
@@ -862,7 +862,7 @@
             <h3 id="submitList(androidx.paging.PagedList)">submitList</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
@@ -881,7 +881,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList</code></td>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList</code></td>
                 <td>
                   <p>The new list to be displayed.</p>
                 </td>
@@ -896,7 +896,7 @@
             <h3 id="submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList,&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
@@ -916,7 +916,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList</code></td>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList</code></td>
                 <td>
                   <p>The new list to be displayed.</p>
                 </td>
@@ -937,11 +937,11 @@
             <h3 id="withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.ConcatAdapter&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@androidx.annotation.NonNull ?&gt;&nbsp;footer<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;footer)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
-        <p>Create a <code><a href="">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the start of the presented list.</p>
+        <p>Create a <code><a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the start of the presented list.</p>
       </div>
       <div class="api-item"><a name="withLoadStateHeader-androidx.paging.LoadStateAdapter-"></a><a name="withloadstateheader"></a>
         <div class="api-name-block">
@@ -949,11 +949,11 @@
             <h3 id="withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.ConcatAdapter&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@androidx.annotation.NonNull ?&gt;&nbsp;header<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a></del></span>(@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;header)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
-        <p>Create a <code><a href="">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the end of the presented list.</p>
+        <p>Create a <code><a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the end of the presented list.</p>
       </div>
       <div class="api-item"><a name="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter, androidx.paging.LoadStateAdapter)"></a><a name="withLoadStateHeaderAndFooter-androidx.paging.LoadStateAdapter-androidx.paging.LoadStateAdapter-"></a><a name="withloadstateheaderandfooter"></a>
         <div class="api-name-block">
@@ -961,11 +961,11 @@
             <h3 id="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.ConcatAdapter&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@androidx.annotation.NonNull ?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@androidx.annotation.NonNull ?&gt;&nbsp;footer<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="https://developer.android.com/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;footer<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter, use this instead:
           <pre class="prettyprint">PagingDataAdapter&lt;T, VH&gt;</pre>
         </aside>
-        <p>Create a <code><a href="">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> and <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
+        <p>Create a <code><a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> and <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
       </div>
     </div>
     <div class="list">

@@ -205,6 +205,7 @@ abstract class WriteSourceSetsTask : DefaultTask() {
                 "reactivex" to "https://reactivex.io/RxJava/2.x/javadoc/",
                 "reactivex-rxjava3" to "http://reactivex.io/RxJava/3.x/javadoc/",
                 "truth" to "https://truth.dev/api/0.41/",
+                "androidx" to "https://developer.android.com/reference"
             )
             .map {
                 ExternalDocumentationLink(

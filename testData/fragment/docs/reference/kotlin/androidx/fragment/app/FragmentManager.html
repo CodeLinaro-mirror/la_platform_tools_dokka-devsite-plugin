@@ -223,7 +223,7 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
             <td>
-              <div><code>@androidx.annotation.MainThread<br><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a>()</code></div>
+              <div><code>@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a>()</code></div>
               <p>After a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code> is committed with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commit()">FragmentTransaction.commit()</a></code>, it is scheduled to be executed asynchronously on the process's main thread.</p>
             </td>
           </tr>
@@ -237,7 +237,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>?</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentById(int)">findFragmentById</a>(id:&nbsp;@androidx.annotation.IdRes <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentById(int)">findFragmentById</a>(id:&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/IdRes.html">IdRes</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
               <p>Finds a fragment that was identified by the given id either when inflated from XML or as the container ID when added in a transaction.</p>
             </td>
           </tr>
@@ -335,7 +335,7 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
             <td>
-              <div><code>@androidx.annotation.MainThread<br><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a>()</code></div>
+              <div><code>@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a>()</code></div>
               <p>Like <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a></code>, but performs the operation immediately inside of the call.</p>
             </td>
           </tr>
@@ -349,7 +349,7 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
             <td>
-              <div><code>@androidx.annotation.MainThread<br><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(name:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?,&nbsp;flags:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <div><code>@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(name:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?,&nbsp;flags:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
               <p>Like <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code>, but performs the operation immediately inside of the call.</p>
             </td>
           </tr>
@@ -543,7 +543,7 @@
         </div>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#beginTransaction()">beginTransaction</a>():&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></pre>
         <p>Start a series of edit operations on the Fragments associated with this FragmentManager. </p>
-        <p>Note: A fragment transaction can only be created/committed prior to an activity saving its state. If you try to commit a transaction after <code><a href="">FragmentActivity.onSaveInstanceState()</a></code> (and prior to a following <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onStart()">FragmentActivity.onStart</a></code> or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onResume()">FragmentActivity.onResume()</a></code>, you will get an error. This is because the framework takes care of saving your current fragments in the state, and if changes are made after the state is saved then they will be lost.</p>
+        <p>Note: A fragment transaction can only be created/committed prior to an activity saving its state. If you try to commit a transaction after <code><a href="https://developer.android.com/reference/androidx/activity/ComponentActivity.html#onSaveInstanceState-android.os.Bundle-">FragmentActivity.onSaveInstanceState()</a></code> (and prior to a following <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onStart()">FragmentActivity.onStart</a></code> or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onResume()">FragmentActivity.onResume()</a></code>, you will get an error. This is because the framework takes care of saving your current fragments in the state, and if changes are made after the state is saved then they will be lost.</p>
       </div>
       <div class="api-item"><a name="clearBackStack-java.lang.String-"></a><a name="clearbackstack"></a>
         <div class="api-name-block">
@@ -752,7 +752,7 @@
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@androidx.annotation.MainThread<br>fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <pre class="api-signature no-pretty-print">@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
         <p>After a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code> is committed with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commit()">FragmentTransaction.commit()</a></code>, it is scheduled to be executed asynchronously on the process's main thread. If you want to immediately executing any such pending operations, you can call this function (only from the main thread) to do so. Note that all callbacks and other related behavior will be done from within this call, so be careful about where this is called from. </p>
         <p>If you are committing a single transaction that does not modify the fragment back stack, strongly consider using <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNow()">commitNow</a></code> instead. This can help avoid unwanted side effects when other code in your app has pending committed transactions that expect different timing.</p>
         <p> This also forces the start of any postponed Transactions where <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#postponeEnterTransition()">postponeEnterTransition</a></code> has been called.</p>
@@ -866,7 +866,7 @@
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentById(int)">findFragmentById</a>(id:&nbsp;@androidx.annotation.IdRes <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>?</pre>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentById(int)">findFragmentById</a>(id:&nbsp;@<a href="https://developer.android.com/reference/androidx/annotation/IdRes.html">IdRes</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>?</pre>
         <p>Finds a fragment that was identified by the given id either when inflated from XML or as the container ID when added in a transaction. This first searches through fragments that are currently added to the manager's activity; if no such fragment is found, then all fragments currently on the back stack associated with this ID are searched.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -1315,7 +1315,7 @@
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@androidx.annotation.MainThread<br>fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <pre class="api-signature no-pretty-print">@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
         <p>Like <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -1385,7 +1385,7 @@
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@androidx.annotation.MainThread<br>fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(name:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?,&nbsp;flags:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <pre class="api-signature no-pretty-print">@<a href="https://developer.android.com/reference/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(name:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?,&nbsp;flags:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
         <p>Like <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
