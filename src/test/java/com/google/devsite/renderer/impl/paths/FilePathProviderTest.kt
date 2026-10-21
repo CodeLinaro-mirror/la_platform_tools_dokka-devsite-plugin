@@ -36,7 +36,11 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
     ConverterTestBase(displayLanguage) {
 
     /** A path provider without a documentables graph. */
-    private val pathProvider = pathProvider(externalLocationProvider = externalProvider)
+    private val pathProvider =
+        pathProvider(
+            externalLocationProvider = externalProvider,
+            packageNames = setOf("androidx.example"),
+        )
 
     /** Creates a path provider with a documentables graph based on the [dModule]. */
     private fun pathProviderForModule(
@@ -56,7 +60,7 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
         val (name, url) = pathProvider.forReference(dri)
 
         assertThat(name).isEqualTo("[JVM root]")
-        assertPath(url, "[JVM root]/package-summary.html")
+        assertThat(url).isEmpty()
     }
 
     @Test
@@ -236,7 +240,9 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
                 }
             }
 
-        val (_, url) = pathProvider(external).forReference(internalDri)
+        val (_, url) =
+            pathProvider(external, packageNames = setOf("androidx.example"))
+                .forReference(internalDri)
         assertPath(url, "androidx/example/Foo.html#foo()")
     }
 
@@ -490,7 +496,9 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
             )
         assertThat(composableDri.isForFunctionGroup()).isTrue()
 
-        val (name, url) = pathProvider(externalProvider).forReference(composableDri)
+        val (name, url) =
+            pathProvider(externalProvider, packageNames = setOf("androidx.example"))
+                .forReference(composableDri)
         assertThat(name).isEqualTo("TestComposable")
         assertThat(url.urlSuffix()).isEqualTo("TestComposable.composable.html")
     }

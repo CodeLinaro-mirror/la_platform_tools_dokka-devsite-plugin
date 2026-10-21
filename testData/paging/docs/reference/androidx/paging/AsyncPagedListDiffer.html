@@ -42,9 +42,9 @@
     <aside class="caution"><strong>This class is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
       <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
     </aside>
-    <p>Helper object for mapping a <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code> into a <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a></code>.</p>
+    <p>Helper object for mapping a <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code> into a <code><a href="">RecyclerView.Adapter</a></code>.</p>
     <p>For simplicity, the <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> wrapper class can often be used instead of the differ directly. This diff class is exposed for complex cases, and where overriding an adapter base class to support paging isn't convenient.</p>
-    <p>When consuming a <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> of PagedList, you can observe updates and dispatch them directly to <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>. The AsyncPagedListDiffer then can present this updating data set simply for an adapter. It listens to PagedList loading callbacks, and uses DiffUtil on a background thread to compute updates as new PagedLists are received.</p>
+    <p>When consuming a <code><a href="">LiveData</a></code> of PagedList, you can observe updates and dispatch them directly to <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>. The AsyncPagedListDiffer then can present this updating data set simply for an adapter. It listens to PagedList loading callbacks, and uses DiffUtil on a background thread to compute updates as new PagedLists are received.</p>
     <p>It provides a simple list-like API with <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getItem(kotlin.Int)">getItem</a></code> and <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a></code> for an adapter to acquire and present data objects.</p>
     <p>A complete usage pattern with Room would look like this:</p>
     <pre class="prettyprint">@Dao<br>interface UserDao {<br>    @Query(&quot;SELECT * FROM user ORDER BY lastName ASC&quot;)<br>    public abstract DataSource.Factory&lt;Integer, User&gt; usersByLastName();<br>}<br><br>class MyViewModel extends ViewModel {<br>    public final LiveData&lt;PagedList&lt;User&gt;&gt; usersList;<br>    public MyViewModel(UserDao userDao) {<br>        usersList = new LivePagedListBuilder&lt;&gt;(<br>        userDao.usersByLastName(), /* page size */20).build();<br>    }<br>}<br><br>class MyActivity extends AppCompatActivity {<br>    @Override<br>    public void onCreate(Bundle savedState) {<br>        super.onCreate(savedState);<br>        MyViewModel viewModel = new ViewModelProvider(this).get(MyViewModel.class);<br>        RecyclerView recyclerView = findViewById(R.id.user_list);<br>        final UserAdapter adapter = new UserAdapter();<br>        viewModel.usersList.observe(this, pagedList -&gt; adapter.submitList(pagedList));<br>        recyclerView.setAdapter(adapter);<br>    }<br>}<br><br>class UserAdapter extends RecyclerView.Adapter&amp;lt;UserViewHolder&gt; {<br>    private final AsyncPagedListDiffer&amp;lt;User&gt; differ =<br>            new AsyncPagedListDiffer(this, DIFF_CALLBACK);<br>    @Override<br>    public int getItemCount() {<br>        return differ.getItemCount();<br>    }<br>    public void submitList(PagedList&amp;lt;User&gt; pagedList) {<br>        differ.submitList(pagedList);<br>    }<br>    @Override<br>    public void onBindViewHolder(UserViewHolder holder, int position) {<br>        User user = differ.getItem(position);<br>        if (user != null) {<br>            holder.bindTo(user);<br>        } else {<br>            // Null defines a placeholder item - AsyncPagedListDiffer will automatically<br>            // invalidate this row when the actual object is loaded from the database<br>            holder.clear();<br>        }<br>    }<br>    public static final DiffUtil.ItemCallback&amp;lt;User&gt; DIFF_CALLBACK =<br>            new DiffUtil.ItemCallback&amp;lt;User&gt;() {<br>        @Override<br>        public boolean areItemsTheSame(<br>            @NonNull User oldUser, @NonNull User newUser) {<br>            // User properties may have changed if reloaded from the DB, but ID is fixed<br>            return oldUser.getId() == newUser.getId();<br>        }<br>        @Override<br>        public boolean areContentsTheSame(@NonNull User oldUser, @NonNull User newUser) {<br>            // NOTE: if you use equals, your object must properly override Object#equals()<br>            // Incorrectly returning false here will result in too many animations.<br>            return oldUser.equals(newUser);<br>        }<br>    }<br>}</pre>
@@ -105,13 +105,13 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#AsyncPagedListDiffer(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.DiffUtil.ItemCallback)">AsyncPagedListDiffer</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;adapter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback<br>)</code></div>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#AsyncPagedListDiffer(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.DiffUtil.ItemCallback)">AsyncPagedListDiffer</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.Adapter&lt;@androidx.annotation.NonNull ?&gt;&nbsp;adapter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.DiffUtil.ItemCallback&lt;@androidx.annotation.NonNull T&gt;&nbsp;diffCallback<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#AsyncPagedListDiffer(androidx.recyclerview.widget.ListUpdateCallback,androidx.recyclerview.widget.AsyncDifferConfig)">AsyncPagedListDiffer</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/ListUpdateCallback.html">ListUpdateCallback</a>&nbsp;listUpdateCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config<br>)</code></div>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#AsyncPagedListDiffer(androidx.recyclerview.widget.ListUpdateCallback,androidx.recyclerview.widget.AsyncDifferConfig)">AsyncPagedListDiffer</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.ListUpdateCallback&nbsp;listUpdateCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.AsyncDifferConfig&lt;@androidx.annotation.NonNull T&gt;&nbsp;config<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
@@ -133,26 +133,26 @@
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(kotlin.Function2)">addPagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(kotlin.Function2)">addPagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback<br>)</code></div>
               <p><strong>This method is deprecated.</strong> AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">addPagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">addPagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</p>
             </td>
           </tr>
           <tr>
-            <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
             <td>
               <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getCurrentList()">getCurrentList</a></del></span>()</code></div>
               <p><strong>This method is deprecated.</strong> AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</p>
@@ -175,35 +175,35 @@
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(kotlin.Function2)">removePagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(kotlin.Function2)">removePagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback<br>)</code></div>
               <p><strong>This method is deprecated.</strong> AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">removePagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">removePagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList)</code></div>
               <p><strong>This method is deprecated.</strong> AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList,&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback<br>)</code></div>
               <p><strong>This method is deprecated.</strong> AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</p>
             </td>
           </tr>
@@ -218,7 +218,7 @@
             <h3 id="AsyncPagedListDiffer(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.DiffUtil.ItemCallback)">AsyncPagedListDiffer</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#AsyncPagedListDiffer(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.DiffUtil.ItemCallback)">AsyncPagedListDiffer</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;adapter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#AsyncPagedListDiffer(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.DiffUtil.ItemCallback)">AsyncPagedListDiffer</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.Adapter&lt;@androidx.annotation.NonNull ?&gt;&nbsp;adapter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.DiffUtil.ItemCallback&lt;@androidx.annotation.NonNull T&gt;&nbsp;diffCallback<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer(
                 Dispatchers.Main,
@@ -242,15 +242,15 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;adapter</code></td>
+                <td><code>@androidx.annotation.NonNull androidx.recyclerview.widget.RecyclerView.Adapter&lt;@androidx.annotation.NonNull ?&gt;&nbsp;adapter</code></td>
                 <td>
                   <p>Adapter that will receive update signals.</p>
                 </td>
               </tr>
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback</code></td>
+                <td><code>@androidx.annotation.NonNull androidx.recyclerview.widget.DiffUtil.ItemCallback&lt;@androidx.annotation.NonNull T&gt;&nbsp;diffCallback</code></td>
                 <td>
-                  <p>The <code><a href="/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a></code> instance to compare items in the list.</p>
+                  <p>The <code><a href="">DiffUtil.ItemCallback</a></code> instance to compare items in the list.</p>
                 </td>
               </tr>
             </tbody>
@@ -263,7 +263,7 @@
             <h3 id="AsyncPagedListDiffer(androidx.recyclerview.widget.ListUpdateCallback,androidx.recyclerview.widget.AsyncDifferConfig)">AsyncPagedListDiffer</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#AsyncPagedListDiffer(androidx.recyclerview.widget.ListUpdateCallback,androidx.recyclerview.widget.AsyncDifferConfig)">AsyncPagedListDiffer</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/ListUpdateCallback.html">ListUpdateCallback</a>&nbsp;listUpdateCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#AsyncPagedListDiffer(androidx.recyclerview.widget.ListUpdateCallback,androidx.recyclerview.widget.AsyncDifferConfig)">AsyncPagedListDiffer</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.ListUpdateCallback&nbsp;listUpdateCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull androidx.recyclerview.widget.AsyncDifferConfig&lt;@androidx.annotation.NonNull T&gt;&nbsp;config<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer(
                 Dispatchers.Main,
@@ -282,7 +282,7 @@
             <h3 id="addLoadStateListener(kotlin.Function2)">addLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
@@ -301,7 +301,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p><code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code> listener to receive updates.</p>
                 </td>
@@ -335,7 +335,7 @@
             <h3 id="addPagedListListener(kotlin.Function2)">addPagedListListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(kotlin.Function2)">addPagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(kotlin.Function2)">addPagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
@@ -353,7 +353,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback</code></td>
+                <td><code>@androidx.annotation.NonNull Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback</code></td>
                 <td>
                   <p>to receive updates.</p>
                 </td>
@@ -391,7 +391,7 @@
             <h3 id="addPagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">addPagedListListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">addPagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">addPagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
@@ -409,7 +409,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;listener</code></td>
+                <td><code>@androidx.annotation.NonNull <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Listener to receive updates.</p>
                 </td>
@@ -447,7 +447,7 @@
             <h3 id="getCurrentList()">getCurrentList</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getCurrentList()">getCurrentList</a></del></span>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getCurrentList()">getCurrentList</a></del></span>()</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
@@ -466,7 +466,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                 <td>
                   <p>The list currently being displayed, may be <code>null</code>.</p>
                 </td>
@@ -561,7 +561,7 @@
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
-        <p>Get the number of items currently presented by this Differ. This value can be directly returned to <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemCount()">RecyclerView.Adapter.getItemCount</a></code>.</p>
+        <p>Get the number of items currently presented by this Differ. This value can be directly returned to <code><a href="">RecyclerView.Adapter.getItemCount</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -590,7 +590,7 @@
             <h3 id="removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
@@ -608,7 +608,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Previously registered listener.</p>
                 </td>
@@ -646,7 +646,7 @@
             <h3 id="removePagedListListener(kotlin.Function2)">removePagedListListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(kotlin.Function2)">removePagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(kotlin.Function2)">removePagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
@@ -664,7 +664,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback</code></td>
+                <td><code>@androidx.annotation.NonNull Function2&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;callback</code></td>
                 <td>
                   <p>Previously registered callback.</p>
                 </td>
@@ -702,7 +702,7 @@
             <h3 id="removePagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">removePagedListListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">removePagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">removePagedListListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
@@ -720,7 +720,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;listener</code></td>
+                <td><code>@androidx.annotation.NonNull <a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Previously registered listener.</p>
                 </td>
@@ -758,12 +758,12 @@
             <h3 id="submitList(androidx.paging.PagedList)">submitList</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
         <p>Pass a new <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> to the differ.</p>
-        <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the <code><a href="/reference/androidx/recyclerview/widget/ListUpdateCallback.html">ListUpdateCallback</a></code>), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code>.</p>
+        <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the <code><a href="">ListUpdateCallback</a></code>), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -777,7 +777,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList</code></td>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList</code></td>
                 <td>
                   <p>The new PagedList.</p>
                 </td>
@@ -792,12 +792,12 @@
             <h3 id="submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList,&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer, use this instead:
           <pre class="prettyprint">AsyncPagingDataDiffer&lt;T&gt;</pre>
         </aside>
         <p>Pass a new PagedList to the differ.</p>
-        <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the <code><a href="/reference/androidx/recyclerview/widget/ListUpdateCallback.html">ListUpdateCallback</a></code>), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">current list</a></code>.</p>
+        <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the <code><a href="">ListUpdateCallback</a></code>), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">current list</a></code>.</p>
         <p>The commit callback can be used to know when the PagedList is committed, but note that it may not be executed. If PagedList B is submitted immediately after PagedList A, and is committed directly, the callback associated with PagedList A will not be run.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -812,7 +812,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList</code></td>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;pagedList</code></td>
                 <td>
                   <p>The new <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
                 </td>

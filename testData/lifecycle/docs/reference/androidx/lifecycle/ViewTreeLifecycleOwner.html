@@ -43,14 +43,14 @@
           <tr>
             <td><code>static&nbsp;final <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/lifecycle/ViewTreeLifecycleOwner.html#(android.view.View).get()">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver)</code></div>
+              <div><code><a href="/reference/androidx/lifecycle/ViewTreeLifecycleOwner.html#(android.view.View).get()">get</a>(@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver)</code></div>
               <p>Retrieve the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> responsible for managing the given <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>static&nbsp;final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/lifecycle/ViewTreeLifecycleOwner.html#(android.view.View).set(androidx.lifecycle.LifecycleOwner)">set</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver,&nbsp;<a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner)</code></div>
+              <div><code><a href="/reference/androidx/lifecycle/ViewTreeLifecycleOwner.html#(android.view.View).set(androidx.lifecycle.LifecycleOwner)">set</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner<br>)</code></div>
               <p>Set the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> responsible for managing the given <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>.</p>
             </td>
           </tr>
@@ -65,7 +65,7 @@
             <h3 id="(android.view.View).get()">get</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;<a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;<a href="/reference/androidx/lifecycle/ViewTreeLifecycleOwner.html#(android.view.View).get()">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;<a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;<a href="/reference/androidx/lifecycle/ViewTreeLifecycleOwner.html#(android.view.View).get()">get</a>(@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver)</pre>
         <p>Retrieve the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> responsible for managing the given <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>. This may be used to scope work or heavyweight resources associated with the view that may span cycles of the view becoming detached and reattached from a window.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -95,7 +95,7 @@
             <h3 id="(android.view.View).set(androidx.lifecycle.LifecycleOwner)">set</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/ViewTreeLifecycleOwner.html#(android.view.View).set(androidx.lifecycle.LifecycleOwner)">set</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver,&nbsp;<a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/ViewTreeLifecycleOwner.html#(android.view.View).set(androidx.lifecycle.LifecycleOwner)">set</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner<br>)</pre>
         <p>Set the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> responsible for managing the given <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>. Calls to <code><a href="/reference/androidx/lifecycle/package-summary.html#(androidx.lifecycle.ViewModelProvider).get()">get</a></code> from this view or descendants will return <code>lifecycleOwner</code>.</p>
         <p>This should only be called by constructs such as activities or fragments that manage a view tree and reflect their own lifecycle through a <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>. Callers should only set a <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> that will be <em>stable.</em> The associated lifecycle should report that it is destroyed if the view tree is removed and is not guaranteed to later become reattached to a window.</p>
         <div class="devsite-table-wrapper">

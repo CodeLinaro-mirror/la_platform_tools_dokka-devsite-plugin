@@ -1970,7 +1970,8 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
 
-        assertPath(paramText.link().url, "com/example/foo/Foo.html")
+        assertThat(paramText.link().url).isEmpty()
+        assertThat(paramText.link().name).isEqualTo("com.example.foo.Foo")
     }
 
     @Test

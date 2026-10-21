@@ -84,6 +84,12 @@ internal interface FilePathProvider {
 
     val documentablesGraph: DocumentablesGraph
 
+    /**
+     * The set of packages being documented. Used to determine whether reference links should be
+     * relative or use the [locationProvider] for external links.
+     */
+    val internalPackages: Set<String>
+
     /** @return the path of a class-like type */
     fun forType(packageName: String, name: String): String
 
@@ -103,7 +109,7 @@ internal interface FilePathProvider {
      */
     fun forReference(dri: DRI): ReferencePath {
         val documentable = findInDocumentablesGraph(dri)
-        val packageName = dri.packageName.orEmpty().ifBlank { "[JVM root]" }
+        val packageName = dri.packageName.orEmpty()
         val className = dri.classNames
         val outerClassName = getOuterClassName(className)
         val innerClassName = documentable?.name
@@ -112,18 +118,30 @@ internal interface FilePathProvider {
 
         // Exclude specific references from being linked (even if DokkaLocationProvider might be
         // able to resolve them).
-        // In the future we might want to only link to things we *know* we've generated docs for by
-        // passing around a collection of valid locations but that could have performance
-        // implications
         val fullName = "$packageName.$className"
         if (NON_DOCUMENTABLE_PREFIXES.any { fullName.startsWith(it) }) {
             return ReferencePath(className ?: packageName, "")
         }
 
-        // if the DokkaLocationProvider can resolve the dri, then we accept that
-        locationProvider?.resolve(dri)?.let {
-            val text = symbol?.name ?: className ?: packageName
-            return ReferencePath(text, it)
+        // This is an external reference, see if the DokkaLocationProvider can resolve the dri.
+        if (packageName !in internalPackages) {
+            locationProvider?.resolve(dri)?.let {
+                val text = symbol?.name ?: className ?: packageName
+                return ReferencePath(text, it)
+            }
+            // The location of the external reference is not known. Construct the complete name for
+            // the reference, since it won't be included in the URL.
+            val qualifiedName =
+                if (packageName.isEmpty()) {
+                    className
+                        .orEmpty()
+                        // When there is no class or package name, still display something.
+                        .ifBlank { "[JVM root]" }
+                } else {
+                    packageName + "." + className.orEmpty()
+                } + symbol?.name?.let { ".$it" }.orEmpty()
+
+            return ReferencePath(qualifiedName, "")
         }
 
         val (typeName, typeUrl) =

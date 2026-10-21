@@ -204,6 +204,7 @@ internal abstract class ConverterTestBase(
         externalLocationProvider: ExternalDokkaLocationProvider? = null,
         classGraph: ClassGraph = emptyMap(),
         packages: List<DPackage> = emptyList(),
+        packageNames: Set<String> = packages.map { it.packageName }.toSet(),
     ): FilePathProvider {
         val documentablesGraph = computeDocumentablesGraph(classGraph, packages)
         return when (displayLanguage) {
@@ -216,6 +217,7 @@ internal abstract class ConverterTestBase(
                     locationProvider = externalLocationProvider,
                     documentablesGraph = documentablesGraph,
                     includedHeadTagsPath = "_shared/_reference-head-tags.html",
+                    internalPackages = packageNames,
                 )
             Language.KOTLIN ->
                 DevsiteFilePathProvider(
@@ -226,6 +228,7 @@ internal abstract class ConverterTestBase(
                     locationProvider = externalLocationProvider,
                     documentablesGraph = documentablesGraph,
                     includedHeadTagsPath = "_shared/_reference-head-tags.html",
+                    internalPackages = packageNames,
                 )
         }
     }

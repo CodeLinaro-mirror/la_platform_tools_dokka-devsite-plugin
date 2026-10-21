@@ -142,11 +142,11 @@ internal fun ParameterComponent.typeAnnotations() = data.type.annotations
 internal fun AnnotationComponent.link(): Link.Params = data.type.data
 
 internal val AnnotationComponent.isAtNullable
-    get() = this.link().name == "Nullable"
+    get() = this.link().name.endsWith("Nullable")
 internal val AnnotationComponent.isAtNonNull
-    get() = this.link().name == "NonNull"
+    get() = this.link().name.endsWith("NonNull")
 
-internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }
+internal fun List<AnnotationComponent>.exceptNonNull() = this.filterNot { it.isAtNonNull }
 
 internal fun Pair<SummaryList<*>, Classlike.TitledList<*>>.title() = first.data.header!!.data.title
 

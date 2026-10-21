@@ -179,6 +179,8 @@ internal class MultiLanguageRenderer(
 
         val documentablesGraph = holder.documentablesGraph()
 
+        val internalPackages = holder.packages().map { it.packageName }.toSet()
+
         val filePaths =
             DevsiteFilePathProvider(
                 language,
@@ -188,6 +190,7 @@ internal class MultiLanguageRenderer(
                 includedHeadTagsPath,
                 locationProvider,
                 documentablesGraph,
+                internalPackages,
             )
 
         val metadataConverter = MetadataConverter(holder)

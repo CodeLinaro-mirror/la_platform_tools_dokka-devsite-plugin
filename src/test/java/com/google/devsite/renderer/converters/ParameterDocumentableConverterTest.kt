@@ -758,7 +758,8 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
             val lambdaType = lambdaParam.type.data
             assertThat(lambdaParam.annotationComponents).isEmpty()
             assertThat(lambdaType.type.data.name).isEqualTo("Function1")
-            assertThat(lambdaType.annotationComponents.map { it.name }).isEqualTo(listOf("NonNull"))
+            assertThat(lambdaType.annotationComponents.map { it.name })
+                .isEqualTo(listOf("androidx.annotation.NonNull"))
             assertThat(lambdaType.generics.size).isEqualTo(2)
             val generic0 = lambdaType.generics.first()
             val generic1 = lambdaType.generics.last()

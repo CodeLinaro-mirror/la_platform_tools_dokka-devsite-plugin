@@ -43,7 +43,7 @@
 
 {% verbatim %}
     <p>
-      <pre>public abstract class <a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; extends <a href="https://developer.android.com/reference/java/util/AbstractList.html">AbstractList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</pre>
+      <pre>public abstract class <a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; extends <a href="https://developer.android.com/reference/java/util/AbstractList.html">AbstractList</a>&lt;@androidx.annotation.NonNull T&gt;</pre>
     </p>
     <div class="devsite-table-wrapper">
       <table class="jd-inheritance-table">
@@ -58,7 +58,7 @@
           <tr>
             <td>&nbsp;</td>
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
-            <td colspan="2"><a href="https://developer.android.com/reference/java/util/AbstractList.html">java.util.AbstractList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</td>
+            <td colspan="2"><a href="https://developer.android.com/reference/java/util/AbstractList.html">java.util.AbstractList</a>&lt;@androidx.annotation.NonNull T&gt;</td>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -72,12 +72,12 @@
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
     <p>Lazy loading list that pages in immutable content from a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-    <p>A <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a></code> which loads its data in chunks (pages) from a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Items can be accessed with <code><a href="/reference/androidx/paging/PagedList.html#get(kotlin.Int)">get</a></code>, and further loading can be triggered with <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>. To display a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>, see <code><a href="/reference/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>, which enables the binding of a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> to a <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.html">androidx.recyclerview.widget.RecyclerView</a></code>.</p>
+    <p>A <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a></code> which loads its data in chunks (pages) from a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Items can be accessed with <code><a href="/reference/androidx/paging/PagedList.html#get(kotlin.Int)">get</a></code>, and further loading can be triggered with <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>. To display a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>, see <code><a href="/reference/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>, which enables the binding of a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> to a <code><a href="">androidx.recyclerview.widget.RecyclerView</a></code>.</p>
     <h3>Loading Data</h3>
     <p>All data in a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is loaded from its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Creating a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> loads the first chunk of data from the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> immediately, and should for this reason be done on a background thread. The constructed <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> may then be passed to and used on the UI thread. This is done to prevent passing a list with no loaded content to the UI thread, which should generally not be presented to the user.</p>
     <p>A <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> initially presents this first partial load as its content, and expands over time as content is loaded in. When <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code> is called, items will be loaded in near the passed list index. If placeholder <code>null</code>s are present in the list, they will be replaced as content is loaded. If not, newly loaded items will be inserted at the beginning or end of the list.</p>
     <p><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> can present data for an unbounded, infinite scrolling list, or a very large but countable list. Use <code><a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code> to control how many items a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> loads, and when.</p>
-    <p>If you use <code><a href="/reference/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> to get a <code><a href="/reference/androidx/lifecycle/LiveData.html">androidx.lifecycle.LiveData</a></code>, it will initialize <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>s on a background thread for you.</p>
+    <p>If you use <code><a href="/reference/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> to get a <code><a href="">androidx.lifecycle.LiveData</a></code>, it will initialize <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>s on a background thread for you.</p>
     <h3>Placeholders</h3>
     <p>There are two ways that <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> can represent its not-yet-loaded data - with or without <code>null</code> placeholders.</p>
     <p>With placeholders, the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is always the full size of the data set. <code>get(N)</code> returns the <code>N</code>th item in the data set, or <code>null</code> if it's not yet loaded.</p>
@@ -94,7 +94,7 @@
     <p>They also have drawbacks:</p>
     <ul>
       <li>
-        <p>Your Adapter needs to account for <code>null</code> items. This often means providing default values in data you bind to a <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">androidx.recyclerview.widget.RecyclerView.ViewHolder</a></code>.</p>
+        <p>Your Adapter needs to account for <code>null</code> items. This often means providing default values in data you bind to a <code><a href="">androidx.recyclerview.widget.RecyclerView.ViewHolder</a></code>.</p>
       </li>
       <li>
         <p>They don't work well if your item views are of different sizes, as this will prevent loading items from cross-fading nicely.</p>
@@ -145,7 +145,7 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>public abstract class <a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></div>
+              <div><code>@androidx.annotation.MainThread<br>public abstract class <a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></div>
               <p><strong>This class is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
@@ -191,21 +191,21 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousSnapshot,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;previousSnapshot,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</code></div>
               <p><strong>This method is deprecated.</strong> Dispatching a diff since snapshot created is behavior that can be instead tracked by attaching a Callback to the PagedList that is mutating, and tracking changes since calling PagedList.snapshot().</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
@@ -224,14 +224,14 @@
             </td>
           </tr>
           <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
+            <td><code>final @androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
             <td>
               <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#getConfig()">getConfig</a></del></span>()</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
           <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td><code>final @androidx.annotation.NonNull <a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;@androidx.annotation.NonNull ?,&nbsp;@androidx.annotation.NonNull T&gt;</code></td>
             <td>
               <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#getDataSource()">getDataSource</a></del></span>()</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
@@ -289,14 +289,14 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
@@ -308,7 +308,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td><code>final @androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
             <td>
               <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#snapshot()">snapshot</a></del></span>()</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
@@ -369,21 +369,21 @@
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#addAll(java.util.Collection&amp;lt;? extends E&amp;gt;)">addAll</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;c)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#addAll(java.util.Collection&amp;lt;? extends E&amp;gt;)">addAll</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;c<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#contains(java.lang.Object)">contains</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;o)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#contains(java.lang.Object)">contains</a></del></span>(@androidx.annotation.NonNull T&nbsp;o)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#containsAll(java.util.Collection&amp;lt;?&amp;gt;)">containsAll</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;c)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#containsAll(java.util.Collection&amp;lt;?&amp;gt;)">containsAll</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;c<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -397,40 +397,40 @@
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#remove(java.lang.Object)">remove</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;o)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#remove(java.lang.Object)">remove</a></del></span>(@androidx.annotation.NonNull T&nbsp;o)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#removeAll(java.util.Collection&amp;lt;?&amp;gt;)">removeAll</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;c)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#removeAll(java.util.Collection&amp;lt;?&amp;gt;)">removeAll</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;c<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#retainAll(java.util.Collection&amp;lt;?&amp;gt;)">retainAll</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;c)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#retainAll(java.util.Collection&amp;lt;?&amp;gt;)">retainAll</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;c<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Object[]</code></td>
+                      <td><code>@androidx.annotation.NonNull Object[]</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#toArray()">toArray</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T[]</code></td>
+                      <td><code>@androidx.annotation.NonNull T[]</code></td>
                       <td>
-                        <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#toArray(T[])">toArray</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T[]&nbsp;a)</code></div>
+                        <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#toArray(T[])">toArray</a></del></span>(@androidx.annotation.NonNull T[]&nbsp;a)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+                      <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#toString()">toString</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
@@ -453,21 +453,21 @@
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#add(E)">add</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;e)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#add(E)">add</a></del></span>(@androidx.annotation.NonNull T&nbsp;e)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#add(int, E)">add</a></del></span>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;element)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#add(int, E)">add</a></del></span>(int&nbsp;index,&nbsp;@androidx.annotation.NonNull T&nbsp;element)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#addAll(int, java.util.Collection&amp;lt;? extends E&amp;gt;)">addAll</a></del></span>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;c)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#addAll(int, java.util.Collection&amp;lt;? extends E&amp;gt;)">addAll</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;index,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;c<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -495,12 +495,12 @@
                     <tr>
                       <td><code>int</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#indexOf(java.lang.Object)">indexOf</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;o)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#indexOf(java.lang.Object)">indexOf</a></del></span>(@androidx.annotation.NonNull T&nbsp;o)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Iterator.html">Iterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                      <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/Iterator.html">Iterator</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#iterator()">iterator</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
@@ -509,26 +509,26 @@
                     <tr>
                       <td><code>int</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#lastIndexOf(java.lang.Object)">lastIndexOf</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;o)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#lastIndexOf(java.lang.Object)">lastIndexOf</a></del></span>(@androidx.annotation.NonNull T&nbsp;o)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/ListIterator.html">ListIterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                      <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/ListIterator.html">ListIterator</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#listIterator()">listIterator</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/ListIterator.html">ListIterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                      <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/ListIterator.html">ListIterator</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#listIterator(int)">listIterator</a></del></span>(int&nbsp;index)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+                      <td><code>@androidx.annotation.NonNull T</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#removeAt(int)">removeAt</a></del></span>(int&nbsp;index)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
@@ -542,14 +542,14 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+                      <td><code>@androidx.annotation.NonNull T</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#set(int, E)">set</a></del></span>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;element)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#set(int, E)">set</a></del></span>(int&nbsp;index,&nbsp;@androidx.annotation.NonNull T&nbsp;element)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                      <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#subList(int, int)">subList</a></del></span>(int&nbsp;fromIndex,&nbsp;int&nbsp;toIndex)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
@@ -570,30 +570,30 @@
                   </colgroup>
                   <tbody class="list">
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                      <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/Collection.html#parallelStream()">parallelStream</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                      <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/Collection.html#spliterator()">spliterator</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                      <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/Collection.html#stream()">stream</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T[]</code></td>
+                      <td><code>@androidx.annotation.NonNull T[]</code></td>
                       <td>
-                        <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="https://developer.android.com/reference/java/util/Collection.html#toArray(java.util.function.IntFunction&amp;lt;T[]&amp;gt;)">toArray</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/IntFunction.html">IntFunction</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T[]&gt;&nbsp;generator)</code></div>
+                        <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="https://developer.android.com/reference/java/util/Collection.html#toArray(java.util.function.IntFunction&amp;lt;T[]&amp;gt;)">toArray</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/function/IntFunction.html">IntFunction</a>&lt;@androidx.annotation.NonNull T[]&gt;&nbsp;generator<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -614,7 +614,7 @@
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/lang/Iterable.html#forEach(java.util.function.Consumer&amp;lt;? super T&amp;gt;)">forEach</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;action)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/lang/Iterable.html#forEach(java.util.function.Consumer&amp;lt;? super T&amp;gt;)">forEach</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;action<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -633,21 +633,21 @@
                   </colgroup>
                   <tbody class="list">
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+                      <td><code>@androidx.annotation.NonNull T</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#getFirst()">getFirst</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+                      <td><code>@androidx.annotation.NonNull T</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#getLast()">getLast</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                      <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#reversed()">reversed</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
@@ -670,7 +670,7 @@
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/Collection.html#removeIf(java.util.function.Predicate&amp;lt;? super E&amp;gt;)">removeIf</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/Predicate.html">Predicate</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;filter)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/Collection.html#removeIf(java.util.function.Predicate&amp;lt;? super E&amp;gt;)">removeIf</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/function/Predicate.html">Predicate</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;filter<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -691,26 +691,26 @@
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#addFirst(E)">addFirst</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;e)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#addFirst(E)">addFirst</a></del></span>(@androidx.annotation.NonNull T&nbsp;e)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#addLast(E)">addLast</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;e)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#addLast(E)">addLast</a></del></span>(@androidx.annotation.NonNull T&nbsp;e)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+                      <td><code>@androidx.annotation.NonNull T</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#removeFirst()">removeFirst</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+                      <td><code>@androidx.annotation.NonNull T</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#removeLast()">removeLast</a></del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
@@ -719,14 +719,14 @@
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#replaceAll(java.util.function.UnaryOperator&amp;lt;E&amp;gt;)">replaceAll</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/UnaryOperator.html">UnaryOperator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;operator)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#replaceAll(java.util.function.UnaryOperator&amp;lt;E&amp;gt;)">replaceAll</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/function/UnaryOperator.html">UnaryOperator</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;operator<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#sort(java.util.Comparator&amp;lt;? super E&amp;gt;)">sort</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Comparator.html">Comparator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;c)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/List.html#sort(java.util.Comparator&amp;lt;? super E&amp;gt;)">sort</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/Comparator.html">Comparator</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;c<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -746,7 +746,7 @@
             <h3 id="addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
         <p>Adds a callback.</p>
         <p>The callback is internally held as weak reference, so <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> doesn't hold a strong reference to its observer, such as a <code><a href="/reference/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>. If an adapter were held with a strong reference, it would be necessary to clear its <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> observer before it could be GC'd.</p>
@@ -763,7 +763,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback</code></td>
+                <td><code>@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback</code></td>
                 <td>
                   <p>Callback to dispatch to.</p>
                 </td>
@@ -797,7 +797,7 @@
             <h3 id="addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousSnapshot,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;previousSnapshot,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Dispatching a diff since snapshot created is behavior that can be instead tracked by attaching a Callback to the PagedList that is mutating, and tracking changes since calling PagedList.snapshot().</aside>
         <p>Adds a callback, and issues updates since the <code><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">previousSnapshot</a></code> was created.</p>
         <p>If <code><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">previousSnapshot</a></code> is passed, the <code><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">callback</a></code> will also immediately be dispatched any differences between the previous snapshot, and the current state. For example, if the previousSnapshot was of 5 nulls, 10 items, 5 nulls, and the current state was 5 nulls, 12 items, 3 nulls, the callback would immediately receive a call of<code>onChanged(14, 2)</code>.</p>
@@ -816,13 +816,13 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousSnapshot</code></td>
+                <td><code><a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;previousSnapshot</code></td>
                 <td>
                   <p>Snapshot previously captured from this List, or <code>null</code>.</p>
                 </td>
               </tr>
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback</code></td>
+                <td><code>@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback</code></td>
                 <td>
                   <p><code><a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> to dispatch to.</p>
                 </td>
@@ -856,7 +856,7 @@
             <h3 id="addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
         <p>Add a listener to observe the loading state of the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -872,7 +872,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Listener to receive updates.</p>
                 </td>
@@ -988,7 +988,7 @@
             <h3 id="getConfig()">getConfig</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#getConfig()">getConfig</a></del></span>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a>&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#getConfig()">getConfig</a></del></span>()</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
         <p>Return the Config used to construct this PagedList.</p>
         <div class="devsite-table-wrapper">
@@ -1004,7 +1004,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
+                <td><code>@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
                 <td>
                   <p>the Config of this PagedList</p>
                 </td>
@@ -1019,7 +1019,7 @@
             <h3 id="getDataSource()">getDataSource</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#getDataSource()">getDataSource</a></del></span>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;@androidx.annotation.NonNull ?,&nbsp;@androidx.annotation.NonNull T&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#getDataSource()">getDataSource</a></del></span>()</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -1292,7 +1292,7 @@
             <h3 id="removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
         <p>Removes a previously added callback.</p>
         <div class="devsite-table-wrapper">
@@ -1308,7 +1308,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback</code></td>
+                <td><code>@androidx.annotation.NonNull <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback</code></td>
                 <td>
                   <p>Callback, previously added.</p>
                 </td>
@@ -1342,7 +1342,7 @@
             <h3 id="removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
         <p>Remove a previously registered load state listener.</p>
         <div class="devsite-table-wrapper">
@@ -1358,7 +1358,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@androidx.annotation.NonNull Function2&lt;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Previously registered listener.</p>
                 </td>
@@ -1427,7 +1427,7 @@
             <h3 id="snapshot()">snapshot</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#snapshot()">snapshot</a></del></span>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@androidx.annotation.NonNull T&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#snapshot()">snapshot</a></del></span>()</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
         <p>Returns an immutable snapshot of the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> in its current state.</p>
         <p>If this is immutable<code><a href="/reference/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></code> due to its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> being invalid, it will be returned.</p>
@@ -1444,7 +1444,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@androidx.annotation.NonNull T&gt;</code></td>
                 <td>
                   <p>Immutable snapshot of <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> data.</p>
                 </td>

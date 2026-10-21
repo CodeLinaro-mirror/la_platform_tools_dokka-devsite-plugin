@@ -40,7 +40,7 @@
 
 {% verbatim %}
     <p>
-      <pre>public abstract class <a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a> extends <a href="/reference/androidx/viewpager/widget/PagerAdapter.html">PagerAdapter</a></pre>
+      <pre>public abstract class <a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a> extends androidx.viewpager.widget.PagerAdapter</pre>
     </p>
     <div class="devsite-table-wrapper">
       <table class="jd-inheritance-table">
@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
-            <td colspan="2"><a href="/reference/androidx/viewpager/widget/PagerAdapter.html">androidx.viewpager.widget.PagerAdapter</a></td>
+            <td colspan="2">androidx.viewpager.widget.PagerAdapter</td>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -64,10 +64,10 @@
     <aside class="caution"><strong>This class is deprecated.</strong><br>
       <p>Switch to androidx.viewpager2.widget.ViewPager2 and use androidx.viewpager2.adapter.FragmentStateAdapter instead.</p>
     </aside>
-    <p>Implementation of <code><a href="/reference/androidx/viewpager/widget/PagerAdapter.html">PagerAdapter</a></code> that uses a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> to manage each page. This class also handles saving and restoring of fragment's state. </p>
+    <p>Implementation of <code><a href="">PagerAdapter</a></code> that uses a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> to manage each page. This class also handles saving and restoring of fragment's state. </p>
     <p>This version of the pager is more useful when there are a large number of pages, working more like a list view. When pages are not visible to the user, their entire fragment may be destroyed, only keeping the saved state of that fragment. This allows the pager to hold on to much less memory associated with each visited page as compared to <code><a href="/reference/androidx/fragment/app/FragmentPagerAdapter.html">FragmentPagerAdapter</a></code> at the cost of potentially more overhead when switching between pages. </p>
     <p>When using FragmentPagerAdapter the host ViewPager must have a valid ID set.</p>
-    <p>Subclasses only need to implement <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></code> and <code><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#getCount()">getCount</a></code> to have a working adapter. </p>
+    <p>Subclasses only need to implement <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></code> and <code><a href="">getCount</a></code> to have a working adapter. </p>
 Here is an example implementation of a pager containing fragments of lists:
     <pre class="prettyprint lang-java">
 public class FragmentStatePagerSupport extends FragmentActivity {
@@ -288,7 +288,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
         <tbody class="list">
           <tr>
             <td>
-              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager)">FragmentStatePagerAdapter</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm)</code></div>
+              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager)">FragmentStatePagerAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm<br>)</code></div>
               <p><strong>This method is deprecated.</strong>
                 <p>use <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></code> with <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code></p>
               </p>
@@ -296,7 +296,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
           </tr>
           <tr>
             <td>
-              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;int&nbsp;behavior)</code></div>
+              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;behavior<br>)</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
             </td>
           </tr>
@@ -318,47 +318,47 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#destroyItem(android.view.ViewGroup,int,java.lang.Object)">destroyItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#destroyItem(android.view.ViewGroup,int,java.lang.Object)">destroyItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#finishUpdate(android.view.ViewGroup)">finishUpdate</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container)</code></div>
+              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#finishUpdate(android.view.ViewGroup)">finishUpdate</a></del></span>(@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container)</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
             </td>
           </tr>
           <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+            <td><code>abstract @androidx.annotation.NonNull <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
             <td>
               <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></del></span>(int&nbsp;position)</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
             </td>
           </tr>
           <tr>
-            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
+            <td><code>@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#instantiateItem(android.view.ViewGroup,int)">instantiateItem</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,&nbsp;int&nbsp;position)</code></div>
+              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#instantiateItem(android.view.ViewGroup,int)">instantiateItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position<br>)</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
             </td>
           </tr>
           <tr>
             <td><code>boolean</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#isViewFromObject(android.view.View,java.lang.Object)">isViewFromObject</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;view,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object)</code></div>
+              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#isViewFromObject(android.view.View,java.lang.Object)">isViewFromObject</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;view,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#restoreState(android.os.Parcelable,java.lang.ClassLoader)">restoreState</a></del></span>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a>&nbsp;state,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/ClassLoader.html">ClassLoader</a>&nbsp;loader)</code></div>
+              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#restoreState(android.os.Parcelable,java.lang.ClassLoader)">restoreState</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.Nullable <a href="https://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.Nullable <a href="https://developer.android.com/reference/java/lang/ClassLoader.html">ClassLoader</a>&nbsp;loader<br>)</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
             </td>
           </tr>
           <tr>
-            <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a></code></td>
+            <td><code>@androidx.annotation.Nullable <a href="https://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a></code></td>
             <td>
               <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#saveState()">saveState</a></del></span>()</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
@@ -367,14 +367,14 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#setPrimaryItem(android.view.ViewGroup,int,java.lang.Object)">setPrimaryItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#setPrimaryItem(android.view.ViewGroup,int,java.lang.Object)">setPrimaryItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#startUpdate(android.view.ViewGroup)">startUpdate</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container)</code></div>
+              <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#startUpdate(android.view.ViewGroup)">startUpdate</a></del></span>(@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container)</code></div>
               <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
             </td>
           </tr>
@@ -390,7 +390,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
         </thead>
         <tbody class="list">
           <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/viewpager/widget/PagerAdapter.html">androidx.viewpager.widget.PagerAdapter</a></span>
+            <td><devsite-expandable><span class="expand-control">From androidx.viewpager.widget.PagerAdapter</span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -401,14 +401,14 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
                     <tr>
                       <td><code>static&nbsp;final int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#POSITION_NONE()">POSITION_NONE</a> = -2</code></div>
+                        <div><code>androidx.viewpager.widget.PagerAdapter.POSITION_NONE = -2</code></div>
                         <p><strong>This field is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>static&nbsp;final int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#POSITION_UNCHANGED()">POSITION_UNCHANGED</a> = -1</code></div>
+                        <div><code>androidx.viewpager.widget.PagerAdapter.POSITION_UNCHANGED = -1</code></div>
                         <p><strong>This field is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
@@ -429,7 +429,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
         </thead>
         <tbody class="list">
           <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/viewpager/widget/PagerAdapter.html">androidx.viewpager.widget.PagerAdapter</a></span>
+            <td><devsite-expandable><span class="expand-control">From androidx.viewpager.widget.PagerAdapter</span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -440,49 +440,49 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
                     <tr>
                       <td><code>abstract int</code></td>
                       <td>
-                        <div><code><span><del><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#getCount()">getCount</a></del></span>()</code></div>
+                        <div><code><span><del>getCount</del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>int</code></td>
                       <td>
-                        <div><code><span><del><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#getItemPosition(java.lang.Object)">getItemPosition</a></del></span>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object)</code></div>
+                        <div><code><span><del>getItemPosition</del></span>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object)</code></div>
                         <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a></code></td>
                       <td>
-                        <div><code><span><del><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#getPageTitle(int)">getPageTitle</a></del></span>(int&nbsp;position)</code></div>
+                        <div><code><span><del>getPageTitle</del></span>(int&nbsp;position)</code></div>
                         <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>float</code></td>
                       <td>
-                        <div><code><span><del><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#getPageWidth(int)">getPageWidth</a></del></span>(int&nbsp;position)</code></div>
+                        <div><code><span><del>getPageWidth</del></span>(int&nbsp;position)</code></div>
                         <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#notifyDataSetChanged()">notifyDataSetChanged</a></del></span>()</code></div>
+                        <div><code><span><del>notifyDataSetChanged</del></span>()</code></div>
                         <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#registerDataSetObserver(android.database.DataSetObserver)">registerDataSetObserver</a></del></span>(<a href="https://developer.android.com/reference/android/database/DataSetObserver.html">DataSetObserver</a>&nbsp;observer)</code></div>
+                        <div><code><span><del>registerDataSetObserver</del></span>(<a href="https://developer.android.com/reference/android/database/DataSetObserver.html">DataSetObserver</a>&nbsp;observer)</code></div>
                         <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><span><del><a href="/reference/androidx/viewpager/widget/PagerAdapter.html#unregisterDataSetObserver(android.database.DataSetObserver)">unregisterDataSetObserver</a></del></span>(<a href="https://developer.android.com/reference/android/database/DataSetObserver.html">DataSetObserver</a>&nbsp;observer)</code></div>
+                        <div><code><span><del>unregisterDataSetObserver</del></span>(<a href="https://developer.android.com/reference/android/database/DataSetObserver.html">DataSetObserver</a>&nbsp;observer)</code></div>
                         <p><strong>This method is deprecated.</strong> Deprecated in Java</p>
                       </td>
                     </tr>
@@ -583,7 +583,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager)">FragmentStatePagerAdapter</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager)">FragmentStatePagerAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>
           <p>use <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></code> with <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code></p>
         </aside>
@@ -602,7 +602,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm</code></td>
+                <td><code>@androidx.annotation.NonNull <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm</code></td>
                 <td>
                   <p>fragment manager that will interact with this adapter</p>
                 </td>
@@ -623,7 +623,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;int&nbsp;behavior)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;behavior<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
         <p>Constructor for <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a></code>. If <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code> is passed in, then only the current Fragment is in the RESUMED state, while all other fragments are capped at STARTED. If <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_SET_USER_VISIBLE_HINT()">BEHAVIOR_SET_USER_VISIBLE_HINT</a></code> is passed, all fragments are in the RESUMED state and there will be callbacks to <code><a href="/reference/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">setUserVisibleHint</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -639,7 +639,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm</code></td>
+                <td><code>@androidx.annotation.NonNull <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm</code></td>
                 <td>
                   <p>fragment manager that will interact with this adapter</p>
                 </td>
@@ -669,7 +669,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#destroyItem(android.view.ViewGroup,int,java.lang.Object)">destroyItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#destroyItem(android.view.ViewGroup,int,java.lang.Object)">destroyItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
       </div>
       <div class="api-item"><a name="finishUpdate-android.view.ViewGroup-"></a><a name="finishupdate"></a>
@@ -684,7 +684,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#finishUpdate(android.view.ViewGroup)">finishUpdate</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#finishUpdate(android.view.ViewGroup)">finishUpdate</a></del></span>(@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
       </div>
       <div class="api-item"><a name="getItem-int-"></a><a name="getitem"></a>
@@ -699,7 +699,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></del></span>(int&nbsp;position)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@androidx.annotation.NonNull <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></del></span>(int&nbsp;position)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
         <p>Return the Fragment associated with a specified position.</p>
       </div>
@@ -715,7 +715,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#instantiateItem(android.view.ViewGroup,int)">instantiateItem</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,&nbsp;int&nbsp;position)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#instantiateItem(android.view.ViewGroup,int)">instantiateItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
       </div>
       <div class="api-item"><a name="isViewFromObject(android.view.View, java.lang.Object)"></a><a name="isViewFromObject-android.view.View-java.lang.Object-"></a><a name="isviewfromobject"></a>
@@ -730,7 +730,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#isViewFromObject(android.view.View,java.lang.Object)">isViewFromObject</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;view,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#isViewFromObject(android.view.View,java.lang.Object)">isViewFromObject</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;view,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
       </div>
       <div class="api-item"><a name="restoreState(android.os.Parcelable, java.lang.ClassLoader)"></a><a name="restoreState-android.os.Parcelable-java.lang.ClassLoader-"></a><a name="restorestate"></a>
@@ -745,7 +745,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#restoreState(android.os.Parcelable,java.lang.ClassLoader)">restoreState</a></del></span>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a>&nbsp;state,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/ClassLoader.html">ClassLoader</a>&nbsp;loader)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#restoreState(android.os.Parcelable,java.lang.ClassLoader)">restoreState</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.Nullable <a href="https://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.Nullable <a href="https://developer.android.com/reference/java/lang/ClassLoader.html">ClassLoader</a>&nbsp;loader<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
       </div>
       <div class="api-item"><a name="saveState--"></a><a name="savestate"></a>
@@ -760,7 +760,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a>&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#saveState()">saveState</a></del></span>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;@androidx.annotation.Nullable <a href="https://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a>&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#saveState()">saveState</a></del></span>()</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
       </div>
       <div class="api-item"><a name="setPrimaryItem(android.view.ViewGroup, int, java.lang.Object)"></a><a name="setPrimaryItem-android.view.ViewGroup-int-java.lang.Object-"></a><a name="setprimaryitem"></a>
@@ -775,7 +775,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#setPrimaryItem(android.view.ViewGroup,int,java.lang.Object)">setPrimaryItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#setPrimaryItem(android.view.ViewGroup,int,java.lang.Object)">setPrimaryItem</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@androidx.annotation.NonNull <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;object<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
       </div>
       <div class="api-item"><a name="startUpdate-android.view.ViewGroup-"></a><a name="startupdate"></a>
@@ -790,7 +790,7 @@ The <code>R.layout.fragment_pager_list</code>resource containing each individual
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#startUpdate(android.view.ViewGroup)">startUpdate</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#startUpdate(android.view.ViewGroup)">startUpdate</a></del></span>(@androidx.annotation.NonNull <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;container)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Deprecated in Java</aside>
       </div>
     </div>
