@@ -580,7 +580,7 @@ internal class DocTagConverter(
                 "Do not {@link the exception type in `@throws ${throws.text()}`",
                 parent,
             )
-        } else if (link.data.url.isEmpty()) {
+        } else if (dri == null && link.data.url.isEmpty()) {
             docsHolder.printWarningFor(
                 "Link does not resolve for @",
                 parent,

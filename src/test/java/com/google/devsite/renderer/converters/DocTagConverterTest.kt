@@ -2554,6 +2554,27 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         assertThat(rendered).contains("<li><code>2</code></li>")
     }
 
+    @Test
+    fun `Warning for unresolved throws`() {
+        """
+        class Foo {
+            /**
+             * @throws java.rmi.NotBoundException resolved but no package list
+             * @throws InvalidExceptionName not resolved
+             */
+             fun foo() = Unit
+        }
+        """
+            .render()
+            .documentation({ function("foo")!! })
+        assertThat(logs)
+            .containsExactly(
+                "WARN: Couldn't resolve link: [InvalidExceptionName] in file:///SRC_DIR/main/kotlin/androidx/example/Test.kt:5:16 (root/main)",
+                "WARN: Missing package-list for java.rmi (go/dackka#missing-package-list)",
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:7 Link does not resolve for @throws InvalidExceptionName in DFunction foo. Is it from a package that the containing file does not import? Are docs inherited by an un-documented override function, but the exception class is not in scope in the inheriting class? The general fix for these is to fully qualify the exception name, e.g. `@throws java.io.IOException under some conditions`.",
+            )
+    }
+
     private fun DModule.description(
         doc: DModule.() -> Documentable = ::smartDoc
     ): DescriptionComponent {
