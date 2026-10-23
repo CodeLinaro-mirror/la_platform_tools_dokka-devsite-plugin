@@ -259,6 +259,22 @@ internal class FilePathProviderTest(private val displayLanguage: Language) :
     }
 
     @Test
+    fun `Missing package list entry is correctly unlinked for top level function`() {
+        val externalDri =
+            DRI(
+                packageName = "com.external",
+                callable = Callable(name = "foo", params = emptyList()),
+            )
+        val (name, url) = pathProvider.forReference(externalDri)
+
+        assertThat(name).isEqualTo("com.external.foo")
+        assertThat(url).isEmpty()
+        val expected =
+            "WARN: Missing package-list for com.external (go/dackka#missing-package-list)"
+        assertThat(logs).contains(expected)
+    }
+
+    @Test
     fun `findInDocumentablesGraph finds top level documentable by DRI`() {
         val module =
             """

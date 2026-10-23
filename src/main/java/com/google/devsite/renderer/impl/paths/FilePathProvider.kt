@@ -159,7 +159,7 @@ internal interface FilePathProvider {
                         // When there is no class or package name, still display something.
                         .ifBlank { "[JVM root]" }
                 } else {
-                    packageName + "." + className.orEmpty()
+                    packageName + className?.let { ".$it" }.orEmpty()
                 } + symbol?.name?.let { ".$it" }.orEmpty()
 
             return ReferencePath(qualifiedName, "")
