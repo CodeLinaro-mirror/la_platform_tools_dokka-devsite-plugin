@@ -32,6 +32,7 @@ import kotlin.reflect.jvm.jvmName
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.Platform.jvm
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
+import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.PointingToDeclaration
@@ -376,6 +377,12 @@ fun <T> T.isOverride(sourceSet: DokkaConfiguration.DokkaSourceSet): Boolean wher
         extra[Annotations]?.directAnnotations?.get(sourceSet)?.any {
             it.dri.packageName == "java.lang" && it.dri.classNames == "Override"
         } == true
+}
+
+/** Whether this documentable is deprecated. */
+@Suppress("UNCHECKED_CAST") // required to use extra properties
+fun <T> T.isDeprecated(): Boolean where T : Documentable {
+    return (this as? WithExtraProperties<T>)?.isDeprecated() ?: false
 }
 
 /**

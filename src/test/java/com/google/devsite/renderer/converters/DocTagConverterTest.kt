@@ -1456,6 +1456,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val documentation =
             """
             |/**
+            | * A class
             | * @see {@link Foo}
             | */
             |class Foo
@@ -1464,7 +1465,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .documentation()
 
         val expectedWarning =
-            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Could not understand @see tag " +
+            "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:6 Could not understand @see tag " +
                 "`{@link Foo}` in DClass Foo"
         assertThat(logs).containsExactly(expectedWarning)
 
@@ -1682,6 +1683,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val moduleJ3 =
             """
             |/**
+            | * Function that throws
             | * @throws IOException if file operations fail
             | */
             |public void foo() {}
@@ -1690,6 +1692,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val moduleK1 =
             """
             |/**
+            | * Function that throws
             | * @throws an IllegalStateException if my syntax is bad
             | */
             |fun foo()
@@ -1698,6 +1701,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val moduleK2 =
             """
             |/**
+            | * Function that throws
             | * @throws [IllegalStateException] but this one is actually fine, it turns out
             | */
             |fun foo()
@@ -1706,6 +1710,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val moduleK3 =
             """
             |/**
+            | * Function that throws
             | * @throws IOException if file operations fail
             | */
             |fun foo()
@@ -1730,7 +1735,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         moduleK1.throwsTable().item()
         assertThat(logs)
             .containsExactly(
-                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Do not use 'an' " +
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:6 Do not use 'an' " +
                     "before the exception type in `@throws IllegalStateException if my syntax is " +
                     "bad` in DFunction foo"
             )
@@ -2559,6 +2564,7 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         """
         class Foo {
             /**
+             * Function that throws errors
              * @throws java.rmi.NotBoundException resolved but no package list
              * @throws InvalidExceptionName not resolved
              */
@@ -2569,9 +2575,9 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
             .documentation({ function("foo")!! })
         assertThat(logs)
             .containsExactly(
-                "WARN: Couldn't resolve link: [InvalidExceptionName] in file:///SRC_DIR/main/kotlin/androidx/example/Test.kt:5:16 (root/main)",
+                "WARN: Couldn't resolve link: [InvalidExceptionName] in file:///SRC_DIR/main/kotlin/androidx/example/Test.kt:6:16 (root/main)",
                 "WARN: Missing package-list for java.rmi (go/dackka#missing-package-list)",
-                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:7 Link does not resolve for @throws InvalidExceptionName in DFunction foo. Is it from a package that the containing file does not import? Are docs inherited by an un-documented override function, but the exception class is not in scope in the inheriting class? The general fix for these is to fully qualify the exception name, e.g. `@throws java.io.IOException under some conditions`.",
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:8 Link does not resolve for @throws InvalidExceptionName in DFunction foo. Is it from a package that the containing file does not import? Are docs inherited by an un-documented override function, but the exception class is not in scope in the inheriting class? The general fix for these is to fully qualify the exception name, e.g. `@throws java.io.IOException under some conditions`.",
             )
     }
 
@@ -2761,6 +2767,188 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val sRow = paramTable[1]
         assertThat(sRow.name()).isEqualTo("s")
         assertThat(sRow.data.description.text()).isEqualTo("A string param")
+    }
+
+    @Test
+    fun `Require top-level documentation`() {
+        val module =
+            """
+            class Foo {
+                constructor(i: Int)
+                /** @param i has param tag but no top level description */
+                fun foo(i: Int) = Unit
+                val foo: Int = 0
+                companion object NamedCompanion
+            }
+            """
+                .render()
+        val fooClass = module.explicitClasslike("Foo")
+        module.documentation({ fooClass })
+        module.documentation({ fooClass.functions.single() })
+        module.documentation({ fooClass.properties.single() })
+        module.documentation({ (fooClass as DClass).constructors.single() })
+        module.documentation({ fooClass.classlikes.single() })
+
+        assertThat(logs)
+            .containsExactly(
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:2 Missing top-level documentation in DClass Foo",
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:5 Missing top-level documentation in DFunction foo",
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:6 Missing top-level documentation in DProperty foo",
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:3 Missing top-level documentation in DFunction Foo",
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:7 Missing top-level documentation in DObject NamedCompanion",
+            )
+    }
+
+    @Test
+    fun `Top-level documentation is not required for deprecated element`() {
+        """
+        @Deprecated
+        class Foo
+        """
+            .render()
+            .documentation()
+        assertThat(logs).isEmpty()
+    }
+
+    @Test
+    fun `Top-level documentation is not required for boring companion object`() {
+        """
+        class Foo {
+            companion object
+        }
+        """
+            .render()
+            .documentation({ explicitClasslike("Foo").classlikes.single() })
+        assertThat(logs).isEmpty()
+    }
+
+    @Test
+    fun `Top-level documentation is not required for parcelable CREATOR field`() {
+        """
+        class Foo : Parcelable {
+            companion object {
+                @JvmField
+                val CREATOR =
+                    object : Parcelable.Creator<Foo> {
+                        override fun createFromParcel(parcel: Parcel): Foo = Foo()
+                        override fun newArray(size: Int): Array<Foo?> = arrayOfNulls(size)
+                    }
+            }
+        }
+
+        // Stub for Parcelable
+        interface Parcelable {
+            interface Creator<T> {
+                fun createFromParcel(parcel: Parcel): T
+                fun newArray(size: Int): Array<T?>
+            }
+        }
+        class Parcel
+        """
+            .render()
+            .documentation({ explicitClasslike("Foo").classlikes.single().properties.single() })
+        assertThat(logs).isEmpty()
+    }
+
+    @Test
+    fun `Top-level documentation is not required for operator function`() {
+        """
+        class Foo {
+            operator fun plus(other: Foo): Foo = this
+        }
+        """
+            .render()
+            .documentation({ explicitClasslike("Foo").functions.single() })
+        assertThat(logs).isEmpty()
+    }
+
+    @Test
+    fun `Top-level documentation is not required for equals, toString, hashCode`() {
+        // These functions aren't explicitly marked as overrides here, but docs aren't required
+        val module =
+            """
+            public class Foo {
+                public String toString() { return ""; }
+                public boolean equals(Object o) { return false; }
+                public int hashCode() { return 0; }
+            }
+            """
+                .render(java = true)
+        val fooClass = module.explicitClasslike("Foo")
+        module.documentation({ fooClass.functions.single { it.name == "toString" } })
+        module.documentation({ fooClass.functions.single { it.name == "equals" } })
+        module.documentation({ fooClass.functions.single { it.name == "hashCode" } })
+
+        assertThat(logs).isEmpty()
+    }
+
+    @Test
+    fun `Top-level documentation is not required for override functions and properties`() {
+        val module =
+            """
+            open class ParentClass {
+                open fun foo() = Unit
+                open val foo = 0
+            }
+            class ChildClass : ParentClass() {
+                override fun foo() = Unit
+                override val foo = 0
+            }
+            """
+                .render()
+        val childClass = module.explicitClasslike("ChildClass")
+        module.documentation({ childClass.functions.single() })
+        module.documentation({ childClass.properties.single() })
+        assertThat(logs).isEmpty()
+    }
+
+    @Test
+    fun `Top-level documentation is not required for resources`() {
+        val module =
+            """
+            class R {
+                class attr {
+                    val alpha = 0;
+                }
+            }
+            """
+                .render()
+        val rClass = module.explicitClasslike("R")
+        module.documentation({ rClass })
+        val attrClass = rClass.classlikes.single()
+        module.documentation({ attrClass })
+        module.documentation({ attrClass.properties.single() })
+        assertThat(logs).isEmpty()
+    }
+
+    @Test
+    fun `Top-level documentation is not required for primary constructor`() {
+        """
+        class Foo(val i: Int)
+        """
+            .render()
+            .documentation({ (explicitClasslike("Foo") as DClass).constructors.single() })
+
+        """
+        public class Foo {
+            public Foo() {}
+        }
+        """
+            .render(java = true)
+            .documentation({ (explicitClasslike("Foo") as DClass).constructors.single() })
+
+        assertThat(logs).isEmpty()
+    }
+
+    @Test
+    fun `Top-level documentation is not required for experimental annotation`() {
+        """
+        @RequiresOptIn("APIs annotated with this annotation are not stable")
+        annotation class ExperimentalFooAnnotation
+        """
+            .render()
+            .documentation()
+        assertThat(logs).isEmpty()
     }
 
     private fun DModule.description(

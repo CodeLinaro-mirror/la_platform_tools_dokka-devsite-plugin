@@ -55,8 +55,10 @@ import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.ArrayValue
 import org.jetbrains.dokka.model.BooleanValue
 import org.jetbrains.dokka.model.Callable
+import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
@@ -66,6 +68,7 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.Dynamic
 import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.Nullable
+import org.jetbrains.dokka.model.PrimaryConstructorExtra
 import org.jetbrains.dokka.model.PrimitiveJavaType
 import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.Star
@@ -270,7 +273,61 @@ internal class DocTagConverter(
     /** Whether this element is required to have documentation. */
     private fun Documentable.requireDocumentation(): Boolean {
         // Don't require documentation for synthetic elements
-        return !(this !is WithSources || sources.isEmpty())
+        if (this !is WithSources || sources.isEmpty()) return false
+
+        // Don't require documentation for deprecated elements, since checks are meant for new APIs
+        if (isDeprecated()) return false
+
+        // Don't require documentation for boring companion objects
+        if (this is DObject && name == "Companion") return false
+
+        // Don't require documentation for parcelable creator fields
+        if (this is DProperty && name == "CREATOR") return false
+
+        // Don't require documentation for operator functions, which follow a standard in kotlin
+        if (
+            this is DFunction &&
+                getExtraModifiers(getExpectOrCommonSourceSet()).contains("operator")
+        )
+            return false
+
+        // Don't require documentation for synthetic INSTANCE fields of objects
+        if (this is DProperty && name == "INSTANCE") return false
+
+        // Don't require documentation for basic object methods
+        if (this is DFunction && (name == "equals" || name == "hashCode" || name == "toString"))
+            return false
+
+        // Don't require documentation for inherited functions and properties, because there might
+        // be issues with inheriting documentation from the parent (b/202177236)
+        if (isOverride(getExpectOrCommonSourceSet())) return false
+
+        // Don't require documentation for resource classes and properties
+        if (dri.classNames == "R" || dri.classNames?.startsWith("R.") == true) return false
+
+        return true
+    }
+
+    /** Whether this element is required to have a top-level description. */
+    private fun Documentable.requireTopLevelDocumentation(): Boolean {
+        if (!requireDocumentation()) return false
+        // Don't require documentation for primary constructors, or constructors with no arguments,
+        // as their documentation is generally shared with the class
+        if (
+            this is DFunction &&
+                isConstructor &&
+                (extra[PrimaryConstructorExtra] != null || parameters.isEmpty())
+        )
+            return false
+
+        // Experimental annotations are already effectively documented through the opt-in message
+        if (
+            this is DAnnotation &&
+                allAnnotations().any { it.dri.fullName == "kotlin.RequiresOptIn" }
+        )
+            return false
+
+        return true
     }
 
     /** Whether this function is required to use @param tags. */
@@ -282,10 +339,7 @@ internal class DocTagConverter(
             // The kotlin enum valueOf method is synthetic but still has sources
             !(name == "valueOf" && parameters.size == 1) &&
             // Don't require parameter documentation for property accessors
-            extra[SourceProperty.PropertyKey] == null &&
-            // Don't require parameter documentation for overrides, because the doc text is
-            // from the parent function if the override doesn't have a doc comment.
-            !isOverride(getExpectOrCommonSourceSet())
+            extra[SourceProperty.PropertyKey] == null
     }
 
     // Turn both "E" and "<E>" to "E"
@@ -799,7 +853,17 @@ internal class DocTagConverter(
                 components.add(defNoteTags)
             }
         }
-        if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent
+        if (components.isEmpty()) {
+            // Warn if there is no description. Only warn when creating the detailed description
+            // which is only created once (the summary may be generated several times).
+            if (!summary && requireTopLevelDocumentation()) {
+                docsHolder.printWarningFor(
+                    "Missing top-level documentation",
+                    documentableWithError = this,
+                )
+            }
+            return UndocumentedSymbolDescriptionComponent
+        }
         return description(components, summary, null)
     }
 
