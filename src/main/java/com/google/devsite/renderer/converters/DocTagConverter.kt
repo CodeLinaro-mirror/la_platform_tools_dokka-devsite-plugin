@@ -250,20 +250,8 @@ internal class DocTagConverter(
         // This will warn about the missing @param tags.
         val extraParamTable =
             if (
-                documentable is DFunction &&
-                    documentable.parameters.isNotEmpty() &&
-                    tagsByType.keys.none { it == Param::class.java } &&
-                    // If there is no documentation at all, don't include a parameter table
-                    documentable.documentation.isNotEmpty() &&
-                    // Don't require parameter documentation for synthetic functions
-                    documentable.sources.isNotEmpty() &&
-                    // The kotlin enum valueOf method is synthetic but still has sources
-                    !(documentable.name == "valueOf" && documentable.parameters.size == 1) &&
-                    // Don't require parameter documentation for property accessors
-                    documentable.extra[SourceProperty.PropertyKey] == null &&
-                    // Don't require parameter documentation for overrides, because the doc text is
-                    // from the parent function if the override doesn't have a doc comment.
-                    !documentable.isOverride(documentable.getExpectOrCommonSourceSet())
+                tagsByType.keys.none { it == Param::class.java } &&
+                    (documentable as? DFunction)?.requireParamDocumentation() == true
             ) {
                 params(
                     emptyList(),
@@ -277,6 +265,27 @@ internal class DocTagConverter(
             }
 
         return listOfNotNull(deprecation, description, *tables.toTypedArray(), extraParamTable)
+    }
+
+    /** Whether this element is required to have documentation. */
+    private fun Documentable.requireDocumentation(): Boolean {
+        // Don't require documentation for synthetic elements
+        return !(this !is WithSources || sources.isEmpty())
+    }
+
+    /** Whether this function is required to use @param tags. */
+    private fun DFunction.requireParamDocumentation(): Boolean {
+        return parameters.isNotEmpty() &&
+            requireDocumentation() &&
+            // If there is no documentation at all, don't include a parameter table
+            documentation.isNotEmpty() &&
+            // The kotlin enum valueOf method is synthetic but still has sources
+            !(name == "valueOf" && parameters.size == 1) &&
+            // Don't require parameter documentation for property accessors
+            extra[SourceProperty.PropertyKey] == null &&
+            // Don't require parameter documentation for overrides, because the doc text is
+            // from the parent function if the override doesn't have a doc comment.
+            !isOverride(getExpectOrCommonSourceSet())
     }
 
     // Turn both "E" and "<E>" to "E"
