@@ -361,8 +361,10 @@ private fun DParameter.paramAsString() =
         ?: type.driOrNull?.let { "${it.classNames} $it" } // by classname, then full dri
         )
 
-/** Whether this function is an override of a parent function. */
-fun DFunction.isOverride(sourceSet: DokkaConfiguration.DokkaSourceSet): Boolean {
+/** Whether this function/property is an override of a parent function/property. */
+@Suppress("UNCHECKED_CAST") // required to use extra properties
+fun <T> T.isOverride(sourceSet: DokkaConfiguration.DokkaSourceSet): Boolean where T : Documentable {
+    val extra = (this as? WithExtraProperties<T>)?.extra ?: return false
     // The function has the override modifier
     return extra[AdditionalModifiers]
         ?.content
