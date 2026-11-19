@@ -134,6 +134,7 @@ class DevsitePlugin : DokkaPlugin() {
                 PreMergeHiddenDocumentableFilter(
                     it,
                     devsiteConfiguration.hidingAnnotations,
+                    devsiteConfiguration.internalApiAnnotationsHideElements,
                     devsiteConfiguration.tracer,
                 )
             } order

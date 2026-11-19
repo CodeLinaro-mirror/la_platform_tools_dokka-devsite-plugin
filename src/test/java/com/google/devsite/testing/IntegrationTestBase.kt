@@ -120,6 +120,7 @@ abstract class IntegrationTestBase :
                                     annotationsNotToDisplayJava = null,
                                     annotationsNotToDisplayKotlin = null,
                                     hidingAnnotations = hidingAnnotations,
+                                    internalApiAnnotationsHideElements = true,
                                     includeHiddenParentSymbols = includeHiddenParentSymbols,
                                     validNullabilityAnnotations = validNullabilityAnnotations,
                                     unlinkedExternalPackages = emptyList(),

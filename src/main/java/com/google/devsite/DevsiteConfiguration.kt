@@ -86,6 +86,8 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * @param hidingAnnotations A list of annotation names (including the package name, e.g.
  *   `androidx.annotation.RestrictTo`) which mean that the elements they are applied to should be
  *   not be displayed in the docs.
+ * @param internalApiAnnotationsHideElements If true, annotations of the form `Internal*Api` will be
+ *   treated like the annotations in [hidingAnnotations].
  * @param validNullabilityAnnotations A list of annotation names (including the package name, e.g.
  *   `androidx.annotation.Nullable`) which can be used for nullability. Using nullability
  *   annotations not on this list is not allowed. Android projects should generally exclusively use
@@ -125,6 +127,7 @@ data class DevsiteConfiguration(
     val annotationsNotToDisplayJava: List<String>?,
     val annotationsNotToDisplayKotlin: List<String>?,
     val hidingAnnotations: List<String> = emptyList(),
+    val internalApiAnnotationsHideElements: Boolean = false,
     // We set a default to the nullability annotations all android projects should use
     val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
     val includeHiddenParentSymbols: Boolean = false,

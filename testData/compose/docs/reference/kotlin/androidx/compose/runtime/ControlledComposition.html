@@ -14,8 +14,6 @@
       <meta itemprop="property" content="changesApplied()">
       <meta itemprop="property" content="composeContent(kotlin.Function0)">
       <meta itemprop="property" content="delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">
-      <meta itemprop="property" content="disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">
-      <meta itemprop="property" content="insertMovableContent(kotlin.collections.List)">
       <meta itemprop="property" content="invalidateAll()">
       <meta itemprop="property" content="observesAnyOf(kotlin.collections.Set)">
       <meta itemprop="property" content="prepareCompose(kotlin.Function0)">
@@ -23,7 +21,6 @@
       <meta itemprop="property" content="recordModificationsOf(kotlin.collections.Set)">
       <meta itemprop="property" content="recordReadOf(kotlin.Any)">
       <meta itemprop="property" content="recordWriteOf(kotlin.Any)">
-      <meta itemprop="property" content="verifyConsistent()">
       <meta itemprop="property" content="hasPendingChanges()">
       <meta itemprop="property" content="isComposing()">
       <meta itemprop="property" content="(androidx.compose.runtime.ControlledComposition).recomposeCoroutineContext()">
@@ -156,26 +153,6 @@
             <tr>
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentState.html">MovableContentState</a>)</code></div>
-                <p>Dispose the value state that is no longer needed.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;references:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>?&gt;&gt;<br>)</code></div>
-                <p>Insert the given list of movable content with their paired state in potentially a different composition.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#invalidateAll()">invalidateAll</a>()</code></div>
                 <p>Invalidate all invalidation scopes.</p>
               </td>
@@ -238,16 +215,6 @@
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">recordWriteOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>)</code></div>
                 <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">value</a></code> has been modified.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#verifyConsistent()">verifyConsistent</a>()</code></div>
-                <p>Throws an exception if the internal state of the composer has been corrupted and is no longer consistent.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -522,32 +489,6 @@
           <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;to:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;groupIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
           <p>Temporarily delegate all invalidations sent to this composition to the <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">to</a></code> composition. This is used when movable content moves between compositions. The recompose scopes are not redirected until after the move occurs during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a></code>. This is used to compose as if the scopes have already been changed.</p>
         </div>
-        <div class="api-item"><a name="disposeUnusedMovableContent-androidx.compose.runtime.MovableContentState-"></a><a name="disposeunusedmovablecontent"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentState.html">MovableContentState</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Dispose the value state that is no longer needed.</p>
-        </div>
-        <div class="api-item"><a name="insertMovableContent-kotlin.collections.List-"></a><a name="insertmovablecontent"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="insertMovableContent(kotlin.collections.List)">insertMovableContent</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;references:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>?&gt;&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Insert the given list of movable content with their paired state in potentially a different composition. If the second part of the pair is null then the movable content should be inserted as new. If second part of the pair has a value then the state should be moved into the referenced location and then recomposed there.</p>
-        </div>
         <div class="api-item"><a name="invalidateAll--"></a><a name="invalidateall"></a>
           <div class="api-name-block">
             <div>
@@ -701,19 +642,6 @@
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">recordWriteOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">value</a></code> has been modified. This is used primarily by the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> to inform the composer when the a <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code> instance been change by a composable function.</p>
-        </div>
-        <div class="api-item"><a name="verifyConsistent--"></a><a name="verifyconsistent"></a>
-          <div class="api-name-block">
-            <div>
-              <h3 id="verifyConsistent()">verifyConsistent</h3>
-            </div>
-            <div class="api-name-platform-and-metadata">
-              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
-                <!--platform-Common/All--></div>
-            </div>
-          </div>
-          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#verifyConsistent()">verifyConsistent</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Throws an exception if the internal state of the composer has been corrupted and is no longer consistent. Used in testing the composer itself.</p>
         </div>
       </div>
     </devsite-filter >

@@ -74,6 +74,7 @@ import org.jetbrains.dokka.transformers.documentation.PreMergeDocumentableTransf
 class PreMergeHiddenDocumentableFilter(
     dokkaContext: DokkaContext,
     private val hidingAnnotations: List<String>,
+    private val internalApiAnnotationsHideElements: Boolean,
     private val tracer: Tracer,
 ) : SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
     override fun shouldBeSuppressed(d: Documentable): Boolean {
@@ -90,7 +91,8 @@ class PreMergeHiddenDocumentableFilter(
                 addToHiddenSet(d)
                 return@trace true
             }
-            if (!d.isHidden(hidingAnnotations)) return@trace false
+            if (!d.isHidden(hidingAnnotations, internalApiAnnotationsHideElements))
+                return@trace false
             if (d is DPackage) {
                 d.dri.packageName?.let { hiddenPackages.add(it) }
             }
@@ -158,18 +160,32 @@ private fun Visibility.isDocumented(
     // [DokkaConfiguration.Visibility]. All other visibilities match between the definitions.
     DokkaConfiguration.Visibility.fromString(name.ifEmpty { "package" }) in documentedVisibilities
 
-private fun Documentable.isHiddenWithAnnotation(hidingAnnotations: List<String>): Boolean =
+/** Pattern for an annotation name which should hide elements */
+private val internalAnnotationRegex = "Internal[a-zA-Z]*Api".toRegex()
+
+private fun Documentable.isHiddenWithAnnotation(
+    hidingAnnotations: List<String>,
+    internalApiAnnotationsHideElements: Boolean,
+): Boolean =
     allAnnotations().any {
         hidingAnnotations.contains(it.dri.fullName) ||
-            (it.dri == deprecatedDri && "DeprecationLevel.HIDDEN" in it.params["level"].asString())
+            (it.dri == deprecatedDri &&
+                "DeprecationLevel.HIDDEN" in it.params["level"].asString()) ||
+            (internalApiAnnotationsHideElements &&
+                internalAnnotationRegex.matches(it.dri.classNames.orEmpty()))
     }
 
-private fun Documentable.isHidden(hidingAnnotations: List<String>): Boolean =
-    isHiddenWithAnnotation(hidingAnnotations) ||
+private fun Documentable.isHidden(
+    hidingAnnotations: List<String>,
+    internalApiAnnotationsHideElements: Boolean,
+): Boolean =
+    isHiddenWithAnnotation(hidingAnnotations, internalApiAnnotationsHideElements) ||
         this.hasHideJavadocTag() ||
         this.hasRemovedJavadocTag() ||
         // Mirror Metalava's behavior for properties annotated with `@get:<hiding annotation>`
-        (this as? DProperty)?.getter?.isHiddenWithAnnotation(hidingAnnotations) == true
+        (this as? DProperty)
+            ?.getter
+            ?.isHiddenWithAnnotation(hidingAnnotations, internalApiAnnotationsHideElements) == true
 
 private fun Documentable.hasHideJavadocTag(): Boolean =
     this.documentation.any { (_, docs) ->
