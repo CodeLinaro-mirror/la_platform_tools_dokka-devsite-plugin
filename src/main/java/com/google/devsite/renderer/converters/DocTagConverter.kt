@@ -268,6 +268,13 @@ internal class DocTagConverter(
                 null
             }
 
+        if (
+            tagsByType.keys.none { it == Return::class.java } &&
+                (documentable as? DFunction)?.requireReturnDocumentation() == true
+        ) {
+            docsHolder.printWarningFor("Missing @return tag", documentable)
+        }
+
         return listOfNotNull(deprecation, description, *tables.toTypedArray(), extraParamTable)
     }
 
@@ -306,6 +313,9 @@ internal class DocTagConverter(
         // Don't require documentation for resource classes and properties
         if (dri.classNames == "R" || dri.classNames?.startsWith("R.") == true) return false
 
+        // The kotlin enum valueOf method is synthetic but still has sources
+        if (name == "valueOf" && (this as? DFunction)?.parameters?.size == 1) return false
+
         return true
     }
 
@@ -337,12 +347,27 @@ internal class DocTagConverter(
             requireDocumentation() &&
             // If there is no documentation at all, don't include a parameter table
             documentation.isNotEmpty() &&
-            // The kotlin enum valueOf method is synthetic but still has sources
-            !(name == "valueOf" && parameters.size == 1) &&
             // Don't require parameter documentation for property accessors
             extra[SourceProperty.PropertyKey] == null &&
             // Don't require parameter documentation for setters on builders (similar to accessors)
             !(isFromBuilder() && parameters.size == 1)
+    }
+
+    /** Whether this function is required to use a @return tag. */
+    private fun DFunction.requireReturnDocumentation(): Boolean {
+        // API guidelines: simple methods with no parameters don't need @return
+        if (parameters.isEmpty()) return false
+        // Constructors don't need @return
+        if (isConstructor) return false
+        // No return type to document
+        if (type is Void || (type as? GenericTypeConstructor)?.dri?.fullName == "kotlin.Unit")
+            return false
+        // Don't require return documentation for property accessors
+        if (extra[SourceProperty.PropertyKey] != null) return false
+        // Don't require return documentation for builders using a fluent API pattern
+        if (isFromBuilder()) return false
+
+        return requireDocumentation()
     }
 
     /** Whether the function is from a builder class and returns a builder */

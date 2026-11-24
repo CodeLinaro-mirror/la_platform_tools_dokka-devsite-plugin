@@ -2973,7 +2973,49 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .render()
         val builderClass = module.explicitClasslike("Foo").classlikes.single()
         module.documentation({ builderClass.functions.single { it.name == "setV" } })
+        module.documentation({ builderClass.functions.single { it.name == "build" } })
         assertThat(logs).isEmpty()
+    }
+
+    @Test
+    fun `Return tag required for regular function`() {
+        val module =
+            """
+            /**
+             * Class docs
+             * @property v property docs
+             */
+            class Foo(val v: Int) {
+                /** Function docs */
+                fun noArgs(): Int = 0
+
+                /**
+                 * Function docs
+                 * @param i param docs
+                 */
+                fun unitReturn(i: Int) = Unit
+
+                /**
+                 * Function docs
+                 * @param i param docs
+                 */
+                fun regularFun(i: Int): Int = 0
+            }
+            """
+                .render()
+
+        // Load documentation for several functions, check that only regularFun has a warning
+        val fooClass = module.explicitClasslike("Foo") as DClass
+        module.documentation({ fooClass.constructors.single() })
+        module.documentation({ fooClass.functions.single { it.name == "noArgs" } })
+        module.documentation({ fooClass.functions.single { it.name == "unitReturn" } })
+        module.documentation({ fooClass.functions.single { it.name == "regularFun" } })
+        module.documentation({ fooClass.properties.single().getter!! })
+
+        assertThat(logs)
+            .containsExactly(
+                "WARN: SRC_DIR/main/kotlin/androidx/example/Test.kt:20 Missing @return tag in DFunction regularFun"
+            )
     }
 
     private fun DModule.description(
