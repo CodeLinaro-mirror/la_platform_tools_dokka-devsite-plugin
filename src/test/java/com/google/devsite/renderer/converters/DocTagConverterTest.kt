@@ -2951,6 +2951,31 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         assertThat(logs).isEmpty()
     }
 
+    @Test
+    fun `Parameter documentation is not required on builder method`() {
+        val module =
+            """
+            /** A foo class */
+            class Foo private constructor(val v: Int) {
+                /** Builder for [Foo]. */
+                class Builder {
+                    private var v: Int = 0
+                    /** Sets the value */
+                    fun setV(v: Int): Builder {
+                        this.v = v
+                        return this
+                    }
+                    /** Creates the [Foo] */
+                    fun build(): Foo = Foo(v)
+                }
+            }
+            """
+                .render()
+        val builderClass = module.explicitClasslike("Foo").classlikes.single()
+        module.documentation({ builderClass.functions.single { it.name == "setV" } })
+        assertThat(logs).isEmpty()
+    }
+
     private fun DModule.description(
         doc: DModule.() -> Documentable = ::smartDoc
     ): DescriptionComponent {

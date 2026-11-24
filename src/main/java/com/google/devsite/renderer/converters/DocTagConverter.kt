@@ -66,6 +66,7 @@ import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.Dynamic
+import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.PrimaryConstructorExtra
@@ -339,7 +340,16 @@ internal class DocTagConverter(
             // The kotlin enum valueOf method is synthetic but still has sources
             !(name == "valueOf" && parameters.size == 1) &&
             // Don't require parameter documentation for property accessors
-            extra[SourceProperty.PropertyKey] == null
+            extra[SourceProperty.PropertyKey] == null &&
+            // Don't require parameter documentation for setters on builders (similar to accessors)
+            !(isFromBuilder() && parameters.size == 1)
+    }
+
+    /** Whether the function is from a builder class and returns a builder */
+    private fun DFunction.isFromBuilder(): Boolean {
+        return !isConstructor &&
+            dri.classNames?.endsWith("Builder") == true &&
+            (type as? GenericTypeConstructor)?.dri?.fullName == dri.fullName
     }
 
     // Turn both "E" and "<E>" to "E"
