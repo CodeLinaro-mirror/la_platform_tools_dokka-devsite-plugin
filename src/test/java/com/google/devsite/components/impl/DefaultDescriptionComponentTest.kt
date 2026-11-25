@@ -1446,6 +1446,45 @@ public void onCreate() {
             )
     }
 
+    @Test
+    fun `Inline code inside of table header renders`() {
+        val component =
+            """
+            /**
+             * <table>
+             *   <tr>
+             *     <th>Table header with {@code code} and text</th>
+             *   </tr>
+             *   <tr>
+             *     <td>Table data</td>
+             *   </tr>
+             * </table>
+             */
+            public class Foo {}
+            """
+                .render(java = true)
+        val description = createHTML().body { component.description().render(this) }.trim()
+        // language=html
+        assertThat(description)
+            .isEqualTo(
+                """
+                <body>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>Table header with <code>code</code> and text</th>
+                      </tr>
+                      <tr>
+                        <td>Table data</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </body>
+                """
+                    .trimIndent()
+            )
+    }
+
     private fun DModule.description(
         summary: Boolean = false,
         deprecation: String? = null,

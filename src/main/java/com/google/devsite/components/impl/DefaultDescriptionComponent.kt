@@ -337,7 +337,7 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
                 is Ol -> ol { renderOrderedList(tag.children, state) }
                 is Ul -> ul { renderUnorderedList(tag.children, state) }
                 HorizontalRule -> hr { renderTags(tag.children, state) }
-                is CodeInline -> code { renderTags(tag.children, state) }
+                is CodeInline -> renderCodeInline(tag, state)
                 // Turn CodeBlock into pre. TODO: guess codeblock-literal's language b/279184834
                 is Pre,
                 is CodeBlock -> {
@@ -438,6 +438,10 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
         }
     }
 
+    private fun FlowOrPhrasingContent.renderCodeInline(tag: CodeInline, state: State) {
+        code { renderTags(tag.children, state) }
+    }
+
     // TODO: remove improper handling of dt b/217941159
     private fun DL.renderDescriptionList(tags: List<DocTag>, state: State) {
         for (tag in tags) {
@@ -526,14 +530,15 @@ internal data class DefaultDescriptionComponent(override val data: DescriptionCo
                             when (childTag) {
                                 is Text -> +childTag.body.stripTemplate()
                                 is DocumentationLink -> renderDocumentationLink(childTag, state)
+                                is CodeInline -> renderCodeInline(childTag, state)
                                 else -> {
                                     // Handling can be added for other types of tags if they are
-                                    // found later (only Text and Documentation link are present in
-                                    // `th` in AndroidX sources now).
+                                    // found later (only Text, DocumentationLink, and CodeInline are
+                                    // present in `th` in AndroidX sources now).
                                     data.docsHolder
                                         ?.logger
                                         ?.warn(
-                                            "Unsupported tag inside of TableHeader: ${tag.javaClass.simpleName}. " +
+                                            "Unsupported tag inside of TableHeader: ${childTag.javaClass.simpleName}. " +
                                                 "Context: ${tags.text()}. File a bug on dackka."
                                         )
                                 }
